@@ -1,0 +1,31 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: unit
+spec:
+  containers:
+  - name: ds-ubuntu
+    image: registry.itrcs3-app.intranet.chuv/ds-ubuntu
+    imagePullPolicy: Always
+    tty: true
+    volumeMounts:
+    - name: docker
+      mountPath: /run/docker.sock
+    - name: docker-config
+      mountPath: /ds/ds-deployer/.docker/secret
+    lifecycle:
+      postStart:
+        exec:
+          command: ['sh', '-c', "cp /ds/ds-deployer/.docker/secret/config.json /ds/ds-deployer/.docker/config.json"]
+  imagePullSecrets:
+  - name: registry-auth
+  volumes:
+  - name: docker
+    hostPath:
+      path: /run/docker.sock
+  - name: docker-config
+    secret:
+      secretName: registry-auth
+      items:
+      - key: .dockerconfigjson
+        path: config.json

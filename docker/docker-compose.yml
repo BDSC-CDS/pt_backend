@@ -1,0 +1,9 @@
+version: "3"
+services:
+  ds-cicd-template-backend:
+    image: local/ds-cicd-template-backend-stage1
+    volumes:
+      - $PWD/..:/ds/ds-deployer/ds-cicd-template-backend
+    stdin_open: true
+    tty: true
+    entrypoint: /bin/bash

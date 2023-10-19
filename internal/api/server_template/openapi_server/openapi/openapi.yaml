@@ -1,0 +1,162 @@
+openapi: 3.0.1
+info:
+  contact:
+    email: dev@chuv.ch
+    name: template backend index service
+    url: https://gitlab.itrcs3-app.intranet.chuv/datascience/ds-template-backend
+  title: template backend index service
+  version: "1.0"
+servers:
+- url: /
+security:
+- Bearer: []
+tags:
+- name: IndexService
+paths:
+  /api/v1/hello:
+    get:
+      description: This endpoint returns a hello
+      operationId: index_service_get_hello
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/templatebackendGetHelloReply'
+          description: A successful response.
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+          description: An unexpected error response.
+      summary: Get a hello
+      tags:
+      - Index
+      x-openapi-router-controller: openapi_server.controllers.index_controller
+  /api/v1/hello/{identifier}:
+    post:
+      description: This endpoint returns a hello
+      operationId: index_service_create_hello
+      parameters:
+      - in: path
+        name: identifier
+        required: true
+        schema:
+          format: int32
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IndexService_CreateHello_request'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/templatebackendCreateHelloReply'
+          description: A successful response.
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+          description: An unexpected error response.
+      summary: Get a hello
+      tags:
+      - Index
+      x-codegen-request-body-name: body
+      x-openapi-router-controller: openapi_server.controllers.index_controller
+  /api/v1/helloo:
+    get:
+      description: This endpoint returns a hello
+      operationId: index_service_get_helloo
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/templatebackendGetHelloReply'
+          description: A successful response.
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+          description: An unexpected error response.
+      summary: Get a hello
+      tags:
+      - Index
+      x-openapi-router-controller: internal.controllers.index_controller
+components:
+  schemas:
+    protobufAny:
+      additionalProperties:
+        type: object
+      properties:
+        '@type':
+          type: string
+      title: protobufAny
+      type: object
+    rpcStatus:
+      properties:
+        code:
+          format: int32
+          title: code
+          type: integer
+        message:
+          title: message
+          type: string
+        details:
+          items:
+            $ref: '#/components/schemas/protobufAny'
+          title: details
+          type: array
+      title: rpcStatus
+      type: object
+    templatebackendCreateHelloReply:
+      example:
+        identifier: 0
+        title: title
+        content: content
+      properties:
+        identifier:
+          format: int32
+          title: identifier
+          type: integer
+        title:
+          title: title
+          type: string
+        content:
+          title: content
+          type: string
+      title: templatebackendCreateHelloReply
+      type: object
+    templatebackendGetHelloReply:
+      example:
+        content: content
+      properties:
+        content:
+          title: content
+          type: string
+      title: templatebackendGetHelloReply
+      type: object
+    IndexService_CreateHello_request:
+      properties:
+        title:
+          title: title
+          type: string
+        content:
+          title: content
+          type: string
+      title: IndexService_CreateHello_request
+      type: object
+  securitySchemes:
+    Bearer:
+      in: header
+      name: Authorization
+      type: apiKey
+      x-apikeyInfoFunc: openapi_server.controllers.security_controller.info_from_Bearer
+x-original-swagger-version: "2.0"

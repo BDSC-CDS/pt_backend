@@ -1,0 +1,87 @@
+pipeline {
+  agent {
+    kubernetes {
+      cloud 'kubernetes-int'
+      namespace 'jenkins-int-pipeline'
+      label "ci-ds-cicd-template-backend-${UUID.randomUUID().toString()}"
+      yamlFile "jenkins/agents/unit.yaml"
+    }
+  }
+  stages {
+    stage('Set version') {
+      when {
+        not {
+          branch 'release/v*'
+        }
+      }
+      steps {
+        sh '''#!/bin/bash -xe
+          VERSION=$BRANCH_NAME-$BUILD_ID
+          echo $VERSION > $WORKSPACE/version
+          echo ${VERSION//\\//-} > $WORKSPACE/image_tag
+          echo $VERSION
+        '''
+        script {
+          env.VERSION = readFile("$WORKSPACE/version")
+          env.IMAGE_TAG = readFile("$WORKSPACE/image_tag")
+        }
+      }
+    }
+
+    stage('Set release version') {
+      when {
+        branch 'release/v*'
+      }
+      steps {
+        sh '''#!/bin/bash -xe
+          stripped=${BRANCH_NAME#release/v}
+          MAJOR=$(echo $stripped | cut -d'.' -f1)
+          MINOR=$(echo $stripped | cut -d'.' -f2)
+          VERSION=v$MAJOR.$MINOR.$BUILD_ID
+          echo $VERSION > $WORKSPACE/version
+          echo ${VERSION//\\//-} > $WORKSPACE/image_tag
+          echo $VERSION
+        '''
+        script {
+          env.VERSION = readFile("$WORKSPACE/version")
+          env.IMAGE_TAG = readFile("$WORKSPACE/image_tag")
+        }
+      }
+    }
+
+    stage('Build') {
+      steps {
+        container(name: 'ds-ubuntu', shell: '/bin/bash') {
+          dir('ds-dev-ops') {
+            checkout scm
+            sh '''
+              cd docker
+              ./build-stage2.sh
+            '''
+          }
+        }
+      }
+    }
+
+    stage('Master') {
+      when {
+        branch 'master'
+      }
+      stages {
+        stage('Deploy') {
+          steps {
+            container(name: 'ds-ubuntu', shell: '/bin/bash') {
+              dir('ds-dev-ops') {
+                checkout scm
+                sh '''
+                  cd deploy
+                  ./deploy.sh
+                '''
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
