@@ -2,12 +2,21 @@ import connexion
 from typing import Dict
 from typing import Tuple
 from typing import Union
+from inspect import getmembers, isfunction
+
 
 from server_template.models.index_service_create_hello_request import IndexServiceCreateHelloRequest  # noqa: E501
 from server_template.models.rpc_status import RpcStatus  # noqa: E501
 from server_template.models.templatebackend_create_hello_reply import TemplatebackendCreateHelloReply  # noqa: E501
 from server_template.models.templatebackend_get_hello_reply import TemplatebackendGetHelloReply  # noqa: E501
 from server_template import util
+
+from src.internal.api.controllers import index_controller
+controller_functions = getmembers(index_controller, isfunction)
+needed_functions = ["index_service_create_hello", "index_service_get_hello", "index_service_get_helloo"]
+for op in needed_functions:
+    if op not in controller_functions:
+        raise NotImplementedError("operation " + op + " is not implemented by src.internal.api.controllers.index_controller")
 
 
 def index_service_create_hello(identifier, body):  # noqa: E501

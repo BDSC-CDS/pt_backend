@@ -2,10 +2,19 @@ import connexion
 from typing import Dict
 from typing import Tuple
 from typing import Union
+from inspect import getmembers, isfunction
+
 
 {{#imports}}{{import}}  # noqa: E501
 {{/imports}}
 from {{packageName}} import util
+
+from src.internal.api.controllers import {{classFilename}}
+controller_functions = getmembers({{classFilename}}, isfunction)
+needed_functions = [{{#operations}}{{#operation}}"{{operationId}}"{{^-last}}, {{/-last}}{{/operation}}{{/operations}}]
+for op in needed_functions:
+    if op not in controller_functions:
+        raise NotImplementedError("operation " + op + " is not implemented by src.internal.api.controllers.{{classFilename}}")
 {{#operations}}
 {{#operation}}
 
