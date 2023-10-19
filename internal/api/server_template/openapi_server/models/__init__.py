@@ -1,7 +1,0 @@
-# flake8: noqa
-# import models into model package
-from openapi_server.models.index_service_create_hello_request import IndexServiceCreateHelloRequest
-from openapi_server.models.protobuf_any import ProtobufAny
-from openapi_server.models.rpc_status import RpcStatus
-from openapi_server.models.templatebackend_create_hello_reply import TemplatebackendCreateHelloReply
-from openapi_server.models.templatebackend_get_hello_reply import TemplatebackendGetHelloReply

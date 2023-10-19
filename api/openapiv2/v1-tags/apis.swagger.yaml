@@ -1,0 +1,126 @@
+swagger: "2.0"
+info:
+  title: template backend index service
+  version: "1.0"
+  contact:
+    name: template backend index service
+    url: https://gitlab.itrcs3-app.intranet.chuv/datascience/ds-template-backend
+    email: dev@chuv.ch
+tags:
+  - name: IndexService
+schemes:
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /api/v1/hello:
+    get:
+      summary: Get a hello
+      description: This endpoint returns a hello
+      operationId: IndexService_GetHello
+      responses:
+        "200":
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/templatebackendGetHelloReply'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/rpcStatus'
+      tags:
+        - Index
+      x-openapi-router-controller: src.internal.api.server_template.controllers.index_controller
+  /api/v1/hello/{identifier}:
+    post:
+      summary: Get a hello
+      description: This endpoint returns a hello
+      operationId: IndexService_CreateHello
+      responses:
+        "200":
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/templatebackendCreateHelloReply'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/rpcStatus'
+      parameters:
+        - name: identifier
+          in: path
+          required: true
+          type: integer
+          format: int32
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              title:
+                type: string
+              content:
+                type: string
+      tags:
+        - Index
+      x-openapi-router-controller: src.internal.api.server_template.controllers.index_controller
+  /api/v1/helloo:
+    get:
+      summary: Get a hello
+      description: This endpoint returns a hello
+      operationId: IndexService_GetHelloo
+      responses:
+        "200":
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/templatebackendGetHelloReply'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/rpcStatus'
+      tags:
+        - Index
+      x-openapi-router-controller: src.internal.api.server_template.controllers.index_controller
+definitions:
+  protobufAny:
+    type: object
+    properties:
+      '@type':
+        type: string
+    additionalProperties: {}
+  rpcStatus:
+    type: object
+    properties:
+      code:
+        type: integer
+        format: int32
+      message:
+        type: string
+      details:
+        type: array
+        items:
+          type: object
+          $ref: '#/definitions/protobufAny'
+  templatebackendCreateHelloReply:
+    type: object
+    properties:
+      identifier:
+        type: integer
+        format: int32
+      title:
+        type: string
+      content:
+        type: string
+  templatebackendGetHelloReply:
+    type: object
+    properties:
+      content:
+        type: string
+securityDefinitions:
+  Bearer:
+    type: apiKey
+    name: Authorization
+    in: header
+security:
+  - Bearer: []
