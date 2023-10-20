@@ -8,8 +8,6 @@ info:
   version: "1.0"
 servers:
 - url: /
-security:
-- Bearer: []
 tags:
 - name: IndexService
 paths:
