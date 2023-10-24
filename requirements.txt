@@ -2,3 +2,4 @@ connexion
 flask<2.3
 grpcio
 grpcio-tools
+vyper-config
