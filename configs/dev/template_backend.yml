@@ -19,10 +19,12 @@ storage:
   datastores:
     template_backend:
       type: postgres
-      host: 127.0.0.1
+      driver: psycopg2
+      migration_table_name: tt_migrations
+      host: postgres
       port: 5432
-      username: root #sa
-      password: XXXXXX
+      username: admin
+      password: password
       database: template_backend
       max_connections: 10
       max_lifetime: 10s

@@ -14,7 +14,8 @@ if module_path not in sys.path:
     sys.path.append(module_path)
 
 
-from .provider.config import config
+from .provider import config
+from .provider import db
 from ..internal.api.server_template import encoder
 
 def main():    
@@ -27,8 +28,8 @@ def run_server():
     p.add_argument('--config', type=str, help='Config file path', default="./configs/dev/template_backend.yml")
     args = p.parse_args()
 
-
     conf = config.provide_config(args.config).config()
+    d = db.provide_db("template_backend")
     
     app = connexion.App(__name__, specification_dir='../internal/api/server_template/openapi/')
     app.app.json_encoder = encoder.JSONEncoder

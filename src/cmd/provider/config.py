@@ -1,11 +1,10 @@
 import copy
 from vyper import v
-import jsonpickle # pip install jsonpickle
 import json
 
 conf = None
 
-def provide_config(config_path: str):
+def provide_config(config_path: str = "./configs/dev/template_backend.yml"):
     global conf
     if conf is None:
         conf = Config(config_path)
@@ -15,6 +14,7 @@ def provide_config(config_path: str):
 def dict_to_class(d, class_name="Config"):
     """
     Convert a dictionary into a class recursively, handling nested dictionaries and lists.
+    The class will also behave as a dictionary.
     
     Args:
         d (dict): Dictionary to be converted.
@@ -24,18 +24,21 @@ def dict_to_class(d, class_name="Config"):
         Type: A new class type initialized with the dictionary values.
     """
 
-    # Create a new class with the specified name
-    new_class = type(class_name, (), {})
+    # Create a new class with the specified name, subclassing dict
+    class_dict = type(class_name, (dict,), {})
+    
+    class_instance = class_dict()
 
     for k, v in d.items():
-        if isinstance(v, dict):  # Check if the value is another dictionary
-            setattr(new_class, k, dict_to_class(v, k.capitalize()))
-        elif isinstance(v, list):  # Check if the value is a list
-            setattr(new_class, k, [dict_to_class(item, class_name + k.capitalize()) if isinstance(item, dict) else item for item in v])
+        if isinstance(v, dict):
+            class_instance[k] = dict_to_class(v, k.capitalize())
+        elif isinstance(v, list):
+            class_instance[k] = [dict_to_class(item, class_name + k.capitalize()) if isinstance(item, dict) else item for item in v]
         else:
-            setattr(new_class, k, v)
+            class_instance[k] = v
+        setattr(class_instance, k, class_instance[k])
             
-    return new_class
+    return class_instance
 
 def dump_config(obj, level=0):
     if hasattr(obj, "__dict__"):
@@ -80,6 +83,7 @@ class Config:
 
         self._set_default("storage.description", "Type can be 'postgres'")
         self._set_default("storage.datastores.template_backend.type", "postgres")
+        self._set_default("storage.datastores.template_backend.driver", "psycopg2")
         self._set_default("storage.datastores.template_backend.host", "localhost")
         self._set_default("storage.datastores.template_backend.port", "26257")
         self._set_default("storage.datastores.template_backend.username", "root")
