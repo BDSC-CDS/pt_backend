@@ -12,7 +12,7 @@ from inspect import getmembers, isfunction
 from {{packageName}} import util
 
 from src.internal.api.controllers import {{classFilename}}
-controller_functions =  [func_tupple[0] for func_tupple in getmembers(index_controller, isfunction)]
+controller_functions =  [func_tupple[0] for func_tupple in getmembers({{classFilename}}, isfunction)]
 needed_functions = [{{#operations}}{{#operation}}"{{operationId}}"{{^-last}}, {{/-last}}{{/operation}}{{/operations}}]
 for op in needed_functions:
     if op not in controller_functions:

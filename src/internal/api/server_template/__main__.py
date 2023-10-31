@@ -11,7 +11,7 @@ def main():
     app = connexion.App(__name__, specification_dir='./openapi/')
     app.app.json_encoder = encoder.JSONEncoder
     app.add_api('openapi.yaml',
-                arguments={'title': 'template backend index service'},
+                arguments={'title': 'template backend authentication service'},
                 pythonic_params=True)
 
     app.run(port=8080)

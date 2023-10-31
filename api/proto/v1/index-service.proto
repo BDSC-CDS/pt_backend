@@ -2,7 +2,7 @@ syntax = "proto3";
 package templatebackend;
 option go_package = ".;templatebackend";
 
-import "google/protobuf/empty.proto";
+// import "google/protobuf/empty.proto";
 import "google/api/annotations.proto";
 import "protoc-gen-openapiv2/options/annotations.proto";
 
@@ -16,6 +16,7 @@ option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
             email: "dev@chuv.ch";
         };
     };
+
     schemes: HTTP;
     consumes: "application/json";
     produces: "application/json";
@@ -31,12 +32,13 @@ option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
         }
     }
 
-    // security: {
-    //     security_requirement: {
-    //         key: "Bearer";
-    //         value: {};
-    //     }
-    // }
+    security: {
+        security_requirement: {
+            key: "Bearer";
+            value: {};
+        }
+    }
+    security: {}
 };
 
 

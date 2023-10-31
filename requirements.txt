@@ -5,3 +5,4 @@ grpcio-tools
 vyper-config
 sqlalchemy
 psycopg2
+PyJWT

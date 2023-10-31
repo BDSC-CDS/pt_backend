@@ -23,6 +23,7 @@ class TestIndexController(BaseTestCase):
         headers = { 
             'Accept': 'application/json',
             'Content-Type': 'application/json',
+            'Bearer': 'special-key',
         }
         response = self.client.open(
             '/api/v1/hello/{identifier}'.format(identifier=56),
@@ -40,6 +41,7 @@ class TestIndexController(BaseTestCase):
         """
         headers = { 
             'Accept': 'application/json',
+            'Bearer': 'special-key',
         }
         response = self.client.open(
             '/api/v1/hello',
@@ -55,6 +57,7 @@ class TestIndexController(BaseTestCase):
         """
         headers = { 
             'Accept': 'application/json',
+            'Bearer': 'special-key',
         }
         response = self.client.open(
             '/api/v1/helloo',

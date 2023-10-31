@@ -1,12 +1,13 @@
 swagger: "2.0"
 info:
-  title: template backend index service
+  title: template backend authentication service
   version: "1.0"
   contact:
-    name: template backend index service
-    url: https://gitlab.itrcs3-app.intranet.chuv/datascience/ds-template-backend
-    email: dev@chuv.ch
+    name: template backend authentication service
+    url: https://github.com/taurusgroup/tg-capitald
+    email: development@taurusgroup.ch
 tags:
+  - name: AuthenticationService
   - name: IndexService
 schemes:
   - http
@@ -15,6 +16,28 @@ consumes:
 produces:
   - application/json
 paths:
+  /api/rest/v1/authentication/login:
+    post:
+      summary: Authenticate
+      description: This endpoint authenticates a user
+      operationId: AuthenticationService_Authenticate
+      responses:
+        "200":
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/templatebackendAuthenticationReply'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/rpcStatus'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/templatebackendCredentials'
+      tags:
+        - Authentication
   /api/v1/hello:
     get:
       summary: Get a hello
@@ -102,6 +125,16 @@ definitions:
         items:
           type: object
           $ref: '#/definitions/protobufAny'
+  templatebackendAuthenticationReply:
+    type: object
+    properties:
+      result:
+        $ref: '#/definitions/templatebackendAuthenticationResult'
+  templatebackendAuthenticationResult:
+    type: object
+    properties:
+      token:
+        type: string
   templatebackendCreateHelloReply:
     type: object
     properties:
@@ -111,6 +144,15 @@ definitions:
       title:
         type: string
       content:
+        type: string
+  templatebackendCredentials:
+    type: object
+    properties:
+      username:
+        type: string
+      password:
+        type: string
+      totp:
         type: string
   templatebackendGetHelloReply:
     type: object
@@ -122,3 +164,6 @@ securityDefinitions:
     type: apiKey
     name: Authorization
     in: header
+security:
+  - Bearer: []
+  - {}

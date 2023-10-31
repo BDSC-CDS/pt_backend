@@ -1,16 +1,48 @@
 openapi: 3.0.1
 info:
   contact:
-    email: dev@chuv.ch
-    name: template backend index service
-    url: https://gitlab.itrcs3-app.intranet.chuv/datascience/ds-template-backend
-  title: template backend index service
+    email: development@taurusgroup.ch
+    name: template backend authentication service
+    url: https://github.com/taurusgroup/tg-capitald
+  title: template backend authentication service
   version: "1.0"
 servers:
 - url: /
+security:
+- Bearer: []
+- {}
 tags:
+- name: AuthenticationService
 - name: IndexService
 paths:
+  /api/rest/v1/authentication/login:
+    post:
+      description: This endpoint authenticates a user
+      operationId: authentication_service_authenticate
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/templatebackendCredentials'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/templatebackendAuthenticationReply'
+          description: A successful response.
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+          description: An unexpected error response.
+      summary: Authenticate
+      tags:
+      - Authentication
+      x-codegen-request-body-name: body
+      x-openapi-router-controller: server_template.controllers.authentication_controller
   /api/v1/hello:
     get:
       description: This endpoint returns a hello
@@ -114,6 +146,24 @@ components:
           type: array
       title: rpcStatus
       type: object
+    templatebackendAuthenticationReply:
+      example:
+        result:
+          token: token
+      properties:
+        result:
+          $ref: '#/components/schemas/templatebackendAuthenticationResult'
+      title: templatebackendAuthenticationReply
+      type: object
+    templatebackendAuthenticationResult:
+      example:
+        token: token
+      properties:
+        token:
+          title: token
+          type: string
+      title: templatebackendAuthenticationResult
+      type: object
     templatebackendCreateHelloReply:
       example:
         identifier: 0
@@ -131,6 +181,19 @@ components:
           title: content
           type: string
       title: templatebackendCreateHelloReply
+      type: object
+    templatebackendCredentials:
+      properties:
+        username:
+          title: username
+          type: string
+        password:
+          title: password
+          type: string
+        totp:
+          title: totp
+          type: string
+      title: templatebackendCredentials
       type: object
     templatebackendGetHelloReply:
       example:
