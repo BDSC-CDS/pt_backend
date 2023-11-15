@@ -50,7 +50,7 @@ class IndexController:
         return self.controller.index_service_create_hello(identifier, body)
 
 
-    def index_service_get_hello(self, ):
+    def index_service_get_hello(self):
         """Get a hello
 
         This endpoint returns a hello
@@ -62,7 +62,7 @@ class IndexController:
         return self.controller.index_service_get_hello()
 
 
-    def index_service_get_helloo(self, ):
+    def index_service_get_helloo(self):
         """Get a hello
 
         This endpoint returns a hello

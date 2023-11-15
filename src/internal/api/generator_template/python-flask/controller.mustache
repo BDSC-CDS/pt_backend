@@ -32,7 +32,7 @@ class {{#lambda.titlecase}}{{#lambda.camelcase}}{{classFilename}}{{/lambda.camel
 {{#operation}}
 
 
-    def {{operationId}}(self, {{#allParams}}{{paramName}}: {{dataType}}{{^required}}=None{{/required}}{{^-last}}, {{/-last}}{{/allParams}}):
+    def {{operationId}}(self{{#allParams.0}}, {{/allParams.0}}{{#allParams}}{{paramName}}: {{dataType}}{{^required}}=None{{/required}}{{^-last}}, {{/-last}}{{/allParams}}):
         """{{summary}}{{^summary}}{{operationId}}{{/summary}}
 
         {{notes}}

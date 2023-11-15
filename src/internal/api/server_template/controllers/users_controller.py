@@ -81,7 +81,7 @@ class UsersController:
         return self.controller.user_service_get_user(id)
 
 
-    def user_service_get_user_me(self, ):
+    def user_service_get_user_me(self):
         """Get my own user
 
         This endpoint returns the details of the authenticated user
