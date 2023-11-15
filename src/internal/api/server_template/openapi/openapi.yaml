@@ -14,6 +14,7 @@ security:
 tags:
 - name: AuthenticationService
 - name: IndexService
+- name: UserService
 paths:
   /api/rest/v1/authentication/login:
     post:
@@ -43,6 +44,173 @@ paths:
       - Authentication
       x-codegen-request-body-name: body
       x-openapi-router-controller: server_template.controllers.authentication_controller
+  /api/rest/v1/users:
+    post:
+      description: This endpoint creates a user
+      operationId: user_service_create_user
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/templatebackendUser'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/templatebackendCreateUserReply'
+          description: A successful response.
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+          description: An unexpected error response.
+      summary: Create a user
+      tags:
+      - Users
+      x-codegen-request-body-name: body
+      x-openapi-router-controller: server_template.controllers.users_controller
+  /api/rest/v1/users/me:
+    get:
+      description: This endpoint returns the details of the authenticated user
+      operationId: user_service_get_user_me
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/templatebackendGetUserMeReply'
+          description: A successful response.
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+          description: An unexpected error response.
+      summary: Get my own user
+      tags:
+      - Users
+      x-openapi-router-controller: server_template.controllers.users_controller
+  /api/rest/v1/users/me/password:
+    put:
+      description: This endpoint updates the password of the authenticated user
+      operationId: user_service_update_password
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/templatebackendUpdatePasswordRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/templatebackendUpdatePasswordReply'
+          description: A successful response.
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+          description: An unexpected error response.
+      summary: Update password
+      tags:
+      - Users
+      x-codegen-request-body-name: body
+      x-openapi-router-controller: server_template.controllers.users_controller
+  /api/rest/v1/users/{id}:
+    delete:
+      description: This endpoint deletes a user
+      operationId: user_service_delete_user
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: uint64
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/templatebackendDeleteUserReply'
+          description: A successful response.
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+          description: An unexpected error response.
+      summary: Delete a user
+      tags:
+      - Users
+      x-openapi-router-controller: server_template.controllers.users_controller
+    get:
+      description: This endpoint returns a user
+      operationId: user_service_get_user
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: uint64
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/templatebackendGetUserReply'
+          description: A successful response.
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+          description: An unexpected error response.
+      summary: Get a user
+      tags:
+      - Users
+      x-openapi-router-controller: server_template.controllers.users_controller
+  /api/rest/v1/users/{id}/password/reset:
+    post:
+      description: This endpoint resets a user's password
+      operationId: user_service_reset_password
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: uint64
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/templatebackendResetPasswordReply'
+          description: A successful response.
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+          description: An unexpected error response.
+      summary: Reset password
+      tags:
+      - Users
+      x-codegen-request-body-name: body
+      x-openapi-router-controller: server_template.controllers.users_controller
   /api/v1/hello:
     get:
       description: This endpoint returns a hello
@@ -182,6 +350,25 @@ components:
           type: string
       title: templatebackendCreateHelloReply
       type: object
+    templatebackendCreateUserReply:
+      example:
+        result:
+          id: id
+      properties:
+        result:
+          $ref: '#/components/schemas/templatebackendCreateUserResult'
+      title: Create Users
+      type: object
+    templatebackendCreateUserResult:
+      example:
+        id: id
+      properties:
+        id:
+          format: uint64
+          title: id
+          type: string
+      title: templatebackendCreateUserResult
+      type: object
     templatebackendCredentials:
       properties:
         username:
@@ -195,6 +382,18 @@ components:
           type: string
       title: templatebackendCredentials
       type: object
+    templatebackendDeleteUserReply:
+      example:
+        result: "{}"
+      properties:
+        result:
+          title: result
+          type: object
+      title: templatebackendDeleteUserReply
+      type: object
+    templatebackendDeleteUserResult:
+      title: result
+      type: object
     templatebackendGetHelloReply:
       example:
         content: content
@@ -203,6 +402,182 @@ components:
           title: content
           type: string
       title: templatebackendGetHelloReply
+      type: object
+    templatebackendGetUserMeReply:
+      example:
+        result:
+          me:
+            firstName: firstName
+            lastName: lastName
+            createdAt: 2000-01-23T04:56:07.000+00:00
+            password: password
+            passwordChanged: true
+            roles:
+            - roles
+            - roles
+            id: id
+            totpEnabled: true
+            username: username
+            status: status
+            updatedAt: 2000-01-23T04:56:07.000+00:00
+      properties:
+        result:
+          $ref: '#/components/schemas/templatebackendGetUserMeResult'
+      title: templatebackendGetUserMeReply
+      type: object
+    templatebackendGetUserMeResult:
+      example:
+        me:
+          firstName: firstName
+          lastName: lastName
+          createdAt: 2000-01-23T04:56:07.000+00:00
+          password: password
+          passwordChanged: true
+          roles:
+          - roles
+          - roles
+          id: id
+          totpEnabled: true
+          username: username
+          status: status
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+      properties:
+        me:
+          $ref: '#/components/schemas/templatebackendUser'
+      title: Get User (me)
+      type: object
+    templatebackendGetUserReply:
+      example:
+        result:
+          user:
+            firstName: firstName
+            lastName: lastName
+            createdAt: 2000-01-23T04:56:07.000+00:00
+            password: password
+            passwordChanged: true
+            roles:
+            - roles
+            - roles
+            id: id
+            totpEnabled: true
+            username: username
+            status: status
+            updatedAt: 2000-01-23T04:56:07.000+00:00
+      properties:
+        result:
+          $ref: '#/components/schemas/templatebackendGetUserResult'
+      title: templatebackendGetUserReply
+      type: object
+    templatebackendGetUserResult:
+      example:
+        user:
+          firstName: firstName
+          lastName: lastName
+          createdAt: 2000-01-23T04:56:07.000+00:00
+          password: password
+          passwordChanged: true
+          roles:
+          - roles
+          - roles
+          id: id
+          totpEnabled: true
+          username: username
+          status: status
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+      properties:
+        user:
+          $ref: '#/components/schemas/templatebackendUser'
+      title: templatebackendGetUserResult
+      type: object
+    templatebackendResetPasswordReply:
+      example:
+        result: "{}"
+      properties:
+        result:
+          title: result
+          type: object
+      title: templatebackendResetPasswordReply
+      type: object
+    templatebackendResetPasswordResult:
+      title: result
+      type: object
+    templatebackendUpdatePasswordReply:
+      example:
+        result: "{}"
+      properties:
+        result:
+          title: result
+          type: object
+      title: templatebackendUpdatePasswordReply
+      type: object
+    templatebackendUpdatePasswordRequest:
+      properties:
+        currentPassword:
+          title: currentPassword
+          type: string
+        newPassword:
+          title: newPassword
+          type: string
+      title: Update User Password
+      type: object
+    templatebackendUpdateUserResult:
+      title: result
+      type: object
+    templatebackendUser:
+      example:
+        firstName: firstName
+        lastName: lastName
+        createdAt: 2000-01-23T04:56:07.000+00:00
+        password: password
+        passwordChanged: true
+        roles:
+        - roles
+        - roles
+        id: id
+        totpEnabled: true
+        username: username
+        status: status
+        updatedAt: 2000-01-23T04:56:07.000+00:00
+      properties:
+        id:
+          format: uint64
+          title: id
+          type: string
+        firstName:
+          title: firstName
+          type: string
+        lastName:
+          title: lastName
+          type: string
+        username:
+          title: username
+          type: string
+        password:
+          title: password
+          type: string
+        status:
+          title: status
+          type: string
+        roles:
+          items:
+            type: string
+          title: roles
+          type: array
+        totpEnabled:
+          title: totpEnabled
+          type: boolean
+        createdAt:
+          format: date-time
+          title: createdAt
+          type: string
+        updatedAt:
+          format: date-time
+          title: updatedAt
+          type: string
+        passwordChanged:
+          title: passwordChanged
+          type: boolean
+      title: templatebackendUser
       type: object
     IndexService_CreateHello_request:
       properties:

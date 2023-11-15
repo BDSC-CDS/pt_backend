@@ -9,6 +9,7 @@ info:
 tags:
   - name: AuthenticationService
   - name: IndexService
+  - name: UserService
 schemes:
   - http
 consumes:
@@ -38,6 +39,136 @@ paths:
             $ref: '#/definitions/templatebackendCredentials'
       tags:
         - Authentication
+  /api/rest/v1/users:
+    post:
+      summary: Create a user
+      description: This endpoint creates a user
+      operationId: UserService_CreateUser
+      responses:
+        "200":
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/templatebackendCreateUserReply'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/rpcStatus'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/templatebackendUser'
+      tags:
+        - Users
+  /api/rest/v1/users/me:
+    get:
+      summary: Get my own user
+      description: This endpoint returns the details of the authenticated user
+      operationId: UserService_GetUserMe
+      responses:
+        "200":
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/templatebackendGetUserMeReply'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/rpcStatus'
+      tags:
+        - Users
+  /api/rest/v1/users/me/password:
+    put:
+      summary: Update password
+      description: This endpoint updates the password of the authenticated user
+      operationId: UserService_UpdatePassword
+      responses:
+        "200":
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/templatebackendUpdatePasswordReply'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/rpcStatus'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/templatebackendUpdatePasswordRequest'
+      tags:
+        - Users
+  /api/rest/v1/users/{id}:
+    get:
+      summary: Get a user
+      description: This endpoint returns a user
+      operationId: UserService_GetUser
+      responses:
+        "200":
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/templatebackendGetUserReply'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/rpcStatus'
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: string
+          format: uint64
+      tags:
+        - Users
+    delete:
+      summary: Delete a user
+      description: This endpoint deletes a user
+      operationId: UserService_DeleteUser
+      responses:
+        "200":
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/templatebackendDeleteUserReply'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/rpcStatus'
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: string
+          format: uint64
+      tags:
+        - Users
+  /api/rest/v1/users/{id}/password/reset:
+    post:
+      summary: Reset password
+      description: This endpoint resets a user's password
+      operationId: UserService_ResetPassword
+      responses:
+        "200":
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/templatebackendResetPasswordReply'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/rpcStatus'
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: string
+          format: uint64
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+      tags:
+        - Users
   /api/v1/hello:
     get:
       summary: Get a hello
@@ -145,6 +276,18 @@ definitions:
         type: string
       content:
         type: string
+  templatebackendCreateUserReply:
+    type: object
+    properties:
+      result:
+        $ref: '#/definitions/templatebackendCreateUserResult'
+    title: Create Users
+  templatebackendCreateUserResult:
+    type: object
+    properties:
+      id:
+        type: string
+        format: uint64
   templatebackendCredentials:
     type: object
     properties:
@@ -154,11 +297,91 @@ definitions:
         type: string
       totp:
         type: string
+  templatebackendDeleteUserReply:
+    type: object
+    properties:
+      result:
+        $ref: '#/definitions/templatebackendDeleteUserResult'
+  templatebackendDeleteUserResult:
+    type: object
   templatebackendGetHelloReply:
     type: object
     properties:
       content:
         type: string
+  templatebackendGetUserMeReply:
+    type: object
+    properties:
+      result:
+        $ref: '#/definitions/templatebackendGetUserMeResult'
+  templatebackendGetUserMeResult:
+    type: object
+    properties:
+      me:
+        $ref: '#/definitions/templatebackendUser'
+    title: Get User (me)
+  templatebackendGetUserReply:
+    type: object
+    properties:
+      result:
+        $ref: '#/definitions/templatebackendGetUserResult'
+  templatebackendGetUserResult:
+    type: object
+    properties:
+      user:
+        $ref: '#/definitions/templatebackendUser'
+  templatebackendResetPasswordReply:
+    type: object
+    properties:
+      result:
+        $ref: '#/definitions/templatebackendResetPasswordResult'
+  templatebackendResetPasswordResult:
+    type: object
+  templatebackendUpdatePasswordReply:
+    type: object
+    properties:
+      result:
+        $ref: '#/definitions/templatebackendUpdateUserResult'
+  templatebackendUpdatePasswordRequest:
+    type: object
+    properties:
+      currentPassword:
+        type: string
+      newPassword:
+        type: string
+    title: Update User Password
+  templatebackendUpdateUserResult:
+    type: object
+  templatebackendUser:
+    type: object
+    properties:
+      id:
+        type: string
+        format: uint64
+      firstName:
+        type: string
+      lastName:
+        type: string
+      username:
+        type: string
+      password:
+        type: string
+      status:
+        type: string
+      roles:
+        type: array
+        items:
+          type: string
+      totpEnabled:
+        type: boolean
+      createdAt:
+        type: string
+        format: date-time
+      updatedAt:
+        type: string
+        format: date-time
+      passwordChanged:
+        type: boolean
 securityDefinitions:
   Bearer:
     type: apiKey
