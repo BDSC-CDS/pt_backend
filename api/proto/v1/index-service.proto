@@ -72,7 +72,7 @@ service IndexService {
             tags: "Index";
             extensions: {
                 key: "x-openapi-router-controller";
-                value {string_value: "src.internal.api.server_template.controllers.index_controller"};
+                value {string_value: "index_controller"};
             };
         };
     };
@@ -86,7 +86,7 @@ service IndexService {
             tags: "Index";
             extensions: {
                 key: "x-openapi-router-controller";
-                value {string_value: "src.internal.api.server_template.controllers.index_controller"};
+                value {string_value: "index_controller"};
             };
         };
     };
@@ -101,7 +101,7 @@ service IndexService {
             tags: "Index";
             extensions: {
                 key: "x-openapi-router-controller";
-                value {string_value: "src.internal.api.server_template.controllers.index_controller"};
+                value {string_value: "index_controller"};
             };
         };
     }

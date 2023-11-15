@@ -15,8 +15,10 @@ if module_path not in sys.path:
 
 
 from .provider import config
+from .provider import controllers
 from .provider import db
 from ..internal.api.server_template import encoder
+from ..internal.connexion import connexion as connexion_utils
 
 def main():    
     run_server()
@@ -35,7 +37,8 @@ def run_server():
     app.app.json_encoder = encoder.JSONEncoder
     app.add_api('openapi.yaml',
                 arguments={'title': conf.daemon.title},
-                pythonic_params=True)
+                pythonic_params=True,
+                resolver=connexion_utils.Resolver(controllers=controllers.provide_controllers()))
 
     app.run(port=conf.daemon.http.port)
 

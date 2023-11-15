@@ -39,6 +39,7 @@ paths:
             $ref: '#/definitions/templatebackendCredentials'
       tags:
         - Authentication
+      x-openapi-router-controller: authentication_controller
   /api/rest/v1/users:
     post:
       summary: Create a user
@@ -61,6 +62,7 @@ paths:
             $ref: '#/definitions/templatebackendUser'
       tags:
         - Users
+      x-openapi-router-controller: users_controller
   /api/rest/v1/users/me:
     get:
       summary: Get my own user
@@ -77,6 +79,7 @@ paths:
             $ref: '#/definitions/rpcStatus'
       tags:
         - Users
+      x-openapi-router-controller: users_controller
   /api/rest/v1/users/me/password:
     put:
       summary: Update password
@@ -99,6 +102,7 @@ paths:
             $ref: '#/definitions/templatebackendUpdatePasswordRequest'
       tags:
         - Users
+      x-openapi-router-controller: users_controller
   /api/rest/v1/users/{id}:
     get:
       summary: Get a user
@@ -121,6 +125,7 @@ paths:
           format: uint64
       tags:
         - Users
+      x-openapi-router-controller: users_controller
     delete:
       summary: Delete a user
       description: This endpoint deletes a user
@@ -142,6 +147,7 @@ paths:
           format: uint64
       tags:
         - Users
+      x-openapi-router-controller: users_controller
   /api/rest/v1/users/{id}/password/reset:
     post:
       summary: Reset password
@@ -169,6 +175,7 @@ paths:
             type: object
       tags:
         - Users
+      x-openapi-router-controller: users_controller
   /api/v1/hello:
     get:
       summary: Get a hello
@@ -185,7 +192,7 @@ paths:
             $ref: '#/definitions/rpcStatus'
       tags:
         - Index
-      x-openapi-router-controller: src.internal.api.server_template.controllers.index_controller
+      x-openapi-router-controller: index_controller
   /api/v1/hello/{identifier}:
     post:
       summary: Get a hello
@@ -218,7 +225,7 @@ paths:
                 type: string
       tags:
         - Index
-      x-openapi-router-controller: src.internal.api.server_template.controllers.index_controller
+      x-openapi-router-controller: index_controller
   /api/v1/helloo:
     get:
       summary: Get a hello
@@ -235,7 +242,7 @@ paths:
             $ref: '#/definitions/rpcStatus'
       tags:
         - Index
-      x-openapi-router-controller: src.internal.api.server_template.controllers.index_controller
+      x-openapi-router-controller: index_controller
 definitions:
   protobufAny:
     type: object

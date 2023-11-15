@@ -11,5 +11,6 @@ from server_template.models.templatebackend_authentication_reply import Template
 from server_template.models.templatebackend_authentication_result import TemplatebackendAuthenticationResult
 from server_template import util
 
-def authentication_service_authenticate(body: TemplatebackendCredentials):
-    return TemplatebackendAuthenticationReply(TemplatebackendAuthenticationResult("hello")), 200
+class AuthenticationController():
+    def authentication_service_authenticate(self, body: TemplatebackendCredentials):
+        return TemplatebackendAuthenticationReply(TemplatebackendAuthenticationResult("hello")), 200

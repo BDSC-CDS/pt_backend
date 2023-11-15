@@ -4,7 +4,7 @@ import connexion
 from typing import Dict
 from typing import Tuple
 from typing import Union
-from inspect import getmembers, isfunction
+from inspect import getmembers, isfunction, ismethod
 
 
 from server_template.models.rpc_status import RpcStatus
@@ -18,97 +18,108 @@ from server_template.models.templatebackend_update_password_request import Templ
 from server_template.models.templatebackend_user import TemplatebackendUser
 from server_template import util
 
-from src.internal.api.controllers import users_controller
-controller_functions =  [func_tupple[0] for func_tupple in getmembers(users_controller, isfunction)]
-needed_functions = ["user_service_create_user", "user_service_delete_user", "user_service_get_user", "user_service_get_user_me", "user_service_reset_password", "user_service_update_password"]
-for op in needed_functions:
-    if op not in controller_functions:
-        raise NotImplementedError("operation " + op + " is not implemented by src.internal.api.controllers.users_controller")
+
+#from src.internal.api.controllers import users_controller
+#controller_functions =  [func_tupple[0] for func_tupple in getmembers(users_controller, isfunction)]
+#needed_functions = ["user_service_create_user", "user_service_delete_user", "user_service_get_user", "user_service_get_user_me", "user_service_reset_password", "user_service_update_password"]
+#for op in needed_functions:
+#    if op not in controller_functions:
+#        raise NotImplementedError("operation " + op + " is not implemented by src.internal.api.controllers.users_controller")
+
+class UsersController:
+    def __init__(self, controller):
+        controller_functions =  [func_tupple[0] for func_tupple in getmembers(controller, ismethod)]
+        needed_functions = ["user_service_create_user", "user_service_delete_user", "user_service_get_user", "user_service_get_user_me", "user_service_reset_password", "user_service_update_password"]
+        for op in needed_functions:
+            if op not in controller_functions:
+                raise NotImplementedError("operation " + op + " is not implemented by provided controller")
+
+        self.controller=controller
 
 
-def user_service_create_user(body: TemplatebackendUser):
-    """Create a user
+    def user_service_create_user(self, body: TemplatebackendUser):
+        """Create a user
 
-    This endpoint creates a user
+        This endpoint creates a user
 
-    :param body: 
-    :type body: dict | bytes
+        :param body: 
+        :type body: dict | bytes
 
-    :rtype: Union[TemplatebackendCreateUserReply, Tuple[TemplatebackendCreateUserReply, int], Tuple[TemplatebackendCreateUserReply, int, Dict[str, str]]
-    """
-    if connexion.request.is_json:
-        body = TemplatebackendUser.from_dict(connexion.request.get_json())
+        :rtype: Union[TemplatebackendCreateUserReply, Tuple[TemplatebackendCreateUserReply, int], Tuple[TemplatebackendCreateUserReply, int, Dict[str, str]]
+        """
+        if connexion.request.is_json:
+            body = TemplatebackendUser.from_dict(connexion.request.get_json())
 
-    return users_controller.user_service_create_user(body)
-
-
-def user_service_delete_user(id: str):
-    """Delete a user
-
-    This endpoint deletes a user
-
-    :param id: 
-    :type id: str
-
-    :rtype: Union[TemplatebackendDeleteUserReply, Tuple[TemplatebackendDeleteUserReply, int], Tuple[TemplatebackendDeleteUserReply, int, Dict[str, str]]
-    """
-
-    return users_controller.user_service_delete_user(id)
+        return self.controller.user_service_create_user(body)
 
 
-def user_service_get_user(id: str):
-    """Get a user
+    def user_service_delete_user(self, id: str):
+        """Delete a user
 
-    This endpoint returns a user
+        This endpoint deletes a user
 
-    :param id: 
-    :type id: str
+        :param id: 
+        :type id: str
 
-    :rtype: Union[TemplatebackendGetUserReply, Tuple[TemplatebackendGetUserReply, int], Tuple[TemplatebackendGetUserReply, int, Dict[str, str]]
-    """
+        :rtype: Union[TemplatebackendDeleteUserReply, Tuple[TemplatebackendDeleteUserReply, int], Tuple[TemplatebackendDeleteUserReply, int, Dict[str, str]]
+        """
 
-    return users_controller.user_service_get_user(id)
-
-
-def user_service_get_user_me():
-    """Get my own user
-
-    This endpoint returns the details of the authenticated user
+        return self.controller.user_service_delete_user(id)
 
 
-    :rtype: Union[TemplatebackendGetUserMeReply, Tuple[TemplatebackendGetUserMeReply, int], Tuple[TemplatebackendGetUserMeReply, int, Dict[str, str]]
-    """
+    def user_service_get_user(self, id: str):
+        """Get a user
 
-    return users_controller.user_service_get_user_me()
+        This endpoint returns a user
 
+        :param id: 
+        :type id: str
 
-def user_service_reset_password(id: str, body: object):
-    """Reset password
+        :rtype: Union[TemplatebackendGetUserReply, Tuple[TemplatebackendGetUserReply, int], Tuple[TemplatebackendGetUserReply, int, Dict[str, str]]
+        """
 
-    This endpoint resets a user&#39;s password
-
-    :param id: 
-    :type id: str
-    :param body: 
-    :type body: 
-
-    :rtype: Union[TemplatebackendResetPasswordReply, Tuple[TemplatebackendResetPasswordReply, int], Tuple[TemplatebackendResetPasswordReply, int, Dict[str, str]]
-    """
-
-    return users_controller.user_service_reset_password(id, body)
+        return self.controller.user_service_get_user(id)
 
 
-def user_service_update_password(body: TemplatebackendUpdatePasswordRequest):
-    """Update password
+    def user_service_get_user_me(self, ):
+        """Get my own user
 
-    This endpoint updates the password of the authenticated user
+        This endpoint returns the details of the authenticated user
 
-    :param body: 
-    :type body: dict | bytes
 
-    :rtype: Union[TemplatebackendUpdatePasswordReply, Tuple[TemplatebackendUpdatePasswordReply, int], Tuple[TemplatebackendUpdatePasswordReply, int, Dict[str, str]]
-    """
-    if connexion.request.is_json:
-        body = TemplatebackendUpdatePasswordRequest.from_dict(connexion.request.get_json())
+        :rtype: Union[TemplatebackendGetUserMeReply, Tuple[TemplatebackendGetUserMeReply, int], Tuple[TemplatebackendGetUserMeReply, int, Dict[str, str]]
+        """
 
-    return users_controller.user_service_update_password(body)
+        return self.controller.user_service_get_user_me()
+
+
+    def user_service_reset_password(self, id: str, body: object):
+        """Reset password
+
+        This endpoint resets a user&#39;s password
+
+        :param id: 
+        :type id: str
+        :param body: 
+        :type body: 
+
+        :rtype: Union[TemplatebackendResetPasswordReply, Tuple[TemplatebackendResetPasswordReply, int], Tuple[TemplatebackendResetPasswordReply, int, Dict[str, str]]
+        """
+
+        return self.controller.user_service_reset_password(id, body)
+
+
+    def user_service_update_password(self, body: TemplatebackendUpdatePasswordRequest):
+        """Update password
+
+        This endpoint updates the password of the authenticated user
+
+        :param body: 
+        :type body: dict | bytes
+
+        :rtype: Union[TemplatebackendUpdatePasswordReply, Tuple[TemplatebackendUpdatePasswordReply, int], Tuple[TemplatebackendUpdatePasswordReply, int, Dict[str, str]]
+        """
+        if connexion.request.is_json:
+            body = TemplatebackendUpdatePasswordRequest.from_dict(connexion.request.get_json())
+
+        return self.controller.user_service_update_password(body)

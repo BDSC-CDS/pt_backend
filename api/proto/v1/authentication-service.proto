@@ -65,6 +65,10 @@ service AuthenticationService {
             summary: "Authenticate";
             description: "This endpoint authenticates a user";
             tags: "Authentication";
+            extensions: {
+                key: "x-openapi-router-controller";
+                value {string_value: "authentication_controller"};
+            };
         };
     };
 }

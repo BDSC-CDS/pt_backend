@@ -42,8 +42,8 @@ paths:
       summary: Authenticate
       tags:
       - Authentication
+      x-openapi-router-controller: authentication_controller
       x-codegen-request-body-name: body
-      x-openapi-router-controller: server_template.controllers.authentication_controller
   /api/rest/v1/users:
     post:
       description: This endpoint creates a user
@@ -70,8 +70,8 @@ paths:
       summary: Create a user
       tags:
       - Users
+      x-openapi-router-controller: users_controller
       x-codegen-request-body-name: body
-      x-openapi-router-controller: server_template.controllers.users_controller
   /api/rest/v1/users/me:
     get:
       description: This endpoint returns the details of the authenticated user
@@ -92,7 +92,7 @@ paths:
       summary: Get my own user
       tags:
       - Users
-      x-openapi-router-controller: server_template.controllers.users_controller
+      x-openapi-router-controller: users_controller
   /api/rest/v1/users/me/password:
     put:
       description: This endpoint updates the password of the authenticated user
@@ -119,8 +119,8 @@ paths:
       summary: Update password
       tags:
       - Users
+      x-openapi-router-controller: users_controller
       x-codegen-request-body-name: body
-      x-openapi-router-controller: server_template.controllers.users_controller
   /api/rest/v1/users/{id}:
     delete:
       description: This endpoint deletes a user
@@ -148,7 +148,7 @@ paths:
       summary: Delete a user
       tags:
       - Users
-      x-openapi-router-controller: server_template.controllers.users_controller
+      x-openapi-router-controller: users_controller
     get:
       description: This endpoint returns a user
       operationId: user_service_get_user
@@ -175,7 +175,7 @@ paths:
       summary: Get a user
       tags:
       - Users
-      x-openapi-router-controller: server_template.controllers.users_controller
+      x-openapi-router-controller: users_controller
   /api/rest/v1/users/{id}/password/reset:
     post:
       description: This endpoint resets a user's password
@@ -209,8 +209,8 @@ paths:
       summary: Reset password
       tags:
       - Users
+      x-openapi-router-controller: users_controller
       x-codegen-request-body-name: body
-      x-openapi-router-controller: server_template.controllers.users_controller
   /api/v1/hello:
     get:
       description: This endpoint returns a hello
@@ -231,7 +231,7 @@ paths:
       summary: Get a hello
       tags:
       - Index
-      x-openapi-router-controller: src.internal.api.server_template.controllers.index_controller
+      x-openapi-router-controller: index_controller
   /api/v1/hello/{identifier}:
     post:
       description: This endpoint returns a hello
@@ -265,7 +265,7 @@ paths:
       summary: Get a hello
       tags:
       - Index
-      x-openapi-router-controller: src.internal.api.server_template.controllers.index_controller
+      x-openapi-router-controller: index_controller
       x-codegen-request-body-name: body
   /api/v1/helloo:
     get:
@@ -287,7 +287,7 @@ paths:
       summary: Get a hello
       tags:
       - Index
-      x-openapi-router-controller: src.internal.api.server_template.controllers.index_controller
+      x-openapi-router-controller: index_controller
 components:
   schemas:
     protobufAny:

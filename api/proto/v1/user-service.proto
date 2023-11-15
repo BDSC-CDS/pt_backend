@@ -163,6 +163,10 @@ service UserService {
             summary: "Update password";
             description: "This endpoint updates the password of the authenticated user";
             tags: "Users";
+            extensions: {
+                key: "x-openapi-router-controller";
+                value {string_value: "users_controller"};
+            };
         };
     };
 
@@ -175,6 +179,10 @@ service UserService {
     //    //         summary: "Enable TOTP";
     //         description: "This endpoint enables the TOTP of the authenticated user";
     //         tags: "Users";
+    //         extensions: {
+    //             key: "x-openapi-router-controller";
+    //             value {string_value: "users_controller"};
+    //         };
     //     };
     // };
 
@@ -187,6 +195,10 @@ service UserService {
     //    //         summary: "Reset TOTP";
     //         description: "This endpoint resets the TOTP of the authenticated user";
     //         tags: "Users";
+    //         extensions: {
+    //             key: "x-openapi-router-controller";
+    //             value {string_value: "users_controller"};
+    //         };
     //     };
     // };
 
@@ -198,6 +210,10 @@ service UserService {
             summary: "Get my own user";
             description: "This endpoint returns the details of the authenticated user";
             tags: "Users";
+            extensions: {
+                key: "x-openapi-router-controller";
+                value {string_value: "users_controller"};
+            };
         };
     };
 
@@ -209,6 +225,10 @@ service UserService {
     //    //         summary: "List users";
     //         description: "This endpoint returns a list of users";
     //         tags: "Users";
+    //         extensions: {
+    //             key: "x-openapi-router-controller";
+    //             value {string_value: "users_controller"};
+    //         };
     //     };
     // };
 
@@ -221,6 +241,10 @@ service UserService {
     //    //         summary: "Update a user";
     //         description: "This endpoint updates a user";
     //         tags: "Users";
+    //         extensions: {
+    //             key: "x-openapi-router-controller";
+    //             value {string_value: "users_controller"};
+    //         };
     //     };
     // };
 
@@ -233,6 +257,10 @@ service UserService {
             summary: "Reset password";
             description: "This endpoint resets a user's password";
             tags: "Users";
+            extensions: {
+                key: "x-openapi-router-controller";
+                value {string_value: "users_controller"};
+            };
         };
     };
 
@@ -244,6 +272,10 @@ service UserService {
             summary: "Get a user";
             description: "This endpoint returns a user";
             tags: "Users";
+            extensions: {
+                key: "x-openapi-router-controller";
+                value {string_value: "users_controller"};
+            };
         };
     };
 
@@ -255,6 +287,10 @@ service UserService {
             summary: "Delete a user";
             description: "This endpoint deletes a user";
             tags: "Users";
+            extensions: {
+                key: "x-openapi-router-controller";
+                value {string_value: "users_controller"};
+            };
         };
     };
 
@@ -267,6 +303,10 @@ service UserService {
             summary: "Create a user";
             description: "This endpoint creates a user";
             tags: "Users";
+            extensions: {
+                key: "x-openapi-router-controller";
+                value {string_value: "users_controller"};
+            };
         };
     };
 }

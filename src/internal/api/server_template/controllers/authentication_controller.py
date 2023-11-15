@@ -4,7 +4,7 @@ import connexion
 from typing import Dict
 from typing import Tuple
 from typing import Union
-from inspect import getmembers, isfunction
+from inspect import getmembers, isfunction, ismethod
 
 
 from server_template.models.rpc_status import RpcStatus
@@ -12,25 +12,36 @@ from server_template.models.templatebackend_authentication_reply import Template
 from server_template.models.templatebackend_credentials import TemplatebackendCredentials
 from server_template import util
 
-from src.internal.api.controllers import authentication_controller
-controller_functions =  [func_tupple[0] for func_tupple in getmembers(authentication_controller, isfunction)]
-needed_functions = ["authentication_service_authenticate"]
-for op in needed_functions:
-    if op not in controller_functions:
-        raise NotImplementedError("operation " + op + " is not implemented by src.internal.api.controllers.authentication_controller")
+
+#from src.internal.api.controllers import authentication_controller
+#controller_functions =  [func_tupple[0] for func_tupple in getmembers(authentication_controller, isfunction)]
+#needed_functions = ["authentication_service_authenticate"]
+#for op in needed_functions:
+#    if op not in controller_functions:
+#        raise NotImplementedError("operation " + op + " is not implemented by src.internal.api.controllers.authentication_controller")
+
+class AuthenticationController:
+    def __init__(self, controller):
+        controller_functions =  [func_tupple[0] for func_tupple in getmembers(controller, ismethod)]
+        needed_functions = ["authentication_service_authenticate"]
+        for op in needed_functions:
+            if op not in controller_functions:
+                raise NotImplementedError("operation " + op + " is not implemented by provided controller")
+
+        self.controller=controller
 
 
-def authentication_service_authenticate(body: TemplatebackendCredentials):
-    """Authenticate
+    def authentication_service_authenticate(self, body: TemplatebackendCredentials):
+        """Authenticate
 
-    This endpoint authenticates a user
+        This endpoint authenticates a user
 
-    :param body: 
-    :type body: dict | bytes
+        :param body: 
+        :type body: dict | bytes
 
-    :rtype: Union[TemplatebackendAuthenticationReply, Tuple[TemplatebackendAuthenticationReply, int], Tuple[TemplatebackendAuthenticationReply, int, Dict[str, str]]
-    """
-    if connexion.request.is_json:
-        body = TemplatebackendCredentials.from_dict(connexion.request.get_json())
+        :rtype: Union[TemplatebackendAuthenticationReply, Tuple[TemplatebackendAuthenticationReply, int], Tuple[TemplatebackendAuthenticationReply, int, Dict[str, str]]
+        """
+        if connexion.request.is_json:
+            body = TemplatebackendCredentials.from_dict(connexion.request.get_json())
 
-    return authentication_controller.authentication_service_authenticate(body)
+        return self.controller.authentication_service_authenticate(body)
