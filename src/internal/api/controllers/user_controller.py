@@ -14,10 +14,21 @@ from server_template.models.templatebackend_create_user_result import Templateba
 from server_template.models.templatebackend_update_password_request import TemplatebackendUpdatePasswordRequest
 from server_template import util
 
-class UsersController():
-    def user_service_create_user(self, body: TemplatebackendUser):
-        return TemplatebackendCreateUserReply(TemplatebackendCreateUserResult(id=1))
+from src.internal.api.controllers.converter import user
+from src.pkg.user.service.user import UserService
 
+class UsersController():
+    def __init__(self, user_service: UserService):
+        self.user_service = user_service
+
+    def user_service_create_user(self, body: TemplatebackendUser):
+        u = user.user_to_business(body)
+        try:
+            user = self.user_service.create_user(u)
+        except Exception as e:
+            return e, 500
+        
+        return TemplatebackendCreateUserReply(TemplatebackendCreateUserResult(id=user.id))
 
     def user_service_delete_user(self, id: str):
         """Delete a user
@@ -30,7 +41,7 @@ class UsersController():
         :rtype: Union[TemplatebackendDeleteUserReply, Tuple[TemplatebackendDeleteUserReply, int], Tuple[TemplatebackendDeleteUserReply, int, Dict[str, str]]
         """
 
-        return None
+        return "Not implemented", 501
 
 
     def user_service_get_user(self, id: str):
@@ -44,7 +55,7 @@ class UsersController():
         :rtype: Union[TemplatebackendGetUserReply, Tuple[TemplatebackendGetUserReply, int], Tuple[TemplatebackendGetUserReply, int, Dict[str, str]]
         """
 
-        return None
+        return "Not implemented", 501
 
 
     def user_service_get_user_me(self):
@@ -56,7 +67,7 @@ class UsersController():
         :rtype: Union[TemplatebackendGetUserMeReply, Tuple[TemplatebackendGetUserMeReply, int], Tuple[TemplatebackendGetUserMeReply, int, Dict[str, str]]
         """
 
-        return None
+        return "Not implemented", 501
 
 
     def user_service_reset_password(self, id: str, body: object):
@@ -72,7 +83,7 @@ class UsersController():
         :rtype: Union[TemplatebackendResetPasswordReply, Tuple[TemplatebackendResetPasswordReply, int], Tuple[TemplatebackendResetPasswordReply, int, Dict[str, str]]
         """
 
-        return None
+        return "Not implemented", 501
 
 
     def user_service_update_password(self, body: TemplatebackendUpdatePasswordRequest):
@@ -88,4 +99,4 @@ class UsersController():
         # if connexion.request.is_json:
         #     body = TemplatebackendUpdatePasswordRequest.from_dict(connexion.request.get_json())
 
-        return None
+        return "Not implemented", 501

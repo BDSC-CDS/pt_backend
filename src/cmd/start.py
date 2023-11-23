@@ -14,9 +14,9 @@ if module_path not in sys.path:
     sys.path.append(module_path)
 
 
-from .provider import config
-from .provider import controllers
-from .provider import db
+from ..internal.cmd.provider import config
+from ..internal.cmd.provider import controllers
+from ..internal.cmd.provider import db
 from ..internal.api.server_template import encoder
 from ..internal.connexion import connexion as connexion_utils
 

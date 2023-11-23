@@ -1,4 +1,4 @@
-connexion
+connexion~=2.14
 flask<2.3
 grpcio
 grpcio-tools
@@ -6,3 +6,4 @@ vyper-config
 sqlalchemy
 psycopg2
 PyJWT
+bcrypt

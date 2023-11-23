@@ -25,12 +25,12 @@ CREATE TABLE IF NOT EXISTS roles (
 CREATE TABLE IF NOT EXISTS user_role (
 	id SERIAL PRIMARY KEY,
 
-    userid INT64,
+    userid INT,
 	role TEXT,
 
 	CONSTRAINT usercon FOREIGN KEY (userid) REFERENCES users(id),
 	CONSTRAINT rolecon FOREIGN KEY (role) REFERENCES roles(id)
 );
 
-insert into roles (name) select 'admin' where not exists (select * from roles where name = 'admin');
-insert into roles (name) select 'daemon' where not exists (select * from roles where name = 'daemon');
+insert into roles (id) select 'admin' where not exists (select * from roles where id = 'admin');
+insert into roles (id) select 'daemon' where not exists (select * from roles where id = 'daemon');

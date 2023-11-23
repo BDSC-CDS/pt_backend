@@ -1,7 +1,7 @@
 from . import config
 from sqlalchemy import create_engine
 from sqlalchemy import URL
-from ...internal.migrations import migrations
+from src.internal.migrations import migrations
 
 migration_instances = {}
 

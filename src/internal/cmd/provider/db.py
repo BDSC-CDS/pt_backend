@@ -6,7 +6,16 @@ from sqlalchemy import URL
 
 dbs = None
 
-def provide_db(datastore_id: str):
+def provide_db_type(datastore_id: str = "template_backend") -> str:
+    conf = config.provide_config().config()
+        
+    for id in conf.storage.datastores:
+        if id == datastore_id: 
+            return conf.storage.datastores[id].type
+    
+    return None
+
+def provide_db(datastore_id: str = "template_backend"):
     global dbs
     if dbs is None:
         dbs = {}
