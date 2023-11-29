@@ -13,6 +13,12 @@ spec:
       mountPath: /run/docker.sock
     - name: docker-config
       mountPath: /ds/ds-deployer/.docker/secret
+    env:
+      - name: CONFIG_AES_PASSPHRASE
+        valueFrom:
+          secretKeyRef:
+            name: configaespassphrase
+            key: passphrase
     lifecycle:
       postStart:
         exec:
