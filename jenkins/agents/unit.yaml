@@ -23,6 +23,9 @@ spec:
       postStart:
         exec:
           command: ['sh', '-c', "cp /ds/ds-deployer/.docker/secret/config.json /ds/ds-deployer/.docker/config.json"]
+  - name: jnlp
+    image: registry.itrcs3-app.intranet.chuv/ds-jnlp/jenkins/inbound-agent:3107.v665000b_51092-15
+    imagePullPolicy: Always
   imagePullSecrets:
   - name: registry-auth
   volumes:
