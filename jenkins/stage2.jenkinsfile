@@ -70,7 +70,7 @@ pipeline {
       stages {
         stage('Deploy') {
           steps {
-            container(name: 'ds-ubuntu', shell: '/bin/bash', secretEnvVar: [key: "CONFIG_AES_PASSPHRASE", secretName:"config_aes_passphrase", secretKey:"passphrase"])) {
+            container(name: 'ds-ubuntu', shell: '/bin/bash', secretEnvVar: [key: "CONFIG_AES_PASSPHRASE", secretName:"config_aes_passphrase", secretKey:"passphrase"]) {
               dir('ds-dev-ops') {
                 checkout scm
                 sh '''
