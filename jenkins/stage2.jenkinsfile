@@ -63,6 +63,42 @@ pipeline {
       }
     }
 
+    stage('Test CI') {
+      when {
+        branch 'feat/ci'
+      }
+      stages {
+        stage('Deploy') {
+          steps {
+            container(name: 'ds-ubuntu', shell: '/bin/bash', secretEnvVar: [key: "CONFIG_AES_PASSPHRASE", secretName:"config_aes_passphrase", secretKey:"passphrase"])) {
+              dir('ds-dev-ops') {
+                checkout scm
+                sh '''
+                  export env=ci
+                  cd deploy
+                  ./deploy.sh
+                '''
+              }
+            }
+          }
+        }
+      }
+    }
+    
+    // stage('Test') {
+    //   steps {
+    //     container(name: 'ds-ubuntu', shell: '/bin/bash') {
+    //       dir('ds-dev-ops') {
+    //         checkout scm
+    //         sh '''
+    //           cd docker
+    //           ./build-stage2.sh
+    //         '''
+    //       }
+    //     }
+    //   }
+    // }
+
     stage('Master') {
       when {
         branch 'master'
@@ -83,5 +119,7 @@ pipeline {
         }
       }
     }
+    
+    
   }
 }

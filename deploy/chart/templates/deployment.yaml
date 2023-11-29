@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ds-cicd-template-backend
+  labels:
+    app: ds-cicd-template-backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ds-cicd-template-backend
+  template:
+    metadata:
+      labels:
+        app: ds-cicd-template-backend
+    spec:
+      containers:
+      - name: ds-cicd-template-backend
+        image: {{ .Values.image }}
+        ports:
+        - containerPort: 3001
+      imagePullSecrets:
+      - name: registry-auth

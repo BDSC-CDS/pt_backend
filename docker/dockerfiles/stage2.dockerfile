@@ -2,11 +2,10 @@ FROM registry.itrcs3-app.intranet.chuv/ds-cicd-template-backend-stage1:latest
 
 USER ds
 
-COPY --chown=ds:ds . /ds/ds-deployer
-RUN rm -rf /ds/ds-deployer/.git
+COPY --chown=ds:ds . /template_backend
+RUN rm -rf /template_backend/.git
 
-RUN whoami
-RUN ls -lah
-RUN npm ci
+RUN --mount=type=secret,id=PYPI_USERNAME --mount=type=secret,id=PYPI_PASSWORD \
+    /template_backend/docker/secret_exec.sh pip install -r /template_backend/requirements.txt
 
-CMD ["/usr/bin/node", "app.js", "--config", "int"]
+CMD ["python3", "-m", "src.cmd.start"]
