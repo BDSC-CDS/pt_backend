@@ -1,7 +1,7 @@
 FROM registry.itrcs3-app.intranet.chuv/ds-ubuntu:latest
 
 USER root
-RUN apt update && apt install libpq-dev
+RUN apt update && apt install libpq-dev -y --no-install-recommends
 USER ds
 
 COPY ./requirements.txt /template_backend/requirements.txt
