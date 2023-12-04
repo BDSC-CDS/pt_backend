@@ -1,4 +1,4 @@
-FROM registry.itrcs3-app.intranet.chuv/python-oracle:3.8
+FROM registry.itrcs3-app.intranet.chuv/ds-ubuntu:latest
 
 RUN apt install libpq-dev
 
