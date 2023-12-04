@@ -6,9 +6,17 @@ Expand the name of the chart.
 {{- end }}
 
 {{- define "chart.main" -}}
-{{- $secrets := .Files.Get "files/main-enc.yaml" | b64enc | decryptAES (.Values.aesPassphrase | sha256sum | substr 0 32) | fromYaml -}}
-{{- $_ := set $secrets "Template" $.Template }}
-{{- tpl (.Files.Get "files/main.yml") $secrets -}}
+
+    {{- $encryptedFile := .Files.Get "files/secrets.yaml.enc" }}
+    {{- $salt := $encryptedFile | substr 0 64 }}
+    {{- $remainingFile := $encryptedFile | substr 64 -1 }}
+    {{- $ivAndEncryptedData := $remainingFile | b64enc }}
+    {{- $passphraseWithSalt :=  (printf "%s%s" .Values.aesPassphrase $salt) | sha256sum | substr 0 32 }}
+    {{- $secrets := $ivAndEncryptedData | decryptAES $passphraseWithSalt | fromYaml -}}
+
+    {{- $_ := set $secrets "Template" $.Template }}
+    {{- tpl (.Files.Get "files/main.yml") $secrets -}}
+
 {{- end -}}
 
 {{/*
