@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 if [ -f /run/secrets/PYPI_USERNAME ]; then
     echo "file /run/secrets/PYPI_USERNAME is set, setting up env variable"
     PYPI_USERNAME=$(cat /run/secrets/PYPI_USERNAME)

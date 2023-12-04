@@ -1,6 +1,8 @@
 FROM registry.itrcs3-app.intranet.chuv/ds-ubuntu:latest
 
-RUN apt install libpq-dev
+USER root
+RUN apt update && apt install libpq-dev
+USER ds
 
 COPY ./requirements.txt /template_backend/requirements.txt
 COPY ./docker/secret_exec.sh /template_backend/docker/secret_exec.sh
