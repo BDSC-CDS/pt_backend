@@ -17,9 +17,9 @@ pipeline {
       steps {
         sh '''#!/bin/bash -xe
           VERSION=$BRANCH_NAME-$BUILD_ID
-          echo $VERSION > $WORKSPACE/version
-          echo ${VERSION//\\//-} > $WORKSPACE/image_tag
-          echo $VERSION
+          echo -n $VERSION > $WORKSPACE/version
+          echo -n ${VERSION//\\//-} > $WORKSPACE/image_tag
+          echo -n $VERSION
         '''
         script {
           env.VERSION = readFile("$WORKSPACE/version")
