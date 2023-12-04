@@ -7,7 +7,7 @@ daemon:
       access_control_allow_origin: "*"
       access_control_max_age: "600"
   jwt:
-    secret: {{ .jwt_secret }}
+    secret: "{{ .jwt_secret }}"
     expiration_time: 259200 # 72h
   jobs:
     job_status_gc:
