@@ -9,7 +9,7 @@ pipeline {
     }
   }
   environment{
-    componentName = 'template_backend'
+    componentName = 'template-backend'
   }
   stages {
     stage('Set version') {
@@ -21,12 +21,17 @@ pipeline {
       steps {
         sh '''#!/bin/bash -xe
           VERSION=$BRANCH_NAME-$BUILD_ID
+          IMAGE_TAG=$(echo -n ${VERSION//[\\|_]/-})
+          RELEASE_NAME="${componentName}-$VERSION"
+          RELEASE_NAME=$(echo -n ${RELEASE_NAME//[\\|_]/-})
+
+          echo -n $RELEASE_NAME > $WORKSPACE/release_name
           echo -n $VERSION > $WORKSPACE/version
-          echo -n ${VERSION//\\//-} > $WORKSPACE/image_tag
-          echo -n $VERSION
-          echo JOB_NAME $JOB_NAME
-          RELEASE_NAME="${componentName}_$VERSION"
-          echo -n ${RELEASE_NAME//\\//-} > $WORKSPACE/release_name
+          echo -n $IMAGE_TAG > $WORKSPACE/image_tag
+          
+          echo "VERSION $VERSION"
+          echo "IMAGE_TAG $IMAGE_TAG"
+          echo "JOB_NAME $JOB_NAME"
           echo "RELEASE_NAME $RELEASE_NAME"
         '''
         script {
