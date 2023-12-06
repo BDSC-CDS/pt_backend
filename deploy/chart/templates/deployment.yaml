@@ -23,9 +23,9 @@ spec:
         - containerPort: 3001
         volumeMounts:
         - name: backend-config
-          mountPath: /template_backend/config.yaml
+          mountPath: /template_backend/conf
         command: ["python3"]
-        args: ["-m", "src.cmd.start", "--config", "/template_backend/config.yaml"]
+        args: ["-m", "src.cmd.start", "--config", "/template_backend/conf/config.yaml"]
       - name: postgres
         image: postgres
         ports:
