@@ -1,23 +1,23 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: deployment_backend_{{ include "chart.nameid" . }}
+  name: deployment-backend-{{ include "chart.nameid" . }}
   labels:
-    app: deployment_backend_{{ include "chart.nameid" . }}
+    app: deployment-backend-{{ include "chart.nameid" . }}
     nameid: {{ include "chart.nameid" . }}
     version: {{ .Values.version }}
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: deployment_backend_{{ include "chart.nameid" . }}
+      app: deployment-backend-{{ include "chart.nameid" . }}
   template:
     metadata:
       labels:
-        app: deployment_backend_{{ include "chart.nameid" . }}
+        app: deployment-backend-{{ include "chart.nameid" . }}
     spec:
       containers:
-      - name: deployment_backend_{{ include "chart.nameid" . }}
+      - name: deployment-backend-{{ include "chart.nameid" . }}
         image: {{ .Values.image }}
         ports:
         - containerPort: 3001
