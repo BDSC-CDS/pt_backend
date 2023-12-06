@@ -6,7 +6,7 @@ Expand the name of the chart.
 {{- end }}
 
 {{- define "chart.nameid" -}}
-{{- printf "%s_%s" (include "chart.name" .) .Values.version }}
+{{- printf "%s-%s" (include "chart.name" .) .Values.version }}
 {{- end }}
 
 {{- define "chart.main" -}}
