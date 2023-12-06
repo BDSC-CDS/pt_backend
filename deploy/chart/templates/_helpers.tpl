@@ -5,6 +5,10 @@ Expand the name of the chart.
 {{- default .Chart.Name .Values.nameOverride | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
+{{- define "chart.nameid" -}}
+{{- printf "%s_%s" (include "chart.name" .) .Values.version }}
+{{- end }}
+
 {{- define "chart.main" -}}
 
     {{- $encryptedFile := .Files.Get "files/secrets.yaml.enc" }}

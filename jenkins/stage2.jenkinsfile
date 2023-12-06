@@ -7,6 +7,9 @@ pipeline {
       yamlFile "jenkins/agents/unit.yaml"
     }
   }
+  environment{
+    componentName = 'template_backend'
+  }
   stages {
     stage('Set version') {
       when {
@@ -20,10 +23,15 @@ pipeline {
           echo -n $VERSION > $WORKSPACE/version
           echo -n ${VERSION//\\//-} > $WORKSPACE/image_tag
           echo -n $VERSION
+          echo JOB_NAME $JOB_NAME
+          RELEASE_NAME="${componentName}_$VERSION"
+          echo -n ${RELEASE_NAME//\\//-} > $WORKSPACE/release_name
+          echo "RELEASE_NAME $RELEASE_NAME"
         '''
         script {
           env.VERSION = readFile("$WORKSPACE/version")
           env.IMAGE_TAG = readFile("$WORKSPACE/image_tag")
+          env.RELEASE_NAME = readFile("$WORKSPACE/release_name")
         }
       }
     }
@@ -71,14 +79,26 @@ pipeline {
       }
       stages {
         stage('Deploy') {
-          steps {
-            container(name: 'ds-ubuntu', shell: '/bin/bash') {
+          container(name: 'ds-ubuntu', shell: '/bin/bash') {
+            steps {
               dir('ds-dev-ops') {
                 checkout scm
                 sh '''
                   export env=ci
                   cd deploy
                   ./deploy.sh
+                '''
+              }
+            }
+            post {
+              always {
+                sh '''
+                  helm uninstall --timeout 60s --namespace ci "${RELEASE_NAME} || true"
+                '''
+              }
+              failure {
+                sh '''
+                  echo nooo
                 '''
               }
             }

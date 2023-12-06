@@ -2,9 +2,13 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
+nameOverride: "template_backend"
+
 aesPassphrase: ""
 
 image: registry.itrcs3-app.intranet.chuv/ds-cicd-template-backend:latest
+
+version: master
 
 replicaCount: 1
 
@@ -15,7 +19,6 @@ image:
   tag: ""
 
 imagePullSecrets: []
-nameOverride: ""
 fullnameOverride: ""
 
 serviceAccount:
