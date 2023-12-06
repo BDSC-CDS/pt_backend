@@ -5,6 +5,7 @@ pipeline {
       namespace 'jenkins-int-pipeline'
       label "ci-ds-cicd-template-backend-${UUID.randomUUID().toString()}"
       yamlFile "jenkins/agents/unit.yaml"
+      defaultContainer 'ds-ubuntu'
     }
   }
   environment{
@@ -80,29 +81,25 @@ pipeline {
       stages {
         stage('Deploy') {
           steps {
-            container(name: 'ds-ubuntu', shell: '/bin/bash') {
-              steps {
-                dir('ds-dev-ops') {
-                  checkout scm
-                  sh '''
-                    export env=ci
-                    cd deploy
-                    ./deploy.sh
-                  '''
-                }
-              }
-              post {
-                always {
-                  sh '''
-                    helm uninstall --timeout 60s --namespace ci "${RELEASE_NAME} || true"
-                  '''
-                }
-                failure {
-                  sh '''
-                    echo nooo
-                  '''
-                }
-              }
+            dir('ds-dev-ops') {
+              checkout scm
+              sh '''
+                export env=ci
+                cd deploy
+                ./deploy.sh
+              '''
+            }
+          }
+          post {
+            always {
+              sh '''
+                helm uninstall --timeout 60s --namespace ci "${RELEASE_NAME} || true"
+              '''
+            }
+            failure {
+              sh '''
+                echo nooo
+              '''
             }
           }
         }
