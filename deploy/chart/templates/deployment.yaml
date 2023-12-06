@@ -42,7 +42,7 @@ spec:
       volumes:
       - name: backend-config
         secret:
-          secretName: backend-config-{{ .Values.version }}
+          secretName: backend-config-{{ include "chart.nameid" . }}
           items:
           - key: config.yaml
             path: config.yaml
