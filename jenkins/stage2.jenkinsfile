@@ -21,9 +21,9 @@ pipeline {
       steps {
         sh '''#!/bin/bash -xe
           VERSION=$BRANCH_NAME-$BUILD_ID
-          IMAGE_TAG=$(echo -n ${VERSION//[\\\/_]/-})
+          IMAGE_TAG=$(echo -n ${VERSION//[\\/_]/-})
           RELEASE_NAME="${componentName}-$VERSION"
-          RELEASE_NAME=$(echo -n ${RELEASE_NAME//[\\\/_]/-})
+          RELEASE_NAME=$(echo -n ${RELEASE_NAME//[\\/_]/-})
 
           echo -n $RELEASE_NAME > $WORKSPACE/release_name
           echo -n $VERSION > $WORKSPACE/version
@@ -53,7 +53,7 @@ pipeline {
           MINOR=$(echo $stripped | cut -d'.' -f2)
           VERSION=v$MAJOR.$MINOR.$BUILD_ID
           RELEASE_NAME="${componentName}-$VERSION"
-          RELEASE_NAME=$(echo -n ${RELEASE_NAME//[\\\/_]/-})
+          RELEASE_NAME=$(echo -n ${RELEASE_NAME//[\\/_]/-})
 
           echo $VERSION > $WORKSPACE/version
           echo ${VERSION//\\//-} > $WORKSPACE/image_tag
