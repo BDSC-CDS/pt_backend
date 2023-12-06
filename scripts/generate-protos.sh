@@ -59,5 +59,22 @@ function generate_server() {
     rm -r src/internal/api/server_template_tmp
 }
 
+function generate_client() {
+    # Protobuf and openapiv2 instantiations.
+    echo
+    echo "==> Handling openapi file:"
+
+    echo "---> generating flask server ..."
+    java -jar ./scripts/tools/openapi-generator-cli.jar generate \
+       -i api/openapiv2/v1-tags/apis.swagger.yaml \
+       -g python \
+       -o src/tests/client 
+
+    # rm -rf src/internal/api/server_template
+    # mv src/internal/api/server_template_tmp/server_template src/internal/api/server_template
+    # rm -r src/internal/api/server_template_tmp
+}
+
 generate_api_files
 generate_server
+generate_client

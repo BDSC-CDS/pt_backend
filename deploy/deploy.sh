@@ -2,9 +2,6 @@
 
 set -e
 
-# kubectl apply --force -f ./all.yaml
-# kubectl rollout restart -f ./all.yaml || true
-
 mkdir -p ./chart/files
 rm -rf ./chart/files/*
 cp -r ../configs/$env/* ./chart/files/
