@@ -1,6 +1,7 @@
 from sqlalchemy import Engine
 from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy.orm import sessionmaker
+from sqlalchemy.sql import text
 from contextlib import contextmanager
 from src.pkg.user.model.user import User, Role
 
@@ -23,32 +24,31 @@ class UserStore:
         finally:
             session.close()
 
-    def create_user(self, user: User):
+    def create_user(self, user: User) -> User:
         user_query = """
 INSERT INTO users 
-    (tenantid, firstname, lastname, username, password, status, totpsecret, createdat, updatedat)
+    (tenantid, firstname, lastname, username, email, password, status, source, totpsecret, createdat, updatedat)
 VALUES 
-    (:tenant_id, :first_name, :last_name, :username, :password, :status, :totp_secret, NOW(), NOW()) 
+    (:tenantid, :firstname, :lastname, :username, :email, :password, :status, :source, :totpsecret, NOW(), NOW()) 
 RETURNING id;
 """
 
         user_role_query = """
-INSERT INTO user_role (userid, roleid) VALUES (:user_id, :role_id);
-        """
-
-        recovery_code_query = """
-INSERT INTO totp_recovery_codes (tenantid, userid, code) VALUES (:tenant_id, :user_id, :code);
+INSERT INTO user_role (userid, roleid) VALUES (:userid, :roleid);
         """
 
         with self.session_scope() as session:
             try:
-                result = session.execute(user_query, {
-                    'first_name': user.firstname, 
-                    'last_name': user.lastname,
+                result = session.execute(text(user_query), {
+                    'tenantid': user.tenantid,
+                    'firstname': user.firstname, 
+                    'lastname': user.lastname,
                     'username': user.username, 
+                    'email': user.email,
                     'password': user.password, 
                     'status': user.status.value, 
-                    'totp_secret': user.totpsecret
+                    'source': user.source.value,
+                    'totpsecret': user.totpsecret
                 }).fetchone()
                 user_id = result[0]
 
@@ -58,23 +58,23 @@ INSERT INTO totp_recovery_codes (tenantid, userid, code) VALUES (:tenant_id, :us
                     found = False
                     for r in roles:
                         if ur.id == r.id:
-                            session.execute(user_role_query, {'user_id': user_id, 'role_id': r.id})
+                            session.execute(text(user_role_query), {
+                                'tenantid': user.tenantid,
+                                'userid': user_id, 
+                                'roleid': r.id,
+                            })
                             found = True
                             break
                     if not found:
                         raise ValueError(f"unknown user role: {ur}")
 
-                if user.totp_recovery_codes:
-                    for rc in user.totp_recovery_codes:
-                        session.execute(recovery_code_query, {'user_id': user_id, 'code': rc})
-
             except SQLAlchemyError as e:
                 raise e
 
-            return user_id
+            return User(id=user_id)
 
     def get_roles(self):
         query = "SELECT id FROM roles;"
         with self.session_scope() as session:
-            roles = session.execute(query).fetchall()
+            roles = session.execute(text(query)).fetchall()
             return [Role(id=row[0]) for row in roles]

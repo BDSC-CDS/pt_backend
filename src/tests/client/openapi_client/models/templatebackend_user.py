@@ -30,6 +30,7 @@ class TemplatebackendUser(BaseModel):
     first_name: Optional[StrictStr] = Field(None, alias="firstName")
     last_name: Optional[StrictStr] = Field(None, alias="lastName")
     username: Optional[StrictStr] = None
+    email: Optional[StrictStr] = None
     password: Optional[StrictStr] = None
     status: Optional[StrictStr] = None
     roles: Optional[conlist(StrictStr)] = None
@@ -37,7 +38,7 @@ class TemplatebackendUser(BaseModel):
     created_at: Optional[datetime] = Field(None, alias="createdAt")
     updated_at: Optional[datetime] = Field(None, alias="updatedAt")
     password_changed: Optional[StrictBool] = Field(None, alias="passwordChanged")
-    __properties = ["id", "firstName", "lastName", "username", "password", "status", "roles", "totpEnabled", "createdAt", "updatedAt", "passwordChanged"]
+    __properties = ["id", "firstName", "lastName", "username", "email", "password", "status", "roles", "totpEnabled", "createdAt", "updatedAt", "passwordChanged"]
 
     class Config:
         """Pydantic configuration"""
@@ -79,6 +80,7 @@ class TemplatebackendUser(BaseModel):
             "first_name": obj.get("firstName"),
             "last_name": obj.get("lastName"),
             "username": obj.get("username"),
+            "email": obj.get("email"),
             "password": obj.get("password"),
             "status": obj.get("status"),
             "roles": obj.get("roles"),

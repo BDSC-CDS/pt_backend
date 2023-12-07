@@ -1,5 +1,5 @@
 from enum import Enum
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 
 class StrEnum(Enum):
     def _generate_next_value_(name, start, count, last_values):
@@ -21,17 +21,20 @@ class Role:
 
 @dataclass
 class User:
-    id: int
-    username: str
-    password: str
-    firstname: str
-    lastname: str
-    roles: list[Role]
-    status: Status
-    source: Source
-    totpsecret: str
-    createdat: str
-    updatedat: str
+    tenantid: int = 0
+    username: str = ""
+    email: str = ""
+    password: str = ""
+    firstname: str = ""
+    lastname: str = ""
+    status: Status = Status.ACTIVE
+    source: Source = Source.INTERNAL
+
+    id: int = None
+    roles: list[Role] = field(default_factory=list)
+    totpsecret: str = ""
+    createdat: str = ""
+    updatedat: str = ""
 
 
 

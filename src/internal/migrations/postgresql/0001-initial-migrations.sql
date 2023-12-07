@@ -1,15 +1,16 @@
 CREATE TABLE IF NOT EXISTS users (
     id SERIAL PRIMARY KEY,
-	-- tenantid INT64 NULL,
+	tenantid INT NULL,
 
-    username  TEXT UNIQUE,
-    password  TEXT,
-    firstname TEXT,
-    lastname  TEXT,
-    status    TEXT,
-	source	  TEXT,
+    username  TEXT UNIQUE NOT NULL,
+    email     TEXT NOT NULL,
+    password  TEXT NOT NULL,
+    firstname TEXT NOT NULL,
+    lastname  TEXT NOT NULL,
+    status    TEXT NOT NULL,
+	source	  TEXT NOT NULL,
 
-	totpsecret TEXT,
+	totpsecret TEXT NOT NULL DEFAULT '',
 
     createdat TIMESTAMP,
     updatedat TIMESTAMP

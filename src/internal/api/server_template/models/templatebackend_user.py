@@ -14,7 +14,7 @@ class TemplatebackendUser(Model):
     Do not edit the class manually.
     """
 
-    def __init__(self, id=None, first_name=None, last_name=None, username=None, password=None, status=None, roles=None, totp_enabled=None, created_at=None, updated_at=None, password_changed=None):
+    def __init__(self, id=None, first_name=None, last_name=None, username=None, email=None, password=None, status=None, roles=None, totp_enabled=None, created_at=None, updated_at=None, password_changed=None):
         """TemplatebackendUser - a model defined in OpenAPI
 
         :param id: The id of this TemplatebackendUser.
@@ -25,6 +25,8 @@ class TemplatebackendUser(Model):
         :type last_name: str
         :param username: The username of this TemplatebackendUser.
         :type username: str
+        :param email: The email of this TemplatebackendUser.
+        :type email: str
         :param password: The password of this TemplatebackendUser.
         :type password: str
         :param status: The status of this TemplatebackendUser.
@@ -45,6 +47,7 @@ class TemplatebackendUser(Model):
             'first_name': str,
             'last_name': str,
             'username': str,
+            'email': str,
             'password': str,
             'status': str,
             'roles': List[str],
@@ -59,6 +62,7 @@ class TemplatebackendUser(Model):
             'first_name': 'firstName',
             'last_name': 'lastName',
             'username': 'username',
+            'email': 'email',
             'password': 'password',
             'status': 'status',
             'roles': 'roles',
@@ -72,6 +76,7 @@ class TemplatebackendUser(Model):
         self._first_name = first_name
         self._last_name = last_name
         self._username = username
+        self._email = email
         self._password = password
         self._status = status
         self._roles = roles
@@ -174,6 +179,27 @@ class TemplatebackendUser(Model):
         """
 
         self._username = username
+
+    @property
+    def email(self) -> str:
+        """Gets the email of this TemplatebackendUser.
+
+
+        :return: The email of this TemplatebackendUser.
+        :rtype: str
+        """
+        return self._email
+
+    @email.setter
+    def email(self, email: str):
+        """Sets the email of this TemplatebackendUser.
+
+
+        :param email: The email of this TemplatebackendUser.
+        :type email: str
+        """
+
+        self._email = email
 
     @property
     def password(self) -> str:

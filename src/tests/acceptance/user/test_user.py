@@ -2,6 +2,7 @@ import unittest
 import time
 import os
 import sys
+import traceback
 
 ### Allow dynamic import resolution from generated template backend
 # Get the absolute path to src/internal/api/
@@ -21,21 +22,27 @@ class TestUser(unittest.TestCase):
 
     def test_create_user(self):
         configuration = openapi_client.Configuration(
-            host = "http://172.17.0.1:5000"
+            host = "http://127.0.0.1:5000"
         )
         with openapi_client.ApiClient(configuration) as api_client:
             # Create an instance of the API class
             api_instance = openapi_client.UsersApi(api_client)
-            body = openapi_client.TemplatebackendUser() # TemplatebackendUser | 
+            body = openapi_client.TemplatebackendUser(
+                password="hello", 
+                username="moto2", 
+                email="hello.moto@gmail.com",
+                firstName="hello",
+                lastName="moto"
+            )
+            api_response = api_instance.user_service_create_user(body)
+            print("The response of UsersApi->user_service_create_user:\n")
+            pprint(api_response)
 
-            try:
-                # Create a user
-                api_response = api_instance.user_service_create_user(body)
-                print("The response of UsersApi->user_service_create_user:\n")
-                pprint(api_response)
-            except Exception as e:
-                print("Exception when calling UsersApi->user_service_create_user: %s\n" % e)
-        self.assertEqual('foo'.upper(), 'FOO')
+        self.assertIsNotNone(api_response)
+        self.assertIsInstance(api_response.result.id, str)
+        id = int(api_response.result.id)
+        self.assertIsInstance(id, int)
+        self.assertTrue(id > 0)
 
 if __name__ == '__main__':
     unittest.main()

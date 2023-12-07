@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **first_name** | **str** |  | [optional] 
 **last_name** | **str** |  | [optional] 
 **username** | **str** |  | [optional] 
+**email** | **str** |  | [optional] 
 **password** | **str** |  | [optional] 
 **status** | **str** |  | [optional] 
 **roles** | **List[str]** |  | [optional] 

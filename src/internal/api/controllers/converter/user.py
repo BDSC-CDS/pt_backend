@@ -7,6 +7,7 @@ from src.internal.api.server_template.models.templatebackend_user import Templat
 def user_to_business(user: TemplatebackendUser) -> User:
     u = User(
         username = user.username,
+        email = user.email,
         password = user.password,
         firstname = user.first_name,
         lastname = user.last_name,

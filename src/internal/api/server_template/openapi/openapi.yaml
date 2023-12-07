@@ -417,6 +417,7 @@ components:
             - roles
             id: id
             totpEnabled: true
+            email: email
             username: username
             status: status
             updatedAt: 2000-01-23T04:56:07.000+00:00
@@ -438,6 +439,7 @@ components:
           - roles
           id: id
           totpEnabled: true
+          email: email
           username: username
           status: status
           updatedAt: 2000-01-23T04:56:07.000+00:00
@@ -460,6 +462,7 @@ components:
             - roles
             id: id
             totpEnabled: true
+            email: email
             username: username
             status: status
             updatedAt: 2000-01-23T04:56:07.000+00:00
@@ -481,6 +484,7 @@ components:
           - roles
           id: id
           totpEnabled: true
+          email: email
           username: username
           status: status
           updatedAt: 2000-01-23T04:56:07.000+00:00
@@ -535,6 +539,7 @@ components:
         - roles
         id: id
         totpEnabled: true
+        email: email
         username: username
         status: status
         updatedAt: 2000-01-23T04:56:07.000+00:00
@@ -551,6 +556,9 @@ components:
           type: string
         username:
           title: username
+          type: string
+        email:
+          title: email
           type: string
         password:
           title: password

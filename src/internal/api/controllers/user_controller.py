@@ -1,4 +1,5 @@
 import connexion
+import traceback
 from typing import Dict
 from typing import Tuple
 from typing import Union
@@ -14,7 +15,7 @@ from server_template.models.templatebackend_create_user_result import Templateba
 from server_template.models.templatebackend_update_password_request import TemplatebackendUpdatePasswordRequest
 from server_template import util
 
-from src.internal.api.controllers.converter import user
+import src.internal.api.controllers.converter.user as user_converter
 from src.pkg.user.service.user import UserService
 
 class UsersController():
@@ -22,13 +23,17 @@ class UsersController():
         self.user_service = user_service
 
     def user_service_create_user(self, body: TemplatebackendUser):
-        u = user.user_to_business(body)
+        u = user_converter.user_to_business(body)
         try:
             user = self.user_service.create_user(u)
         except Exception as e:
-            return e, 500
+            print("error", e)
+            traceback.print_exception(e)
+            return str(e), 500
         
-        return TemplatebackendCreateUserReply(TemplatebackendCreateUserResult(id=user.id))
+        print("user", user)
+
+        return TemplatebackendCreateUserReply(TemplatebackendCreateUserResult(id=str(user.id)))
 
     def user_service_delete_user(self, id: str):
         """Delete a user
