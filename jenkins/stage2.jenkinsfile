@@ -106,10 +106,13 @@ pipeline {
             stage('test') {
               agent {
                 kubernetes {
-                  containerTemplate {
-                    name 'ds-ubuntu'
-                    image "registry.itrcs3-app.intranet.chuv/ds-cicd-template-backend:${IMAGE_TAG}"
-                  }
+                  inheritFrom 'mypod'
+                  yaml """
+                  spec:
+                    containers:
+                    - name: ds-ubuntu
+                      image: registry.itrcs3-app.intranet.chuv/ds-cicd-template-backend:${IMAGE_TAG}
+                   """
                 }
               }
               steps {
