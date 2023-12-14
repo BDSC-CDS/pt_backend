@@ -106,7 +106,7 @@ pipeline {
             stage('test') {
               agent {
                 kubernetes {
-                  inheritFrom 'mypod'
+                  inheritFrom 'unit'
                   yaml """
                   spec:
                     containers:
