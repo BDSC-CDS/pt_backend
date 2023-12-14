@@ -90,14 +90,36 @@ pipeline {
       }
       stages {
         stage('Deploy') {
-          steps {
-            dir('ds-dev-ops') {
-              checkout scm
-              sh '''
-                export env=ci
-                cd deploy
-                ./deploy.sh
-              '''
+          stages {
+            stage('Deploy'){
+              steps {
+                dir('ds-dev-ops') {
+                  checkout scm
+                  sh '''
+                    export env=ci
+                    cd deploy
+                    ./deploy.sh
+                  '''
+                }
+              }
+            }
+            stage('test') {
+              agent {
+                kubernetes {
+                  containerTemplate {
+                    name 'ds-ubuntu'
+                    image "registry.itrcs3-app.intranet.chuv/ds-cicd-template-backend:${IMAGE_TAG}"
+                  }
+                }
+              }
+              steps {
+                dir('ds-dev-ops') {
+                  checkout scm
+                  sh '''
+                    python3 -m unittest discover ./src/tests/acceptance
+                  '''
+                }
+              }
             }
           }
           post {
