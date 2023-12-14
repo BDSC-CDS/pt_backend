@@ -106,7 +106,9 @@ pipeline {
             stage('test') {
               agent {
                 kubernetes {
-                  inheritFrom 'unit'
+                  label "ci-ds-cicd-template-backend-${UUID.randomUUID().toString()}"
+                  yamlFile "jenkins/agents/unit.yaml"
+                  defaultContainer 'ds-ubuntu'
                   yaml """
                   spec:
                     containers:
