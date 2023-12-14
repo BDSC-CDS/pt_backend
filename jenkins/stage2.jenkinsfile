@@ -104,27 +104,30 @@ pipeline {
               }
             }
             stage('test') {
-              agent {
-                kubernetes {
-                  label "ci-ds-cicd-template-backend-${UUID.randomUUID().toString()}"
-                  yamlFile "jenkins/agents/unit.yaml"
-                  defaultContainer 'ds-ubuntu'
-                  yaml """
-                  spec:
-                    containers:
-                    - name: ds-ubuntu
-                      image: registry.itrcs3-app.intranet.chuv/ds-cicd-template-backend:${IMAGE_TAG}
-                   """
+              podTemplate(yaml: readTrusted('jenkins/agents/unit.yaml')) {
+                node('ds-ubuntu') {
+                  agent {
+                    kubernetes {
+                      inheritFrom 'unit'
+                      yaml """
+                      spec:
+                        containers:
+                        - name: ds-ubuntu
+                          image: registry.itrcs3-app.intranet.chuv/ds-cicd-template-backend:${IMAGE_TAG}
+                      """
+                    }
+                  }
+                  steps {
+                    dir('ds-dev-ops') {
+                      checkout scm
+                      sh '''
+                        python3 -m unittest discover ./src/tests/acceptance
+                      '''
+                    }
+                  }
                 }
               }
-              steps {
-                dir('ds-dev-ops') {
-                  checkout scm
-                  sh '''
-                    python3 -m unittest discover ./src/tests/acceptance
-                  '''
-                }
-              }
+              
             }
           }
           post {
