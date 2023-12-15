@@ -139,7 +139,7 @@ pipeline {
                       kubectl wait --for=condition=ready pod \$POD_NAME -n ci --timeout=60s
                       kubectl -n ci port-forward service/service-backend-${RELEASE_NAME} 5000:5000 &
                       kubectl -n ci logs -f pod/\$POD_NAME &
-                      sleep 15
+                      sleep 20
                       python3 -m unittest discover ./src/tests/acceptance || true
                     """
                   }
