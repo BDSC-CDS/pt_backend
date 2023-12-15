@@ -140,7 +140,7 @@ pipeline {
                       kubectl -n ci port-forward service/service-backend-${RELEASE_NAME} 5000:5000 &
                       kubectl -n ci logs -f pod/\$POD_NAME &
                       sleep 20
-                      python3 -m unittest discover ./src/tests/acceptance || true
+                      python3 -m unittest discover ./src/tests/acceptance
                     """
                   }
                 }
