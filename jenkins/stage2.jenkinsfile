@@ -90,7 +90,7 @@ pipeline {
           dir('ds-dev-ops') {
             checkout scm
             sh '''
-              pip3 install -r requirements.txt
+              #pip3 install -r requirements.txt
               #python3 -m unittest discover ./src
             '''
           }
@@ -118,6 +118,14 @@ pipeline {
               }
             }
             stage('test') {
+              agent {
+                docker {
+                    image "registry.itrcs3-app.intranet.chuv/ds-cicd-template-backend:${IMAGE_TAG}"
+                    registryUrl 'http://registry.itrcs3-app.intranet.chuv'
+                    registryCredentialsId 'dsr_registry'
+                    alwaysPull true
+                }
+              }
               steps {
                 dir('ds-dev-ops') {
                   checkout scm
