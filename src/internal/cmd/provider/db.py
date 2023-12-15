@@ -2,6 +2,7 @@ from . import config
 from . import migrations
 from sqlalchemy import create_engine
 from sqlalchemy import URL
+import time
 
 
 dbs = None
@@ -50,7 +51,18 @@ def provide_postgres_db(datastore_id, datastore):
 
     if datastore_id == "template_backend":
         m = migrations.provide_migrations("postgresql", datastore)
-        m.migrate(engine)
+        tries = 3
+        for i in range(tries):
+            try:
+                m.migrate(engine)
+            except Exception as e:
+                if i < tries - 1:
+                    print ("error while migrating, retrying in 3...", e)
+                    time.sleep(3)
+                    continue
+                else:
+                    raise e
+            break
     
     return engine
 
