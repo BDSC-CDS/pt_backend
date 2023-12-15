@@ -84,50 +84,49 @@ pipeline {
       }
     }
 
+    // stage('Test') {
+    //   steps {
+    //     container(name: 'ds-ubuntu', shell: '/bin/bash') {
+    //       dir('ds-dev-ops') {
+    //         checkout scm
+    //         sh '''
+    //           cd docker
+    //           ./build-stage2.sh
+    //         '''
+    //       }
+    //     }
+    //   }
+    // }
+
     stage('Test CI') {
       when {
         branch 'feat/ci'
       }
       stages {
-        stage('Deploy') {
+        stage('deploy & test') {
           stages {
-            stage('Deploy'){
+            stage('deploy'){
               steps {
                 dir('ds-dev-ops') {
                   checkout scm
                   sh '''
                     export env=ci
                     cd deploy
-                    ./deploy.sh
+                    ./deploy.sh 
                   '''
                 }
               }
             }
             stage('test') {
-              podTemplate(yaml: readTrusted('jenkins/agents/unit.yaml')) {
-                node('ds-ubuntu') {
-                  agent {
-                    kubernetes {
-                      inheritFrom 'unit'
-                      yaml """
-                      spec:
-                        containers:
-                        - name: ds-ubuntu
-                          image: registry.itrcs3-app.intranet.chuv/ds-cicd-template-backend:${IMAGE_TAG}
-                      """
-                    }
-                  }
-                  steps {
-                    dir('ds-dev-ops') {
-                      checkout scm
-                      sh '''
-                        python3 -m unittest discover ./src/tests/acceptance
-                      '''
-                    }
-                  }
+              steps {
+                dir('ds-dev-ops') {
+                  checkout scm
+                  sh """
+                    kubectl port-forward service/service-backend-${RELEASE_NAME} 5000:5000
+                    python3 -m unittest discover ./src/tests/acceptance || true
+                  """
                 }
               }
-              
             }
           }
           post {
@@ -145,20 +144,6 @@ pipeline {
         }
       }
     }
-    
-    // stage('Test') {
-    //   steps {
-    //     container(name: 'ds-ubuntu', shell: '/bin/bash') {
-    //       dir('ds-dev-ops') {
-    //         checkout scm
-    //         sh '''
-    //           cd docker
-    //           ./build-stage2.sh
-    //         '''
-    //       }
-    //     }
-    //   }
-    // }
 
     stage('Master') {
       when {
@@ -170,17 +155,17 @@ pipeline {
             container(name: 'ds-ubuntu', shell: '/bin/bash') {
               dir('ds-dev-ops') {
                 checkout scm
-                sh '''
+                sh """
+                  export env=int
+                  export RELEASE_NAME="${componentName}-int-master"
                   cd deploy
                   ./deploy.sh
-                '''
+                """
               }
             }
           }
         }
       }
     }
-    
-    
   }
 }

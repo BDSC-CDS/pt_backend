@@ -7,9 +7,10 @@ rm -rf ./chart/files/*
 cp -r ../configs/$env/* ./chart/files/
 
 helm version
-helm template --namespace ci --values ./chart/files/values.yaml --set-string "aesPassphrase=$CONFIG_AES_PASSPHRASE" --set-string "image=registry.itrcs3-app.intranet.chuv/ds-cicd-template-backend:${IMAGE_TAG}" ./chart
+CONFIG_AES_PASSPHRASE_VAR_NAME="CONFIG_AES_PASSPHRASE_$env"
+helm template --namespace "$env" --values ./chart/files/values.yaml --set-string "aesPassphrase=${!CONFIG_AES_PASSPHRASE_VAR_NAME}" --set-string "image=registry.itrcs3-app.intranet.chuv/ds-cicd-template-backend:${IMAGE_TAG}" ./chart
 
 echo ""
 echo "deploying..."
-helm upgrade --install --create-namespace --namespace ci --values ./chart/files/values.yaml --set-string "aesPassphrase=$CONFIG_AES_PASSPHRASE" --set-string "version=$IMAGE_TAG" --set-string "image=registry.itrcs3-app.intranet.chuv/ds-cicd-template-backend:${IMAGE_TAG}" "${RELEASE_NAME}" ./chart
+helm upgrade --install --create-namespace --namespace "$env" --values ./chart/files/values.yaml --set-string "aesPassphrase=${!CONFIG_AES_PASSPHRASE_VAR_NAME}" --set-string "version=$IMAGE_TAG" --set-string "image=registry.itrcs3-app.intranet.chuv/ds-cicd-template-backend:${IMAGE_TAG}" "${RELEASE_NAME}" ./chart
 echo "done"
