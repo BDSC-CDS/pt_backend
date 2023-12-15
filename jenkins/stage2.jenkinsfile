@@ -84,19 +84,19 @@ pipeline {
       }
     }
 
-    // stage('Test') {
-    //   steps {
-    //     container(name: 'ds-ubuntu', shell: '/bin/bash') {
-    //       dir('ds-dev-ops') {
-    //         checkout scm
-    //         sh '''
-    //           cd docker
-    //           ./build-stage2.sh
-    //         '''
-    //       }
-    //     }
-    //   }
-    // }
+    stage('Test') {
+      steps {
+        container(name: 'ds-ubuntu', shell: '/bin/bash') {
+          dir('ds-dev-ops') {
+            checkout scm
+            sh '''
+              pip3 install -r requirements.txt
+              #python3 -m unittest discover ./src
+            '''
+          }
+        }
+      }
+    }
 
     stage('Test CI') {
       when {

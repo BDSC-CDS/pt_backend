@@ -7,3 +7,5 @@ sqlalchemy
 psycopg2
 PyJWT
 bcrypt
+pydantic
+python-dateutil
