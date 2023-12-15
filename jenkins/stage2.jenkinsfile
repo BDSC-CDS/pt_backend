@@ -113,6 +113,7 @@ pipeline {
                     export env=ci
                     cd deploy
                     ./deploy.sh 
+                    kubectl config view
                   '''
                 }
               }
@@ -130,6 +131,7 @@ pipeline {
                 dir('ds-dev-ops') {
                   checkout scm
                   sh """
+                    kubectl config view
                     echo "looking for pod name"
                     POD_NAME=\$(kubectl get pods -n ci -l app=deployment-backend-${RELEASE_NAME} -o jsonpath="{.items[0].metadata.name}")
                     echo "waiting 60sec for pod \$POD_NAME to be ready"
