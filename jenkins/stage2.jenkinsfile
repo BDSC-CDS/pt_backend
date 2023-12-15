@@ -140,6 +140,7 @@ pipeline {
                       echo "waiting 60sec for pod \$POD_NAME to be ready"
                       kubectl wait --for=condition=ready pod \$POD_NAME -n ci --timeout=60s
                       kubectl -n ci port-forward service/service-backend-${RELEASE_NAME} 5000:5000 &
+                      wait 15
                       python3 -m unittest discover ./src/tests/acceptance || true
                     """
                   }
