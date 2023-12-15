@@ -113,7 +113,6 @@ pipeline {
                     export env=ci
                     cd deploy
                     ./deploy.sh 
-                    kubectl config view
                   '''
                 }
               }
@@ -134,12 +133,12 @@ pipeline {
                     file([credentialsId: 'Kubernetes-INT-microk8s-admin-config', variable: "KUBECONFIG"])
                   ]){
                     sh """
-                      kubectl config view
                       echo "looking for pod name"
                       POD_NAME=\$(kubectl get pods -n ci -l app=deployment-backend-${RELEASE_NAME} -o jsonpath="{.items[0].metadata.name}")
                       echo "waiting 60sec for pod \$POD_NAME to be ready"
                       kubectl wait --for=condition=ready pod \$POD_NAME -n ci --timeout=60s
                       kubectl -n ci port-forward service/service-backend-${RELEASE_NAME} 5000:5000 &
+                      kubectl -n ci logs -f pod/\$POD_NAME &
                       sleep 15
                       python3 -m unittest discover ./src/tests/acceptance || true
                     """
@@ -151,12 +150,12 @@ pipeline {
           post {
             always {
               sh '''
-                #helm uninstall --timeout 60s --namespace ci "${RELEASE_NAME}" || true
+                helm uninstall --timeout 60s --namespace ci "${RELEASE_NAME}" || true
               '''
             }
             failure {
               sh '''
-                echo nooo
+                echo no
               '''
             }
           }
