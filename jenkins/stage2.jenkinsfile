@@ -99,9 +99,6 @@ pipeline {
     }
 
     stage('Test CI') {
-      when {
-        branch 'feat/ci'
-      }
       stages {
         stage('deploy & test') {
           stages {
