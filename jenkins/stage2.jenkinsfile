@@ -122,7 +122,7 @@ pipeline {
                 dir('ds-dev-ops') {
                   checkout scm
                   sh """
-                    kubectl port-forward service/service-backend-${RELEASE_NAME} 5000:5000
+                    kubectl -n ci port-forward service/service-backend-${RELEASE_NAME} 5000:5000
                     python3 -m unittest discover ./src/tests/acceptance || true
                   """
                 }

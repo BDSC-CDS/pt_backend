@@ -7,7 +7,7 @@ metadata:
     nameid: {{ include "chart.nameid" . }}
 spec:
   selector:
-    app: service-backend-{{ include "chart.nameid" . }}
+    app: deployment-backend-{{ include "chart.nameid" . }}
   ports:
     - protocol: TCP
       port: 80
