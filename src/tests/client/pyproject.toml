@@ -1,12 +1,12 @@
 [tool.poetry]
 name = "openapi_client"
 version = "1.0.0"
-description = "template backend authentication service"
-authors = ["template backend authentication service <development@taurusgroup.ch>"]
+description = "template backend"
+authors = ["template backend authentication service <development.bdsc@chuv.ch>"]
 license = "NoLicense"
 readme = "README.md"
 repository = "https://github.com/GIT_USER_ID/GIT_REPO_ID"
-keywords = ["OpenAPI", "OpenAPI-Generator", "template backend authentication service"]
+keywords = ["OpenAPI", "OpenAPI-Generator", "template backend"]
 include = ["openapi_client/py.typed"]
 
 [tool.poetry.dependencies]

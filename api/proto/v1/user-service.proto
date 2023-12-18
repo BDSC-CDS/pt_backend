@@ -11,12 +11,12 @@ import "user.proto";
 
 option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
     info: {
-        title: "template backend user service";
+        title: "template backend";
         version: "1.0";
         contact: {
             name: "template backend user service";
-            url: "https://github.com/taurusgroup/tg-capitald";
-            email: "development@taurusgroup.ch";
+            url: "https://template-backend.horus-graph.intranet.chuv";
+            email: "development.bdsc@chuv.ch";
         };
     };
 
