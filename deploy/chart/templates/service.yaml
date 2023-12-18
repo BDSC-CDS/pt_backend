@@ -10,6 +10,6 @@ spec:
     app: deployment-backend-{{ include "chart.nameid" . }}
   ports:
     - protocol: TCP
-      port: 16080
+      port: {{ .Values.service.port }}
       targetPort: 5000
   type: ClusterIP
