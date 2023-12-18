@@ -15,7 +15,7 @@ spec:
         pathType: Prefix
         backend:
           service:
-            name: kubernetes-dashboard
+            name: service-backend-{{ include "chart.nameid" . }}
             port:
               number: 16080
 {{- end }}
