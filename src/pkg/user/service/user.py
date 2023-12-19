@@ -9,4 +9,6 @@ class UserService:
         hash = helper.hash_password(user.password)
         user.password = hash
 
+        raise Exception()
+
         return self.user_store.create_user(user)
