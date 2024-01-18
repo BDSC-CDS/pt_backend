@@ -37,7 +37,7 @@ def run_server():
     app.app.json_encoder = encoder.JSONEncoder
     app.add_api('openapi.yaml',
                 arguments={'title': conf.daemon.title},
-                pythonic_params=True,
+                pythonic_params=False,
                 resolver=connexion_utils.Resolver(controllers=controllers.provide_controllers()))
 
     app.run(port=conf.daemon.http.port)

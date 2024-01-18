@@ -78,3 +78,11 @@ INSERT INTO user_role (userid, roleid) VALUES (:userid, :roleid);
         with self.session_scope() as session:
             roles = session.execute(text(query)).fetchall()
             return [Role(id=row[0]) for row in roles]
+    
+    def get_user(self, id: int):
+        query = "SELECT * FROM users where id = :userid;"
+        with self.session_scope() as session:
+            user = session.execute(text(query), {
+                'userid': id, 
+            }).fetchone()
+            return user

@@ -10,6 +10,8 @@ from server_template.models.rpc_status import RpcStatus
 from server_template.models.templatebackend_user import TemplatebackendUser
 from server_template.models.templatebackend_create_user_reply import TemplatebackendCreateUserReply
 from server_template.models.templatebackend_create_user_result import TemplatebackendCreateUserResult
+from server_template.models.templatebackend_get_user_reply import TemplatebackendGetUserReply
+from server_template.models.templatebackend_get_user_result import TemplatebackendGetUserResult
 # from server_template.models.templatebackend_ import 
 # from server_template.models.templatebackend_ import 
 from server_template.models.templatebackend_update_password_request import TemplatebackendUpdatePasswordRequest
@@ -60,7 +62,19 @@ class UsersController():
         :rtype: Union[TemplatebackendGetUserReply, Tuple[TemplatebackendGetUserReply, int], Tuple[TemplatebackendGetUserReply, int, Dict[str, str]]
         """
 
-        return "Not implemented", 501
+        print("id", id)
+
+
+        try:
+            user = self.user_service.get_user(id)
+        except Exception as e:
+            print("error", e)
+            traceback.print_exception(e)
+            return str(e), 500
+        
+        print("user", user)
+
+        return TemplatebackendGetUserReply(TemplatebackendGetUserResult(user=user))
 
 
     def user_service_get_user_me(self):
