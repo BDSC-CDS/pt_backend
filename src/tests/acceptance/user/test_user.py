@@ -34,7 +34,7 @@ class TestUser(unittest.TestCase):
             self.assertIsInstance(api_response.result.user.id, str)
 
             self.assertEqual(id, api_response.result.user.id)
-            self.assertEqual("", api_response.result.user.password)
+            self.assertEqual(None, api_response.result.user.password)
             self.assertEqual("moto2", api_response.result.user.username)
             self.assertEqual("hello.moto@gmail.com", api_response.result.user.email)
             self.assertEqual("hello", api_response.result.user.first_name)
