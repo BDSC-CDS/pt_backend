@@ -23,4 +23,4 @@ chmod u+x scripts/tools/linux/bin/protoc-gen-openapiv2
 # curl -L -o scripts/tools/swagger-codegen-cli.jar https://repo1.maven.org/maven2/io/swagger/codegen/v3/swagger-codegen-cli/3.0.43/swagger-codegen-cli-3.0.43.jar
 
 echo "--- getting openapi generator ---"
-curl -L -o scripts/tools/openapi-generator-cli.jar https://repo1.maven.org/maven2/org/openapitools/openapi-generator-cli/7.0.0/openapi-generator-cli-7.0.0.jar
+curl -L -o scripts/tools/openapi-generator-cli.jar https://repo1.maven.org/maven2/org/openapitools/openapi-generator-cli/7.2.0/openapi-generator-cli-7.2.0.jar

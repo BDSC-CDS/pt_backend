@@ -22,6 +22,7 @@ This endpoint creates a user
 ### Example
 
 * Api Key Authentication (Bearer):
+
 ```python
 import time
 import os
@@ -67,6 +68,7 @@ with openapi_client.ApiClient(configuration) as api_client:
 
 ### Parameters
 
+
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **body** | [**TemplatebackendUser**](TemplatebackendUser.md)|  | 
@@ -85,6 +87,7 @@ Name | Type | Description  | Notes
  - **Accept**: application/json
 
 ### HTTP response details
+
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | A successful response. |  -  |
@@ -102,6 +105,7 @@ This endpoint deletes a user
 ### Example
 
 * Api Key Authentication (Bearer):
+
 ```python
 import time
 import os
@@ -146,6 +150,7 @@ with openapi_client.ApiClient(configuration) as api_client:
 
 ### Parameters
 
+
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id** | **str**|  | 
@@ -164,6 +169,7 @@ Name | Type | Description  | Notes
  - **Accept**: application/json
 
 ### HTTP response details
+
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | A successful response. |  -  |
@@ -181,6 +187,7 @@ This endpoint returns a user
 ### Example
 
 * Api Key Authentication (Bearer):
+
 ```python
 import time
 import os
@@ -225,6 +232,7 @@ with openapi_client.ApiClient(configuration) as api_client:
 
 ### Parameters
 
+
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id** | **str**|  | 
@@ -243,6 +251,7 @@ Name | Type | Description  | Notes
  - **Accept**: application/json
 
 ### HTTP response details
+
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | A successful response. |  -  |
@@ -260,6 +269,7 @@ This endpoint returns the details of the authenticated user
 ### Example
 
 * Api Key Authentication (Bearer):
+
 ```python
 import time
 import os
@@ -302,6 +312,7 @@ with openapi_client.ApiClient(configuration) as api_client:
 
 
 ### Parameters
+
 This endpoint does not need any parameter.
 
 ### Return type
@@ -318,6 +329,7 @@ This endpoint does not need any parameter.
  - **Accept**: application/json
 
 ### HTTP response details
+
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | A successful response. |  -  |
@@ -335,6 +347,7 @@ This endpoint resets a user's password
 ### Example
 
 * Api Key Authentication (Bearer):
+
 ```python
 import time
 import os
@@ -380,6 +393,7 @@ with openapi_client.ApiClient(configuration) as api_client:
 
 ### Parameters
 
+
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id** | **str**|  | 
@@ -399,6 +413,7 @@ Name | Type | Description  | Notes
  - **Accept**: application/json
 
 ### HTTP response details
+
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | A successful response. |  -  |
@@ -416,6 +431,7 @@ This endpoint updates the password of the authenticated user
 ### Example
 
 * Api Key Authentication (Bearer):
+
 ```python
 import time
 import os
@@ -461,6 +477,7 @@ with openapi_client.ApiClient(configuration) as api_client:
 
 ### Parameters
 
+
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **body** | [**TemplatebackendUpdatePasswordRequest**](TemplatebackendUpdatePasswordRequest.md)|  | 
@@ -479,6 +496,7 @@ Name | Type | Description  | Notes
  - **Accept**: application/json
 
 ### HTTP response details
+
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | A successful response. |  -  |

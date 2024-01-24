@@ -79,29 +79,6 @@ INSERT INTO user_role (userid, roleid) VALUES (:userid, :roleid);
             roles = session.execute(text(query)).fetchall()
             return [Role(id=row[0]) for row in roles]
     
-    def get_user(self, id: int) -> User : 
-        query = "SELECT * FROM users where id = :userid;"
-        with self.session_scope() as session:
-            user = session.execute(text(query), {
-                'userid': id, 
-            }).mappings().fetchone()
-
-            u = User(
-                id=user.id,
-                tenantid=user.tenantid,
-                username=user.username,
-                email=user.email,
-                password=user.password,
-                firstname=user.firstname,
-                lastname=user.lastname,
-                status=user.status,
-                source=user.source,
-                createdat=user.createdat,
-                updatedat=user.updatedat
-            )
-
-            return u
-    
     def get_user(self, by: str, identifier: str | int) -> User : 
         if by not in ['id', 'username', 'email']:
             raise Exception("identifier must be one of 'id', 'username', 'email'")

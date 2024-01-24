@@ -5,15 +5,12 @@ from src.tests.acceptance.helpers.client import client
 
 class TestUser(unittest.TestCase):
     def test_create_get_user(self):
-        from random import randrange
-        username = "motoo" + str(randrange(1000000))
-
         with client() as api_client:
             # Create an instance of the API class
             api_instance = openapi_client.UsersApi(api_client)
             body = openapi_client.TemplatebackendUser(
                 password="hello", 
-                username=username, 
+                username="moto1", 
                 email="hello.moto@gmail.com",
                 firstName="hello",
                 lastName="moto"
@@ -38,10 +35,10 @@ class TestUser(unittest.TestCase):
 
             self.assertEqual(id, api_response.result.user.id)
             self.assertEqual(None, api_response.result.user.password)
-            self.assertEqual(username, api_response.result.user.username)
+            self.assertEqual("moto1", api_response.result.user.username)
             self.assertEqual("hello.moto@gmail.com", api_response.result.user.email)
-            #self.assertEqual("hello", api_response.result.user.firstName)
-            #self.assertEqual("moto", api_response.result.user.lastName)
+            self.assertEqual("hello", api_response.result.user.first_name)
+            self.assertEqual("moto", api_response.result.user.last_name)
 
 if __name__ == '__main__':
     unittest.main()
