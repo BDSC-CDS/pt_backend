@@ -36,5 +36,11 @@ class User:
     createdat: str = ""
     updatedat: str = ""
 
+    def drop_sensitive_fields(self):
+        self.password = ""
+        self.status = None
+        self.source = None
+        self.totpsecret = ""
+
 
 
