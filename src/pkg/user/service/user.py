@@ -11,8 +11,8 @@ class UserService:
 
         return self.user_store.create_user(user)
     
-    def get_user(self, id: int, keep_sensitive_filelds: bool = False) -> User:
-        user = self.user_store.get_user(id)
+    def get_user(self, by: str, identifier: str | int, keep_sensitive_filelds: bool = False) -> User:
+        user = self.user_store.get_user(by=by, identifier=identifier)
         
         if not keep_sensitive_filelds:
             user.drop_sensitive_fields()

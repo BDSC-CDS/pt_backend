@@ -1,5 +1,6 @@
 connexion~=2.14
 flask<2.3
+flask_cors
 grpcio
 grpcio-tools
 vyper-config

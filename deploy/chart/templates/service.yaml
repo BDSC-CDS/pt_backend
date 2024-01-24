@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: service-backend-{{ include "chart.nameid" . }}
+  name: service-backend-{{ include "chart.name" . }}
   labels:
     version: {{ .Values.version }}
     nameid: {{ include "chart.nameid" . }}

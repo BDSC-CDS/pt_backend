@@ -66,7 +66,8 @@ class UsersController():
 
 
         try:
-            user = self.user_service.get_user(id)
+            user = self.user_service.get_user(by='id', identifier=id)
+            user = user_converter.user_from_business(user)
         except Exception as e:
             print("error", e)
             traceback.print_exception(e)

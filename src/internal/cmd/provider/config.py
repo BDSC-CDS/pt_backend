@@ -9,7 +9,7 @@ def provide_config(config_path: str = "./configs/dev/template_backend.yml"):
     if conf is None:
         conf = Config(config_path)
 
-    return conf
+    return conf.config()
 
 def dict_to_class(d, class_name="Config"):
     """

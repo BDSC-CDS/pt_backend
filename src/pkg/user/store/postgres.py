@@ -101,3 +101,29 @@ INSERT INTO user_role (userid, roleid) VALUES (:userid, :roleid);
             )
 
             return u
+    
+    def get_user(self, by: str, identifier: str | int) -> User : 
+        if by not in ['id', 'username', 'email']:
+            raise Exception("identifier must be one of 'id', 'username', 'email'")
+        
+        query = "SELECT * FROM users where " + by + " = :identifier;"
+        with self.session_scope() as session:
+            user = session.execute(text(query), {
+                'identifier': identifier, 
+            }).mappings().fetchone()
+
+            u = User(
+                id=user.id,
+                tenantid=user.tenantid,
+                username=user.username,
+                email=user.email,
+                password=user.password,
+                firstname=user.firstname,
+                lastname=user.lastname,
+                status=user.status,
+                source=user.source,
+                createdat=user.createdat,
+                updatedat=user.updatedat
+            )
+
+            return u

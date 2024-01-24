@@ -8,7 +8,7 @@ import time
 dbs = None
 
 def provide_db_type(datastore_id: str = "template_backend") -> str:
-    conf = config.provide_config().config()
+    conf = config.provide_config()
         
     for id in conf.storage.datastores:
         if id == datastore_id: 
@@ -21,7 +21,7 @@ def provide_db(datastore_id: str = "template_backend"):
     if dbs is None:
         dbs = {}
 
-        conf = config.provide_config().config()
+        conf = config.provide_config()
         
         for id in conf.storage.datastores:
             tpe = conf.storage.datastores[id].type
