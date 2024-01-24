@@ -4,3 +4,6 @@ ingress:
 
 service:
   port: 16080
+
+deployment:
+  hostPath: /data/kubernetes/hostPathStorage/template_backend

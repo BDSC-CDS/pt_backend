@@ -30,6 +30,11 @@ spec:
         image: postgres
         ports:
         - containerPort: 5432
+{{- if .Values.deployment.hostPath }}
+        volumeMounts:
+        - name: template-backend-data
+          mountPath: /var/lib/postgresql/data
+{{- end }}
         env:
         - name: POSTGRES_USER
           value: admin
@@ -46,3 +51,8 @@ spec:
           items:
           - key: config.yaml
             path: config.yaml
+{{- if .Values.deployment.hostPath }}
+      - name: template-backend-data
+        hostPath:
+          path: /data/kubernetes/hostPathStorage/template_backend
+{{- end }}
