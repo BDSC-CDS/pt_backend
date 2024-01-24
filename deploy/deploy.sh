@@ -12,5 +12,5 @@ helm template --namespace "$env" --values ./chart/files/values.yaml --set-string
 
 echo ""
 echo "deploying..."
-helm upgrade --install --create-namespace --namespace "$env" --values ./chart/files/values.yaml --set-string "aesPassphrase=${!CONFIG_AES_PASSPHRASE_VAR_NAME}" --set-string "version=$IMAGE_TAG" --set-string "image=registry.itrcs3-app.intranet.chuv/ds-cicd-template-backend:${IMAGE_TAG}" "${RELEASE_NAME}" ./chart
+helm upgrade --install --create-namespace --namespace "$env" --values ./chart/files/values.yaml --set-string "aesPassphrase=${!CONFIG_AES_PASSPHRASE_VAR_NAME}" --set-string "version=$version" --set-string "image=registry.itrcs3-app.intranet.chuv/ds-cicd-template-backend:${IMAGE_TAG}" "${RELEASE_NAME}" ./chart
 echo "done"
