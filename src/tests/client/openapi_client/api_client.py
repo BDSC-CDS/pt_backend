@@ -223,6 +223,9 @@ class ApiClient(object):
 
         self.last_response = response_data
 
+        print("response_data", response_data)
+        print("response_data", response_data.data)
+
         return_data = None # assuming derialization is not needed
         # data needs deserialization or returns HTTP data (deserialized) only
         if _preload_content or _return_http_data_only:
