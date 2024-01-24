@@ -25,7 +25,7 @@ class TestUser(unittest.TestCase):
             self.assertIsInstance(id, int)
             self.assertTrue(id > 0)
 
-            api_response = api_instance.user_service_get_user(id=id)
+            api_response = api_instance.user_service_get_user(id=str(id))
             print("The response of UsersApi->user_service_get_user:\n")
             pprint(api_response)
             self.assertIsNotNone(api_response)
