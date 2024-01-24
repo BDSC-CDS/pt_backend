@@ -29,14 +29,17 @@ class TestUser(unittest.TestCase):
             print("The response of UsersApi->user_service_get_user:\n")
             pprint(api_response)
             self.assertIsNotNone(api_response)
-            self.assertIsInstance(api_response.result.id, str)
-            self.assertEqual(id, api_response.result.id)
+            self.assertIsNotNone(api_response.result)
+            self.assertIsNotNone(api_response.result.user)
+            self.assertIsInstance(api_response.result.user.id, str)
 
-            self.assertEqual("", api_response.result.password)
-            self.assertEqual("moto2", api_response.result.username)
-            self.assertEqual("hello.moto@gmail.com", api_response.result.email)
-            self.assertEqual("hello", api_response.result.firstName)
-            self.assertEqual("moto", api_response.result.lastName)
+            self.assertEqual(id, api_response.result.user.id)
+
+            self.assertEqual("", api_response.result.user.password)
+            self.assertEqual("moto2", api_response.result.user.username)
+            self.assertEqual("hello.moto@gmail.com", api_response.result.user.email)
+            self.assertEqual("hello", api_response.result.user.first_name)
+            self.assertEqual("moto", api_response.result.user.last_name)
 
 if __name__ == '__main__':
     unittest.main()
