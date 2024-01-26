@@ -20,7 +20,7 @@ def user_to_business(user: TemplatebackendUser) -> User:
 def user_from_business(user: User) -> TemplatebackendUser:
     print(user)
     u = TemplatebackendUser(
-        id=str(user.id),
+        id=user.id,
         username = user.username,
         email = user.email,
         first_name = user.firstname,

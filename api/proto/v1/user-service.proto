@@ -55,7 +55,7 @@ message GetUsersReply {
 
 // Get User (by id)
 message GetUserRequest {
-    uint64 id = 1;
+    uint32 id = 1;
 }
 
 message GetUserResult {
@@ -91,7 +91,7 @@ message CreateUserReply {
     CreateUserResult result = 1;
 }
 message CreateUserResult {
-    uint64 id = 1;
+    uint32 id = 1;
 }
 
 // Update User
@@ -107,7 +107,7 @@ message UpdateUserReply {
 
 // Delete User
 message DeleteUserRequest {
-    uint64  id = 1;
+    uint32  id = 1;
 }
 
 message DeleteUserResult {}
@@ -144,7 +144,7 @@ message ResetTotpReply {
 // Reset Password
 
 message ResetPasswordRequest {
-    uint64 id = 1;
+    uint32 id = 1;
 }
 
 message ResetPasswordResult {}

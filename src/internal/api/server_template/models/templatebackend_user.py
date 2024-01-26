@@ -18,7 +18,7 @@ class TemplatebackendUser(Model):
         """TemplatebackendUser - a model defined in OpenAPI
 
         :param id: The id of this TemplatebackendUser.
-        :type id: str
+        :type id: int
         :param first_name: The first_name of this TemplatebackendUser.
         :type first_name: str
         :param last_name: The last_name of this TemplatebackendUser.
@@ -43,7 +43,7 @@ class TemplatebackendUser(Model):
         :type password_changed: bool
         """
         self.openapi_types = {
-            'id': str,
+            'id': int,
             'first_name': str,
             'last_name': str,
             'username': str,
@@ -97,22 +97,22 @@ class TemplatebackendUser(Model):
         return util.deserialize_model(dikt, cls)
 
     @property
-    def id(self) -> str:
+    def id(self) -> int:
         """Gets the id of this TemplatebackendUser.
 
 
         :return: The id of this TemplatebackendUser.
-        :rtype: str
+        :rtype: int
         """
         return self._id
 
     @id.setter
-    def id(self, id: str):
+    def id(self, id: int):
         """Sets the id of this TemplatebackendUser.
 
 
         :param id: The id of this TemplatebackendUser.
-        :type id: str
+        :type id: int
         """
 
         self._id = id

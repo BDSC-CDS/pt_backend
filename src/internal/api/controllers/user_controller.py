@@ -35,7 +35,7 @@ class UsersController():
         
         print("user", user)
 
-        return TemplatebackendCreateUserReply(TemplatebackendCreateUserResult(id=str(user.id)))
+        return TemplatebackendCreateUserReply(TemplatebackendCreateUserResult(id=user.id))
 
     def user_service_delete_user(self, id: str):
         """Delete a user
@@ -67,14 +67,16 @@ class UsersController():
 
         try:
             user = self.user_service.get_user(by='id', identifier=id)
-            user = user_converter.user_from_business(user)
         except Exception as e:
             print("error", e)
             traceback.print_exception(e)
             return str(e), 500
         
-        print("user", user)
-
+        if user is None:
+            return TemplatebackendGetUserReply(TemplatebackendGetUserResult(user=None)), 404
+        
+        user = user_converter.user_from_business(user)
+        
         return TemplatebackendGetUserReply(TemplatebackendGetUserResult(user=user))
 
 

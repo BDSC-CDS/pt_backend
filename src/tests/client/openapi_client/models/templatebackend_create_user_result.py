@@ -20,7 +20,7 @@ import json
 
 
 from typing import Any, ClassVar, Dict, List, Optional
-from pydantic import BaseModel, StrictStr
+from pydantic import BaseModel, StrictInt
 try:
     from typing import Self
 except ImportError:
@@ -30,7 +30,7 @@ class TemplatebackendCreateUserResult(BaseModel):
     """
     TemplatebackendCreateUserResult
     """ # noqa: E501
-    id: Optional[StrictStr] = None
+    id: Optional[StrictInt] = None
     __properties: ClassVar[List[str]] = ["id"]
 
     model_config = {

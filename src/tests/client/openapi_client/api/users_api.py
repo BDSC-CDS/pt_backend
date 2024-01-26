@@ -24,7 +24,7 @@ try:
 except ImportError:
     from typing_extensions import Annotated
 
-from pydantic import StrictStr
+from pydantic import StrictInt
 
 from typing import Any, Dict
 
@@ -329,7 +329,7 @@ class UsersApi:
     @validate_call
     def user_service_delete_user(
         self,
-        id: StrictStr,
+        id: StrictInt,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -348,7 +348,7 @@ class UsersApi:
         This endpoint deletes a user
 
         :param id: (required)
-        :type id: str
+        :type id: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -396,7 +396,7 @@ class UsersApi:
     @validate_call
     def user_service_delete_user_with_http_info(
         self,
-        id: StrictStr,
+        id: StrictInt,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -415,7 +415,7 @@ class UsersApi:
         This endpoint deletes a user
 
         :param id: (required)
-        :type id: str
+        :type id: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -463,7 +463,7 @@ class UsersApi:
     @validate_call
     def user_service_delete_user_without_preload_content(
         self,
-        id: StrictStr,
+        id: StrictInt,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -482,7 +482,7 @@ class UsersApi:
         This endpoint deletes a user
 
         :param id: (required)
-        :type id: str
+        :type id: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -587,7 +587,7 @@ class UsersApi:
     @validate_call
     def user_service_get_user(
         self,
-        id: StrictStr,
+        id: StrictInt,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -606,7 +606,7 @@ class UsersApi:
         This endpoint returns a user
 
         :param id: (required)
-        :type id: str
+        :type id: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -654,7 +654,7 @@ class UsersApi:
     @validate_call
     def user_service_get_user_with_http_info(
         self,
-        id: StrictStr,
+        id: StrictInt,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -673,7 +673,7 @@ class UsersApi:
         This endpoint returns a user
 
         :param id: (required)
-        :type id: str
+        :type id: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -721,7 +721,7 @@ class UsersApi:
     @validate_call
     def user_service_get_user_without_preload_content(
         self,
-        id: StrictStr,
+        id: StrictInt,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -740,7 +740,7 @@ class UsersApi:
         This endpoint returns a user
 
         :param id: (required)
-        :type id: str
+        :type id: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1088,7 +1088,7 @@ class UsersApi:
     @validate_call
     def user_service_reset_password(
         self,
-        id: StrictStr,
+        id: StrictInt,
         body: Dict[str, Any],
         _request_timeout: Union[
             None,
@@ -1108,7 +1108,7 @@ class UsersApi:
         This endpoint resets a user's password
 
         :param id: (required)
-        :type id: str
+        :type id: int
         :param body: (required)
         :type body: object
         :param _request_timeout: timeout setting for this request. If one
@@ -1159,7 +1159,7 @@ class UsersApi:
     @validate_call
     def user_service_reset_password_with_http_info(
         self,
-        id: StrictStr,
+        id: StrictInt,
         body: Dict[str, Any],
         _request_timeout: Union[
             None,
@@ -1179,7 +1179,7 @@ class UsersApi:
         This endpoint resets a user's password
 
         :param id: (required)
-        :type id: str
+        :type id: int
         :param body: (required)
         :type body: object
         :param _request_timeout: timeout setting for this request. If one
@@ -1230,7 +1230,7 @@ class UsersApi:
     @validate_call
     def user_service_reset_password_without_preload_content(
         self,
-        id: StrictStr,
+        id: StrictInt,
         body: Dict[str, Any],
         _request_timeout: Union[
             None,
@@ -1250,7 +1250,7 @@ class UsersApi:
         This endpoint resets a user's password
 
         :param id: (required)
-        :type id: str
+        :type id: int
         :param body: (required)
         :type body: object
         :param _request_timeout: timeout setting for this request. If one

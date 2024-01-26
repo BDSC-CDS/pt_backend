@@ -18,10 +18,10 @@ class TemplatebackendCreateUserResult(Model):
         """TemplatebackendCreateUserResult - a model defined in OpenAPI
 
         :param id: The id of this TemplatebackendCreateUserResult.
-        :type id: str
+        :type id: int
         """
         self.openapi_types = {
-            'id': str
+            'id': int
         }
 
         self.attribute_map = {
@@ -42,22 +42,22 @@ class TemplatebackendCreateUserResult(Model):
         return util.deserialize_model(dikt, cls)
 
     @property
-    def id(self) -> str:
+    def id(self) -> int:
         """Gets the id of this TemplatebackendCreateUserResult.
 
 
         :return: The id of this TemplatebackendCreateUserResult.
-        :rtype: str
+        :rtype: int
         """
         return self._id
 
     @id.setter
-    def id(self, id: str):
+    def id(self, id: int):
         """Sets the id of this TemplatebackendCreateUserResult.
 
 
         :param id: The id of this TemplatebackendCreateUserResult.
-        :type id: str
+        :type id: int
         """
 
         self._id = id

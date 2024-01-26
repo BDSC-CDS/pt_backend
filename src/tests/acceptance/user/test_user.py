@@ -20,10 +20,9 @@ class TestUser(unittest.TestCase):
             pprint(api_response)
 
             self.assertIsNotNone(api_response)
-            self.assertIsInstance(api_response.result.id, str)
+            self.assertIsInstance(api_response.result.id, int)
             id = api_response.result.id
-            self.assertIsInstance(id, str)
-            self.assertTrue(int(id) > 0)
+            self.assertTrue(id > 0)
 
             api_response = api_instance.user_service_get_user(id=id)
             print("The response of UsersApi->user_service_get_user:\n")
@@ -31,7 +30,7 @@ class TestUser(unittest.TestCase):
             self.assertIsNotNone(api_response)
             self.assertIsNotNone(api_response.result)
             self.assertIsNotNone(api_response.result.user)
-            self.assertIsInstance(api_response.result.user.id, str)
+            self.assertIsInstance(api_response.result.user.id, int)
 
             self.assertEqual(id, api_response.result.user.id)
             self.assertEqual(None, api_response.result.user.password)

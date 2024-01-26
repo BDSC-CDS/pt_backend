@@ -20,7 +20,7 @@ class TestAuthenticate(unittest.TestCase):
             )
             api_response = user_api.user_service_create_user(body)
             self.assertIsNotNone(api_response)
-            self.assertIsInstance(api_response.result.id, str)
+            self.assertIsInstance(api_response.result.id, int)
             
             auth_api = openapi_client.AuthenticationApi(api_client)
             body = openapi_client.TemplatebackendCredentials(username='username2', password="hello1234")

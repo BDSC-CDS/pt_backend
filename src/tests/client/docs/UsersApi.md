@@ -135,7 +135,7 @@ configuration.api_key['Bearer'] = os.environ["API_KEY"]
 with openapi_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = openapi_client.UsersApi(api_client)
-    id = 'id_example' # str | 
+    id = 56 # int | 
 
     try:
         # Delete a user
@@ -153,7 +153,7 @@ with openapi_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **str**|  | 
+ **id** | **int**|  | 
 
 ### Return type
 
@@ -217,7 +217,7 @@ configuration.api_key['Bearer'] = os.environ["API_KEY"]
 with openapi_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = openapi_client.UsersApi(api_client)
-    id = 'id_example' # str | 
+    id = 56 # int | 
 
     try:
         # Get a user
@@ -235,7 +235,7 @@ with openapi_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **str**|  | 
+ **id** | **int**|  | 
 
 ### Return type
 
@@ -377,7 +377,7 @@ configuration.api_key['Bearer'] = os.environ["API_KEY"]
 with openapi_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = openapi_client.UsersApi(api_client)
-    id = 'id_example' # str | 
+    id = 56 # int | 
     body = None # object | 
 
     try:
@@ -396,7 +396,7 @@ with openapi_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **str**|  | 
+ **id** | **int**|  | 
  **body** | **object**|  | 
 
 ### Return type

@@ -121,8 +121,8 @@ paths:
         - name: id
           in: path
           required: true
-          type: string
-          format: uint64
+          type: integer
+          format: int64
       tags:
         - Users
       x-openapi-router-controller: user_controller
@@ -143,8 +143,8 @@ paths:
         - name: id
           in: path
           required: true
-          type: string
-          format: uint64
+          type: integer
+          format: int64
       tags:
         - Users
       x-openapi-router-controller: user_controller
@@ -166,8 +166,8 @@ paths:
         - name: id
           in: path
           required: true
-          type: string
-          format: uint64
+          type: integer
+          format: int64
         - name: body
           in: body
           required: true
@@ -293,8 +293,8 @@ definitions:
     type: object
     properties:
       id:
-        type: string
-        format: uint64
+        type: integer
+        format: int64
   templatebackendCredentials:
     type: object
     properties:
@@ -363,8 +363,8 @@ definitions:
     type: object
     properties:
       id:
-        type: string
-        format: uint64
+        type: integer
+        format: int64
       firstName:
         type: string
       lastName:

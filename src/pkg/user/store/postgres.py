@@ -89,6 +89,9 @@ INSERT INTO user_role (userid, roleid) VALUES (:userid, :roleid);
                 'identifier': identifier, 
             }).mappings().fetchone()
 
+            if user is None:
+                return None
+
             u = User(
                 id=user.id,
                 tenantid=user.tenantid,

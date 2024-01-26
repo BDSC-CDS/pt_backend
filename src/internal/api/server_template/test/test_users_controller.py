@@ -49,7 +49,7 @@ class TestUsersController(BaseTestCase):
             'Bearer': 'special-key',
         }
         response = self.client.open(
-            '/api/rest/v1/users/{id}'.format(id='id_example'),
+            '/api/rest/v1/users/{id}'.format(id=56),
             method='DELETE',
             headers=headers)
         self.assert200(response,
@@ -65,7 +65,7 @@ class TestUsersController(BaseTestCase):
             'Bearer': 'special-key',
         }
         response = self.client.open(
-            '/api/rest/v1/users/{id}'.format(id='id_example'),
+            '/api/rest/v1/users/{id}'.format(id=56),
             method='GET',
             headers=headers)
         self.assert200(response,
@@ -99,7 +99,7 @@ class TestUsersController(BaseTestCase):
             'Bearer': 'special-key',
         }
         response = self.client.open(
-            '/api/rest/v1/users/{id}/password/reset'.format(id='id_example'),
+            '/api/rest/v1/users/{id}/password/reset'.format(id=56),
             method='POST',
             headers=headers,
             data=json.dumps(body),
