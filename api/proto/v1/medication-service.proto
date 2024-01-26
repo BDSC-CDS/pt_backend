@@ -1,0 +1,155 @@
+syntax = "proto3";
+package templatebackend;
+option go_package = ".;templatebackend";
+
+// import "google/protobuf/empty.proto";
+import "google/api/annotations.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
+
+import "medication.proto";
+
+option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
+    info: {
+        title: "template backend";
+        version: "1.0";
+        contact: {
+            name: "template backend medication service";
+            url: "https://gitlab.itrcs3-app.intranet.chuv/datascience/ds-template-backend";
+            email: "dev@chuv.ch";
+        };
+    };
+
+    schemes: HTTP;
+    consumes: "application/json";
+    produces: "application/json";
+
+    security_definitions: {
+        security: {
+            key: "Bearer";
+            value: {
+                type: TYPE_API_KEY;
+                in: IN_HEADER;
+                name: "Authorization";
+            }
+        }
+    }
+
+    security: {
+        security_requirement: {
+            key: "Bearer";
+            value: {};
+        }
+    }
+    security: {}
+};
+
+
+// Message definitions for requests and responses
+message CreateMedicationRequest {
+    Medication medication = 1;
+}
+message CreateMedicationReply {
+    CreateMedicationResult result = 1;
+}
+message CreateMedicationResult {
+    uint32 id = 1;
+}
+
+message GetMedicationRequest {
+    uint32 id = 1;
+}
+message GetMedicationReply {
+    GetMedicationResult result = 1;
+}
+message GetMedicationResult {
+    Medication medication = 1;
+}
+
+message ListMedicationRequest {
+    uint32 offset = 1;
+    uint32 limit = 2;
+}
+message ListMedicationReply {
+    ListMedicationResult result = 1;
+}
+message ListMedicationResult {
+    repeated Medication medications = 1;
+}
+
+message DeleteMedicationRequest {
+    string id = 1;
+}
+message DeleteMedicationReply {
+    DeleteMedicationResult result = 1;
+}
+message DeleteMedicationResult {
+    bool success = 1;
+}
+
+// Service definition
+service MedicationService {
+    // Create a new medication entry
+    rpc CreateMedication(CreateMedicationRequest) returns (CreateMedicationReply) {
+        option (google.api.http) = {
+            post: "/api/v1/medication"
+            body: "*"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            summary: "Create a medication";
+            description: "This endpoint creates a medication, and its schedule";
+            tags: "Medication";
+            extensions: {
+                key: "x-openapi-router-controller";
+                value {string_value: "medication_controller"};
+            };
+        };
+    };
+
+    // Retrieve medication entries for a user
+    rpc ListMedication(ListMedicationRequest) returns (ListMedicationReply) {
+        option (google.api.http) = {
+            get: "/api/v1/medication"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            summary: "List medications";
+            description: "This endpoint allows listing a user's medications";
+            tags: "Medication";
+            extensions: {
+                key: "x-openapi-router-controller";
+                value {string_value: "medication_controller"};
+            };
+        };
+    };
+    
+    // Retrieve medication entries for a user
+    rpc GetMedication(GetMedicationRequest) returns (GetMedicationReply) {
+        option (google.api.http) = {
+            get: "/api/v1/medication/{id}"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            summary: "Get medications";
+            description: "This endpoint allow getting a single user's medication";
+            tags: "Medication";
+            extensions: {
+                key: "x-openapi-router-controller";
+                value {string_value: "medication_controller"};
+            };
+        };
+    };
+
+    // Delete a medication entry
+    rpc DeleteMedication(DeleteMedicationRequest) returns (DeleteMedicationReply) {
+        option (google.api.http) = {
+            delete: "/api/v1/medication/{id}"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            summary: "Create a medication";
+            description: "This endpoint creates a medication, and its schedule";
+            tags: "Medication";
+            extensions: {
+                key: "x-openapi-router-controller";
+                value {string_value: "medication_controller"};
+            };
+        };
+    };
+}
