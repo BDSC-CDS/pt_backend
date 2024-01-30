@@ -99,7 +99,6 @@ Class | Method | HTTP request | Description
 *AuthenticationApi* | [**authentication_service_authenticate**](docs/AuthenticationApi.md#authentication_service_authenticate) | **POST** /api/rest/v1/authentication/login | Authenticate
 *IndexApi* | [**index_service_create_hello**](docs/IndexApi.md#index_service_create_hello) | **POST** /api/v1/hello/{identifier} | Get a hello
 *IndexApi* | [**index_service_get_hello**](docs/IndexApi.md#index_service_get_hello) | **GET** /api/v1/hello | Get a hello
-*IndexApi* | [**index_service_get_helloo**](docs/IndexApi.md#index_service_get_helloo) | **GET** /api/v1/helloo | Get a hello
 *UsersApi* | [**user_service_create_user**](docs/UsersApi.md#user_service_create_user) | **POST** /api/rest/v1/users | Create a user
 *UsersApi* | [**user_service_delete_user**](docs/UsersApi.md#user_service_delete_user) | **DELETE** /api/rest/v1/users/{id} | Delete a user
 *UsersApi* | [**user_service_get_user**](docs/UsersApi.md#user_service_get_user) | **GET** /api/rest/v1/users/{id} | Get a user

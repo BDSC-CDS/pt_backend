@@ -267,27 +267,6 @@ paths:
       - Index
       x-openapi-router-controller: index_controller
       x-codegen-request-body-name: body
-  /api/v1/helloo:
-    get:
-      description: This endpoint returns a hello
-      operationId: index_service_get_helloo
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/templatebackendGetHelloReply'
-          description: A successful response.
-        default:
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/rpcStatus'
-          description: An unexpected error response.
-      summary: Get a hello
-      tags:
-      - Index
-      x-openapi-router-controller: index_controller
 components:
   schemas:
     protobufAny:

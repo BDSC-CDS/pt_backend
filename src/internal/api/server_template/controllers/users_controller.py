@@ -38,7 +38,7 @@ class UsersController:
         self.controller=controller
 
 
-    def user_service_create_user(self, body: TemplatebackendUser):
+    def user_service_create_user(self, user, body: TemplatebackendUser):
         """Create a user
 
         This endpoint creates a user
@@ -51,10 +51,10 @@ class UsersController:
         if connexion.request.is_json:
             body = TemplatebackendUser.from_dict(connexion.request.get_json())
 
-        return self.controller.user_service_create_user(body)
+        return self.controller.user_service_create_user(user, body)
 
 
-    def user_service_delete_user(self, id: int):
+    def user_service_delete_user(self, user, id: int):
         """Delete a user
 
         This endpoint deletes a user
@@ -65,10 +65,10 @@ class UsersController:
         :rtype: Union[TemplatebackendDeleteUserReply, Tuple[TemplatebackendDeleteUserReply, int], Tuple[TemplatebackendDeleteUserReply, int, Dict[str, str]]
         """
 
-        return self.controller.user_service_delete_user(id)
+        return self.controller.user_service_delete_user(user, id)
 
 
-    def user_service_get_user(self, id: int):
+    def user_service_get_user(self, user, id: int):
         """Get a user
 
         This endpoint returns a user
@@ -79,10 +79,10 @@ class UsersController:
         :rtype: Union[TemplatebackendGetUserReply, Tuple[TemplatebackendGetUserReply, int], Tuple[TemplatebackendGetUserReply, int, Dict[str, str]]
         """
 
-        return self.controller.user_service_get_user(id)
+        return self.controller.user_service_get_user(user, id)
 
 
-    def user_service_get_user_me(self):
+    def user_service_get_user_me(self, user):
         """Get my own user
 
         This endpoint returns the details of the authenticated user
@@ -91,10 +91,10 @@ class UsersController:
         :rtype: Union[TemplatebackendGetUserMeReply, Tuple[TemplatebackendGetUserMeReply, int], Tuple[TemplatebackendGetUserMeReply, int, Dict[str, str]]
         """
 
-        return self.controller.user_service_get_user_me()
+        return self.controller.user_service_get_user_me(user, )
 
 
-    def user_service_reset_password(self, id: int, body: object):
+    def user_service_reset_password(self, user, id: int, body: object):
         """Reset password
 
         This endpoint resets a user&#39;s password
@@ -107,10 +107,10 @@ class UsersController:
         :rtype: Union[TemplatebackendResetPasswordReply, Tuple[TemplatebackendResetPasswordReply, int], Tuple[TemplatebackendResetPasswordReply, int, Dict[str, str]]
         """
 
-        return self.controller.user_service_reset_password(id, body)
+        return self.controller.user_service_reset_password(user, id, body)
 
 
-    def user_service_update_password(self, body: TemplatebackendUpdatePasswordRequest):
+    def user_service_update_password(self, user, body: TemplatebackendUpdatePasswordRequest):
         """Update password
 
         This endpoint updates the password of the authenticated user
@@ -123,4 +123,4 @@ class UsersController:
         if connexion.request.is_json:
             body = TemplatebackendUpdatePasswordRequest.from_dict(connexion.request.get_json())
 
-        return self.controller.user_service_update_password(body)
+        return self.controller.user_service_update_password(user, body)

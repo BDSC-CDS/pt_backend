@@ -32,7 +32,7 @@ class AuthenticationController:
         self.controller=controller
 
 
-    def authentication_service_authenticate(self, body: TemplatebackendCredentials):
+    def authentication_service_authenticate(self, user, body: TemplatebackendCredentials):
         """Authenticate
 
         This endpoint authenticates a user
@@ -45,4 +45,4 @@ class AuthenticationController:
         if connexion.request.is_json:
             body = TemplatebackendCredentials.from_dict(connexion.request.get_json())
 
-        return self.controller.authentication_service_authenticate(body)
+        return self.controller.authentication_service_authenticate(user, body)

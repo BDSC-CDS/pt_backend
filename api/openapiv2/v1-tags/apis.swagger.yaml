@@ -226,23 +226,6 @@ paths:
       tags:
         - Index
       x-openapi-router-controller: index_controller
-  /api/v1/helloo:
-    get:
-      summary: Get a hello
-      description: This endpoint returns a hello
-      operationId: IndexService_GetHelloo
-      responses:
-        "200":
-          description: A successful response.
-          schema:
-            $ref: '#/definitions/templatebackendGetHelloReply'
-        default:
-          description: An unexpected error response.
-          schema:
-            $ref: '#/definitions/rpcStatus'
-      tags:
-        - Index
-      x-openapi-router-controller: index_controller
 definitions:
   protobufAny:
     type: object

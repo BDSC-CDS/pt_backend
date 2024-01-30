@@ -8,6 +8,6 @@ class AuthenticationController():
         self.config = config
         self.authentication_service = authentication_service
 
-    def authentication_service_authenticate(self, body: TemplatebackendCredentials):
+    def authentication_service_authenticate(self, user, body: TemplatebackendCredentials):
         token = self.authentication_service.authenticate(body.username, body.password)
         return TemplatebackendAuthenticationReply(TemplatebackendAuthenticationResult(token)), 200

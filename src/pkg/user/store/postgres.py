@@ -83,6 +83,7 @@ INSERT INTO user_role (userid, roleid) VALUES (:userid, :roleid);
         if by not in ['id', 'username', 'email']:
             raise Exception("identifier must be one of 'id', 'username', 'email'")
         
+        role_query = "SELECT role FROM user_role WHERE userid = :userid;"
         query = "SELECT * FROM users where " + by + " = :identifier;"
         with self.session_scope() as session:
             user = session.execute(text(query), {
@@ -105,5 +106,12 @@ INSERT INTO user_role (userid, roleid) VALUES (:userid, :roleid);
                 createdat=user.createdat,
                 updatedat=user.updatedat
             )
+
+            roles = session.execute(text(role_query), {
+                'userid': u.id, 
+            }).mappings().fetchall()
+
+            roles = [Role(id=role.role) for role in roles]
+            u.roles = roles
 
             return u

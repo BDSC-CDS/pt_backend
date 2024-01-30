@@ -24,7 +24,7 @@ class UsersController():
     def __init__(self, user_service: UserService):
         self.user_service = user_service
 
-    def user_service_create_user(self, body: TemplatebackendUser):
+    def user_service_create_user(self, user, body: TemplatebackendUser):
         u = user_converter.user_to_business(body)
         try:
             user = self.user_service.create_user(u)
@@ -37,7 +37,7 @@ class UsersController():
 
         return TemplatebackendCreateUserReply(TemplatebackendCreateUserResult(id=user.id))
 
-    def user_service_delete_user(self, id: int):
+    def user_service_delete_user(self, user, id: int):
         """Delete a user
 
         This endpoint deletes a user
@@ -51,7 +51,7 @@ class UsersController():
         return "Not implemented", 501
 
 
-    def user_service_get_user(self, id: int):
+    def user_service_get_user(self, user, id: int):
         """Get a user
 
         This endpoint returns a user
@@ -80,7 +80,7 @@ class UsersController():
         return TemplatebackendGetUserReply(TemplatebackendGetUserResult(user=user))
 
 
-    def user_service_get_user_me(self):
+    def user_service_get_user_me(self, user):
         """Get my own user
 
         This endpoint returns the details of the authenticated user
@@ -92,7 +92,7 @@ class UsersController():
         return "Not implemented", 501
 
 
-    def user_service_reset_password(self, id: int, body: object):
+    def user_service_reset_password(self, user, id: int, body: object):
         """Reset password
 
         This endpoint resets a user&#39;s password
@@ -108,7 +108,7 @@ class UsersController():
         return "Not implemented", 501
 
 
-    def user_service_update_password(self, body: TemplatebackendUpdatePasswordRequest):
+    def user_service_update_password(self, user, body: TemplatebackendUpdatePasswordRequest):
         """Update password
 
         This endpoint updates the password of the authenticated user
