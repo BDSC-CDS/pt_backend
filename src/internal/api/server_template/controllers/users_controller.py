@@ -28,11 +28,12 @@ from server_template import util
 
 class UsersController:
     def __init__(self, controller):
-        controller_functions =  [func_tupple[0] for func_tupple in getmembers(controller, ismethod)]
-        needed_functions = ["user_service_create_user", "user_service_delete_user", "user_service_get_user", "user_service_get_user_me", "user_service_reset_password", "user_service_update_password"]
-        for op in needed_functions:
-            if op not in controller_functions:
-                raise NotImplementedError("operation " + op + " is not implemented by provided controller")
+        #controller_functions =  [func_tupple[0] for func_tupple in getmembers(controller, ismethod)]
+        #needed_functions = ["user_service_create_user", "user_service_delete_user", "user_service_get_user", "user_service_get_user_me", "user_service_reset_password", "user_service_update_password"]
+        #for op in needed_functions:
+        #    if op not in controller_functions:
+        #        raise NotImplementedError("operation " + op + " is not implemented by provided controller")
+        util.implements_interface(UsersController, controller)
 
         self.controller=controller
 

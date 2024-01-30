@@ -22,11 +22,12 @@ from server_template import util
 
 class AuthenticationController:
     def __init__(self, controller):
-        controller_functions =  [func_tupple[0] for func_tupple in getmembers(controller, ismethod)]
-        needed_functions = ["authentication_service_authenticate"]
-        for op in needed_functions:
-            if op not in controller_functions:
-                raise NotImplementedError("operation " + op + " is not implemented by provided controller")
+        #controller_functions =  [func_tupple[0] for func_tupple in getmembers(controller, ismethod)]
+        #needed_functions = ["authentication_service_authenticate"]
+        #for op in needed_functions:
+        #    if op not in controller_functions:
+        #        raise NotImplementedError("operation " + op + " is not implemented by provided controller")
+        util.implements_interface(AuthenticationController, controller)
 
         self.controller=controller
 

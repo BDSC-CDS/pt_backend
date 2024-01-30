@@ -37,13 +37,13 @@ class UsersController():
 
         return TemplatebackendCreateUserReply(TemplatebackendCreateUserResult(id=user.id))
 
-    def user_service_delete_user(self, id: str):
+    def user_service_delete_user(self, id: int):
         """Delete a user
 
         This endpoint deletes a user
 
         :param id: 
-        :type id: str
+        :type id: int
 
         :rtype: Union[TemplatebackendDeleteUserReply, Tuple[TemplatebackendDeleteUserReply, int], Tuple[TemplatebackendDeleteUserReply, int, Dict[str, str]]
         """
@@ -51,13 +51,13 @@ class UsersController():
         return "Not implemented", 501
 
 
-    def user_service_get_user(self, id: str):
+    def user_service_get_user(self, id: int):
         """Get a user
 
         This endpoint returns a user
 
         :param id: 
-        :type id: str
+        :type id: int
 
         :rtype: Union[TemplatebackendGetUserReply, Tuple[TemplatebackendGetUserReply, int], Tuple[TemplatebackendGetUserReply, int, Dict[str, str]]
         """
@@ -92,13 +92,13 @@ class UsersController():
         return "Not implemented", 501
 
 
-    def user_service_reset_password(self, id: str, body: object):
+    def user_service_reset_password(self, id: int, body: object):
         """Reset password
 
         This endpoint resets a user&#39;s password
 
         :param id: 
-        :type id: str
+        :type id: int
         :param body: 
         :type body: 
 
