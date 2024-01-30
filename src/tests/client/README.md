@@ -99,7 +99,6 @@ Class | Method | HTTP request | Description
 *AuthenticationApi* | [**authentication_service_authenticate**](docs/AuthenticationApi.md#authentication_service_authenticate) | **POST** /api/rest/v1/authentication/login | Authenticate
 *IndexApi* | [**index_service_create_hello**](docs/IndexApi.md#index_service_create_hello) | **POST** /api/v1/hello/{identifier} | Get a hello
 *IndexApi* | [**index_service_get_hello**](docs/IndexApi.md#index_service_get_hello) | **GET** /api/v1/hello | Get a hello
-*IndexApi* | [**index_service_get_helloo**](docs/IndexApi.md#index_service_get_helloo) | **GET** /api/v1/helloo | Get a hello
 *MedicationApi* | [**medication_service_create_medication**](docs/MedicationApi.md#medication_service_create_medication) | **POST** /api/v1/medication | Create a medication
 *MedicationApi* | [**medication_service_delete_medication**](docs/MedicationApi.md#medication_service_delete_medication) | **DELETE** /api/v1/medication/{id} | Create a medication
 *MedicationApi* | [**medication_service_get_medication**](docs/MedicationApi.md#medication_service_get_medication) | **GET** /api/v1/medication/{id} | Get medications

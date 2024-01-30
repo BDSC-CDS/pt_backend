@@ -62,20 +62,6 @@ message CreateHelloReply {
 }
 
 service IndexService {
-    rpc GetHelloo (GetHelloRequest) returns (GetHelloReply) {
-        option (google.api.http) = {
-            get: "/api/v1/helloo"
-        };
-        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-            summary: "Get a hello";
-            description: "This endpoint returns a hello";
-            tags: "Index";
-            extensions: {
-                key: "x-openapi-router-controller";
-                value {string_value: "index_controller"};
-            };
-        };
-    };
     rpc GetHello (GetHelloRequest) returns (GetHelloReply) {
         option (google.api.http) = {
             get: "/api/v1/hello"

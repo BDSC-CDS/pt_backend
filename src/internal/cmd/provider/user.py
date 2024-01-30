@@ -1,5 +1,6 @@
 import src.internal.api.server_template.controllers.users_controller as connexion_user_controller
 import src.internal.api.controllers.user_controller as internal_user_controller
+import src.internal.api.controllers.middleware.user_authorization as user_controller_authorization
 from src.pkg.user.service.user import UserService
 from src.pkg.user.store.postgres import UserStore as PostgresUserStore
 from .db import provide_db_type, provide_db
@@ -15,6 +16,7 @@ def provide_user_controller():
         return user_controller
 
     controller = internal_user_controller.UsersController(provide_user_service())
+    controller = user_controller_authorization.UsersControllerAuthentication(controller)
     user_controller = connexion_user_controller.UsersController(controller)
 
     return user_controller

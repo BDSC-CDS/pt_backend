@@ -16,7 +16,7 @@ from server_template import util
 
 #from src.internal.api.controllers import index_controller
 #controller_functions =  [func_tupple[0] for func_tupple in getmembers(index_controller, isfunction)]
-#needed_functions = ["index_service_create_hello", "index_service_get_hello", "index_service_get_helloo"]
+#needed_functions = ["index_service_create_hello", "index_service_get_hello"]
 #for op in needed_functions:
 #    if op not in controller_functions:
 #        raise NotImplementedError("operation " + op + " is not implemented by src.internal.api.controllers.index_controller")
@@ -24,7 +24,7 @@ from server_template import util
 class IndexController:
     def __init__(self, controller):
         #controller_functions =  [func_tupple[0] for func_tupple in getmembers(controller, ismethod)]
-        #needed_functions = ["index_service_create_hello", "index_service_get_hello", "index_service_get_helloo"]
+        #needed_functions = ["index_service_create_hello", "index_service_get_hello"]
         #for op in needed_functions:
         #    if op not in controller_functions:
         #        raise NotImplementedError("operation " + op + " is not implemented by provided controller")
@@ -33,7 +33,7 @@ class IndexController:
         self.controller=controller
 
 
-    def index_service_create_hello(self, identifier: int, body: IndexServiceCreateHelloRequest):
+    def index_service_create_hello(self, user, identifier: int, body: IndexServiceCreateHelloRequest):
         """Get a hello
 
         This endpoint returns a hello
@@ -48,10 +48,10 @@ class IndexController:
         if connexion.request.is_json:
             body = IndexServiceCreateHelloRequest.from_dict(connexion.request.get_json())
 
-        return self.controller.index_service_create_hello(identifier, body)
+        return self.controller.index_service_create_hello(user, identifier, body)
 
 
-    def index_service_get_hello(self):
+    def index_service_get_hello(self, user):
         """Get a hello
 
         This endpoint returns a hello
@@ -60,16 +60,4 @@ class IndexController:
         :rtype: Union[TemplatebackendGetHelloReply, Tuple[TemplatebackendGetHelloReply, int], Tuple[TemplatebackendGetHelloReply, int, Dict[str, str]]
         """
 
-        return self.controller.index_service_get_hello()
-
-
-    def index_service_get_helloo(self):
-        """Get a hello
-
-        This endpoint returns a hello
-
-
-        :rtype: Union[TemplatebackendGetHelloReply, Tuple[TemplatebackendGetHelloReply, int], Tuple[TemplatebackendGetHelloReply, int, Dict[str, str]]
-        """
-
-        return self.controller.index_service_get_helloo()
+        return self.controller.index_service_get_hello(user, )

@@ -85,15 +85,4 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
-test/test_medication_api.py
-test/test_templatebackend_create_medication_reply.py
-test/test_templatebackend_create_medication_request.py
-test/test_templatebackend_create_medication_result.py
-test/test_templatebackend_delete_medication_reply.py
-test/test_templatebackend_delete_medication_result.py
-test/test_templatebackend_get_medication_reply.py
-test/test_templatebackend_get_medication_result.py
-test/test_templatebackend_list_medication_reply.py
-test/test_templatebackend_list_medication_result.py
-test/test_templatebackend_medication.py
 tox.ini

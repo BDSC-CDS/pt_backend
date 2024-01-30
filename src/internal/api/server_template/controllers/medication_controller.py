@@ -25,16 +25,17 @@ from server_template import util
 
 class MedicationController:
     def __init__(self, controller):
-        controller_functions =  [func_tupple[0] for func_tupple in getmembers(controller, ismethod)]
-        needed_functions = ["medication_service_create_medication", "medication_service_delete_medication", "medication_service_get_medication", "medication_service_list_medication"]
-        for op in needed_functions:
-            if op not in controller_functions:
-                raise NotImplementedError("operation " + op + " is not implemented by provided controller")
+        #controller_functions =  [func_tupple[0] for func_tupple in getmembers(controller, ismethod)]
+        #needed_functions = ["medication_service_create_medication", "medication_service_delete_medication", "medication_service_get_medication", "medication_service_list_medication"]
+        #for op in needed_functions:
+        #    if op not in controller_functions:
+        #        raise NotImplementedError("operation " + op + " is not implemented by provided controller")
+        util.implements_interface(MedicationController, controller)
 
         self.controller=controller
 
 
-    def medication_service_create_medication(self, body: TemplatebackendCreateMedicationRequest):
+    def medication_service_create_medication(self, user, body: TemplatebackendCreateMedicationRequest):
         """Create a medication
 
         This endpoint creates a medication, and its schedule
@@ -47,10 +48,10 @@ class MedicationController:
         if connexion.request.is_json:
             body = TemplatebackendCreateMedicationRequest.from_dict(connexion.request.get_json())
 
-        return self.controller.medication_service_create_medication(body)
+        return self.controller.medication_service_create_medication(user, body)
 
 
-    def medication_service_delete_medication(self, id: str):
+    def medication_service_delete_medication(self, user, id: str):
         """Create a medication
 
         This endpoint creates a medication, and its schedule
@@ -61,10 +62,10 @@ class MedicationController:
         :rtype: Union[TemplatebackendDeleteMedicationReply, Tuple[TemplatebackendDeleteMedicationReply, int], Tuple[TemplatebackendDeleteMedicationReply, int, Dict[str, str]]
         """
 
-        return self.controller.medication_service_delete_medication(id)
+        return self.controller.medication_service_delete_medication(user, id)
 
 
-    def medication_service_get_medication(self, id: int):
+    def medication_service_get_medication(self, user, id: int):
         """Get medications
 
         This endpoint allow getting a single user&#39;s medication
@@ -75,10 +76,10 @@ class MedicationController:
         :rtype: Union[TemplatebackendGetMedicationReply, Tuple[TemplatebackendGetMedicationReply, int], Tuple[TemplatebackendGetMedicationReply, int, Dict[str, str]]
         """
 
-        return self.controller.medication_service_get_medication(id)
+        return self.controller.medication_service_get_medication(user, id)
 
 
-    def medication_service_list_medication(self, offset: int=None, limit: int=None):
+    def medication_service_list_medication(self, user, offset: int=None, limit: int=None):
         """List medications
 
         This endpoint allows listing a user&#39;s medications
@@ -91,4 +92,4 @@ class MedicationController:
         :rtype: Union[TemplatebackendListMedicationReply, Tuple[TemplatebackendListMedicationReply, int], Tuple[TemplatebackendListMedicationReply, int, Dict[str, str]]
         """
 
-        return self.controller.medication_service_list_medication(offset, limit)
+        return self.controller.medication_service_list_medication(user, offset, limit)

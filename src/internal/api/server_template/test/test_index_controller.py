@@ -50,22 +50,6 @@ class TestIndexController(BaseTestCase):
         self.assert200(response,
                        'Response body is : ' + response.data.decode('utf-8'))
 
-    def test_index_service_get_helloo(self):
-        """Test case for index_service_get_helloo
-
-        Get a hello
-        """
-        headers = { 
-            'Accept': 'application/json',
-            'Bearer': 'special-key',
-        }
-        response = self.client.open(
-            '/api/v1/helloo',
-            method='GET',
-            headers=headers)
-        self.assert200(response,
-                       'Response body is : ' + response.data.decode('utf-8'))
-
 
 if __name__ == '__main__':
     unittest.main()

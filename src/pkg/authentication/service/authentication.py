@@ -26,6 +26,9 @@ class AuthenticationService:
 
     def authenticate(self, username:str, password:str) -> str:
         user = self.user_service.get_user(by="username", identifier=username, keep_sensitive_filelds=True)
+        if user is None:
+            return ""
+        
         correct = helper.is_password_correct(password, user.password)
 
         if not correct:
