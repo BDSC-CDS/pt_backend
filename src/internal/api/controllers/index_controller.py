@@ -1,6 +1,6 @@
-from server_template.models.index_service_create_hello_request import IndexServiceCreateHelloRequest
-from server_template.models.templatebackend_create_hello_reply import TemplatebackendCreateHelloReply
-from server_template.models.templatebackend_get_hello_reply import TemplatebackendGetHelloReply
+from server_template.models import IndexServiceCreateHelloRequest
+from server_template.models import TemplatebackendCreateHelloReply
+from server_template.models import TemplatebackendGetHelloReply
 
 class IndexController():
     def index_service_create_hello(self, user, identifier: int, body: IndexServiceCreateHelloRequest):

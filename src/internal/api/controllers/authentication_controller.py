@@ -1,7 +1,6 @@
-from server_template.models.templatebackend_credentials import TemplatebackendCredentials
-from server_template.models.templatebackend_authentication_reply import TemplatebackendAuthenticationReply
-from server_template.models.templatebackend_authentication_result import TemplatebackendAuthenticationResult
-from server_template import util
+from server_template.models import TemplatebackendCredentials
+from server_template.models import TemplatebackendAuthenticationReply
+from server_template.models import TemplatebackendAuthenticationResult
 
 class AuthenticationController():
     def __init__(self, config, authentication_service):
