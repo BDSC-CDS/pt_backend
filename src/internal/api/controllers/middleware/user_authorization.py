@@ -1,5 +1,5 @@
-from server_template.models.templatebackend_user import TemplatebackendUser
-from server_template.models.templatebackend_update_password_request import TemplatebackendUpdatePasswordRequest
+from server_template.models import TemplatebackendUser
+from server_template.models import TemplatebackendUpdatePasswordRequest
 from src.internal.api.controllers.user_controller import UsersController
 from src.pkg.user.model.user import Role
 from src.internal.util.interface.implements import implements_interface
