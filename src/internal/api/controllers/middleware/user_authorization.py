@@ -10,6 +10,12 @@ def is_admin(user):
 def is_authenticated(user):
     return user is not None
 
+def is_self(user, id):
+    return user is not None and user.id == id
+
+def is_admin_or_self(user, id):
+    return is_admin(user) or is_self(user, id)
+
 class UsersControllerAuthentication():
     def __init__(self, next: UsersController):
         self.next = next
@@ -19,6 +25,9 @@ class UsersControllerAuthentication():
         return self.next(user, body)
 
     def user_service_delete_user(self, user, id: int):
+        if not is_admin_or_self(user, id):
+            return None, 403
+
         return self.next(user, id)
 
     def user_service_get_user(self, user, id: int):
@@ -29,10 +38,17 @@ class UsersControllerAuthentication():
     def user_service_get_user_me(self, user):
         if not is_authenticated(user):
             return None, 403
+        
         return self.next(user)
 
     def user_service_reset_password(self, user, id: int, body: object):
+        if not is_admin_or_self(user, id):
+            return None, 403
+
         return self.next(user, id, body)
 
     def user_service_update_password(self, user, body: TemplatebackendUpdatePasswordRequest):
+        if not is_authenticated(user):
+            return None, 403
+        
         return self.next(user, body)
