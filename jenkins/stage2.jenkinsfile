@@ -184,5 +184,29 @@ pipeline {
         }
       }
     }
+    
+    stage('medication-tracker') {
+      when {
+        branch 'feat/medication-service'
+      }
+      stages {
+        stage('Deploy') {
+          steps {
+            container(name: 'ds-ubuntu', shell: '/bin/bash') {
+              dir('ds-dev-ops') {
+                checkout scm
+                sh """
+                  export env=int_medication
+                  export RELEASE_NAME="${componentName}-int-medication"
+                  export version="medication"
+                  cd deploy
+                  ./deploy.sh
+                """
+              }
+            }
+          }
+        }
+      }
+    }
   }
 }
