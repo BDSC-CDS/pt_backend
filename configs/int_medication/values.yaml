@@ -1,0 +1,9 @@
+ingress:
+  enabled: true
+  host: "medication-tracker.horus-graph.intranet.chuv"
+
+service:
+  port: 16080
+
+deployment:
+  hostPath: /data/kubernetes/hostPathStorage/medication_tracker
