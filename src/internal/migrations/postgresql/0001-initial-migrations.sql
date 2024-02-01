@@ -1,6 +1,6 @@
 CREATE TABLE IF NOT EXISTS users (
     id SERIAL PRIMARY KEY,
-	tenantid INT NULL,
+	tenantid INT NOT NULL,
 
     username  TEXT UNIQUE NOT NULL,
     email     TEXT NOT NULL,
@@ -25,6 +25,7 @@ CREATE TABLE IF NOT EXISTS roles (
 
 CREATE TABLE IF NOT EXISTS user_role (
 	id SERIAL PRIMARY KEY,
+	tenantid INT NOT NULL,
 
     userid INT,
 	role TEXT,
