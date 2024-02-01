@@ -1,0 +1,87 @@
+swagger: "2.0"
+info:
+  title: template backend
+  version: "1.0"
+  contact:
+    name: template backend authentication service
+    url: https://template-backend.horus-graph.intranet.chuv
+    email: development.bdsc@chuv.ch
+tags:
+  - name: AuthenticationService
+schemes:
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /api/rest/v1/authentication/login:
+    post:
+      summary: Authenticate
+      description: This endpoint authenticates a user
+      operationId: AuthenticationService_Authenticate
+      responses:
+        "200":
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/templatebackendAuthenticationReply'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/rpcStatus'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/templatebackendCredentials'
+      tags:
+        - Authentication
+      x-openapi-router-controller: authentication_controller
+definitions:
+  protobufAny:
+    type: object
+    properties:
+      '@type':
+        type: string
+    additionalProperties: {}
+  rpcStatus:
+    type: object
+    properties:
+      code:
+        type: integer
+        format: int32
+      message:
+        type: string
+      details:
+        type: array
+        items:
+          type: object
+          $ref: '#/definitions/protobufAny'
+  templatebackendAuthenticationReply:
+    type: object
+    properties:
+      result:
+        $ref: '#/definitions/templatebackendAuthenticationResult'
+  templatebackendAuthenticationResult:
+    type: object
+    properties:
+      token:
+        type: string
+  templatebackendCredentials:
+    type: object
+    properties:
+      username:
+        type: string
+      password:
+        type: string
+      totp:
+        type: string
+securityDefinitions:
+  Bearer:
+    type: apiKey
+    name: Authorization
+    in: header
+security:
+  - Bearer: []
+  - {}
