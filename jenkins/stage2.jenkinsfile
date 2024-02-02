@@ -141,7 +141,7 @@ pipeline {
                       sleep 20
                       
                       mkdir -p ./conf
-                      kubectl -n ci cp \$POD_NAME:/template_backend/conf/config.yaml ./conf/config.yaml
+                      kubectl -n ci exec pod/\$POD_NAME -- cat /template_backend/conf/config.yaml > ./conf/config.yaml
                       export TEST_CONFIG=\$(realpath ./conf/config.yaml)
                       python3 -m unittest discover ./src/tests/acceptance
                     """
