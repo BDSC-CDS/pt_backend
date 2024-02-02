@@ -136,13 +136,14 @@ pipeline {
                       echo "waiting 60sec for pod \$POD_NAME to be ready"
                       kubectl wait --for=condition=ready pod \$POD_NAME -n ci --timeout=60s
                       kubectl -n ci port-forward service/service-backend-${RELEASE_NAME} 5000:5000 &
+                      kubectl -n ci logs -f pod/\$POD_NAME &
+                      
+                      sleep 20
+                      
                       ls -lah
                       mkdir -p ./conf
                       ls -lah ./conf
                       kubectl -n ci cp pod/\$POD_NAME:/template_backend/conf/config.yaml ./conf/config.yaml
-                      kubectl -n ci logs -f pod/\$POD_NAME &
-                      
-                      sleep 20
                       export TEST_CONFIG=\$(realpath ./conf/config.yaml)
                       python3 -m unittest discover ./src/tests/acceptance
                     """
