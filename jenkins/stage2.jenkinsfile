@@ -137,7 +137,9 @@ pipeline {
                       kubectl wait --for=condition=ready pod \$POD_NAME -n ci --timeout=60s
                       kubectl -n ci port-forward service/service-backend-${RELEASE_NAME} 5000:5000 &
                       kubectl -n ci logs -f pod/\$POD_NAME &
-                      mkdir ./conf
+                      ls -lah
+                      mkdir -p ./conf
+                      ls -lah ./conf
                       kubectl -n ci cp pod/\$POD_NAME:/template_backend/conf/config.yaml ./conf/config.yaml
                       
                       sleep 20
