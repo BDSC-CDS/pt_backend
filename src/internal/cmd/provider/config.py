@@ -53,12 +53,15 @@ def dump_config(obj, level=0):
 
 class Config:
     def __init__(self, config_path: str = "./configs/dev/template_backend.yml"):
-        v.set_config_name('template_backend')
-        v.set_config_file(config_path)
-        v.set_config_type("yaml")
-        v.read_in_config()
+        self._config = {}
 
-        self._config = v.all_settings()
+        if config_path != "":
+            v.set_config_name('template_backend')
+            v.set_config_file(config_path)
+            v.set_config_type("yaml")
+            v.read_in_config()
+
+            self._config = v.all_settings()
         self._provide_defaults()
 
         dump_config(dict_to_class(self._config))
