@@ -8,16 +8,21 @@ def user_to_jwt_payload(user: User, expiration_time: int) -> dict:
 
     # Prepare the JWT payload
     jwt_payload = {
-        "sub": str(user.id), 
+        "sub": str(user.id) if user.id else None, 
         "email": user.email,
         "tenantid": user.tenantid,
-        "roles": user.roles,
+        "roles": user.to_dict()["roles"],
         "username": user.username,
         "iat": datetime.utcnow(),  # Issued At
         "exp": datetime.utcnow() + timedelta(seconds=expiration_time)  # Expiration Time, set to 1 hour from now
     }
 
     return jwt_payload
+
+def user_to_token(user: User, expiration_time: int, secret: str) -> str:
+    payload = user_to_jwt_payload(user, expiration_time)
+    token = jwt.encode(payload, secret, algorithm="HS256")
+    return token
 
 class AuthenticationService:
     def __init__(self, config, user_service):
@@ -34,7 +39,28 @@ class AuthenticationService:
         if not correct:
             return ""
 
-        payload = user_to_jwt_payload(user, self.config.daemon.jwt.expiration_time)
-        token = jwt.encode(payload, self.config.daemon.jwt.secret, algorithm="HS256")
+        expiration_time = self.config.daemon.jwt.expiration_time
+        secret = self.config.daemon.jwt.secret
+        token = user_to_token(user, expiration_time, secret)
 
         return token
+    
+    def token_to_user(self, api_key):
+        token = jwt.decode(api_key, self.config.daemon.jwt.secret, algorithms=["HS256"])
+
+
+        user_id = token['sub']
+        user = None
+        if user_id is not None:
+            user = self.user_service.get_user(by='id', identifier=user_id)
+
+
+        if user is not None:
+            return user
+
+        if token.get('user') is not None:
+            u = token.get("user")
+            user = User.from_dict(u)
+            return user
+
+        return None

@@ -1,4 +1,4 @@
-from src.internal.api.controllers.security_controller import inject_dependencies
+from src.internal.api.controllers import security_controller
 import src.internal.api.controllers.authentication_controller as internal_authentication_controller
 import src.internal.api.server_template.controllers.authentication_controller as connexion_authentication_controller
 from src.pkg.authentication.service.authentication import AuthenticationService
@@ -17,7 +17,7 @@ def provide_authentication_controller():
     controller = internal_authentication_controller.AuthenticationController(provide_config(), provide_authentication_service())
     authentication_controller = connexion_authentication_controller.AuthenticationController(controller)
 
-    inject_dependencies(provide_config(), provide_user_service())
+    security_controller.inject_dependencies(provide_config(), provide_authentication_service())
 
     return authentication_controller
 

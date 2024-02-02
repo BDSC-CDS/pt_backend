@@ -1,24 +1,21 @@
-import jwt
-from connexion.exceptions import OAuthProblem
+import traceback
 
 config = None
-user_service = None
+authentication_service = None
 
-def inject_dependencies(_config, _user_service):
-    print("dep")
-    global config, user_service
+def inject_dependencies(_config, _authentication_service):
+    global config, authentication_service
     config = _config
-    user_service = _user_service
+    authentication_service = _authentication_service
 
 
 def info_from_Bearer(api_key: str, required_scopes):
-    global config, user_service
-
-    print("info")
+    global config, authentication_service
 
     if config is None:
-        print("none")
-        raise ReferenceError("config not injected")
+        e = ReferenceError("config not injected")
+        traceback.print_exception(e)
+        raise e
     
     """
     Check and retrieve authentication information from api_key.
@@ -32,19 +29,21 @@ def info_from_Bearer(api_key: str, required_scopes):
     :return: Information attached to provided api_key or None if api_key is invalid or does not allow access to called API
     :rtype: dict | None
     """
-    api_key = api_key.replace("Bearer ", "")
-    api_key = api_key.strip()
+    try:
+        api_key = api_key.replace("Bearer ", "")
+        api_key = api_key.strip()
 
-    if api_key == "":
-        return {"uid": None, "token_info": None}
+        if api_key == "":
+            return {"uid": None, "token_info": None}
 
-    token = jwt.decode(api_key, config.daemon.jwt.secret, algorithms=["HS256"])
+        user = authentication_service.token_to_user(api_key)
 
-    user_id = token['sub']
-    user = user_service.get_user(by='id', identifier=user_id)
-    if user is None:
-        # todo log error, should not happend
-        return {"uid": None, "token_info": None}
+        if user is None:
+            return {"uid": None, "token_info": None}
+        
+    except Exception as e:
+        # debug log as exception is dropped silently
+        traceback.print_exception(e)
+        raise e
 
-
-    return {"uid": user, "token_info": token}
+    return {"uid": user, "token_info": {}}
