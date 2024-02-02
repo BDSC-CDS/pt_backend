@@ -2,9 +2,13 @@
 
 set -e
 
+if [ ! -n "$env_config" ]; then
+    export env_config="$env"
+fi
+
 mkdir -p ./chart/files
 rm -rf ./chart/files/*
-cp -r ../configs/$env/* ./chart/files/
+cp -r ../configs/$env_config/* ./chart/files/
 
 helm version
 CONFIG_AES_PASSPHRASE_VAR_NAME="CONFIG_AES_PASSPHRASE_$env"
