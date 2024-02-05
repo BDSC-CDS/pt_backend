@@ -54,5 +54,5 @@ spec:
 {{- if .Values.deployment.hostPath }}
       - name: template-backend-data
         hostPath:
-          path: /data/kubernetes/hostPathStorage/template_backend
+          path: {{ .Values.deployment.hostPath }}
 {{- end }}
