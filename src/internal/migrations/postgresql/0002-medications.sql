@@ -13,3 +13,5 @@ CREATE TABLE IF NOT EXISTS medication (
 
 	CONSTRAINT usercon FOREIGN KEY (userid) REFERENCES users(id)
 );
+
+CREATE INDEX idx_medication_tenantid_userid_createdat ON medication (tenantid, userid, createdat);
