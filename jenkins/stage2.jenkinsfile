@@ -201,6 +201,7 @@ pipeline {
               dir('ds-dev-ops') {
                 checkout scm
                 sh """
+                  export env=int
                   export env_config=int_medication
                   export RELEASE_NAME="${componentName}-int-medication"
                   export version="medication"
