@@ -33,9 +33,9 @@ VALUES
 RETURNING id;
 """
 
-        with self.db.connect() as connection:
+        with self.session_scope() as session:
             try:
-                result = connection.execute(text(medication_query), {
+                result = session.execute(text(medication_query), {
                     'tenantid': medication.tenantid,
                     'userid': medication.userid,
                     'name': medication.name,
@@ -49,10 +49,10 @@ RETURNING id;
 
             return Medication(id=medication_id)
     
-    def get_medications(self, tenantid: int, userid: int, offset: int, limit: int) -> list[Medication] :
+    def list_medications(self, tenantid: int, userid: int, offset: int, limit: int) -> list[Medication] :
         query = "SELECT * FROM medication where tenantid = :tenantid and userid = :userid order by createdat offset :offset limit :limit;"
-        with self.db.connect() as connection:
-            medications = connection.execute(text(query), {
+        with self.session_scope() as session:
+            medications = session.execute(text(query), {
                 'tenantid': tenantid,
                 'userid': userid,
                 'offset': offset,

@@ -11,7 +11,7 @@ class Medication:
     dosage: str = ""
     frequency: str = ""
 
-    createdat: datetime.datetime
-    updatedat: datetime.datetime
+    createdat: datetime.datetime = None
+    updatedat: datetime.datetime = None
     deletedat: datetime.datetime = None
 
