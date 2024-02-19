@@ -5,7 +5,7 @@ pipeline {
       namespace 'jenkins-int-pipeline'
       label "ci-pt-backend-${UUID.randomUUID().toString()}"
       yamlFile "jenkins/agents/unit.yaml"
-      defaultContainer 'ds-ubuntu'
+      defaultContainer 'pt-ubuntu'
     }
   }
   environment{
@@ -70,8 +70,8 @@ pipeline {
 
     stage('Build') {
       steps {
-        container(name: 'ds-ubuntu', shell: '/bin/bash') {
-          dir('ds-dev-ops') {
+        container(name: 'pt-ubuntu', shell: '/bin/bash') {
+          dir('pt-dev-ops') {
             withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'PYPI_SERVER_USERNAME_PASSWORD', usernameVariable: 'PYPI_USERNAME', passwordVariable: 'PYPI_PASSWORD']]) {
               checkout scm
               sh '''
@@ -86,8 +86,8 @@ pipeline {
 
     stage('Test') {
       steps {
-        container(name: 'ds-ubuntu', shell: '/bin/bash') {
-          dir('ds-dev-ops') {
+        container(name: 'pt-ubuntu', shell: '/bin/bash') {
+          dir('pt-dev-ops') {
             checkout scm
             sh '''
               #pip3 install -r requirements.txt
@@ -104,7 +104,7 @@ pipeline {
           stages {
             stage('deploy'){
               steps {
-                dir('ds-dev-ops') {
+                dir('pt-dev-ops') {
                   checkout scm
                   sh '''
                     export env=ci
@@ -125,7 +125,7 @@ pipeline {
                 }
               }
               steps {
-                dir('ds-dev-ops') {
+                dir('pt-dev-ops') {
                   checkout scm
                   withCredentials([
                     file([credentialsId: 'Kubernetes-INT-microk8s-admin-config', variable: "KUBECONFIG"])
@@ -173,8 +173,8 @@ pipeline {
       stages {
         stage('Deploy') {
           steps {
-            container(name: 'ds-ubuntu', shell: '/bin/bash') {
-              dir('ds-dev-ops') {
+            container(name: 'pt-ubuntu', shell: '/bin/bash') {
+              dir('pt-dev-ops') {
                 checkout scm
                 sh """
                   export env=int
