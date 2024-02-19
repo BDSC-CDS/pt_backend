@@ -4,7 +4,7 @@ USER root
 
 RUN apt update && apt install libpq-dev -y --no-install-recommends
 
-USER ds
+USER pt
 
 COPY ./requirements.txt /pt_backend/requirements.txt
 COPY ./docker/secret_exec.sh /pt_backend/docker/secret_exec.sh

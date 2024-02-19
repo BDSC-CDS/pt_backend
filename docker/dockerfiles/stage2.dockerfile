@@ -1,11 +1,11 @@
 FROM registry.rdeid.unil.ch/pt-backend-stage1:latest
 
-USER ds
+USER pt
 
 COPY --chown=ds:ds . /pt_backend
 USER root
 RUN ls -lah /pt_backend && rm -rf /pt_backend/.git
-USER ds
+USER pt
 
 RUN --mount=type=secret,id=PYPI_USERNAME,uid=1000 --mount=type=secret,id=PYPI_PASSWORD,uid=1000 \
     /pt_backend/docker/secret_exec.sh pip install -r /pt_backend/requirements.txt
