@@ -4,7 +4,7 @@ import json
 
 conf = None
 
-def provide_config(config_path: str = "./configs/dev/template_backend.yml"):
+def provide_config(config_path: str = "./configs/dev/pt_backend.yml"):
     global conf
     if conf is None:
         conf = Config(config_path)
@@ -52,11 +52,11 @@ def dump_config(obj, level=0):
 
 
 class Config:
-    def __init__(self, config_path: str = "./configs/dev/template_backend.yml"):
+    def __init__(self, config_path: str = "./configs/dev/pt_backend.yml"):
         self._config = {}
 
         if config_path != "":
-            v.set_config_name('template_backend')
+            v.set_config_name('pt_backend')
             v.set_config_file(config_path)
             v.set_config_type("yaml")
             v.read_in_config()
@@ -85,18 +85,18 @@ class Config:
         self._set_default("daemon.jwt.max_renewal_amount", 24)
 
         self._set_default("storage.description", "Type can be 'postgres'")
-        self._set_default("storage.datastores.template_backend.type", "postgres")
-        self._set_default("storage.datastores.template_backend.driver", "psycopg2")
-        self._set_default("storage.datastores.template_backend.host", "localhost")
-        self._set_default("storage.datastores.template_backend.port", "26257")
-        self._set_default("storage.datastores.template_backend.username", "root")
-        self._set_default("storage.datastores.template_backend.database", "template_backend")
-        self._set_default("storage.datastores.template_backend.max_connections", 5000)
-        self._set_default("storage.datastores.template_backend.max_lifetime", 0)
-        self._set_default("storage.datastores.template_backend.ssl.enabled", False)
-        self._set_default("storage.datastores.template_backend.ssl.certificate_file", "/template_backend/postgres-certs/client.crt")
-        self._set_default("storage.datastores.template_backend.ssl.key_file", "/template_backend/postgres-certs/client.key")
-        self._set_default("storage.datastores.template_backend.debug_mode", False)
+        self._set_default("storage.datastores.pt_backend.type", "postgres")
+        self._set_default("storage.datastores.pt_backend.driver", "psycopg2")
+        self._set_default("storage.datastores.pt_backend.host", "localhost")
+        self._set_default("storage.datastores.pt_backend.port", "26257")
+        self._set_default("storage.datastores.pt_backend.username", "root")
+        self._set_default("storage.datastores.pt_backend.database", "pt_backend")
+        self._set_default("storage.datastores.pt_backend.max_connections", 5000)
+        self._set_default("storage.datastores.pt_backend.max_lifetime", 0)
+        self._set_default("storage.datastores.pt_backend.ssl.enabled", False)
+        self._set_default("storage.datastores.pt_backend.ssl.certificate_file", "/pt_backend/postgres-certs/client.crt")
+        self._set_default("storage.datastores.pt_backend.ssl.key_file", "/pt_backend/postgres-certs/client.key")
+        self._set_default("storage.datastores.pt_backend.debug_mode", False)
 
     def config(self):
         return dict_to_class(copy.deepcopy(self._config))

@@ -3,13 +3,13 @@ pipeline {
     kubernetes {
       cloud 'kubernetes-int'
       namespace 'jenkins-int-pipeline'
-      label "ci-ds-cicd-template-backend-${UUID.randomUUID().toString()}"
+      label "ci-pt-backend-${UUID.randomUUID().toString()}"
       yamlFile "jenkins/agents/unit.yaml"
       defaultContainer 'ds-ubuntu'
     }
   }
   environment{
-    componentName = 'template-backend'
+    componentName = 'pt-backend'
   }
   stages {
     stage('Set version') {
@@ -118,8 +118,8 @@ pipeline {
             stage('test') {
               agent {
                 docker {
-                    image "registry.itrcs3-app.intranet.chuv/ds-cicd-template-backend:${IMAGE_TAG}"
-                    registryUrl 'http://registry.itrcs3-app.intranet.chuv'
+                    image "registry.rdeid.unil.ch/pt-backend:${IMAGE_TAG}"
+                    registryUrl 'http://registry.rdeid.unil.ch'
                     registryCredentialsId 'dsr_registry'
                     alwaysPull true
                 }
@@ -141,7 +141,7 @@ pipeline {
                       sleep 20
                       
                       mkdir -p ./conf
-                      kubectl -n ci exec pod/\$POD_NAME -- cat /template_backend/conf/config.yaml > ./conf/config.yaml
+                      kubectl -n ci exec pod/\$POD_NAME -- cat /pt_backend/conf/config.yaml > ./conf/config.yaml
                       export TEST_CONFIG=\$(realpath ./conf/config.yaml)
                       python3 -m unittest discover ./src/tests/acceptance
                     """

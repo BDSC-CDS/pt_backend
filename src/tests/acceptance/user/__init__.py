@@ -1,7 +1,7 @@
 import os
 import sys
 
-### Allow dynamic import resolution from generated template backend
+### Allow dynamic import resolution from generated pt backend
 # Get the absolute path to src/internal/api/
 module_path = os.path.abspath(os.path.join('src', 'tests', 'client'))
 # Add this path to sys.path if it's not already there

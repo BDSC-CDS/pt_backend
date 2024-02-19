@@ -8,23 +8,23 @@ metadata:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: ds-cicd-template-backend
+  name: pt-backend
   namespace: int
   labels:
-    app: ds-cicd-template-backend
+    app: pt-backend
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: ds-cicd-template-backend
+      app: pt-backend
   template:
     metadata:
       labels:
-        app: ds-cicd-template-backend
+        app: pt-backend
     spec:
       containers:
-      - name: ds-cicd-template-backend
-        image: registry.itrcs3-app.intranet.chuv/ds-cicd-template-backend:latest
+      - name: pt-backend
+        image: registry.rdeid.unil.ch/pt-backend:latest
         ports:
         - containerPort: 3001
       imagePullSecrets:
@@ -35,11 +35,11 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: ds-cicd-template-backend
+  name: pt-backend
   namespace: int
 spec:
   selector:
-    app: ds-cicd-template-backend
+    app: pt-backend
   ports:
     - protocol: TCP
       port: 80
@@ -51,7 +51,7 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: ds-cicd-template-backend-ingress
+  name: pt-backend-ingress
   namespace: int
   annotations:
     kubernetes.io/ingress.class: "public"
@@ -61,16 +61,16 @@ metadata:
 spec:
   tls:
   - hosts:
-    - ds-cicd-template-backend.itrcs3-app.intranet.chuv
-    secretName: ds-cicd-template-backend-tls
+    - pt-backend.rdeid.unil.ch
+    secretName: pt-backend-tls
   rules:
-  - host: ds-cicd-template-backend.itrcs3-app.intranet.chuv
+  - host: pt-backend.rdeid.unil.ch
     http:
       paths:
       - path: /
         pathType: Prefix
         backend:
           service:
-            name: ds-cicd-template-backend
+            name: pt-backend
             port:
               number: 80

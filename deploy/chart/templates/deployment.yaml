@@ -23,16 +23,16 @@ spec:
         - containerPort: 5000
         volumeMounts:
         - name: backend-config
-          mountPath: /template_backend/conf
+          mountPath: /pt_backend/conf
         command: ["python3"]
-        args: ["-m", "src.cmd.start", "--config", "/template_backend/conf/config.yaml"]
+        args: ["-m", "src.cmd.start", "--config", "/pt_backend/conf/config.yaml"]
       - name: postgres
         image: postgres
         ports:
         - containerPort: 5432
 {{- if .Values.deployment.hostPath }}
         volumeMounts:
-        - name: template-backend-data
+        - name: pt-backend-data
           mountPath: /var/lib/postgresql/data
 {{- end }}
         env:
@@ -41,7 +41,7 @@ spec:
         - name: POSTGRES_PASSWORD
           value: password
         - name: POSTGRES_DB
-          value: template_backend
+          value: pt_backend
       imagePullSecrets:
       - name: registry-auth
       volumes:
@@ -52,7 +52,7 @@ spec:
           - key: config.yaml
             path: config.yaml
 {{- if .Values.deployment.hostPath }}
-      - name: template-backend-data
+      - name: pt-backend-data
         hostPath:
           path: {{ .Values.deployment.hostPath }}
 {{- end }}

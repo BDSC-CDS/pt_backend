@@ -7,11 +7,11 @@ import "protoc-gen-openapiv2/options/annotations.proto";
 
 option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
     info: {
-        title: "template backend";
+        title: "pt backend";
         version: "1.0";
         contact: {
-            name: "template backend authentication service";
-            url: "https://template-backend.horus-graph.intranet.chuv";
+            name: "pt backend authentication service";
+            url: "https://pt-backend.rdeid.unil.ch";
             email: "development.bdsc@chuv.ch";
         };
     };

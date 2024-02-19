@@ -6,7 +6,7 @@ import os
 import sys
 from flask_cors import CORS
 
-### Allow dynamic import resolution from generated template backend
+### Allow dynamic import resolution from generated pt backend
 # Get the absolute path to src/internal/api/
 module_path = os.path.abspath(os.path.join('src', 'internal', 'api'))
 # Add this path to sys.path if it's not already there
@@ -27,11 +27,11 @@ def main():
 def run_server():
     p = argparse.ArgumentParser(description="Application settings")
     p.add_argument('--env', type=str, help='Runtime environment, e.g. int, acc, prod...')
-    p.add_argument('--config', type=str, help='Config file path', default="./configs/dev/template_backend.yml")
+    p.add_argument('--config', type=str, help='Config file path', default="./configs/dev/pt_backend.yml")
     args = p.parse_args()
 
     conf = config.provide_config(args.config)
-    d = db.provide_db("template_backend")
+    d = db.provide_db("pt_backend")
     
     app = connexion.App(__name__, specification_dir='../internal/api/server_template/openapi/')
 

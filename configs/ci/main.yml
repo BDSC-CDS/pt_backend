@@ -1,5 +1,5 @@
 daemon:
-  title: "template backend"
+  title: "pt backend"
   http:
     host: localhost
     port: 5000
@@ -12,12 +12,12 @@ daemon:
   jobs:
     job_status_gc:
       enabled: true
-  private_key_file: ./configs/dev/files/keys/template_backend_privkey.pem
-  public_key_file: ./configs/dev/files/keys/template_backend_pubkey.pem
+  private_key_file: ./configs/dev/files/keys/pt_backend_privkey.pem
+  public_key_file: ./configs/dev/files/keys/pt_backend_pubkey.pem
 
 storage:
   datastores:
-    template_backend:
+    pt_backend:
       type: postgres
       driver: psycopg2
       migration_table_name: tt_migrations
@@ -25,14 +25,14 @@ storage:
       port: 5432
       username: admin
       password: password
-      database: template_backend
+      database: pt_backend
       max_connections: 10
       max_lifetime: 10s
       debug_mode: true
       ssl:
         enabled: false
-        certificate_file: /template_backend/postgres-certs/client.crt
-        key_file: /template_backend/postgres-certs/client.key
+        certificate_file: /pt_backend/postgres-certs/client.crt
+        key_file: /pt_backend/postgres-certs/client.key
 
 services:
   index_service:

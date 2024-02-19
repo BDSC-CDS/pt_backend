@@ -1,10 +1,10 @@
 swagger: "2.0"
 info:
-  title: template backend
+  title: pt backend
   version: "1.0"
   contact:
-    name: template backend user service
-    url: https://template-backend.horus-graph.intranet.chuv
+    name: pt backend user service
+    url: https://pt-backend.rdeid.unil.ch
     email: development.bdsc@chuv.ch
 tags:
   - name: UserService

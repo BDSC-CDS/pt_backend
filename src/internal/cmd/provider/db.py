@@ -7,7 +7,7 @@ import time
 
 dbs = None
 
-def provide_db_type(datastore_id: str = "template_backend") -> str:
+def provide_db_type(datastore_id: str = "pt_backend") -> str:
     conf = config.provide_config()
         
     for id in conf.storage.datastores:
@@ -16,7 +16,7 @@ def provide_db_type(datastore_id: str = "template_backend") -> str:
     
     return None
 
-def provide_db(datastore_id: str = "template_backend"):
+def provide_db(datastore_id: str = "pt_backend"):
     global dbs
     if dbs is None:
         dbs = {}
@@ -49,7 +49,7 @@ def provide_postgres_db(datastore_id, datastore):
     engine = create_engine(url_object, echo=debug_mode)
     engine.connect()
 
-    if datastore_id == "template_backend":
+    if datastore_id == "pt_backend":
         m = migrations.provide_migrations("postgresql", datastore)
         tries = 3
         for i in range(tries):

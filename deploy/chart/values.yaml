@@ -2,11 +2,11 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
-nameOverride: "template-backend"
+nameOverride: "pt-backend"
 
 aesPassphrase: ""
 
-image: registry.itrcs3-app.intranet.chuv/ds-cicd-template-backend:latest
+image: registry.rdeid.unil.ch/pt-backend:latest
 
 version: master
 

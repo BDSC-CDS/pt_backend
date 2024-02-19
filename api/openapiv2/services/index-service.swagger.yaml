@@ -1,10 +1,10 @@
 swagger: "2.0"
 info:
-  title: template backend
+  title: pt backend
   version: "1.0"
   contact:
-    name: template backend index service
-    url: https://gitlab.itrcs3-app.intranet.chuv/datascience/ds-template-backend
+    name: pt backend index service
+    url: https://github.com/BDSC-CDS/pt_backend
     email: dev@chuv.ch
 tags:
   - name: IndexService

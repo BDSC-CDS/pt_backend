@@ -12,7 +12,7 @@ if [ -f /run/secrets/PYPI_PASSWORD ]; then
 fi
 
 cat > $HOME/.netrc <<- EOM
-machine pypiserver.itrcs3-app.intranet.chuv
+machine pypiserver.rdeid.unil.ch
     login ${PYPI_USERNAME}
     password ${PYPI_PASSWORD}
 EOM

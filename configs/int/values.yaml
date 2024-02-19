@@ -1,9 +1,9 @@
 ingress:
   enabled: true
-  host: "template-backend.horus-graph.intranet.chuv"
+  host: "pt-backend.rdeid.unil.ch"
 
 service:
   port: 16080
 
 deployment:
-  hostPath: /data/kubernetes/hostPathStorage/template_backend
+  hostPath: /data/kubernetes/hostPathStorage/pt_backend
