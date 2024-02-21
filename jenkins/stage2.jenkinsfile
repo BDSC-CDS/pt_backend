@@ -119,7 +119,7 @@ pipeline {
               agent {
                 docker {
                     image "registry.rdeid.unil.ch/pt-backend:${IMAGE_TAG}"
-                    registryUrl 'http://registry.rdeid.unil.ch'
+                    registryUrl 'https://registry.rdeid.unil.ch'
                     registryCredentialsId 'dsr_registry'
                     alwaysPull true
                 }
