@@ -72,13 +72,11 @@ pipeline {
       steps {
         container(name: 'pt-ubuntu', shell: '/bin/bash') {
           dir('pt-dev-ops') {
-            withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'PYPI_SERVER_USERNAME_PASSWORD', usernameVariable: 'PYPI_USERNAME', passwordVariable: 'PYPI_PASSWORD']]) {
-              checkout scm
-              sh '''
-                cd docker
-                ./build-stage2.sh
-              '''
-            }
+            checkout scm
+            sh '''
+              cd docker
+              ./build-stage2.sh
+            '''
           }
         }
       }
