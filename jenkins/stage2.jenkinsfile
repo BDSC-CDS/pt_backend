@@ -126,7 +126,7 @@ pipeline {
                 dir('pt-dev-ops') {
                   checkout scm
                   withCredentials([
-                    file([credentialsId: 'Kubernetes-INT-microk8s-admin-config', variable: "KUBECONFIG"])
+                    file([credentialsId: 'kubernetes-in-kubeconfig-file', variable: "KUBECONFIG"])
                   ]){
                     sh """
                       echo "looking for pod name"
