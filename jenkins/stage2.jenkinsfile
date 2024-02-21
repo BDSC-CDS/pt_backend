@@ -116,15 +116,13 @@ pipeline {
               }
             }
             stage('test') {
-              tools {
-                dockerTool 'docker'
-              }
               agent {
                 docker {
                   image "registry.rdeid.unil.ch/pt-backend:${IMAGE_TAG}"
                   registryUrl 'https://registry.rdeid.unil.ch'
                   registryCredentialsId 'pt_registry'
                   alwaysPull true
+                  label "ci-pt-backend-${UUID.randomUUID().toString()}"
                 }
               }
               steps {
