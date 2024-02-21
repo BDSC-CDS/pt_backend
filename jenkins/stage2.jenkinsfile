@@ -8,9 +8,6 @@ pipeline {
       defaultContainer 'pt-ubuntu'
     }
   }
-  tools {
-    dockerTool 'docker'
-  }
   environment{
     componentName = 'pt-backend'
   }
@@ -119,6 +116,9 @@ pipeline {
               }
             }
             stage('test') {
+              tools {
+                dockerTool 'docker'
+              }
               agent {
                 docker {
                   image "registry.rdeid.unil.ch/pt-backend:${IMAGE_TAG}"
