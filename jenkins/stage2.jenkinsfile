@@ -9,7 +9,7 @@ pipeline {
     }
   }
   tools {
-    docker 'latest'
+    dockerTool 'docker'
   }
   environment{
     componentName = 'pt-backend'
