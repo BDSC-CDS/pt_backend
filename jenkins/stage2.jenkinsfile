@@ -123,7 +123,7 @@ pipeline {
                   registryUrl 'https://registry.rdeid.unil.ch'
                   registryCredentialsId 'pt_registry'
                   alwaysPull true
-                  label "${NODE_NAME}"
+                  reuseNode true
                 }
               }
               steps {
