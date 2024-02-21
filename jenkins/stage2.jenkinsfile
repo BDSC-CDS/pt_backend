@@ -112,6 +112,8 @@ pipeline {
                     export version="$IMAGE_TAG"
                     cd deploy
                     ./deploy.sh 
+                    docker version
+                    which docker
                   '''
                 }
               }
