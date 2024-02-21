@@ -1,4 +1,4 @@
-# Python Backend Best Practices Project
+# Python Backend Best Practices Project 
 
 ## Introduction
 This project is a reference implementation of a Python backend, showcasing best practices in API design, testing, and deployment. It serves as a guideline for developing robust and scalable backend services within our organization.
