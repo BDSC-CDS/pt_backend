@@ -118,7 +118,7 @@ pipeline {
                 docker {
                     image "registry.rdeid.unil.ch/pt-backend:${IMAGE_TAG}"
                     registryUrl 'https://registry.rdeid.unil.ch'
-                    registryCredentialsId 'dsr_registry'
+                    registryCredentialsId 'pt_registry'
                     alwaysPull true
                 }
               }
