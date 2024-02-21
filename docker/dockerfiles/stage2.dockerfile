@@ -2,7 +2,7 @@ FROM registry.rdeid.unil.ch/pt-backend-stage1:latest
 
 USER pt
 
-COPY --chown=ds:ds . /pt_backend
+COPY --chown=pt:pt . /pt_backend
 USER root
 RUN ls -lah /pt_backend && rm -rf /pt_backend/.git
 USER pt
