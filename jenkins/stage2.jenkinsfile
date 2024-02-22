@@ -6,8 +6,6 @@ pipeline {
       label "ci-pt-backend-${UUID.randomUUID().toString()}"
       yamlFile "jenkins/agents/unit.yaml"
       defaultContainer 'pt-ubuntu'
-      workingDir '/pt/pt-deployer'
-      customWorkspace '/pt/pt-deployer'
     }
   }
   environment{
@@ -124,9 +122,9 @@ pipeline {
                   image "registry.rdeid.unil.ch/pt-backend:${IMAGE_TAG}"
                   registryUrl 'https://registry.rdeid.unil.ch'
                   registryCredentialsId 'pt_registry'
-                  customWorkspace '/pt/pt-deployer'
                   alwaysPull true
                   reuseNode true
+                  args "-u root"
                 }
               }
               steps {
