@@ -6,6 +6,7 @@ pipeline {
       label "ci-pt-backend-${UUID.randomUUID().toString()}"
       yamlFile "jenkins/agents/unit.yaml"
       defaultContainer 'pt-ubuntu'
+      workingDir '/pt/pt-deployer'
     }
   }
   environment{
