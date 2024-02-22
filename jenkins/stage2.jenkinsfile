@@ -123,6 +123,7 @@ pipeline {
                   registryUrl 'https://registry.rdeid.unil.ch'
                   registryCredentialsId 'pt_registry'
                   alwaysPull true
+                  args "-u root"
                 }
               }
               steps {
