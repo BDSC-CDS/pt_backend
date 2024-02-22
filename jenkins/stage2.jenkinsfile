@@ -129,7 +129,8 @@ pipeline {
                 dir('pt-dev-ops') {
                   checkout scm
                   withCredentials([
-                    file([credentialsId: 'kubernetes-in-kubeconfig-file', variable: "KUBECONFIG"])
+                    file([credentialsId: 'kubernetes-in-kubeconfig-file', variable: "KUBECONFIG"]),
+                    file([credentialsId: 'registry-auth-docker-config', variable: "DOCKER_CONFIG"]),
                   ]){
                     sh """
                       echo "looking for pod name"
