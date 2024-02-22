@@ -123,7 +123,7 @@ pipeline {
                   registryUrl 'https://registry.rdeid.unil.ch'
                   registryCredentialsId 'pt_registry'
                   alwaysPull true
-                  args "-u root"
+                  args "-u root -v /home/sperrin2@ad.unil.ch/hostpathstorage/jenkins:/var/jenkins_home"
                 }
               }
               steps {
