@@ -123,7 +123,7 @@ pipeline {
                   image "registry.rdeid.unil.ch/pt-backend:${IMAGE_TAG}"
                   registryUrl 'https://registry.rdeid.unil.ch'
                   registryCredentialsId 'pt_registry'
-                  workingDir '/pt/pt-deployer'
+                  customWorkspace '/pt/pt-deployer'
                   alwaysPull true
                   reuseNode true
                 }
