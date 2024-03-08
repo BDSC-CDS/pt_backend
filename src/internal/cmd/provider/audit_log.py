@@ -5,7 +5,6 @@ from .db import provide_db_type, provide_db
 audit_log_service = None
 audit_log_store = None
 
-
 def provide_audit_log_service():
     global audit_log_service
 

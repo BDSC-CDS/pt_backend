@@ -10,6 +10,8 @@ from server_template.models import TemplatebackendUpdatePasswordRequest
 import src.internal.api.controllers.converter.user as user_converter
 from src.pkg.user.service.user import UserService
 
+from src.internal.cmd.provider.audit_log import provide_audit_log_service
+
 class UsersController():
     def __init__(self, user_service: UserService):
         self.user_service = user_service
@@ -22,7 +24,7 @@ class UsersController():
             print("error", e)
             traceback.print_exception(e)
             return str(e), 500
-        
+
         return TemplatebackendCreateUserReply(TemplatebackendCreateUserResult(id=user.id))
 
     def user_service_delete_user(self, user, id: int):
@@ -36,12 +38,12 @@ class UsersController():
             print("error", e)
             traceback.print_exception(e)
             return str(e), 500
-        
+
         if user is None:
             return TemplatebackendGetUserReply(TemplatebackendGetUserResult(user=None)), 404
-        
+
         user = user_converter.user_from_business(user)
-        
+
         return TemplatebackendGetUserReply(TemplatebackendGetUserResult(user=user))
 
 
