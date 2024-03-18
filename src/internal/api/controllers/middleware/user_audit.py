@@ -6,30 +6,65 @@ from src.pkg.audit_log.model.audit_log import AuditLog
 from src.pkg.audit_log.service.audit_log import AuditLogService
 
 class UsersControllerAudit():
-    def __init__(self, next: UsersController):
+    def __init__(self, next: UsersController,auditLogService: AuditLogService):
         self.next = next
+        self.auditLogService = auditLogService
         implements_interface(UsersController, UsersControllerAudit)
 
     def user_service_create_user(self, user, body: TemplatebackendUser):
-        AuditLogService.log_event(AuditLog(user,"created user"))
-        return self.next.user_service_create_user(user, body)
+        try:
+            response =  self.next.user_service_create_user(user, body)
+            self.auditLogService.log_event(AuditLog(service="user", userid=user,action="created user",body=body,response=response))
+            return response
+        except:
+            self.auditLogService.log_event(AuditLog(service="user", userid=user,action="Error creating user",body=body,response=response, error=True))
+            raise Exception
 
     def user_service_delete_user(self, user, id: int):
-        AuditLogService.log_event(AuditLog(user,"deleted user of id "+id))
-        return self.next.user_service_delete_user(user, id)
+        try:
+            response =  self.next.user_service_delete_user(user, id)
+            self.auditLogService.log_event(AuditLog(service="user", userid=user,action="deleted user of id "+id, response=response))
+            return response
+        except:
+            self.auditLogService.log_event(AuditLog(service="user", userid=user,action="Error deleting user of id "+id, response=response, error=True))
+            raise Exception
+
 
     def user_service_get_user(self, user, id: int):
-        AuditLogService.log_event(AuditLog(user,"accessed user of id "+id))
-        return self.next.user_service_get_user(user, id)
+        try:
+            response =  self.next.user_service_get_user(user, id)
+            self.auditLogService.log_event(AuditLog(service="user", userid=user,action="accessed user of id "+id, response=response))
+            return response
+        except:
+            self.auditLogService.log_event(AuditLog(service="user", userid=user,action="Error accessing user of id "+id, response=response, error=True))
+            raise Exception
+
 
     def user_service_get_user_me(self, user):
-        AuditLogService.log_event(AuditLog(user,"accessed user of id "+id))
-        return self.next.user_service_get_user_me(user)
+        try:
+            response = self.next.user_service_get_user_me(user)
+            self.auditLogService.log_event(AuditLog(service="user", userid=user,action="accessed user of id "+user, response=response))
+            return response
+        except:
+            self.auditLogService.log_event(AuditLog(service="user", userid=user,action="Error accessing user of id "+user, response=response, error=True))
+            raise Exception
+
 
     def user_service_reset_password(self, user, id: int, body: object):
-        AuditLogService.log_event(AuditLog(user,"reset password "))
-        return self.next.user_service_reset_password(user, id, body)
+        try:
+            response =  self.next.user_service_reset_password(user, id, body)
+            self.auditLogService.log_event(AuditLog(service="user", userid=user,action="reset password"))
+            return response
+        except:
+            self.auditLogService.log_event(AuditLog(service="user", userid=user,action="Error resetting password",error=True))
+            raise Exception
+
 
     def user_service_update_password(self, user, body: TemplatebackendUpdatePasswordRequest):
-        AuditLogService.log_event(AuditLog(user,"updated password "))
-        return self.next.user_service_update_password(user, body)
+        try:
+            response = self.next.user_service_update_password(user, body)
+            self.auditLogService.log_event(AuditLog(service="user", userid=user,action="updated password"))
+            return response
+        except:
+            self.auditLogService.log_event(AuditLog(service="user", userid=user,action="Error updating password",error=True))
+            raise Exception

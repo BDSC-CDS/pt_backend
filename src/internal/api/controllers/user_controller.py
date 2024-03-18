@@ -10,8 +10,6 @@ from server_template.models import TemplatebackendUpdatePasswordRequest
 import src.internal.api.controllers.converter.user as user_converter
 from src.pkg.user.service.user import UserService
 
-from src.internal.cmd.provider.audit_log import provide_audit_log_service
-
 class UsersController():
     def __init__(self, user_service: UserService):
         self.user_service = user_service
