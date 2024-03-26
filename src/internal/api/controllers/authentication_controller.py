@@ -12,8 +12,8 @@ class AuthenticationController():
     def authentication_service_authenticate(self, user, body: TemplatebackendCredentials):
         try:
             token = self.authentication_service.authenticate(body.username, body.password)
-            self.auditlog_service.log_event(AuditLog(service="authentication", action="authenticated user",body=body.username))
+            self.auditlog_service.log_event(AuditLog(service="AuthenticationController", action="authenticated user",body=body.username))
             return TemplatebackendAuthenticationReply(TemplatebackendAuthenticationResult(token)), 200
-        except:
-            self.auditlog_service.log_event(AuditLog(service="authentication", action="Error authenticating",body=body.username, error=True))
-            raise Exception
+        except Exception as e:
+            self.auditlog_service.log_event(AuditLog(service="AuthenticationController", action="Error authenticating",body=body.username, error=True))
+            raise e
