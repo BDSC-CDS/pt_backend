@@ -28,7 +28,7 @@ pipeline {
           echo -n $RELEASE_NAME > $WORKSPACE/release_name
           echo -n $VERSION > $WORKSPACE/version
           echo -n $IMAGE_TAG > $WORKSPACE/image_tag
-          
+
           echo "VERSION $VERSION"
           echo "IMAGE_TAG $IMAGE_TAG"
           echo "JOB_NAME $JOB_NAME"
@@ -109,7 +109,7 @@ pipeline {
                     export env=ci
                     export version="$IMAGE_TAG"
                     cd deploy
-                    ./deploy.sh 
+                    ./deploy.sh
                     docker version
                     which docker
                   '''
@@ -139,13 +139,15 @@ pipeline {
                       kubectl wait --for=condition=ready pod \$POD_NAME -n ci --timeout=60s
                       kubectl -n ci port-forward service/service-backend-${RELEASE_NAME} 5000:5000 &
                       kubectl -n ci logs -f pod/\$POD_NAME &
-                      
+
                       sleep 20
-                      
+
                       mkdir -p ./conf
                       kubectl -n ci exec pod/\$POD_NAME -- cat /pt_backend/conf/config.yaml > ./conf/config.yaml
                       export TEST_CONFIG=\$(realpath ./conf/config.yaml)
                       python3 -m unittest discover ./src/tests/acceptance
+                      python3 -m unittest discover ./src/tests/unit
+
                     """
                   }
                 }
