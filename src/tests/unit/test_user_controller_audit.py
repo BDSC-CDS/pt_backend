@@ -32,3 +32,53 @@ class UsersControllerAuditTest(unittest.TestCase):
         self.assertEqual(response, self.response)
         self.mock_users_controller.user_service_create_user.assert_called_once_with(self.user, self.body)
         self.mock_audit_log_service.log_event.assert_called_once()
+
+    def test_user_service_delete_user_success(self):
+        # Assuming we have a user ID to delete
+        user_id = 123
+        self.mock_users_controller.user_service_delete_user.return_value = self.response
+
+        response = self.users_controller_audit.user_service_delete_user(self.user, user_id)
+
+        self.assertEqual(response, self.response)
+        self.mock_users_controller.user_service_delete_user.assert_called_once_with(self.user, user_id)
+        self.mock_audit_log_service.log_event.assert_called_once()
+
+    def test_user_service_get_user_success(self):
+        user_id = 123
+        self.mock_users_controller.user_service_get_user.return_value = self.response
+
+        response = self.users_controller_audit.user_service_get_user(self.user, user_id)
+
+        self.assertEqual(response, self.response)
+        self.mock_users_controller.user_service_get_user.assert_called_once_with(self.user, user_id)
+        self.mock_audit_log_service.log_event.assert_called_once()
+
+    def test_user_service_get_user_me_success(self):
+        self.mock_users_controller.user_service_get_user_me.return_value = self.response
+
+        response = self.users_controller_audit.user_service_get_user_me(self.user)
+
+        self.assertEqual(response, self.response)
+        self.mock_users_controller.user_service_get_user_me.assert_called_once_with(self.user)
+        self.mock_audit_log_service.log_event.assert_called_once()
+
+    def test_user_service_reset_password_success(self):
+        user_id = 123
+        body = {}
+        self.mock_users_controller.user_service_reset_password.return_value = self.response
+
+        response = self.users_controller_audit.user_service_reset_password(self.user, user_id, body)
+
+        self.assertEqual(response, self.response)
+        self.mock_users_controller.user_service_reset_password.assert_called_once_with(self.user, user_id, body)
+        self.mock_audit_log_service.log_event.assert_called_once()
+
+    def test_user_service_update_password_success(self):
+        body = TemplatebackendUpdatePasswordRequest()
+        self.mock_users_controller.user_service_update_password.return_value = self.response
+        response = self.users_controller_audit.user_service_update_password(self.user, body)
+
+        self.assertEqual(response, self.response)
+        self.mock_users_controller.user_service_update_password.assert_called_once_with(self.user, body)
+        self.mock_audit_log_service.log_event.assert_called_once()

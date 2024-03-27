@@ -23,20 +23,20 @@ class UsersControllerAudit():
     def user_service_delete_user(self, user, id: int):
         try:
             response =  self.next.user_service_delete_user(user, id)
-            self.auditLogService.log_event(AuditLog(service="user", userid=user,action="deleted user of id "+id, response=response))
+            self.auditLogService.log_event(AuditLog(service="user", userid=user,action="deleted user of id "+str(id), response=response))
             return response
         except Exception as e:
-            self.auditLogService.log_event(AuditLog(service="user", userid=user,action="Error deleting user of id "+id, response=response, error=True))
+            self.auditLogService.log_event(AuditLog(service="user", userid=user,action="Error deleting user of id "+ str(id), response=response, error=True))
             raise e
 
 
     def user_service_get_user(self, user, id: int):
         try:
             response =  self.next.user_service_get_user(user, id)
-            self.auditLogService.log_event(AuditLog(service="user", userid=user,action="accessed user of id "+id, response=response))
+            self.auditLogService.log_event(AuditLog(service="user", userid=user,action="accessed user of id "+str(id), response=response))
             return response
         except  Exception as e:
-            self.auditLogService.log_event(AuditLog(service="user", userid=user,action="Error accessing user of id "+id, response=response, error=True))
+            self.auditLogService.log_event(AuditLog(service="user", userid=user,action="Error accessing user of id "+str(id), response=response, error=True))
             raise e
 
 
