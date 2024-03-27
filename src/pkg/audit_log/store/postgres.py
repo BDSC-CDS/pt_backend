@@ -1,4 +1,4 @@
-from sqlalchemy import Engine
+from sqlalchemy.engine import Engine
 from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.sql import text
@@ -71,7 +71,7 @@ VALUES
             ]
             return result
 
-    def get_logs_for_user(self, id:str | int,offset:int,limit:int) -> list[AuditLog]:
+    def get_logs_for_user(self, id:int, offset:int, limit:int) -> list[AuditLog]:
         query = "SELECT * FROM audit_log WHERE userid = :userid ORDER BY createdat OFFSET :offset LIMIT :limit;"
         with self.session_scope() as session:
             logs = session.execute(text(query), {
