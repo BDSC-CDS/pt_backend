@@ -12,4 +12,4 @@ CREATE TABLE IF NOT EXISTS audit_log (
 );
 
 
-CREATE INDEX idx_auditlog_userid_createdat ON audit_log (userid, createdat);
+CREATE INDEX idx_auditlog_userid_createdat ON audit_log (userid, created_at);
