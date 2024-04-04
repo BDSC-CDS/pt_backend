@@ -1,4 +1,5 @@
 from server_template.models import TemplatebackendUser
+from server_template.models import TemplatebackendCreateUserReply
 from server_template.models import TemplatebackendUpdatePasswordRequest
 from src.internal.api.controllers.user_controller import UsersController
 from src.internal.util.interface.implements import implements_interface
@@ -14,11 +15,12 @@ class UsersControllerAudit():
     def user_service_create_user(self, user, body: TemplatebackendUser):
         body_serialized = f"id: {body.id or ''}, first_name: {body.first_name or ''}, last_name: {body.last_name or ''}, username: {body.username or ''}, email: {body.email or ''}"
         try:
-            response =  self.next.user_service_create_user(user, body)
-            self.auditLogService.log_event(AuditLog(service="user", userid=body.id,action="created user",body=body_serialized,response=response))
+            response : TemplatebackendCreateUserReply =  self.next.user_service_create_user(user, body)
+            response_serialized = response.result.id
+            self.auditLogService.log_event(AuditLog(service="user", userid=body.id,action="created user",body=body_serialized,response=response_serialized))
             return response
         except Exception as e:
-            self.auditLogService.log_event(AuditLog(service="user", userid=body.id,action="Error creating user",body=body_serialized,response=response, error=True))
+            self.auditLogService.log_event(AuditLog(service="user", userid=body.id,action="Error creating user",body=body_serialized,response=response_serialized, error=True))
             raise e
 
     def user_service_delete_user(self, user, id: int):
