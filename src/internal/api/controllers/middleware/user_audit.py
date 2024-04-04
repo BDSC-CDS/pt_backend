@@ -21,7 +21,7 @@ class UsersControllerAudit():
             self.auditLogService.log_event(AuditLog(service="user", userid=body.id,action="created user",body=body_serialized,response=response_serialized))
             return response
         except Exception as e:
-            self.auditLogService.log_event(AuditLog(service="user", userid=body.id,action="Error creating user",body=body_serialized,response=response_serialized, error=True))
+            self.auditLogService.log_event(AuditLog(service="user", userid=body.id,action="Error creating user",body=body_serialized,response=e, error=True))
             raise e
 
     def user_service_delete_user(self, user, id: int):
@@ -30,7 +30,7 @@ class UsersControllerAudit():
             self.auditLogService.log_event(AuditLog(service="user", userid=user,action="deleted user of id "+str(id), response=response))
             return response
         except Exception as e:
-            self.auditLogService.log_event(AuditLog(service="user", userid=user,action="Error deleting user of id "+ str(id), response=response, error=True))
+            self.auditLogService.log_event(AuditLog(service="user", userid=user,action="Error deleting user of id "+ str(id), response=e, error=True))
             raise e
 
 
@@ -44,7 +44,7 @@ class UsersControllerAudit():
             self.auditLogService.log_event(AuditLog(service="user", userid=user,action="accessed user of id "+str(id), response=response_serialized))
             return response
         except  Exception as e:
-            self.auditLogService.log_event(AuditLog(service="user", userid=user,action="Error accessing user of id "+str(id), response=response_serialized, error=True))
+            self.auditLogService.log_event(AuditLog(service="user", userid=user,action="Error accessing user of id "+str(id), response=e, error=True))
             raise e
 
 
@@ -57,7 +57,7 @@ class UsersControllerAudit():
             self.auditLogService.log_event(AuditLog(service="user", userid=user,action="accessed user of id "+user, response=response_serialized))
             return response
         except Exception as e:
-            self.auditLogService.log_event(AuditLog(service="user", userid=user,action="Error accessing user of id "+user, response=response_serialized, error=True))
+            self.auditLogService.log_event(AuditLog(service="user", userid=user,action="Error accessing user of id "+user, response=e, error=True))
             raise e
 
 
