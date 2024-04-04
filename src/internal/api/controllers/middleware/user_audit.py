@@ -12,7 +12,7 @@ class UsersControllerAudit():
         implements_interface(UsersController, UsersControllerAudit)
 
     def user_service_create_user(self, user, body: TemplatebackendUser):
-        body_serialized = 'id:'+ body.id +', first_name: '+ body.first_name+', last_name: '+body.last_name+', username: '+ body.username+ ', email: '+ body.email
+        body_serialized = f"id: {body.id or ''}, first_name: {body.first_name or ''}, last_name: {body.last_name or ''}, username: {body.username or ''}, email: {body.email or ''}"
         try:
             response =  self.next.user_service_create_user(user, body)
             self.auditLogService.log_event(AuditLog(service="user", userid=body.id,action="created user",body=body_serialized,response=response))
