@@ -3,7 +3,6 @@ from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.sql import text
 from contextlib import contextmanager
-from datetime import datetime
 from src.pkg.audit_log.model.audit_log import AuditLog
 
 class AuditLogStore:
@@ -29,7 +28,8 @@ class AuditLogStore:
 INSERT INTO audit_log
     (userid, service, action, body, response, error, created_at)
 VALUES
-    (:userid, :service, :action, :body, :response, :error, :created_at);
+    (:userid, :service, :action, :body, :response, :error, NOW())
+RETURNING id;
 """
         with self.session_scope() as session:
             try:
@@ -40,7 +40,6 @@ VALUES
                     'body': audit_log.body,
                     'response': audit_log.response,
                     'error': audit_log.error,
-                    'created_at': datetime.now().strftime("%d/%m/%Y %H:%M:%S")
                 }).fetchone()
                 audit_id = result[0]
 
@@ -66,7 +65,7 @@ VALUES
                     body=log.body,
                     response=log.response,
                     error=log.error,
-                    created_at= datetime.now().strftime("%d/%m/%Y %H:%M:%S")
+                    created_at= log.created_at
                 ) for log in logs
             ]
             return result
@@ -89,7 +88,7 @@ VALUES
                     body=log.body,
                     response=log.response,
                     error=log.error,
-                    created_at=datetime.now().strftime("%d/%m/%Y %H:%M:%S")
+                    created_at=log.created_at
                 ) for log in logs
             ]
             return result
