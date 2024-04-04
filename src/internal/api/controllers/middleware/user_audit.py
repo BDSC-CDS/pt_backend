@@ -37,7 +37,7 @@ class UsersControllerAudit():
     def user_service_get_user(self, user, id: int):
         try:
             response : User =  self.next.user_service_get_user(user, id)
-            response_serialized = f"id: {response.id or ''}, first_name: {response.firstname or ''}, last_name: {response.lastname or ''},  \
+            response_serialized = f"first_name: {response.firstname or ''}, last_name: {response.lastname or ''},  \
                 username: {response.username or ''}, email: {response.email or ''}, status: {response.status or ''}, source: {response.source or ''},  \
                 roles: {response.roles or ''}"
 
@@ -51,7 +51,7 @@ class UsersControllerAudit():
     def user_service_get_user_me(self, user):
         try:
             response : User = self.next.user_service_get_user_me(user)
-            response_serialized = f"id: {response.id or ''}, first_name: {response.firstname or ''}, last_name: {response.lastname or ''},  \
+            response_serialized = f"first_name: {response.firstname or ''}, last_name: {response.lastname or ''},  \
                 username: {response.username or ''}, email: {response.email or ''}, status: {response.status or ''}, source: {response.source or ''},  \
                 roles: {response.roles or ''}"
             self.auditLogService.log_event(AuditLog(service="user", userid=user,action="accessed user of id "+user, response=response_serialized))
