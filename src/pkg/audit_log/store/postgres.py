@@ -3,7 +3,7 @@ from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.sql import text
 from contextlib import contextmanager
-
+from datetime import datetime
 from src.pkg.audit_log.model.audit_log import AuditLog
 
 class AuditLogStore:
@@ -40,7 +40,7 @@ VALUES
                     'body': audit_log.body,
                     'response': audit_log.response,
                     'error': audit_log.error,
-                    'created_at': audit_log.created_at
+                    'created_at': datetime.now().strftime("%d/%m/%Y %H:%M:%S")
                 }).fetchone()
                 audit_id = result[0]
 
@@ -66,7 +66,7 @@ VALUES
                     body=log.body,
                     response=log.response,
                     error=log.error,
-                    created_at=log.createdat
+                    created_at= datetime.now().strftime("%d/%m/%Y %H:%M:%S")
                 ) for log in logs
             ]
             return result
@@ -89,7 +89,7 @@ VALUES
                     body=log.body,
                     response=log.response,
                     error=log.error,
-                    created_at=log.createdat
+                    created_at=datetime.now().strftime("%d/%m/%Y %H:%M:%S")
                 ) for log in logs
             ]
             return result
