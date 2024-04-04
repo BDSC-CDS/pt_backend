@@ -1,7 +1,7 @@
 from server_template.models import TemplatebackendUser
 from server_template.models import TemplatebackendCreateUserReply
 from server_template.models import TemplatebackendUpdatePasswordRequest
-from src.pkg.user.model.user import User
+from  server_template.models import TemplatebackendGetUserReply
 from src.internal.api.controllers.user_controller import UsersController
 from src.internal.util.interface.implements import implements_interface
 from src.pkg.audit_log.model.audit_log import AuditLog
@@ -36,10 +36,10 @@ class UsersControllerAudit():
 
     def user_service_get_user(self, user, id: int):
         try:
-            response : User =  self.next.user_service_get_user(user, id)
-            response_serialized = f"first_name: {response.firstname or ''}, last_name: {response.lastname or ''},  \
-                username: {response.username or ''}, email: {response.email or ''}, status: {response.status or ''}, source: {response.source or ''},  \
-                roles: {response.roles or ''}"
+            response : TemplatebackendGetUserReply =  self.next.user_service_get_user(user, id)
+            response_serialized = f"id: {response.result.user.id}, first_name: {response.result.user.first_name or ''}, last_name: {response.result.user.last_name or ''},  \
+                username: {response.result.user.username or ''}, email: {response.result.user.email or ''}, status: {response.result.user.status or ''},  \
+                roles: {response.result.user.roles or ''}"
 
             self.auditLogService.log_event(AuditLog(service="user", userid=user,action="accessed user of id "+str(id), response=response_serialized))
             return response
@@ -50,10 +50,10 @@ class UsersControllerAudit():
 
     def user_service_get_user_me(self, user):
         try:
-            response : User = self.next.user_service_get_user_me(user)
-            response_serialized = f"first_name: {response.firstname or ''}, last_name: {response.lastname or ''},  \
-                username: {response.username or ''}, email: {response.email or ''}, status: {response.status or ''}, source: {response.source or ''},  \
-                roles: {response.roles or ''}"
+            response : TemplatebackendGetUserReply = self.next.user_service_get_user_me(user)
+            response_serialized = f"id: {response.result.user.id}, first_name: {response.result.user.first_name or ''}, last_name: {response.result.user.last_name or ''},  \
+                username: {response.result.user.username or ''}, email: {response.result.user.email or ''}, status: {response.result.user.status or ''},  \
+                roles: {response.result.user.roles or ''}"
             self.auditLogService.log_event(AuditLog(service="user", userid=user,action="accessed user of id "+user, response=response_serialized))
             return response
         except Exception as e:
