@@ -12,12 +12,13 @@ class UsersControllerAudit():
         implements_interface(UsersController, UsersControllerAudit)
 
     def user_service_create_user(self, user, body: TemplatebackendUser):
+        body_serialized = {body.id, body.first_name, body.last_name, body.username,body.email}
         try:
             response =  self.next.user_service_create_user(user, body)
-            self.auditLogService.log_event(AuditLog(service="user", userid=body.id,action="created user",body=body,response=response))
+            self.auditLogService.log_event(AuditLog(service="user", userid=body.id,action="created user",body=body_serialized,response=response))
             return response
         except Exception as e:
-            self.auditLogService.log_event(AuditLog(service="user", userid=body.id,action="Error creating user",body=body,response=response, error=True))
+            self.auditLogService.log_event(AuditLog(service="user", userid=body.id,action="Error creating user",body=body_serialized,response=response, error=True))
             raise e
 
     def user_service_delete_user(self, user, id: int):
