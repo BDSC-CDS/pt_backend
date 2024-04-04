@@ -4,6 +4,7 @@ import src.internal.api.server_template.controllers.authentication_controller as
 from src.pkg.authentication.service.authentication import AuthenticationService
 from .user import provide_user_service
 from .config import provide_config
+from .audit_log import provide_audit_log_service
 
 authentication_controller = None
 authentication_service = None
@@ -14,7 +15,7 @@ def provide_authentication_controller():
     if authentication_controller is not None:
         return authentication_controller
 
-    controller = internal_authentication_controller.AuthenticationController(provide_config(), provide_authentication_service())
+    controller = internal_authentication_controller.AuthenticationController(provide_config(), provide_authentication_service(),provide_audit_log_service())
     authentication_controller = connexion_authentication_controller.AuthenticationController(controller)
 
     security_controller.inject_dependencies(provide_config(), provide_authentication_service())
