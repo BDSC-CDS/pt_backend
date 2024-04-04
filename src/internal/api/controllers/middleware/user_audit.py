@@ -1,6 +1,7 @@
 from server_template.models import TemplatebackendUser
 from server_template.models import TemplatebackendCreateUserReply
 from server_template.models import TemplatebackendUpdatePasswordRequest
+from src.pkg.user.model.user import User
 from src.internal.api.controllers.user_controller import UsersController
 from src.internal.util.interface.implements import implements_interface
 from src.pkg.audit_log.model.audit_log import AuditLog
@@ -35,21 +36,28 @@ class UsersControllerAudit():
 
     def user_service_get_user(self, user, id: int):
         try:
-            response =  self.next.user_service_get_user(user, id)
-            self.auditLogService.log_event(AuditLog(service="user", userid=user,action="accessed user of id "+str(id), response=response))
+            response : User =  self.next.user_service_get_user(user, id)
+            response_serialized = f"id: {response.id or ''}, first_name: {response.firstname or ''}, last_name: {response.lastname or ''},  \
+                username: {response.username or ''}, email: {response.email or ''}, status: {response.status or ''}, source: {response.source or ''},  \
+                roles: {response.roles or ''}"
+
+            self.auditLogService.log_event(AuditLog(service="user", userid=user,action="accessed user of id "+str(id), response=response_serialized))
             return response
         except  Exception as e:
-            self.auditLogService.log_event(AuditLog(service="user", userid=user,action="Error accessing user of id "+str(id), response=response, error=True))
+            self.auditLogService.log_event(AuditLog(service="user", userid=user,action="Error accessing user of id "+str(id), response=response_serialized, error=True))
             raise e
 
 
     def user_service_get_user_me(self, user):
         try:
-            response = self.next.user_service_get_user_me(user)
-            self.auditLogService.log_event(AuditLog(service="user", userid=user,action="accessed user of id "+user, response=response))
+            response : User = self.next.user_service_get_user_me(user)
+            response_serialized = f"id: {response.id or ''}, first_name: {response.firstname or ''}, last_name: {response.lastname or ''},  \
+                username: {response.username or ''}, email: {response.email or ''}, status: {response.status or ''}, source: {response.source or ''},  \
+                roles: {response.roles or ''}"
+            self.auditLogService.log_event(AuditLog(service="user", userid=user,action="accessed user of id "+user, response=response_serialized))
             return response
         except Exception as e:
-            self.auditLogService.log_event(AuditLog(service="user", userid=user,action="Error accessing user of id "+user, response=response, error=True))
+            self.auditLogService.log_event(AuditLog(service="user", userid=user,action="Error accessing user of id "+user, response=response_serialized, error=True))
             raise e
 
 
