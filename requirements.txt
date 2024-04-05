@@ -10,4 +10,3 @@ PyJWT
 bcrypt
 pydantic
 python-dateutil
-connexion[swagger-ui]
