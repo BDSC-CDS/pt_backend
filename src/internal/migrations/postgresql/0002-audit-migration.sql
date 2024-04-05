@@ -6,9 +6,9 @@ CREATE TABLE IF NOT EXISTS audit_log (
     body TEXT NOT NULL,
     response TEXT NOT NULL,
     error BOOLEAN NOT NULL,
-    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
-    -- CONSTRAINT audit_user_fk FOREIGN KEY (userid) REFERENCES users(id)
+    CONSTRAINT audit_user_fk FOREIGN KEY (userid) REFERENCES users(id)
 );
 
 
