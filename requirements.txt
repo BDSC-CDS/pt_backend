@@ -1,4 +1,5 @@
 connexion~=2.14
+connexion[swagger-ui]~=2.14
 flask<2.3
 flask_cors
 grpcio
