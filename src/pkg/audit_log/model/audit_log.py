@@ -4,7 +4,7 @@ from dataclasses import dataclass, asdict
 
 @dataclass
 class AuditLog:
-    userid: int = 0
+    userid: int = None
     service: str = ""
     action: str = ""
     body: str = ""
