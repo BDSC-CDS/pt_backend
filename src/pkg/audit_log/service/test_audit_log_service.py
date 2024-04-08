@@ -31,8 +31,7 @@ class TestAuditLogService(unittest.TestCase):
         self.mock_audit_log_store.get_logs_for_user.return_value = ['log1', 'log2']
         result = self.audit_log_service.get_logs_for_user(identifier, offset, limit)
         self.mock_audit_log_store.get_logs_for_user.assert_called_once_with(identifier=identifier, offset=offset, limit=limit)
-        # self.assertEqual(result, ['log1', 'log2'])
-        assert False
+        self.assertEqual(result, ['log1', 'log2'])
 
 if __name__ == '__main__':
     unittest.main()
