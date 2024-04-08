@@ -3,7 +3,7 @@ from unittest.mock import MagicMock, patch
 import sys
 import os
 
-api_dir_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../internal/api'))
+api_dir_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '../'))
 sys.path.append(api_dir_path)
 
 from server_template.models import TemplatebackendUser, TemplatebackendUpdatePasswordRequest
