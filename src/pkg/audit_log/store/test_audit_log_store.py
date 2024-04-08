@@ -19,3 +19,7 @@ class TestAuditLogStore(unittest.TestCase):
         result = store.log_event(log)
 
         self.assertEqual(result.id, 1)
+
+
+if __name__ == '__main__':
+    unittest.main()

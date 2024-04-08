@@ -38,3 +38,6 @@ class TestAuditLogProvider(unittest.TestCase):
             # Verify that calling the function with an unsupported db type raises an error
             with self.assertRaises(NotImplementedError):
                 provide_audit_log_store()
+
+if __name__ == '__main__':
+    unittest.main()

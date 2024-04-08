@@ -82,3 +82,6 @@ class UsersControllerAuditTest(unittest.TestCase):
         self.assertEqual(response, self.response)
         self.mock_users_controller.user_service_update_password.assert_called_once_with(self.user, body)
         self.mock_audit_log_service.log_event.assert_called_once()
+
+if __name__ == '__main__':
+    unittest.main()

@@ -15,3 +15,7 @@ class TestAuditLogModel(unittest.TestCase):
             'id': None,
         }
         self.assertEqual(log.to_dict(), expected)
+
+
+if __name__ == '__main__':
+    unittest.main()
