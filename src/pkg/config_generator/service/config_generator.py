@@ -1,3 +1,4 @@
+from typing import List
 from src.pkg.config_generator.model.config_generator import ConfigGenerator
 import json
 
@@ -30,12 +31,14 @@ class ConfigGeneratorService:
     def create_config(self, config: ConfigGenerator):
         self.config_generator_store.create_config(config)
 
-    def get_configs(self,offset:int,limit:int):
+    def get_configs(self,offset:int,limit:int) -> List[ConfigGenerator]:
         configs = self.config_generator_store.get_configs(offset,limit)
-        result = [self.format_json_config(config) for config in configs]
-        return result
+        # result = [self.format_json_config(config) for config in configs]
+        # return result
+        return configs
 
-    def get_configs_for_questionnaire(self, identifier:int,offset:int,limit:int):
+    def get_configs_for_questionnaire(self, identifier:int,offset:int,limit:int) -> List[ConfigGenerator]:
         configs = self.config_generator_store.get_configs_for_questionnaire(identifier=identifier,offset=offset,limit=limit)
-        result = [self.format_json_config(config) for config in configs]
-        return result
+        # result = [self.format_json_config(config) for config in configs]
+        # return result
+        return configs
