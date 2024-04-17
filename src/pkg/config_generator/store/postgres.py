@@ -26,12 +26,12 @@ class ConfigGeneratorStore:
     def create_config(self, config_generator: ConfigGenerator):
         config_query = """
 INSERT INTO config_generator
-    (userid, hasScrambleField, hasDateShift, hassubFieldList, hassubFieldRegex,
+    (questionnaireid, hasScrambleField, hasDateShift, hassubFieldList, hassubFieldRegex,
     scrambleField_fields, dateShift_lowrange, dateShift_highrange, subFieldList_fields,
     subFieldList_substitute, subFieldList_replacement, subFieldRegex_fields,
     subFieldRegex_regex,subFieldRegex_replacement, created_at)
 VALUES
-    (:userid, :hasScrambleField, :hasDateShift, :hassubFieldList, :hassubFieldRegex,
+    (:questionnaireid, :hasScrambleField, :hasDateShift, :hassubFieldList, :hassubFieldRegex,
     :scrambleField_fields, :dateShift_lowrange, :dateShift_highrange, :subFieldList_fields,
     :subFieldList_substitute, :subFieldList_replacement, :subFieldRegex_fields,
     :subFieldRegex_regex, :subFieldRegex_replacement, NOW())
@@ -41,7 +41,7 @@ RETURNING id;
         with self.session_scope() as session:
             try:
                 result = session.execute(text(config_query), {
-                    'userid': config_generator.userid,
+                    'questionnaireid': config_generator.questionnaireid,
                     'hasScrambleField': config_generator.hasScrambleField,
                     'hasDateShift': config_generator.hasDateShift,
                     'hassubFieldList': config_generator.hassubFieldList,
@@ -74,7 +74,7 @@ RETURNING id;
             result = [
                 ConfigGenerator(
                     id=config.id,
-                    userid=config.userid,
+                    questionnaireid=config.questionnaireid,
                     hasScrambleField=config.hasScrambleField,
                     hasDateShift=config.hasDateShift,
                     hassubFieldList=config.hassubFieldList,
@@ -93,11 +93,11 @@ RETURNING id;
             ]
             return result
 
-    def get_configs_for_user(self, id:int, offset:int, limit:int) -> list[ConfigGenerator]:
-        query = "SELECT * FROM config_generator WHERE userid = :userid ORDER BY createdat OFFSET :offset LIMIT :limit;"
+    def get_configs_for_questionnaire(self, id:int, offset:int, limit:int) -> list[ConfigGenerator]:
+        query = "SELECT * FROM config_generator WHERE questionnaireid = :questionnaireid ORDER BY createdat OFFSET :offset LIMIT :limit;"
         with self.session_scope() as session:
             configs = session.execute(text(query), {
-                'userid': id,
+                'questionnaireid': id,
                 'offset':offset,
                 'limit':limit
             }).mappings().fetchall()
@@ -105,7 +105,7 @@ RETURNING id;
             result = [
                 ConfigGenerator(
                     id=config.id,
-                    userid=config.userid,
+                    questionnaireid=config.questionnaireid,
                     hasScrambleField=config.hasScrambleField,
                     hasDateShift=config.hasDateShift,
                     hassubFieldList=config.hassubFieldList,

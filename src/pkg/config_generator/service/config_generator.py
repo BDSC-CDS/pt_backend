@@ -35,7 +35,7 @@ class ConfigGeneratorService:
         result = [self.format_json_config(config) for config in configs]
         return result
 
-    def get_configs_for_user(self, identifier:int,offset:int,limit:int):
-        configs = self.config_generator_store.get_configs_for_user(identifier=identifier,offset=offset,limit=limit)
+    def get_configs_for_questionnaire(self, identifier:int,offset:int,limit:int):
+        configs = self.config_generator_store.get_configs_for_questionnaire(identifier=identifier,offset=offset,limit=limit)
         result = [self.format_json_config(config) for config in configs]
         return result

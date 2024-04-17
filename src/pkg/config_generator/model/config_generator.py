@@ -3,7 +3,7 @@ from dataclasses import dataclass, asdict
 @dataclass
 class ConfigGenerator:
     id: int = None
-    userid:int = None
+    questionnaireid:int = None
     hasScrambleField: bool = False
     hasDateShift: bool = False
     hassubFieldList: bool = False
