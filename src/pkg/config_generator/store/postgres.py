@@ -23,72 +23,104 @@ class ConfigGeneratorStore:
         finally:
             session.close()
 
-    def log_event(self, audit_log: AuditLog):
-        audit_log_query = """
-INSERT INTO audit_log
-    (userid, service, action, body, response, error, created_at)
+    def create_config(self, config_generator: ConfigGenerator):
+        config_query = """
+INSERT INTO config_generator
+    (userid, hasScrambleField, hasDateShift, hassubFieldList, hassubFieldRegex,
+    scrambleField_fields, dateShift_lowrange, dateShift_highrange, subFieldList_fields,
+    subFieldList_substitute, subFieldList_replacement, subFieldRegex_fields,
+    subFieldRegex_regex,subFieldRegex_replacement, created_at)
 VALUES
-    (:userid, :service, :action, :body, :response, :error, NOW())
+    (:userid, :hasScrambleField, :hasDateShift, :hassubFieldList, :hassubFieldRegex,
+    :scrambleField_fields, :dateShift_lowrange, :dateShift_highrange, :subFieldList_fields,
+    :subFieldList_substitute, :subFieldList_replacement, :subFieldRegex_fields,
+    :subFieldRegex_regex, :subFieldRegex_replacement, NOW())
 RETURNING id;
 """
+
         with self.session_scope() as session:
             try:
-                result = session.execute(text(audit_log_query), {
-                    'userid': audit_log.userid,
-                    'service':audit_log.service,
-                    'action': audit_log.action,
-                    'body': audit_log.body,
-                    'response': audit_log.response,
-                    'error': audit_log.error,
+                result = session.execute(text(config_query), {
+                    'userid': config_generator.userid,
+                    'hasScrambleField': config_generator.hasScrambleField,
+                    'hasDateShift': config_generator.hasDateShift,
+                    'hassubFieldList': config_generator.hassubFieldList,
+                    'hassubFieldRegex': config_generator.hassubFieldRegex,
+                    'scrambleField_fields': ','.join(config_generator.scrambleField_fields),
+                    'dateShift_lowrange': config_generator.dateShift_lowrange,
+                    'dateShift_highrange': config_generator.dateShift_highrange,
+                    'subFieldList_fields': ','.join(config_generator.subFieldList_fields),
+                    'subFieldList_substitute': ','.join(config_generator.subFieldList_substitute),
+                    'subFieldList_replacement': config_generator.subFieldList_replacement,
+                    'subFieldRegex_fields': ','.join(config_generator.subFieldRegex_fields),
+                    'subFieldRegex_regex': config_generator.subFieldRegex_regex,
+                    'subFieldRegex_replacement': config_generator.subFieldRegex_replacement
                 }).fetchone()
-                audit_id = result[0]
+                config_id = result[0]
 
             except SQLAlchemyError as e:
                 raise e
 
-            return AuditLog(id=audit_id)
+            return ConfigGenerator(id=config_id)
 
-    def get_logs(self,offset:int,limit:int) -> list[AuditLog]:
-        query = "SELECT * FROM audit_log ORDER BY createdat OFFSET :offset LIMIT :limit;"
+    def get_configs(self,offset:int,limit:int) -> list[ConfigGenerator]:
+        query = "SELECT * FROM config_generator ORDER BY createdat OFFSET :offset LIMIT :limit;"
         with self.session_scope() as session:
-            logs = session.execute(text(query),{
+            configs = session.execute(text(query),{
                 'offset': offset,
                 'limit': limit,
             }).mappings().fetchall()
 
             result = [
-                AuditLog(
-                    id=log.id,
-                    userid=log.userid,
-                    service=log.service,
-                    action=log.action,
-                    body=log.body,
-                    response=log.response,
-                    error=log.error,
-                    created_at= log.created_at
-                ) for log in logs
+                ConfigGenerator(
+                    id=config.id,
+                    userid=config.userid,
+                    hasScrambleField=config.hasScrambleField,
+                    hasDateShift=config.hasDateShift,
+                    hassubFieldList=config.hassubFieldList,
+                    hassubFieldRegex=config.hassubFieldRegex,
+                    scrambleField_fields=config.scrambleField_fields.split(","),
+                    dateShift_lowrange=config.dateShift_lowrange,
+                    dateShift_highrange=config.dateShift_highrange,
+                    subFieldList_fields=config.subFieldList_fields.split(","),
+                    subFieldList_substitute=config.subFieldList_substitute.split(","),
+                    subFieldList_replacement=config.subFieldList_replacement,
+                    suFieldRegex_fields=config.subFieldRegex_fields.split(","),
+                    subFieldRegex_regex=config.subFieldRegex_regex,
+                    subFieldRegex_replacement=config.subFieldRegex_replacement,
+                    created_at= config.created_at
+                ) for config in configs
             ]
             return result
 
-    def get_logs_for_user(self, id:int, offset:int, limit:int) -> list[AuditLog]:
-        query = "SELECT * FROM audit_log WHERE userid = :userid ORDER BY createdat OFFSET :offset LIMIT :limit;"
+    def get_configs_for_user(self, id:int, offset:int, limit:int) -> list[ConfigGenerator]:
+        query = "SELECT * FROM config_generator WHERE userid = :userid ORDER BY createdat OFFSET :offset LIMIT :limit;"
         with self.session_scope() as session:
-            logs = session.execute(text(query), {
+            configs = session.execute(text(query), {
                 'userid': id,
                 'offset':offset,
                 'limit':limit
             }).mappings().fetchall()
 
             result = [
-                AuditLog(
-                    id=log.id,
-                    userid=log.userid,
-                    service=log.service,
-                    action=log.action,
-                    body=log.body,
-                    response=log.response,
-                    error=log.error,
-                    created_at=log.created_at
-                ) for log in logs
+                ConfigGenerator(
+                    id=config.id,
+                    userid=config.userid,
+                    hasScrambleField=config.hasScrambleField,
+                    hasDateShift=config.hasDateShift,
+                    hassubFieldList=config.hassubFieldList,
+                    hassubFieldRegex=config.hassubFieldRegex,
+                    scrambleField_fields=config.scrambleField_fields.split(","),
+                    dateShift_lowrange=config.dateShift_lowrange,
+                    dateShift_highrange=config.dateShift_highrange,
+                    subFieldList_fields=config.subFieldList_fields.split(","),
+                    subFieldList_substitute=config.subFieldList_substitute.split(","),
+                    subFieldList_replacement=config.subFieldList_replacement,
+                    suFieldRegex_fields=config.subFieldRegex_fields.split(","),
+                    subFieldRegex_regex=config.subFieldRegex_regex,
+                    subFieldRegex_replacement=config.subFieldRegex_replacement,
+                    created_at= config.created_at
+                ) for config in configs
             ]
+
             return result

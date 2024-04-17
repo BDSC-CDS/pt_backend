@@ -4,13 +4,13 @@ class ConfigGeneratorService:
     def __init__(self, config_generator_store):
         self.config_generator_store = config_generator_store
 
-    def log_event(self, log: ConfigGenerator):
-        self.config_generator_store.log_event(log)
+    def create_config(self, config: ConfigGenerator):
+        self.config_generator_store.create_config(config)
 
-    def get_logs(self,offset:int,limit:int):
-        logs = self.config_generator_store.get_logs(offset,limit)
-        return logs
+    def get_configs(self,offset:int,limit:int):
+        configs = self.config_generator_store.get_configs(offset,limit)
+        return configs
 
-    def get_logs_for_user(self, identifier:int,offset:int,limit:int):
-        logs = self.config_generator_store.get_logs_for_user(identifier=identifier,offset=offset,limit=limit)
-        return logs
+    def get_configs_for_user(self, identifier:int,offset:int,limit:int):
+        configs = self.config_generator_store.get_configs_for_user(identifier=identifier,offset=offset,limit=limit)
+        return configs
