@@ -13,13 +13,13 @@ class ConfigGeneratorService:
         if config.hasDateShift:
             result["dateShift"] = {"defaultDateShift": {"low_range": config.dateShift_lowrange,
                                                         "high_range":config.dateShift_highrange}}
-        if config.hassubFieldList:
+        if config.hassubFieldList: #TODO list
             result["substituteFieldList"] = {"subIDlist": {
                 "applies_to_field":config.subFieldList_fields,
                 "substitution_list":config.subFieldList_substitute,
                 "replacement": config.subFieldList_replacement
             }}
-        if config.hassubFieldRegex:
+        if config.hassubFieldRegex: #TODO list
             result["substituteFieldRegex"] = {"substituteFieldRegex" : {
                 "applies_to_field": config.subFieldRegex_fields,
                 "regex": config.subFieldRegex_regex,

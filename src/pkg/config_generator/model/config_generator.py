@@ -4,7 +4,7 @@ from dataclasses import dataclass, asdict
 class ConfigGenerator:
     id: int = None
     questionnaireid:int = None
-    hasScrambleField: bool = False
+    hasScrambleField: bool = False # useful? if boolean but not list
     hasDateShift: bool = False
     hassubFieldList: bool = False
     hassubFieldRegex: bool = False
