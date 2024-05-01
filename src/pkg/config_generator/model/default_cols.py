@@ -1,5 +1,5 @@
 
-default_scrambling = [
+default_scrambling_fields = [
  "sphn:SubjectPseudoIdentifier/sphn:hasIdentifier",
  "sphn:AdministrativeCase/sphn:hasIdentifier",
  "sphn:Sample/sphn:hasIdentifier",
