@@ -14,6 +14,7 @@ security:
 tags:
 - name: AuthenticationService
 - name: IndexService
+- name: MedicationService
 - name: UserService
 paths:
   /api/rest/v1/authentication/login:
@@ -267,6 +268,119 @@ paths:
       - Index
       x-openapi-router-controller: index_controller
       x-codegen-request-body-name: body
+  /api/v1/medication:
+    get:
+      description: This endpoint allows listing a user's medications
+      operationId: medication_service_list_medication
+      parameters:
+      - in: query
+        name: offset
+        schema:
+          format: int64
+          type: integer
+      - in: query
+        name: limit
+        schema:
+          format: int64
+          type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/templatebackendListMedicationReply'
+          description: A successful response.
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+          description: An unexpected error response.
+      summary: List medications
+      tags:
+      - Medication
+      x-openapi-router-controller: medication_controller
+    post:
+      description: "This endpoint creates a medication, and its schedule"
+      operationId: medication_service_create_medication
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/templatebackendCreateMedicationRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/templatebackendCreateMedicationReply'
+          description: A successful response.
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+          description: An unexpected error response.
+      summary: Create a medication
+      tags:
+      - Medication
+      x-openapi-router-controller: medication_controller
+      x-codegen-request-body-name: body
+  /api/v1/medication/{id}:
+    delete:
+      description: "This endpoint creates a medication, and its schedule"
+      operationId: medication_service_delete_medication
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/templatebackendDeleteMedicationReply'
+          description: A successful response.
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+          description: An unexpected error response.
+      summary: Create a medication
+      tags:
+      - Medication
+      x-openapi-router-controller: medication_controller
+    get:
+      description: This endpoint allow getting a single user's medication
+      operationId: medication_service_get_medication
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/templatebackendGetMedicationReply'
+          description: A successful response.
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+          description: An unexpected error response.
+      summary: Get medications
+      tags:
+      - Medication
+      x-openapi-router-controller: medication_controller
 components:
   schemas:
     protobufAny:
@@ -329,6 +443,31 @@ components:
           type: string
       title: templatebackendCreateHelloReply
       type: object
+    templatebackendCreateMedicationReply:
+      example:
+        result:
+          id: 0
+      properties:
+        result:
+          $ref: '#/components/schemas/templatebackendCreateMedicationResult'
+      title: templatebackendCreateMedicationReply
+      type: object
+    templatebackendCreateMedicationRequest:
+      properties:
+        medication:
+          $ref: '#/components/schemas/templatebackendMedication'
+      title: Message definitions for requests and responses
+      type: object
+    templatebackendCreateMedicationResult:
+      example:
+        id: 0
+      properties:
+        id:
+          format: int64
+          title: id
+          type: integer
+      title: templatebackendCreateMedicationResult
+      type: object
     templatebackendCreateUserReply:
       example:
         result:
@@ -361,6 +500,24 @@ components:
           type: string
       title: templatebackendCredentials
       type: object
+    templatebackendDeleteMedicationReply:
+      example:
+        result:
+          success: true
+      properties:
+        result:
+          $ref: '#/components/schemas/templatebackendDeleteMedicationResult'
+      title: templatebackendDeleteMedicationReply
+      type: object
+    templatebackendDeleteMedicationResult:
+      example:
+        success: true
+      properties:
+        success:
+          title: success
+          type: boolean
+      title: templatebackendDeleteMedicationResult
+      type: object
     templatebackendDeleteUserReply:
       example:
         result: "{}"
@@ -381,6 +538,37 @@ components:
           title: content
           type: string
       title: templatebackendGetHelloReply
+      type: object
+    templatebackendGetMedicationReply:
+      example:
+        result:
+          medication:
+            dosage: dosage
+            createdAt: 2000-01-23T04:56:07.000+00:00
+            name: name
+            id: 0
+            userId: 6
+            frequency: frequency
+            updatedAt: 2000-01-23T04:56:07.000+00:00
+      properties:
+        result:
+          $ref: '#/components/schemas/templatebackendGetMedicationResult'
+      title: templatebackendGetMedicationReply
+      type: object
+    templatebackendGetMedicationResult:
+      example:
+        medication:
+          dosage: dosage
+          createdAt: 2000-01-23T04:56:07.000+00:00
+          name: name
+          id: 0
+          userId: 6
+          frequency: frequency
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+      properties:
+        medication:
+          $ref: '#/components/schemas/templatebackendMedication'
+      title: templatebackendGetMedicationResult
       type: object
     templatebackendGetUserMeReply:
       example:
@@ -471,6 +659,91 @@ components:
         user:
           $ref: '#/components/schemas/templatebackendUser'
       title: templatebackendGetUserResult
+      type: object
+    templatebackendListMedicationReply:
+      example:
+        result:
+          medications:
+          - dosage: dosage
+            createdAt: 2000-01-23T04:56:07.000+00:00
+            name: name
+            id: 0
+            userId: 6
+            frequency: frequency
+            updatedAt: 2000-01-23T04:56:07.000+00:00
+          - dosage: dosage
+            createdAt: 2000-01-23T04:56:07.000+00:00
+            name: name
+            id: 0
+            userId: 6
+            frequency: frequency
+            updatedAt: 2000-01-23T04:56:07.000+00:00
+      properties:
+        result:
+          $ref: '#/components/schemas/templatebackendListMedicationResult'
+      title: templatebackendListMedicationReply
+      type: object
+    templatebackendListMedicationResult:
+      example:
+        medications:
+        - dosage: dosage
+          createdAt: 2000-01-23T04:56:07.000+00:00
+          name: name
+          id: 0
+          userId: 6
+          frequency: frequency
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+        - dosage: dosage
+          createdAt: 2000-01-23T04:56:07.000+00:00
+          name: name
+          id: 0
+          userId: 6
+          frequency: frequency
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+      properties:
+        medications:
+          items:
+            $ref: '#/components/schemas/templatebackendMedication'
+          title: medications
+          type: array
+      title: templatebackendListMedicationResult
+      type: object
+    templatebackendMedication:
+      example:
+        dosage: dosage
+        createdAt: 2000-01-23T04:56:07.000+00:00
+        name: name
+        id: 0
+        userId: 6
+        frequency: frequency
+        updatedAt: 2000-01-23T04:56:07.000+00:00
+      properties:
+        id:
+          format: int64
+          title: id
+          type: integer
+        userId:
+          format: int64
+          title: userId
+          type: integer
+        name:
+          title: name
+          type: string
+        dosage:
+          title: dosage
+          type: string
+        frequency:
+          title: frequency
+          type: string
+        createdAt:
+          format: date-time
+          title: createdAt
+          type: string
+        updatedAt:
+          format: date-time
+          title: updatedAt
+          type: string
+      title: templatebackendMedication
       type: object
     templatebackendResetPasswordReply:
       example:

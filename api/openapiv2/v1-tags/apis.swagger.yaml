@@ -9,6 +9,7 @@ info:
 tags:
   - name: AuthenticationService
   - name: IndexService
+  - name: MedicationService
   - name: UserService
 schemes:
   - http
@@ -226,6 +227,100 @@ paths:
       tags:
         - Index
       x-openapi-router-controller: index_controller
+  /api/v1/medication:
+    get:
+      summary: List medications
+      description: This endpoint allows listing a user's medications
+      operationId: MedicationService_ListMedication
+      responses:
+        "200":
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/templatebackendListMedicationReply'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/rpcStatus'
+      parameters:
+        - name: offset
+          in: query
+          required: false
+          type: integer
+          format: int64
+        - name: limit
+          in: query
+          required: false
+          type: integer
+          format: int64
+      tags:
+        - Medication
+      x-openapi-router-controller: medication_controller
+    post:
+      summary: Create a medication
+      description: This endpoint creates a medication, and its schedule
+      operationId: MedicationService_CreateMedication
+      responses:
+        "200":
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/templatebackendCreateMedicationReply'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/rpcStatus'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/templatebackendCreateMedicationRequest'
+      tags:
+        - Medication
+      x-openapi-router-controller: medication_controller
+  /api/v1/medication/{id}:
+    get:
+      summary: Get medications
+      description: This endpoint allow getting a single user's medication
+      operationId: MedicationService_GetMedication
+      responses:
+        "200":
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/templatebackendGetMedicationReply'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/rpcStatus'
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: integer
+          format: int64
+      tags:
+        - Medication
+      x-openapi-router-controller: medication_controller
+    delete:
+      summary: Create a medication
+      description: This endpoint creates a medication, and its schedule
+      operationId: MedicationService_DeleteMedication
+      responses:
+        "200":
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/templatebackendDeleteMedicationReply'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/rpcStatus'
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: string
+      tags:
+        - Medication
+      x-openapi-router-controller: medication_controller
 definitions:
   protobufAny:
     type: object
@@ -266,6 +361,23 @@ definitions:
         type: string
       content:
         type: string
+  templatebackendCreateMedicationReply:
+    type: object
+    properties:
+      result:
+        $ref: '#/definitions/templatebackendCreateMedicationResult'
+  templatebackendCreateMedicationRequest:
+    type: object
+    properties:
+      medication:
+        $ref: '#/definitions/templatebackendMedication'
+    title: Message definitions for requests and responses
+  templatebackendCreateMedicationResult:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
   templatebackendCreateUserReply:
     type: object
     properties:
@@ -287,6 +399,16 @@ definitions:
         type: string
       totp:
         type: string
+  templatebackendDeleteMedicationReply:
+    type: object
+    properties:
+      result:
+        $ref: '#/definitions/templatebackendDeleteMedicationResult'
+  templatebackendDeleteMedicationResult:
+    type: object
+    properties:
+      success:
+        type: boolean
   templatebackendDeleteUserReply:
     type: object
     properties:
@@ -299,6 +421,16 @@ definitions:
     properties:
       content:
         type: string
+  templatebackendGetMedicationReply:
+    type: object
+    properties:
+      result:
+        $ref: '#/definitions/templatebackendGetMedicationResult'
+  templatebackendGetMedicationResult:
+    type: object
+    properties:
+      medication:
+        $ref: '#/definitions/templatebackendMedication'
   templatebackendGetUserMeReply:
     type: object
     properties:
@@ -320,6 +452,40 @@ definitions:
     properties:
       user:
         $ref: '#/definitions/templatebackendUser'
+  templatebackendListMedicationReply:
+    type: object
+    properties:
+      result:
+        $ref: '#/definitions/templatebackendListMedicationResult'
+  templatebackendListMedicationResult:
+    type: object
+    properties:
+      medications:
+        type: array
+        items:
+          type: object
+          $ref: '#/definitions/templatebackendMedication'
+  templatebackendMedication:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+      userId:
+        type: integer
+        format: int64
+      name:
+        type: string
+      dosage:
+        type: string
+      frequency:
+        type: string
+      createdAt:
+        type: string
+        format: date-time
+      updatedAt:
+        type: string
+        format: date-time
   templatebackendResetPasswordReply:
     type: object
     properties:

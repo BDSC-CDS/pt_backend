@@ -99,6 +99,10 @@ Class | Method | HTTP request | Description
 *AuthenticationApi* | [**authentication_service_authenticate**](docs/AuthenticationApi.md#authentication_service_authenticate) | **POST** /api/rest/v1/authentication/login | Authenticate
 *IndexApi* | [**index_service_create_hello**](docs/IndexApi.md#index_service_create_hello) | **POST** /api/v1/hello/{identifier} | Get a hello
 *IndexApi* | [**index_service_get_hello**](docs/IndexApi.md#index_service_get_hello) | **GET** /api/v1/hello | Get a hello
+*MedicationApi* | [**medication_service_create_medication**](docs/MedicationApi.md#medication_service_create_medication) | **POST** /api/v1/medication | Create a medication
+*MedicationApi* | [**medication_service_delete_medication**](docs/MedicationApi.md#medication_service_delete_medication) | **DELETE** /api/v1/medication/{id} | Create a medication
+*MedicationApi* | [**medication_service_get_medication**](docs/MedicationApi.md#medication_service_get_medication) | **GET** /api/v1/medication/{id} | Get medications
+*MedicationApi* | [**medication_service_list_medication**](docs/MedicationApi.md#medication_service_list_medication) | **GET** /api/v1/medication | List medications
 *UsersApi* | [**user_service_create_user**](docs/UsersApi.md#user_service_create_user) | **POST** /api/rest/v1/users | Create a user
 *UsersApi* | [**user_service_delete_user**](docs/UsersApi.md#user_service_delete_user) | **DELETE** /api/rest/v1/users/{id} | Delete a user
 *UsersApi* | [**user_service_get_user**](docs/UsersApi.md#user_service_get_user) | **GET** /api/rest/v1/users/{id} | Get a user
@@ -115,15 +119,25 @@ Class | Method | HTTP request | Description
  - [TemplatebackendAuthenticationReply](docs/TemplatebackendAuthenticationReply.md)
  - [TemplatebackendAuthenticationResult](docs/TemplatebackendAuthenticationResult.md)
  - [TemplatebackendCreateHelloReply](docs/TemplatebackendCreateHelloReply.md)
+ - [TemplatebackendCreateMedicationReply](docs/TemplatebackendCreateMedicationReply.md)
+ - [TemplatebackendCreateMedicationRequest](docs/TemplatebackendCreateMedicationRequest.md)
+ - [TemplatebackendCreateMedicationResult](docs/TemplatebackendCreateMedicationResult.md)
  - [TemplatebackendCreateUserReply](docs/TemplatebackendCreateUserReply.md)
  - [TemplatebackendCreateUserResult](docs/TemplatebackendCreateUserResult.md)
  - [TemplatebackendCredentials](docs/TemplatebackendCredentials.md)
+ - [TemplatebackendDeleteMedicationReply](docs/TemplatebackendDeleteMedicationReply.md)
+ - [TemplatebackendDeleteMedicationResult](docs/TemplatebackendDeleteMedicationResult.md)
  - [TemplatebackendDeleteUserReply](docs/TemplatebackendDeleteUserReply.md)
  - [TemplatebackendGetHelloReply](docs/TemplatebackendGetHelloReply.md)
+ - [TemplatebackendGetMedicationReply](docs/TemplatebackendGetMedicationReply.md)
+ - [TemplatebackendGetMedicationResult](docs/TemplatebackendGetMedicationResult.md)
  - [TemplatebackendGetUserMeReply](docs/TemplatebackendGetUserMeReply.md)
  - [TemplatebackendGetUserMeResult](docs/TemplatebackendGetUserMeResult.md)
  - [TemplatebackendGetUserReply](docs/TemplatebackendGetUserReply.md)
  - [TemplatebackendGetUserResult](docs/TemplatebackendGetUserResult.md)
+ - [TemplatebackendListMedicationReply](docs/TemplatebackendListMedicationReply.md)
+ - [TemplatebackendListMedicationResult](docs/TemplatebackendListMedicationResult.md)
+ - [TemplatebackendMedication](docs/TemplatebackendMedication.md)
  - [TemplatebackendResetPasswordReply](docs/TemplatebackendResetPasswordReply.md)
  - [TemplatebackendUpdatePasswordReply](docs/TemplatebackendUpdatePasswordReply.md)
  - [TemplatebackendUpdatePasswordRequest](docs/TemplatebackendUpdatePasswordRequest.md)
