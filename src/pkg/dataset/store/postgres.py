@@ -26,9 +26,9 @@ class DatasetStore:
     def store_dataset(self, dataset: Dataset):
         dataset_query = """
 INSERT INTO datasets
-    (userid, name, data, created_at)
+    (userid, name, data, created_at, updated_at)
 VALUES
-    (:userid, :name, :data, NOW())
+    (:userid, :name, :data, NOW(), NOW())
 RETURNING id;
 """
         with self.session_scope() as session:
@@ -45,60 +45,81 @@ RETURNING id;
 
             return Dataset(id=dataset_id)
 
-    def get_datasets(self,offset:int,limit:int) -> list[Dataset]:
-        query = "SELECT * FROM datasets ORDER BY createdat OFFSET :offset LIMIT :limit;"
-        with self.session_scope() as session:
-            datasets = session.execute(text(query),{
-                'offset': offset,
-                'limit': limit,
-            }).mappings().fetchall()
-
-            result = [
-                Dataset(
-                    id=dataset.id,
-                    userid=dataset.userid,
-                    name=dataset.name,
-                    data=dataset.data,
-                    created_at= dataset.created_at
-                ) for dataset in datasets
-            ]
-            return result
-
-    def get_datasets_for_user(self, id:int, offset:int, limit:int) -> list[Dataset]:
-        query = "SELECT * FROM datasets WHERE userid = :userid ORDER BY createdat OFFSET :offset LIMIT :limit;"
+    def get_list_datasets(self, identifier:int, tenantid:int, offset:int,limit:int):
+        query = "SELECT * FROM datasets WHERE userid = :userid AND tenantid = :tenantid ORDER BY createdat OFFSET :offset LIMIT :limit;"
         with self.session_scope() as session:
             datasets = session.execute(text(query), {
-                'userid': id,
+                'userid': identifier,
+                'tenantid': tenantid,
                 'offset':offset,
                 'limit':limit
             }).mappings().fetchall()
 
             result = [
-               Dataset(
+               Dataset( # TODO what is in the dataset (name,user)
                     id=dataset.id,
                     userid=dataset.userid,
                     name=dataset.name,
-                    data=dataset.data,
+                    # data=dataset.data,
                     created_at= dataset.created_at
                 ) for dataset in datasets
             ]
             return result
 
-    def get_dataset_by_name(self, name:str, offset:int, limit:int) -> list[Dataset]:
-        query = "SELECT * FROM datasets WHERE name = :name ORDER BY createdat OFFSET :offset LIMIT :limit;"
+    def get_dataset_metadata(self,name:str, identifier:int, tenantid:int):
+        query = "SELECT * FROM dataset_metadata WHERE name = :name AND userid = :userid AND tenantid = :tenantid;"
         with self.session_scope() as session:
-            dataset = session.execute(text(query), {
-                'name': name,
-                'offset':offset,
-                'limit':limit
-            }).mappings().fetchone() #only get first result if several with same name TODO ?
+            metadata = session.execute(text(query), {
+                'name':name,
+                'userid': identifier,
+                'tenantid': tenantid,
+            }).mappings().fetchone() # fetch first
 
-            result = Dataset(
-                    id=dataset.id,
-                    userid=dataset.userid,
-                    name=dataset.name,
-                    data=dataset.data,
-                    created_at= dataset.created_at
+            result = Metadata( # TODO what is in the metadata (name,user)
+                    id=metadata.id,
+                    userid=metadata.userid,
+                    name=metadata.name,
+                    # data=dataset.data,
+                    created_at= metadata.created_at
                 )
 
             return result
+
+
+
+    def get_dataset(self, name:str,identifier:int, tenantid:int, offset:int, limit:int):
+        # TODO order by line number?
+        query = "SELECT * FROM values WHERE name = :name AND userid = :userid AND tenantid = :tenantid ORDER BY createdat OFFSET :offset LIMIT :limit;"
+        with self.session_scope() as session:
+            values = session.execute(text(query), {
+                'name': name,
+                'userid': identifier,
+                'tenantid': tenantid,
+                'offset':offset,
+                'limit':limit
+            }).mappings().fetchall() # get all values corresponding to dataset name and user id
+
+            result = [ Value( # TODO
+                    id=val.id,
+                    userid=val.userid,
+                    name=val.name,
+                    data=val.data,
+                    created_at= val.created_at
+                ) for val in values ]
+
+            return result
+
+
+    def update_metadata_dataset(self,name:str,identifier:int, tenantid:int,metadata:str):
+        query = """UPDATE metadata
+                SET col1 = :col1
+                WHERE name = :name AND userid = :userid AND tenantid = :tenantid
+                """ #TODO
+        with self.session_scope() as session:
+            session.execute(text(query), {
+                'name': name,
+                'userid': identifier,
+                'tenantid': tenantid,
+            }) # TODO mappings ? fetchall? qu'est ce que ça retourne?
+
+            return True # TODO
