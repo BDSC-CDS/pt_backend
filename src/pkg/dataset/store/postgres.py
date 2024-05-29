@@ -123,3 +123,32 @@ RETURNING id;
             }) # TODO mappings ? fetchall? qu'est ce que ça retourne?
 
             return True # TODO
+
+    # TODO qu'estce qu'on modifie
+    def update_dataset(self,name:str,identifier:int, tenantid:int,dataset:Dataset):
+        query = """UPDATE values
+                SET col1 = :col1
+                WHERE name = :name AND userid = :userid AND tenantid = :tenantid
+                """ #TODO
+        with self.session_scope() as session:
+            session.execute(text(query), {
+                'name': name,
+                'userid': identifier,
+                'tenantid': tenantid,
+            }) # TODO mappings ? fetchall? qu'est ce que ça retourne?
+
+            return True # TODO
+
+    def delete_dataset(self,name:str,identifier:int, tenantid:int):
+        query = """UPDATE dataset
+                SET deletedat = NOW()
+                WHERE name = :name AND userid = :userid AND tenantid = :tenantid
+                """ #TODO
+        with self.session_scope() as session:
+            session.execute(text(query), {
+                'name': name,
+                'userid': identifier,
+                'tenantid': tenantid,
+            }) # TODO mappings ? fetchall? qu'est ce que ça retourne?
+
+            return True # TODO
