@@ -12,4 +12,3 @@ class IndexController():
             return TemplatebackendGetHelloReply("hello"), 200
 
         return TemplatebackendGetHelloReply("hello " + user.firstname), 200
-        

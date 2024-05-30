@@ -1,0 +1,81 @@
+from server_template.models import TemplatebackendUser
+from server_template.models import TemplatebackendCreateUserReply
+from server_template.models import TemplatebackendUpdatePasswordRequest
+from  server_template.models import TemplatebackendGetUserReply
+from src.internal.api.controllers.user_controller import UsersController
+from src.internal.util.interface.implements import implements_interface
+from src.pkg.audit_log.model.audit_log import AuditLog
+from src.pkg.audit_log.service.audit_log import AuditLogService
+
+class UsersControllerAudit():
+    def __init__(self, next: UsersController,auditLogService: AuditLogService):
+        self.next = next
+        self.auditLogService = auditLogService
+        implements_interface(UsersController, UsersControllerAudit)
+
+    def user_service_create_user(self, user, body: TemplatebackendUser):
+        body_serialized = f"id: {body.id or ''}, first_name: {body.first_name or ''}, last_name: {body.last_name or ''}, username: {body.username or ''}, email: {body.email or ''}"
+        try:
+            response : TemplatebackendCreateUserReply =  self.next.user_service_create_user(user, body)
+            response_serialized = response.result.id
+            self.auditLogService.log_event(AuditLog(service="user", userid=body.id,action="created user",body=body_serialized,response=response_serialized))
+            return response
+        except Exception as e:
+            self.auditLogService.log_event(AuditLog(service="user", userid=body.id,action="Error creating user",body=body_serialized,response=e, error=True))
+            raise e
+
+    def user_service_delete_user(self, user, id: int):
+        try:
+            response =  self.next.user_service_delete_user(user, id)
+            self.auditLogService.log_event(AuditLog(service="user", userid=user.id,action="deleted user of id "+str(id), response=response))
+            return response
+        except Exception as e:
+            self.auditLogService.log_event(AuditLog(service="user", userid=user.id,action="Error deleting user of id "+ str(id), response=e, error=True))
+            raise e
+
+
+    def user_service_get_user(self, user, id: int):
+        try:
+            response : TemplatebackendGetUserReply =  self.next.user_service_get_user(user, id)
+            response_serialized = f"id: {response.result.user.id}, first_name: {response.result.user.first_name or ''}, last_name: {response.result.user.last_name or ''},  \
+                username: {response.result.user.username or ''}, email: {response.result.user.email or ''}, status: {response.result.user.status or ''},  \
+                roles: {response.result.user.roles or ''}"
+
+            self.auditLogService.log_event(AuditLog(service="user", userid=user.id,action="accessed user of id "+str(id), response=response_serialized))
+            return response
+        except  Exception as e:
+            self.auditLogService.log_event(AuditLog(service="user", userid=user.id,action="Error accessing user of id "+str(id), response=e, error=True))
+            raise e
+
+
+    def user_service_get_user_me(self, user):
+        try:
+            response : TemplatebackendGetUserReply = self.next.user_service_get_user_me(user)
+            response_serialized = f"id: {response.result.user.id}, first_name: {response.result.user.first_name or ''}, last_name: {response.result.user.last_name or ''},  \
+                username: {response.result.user.username or ''}, email: {response.result.user.email or ''}, status: {response.result.user.status or ''},  \
+                roles: {response.result.user.roles or ''}"
+            self.auditLogService.log_event(AuditLog(service="user", userid=user.id,action="accessed user of id "+user, response=response_serialized))
+            return response
+        except Exception as e:
+            self.auditLogService.log_event(AuditLog(service="user", userid=user.id,action="Error accessing user of id "+user, response=e, error=True))
+            raise e
+
+
+    def user_service_reset_password(self, user, id: int, body: object):
+        try:
+            response =  self.next.user_service_reset_password(user, id, body)
+            self.auditLogService.log_event(AuditLog(service="user", userid=user.id,action="reset password"))
+            return response
+        except Exception as e:
+            self.auditLogService.log_event(AuditLog(service="user", userid=user.id,action="Error resetting password",error=True))
+            raise e
+
+
+    def user_service_update_password(self, user, body: TemplatebackendUpdatePasswordRequest):
+        try:
+            response = self.next.user_service_update_password(user, body)
+            self.auditLogService.log_event(AuditLog(service="user", userid=user.id,action="updated password"))
+            return response
+        except Exception as e:
+            self.auditLogService.log_event(AuditLog(service="user", userid=user.id,action="Error updating password",error=True))
+            raise e

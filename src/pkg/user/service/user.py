@@ -10,13 +10,13 @@ class UserService:
         user.password = hash
 
         return self.user_store.create_user(user)
-    
+
     def get_user(self, by: str, identifier: str | int, keep_sensitive_filelds: bool = False) -> User:
         user = self.user_store.get_user(by=by, identifier=identifier)
 
         if user is None:
             return None
-        
+
         if not keep_sensitive_filelds:
             user.drop_sensitive_fields()
 
