@@ -1,0 +1,15 @@
+syntax = "proto3";
+package templatebackend;
+option go_package = ".;templatebackend";
+
+import "google/protobuf/timestamp.proto";
+
+message AuditLog {
+    uint32 id = 1;
+    string action = 2;
+    string user_id = 3;
+    string details = 4;
+
+    google.protobuf.Timestamp createdAt = 5;
+    google.protobuf.Timestamp updatedAt = 6;
+}
