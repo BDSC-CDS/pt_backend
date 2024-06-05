@@ -6,12 +6,13 @@ services:
       dockerfile: docker/dockerfiles/dev.dockerfile
     volumes:
       - ..:/workspace:cached
-      - /run/docker.sock:/run/docker.sock
+      # - /run/docker.sock:/run/docker.sock
     command: /bin/sh -c "while sleep 1000; do :; done"
+    user: root
   postgres:
     image: postgres
-    ports:
-      - 5434:5432
+    # ports:
+    #   - 5434:5432
     environment:
       POSTGRES_USER: admin
       POSTGRES_PASSWORD: password
