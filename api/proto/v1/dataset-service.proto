@@ -60,6 +60,8 @@ message CreateDatasetResult {
 // Get dataset
 message GetDatasetRequest {
     uint32 id = 1;
+    uint32 offset = 2;
+    uint32 limit = 3;
 }
 message GetDatasetReply {
     GetDatasetResult result = 1;
