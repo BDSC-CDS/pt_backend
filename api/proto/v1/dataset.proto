@@ -1,0 +1,11 @@
+message Dataset {
+    uint32 id = 1;
+    uint32 user_id = 2;
+    uint32 tenant_id = 3;
+    string name = 4;
+
+    google.protobuf.Timestamp createdAt = 5;
+    google.protobuf.Timestamp updatedAt = 6;
+    google.protobuf.Timestamp deletedAt = 7;
+
+}
