@@ -27,7 +27,7 @@ python3 -m unittest discover ./src/tests/acceptance
 
 ## Developer documentation
 
-To document how to develop within the template backend we will implement a concrete service and make the template backend into a real use case. The goal is to develop a simple medication tracker, so that for instance elderly can save the list of their medication, including the name, the posology and frequency of intake and get reminder for it. 
+To document how to develop within the backend we will implement a concrete service and make backend into a real use case. The goal is to develop a simple medication tracker, so that for instance elderly can save the list of their medication, including the name, the posology and frequency of intake and get reminder for it. 
 
 The service is going to be very basic, just enough to cover most aspect of adding a service to the backend.
 
@@ -41,7 +41,7 @@ The service is going to be very basic, just enough to cover most aspect of addin
 
 ### .proto specifications
 
-The template backend is using the spec first pattern. This mean that the speicifation and documentation of the API is not something that comes after coding the actual api as is usual. The inconvenient of the usual approach is that the specs and documentation tend to always be outdated and an aftertought. Here we write the specification and the backend automatically interpret those and accept an API based on it. Any change in the specs is immediately and without further code reflected in the backend's behavious and in the documentation.
+The backend is using the spec first pattern. This mean that the speicifation and documentation of the API is not something that comes after coding the actual api as is usual. The inconvenient of the usual approach is that the specs and documentation tend to always be outdated and an aftertought. Here we write the specification and the backend automatically interpret those and accept an API based on it. Any change in the specs is immediately and without further code reflected in the backend's behavious and in the documentation.
 
 The format used for the specification is [Protocol Buffers](https://protobuf.dev/programming-guides/proto3/), it will allow the backend to support [gRPC](https://grpc.io/docs/what-is-grpc/introduction/) and support http via [annotation](https://cloud.google.com/endpoints/docs/grpc/transcoding) and [documentation](https://grpc-ecosystem.github.io/grpc-gateway/docs/mapping/customizing_openapi_output/) similarely.
 
