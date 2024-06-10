@@ -7,12 +7,31 @@ from typing import Union
 class Dataset:
     userid: int = None
     tenantid:int = None
-    name: str = ""
-    data : dict[str, Union[int, str, float, bool]] = None
+    dataset_name: str = ""
     id: int = None
     created_at: str = ""
-    updated_at:str = ""
     deleted_at:str = ""
 
     def to_dict(self):
         return asdict(self)
+
+class Metadata:
+    userid: int = None
+    tenantid:int = None
+    dataset_id:int = None
+    column_id:int = None
+    type_:str = ""
+
+    def to_dict(self):
+        return asdict(self)
+
+class Dataset_content:
+    userid: int = None
+    tenantid:int = None
+    dataset_id:int = None
+    column_id:int = None
+    line_id:int = None
+    val:str = ""
+
+    def to_dict(self):
+            return asdict(self)
