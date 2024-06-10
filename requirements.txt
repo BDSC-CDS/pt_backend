@@ -12,3 +12,4 @@ bcrypt
 pydantic
 python-dateutil
 Flask-Testing
+csv

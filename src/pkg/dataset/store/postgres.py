@@ -4,6 +4,31 @@ from sqlalchemy.orm import sessionmaker
 from sqlalchemy.sql import text
 from contextlib import contextmanager
 from src.pkg.dataset.model.dataset import Dataset
+import csv
+
+
+def infer_column_type(values):
+    is_int = True
+    is_float = True
+
+    for value in values:
+        try:
+            int(value)
+        except ValueError:
+            is_int = False
+
+        try:
+            float(value)
+        except ValueError:
+            is_float = False
+
+    if is_int:
+        return "INTEGER"
+    elif is_float:
+        return "FLOAT"
+    else:
+        return "TEXT"
+
 
 class DatasetStore:
     def __init__(self, db: Engine):
@@ -23,7 +48,66 @@ class DatasetStore:
         finally:
             session.close()
 
-    def store_dataset(self, dataset: Dataset):
+    def store_dataset(self, user_id:int,tenant_id:int, dataset_name:str,path: str,metadata_types=None):
+        # Insert dataset entry and get the generated dataset_id
+        dataset_query = """
+            INSERT INTO datasets
+                (userid, tenantid, dataset_name,created_at)
+            VALUES
+                 (:userid, :tenantid, :dataset_name, NOW())
+            RETURNING id;
+        """
+        dataset_id = 0
+        with self.session_scope() as session:
+            try:
+                result = session.execute(text(dataset_query), {
+                    'userid': user_id,
+                    'tenantid': tenant_id,
+                    'name':dataset_name,
+                }).fetchone()
+                dataset_id = result[0]
+
+            except SQLAlchemyError as e:
+                raise e
+
+
+        # Read the CSV file once to infer column types
+        with open(path, newline='') as csvfile:
+            csv_reader = csv.reader(csvfile)
+            headers = next(csv_reader)  # Read the header row
+            column_data = [[] for _ in headers]
+            for row in csv_reader:
+                for col_index, value in enumerate(row):
+                    column_data[col_index].append(value)
+
+                # Infer types for each column
+            column_types = {}
+            for col_index, header in enumerate(headers):
+                if metadata_types and header in metadata_types:
+                    column_types[header] = metadata_types[header]
+                else:
+                    column_types[header] = infer_column_type(column_data[col_index])
+
+            # Insert metadata
+            metadata_to_insert = []
+            for column_id, header in enumerate(headers):
+                column_type = column_types[header]
+                metadata_to_insert.append((user_id, tenant_id, dataset_id, column_id, column_type))
+            query = """
+                INSERT INTO metadata (user_id, tenant_id, dataset_id, column_id, type)
+                VALUES (%s, %s, %s, %s, %s);
+            """
+            with self.session_scope() as session:
+                try:
+                    session.execute(query,metadata_to_insert) # TODO verifier que ça fonctionne
+                except SQLAlchemyError as e:
+                    raise e
+
+        # insert data content
+
+
+
+####### old ##########################
         dataset_query = """
 INSERT INTO datasets
     (userid, name, data, created_at, updated_at)
