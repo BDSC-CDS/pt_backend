@@ -19,13 +19,13 @@ class DatasetService:
         return dataset
 
     # get dataset (if not deleted)
-    def get_dataset_content(self,name:str, userid:int, tenantid:int, offset:int,limit:int):
-        dataset = self.dataset_store.get_dataset_content(name=name,userid=userid,tenantid=tenantid, offset=offset,limit=limit)
+    def get_dataset_content(self,dataset_id:int, userid:int, tenantid:int, offset:int,limit:int):
+        dataset = self.dataset_store.get_dataset_content(dataset_id=dataset_id,userid=userid,tenantid=tenantid, offset=offset,limit=limit)
         return dataset
 
     # delete dataset (just update deleted_at, don't actually delete it)
-    def delete_dataset(self,name:str,userid:int, tenantid:int):
-        deleted = self.dataset_store.delete_dataset(name=name,userid=userid,tenantid=tenantid)
+    def delete_dataset(self,dataset_id:int,userid:int, tenantid:int):
+        deleted = self.dataset_store.delete_dataset(dataset_id=dataset_id,userid=userid,tenantid=tenantid)
         return deleted
 
     # # TODO how would we modify the metadata

@@ -141,120 +141,151 @@ class DatasetStore:
     def get_list_datasets(self, userid:int, tenantid:int, offset:int,limit:int):
         query = "SELECT * FROM datasets WHERE userid = :userid AND tenantid = :tenantid ORDER BY createdat OFFSET :offset LIMIT :limit;"
         with self.session_scope() as session:
-            datasets = session.execute(text(query), {
-                'userid': userid,
-                'tenantid': tenantid,
-                'offset':offset,
-                'limit':limit
-            }).mappings().fetchall()
+            try:
+                datasets = session.execute(text(query), {
+                    'userid': userid,
+                    'tenantid': tenantid,
+                    'offset':offset,
+                    'limit':limit
+                }).mappings().fetchall()
 
-            result = [
-                Dataset(
-                    userid=dataset.userid,
-                    tenantid=dataset.tenantid,
-                    dataset_name=dataset.dataset_name,
-                    id=dataset.id,
-                    created_at= dataset.created_at,
-                    deleted_at= dataset.deleted_at,
-                ) for dataset in datasets if dataset.deleted_at is None # we only take the datasets that have not been deleted
-            ]
+                result = [
+                    Dataset(
+                        userid=dataset.userid,
+                        tenantid=dataset.tenantid,
+                        dataset_name=dataset.dataset_name,
+                        id=dataset.id,
+                        created_at= dataset.created_at,
+                        deleted_at= dataset.deleted_at,
+                    ) for dataset in datasets if dataset.deleted_at is None # we only take the datasets that have not been deleted
+                ]
 
-            return result
+                return result
+            except SQLAlchemyError as e:
+                                raise e
 
     def get_dataset_metadata(self,dataset_id:int, userid:int, tenantid:int):
         query1 = "SELECT * FROM datasets WHERE id=:id AND userid = :userid AND tenantid = :tenantid;"
         query2 = "SELECT * FROM metadata WHERE dataset_id = :dataset_id AND userid = :userid AND tenantid = :tenantid ORDER BY column_id;"
         with self.session_scope() as session:
-            dataset = session.execute(text(query1), {
-                'id':dataset_id,
-                'userid': userid,
-                'tenantid': tenantid,
-            }).mappings().fetchone()
+            try:
+                dataset = session.execute(text(query1), {
+                    'id':dataset_id,
+                    'userid': userid,
+                    'tenantid': tenantid,
+                }).mappings().fetchone()
 
-            if dataset.deleted_at:
-                return # if the dataset was deleted we don't return anything (TODO)
+                if dataset.deleted_at:
+                    return # if the dataset was deleted we don't return anything (TODO)
 
-            metadatas = session.execute(text(query2), {
-                'dataset_id':dataset_id,
-                'userid': userid,
-                'tenantid': tenantid,
-            }).mappings().fetchall()
+                metadatas = session.execute(text(query2), {
+                    'dataset_id':dataset_id,
+                    'userid': userid,
+                    'tenantid': tenantid,
+                }).mappings().fetchall()
 
-            result = [
-                Metadata(
-                    userid=metadata.userid,
-                    tenantid=metadata.tenantid,
-                    dataset_id=metadata.dataset_id,
-                    column_id= metadata.column_id,
-                    type_= metadata.type_
-                ) for metadata in metadatas ]
+                result = [
+                    Metadata(
+                        userid=metadata.userid,
+                        tenantid=metadata.tenantid,
+                        dataset_id=metadata.dataset_id,
+                        column_id= metadata.column_id,
+                        type_= metadata.type_
+                    ) for metadata in metadatas ]
 
-            return result
+                return result
+            except SQLAlchemyError as e:
+                                    raise e
 
 
 
-    def get_dataset(self, name:str,userid:int, tenantid:int, offset:int, limit:int):
-        # TODO order by line number?
-        query = "SELECT * FROM values WHERE name = :name AND userid = :userid AND tenantid = :tenantid ORDER BY createdat OFFSET :offset LIMIT :limit;"
+    def get_dataset(self, dataset_id:int,userid:int, tenantid:int, offset:int, limit:int): # TODO pagination
+        # we order by column and line number
+        query1 = "SELECT * FROM datasets WHERE id=:id AND userid = :userid AND tenantid = :tenantid;"
+        query2 = "SELECT * FROM dataset_content WHERE dataset_id = :dataset_id AND userid = :userid AND tenantid = :tenantid ORDER BY column_id,line_id OFFSET :offset LIMIT :limit;"
         with self.session_scope() as session:
-            values = session.execute(text(query), {
-                'name': name,
-                'userid': userid,
-                'tenantid': tenantid,
-                'offset':offset,
-                'limit':limit
-            }).mappings().fetchall() # get all values corresponding to dataset name and user id
+            try:
+                dataset = session.execute(text(query1), {
+                                'id':dataset_id,
+                                'userid': userid,
+                                'tenantid': tenantid,
+                            }).mappings().fetchone()
 
-            result = [ Value( # TODO
-                    id=val.id,
-                    userid=val.userid,
-                    name=val.name,
-                    data=val.data,
-                    created_at= val.created_at
-                ) for val in values ]
+                if not dataset or dataset.deleted_at:
+                    return # if the dataset was deleted we don't return anything (TODO)
 
-            return result
+                values = session.execute(text(query2), {
+                    'dataset_id': dataset_id,
+                    'userid': userid,
+                    'tenantid': tenantid,
+                    'offset':offset,
+                    'limit':limit
+                }).mappings().fetchall() # get all values corresponding to dataset name and user id
+
+                result = [ Dataset_content(
+                        userid=val_.userid,
+                        tenantid=val_.tenantid,
+                        dataset_id=val_.dataset_id,
+                        column_id= val_.column_id,
+                        line_id= val_.line_id,
+                        val= val_.val,
+                    ) for val_ in values ]
+
+                return result
+            except SQLAlchemyError as e:
+                                raise e
 
 
-    def update_metadata_dataset(self,name:str,userid:int, tenantid:int,metadata:str):
-        query = """UPDATE metadata
-                SET col1 = :col1
-                WHERE name = :name AND userid = :userid AND tenantid = :tenantid
-                """ #TODO
+    def delete_dataset(self,dataset_id:int,userid:int, tenantid:int):
+        query = """UPDATE datasets
+                SET deleted_at = NOW()
+                WHERE id = :id AND userid = :userid AND tenantid = :tenantid
+                """
         with self.session_scope() as session:
-            session.execute(text(query), {
-                'name': name,
-                'userid': userid,
-                'tenantid': tenantid,
-            }) # TODO mappings ? fetchall? qu'est ce que ça retourne?
+            try:
+                session.execute(text(query), {
+                    'id': dataset_id,
+                    'userid': userid,
+                    'tenantid': tenantid,
+                }) # TODO mappings ? fetchall? qu'est ce que ça retourne?
 
-            return True # TODO
+                return True # TODO
+            except SQLAlchemyError as e:
+                                raise e
 
-    # TODO qu'estce qu'on modifie
-    def update_dataset(self,name:str,userid:int, tenantid:int,dataset:Dataset):
-        query = """UPDATE values
-                SET col1 = :col1
-                WHERE name = :name AND userid = :userid AND tenantid = :tenantid
-                """ #TODO
-        with self.session_scope() as session:
-            session.execute(text(query), {
-                'name': name,
-                'userid': userid,
-                'tenantid': tenantid,
-            }) # TODO mappings ? fetchall? qu'est ce que ça retourne?
 
-            return True # TODO
 
-    def delete_dataset(self,name:str,userid:int, tenantid:int):
-        query = """UPDATE dataset
-                SET deletedat = NOW()
-                WHERE name = :name AND userid = :userid AND tenantid = :tenantid
-                """ #TODO
-        with self.session_scope() as session:
-            session.execute(text(query), {
-                'name': name,
-                'userid': userid,
-                'tenantid': tenantid,
-            }) # TODO mappings ? fetchall? qu'est ce que ça retourne?
 
-            return True # TODO
+
+
+
+
+
+    # def update_metadata_dataset(self,name:str,userid:int, tenantid:int,metadata:str):
+    #     query = """UPDATE metadata
+    #             SET col1 = :col1
+    #             WHERE name = :name AND userid = :userid AND tenantid = :tenantid
+    #             """ #TODO
+    #     with self.session_scope() as session:
+    #         session.execute(text(query), {
+    #             'name': name,
+    #             'userid': userid,
+    #             'tenantid': tenantid,
+    #         }) # TODO mappings ? fetchall? qu'est ce que ça retourne?
+
+    #         return True # TODO
+
+    # # TODO qu'estce qu'on modifie
+    # def update_dataset(self,name:str,userid:int, tenantid:int,dataset:Dataset):
+    #     query = """UPDATE values
+    #             SET col1 = :col1
+    #             WHERE name = :name AND userid = :userid AND tenantid = :tenantid
+    #             """ #TODO
+    #     with self.session_scope() as session:
+    #         session.execute(text(query), {
+    #             'name': name,
+    #             'userid': userid,
+    #             'tenantid': tenantid,
+    #         }) # TODO mappings ? fetchall? qu'est ce que ça retourne?
+
+    #         return True # TODO
