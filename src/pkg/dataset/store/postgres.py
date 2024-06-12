@@ -5,7 +5,7 @@ from sqlalchemy.sql import text
 from contextlib import contextmanager
 from src.pkg.dataset.model.dataset import Dataset,Metadata,Dataset_content
 import csv
-
+import pandas as pd
 
 def infer_column_type(values):
     is_int = True
@@ -70,72 +70,75 @@ class DatasetStore:
             except SQLAlchemyError as e:
                 raise e
 
+        try:
+            # Read the CSV file once to infer column types
+            with open(path, newline='') as csvfile:
+                csv_reader = csv.reader(csvfile)
+                headers = next(csv_reader)  # Read the header row
+                column_data = [[] for _ in headers]
+                for row in csv_reader:
+                    for col_index, value in enumerate(row):
+                        column_data[col_index].append(value)
 
-        # Read the CSV file once to infer column types
-        with open(path, newline='') as csvfile:
-            csv_reader = csv.reader(csvfile)
-            headers = next(csv_reader)  # Read the header row
-            column_data = [[] for _ in headers]
-            for row in csv_reader:
-                for col_index, value in enumerate(row):
-                    column_data[col_index].append(value)
+                # Infer types for each column
+                column_types = {}
+                for col_index, header in enumerate(headers):
+                    if metadata_types and header in metadata_types:
+                        column_types[header] = metadata_types[header]
+                    else:
+                        column_types[header] = infer_column_type(column_data[col_index])
 
-            # Infer types for each column
-            column_types = {}
-            for col_index, header in enumerate(headers):
-                if metadata_types and header in metadata_types:
-                    column_types[header] = metadata_types[header]
-                else:
-                    column_types[header] = infer_column_type(column_data[col_index])
-
-            # Insert metadata
-            metadata_to_insert = []
-            for column_id, header in enumerate(headers):
-                column_type = column_types[header]
-                metadata_to_insert.append((userid, tenantid, dataset_id, column_id, column_type))
-            query = """
-                INSERT INTO metadata (userid, tenantid, dataset_id, column_id, type_)
-                VALUES (%s, %s, %s, %s, %s);
-            """
-            with self.session_scope() as session:
-                try:
-                    session.execute(query,metadata_to_insert) # TODO verifier que ça fonctionne
-                except SQLAlchemyError as e:
-                    raise e
-
-            # insert data content
-            csv_reader = csv.reader(csvfile)
-            next(csv_reader)  # Skip the header row
-            data_to_insert = []
-            for line_number, row in enumerate(csv_reader):
-                for column_id, value in enumerate(row):
-                    data_to_insert.append((userid, tenantid, dataset_id, column_id, line_number, value))
-
-                    # Batch insert every 1000 rows
-                    if len(data_to_insert) >= 1000:
-                        query = """
-                            INSERT INTO dataset_content (userid, tenantid, dataset_id, column_id, line_id, val)
-                            VALUES (%s, %s, %s, %s, %s, %s);
-                        """
-                        with self.session_scope() as session:
-                            try:
-                                session.execute(query,data_to_insert) # TODO verifier que ça fonctionne
-                            except SQLAlchemyError as e:
-                                raise e
-                        data_to_insert = []
-
-            if data_to_insert:
+                # Insert metadata
+                metadata_to_insert = []
+                for column_id, header in enumerate(headers):
+                    column_type = column_types[header]
+                    metadata_to_insert.append((userid, tenantid, dataset_id, column_id, column_type))
                 query = """
-                            INSERT INTO dataset_content (userid, tenantid, dataset_id, column_id, line_id, val)
-                            VALUES (%s, %s, %s, %s, %s, %s);
-                        """
+                    INSERT INTO metadata (userid, tenantid, dataset_id, column_id, type_)
+                    VALUES (%s, %s, %s, %s, %s);
+                """
                 with self.session_scope() as session:
                     try:
-                        session.execute(query,data_to_insert) # TODO verifier que ça fonctionne
+                        session.execute(query,metadata_to_insert) # TODO verifier que ça fonctionne
                     except SQLAlchemyError as e:
                         raise e
 
-            return dataset_id
+                # insert data content
+                csv_reader = csv.reader(csvfile)
+                next(csv_reader)  # Skip the header row
+                data_to_insert = []
+                for line_number, row in enumerate(csv_reader):
+                    for column_id, value in enumerate(row):
+                        data_to_insert.append((userid, tenantid, dataset_id, column_id, line_number, value))
+
+                        # Batch insert every 1000 rows
+                        if len(data_to_insert) >= 1000:
+                            query = """
+                                INSERT INTO dataset_content (userid, tenantid, dataset_id, column_id, line_id, val)
+                                VALUES (%s, %s, %s, %s, %s, %s);
+                            """
+                            with self.session_scope() as session:
+                                try:
+                                    session.execute(query,data_to_insert) # TODO verifier que ça fonctionne
+                                except SQLAlchemyError as e:
+                                    raise e
+                            data_to_insert = []
+
+                if data_to_insert:
+                    query = """
+                                INSERT INTO dataset_content (userid, tenantid, dataset_id, column_id, line_id, val)
+                                VALUES (%s, %s, %s, %s, %s, %s);
+                            """
+                    with self.session_scope() as session:
+                        try:
+                            session.execute(query,data_to_insert) # TODO verifier que ça fonctionne
+                        except SQLAlchemyError as e:
+                            raise e
+
+                return dataset_id
+        except Exception as e:
+                print(f"Error storing dataset: {e}")
+                return None
 
 
     def get_list_datasets(self, userid:int, tenantid:int, offset:int,limit:int):
@@ -161,16 +164,17 @@ class DatasetStore:
                 ]
 
                 return result
-            except SQLAlchemyError as e:
-                                raise e
+            except Exception as e:
+                print(f"Error fetching datasets: {e}")
+                return None
 
-    def get_dataset_metadata(self,dataset_id:int, userid:int, tenantid:int):
-        query1 = "SELECT * FROM datasets WHERE id=:id AND userid = :userid AND tenantid = :tenantid;"
+    def get_dataset_metadata(self,name:str, userid:int, tenantid:int):
+        query1 = "SELECT * FROM datasets WHERE dataset_name=:name AND userid = :userid AND tenantid = :tenantid;"
         query2 = "SELECT * FROM metadata WHERE dataset_id = :dataset_id AND userid = :userid AND tenantid = :tenantid ORDER BY column_id;"
         with self.session_scope() as session:
             try:
                 dataset = session.execute(text(query1), {
-                    'id':dataset_id,
+                    'name':name,
                     'userid': userid,
                     'tenantid': tenantid,
                 }).mappings().fetchone()
@@ -178,6 +182,7 @@ class DatasetStore:
                 if dataset.deleted_at:
                     return # if the dataset was deleted we don't return anything (TODO)
 
+                dataset_id = dataset.id
                 metadatas = session.execute(text(query2), {
                     'dataset_id':dataset_id,
                     'userid': userid,
@@ -194,27 +199,30 @@ class DatasetStore:
                     ) for metadata in metadatas ]
 
                 return result
-            except SQLAlchemyError as e:
-                                    raise e
+            except Exception as e:
+                print(f"Error fetching metadata: {e}")
+                return None
 
 
 
-    def get_dataset(self, dataset_id:int,userid:int, tenantid:int, offset:int, limit:int): # TODO pagination
+    def get_dataset_content(self,name:str, userid:int, tenantid:int, offset:int,limit:int): # TODO pagination
         # we order by column and line number
-        query1 = "SELECT * FROM datasets WHERE id=:id AND userid = :userid AND tenantid = :tenantid;"
+        query1 = "SELECT * FROM datasets WHERE dataset_name=:name AND userid = :userid AND tenantid = :tenantid;"
         query2 = "SELECT * FROM dataset_content WHERE dataset_id = :dataset_id AND userid = :userid AND tenantid = :tenantid ORDER BY column_id,line_id OFFSET :offset LIMIT :limit;"
         with self.session_scope() as session:
             try:
                 dataset = session.execute(text(query1), {
-                                'id':dataset_id,
+                                'name':name,
                                 'userid': userid,
                                 'tenantid': tenantid,
                             }).mappings().fetchone()
 
                 if not dataset or dataset.deleted_at:
-                    return # if the dataset was deleted we don't return anything (TODO)
+                    print("Error: Dataset not found (might have been deleted).")
+                    return None # if the dataset was deleted we don't return anything (TODO)
 
-                values = session.execute(text(query2), {
+                dataset_id = dataset.id
+                rows = session.execute(text(query2), {
                     'dataset_id': dataset_id,
                     'userid': userid,
                     'tenantid': tenantid,
@@ -222,36 +230,72 @@ class DatasetStore:
                     'limit':limit
                 }).mappings().fetchall() # get all values corresponding to dataset name and user id
 
-                result = [ Dataset_content(
-                        userid=val_.userid,
-                        tenantid=val_.tenantid,
-                        dataset_id=val_.dataset_id,
-                        column_id= val_.column_id,
-                        line_id= val_.line_id,
-                        val= val_.val,
-                    ) for val_ in values ]
+                if not rows:
+                    print("Error: No data found in the dataset.")
+                    return None
 
-                return result
-            except SQLAlchemyError as e:
-                                raise e
+                # Fetch the column names
+                metadata_query = """
+                    SELECT column_id, type_ FROM metadata WHERE dataset_id = :id AND userid = :userid AND tenantid = :tenantid ORDER BY column_id;
+                """
+                metadata = session.execute(text(metadata_query), {
+                                                'dataset_id':dataset_id,
+                                                'userid': userid,
+                                                'tenantid': tenantid,
+                                            }).mappings().fetchall()
+                if not metadata:
+                        print("Error: No metadata found for the dataset.")
+                        return None
+                # Create a dictionary to map column_id to column name
+                column_names = {col_id: f"Column_{col_id}" for col_id, _ in metadata}
+
+                # Create a dictionary to hold the data by columns
+                data_dict = {column_names[col_id]: [] for col_id, _ in metadata}
+
+                # Populate the data dictionary with values
+                max_line = max(row[1] for row in rows)
+                for col_id in column_names.keys():
+                    data_dict[column_names[col_id]] = [''] * (max_line + 1)
+
+                for col_id, line, value in rows:
+                    data_dict[column_names[col_id]][line] = value
+                # Create the DataFrame
+                df = pd.DataFrame(data_dict)
+
+                # result = [ Dataset_content(
+                #         userid=val_.userid,
+                #         tenantid=val_.tenantid,
+                #         dataset_id=val_.dataset_id,
+                #         column_id= val_.column_id,
+                #         line_id= val_.line_id,
+                #         val= val_.val,
+                #     ) for val_ in rows ]
+
+                return df
+
+            except Exception as e:
+                print(f"Error fetching dataset: {e}")
+                return None
 
 
-    def delete_dataset(self,dataset_id:int,userid:int, tenantid:int):
+
+    def delete_dataset(self,name:str,userid:int, tenantid:int):
         query = """UPDATE datasets
                 SET deleted_at = NOW()
-                WHERE id = :id AND userid = :userid AND tenantid = :tenantid
+                WHERE dataset_name = :name AND userid = :userid AND tenantid = :tenantid
                 """
         with self.session_scope() as session:
             try:
                 session.execute(text(query), {
-                    'id': dataset_id,
+                    'name': name,
                     'userid': userid,
                     'tenantid': tenantid,
                 }) # TODO mappings ? fetchall? qu'est ce que ça retourne?
 
                 return True # TODO
-            except SQLAlchemyError as e:
-                                raise e
+            except Exception as e:
+                print(f"Error deleting dataset: {e}")
+                return None
 
 
 

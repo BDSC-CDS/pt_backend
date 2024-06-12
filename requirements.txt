@@ -13,3 +13,4 @@ pydantic
 python-dateutil
 Flask-Testing
 csv
+pandas
