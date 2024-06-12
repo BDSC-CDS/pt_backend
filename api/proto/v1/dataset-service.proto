@@ -47,43 +47,71 @@ option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
 
 
 // Create a Dataset
-message CreateDatasetRequest {
-    Dataset dataset = 1;
+message StoreDatasetRequest {
+    int32 userid = 1;
+    int32 tenantid = 2;
+    string dataset_name = 3;
+    string path = 4;
 }
-message CreateDatasetReply {
-    CreateDatasetResult result = 1;
+
+message StoreDatasetReply {
+    StoreDatasetResult result = 1;
 }
-message CreateDatasetResult {
+message StoreDatasetResult {
     uint32 id = 1;
 }
 
-// Get dataset
-message GetDatasetRequest {
-    uint32 id = 1;
-    uint32 offset = 2;
-    uint32 limit = 3;
-}
-message GetDatasetReply {
-    GetDatasetResult result = 1;
-}
-message GetDatasetResult {
-    Dataset Dataset = 1;
+message ListDatasetsRequest {
+    int32 userid = 1;
+    int32 tenantid = 2;
+    int32 offset = 3;
+    int32 limit = 4;
 }
 
-message ListDatasetRequest {
-    uint32 offset = 1;
-    uint32 limit = 2;
+message ListDatasetsReply {
+    ListDatasetsResult result = 1;
 }
-message ListDatasetReply {
-    ListDatasetResult result = 1;
-}
-message ListDatasetResult {
+
+message ListDatasetsResult {
     repeated Dataset Datasets = 1;
 }
 
-message DeleteDatasetRequest {
-    string id = 1;
+message GetDatasetMetadataRequest {
+    uint32 id = 1;
+    string name = 2;
+    int32 userid = 3;
+    int32 tenantid = 4;
 }
+
+message GetDatasetMetadataReply {
+    Metadata metadata = 1;
+}
+
+// Get dataset
+message GetDatasetContentRequest {
+    uint32 id = 1;
+    string name = 2;
+    int32 userid = 3;
+    int32 tenantid = 4;
+    int32 offset = 5;
+    int32 limit = 6;
+}
+message GetDatasetContentReply {
+    GetDatasetContentResult result = 1;
+}
+
+message GetDatasetContentResult {
+    bytes dataframe = 1;
+}
+
+
+message DeleteDatasetRequest {
+    uint32 id = 1;
+    string name = 2;
+    int32 userid = 3;
+    int32 tenantid = 4;
+}
+
 message DeleteDatasetReply {
     DeleteDatasetResult result = 1;
 }
@@ -93,14 +121,14 @@ message DeleteDatasetResult {
 
 service DatasetService {
     // Create a dataset
-    rpc CreateDataset(CreateDatasetRequest) returns (CreateDatasetReply) {
+    rpc StoreDataset(StoreDatasetRequest) returns (StoreDatasetReply) {
         option (google.api.http) = {
             post: "/api/v1/dataset"
             body: "*"
         };
         option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-            summary: "Create a dataset";
-            description: "This endpoint creates a dataset";
+            summary: "Store a dataset";
+            description: "This endpoint stores a dataset";
             tags: "Dataset";
             extensions: {
                 key: "x-openapi-router-controller";
@@ -108,25 +136,8 @@ service DatasetService {
             };
         };
     };
-
-    // Get a dataset
-    rpc GetDataset(GetDatasetRequest) returns (GetDatasetReply) {
-        option (google.api.http) = {
-            get: "/api/v1/dataset/{id}"
-        };
-        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-            summary: "Get Datasets";
-            description: "This endpoint allow getting a specific user's Dataset";
-            tags: "Dataset";
-            extensions: {
-                key: "x-openapi-router-controller";
-                value {string_value: "dataset_controller"};
-            };
-        };
-    };
-
     // Retrieve all datasets for a user
-    rpc ListDataset(ListDatasetRequest) returns (ListDatasetReply) {
+    rpc ListDatasets(ListDatasetsRequest) returns (ListDatasetsReply) {
         option (google.api.http) = {
             get: "/api/v1/dataset"
         };
@@ -140,6 +151,38 @@ service DatasetService {
             };
         };
     };
+    // Get a dataset's metadata
+    rpc GetDatasetMetadata(GetDatasetMetadataRequest) returns (GetDatasetMetadataReply) {
+        option (google.api.http) = {
+            get: "/api/v1/dataset/metadata/{id}"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            summary: "Get Dataset Metadata";
+            description: "This endpoint allow getting a specific user's Dataset Metadata";
+            tags: "Dataset";
+            extensions: {
+                key: "x-openapi-router-controller";
+                value {string_value: "dataset_controller"};
+            };
+        };
+    };
+
+    // Get a dataset's content
+    rpc GetDatasetContent(GetDatasetContentRequest) returns (GetDatasetContentReply) {
+        option (google.api.http) = {
+            get: "/api/v1/dataset/content/{id}"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            summary: "Get Dataset Content";
+            description: "This endpoint allow getting a specific user's Dataset Content";
+            tags: "Dataset";
+            extensions: {
+                key: "x-openapi-router-controller";
+                value {string_value: "dataset_controller"};
+            };
+        };
+    };
+
 
     // Delete a dataset entry
     rpc DeleteDataset(DeleteDatasetRequest) returns (DeleteDatasetReply) {

@@ -2,6 +2,7 @@
 
 # import apis into api package
 from openapi_client.api.authentication_api import AuthenticationApi
+from openapi_client.api.dataset_api import DatasetApi
 from openapi_client.api.index_api import IndexApi
 from openapi_client.api.users_api import UsersApi
 

@@ -8,6 +8,7 @@ info:
     email: development.bdsc@chuv.ch
 tags:
   - name: AuthenticationService
+  - name: DatasetService
   - name: IndexService
   - name: UserService
 schemes:
@@ -176,6 +177,187 @@ paths:
       tags:
         - Users
       x-openapi-router-controller: user_controller
+  /api/v1/dataset:
+    get:
+      summary: List datasets
+      description: This endpoint allows listing a user's datasets
+      operationId: DatasetService_ListDatasets
+      responses:
+        "200":
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/templatebackendListDatasetsReply'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/rpcStatus'
+      parameters:
+        - name: userid
+          in: query
+          required: false
+          type: integer
+          format: int32
+        - name: tenantid
+          in: query
+          required: false
+          type: integer
+          format: int32
+        - name: offset
+          in: query
+          required: false
+          type: integer
+          format: int32
+        - name: limit
+          in: query
+          required: false
+          type: integer
+          format: int32
+      tags:
+        - Dataset
+      x-openapi-router-controller: dataset_controller
+    post:
+      summary: Store a dataset
+      description: This endpoint stores a dataset
+      operationId: DatasetService_StoreDataset
+      responses:
+        "200":
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/templatebackendStoreDatasetReply'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/rpcStatus'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/templatebackendStoreDatasetRequest'
+      tags:
+        - Dataset
+      x-openapi-router-controller: dataset_controller
+  /api/v1/dataset/content/{id}:
+    get:
+      summary: Get Dataset Content
+      description: This endpoint allow getting a specific user's Dataset Content
+      operationId: DatasetService_GetDatasetContent
+      responses:
+        "200":
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/templatebackendGetDatasetContentReply'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/rpcStatus'
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: integer
+          format: int64
+        - name: name
+          in: query
+          required: false
+          type: string
+        - name: userid
+          in: query
+          required: false
+          type: integer
+          format: int32
+        - name: tenantid
+          in: query
+          required: false
+          type: integer
+          format: int32
+        - name: offset
+          in: query
+          required: false
+          type: integer
+          format: int32
+        - name: limit
+          in: query
+          required: false
+          type: integer
+          format: int32
+      tags:
+        - Dataset
+      x-openapi-router-controller: dataset_controller
+  /api/v1/dataset/metadata/{id}:
+    get:
+      summary: Get Dataset Metadata
+      description: This endpoint allow getting a specific user's Dataset Metadata
+      operationId: DatasetService_GetDatasetMetadata
+      responses:
+        "200":
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/templatebackendGetDatasetMetadataReply'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/rpcStatus'
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: integer
+          format: int64
+        - name: name
+          in: query
+          required: false
+          type: string
+        - name: userid
+          in: query
+          required: false
+          type: integer
+          format: int32
+        - name: tenantid
+          in: query
+          required: false
+          type: integer
+          format: int32
+      tags:
+        - Dataset
+      x-openapi-router-controller: dataset_controller
+  /api/v1/dataset/{id}:
+    delete:
+      summary: Deletes a dataset
+      description: This endpoint deletes a dataset
+      operationId: DatasetService_DeleteDataset
+      responses:
+        "200":
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/templatebackendDeleteDatasetReply'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/rpcStatus'
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: integer
+          format: int64
+        - name: name
+          in: query
+          required: false
+          type: string
+        - name: userid
+          in: query
+          required: false
+          type: integer
+          format: int32
+        - name: tenantid
+          in: query
+          required: false
+          type: integer
+          format: int32
+      tags:
+        - Dataset
+      x-openapi-router-controller: dataset_controller
   /api/v1/hello:
     get:
       summary: Get a hello
@@ -287,6 +469,36 @@ definitions:
         type: string
       totp:
         type: string
+  templatebackendDataset:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+      userid:
+        type: integer
+        format: int64
+      tenantid:
+        type: integer
+        format: int64
+      datasetName:
+        type: string
+      createdAt:
+        type: string
+        format: date-time
+      deletedAt:
+        type: string
+        format: date-time
+  templatebackendDeleteDatasetReply:
+    type: object
+    properties:
+      result:
+        $ref: '#/definitions/templatebackendDeleteDatasetResult'
+  templatebackendDeleteDatasetResult:
+    type: object
+    properties:
+      success:
+        type: boolean
   templatebackendDeleteUserReply:
     type: object
     properties:
@@ -294,6 +506,22 @@ definitions:
         $ref: '#/definitions/templatebackendDeleteUserResult'
   templatebackendDeleteUserResult:
     type: object
+  templatebackendGetDatasetContentReply:
+    type: object
+    properties:
+      result:
+        $ref: '#/definitions/templatebackendGetDatasetContentResult'
+  templatebackendGetDatasetContentResult:
+    type: object
+    properties:
+      dataframe:
+        type: string
+        format: byte
+  templatebackendGetDatasetMetadataReply:
+    type: object
+    properties:
+      metadata:
+        $ref: '#/definitions/templatebackendMetadata'
   templatebackendGetHelloReply:
     type: object
     properties:
@@ -320,6 +548,36 @@ definitions:
     properties:
       user:
         $ref: '#/definitions/templatebackendUser'
+  templatebackendListDatasetsReply:
+    type: object
+    properties:
+      result:
+        $ref: '#/definitions/templatebackendListDatasetsResult'
+  templatebackendListDatasetsResult:
+    type: object
+    properties:
+      Datasets:
+        type: array
+        items:
+          type: object
+          $ref: '#/definitions/templatebackendDataset'
+  templatebackendMetadata:
+    type: object
+    properties:
+      userid:
+        type: integer
+        format: int64
+      tenantid:
+        type: integer
+        format: int64
+      datasetId:
+        type: integer
+        format: int64
+      columnId:
+        type: integer
+        format: int64
+      type:
+        type: string
   templatebackendResetPasswordReply:
     type: object
     properties:
@@ -327,6 +585,31 @@ definitions:
         $ref: '#/definitions/templatebackendResetPasswordResult'
   templatebackendResetPasswordResult:
     type: object
+  templatebackendStoreDatasetReply:
+    type: object
+    properties:
+      result:
+        $ref: '#/definitions/templatebackendStoreDatasetResult'
+  templatebackendStoreDatasetRequest:
+    type: object
+    properties:
+      userid:
+        type: integer
+        format: int32
+      tenantid:
+        type: integer
+        format: int32
+      datasetName:
+        type: string
+      path:
+        type: string
+    title: Create a Dataset
+  templatebackendStoreDatasetResult:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
   templatebackendUpdatePasswordReply:
     type: object
     properties:
