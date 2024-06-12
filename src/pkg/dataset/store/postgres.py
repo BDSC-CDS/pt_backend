@@ -48,7 +48,7 @@ class DatasetStore:
         finally:
             session.close()
 
-    def store_dataset(self, user_id:int,tenant_id:int, dataset_name:str,path: str,metadata_types=None):
+    def store_dataset(self, userid:int,tenantid:int, dataset_name:str,path: str,metadata_types=None):
         # Insert dataset entry and get the generated dataset_id
         dataset_query = """
             INSERT INTO datasets
@@ -61,8 +61,8 @@ class DatasetStore:
         with self.session_scope() as session:
             try:
                 result = session.execute(text(dataset_query), {
-                    'userid': user_id,
-                    'tenantid': tenant_id,
+                    'userid': userid,
+                    'tenantid': tenantid,
                     'name':dataset_name,
                 }).fetchone()
                 dataset_id = result[0]
@@ -80,7 +80,7 @@ class DatasetStore:
                 for col_index, value in enumerate(row):
                     column_data[col_index].append(value)
 
-                # Infer types for each column
+            # Infer types for each column
             column_types = {}
             for col_index, header in enumerate(headers):
                 if metadata_types and header in metadata_types:
@@ -92,9 +92,9 @@ class DatasetStore:
             metadata_to_insert = []
             for column_id, header in enumerate(headers):
                 column_type = column_types[header]
-                metadata_to_insert.append((user_id, tenant_id, dataset_id, column_id, column_type))
+                metadata_to_insert.append((userid, tenantid, dataset_id, column_id, column_type))
             query = """
-                INSERT INTO metadata (user_id, tenant_id, dataset_id, column_id, type)
+                INSERT INTO metadata (userid, tenantid, dataset_id, column_id, type_)
                 VALUES (%s, %s, %s, %s, %s);
             """
             with self.session_scope() as session:
@@ -103,31 +103,40 @@ class DatasetStore:
                 except SQLAlchemyError as e:
                     raise e
 
-        # insert data content
+            # insert data content
+            csv_reader = csv.reader(csvfile)
+            next(csv_reader)  # Skip the header row
+            data_to_insert = []
+            for line_number, row in enumerate(csv_reader):
+                for column_id, value in enumerate(row):
+                    data_to_insert.append((userid, tenantid, dataset_id, column_id, line_number, value))
 
+                    # Batch insert every 1000 rows
+                    if len(data_to_insert) >= 1000:
+                        query = """
+                            INSERT INTO dataset_content (userid, tenantid, dataset_id, column_id, line_id, val)
+                            VALUES (%s, %s, %s, %s, %s, %s);
+                        """
+                        with self.session_scope() as session:
+                            try:
+                                session.execute(query,data_to_insert) # TODO verifier que ça fonctionne
+                            except SQLAlchemyError as e:
+                                raise e
+                        data_to_insert = []
 
+            if data_to_insert:
+                query = """
+                            INSERT INTO dataset_content (userid, tenantid, dataset_id, column_id, line_id, val)
+                            VALUES (%s, %s, %s, %s, %s, %s);
+                        """
+                with self.session_scope() as session:
+                    try:
+                        session.execute(query,data_to_insert) # TODO verifier que ça fonctionne
+                    except SQLAlchemyError as e:
+                        raise e
 
-####### old ##########################
-        dataset_query = """
-INSERT INTO datasets
-    (userid, name, data, created_at, updated_at)
-VALUES
-    (:userid, :name, :data, NOW(), NOW())
-RETURNING id;
-"""
-        with self.session_scope() as session:
-            try:
-                result = session.execute(text(dataset_query), {
-                    'userid': dataset.userid,
-                    'name':dataset.name,
-                    'data': dataset.data,
-                }).fetchone()
-                dataset_id = result[0]
+            return dataset_id
 
-            except SQLAlchemyError as e:
-                raise e
-
-            return Dataset(id=dataset_id)
 
     def get_list_datasets(self, identifier:int, tenantid:int, offset:int,limit:int):
         query = "SELECT * FROM datasets WHERE userid = :userid AND tenantid = :tenantid ORDER BY createdat OFFSET :offset LIMIT :limit;"
