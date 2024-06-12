@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**metadata** | [**TemplatebackendMetadata**](TemplatebackendMetadata.md) |  | [optional] 
+**metadata** | [**TemplatebackendGetDatasetMetadataResult**](TemplatebackendGetDatasetMetadataResult.md) |  | [optional] 
 
 ## Example
 

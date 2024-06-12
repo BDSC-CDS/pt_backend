@@ -36,7 +36,7 @@ class DatasetController:
         self.controller=controller
 
 
-    def dataset_service_delete_dataset(self, user, id: int, name: str=None, userid: int=None, tenantid: int=None):
+    def dataset_service_delete_dataset(self, user, id: int, name: str=None):
         """Deletes a dataset
 
         This endpoint deletes a dataset
@@ -45,18 +45,14 @@ class DatasetController:
         :type id: int
         :param name: 
         :type name: str
-        :param userid: 
-        :type userid: int
-        :param tenantid: 
-        :type tenantid: int
 
         :rtype: Union[TemplatebackendDeleteDatasetReply, Tuple[TemplatebackendDeleteDatasetReply, int], Tuple[TemplatebackendDeleteDatasetReply, int, Dict[str, str]]
         """
 
-        return self.controller.dataset_service_delete_dataset(user, id, name, userid, tenantid)
+        return self.controller.dataset_service_delete_dataset(user, id, name)
 
 
-    def dataset_service_get_dataset_content(self, user, id: int, name: str=None, userid: int=None, tenantid: int=None, offset: int=None, limit: int=None):
+    def dataset_service_get_dataset_content(self, user, id: int, name: str=None, offset: int=None, limit: int=None):
         """Get Dataset Content
 
         This endpoint allow getting a specific user&#39;s Dataset Content
@@ -65,10 +61,6 @@ class DatasetController:
         :type id: int
         :param name: 
         :type name: str
-        :param userid: 
-        :type userid: int
-        :param tenantid: 
-        :type tenantid: int
         :param offset: 
         :type offset: int
         :param limit: 
@@ -77,10 +69,10 @@ class DatasetController:
         :rtype: Union[TemplatebackendGetDatasetContentReply, Tuple[TemplatebackendGetDatasetContentReply, int], Tuple[TemplatebackendGetDatasetContentReply, int, Dict[str, str]]
         """
 
-        return self.controller.dataset_service_get_dataset_content(user, id, name, userid, tenantid, offset, limit)
+        return self.controller.dataset_service_get_dataset_content(user, id, name, offset, limit)
 
 
-    def dataset_service_get_dataset_metadata(self, user, id: int, name: str=None, userid: int=None, tenantid: int=None):
+    def dataset_service_get_dataset_metadata(self, user, id: int, name: str=None):
         """Get Dataset Metadata
 
         This endpoint allow getting a specific user&#39;s Dataset Metadata
@@ -89,26 +81,18 @@ class DatasetController:
         :type id: int
         :param name: 
         :type name: str
-        :param userid: 
-        :type userid: int
-        :param tenantid: 
-        :type tenantid: int
 
         :rtype: Union[TemplatebackendGetDatasetMetadataReply, Tuple[TemplatebackendGetDatasetMetadataReply, int], Tuple[TemplatebackendGetDatasetMetadataReply, int, Dict[str, str]]
         """
 
-        return self.controller.dataset_service_get_dataset_metadata(user, id, name, userid, tenantid)
+        return self.controller.dataset_service_get_dataset_metadata(user, id, name)
 
 
-    def dataset_service_list_datasets(self, user, userid: int=None, tenantid: int=None, offset: int=None, limit: int=None):
+    def dataset_service_list_datasets(self, user, offset: int=None, limit: int=None):
         """List datasets
 
         This endpoint allows listing a user&#39;s datasets
 
-        :param userid: 
-        :type userid: int
-        :param tenantid: 
-        :type tenantid: int
         :param offset: 
         :type offset: int
         :param limit: 
@@ -117,7 +101,7 @@ class DatasetController:
         :rtype: Union[TemplatebackendListDatasetsReply, Tuple[TemplatebackendListDatasetsReply, int], Tuple[TemplatebackendListDatasetsReply, int, Dict[str, str]]
         """
 
-        return self.controller.dataset_service_list_datasets(user, userid, tenantid, offset, limit)
+        return self.controller.dataset_service_list_datasets(user, offset, limit)
 
 
     def dataset_service_store_dataset(self, user, body: TemplatebackendStoreDatasetRequest):

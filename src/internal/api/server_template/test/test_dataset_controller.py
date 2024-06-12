@@ -22,9 +22,7 @@ class TestDatasetController(BaseTestCase):
 
         Deletes a dataset
         """
-        query_string = [('name', 'name_example'),
-                        ('userid', 56),
-                        ('tenantid', 56)]
+        query_string = [('name', 'name_example')]
         headers = { 
             'Accept': 'application/json',
             'Bearer': 'special-key',
@@ -43,8 +41,6 @@ class TestDatasetController(BaseTestCase):
         Get Dataset Content
         """
         query_string = [('name', 'name_example'),
-                        ('userid', 56),
-                        ('tenantid', 56),
                         ('offset', 56),
                         ('limit', 56)]
         headers = { 
@@ -64,9 +60,7 @@ class TestDatasetController(BaseTestCase):
 
         Get Dataset Metadata
         """
-        query_string = [('name', 'name_example'),
-                        ('userid', 56),
-                        ('tenantid', 56)]
+        query_string = [('name', 'name_example')]
         headers = { 
             'Accept': 'application/json',
             'Bearer': 'special-key',
@@ -84,9 +78,7 @@ class TestDatasetController(BaseTestCase):
 
         List datasets
         """
-        query_string = [('userid', 56),
-                        ('tenantid', 56),
-                        ('offset', 56),
+        query_string = [('offset', 56),
                         ('limit', 56)]
         headers = { 
             'Accept': 'application/json',

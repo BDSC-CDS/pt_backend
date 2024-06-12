@@ -192,16 +192,6 @@ paths:
           schema:
             $ref: '#/definitions/rpcStatus'
       parameters:
-        - name: userid
-          in: query
-          required: false
-          type: integer
-          format: int32
-        - name: tenantid
-          in: query
-          required: false
-          type: integer
-          format: int32
         - name: offset
           in: query
           required: false
@@ -261,16 +251,6 @@ paths:
           in: query
           required: false
           type: string
-        - name: userid
-          in: query
-          required: false
-          type: integer
-          format: int32
-        - name: tenantid
-          in: query
-          required: false
-          type: integer
-          format: int32
         - name: offset
           in: query
           required: false
@@ -308,16 +288,6 @@ paths:
           in: query
           required: false
           type: string
-        - name: userid
-          in: query
-          required: false
-          type: integer
-          format: int32
-        - name: tenantid
-          in: query
-          required: false
-          type: integer
-          format: int32
       tags:
         - Dataset
       x-openapi-router-controller: dataset_controller
@@ -345,16 +315,6 @@ paths:
           in: query
           required: false
           type: string
-        - name: userid
-          in: query
-          required: false
-          type: integer
-          format: int32
-        - name: tenantid
-          in: query
-          required: false
-          type: integer
-          format: int32
       tags:
         - Dataset
       x-openapi-router-controller: dataset_controller
@@ -521,6 +481,11 @@ definitions:
     type: object
     properties:
       metadata:
+        $ref: '#/definitions/templatebackendGetDatasetMetadataResult'
+  templatebackendGetDatasetMetadataResult:
+    type: object
+    properties:
+      metadata:
         $ref: '#/definitions/templatebackendMetadata'
   templatebackendGetHelloReply:
     type: object
@@ -593,12 +558,6 @@ definitions:
   templatebackendStoreDatasetRequest:
     type: object
     properties:
-      userid:
-        type: integer
-        format: int32
-      tenantid:
-        type: integer
-        format: int32
       datasetName:
         type: string
       path:

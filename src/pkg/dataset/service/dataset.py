@@ -27,13 +27,3 @@ class DatasetService:
     def delete_dataset(self,name:str,userid:int, tenantid:int):
         deleted = self.dataset_store.delete_dataset(name=name,userid=userid,tenantid=tenantid)
         return deleted
-
-    # # TODO how would we modify the metadata
-    # def update_metadata_dataset(self,name:str,userid:int, tenantid:int,metadata:str):
-    #     updated = self.dataset_store.update_metadata_dataset(name=name, userid=userid, tenantid=tenantid,metadata=metadata)
-    #     return updated
-
-    # # TODO just replace dataset?
-    # def update_dataset(self,name:str,userid:int, tenantid:int,dataset: Dataset):
-    #     updated = self.dataset_store.update_dataset(name=name, userid=userid, tenantid=tenantid,dataset=dataset)
-    #     return updated

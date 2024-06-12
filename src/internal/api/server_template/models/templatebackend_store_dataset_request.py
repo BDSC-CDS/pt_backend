@@ -14,34 +14,24 @@ class TemplatebackendStoreDatasetRequest(Model):
     Do not edit the class manually.
     """
 
-    def __init__(self, userid=None, tenantid=None, dataset_name=None, path=None):
+    def __init__(self, dataset_name=None, path=None):
         """TemplatebackendStoreDatasetRequest - a model defined in OpenAPI
 
-        :param userid: The userid of this TemplatebackendStoreDatasetRequest.
-        :type userid: int
-        :param tenantid: The tenantid of this TemplatebackendStoreDatasetRequest.
-        :type tenantid: int
         :param dataset_name: The dataset_name of this TemplatebackendStoreDatasetRequest.
         :type dataset_name: str
         :param path: The path of this TemplatebackendStoreDatasetRequest.
         :type path: str
         """
         self.openapi_types = {
-            'userid': int,
-            'tenantid': int,
             'dataset_name': str,
             'path': str
         }
 
         self.attribute_map = {
-            'userid': 'userid',
-            'tenantid': 'tenantid',
             'dataset_name': 'datasetName',
             'path': 'path'
         }
 
-        self._userid = userid
-        self._tenantid = tenantid
         self._dataset_name = dataset_name
         self._path = path
 
@@ -55,48 +45,6 @@ class TemplatebackendStoreDatasetRequest(Model):
         :rtype: TemplatebackendStoreDatasetRequest
         """
         return util.deserialize_model(dikt, cls)
-
-    @property
-    def userid(self) -> int:
-        """Gets the userid of this TemplatebackendStoreDatasetRequest.
-
-
-        :return: The userid of this TemplatebackendStoreDatasetRequest.
-        :rtype: int
-        """
-        return self._userid
-
-    @userid.setter
-    def userid(self, userid: int):
-        """Sets the userid of this TemplatebackendStoreDatasetRequest.
-
-
-        :param userid: The userid of this TemplatebackendStoreDatasetRequest.
-        :type userid: int
-        """
-
-        self._userid = userid
-
-    @property
-    def tenantid(self) -> int:
-        """Gets the tenantid of this TemplatebackendStoreDatasetRequest.
-
-
-        :return: The tenantid of this TemplatebackendStoreDatasetRequest.
-        :rtype: int
-        """
-        return self._tenantid
-
-    @tenantid.setter
-    def tenantid(self, tenantid: int):
-        """Sets the tenantid of this TemplatebackendStoreDatasetRequest.
-
-
-        :param tenantid: The tenantid of this TemplatebackendStoreDatasetRequest.
-        :type tenantid: int
-        """
-
-        self._tenantid = tenantid
 
     @property
     def dataset_name(self) -> str:

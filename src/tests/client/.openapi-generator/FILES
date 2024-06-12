@@ -22,6 +22,7 @@ docs/TemplatebackendDeleteUserReply.md
 docs/TemplatebackendGetDatasetContentReply.md
 docs/TemplatebackendGetDatasetContentResult.md
 docs/TemplatebackendGetDatasetMetadataReply.md
+docs/TemplatebackendGetDatasetMetadataResult.md
 docs/TemplatebackendGetHelloReply.md
 docs/TemplatebackendGetUserMeReply.md
 docs/TemplatebackendGetUserMeResult.md
@@ -66,6 +67,7 @@ openapi_client/models/templatebackend_delete_user_reply.py
 openapi_client/models/templatebackend_get_dataset_content_reply.py
 openapi_client/models/templatebackend_get_dataset_content_result.py
 openapi_client/models/templatebackend_get_dataset_metadata_reply.py
+openapi_client/models/templatebackend_get_dataset_metadata_result.py
 openapi_client/models/templatebackend_get_hello_reply.py
 openapi_client/models/templatebackend_get_user_me_reply.py
 openapi_client/models/templatebackend_get_user_me_result.py
@@ -89,17 +91,4 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
-test/test_dataset_api.py
-test/test_templatebackend_dataset.py
-test/test_templatebackend_delete_dataset_reply.py
-test/test_templatebackend_delete_dataset_result.py
-test/test_templatebackend_get_dataset_content_reply.py
-test/test_templatebackend_get_dataset_content_result.py
-test/test_templatebackend_get_dataset_metadata_reply.py
-test/test_templatebackend_list_datasets_reply.py
-test/test_templatebackend_list_datasets_result.py
-test/test_templatebackend_metadata.py
-test/test_templatebackend_store_dataset_reply.py
-test/test_templatebackend_store_dataset_request.py
-test/test_templatebackend_store_dataset_result.py
 tox.ini

@@ -12,7 +12,7 @@ Method | HTTP request | Description
 
 
 # **dataset_service_delete_dataset**
-> TemplatebackendDeleteDatasetReply dataset_service_delete_dataset(id, name=name, userid=userid, tenantid=tenantid)
+> TemplatebackendDeleteDatasetReply dataset_service_delete_dataset(id, name=name)
 
 Deletes a dataset
 
@@ -53,12 +53,10 @@ with openapi_client.ApiClient(configuration) as api_client:
     api_instance = openapi_client.DatasetApi(api_client)
     id = 56 # int | 
     name = 'name_example' # str |  (optional)
-    userid = 56 # int |  (optional)
-    tenantid = 56 # int |  (optional)
 
     try:
         # Deletes a dataset
-        api_response = api_instance.dataset_service_delete_dataset(id, name=name, userid=userid, tenantid=tenantid)
+        api_response = api_instance.dataset_service_delete_dataset(id, name=name)
         print("The response of DatasetApi->dataset_service_delete_dataset:\n")
         pprint(api_response)
     except Exception as e:
@@ -74,8 +72,6 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id** | **int**|  | 
  **name** | **str**|  | [optional] 
- **userid** | **int**|  | [optional] 
- **tenantid** | **int**|  | [optional] 
 
 ### Return type
 
@@ -100,7 +96,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **dataset_service_get_dataset_content**
-> TemplatebackendGetDatasetContentReply dataset_service_get_dataset_content(id, name=name, userid=userid, tenantid=tenantid, offset=offset, limit=limit)
+> TemplatebackendGetDatasetContentReply dataset_service_get_dataset_content(id, name=name, offset=offset, limit=limit)
 
 Get Dataset Content
 
@@ -141,14 +137,12 @@ with openapi_client.ApiClient(configuration) as api_client:
     api_instance = openapi_client.DatasetApi(api_client)
     id = 56 # int | 
     name = 'name_example' # str |  (optional)
-    userid = 56 # int |  (optional)
-    tenantid = 56 # int |  (optional)
     offset = 56 # int |  (optional)
     limit = 56 # int |  (optional)
 
     try:
         # Get Dataset Content
-        api_response = api_instance.dataset_service_get_dataset_content(id, name=name, userid=userid, tenantid=tenantid, offset=offset, limit=limit)
+        api_response = api_instance.dataset_service_get_dataset_content(id, name=name, offset=offset, limit=limit)
         print("The response of DatasetApi->dataset_service_get_dataset_content:\n")
         pprint(api_response)
     except Exception as e:
@@ -164,8 +158,6 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id** | **int**|  | 
  **name** | **str**|  | [optional] 
- **userid** | **int**|  | [optional] 
- **tenantid** | **int**|  | [optional] 
  **offset** | **int**|  | [optional] 
  **limit** | **int**|  | [optional] 
 
@@ -192,7 +184,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **dataset_service_get_dataset_metadata**
-> TemplatebackendGetDatasetMetadataReply dataset_service_get_dataset_metadata(id, name=name, userid=userid, tenantid=tenantid)
+> TemplatebackendGetDatasetMetadataReply dataset_service_get_dataset_metadata(id, name=name)
 
 Get Dataset Metadata
 
@@ -233,12 +225,10 @@ with openapi_client.ApiClient(configuration) as api_client:
     api_instance = openapi_client.DatasetApi(api_client)
     id = 56 # int | 
     name = 'name_example' # str |  (optional)
-    userid = 56 # int |  (optional)
-    tenantid = 56 # int |  (optional)
 
     try:
         # Get Dataset Metadata
-        api_response = api_instance.dataset_service_get_dataset_metadata(id, name=name, userid=userid, tenantid=tenantid)
+        api_response = api_instance.dataset_service_get_dataset_metadata(id, name=name)
         print("The response of DatasetApi->dataset_service_get_dataset_metadata:\n")
         pprint(api_response)
     except Exception as e:
@@ -254,8 +244,6 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id** | **int**|  | 
  **name** | **str**|  | [optional] 
- **userid** | **int**|  | [optional] 
- **tenantid** | **int**|  | [optional] 
 
 ### Return type
 
@@ -280,7 +268,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **dataset_service_list_datasets**
-> TemplatebackendListDatasetsReply dataset_service_list_datasets(userid=userid, tenantid=tenantid, offset=offset, limit=limit)
+> TemplatebackendListDatasetsReply dataset_service_list_datasets(offset=offset, limit=limit)
 
 List datasets
 
@@ -319,14 +307,12 @@ configuration.api_key['Bearer'] = os.environ["API_KEY"]
 with openapi_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = openapi_client.DatasetApi(api_client)
-    userid = 56 # int |  (optional)
-    tenantid = 56 # int |  (optional)
     offset = 56 # int |  (optional)
     limit = 56 # int |  (optional)
 
     try:
         # List datasets
-        api_response = api_instance.dataset_service_list_datasets(userid=userid, tenantid=tenantid, offset=offset, limit=limit)
+        api_response = api_instance.dataset_service_list_datasets(offset=offset, limit=limit)
         print("The response of DatasetApi->dataset_service_list_datasets:\n")
         pprint(api_response)
     except Exception as e:
@@ -340,8 +326,6 @@ with openapi_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **userid** | **int**|  | [optional] 
- **tenantid** | **int**|  | [optional] 
  **offset** | **int**|  | [optional] 
  **limit** | **int**|  | [optional] 
 

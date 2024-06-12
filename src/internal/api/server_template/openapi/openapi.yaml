@@ -218,16 +218,6 @@ paths:
       operationId: dataset_service_list_datasets
       parameters:
       - in: query
-        name: userid
-        schema:
-          format: int32
-          type: integer
-      - in: query
-        name: tenantid
-        schema:
-          format: int32
-          type: integer
-      - in: query
         name: offset
         schema:
           format: int32
@@ -297,16 +287,6 @@ paths:
         schema:
           type: string
       - in: query
-        name: userid
-        schema:
-          format: int32
-          type: integer
-      - in: query
-        name: tenantid
-        schema:
-          format: int32
-          type: integer
-      - in: query
         name: offset
         schema:
           format: int32
@@ -348,16 +328,6 @@ paths:
         name: name
         schema:
           type: string
-      - in: query
-        name: userid
-        schema:
-          format: int32
-          type: integer
-      - in: query
-        name: tenantid
-        schema:
-          format: int32
-          type: integer
       responses:
         "200":
           content:
@@ -390,16 +360,6 @@ paths:
         name: name
         schema:
           type: string
-      - in: query
-        name: userid
-        schema:
-          format: int32
-          type: integer
-      - in: query
-        name: tenantid
-        schema:
-          format: int32
-          type: integer
       responses:
         "200":
           content:
@@ -654,6 +614,20 @@ components:
     templatebackendGetDatasetMetadataReply:
       example:
         metadata:
+          metadata:
+            columnId: 5
+            tenantid: 6
+            datasetId: 1
+            type: type
+            userid: 0
+      properties:
+        metadata:
+          $ref: '#/components/schemas/templatebackendGetDatasetMetadataResult'
+      title: templatebackendGetDatasetMetadataReply
+      type: object
+    templatebackendGetDatasetMetadataResult:
+      example:
+        metadata:
           columnId: 5
           tenantid: 6
           datasetId: 1
@@ -662,7 +636,7 @@ components:
       properties:
         metadata:
           $ref: '#/components/schemas/templatebackendMetadata'
-      title: templatebackendGetDatasetMetadataReply
+      title: templatebackendGetDatasetMetadataResult
       type: object
     templatebackendGetHelloReply:
       example:
@@ -859,14 +833,6 @@ components:
       type: object
     templatebackendStoreDatasetRequest:
       properties:
-        userid:
-          format: int32
-          title: userid
-          type: integer
-        tenantid:
-          format: int32
-          title: tenantid
-          type: integer
         datasetName:
           title: datasetName
           type: string

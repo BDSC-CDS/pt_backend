@@ -5,8 +5,6 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**userid** | **int** |  | [optional] 
-**tenantid** | **int** |  | [optional] 
 **dataset_name** | **str** |  | [optional] 
 **path** | **str** |  | [optional] 
 

@@ -48,10 +48,8 @@ option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
 
 // Create a Dataset
 message StoreDatasetRequest {
-    int32 userid = 1;
-    int32 tenantid = 2;
-    string dataset_name = 3;
-    string path = 4;
+    string dataset_name = 1;
+    string path = 2;
 }
 
 message StoreDatasetReply {
@@ -62,10 +60,8 @@ message StoreDatasetResult {
 }
 
 message ListDatasetsRequest {
-    int32 userid = 1;
-    int32 tenantid = 2;
-    int32 offset = 3;
-    int32 limit = 4;
+    int32 offset = 1;
+    int32 limit = 2;
 }
 
 message ListDatasetsReply {
@@ -79,22 +75,20 @@ message ListDatasetsResult {
 message GetDatasetMetadataRequest {
     uint32 id = 1;
     string name = 2;
-    int32 userid = 3;
-    int32 tenantid = 4;
 }
 
 message GetDatasetMetadataReply {
+    GetDatasetMetadataResult metadata = 1;
+}
+message GetDatasetMetadataResult {
     Metadata metadata = 1;
 }
-
 // Get dataset
 message GetDatasetContentRequest {
     uint32 id = 1;
     string name = 2;
-    int32 userid = 3;
-    int32 tenantid = 4;
-    int32 offset = 5;
-    int32 limit = 6;
+    int32 offset = 3;
+    int32 limit = 4;
 }
 message GetDatasetContentReply {
     GetDatasetContentResult result = 1;
@@ -108,8 +102,6 @@ message GetDatasetContentResult {
 message DeleteDatasetRequest {
     uint32 id = 1;
     string name = 2;
-    int32 userid = 3;
-    int32 tenantid = 4;
 }
 
 message DeleteDatasetReply {

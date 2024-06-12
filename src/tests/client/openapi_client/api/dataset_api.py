@@ -58,8 +58,6 @@ class DatasetApi:
         self,
         id: StrictInt,
         name: Optional[StrictStr] = None,
-        userid: Optional[StrictInt] = None,
-        tenantid: Optional[StrictInt] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -81,10 +79,6 @@ class DatasetApi:
         :type id: int
         :param name:
         :type name: str
-        :param userid:
-        :type userid: int
-        :param tenantid:
-        :type tenantid: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -110,8 +104,6 @@ class DatasetApi:
         _param = self._dataset_service_delete_dataset_serialize(
             id=id,
             name=name,
-            userid=userid,
-            tenantid=tenantid,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -137,8 +129,6 @@ class DatasetApi:
         self,
         id: StrictInt,
         name: Optional[StrictStr] = None,
-        userid: Optional[StrictInt] = None,
-        tenantid: Optional[StrictInt] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -160,10 +150,6 @@ class DatasetApi:
         :type id: int
         :param name:
         :type name: str
-        :param userid:
-        :type userid: int
-        :param tenantid:
-        :type tenantid: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -189,8 +175,6 @@ class DatasetApi:
         _param = self._dataset_service_delete_dataset_serialize(
             id=id,
             name=name,
-            userid=userid,
-            tenantid=tenantid,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -216,8 +200,6 @@ class DatasetApi:
         self,
         id: StrictInt,
         name: Optional[StrictStr] = None,
-        userid: Optional[StrictInt] = None,
-        tenantid: Optional[StrictInt] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -239,10 +221,6 @@ class DatasetApi:
         :type id: int
         :param name:
         :type name: str
-        :param userid:
-        :type userid: int
-        :param tenantid:
-        :type tenantid: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -268,8 +246,6 @@ class DatasetApi:
         _param = self._dataset_service_delete_dataset_serialize(
             id=id,
             name=name,
-            userid=userid,
-            tenantid=tenantid,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -290,8 +266,6 @@ class DatasetApi:
         self,
         id,
         name,
-        userid,
-        tenantid,
         _request_auth,
         _content_type,
         _headers,
@@ -317,14 +291,6 @@ class DatasetApi:
         if name is not None:
             
             _query_params.append(('name', name))
-            
-        if userid is not None:
-            
-            _query_params.append(('userid', userid))
-            
-        if tenantid is not None:
-            
-            _query_params.append(('tenantid', tenantid))
             
         # process the header parameters
         # process the form parameters
@@ -367,8 +333,6 @@ class DatasetApi:
         self,
         id: StrictInt,
         name: Optional[StrictStr] = None,
-        userid: Optional[StrictInt] = None,
-        tenantid: Optional[StrictInt] = None,
         offset: Optional[StrictInt] = None,
         limit: Optional[StrictInt] = None,
         _request_timeout: Union[
@@ -392,10 +356,6 @@ class DatasetApi:
         :type id: int
         :param name:
         :type name: str
-        :param userid:
-        :type userid: int
-        :param tenantid:
-        :type tenantid: int
         :param offset:
         :type offset: int
         :param limit:
@@ -425,8 +385,6 @@ class DatasetApi:
         _param = self._dataset_service_get_dataset_content_serialize(
             id=id,
             name=name,
-            userid=userid,
-            tenantid=tenantid,
             offset=offset,
             limit=limit,
             _request_auth=_request_auth,
@@ -454,8 +412,6 @@ class DatasetApi:
         self,
         id: StrictInt,
         name: Optional[StrictStr] = None,
-        userid: Optional[StrictInt] = None,
-        tenantid: Optional[StrictInt] = None,
         offset: Optional[StrictInt] = None,
         limit: Optional[StrictInt] = None,
         _request_timeout: Union[
@@ -479,10 +435,6 @@ class DatasetApi:
         :type id: int
         :param name:
         :type name: str
-        :param userid:
-        :type userid: int
-        :param tenantid:
-        :type tenantid: int
         :param offset:
         :type offset: int
         :param limit:
@@ -512,8 +464,6 @@ class DatasetApi:
         _param = self._dataset_service_get_dataset_content_serialize(
             id=id,
             name=name,
-            userid=userid,
-            tenantid=tenantid,
             offset=offset,
             limit=limit,
             _request_auth=_request_auth,
@@ -541,8 +491,6 @@ class DatasetApi:
         self,
         id: StrictInt,
         name: Optional[StrictStr] = None,
-        userid: Optional[StrictInt] = None,
-        tenantid: Optional[StrictInt] = None,
         offset: Optional[StrictInt] = None,
         limit: Optional[StrictInt] = None,
         _request_timeout: Union[
@@ -566,10 +514,6 @@ class DatasetApi:
         :type id: int
         :param name:
         :type name: str
-        :param userid:
-        :type userid: int
-        :param tenantid:
-        :type tenantid: int
         :param offset:
         :type offset: int
         :param limit:
@@ -599,8 +543,6 @@ class DatasetApi:
         _param = self._dataset_service_get_dataset_content_serialize(
             id=id,
             name=name,
-            userid=userid,
-            tenantid=tenantid,
             offset=offset,
             limit=limit,
             _request_auth=_request_auth,
@@ -623,8 +565,6 @@ class DatasetApi:
         self,
         id,
         name,
-        userid,
-        tenantid,
         offset,
         limit,
         _request_auth,
@@ -652,14 +592,6 @@ class DatasetApi:
         if name is not None:
             
             _query_params.append(('name', name))
-            
-        if userid is not None:
-            
-            _query_params.append(('userid', userid))
-            
-        if tenantid is not None:
-            
-            _query_params.append(('tenantid', tenantid))
             
         if offset is not None:
             
@@ -710,8 +642,6 @@ class DatasetApi:
         self,
         id: StrictInt,
         name: Optional[StrictStr] = None,
-        userid: Optional[StrictInt] = None,
-        tenantid: Optional[StrictInt] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -733,10 +663,6 @@ class DatasetApi:
         :type id: int
         :param name:
         :type name: str
-        :param userid:
-        :type userid: int
-        :param tenantid:
-        :type tenantid: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -762,8 +688,6 @@ class DatasetApi:
         _param = self._dataset_service_get_dataset_metadata_serialize(
             id=id,
             name=name,
-            userid=userid,
-            tenantid=tenantid,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -789,8 +713,6 @@ class DatasetApi:
         self,
         id: StrictInt,
         name: Optional[StrictStr] = None,
-        userid: Optional[StrictInt] = None,
-        tenantid: Optional[StrictInt] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -812,10 +734,6 @@ class DatasetApi:
         :type id: int
         :param name:
         :type name: str
-        :param userid:
-        :type userid: int
-        :param tenantid:
-        :type tenantid: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -841,8 +759,6 @@ class DatasetApi:
         _param = self._dataset_service_get_dataset_metadata_serialize(
             id=id,
             name=name,
-            userid=userid,
-            tenantid=tenantid,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -868,8 +784,6 @@ class DatasetApi:
         self,
         id: StrictInt,
         name: Optional[StrictStr] = None,
-        userid: Optional[StrictInt] = None,
-        tenantid: Optional[StrictInt] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -891,10 +805,6 @@ class DatasetApi:
         :type id: int
         :param name:
         :type name: str
-        :param userid:
-        :type userid: int
-        :param tenantid:
-        :type tenantid: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -920,8 +830,6 @@ class DatasetApi:
         _param = self._dataset_service_get_dataset_metadata_serialize(
             id=id,
             name=name,
-            userid=userid,
-            tenantid=tenantid,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -942,8 +850,6 @@ class DatasetApi:
         self,
         id,
         name,
-        userid,
-        tenantid,
         _request_auth,
         _content_type,
         _headers,
@@ -969,14 +875,6 @@ class DatasetApi:
         if name is not None:
             
             _query_params.append(('name', name))
-            
-        if userid is not None:
-            
-            _query_params.append(('userid', userid))
-            
-        if tenantid is not None:
-            
-            _query_params.append(('tenantid', tenantid))
             
         # process the header parameters
         # process the form parameters
@@ -1017,8 +915,6 @@ class DatasetApi:
     @validate_call
     def dataset_service_list_datasets(
         self,
-        userid: Optional[StrictInt] = None,
-        tenantid: Optional[StrictInt] = None,
         offset: Optional[StrictInt] = None,
         limit: Optional[StrictInt] = None,
         _request_timeout: Union[
@@ -1038,10 +934,6 @@ class DatasetApi:
 
         This endpoint allows listing a user's datasets
 
-        :param userid:
-        :type userid: int
-        :param tenantid:
-        :type tenantid: int
         :param offset:
         :type offset: int
         :param limit:
@@ -1069,8 +961,6 @@ class DatasetApi:
         """ # noqa: E501
 
         _param = self._dataset_service_list_datasets_serialize(
-            userid=userid,
-            tenantid=tenantid,
             offset=offset,
             limit=limit,
             _request_auth=_request_auth,
@@ -1096,8 +986,6 @@ class DatasetApi:
     @validate_call
     def dataset_service_list_datasets_with_http_info(
         self,
-        userid: Optional[StrictInt] = None,
-        tenantid: Optional[StrictInt] = None,
         offset: Optional[StrictInt] = None,
         limit: Optional[StrictInt] = None,
         _request_timeout: Union[
@@ -1117,10 +1005,6 @@ class DatasetApi:
 
         This endpoint allows listing a user's datasets
 
-        :param userid:
-        :type userid: int
-        :param tenantid:
-        :type tenantid: int
         :param offset:
         :type offset: int
         :param limit:
@@ -1148,8 +1032,6 @@ class DatasetApi:
         """ # noqa: E501
 
         _param = self._dataset_service_list_datasets_serialize(
-            userid=userid,
-            tenantid=tenantid,
             offset=offset,
             limit=limit,
             _request_auth=_request_auth,
@@ -1175,8 +1057,6 @@ class DatasetApi:
     @validate_call
     def dataset_service_list_datasets_without_preload_content(
         self,
-        userid: Optional[StrictInt] = None,
-        tenantid: Optional[StrictInt] = None,
         offset: Optional[StrictInt] = None,
         limit: Optional[StrictInt] = None,
         _request_timeout: Union[
@@ -1196,10 +1076,6 @@ class DatasetApi:
 
         This endpoint allows listing a user's datasets
 
-        :param userid:
-        :type userid: int
-        :param tenantid:
-        :type tenantid: int
         :param offset:
         :type offset: int
         :param limit:
@@ -1227,8 +1103,6 @@ class DatasetApi:
         """ # noqa: E501
 
         _param = self._dataset_service_list_datasets_serialize(
-            userid=userid,
-            tenantid=tenantid,
             offset=offset,
             limit=limit,
             _request_auth=_request_auth,
@@ -1249,8 +1123,6 @@ class DatasetApi:
 
     def _dataset_service_list_datasets_serialize(
         self,
-        userid,
-        tenantid,
         offset,
         limit,
         _request_auth,
@@ -1273,14 +1145,6 @@ class DatasetApi:
 
         # process the path parameters
         # process the query parameters
-        if userid is not None:
-            
-            _query_params.append(('userid', userid))
-            
-        if tenantid is not None:
-            
-            _query_params.append(('tenantid', tenantid))
-            
         if offset is not None:
             
             _query_params.append(('offset', offset))

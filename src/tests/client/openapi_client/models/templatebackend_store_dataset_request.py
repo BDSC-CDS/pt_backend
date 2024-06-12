@@ -20,7 +20,7 @@ import json
 
 
 from typing import Any, ClassVar, Dict, List, Optional
-from pydantic import BaseModel, StrictInt, StrictStr
+from pydantic import BaseModel, StrictStr
 from pydantic import Field
 try:
     from typing import Self
@@ -31,11 +31,9 @@ class TemplatebackendStoreDatasetRequest(BaseModel):
     """
     TemplatebackendStoreDatasetRequest
     """ # noqa: E501
-    userid: Optional[StrictInt] = None
-    tenantid: Optional[StrictInt] = None
     dataset_name: Optional[StrictStr] = Field(default=None, alias="datasetName")
     path: Optional[StrictStr] = None
-    __properties: ClassVar[List[str]] = ["userid", "tenantid", "datasetName", "path"]
+    __properties: ClassVar[List[str]] = ["datasetName", "path"]
 
     model_config = {
         "populate_by_name": True,
@@ -86,8 +84,6 @@ class TemplatebackendStoreDatasetRequest(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "userid": obj.get("userid"),
-            "tenantid": obj.get("tenantid"),
             "datasetName": obj.get("datasetName"),
             "path": obj.get("path")
         })

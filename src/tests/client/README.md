@@ -130,6 +130,7 @@ Class | Method | HTTP request | Description
  - [TemplatebackendGetDatasetContentReply](docs/TemplatebackendGetDatasetContentReply.md)
  - [TemplatebackendGetDatasetContentResult](docs/TemplatebackendGetDatasetContentResult.md)
  - [TemplatebackendGetDatasetMetadataReply](docs/TemplatebackendGetDatasetMetadataReply.md)
+ - [TemplatebackendGetDatasetMetadataResult](docs/TemplatebackendGetDatasetMetadataResult.md)
  - [TemplatebackendGetHelloReply](docs/TemplatebackendGetHelloReply.md)
  - [TemplatebackendGetUserMeReply](docs/TemplatebackendGetUserMeReply.md)
  - [TemplatebackendGetUserMeResult](docs/TemplatebackendGetUserMeResult.md)

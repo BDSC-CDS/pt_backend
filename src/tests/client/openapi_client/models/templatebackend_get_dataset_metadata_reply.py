@@ -21,7 +21,7 @@ import json
 
 from typing import Any, ClassVar, Dict, List, Optional
 from pydantic import BaseModel
-from openapi_client.models.templatebackend_metadata import TemplatebackendMetadata
+from openapi_client.models.templatebackend_get_dataset_metadata_result import TemplatebackendGetDatasetMetadataResult
 try:
     from typing import Self
 except ImportError:
@@ -31,7 +31,7 @@ class TemplatebackendGetDatasetMetadataReply(BaseModel):
     """
     TemplatebackendGetDatasetMetadataReply
     """ # noqa: E501
-    metadata: Optional[TemplatebackendMetadata] = None
+    metadata: Optional[TemplatebackendGetDatasetMetadataResult] = None
     __properties: ClassVar[List[str]] = ["metadata"]
 
     model_config = {
@@ -86,7 +86,7 @@ class TemplatebackendGetDatasetMetadataReply(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "metadata": TemplatebackendMetadata.from_dict(obj.get("metadata")) if obj.get("metadata") is not None else None
+            "metadata": TemplatebackendGetDatasetMetadataResult.from_dict(obj.get("metadata")) if obj.get("metadata") is not None else None
         })
         return _obj
 
