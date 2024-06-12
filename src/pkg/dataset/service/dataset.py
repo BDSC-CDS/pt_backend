@@ -14,8 +14,8 @@ class DatasetService:
         return datasets
 
     # get metadata for a dataset (if not deleted)
-    def get_dataset_metadata(self,name:str, userid:int, tenantid:int):
-        dataset = self.dataset_store.get_dataset_metadata(name=name,userid=userid,tenantid=tenantid)
+    def get_dataset_metadata(self,dataset_id:int, userid:int, tenantid:int):
+        dataset = self.dataset_store.get_dataset_metadata(dataset_id=dataset_id,userid=userid,tenantid=tenantid)
         return dataset
 
     # get dataset (if not deleted)
