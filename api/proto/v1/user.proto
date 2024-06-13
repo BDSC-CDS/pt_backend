@@ -6,20 +6,20 @@ import "google/protobuf/timestamp.proto";
 
 message User {
     uint32 id = 1;
+    uint32 tenantid = 2;
+    string firstName = 3;
+    string lastName = 4;
+    string username = 5;
+    string email = 6;
+    string password = 7;
+    string status = 8;
 
-    string firstName = 2;
-    string lastName = 3;
-    string username = 4;
-    string email = 5;
-    string password = 6;
-    string status = 7;
+    repeated string roles = 9;
 
-    repeated string roles = 8;
+    bool totpEnabled = 10;
 
-    bool totpEnabled = 9;
+    google.protobuf.Timestamp createdAt = 11;
+    google.protobuf.Timestamp updatedAt = 12;
 
-    google.protobuf.Timestamp createdAt = 10;
-    google.protobuf.Timestamp updatedAt = 11;
-
-    bool passwordChanged = 12;
+    bool passwordChanged = 13;
 }

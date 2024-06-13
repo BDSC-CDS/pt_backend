@@ -32,6 +32,7 @@ class TemplatebackendUser(BaseModel):
     TemplatebackendUser
     """ # noqa: E501
     id: Optional[StrictInt] = None
+    tenantid: Optional[StrictInt] = None
     first_name: Optional[StrictStr] = Field(default=None, alias="firstName")
     last_name: Optional[StrictStr] = Field(default=None, alias="lastName")
     username: Optional[StrictStr] = None
@@ -43,7 +44,7 @@ class TemplatebackendUser(BaseModel):
     created_at: Optional[datetime] = Field(default=None, alias="createdAt")
     updated_at: Optional[datetime] = Field(default=None, alias="updatedAt")
     password_changed: Optional[StrictBool] = Field(default=None, alias="passwordChanged")
-    __properties: ClassVar[List[str]] = ["id", "firstName", "lastName", "username", "email", "password", "status", "roles", "totpEnabled", "createdAt", "updatedAt", "passwordChanged"]
+    __properties: ClassVar[List[str]] = ["id", "tenantid", "firstName", "lastName", "username", "email", "password", "status", "roles", "totpEnabled", "createdAt", "updatedAt", "passwordChanged"]
 
     model_config = {
         "populate_by_name": True,
@@ -95,6 +96,7 @@ class TemplatebackendUser(BaseModel):
 
         _obj = cls.model_validate({
             "id": obj.get("id"),
+            "tenantid": obj.get("tenantid"),
             "firstName": obj.get("firstName"),
             "lastName": obj.get("lastName"),
             "username": obj.get("username"),

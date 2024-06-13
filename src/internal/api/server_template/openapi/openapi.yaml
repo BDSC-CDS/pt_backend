@@ -664,16 +664,17 @@ components:
       example:
         result:
           me:
-            firstName: firstName
             lastName: lastName
-            createdAt: 2000-01-23T04:56:07.000+00:00
-            password: password
-            passwordChanged: true
             roles:
             - roles
             - roles
-            id: 0
             totpEnabled: true
+            firstName: firstName
+            createdAt: 2000-01-23T04:56:07.000+00:00
+            password: password
+            passwordChanged: true
+            tenantid: 6
+            id: 0
             email: email
             username: username
             status: status
@@ -686,16 +687,17 @@ components:
     templatebackendGetUserMeResult:
       example:
         me:
-          firstName: firstName
           lastName: lastName
-          createdAt: 2000-01-23T04:56:07.000+00:00
-          password: password
-          passwordChanged: true
           roles:
           - roles
           - roles
-          id: 0
           totpEnabled: true
+          firstName: firstName
+          createdAt: 2000-01-23T04:56:07.000+00:00
+          password: password
+          passwordChanged: true
+          tenantid: 6
+          id: 0
           email: email
           username: username
           status: status
@@ -709,16 +711,17 @@ components:
       example:
         result:
           user:
-            firstName: firstName
             lastName: lastName
-            createdAt: 2000-01-23T04:56:07.000+00:00
-            password: password
-            passwordChanged: true
             roles:
             - roles
             - roles
-            id: 0
             totpEnabled: true
+            firstName: firstName
+            createdAt: 2000-01-23T04:56:07.000+00:00
+            password: password
+            passwordChanged: true
+            tenantid: 6
+            id: 0
             email: email
             username: username
             status: status
@@ -731,16 +734,17 @@ components:
     templatebackendGetUserResult:
       example:
         user:
-          firstName: firstName
           lastName: lastName
-          createdAt: 2000-01-23T04:56:07.000+00:00
-          password: password
-          passwordChanged: true
           roles:
           - roles
           - roles
-          id: 0
           totpEnabled: true
+          firstName: firstName
+          createdAt: 2000-01-23T04:56:07.000+00:00
+          password: password
+          passwordChanged: true
+          tenantid: 6
+          id: 0
           email: email
           username: username
           status: status
@@ -888,16 +892,17 @@ components:
       type: object
     templatebackendUser:
       example:
-        firstName: firstName
         lastName: lastName
-        createdAt: 2000-01-23T04:56:07.000+00:00
-        password: password
-        passwordChanged: true
         roles:
         - roles
         - roles
-        id: 0
         totpEnabled: true
+        firstName: firstName
+        createdAt: 2000-01-23T04:56:07.000+00:00
+        password: password
+        passwordChanged: true
+        tenantid: 6
+        id: 0
         email: email
         username: username
         status: status
@@ -906,6 +911,10 @@ components:
         id:
           format: int64
           title: id
+          type: integer
+        tenantid:
+          format: int64
+          title: tenantid
           type: integer
         firstName:
           title: firstName
