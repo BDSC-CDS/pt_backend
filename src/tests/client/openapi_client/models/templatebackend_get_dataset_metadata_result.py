@@ -31,7 +31,7 @@ class TemplatebackendGetDatasetMetadataResult(BaseModel):
     """
     TemplatebackendGetDatasetMetadataResult
     """ # noqa: E501
-    metadata: Optional[TemplatebackendMetadata] = None
+    metadata: Optional[List[TemplatebackendMetadata]] = None
     __properties: ClassVar[List[str]] = ["metadata"]
 
     model_config = {
@@ -71,9 +71,13 @@ class TemplatebackendGetDatasetMetadataResult(BaseModel):
             },
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of metadata
+        # override the default output from pydantic by calling `to_dict()` of each item in metadata (list)
+        _items = []
         if self.metadata:
-            _dict['metadata'] = self.metadata.to_dict()
+            for _item in self.metadata:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['metadata'] = _items
         return _dict
 
     @classmethod
@@ -86,7 +90,7 @@ class TemplatebackendGetDatasetMetadataResult(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "metadata": TemplatebackendMetadata.from_dict(obj.get("metadata")) if obj.get("metadata") is not None else None
+            "metadata": [TemplatebackendMetadata.from_dict(_item) for _item in obj.get("metadata")] if obj.get("metadata") is not None else None
         })
         return _obj
 

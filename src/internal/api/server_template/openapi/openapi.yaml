@@ -615,7 +615,12 @@ components:
       example:
         metadata:
           metadata:
-            columnId: 5
+          - columnId: 5
+            tenantid: 6
+            datasetId: 1
+            type: type
+            userid: 0
+          - columnId: 5
             tenantid: 6
             datasetId: 1
             type: type
@@ -628,14 +633,22 @@ components:
     templatebackendGetDatasetMetadataResult:
       example:
         metadata:
-          columnId: 5
+        - columnId: 5
+          tenantid: 6
+          datasetId: 1
+          type: type
+          userid: 0
+        - columnId: 5
           tenantid: 6
           datasetId: 1
           type: type
           userid: 0
       properties:
         metadata:
-          $ref: '#/components/schemas/templatebackendMetadata'
+          items:
+            $ref: '#/components/schemas/templatebackendMetadata'
+          title: metadata
+          type: array
       title: templatebackendGetDatasetMetadataResult
       type: object
     templatebackendGetHelloReply:

@@ -81,7 +81,7 @@ message GetDatasetMetadataReply {
     GetDatasetMetadataResult metadata = 1;
 }
 message GetDatasetMetadataResult {
-    Metadata metadata = 1;
+    repeated Metadata metadata = 1;
 }
 // Get dataset
 message GetDatasetContentRequest {

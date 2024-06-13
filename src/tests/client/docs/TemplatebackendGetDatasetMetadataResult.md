@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**metadata** | [**TemplatebackendMetadata**](TemplatebackendMetadata.md) |  | [optional] 
+**metadata** | [**List[TemplatebackendMetadata]**](TemplatebackendMetadata.md) |  | [optional] 
 
 ## Example
 

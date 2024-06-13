@@ -20,10 +20,10 @@ class TemplatebackendGetDatasetMetadataResult(Model):
         """TemplatebackendGetDatasetMetadataResult - a model defined in OpenAPI
 
         :param metadata: The metadata of this TemplatebackendGetDatasetMetadataResult.
-        :type metadata: TemplatebackendMetadata
+        :type metadata: List[TemplatebackendMetadata]
         """
         self.openapi_types = {
-            'metadata': TemplatebackendMetadata
+            'metadata': List[TemplatebackendMetadata]
         }
 
         self.attribute_map = {
@@ -44,22 +44,22 @@ class TemplatebackendGetDatasetMetadataResult(Model):
         return util.deserialize_model(dikt, cls)
 
     @property
-    def metadata(self) -> TemplatebackendMetadata:
+    def metadata(self) -> List[TemplatebackendMetadata]:
         """Gets the metadata of this TemplatebackendGetDatasetMetadataResult.
 
 
         :return: The metadata of this TemplatebackendGetDatasetMetadataResult.
-        :rtype: TemplatebackendMetadata
+        :rtype: List[TemplatebackendMetadata]
         """
         return self._metadata
 
     @metadata.setter
-    def metadata(self, metadata: TemplatebackendMetadata):
+    def metadata(self, metadata: List[TemplatebackendMetadata]):
         """Sets the metadata of this TemplatebackendGetDatasetMetadataResult.
 
 
         :param metadata: The metadata of this TemplatebackendGetDatasetMetadataResult.
-        :type metadata: TemplatebackendMetadata
+        :type metadata: List[TemplatebackendMetadata]
         """
 
         self._metadata = metadata
