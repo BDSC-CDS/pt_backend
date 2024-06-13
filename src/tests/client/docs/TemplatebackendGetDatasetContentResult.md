@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**dataframe** | **bytearray** |  | [optional] 
+**columns** | [**List[TemplatebackendColumn]**](TemplatebackendColumn.md) |  | [optional] 
 
 ## Example
 

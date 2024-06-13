@@ -1,3 +1,4 @@
+from typing import List
 from sqlalchemy.engine import Engine
 from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy.orm import sessionmaker
@@ -6,7 +7,7 @@ from contextlib import contextmanager
 from src.pkg.dataset.model.dataset import Dataset,Metadata,Dataset_content
 import csv
 import pandas as pd
-
+from collections import defaultdict
 def infer_column_type(values):
     is_int = True
     is_float = True
@@ -48,7 +49,7 @@ class DatasetStore:
         finally:
             session.close()
 
-    def store_dataset(self, userid:int,tenantid:int, dataset_name:str,path: str,metadata_types=None):
+    def store_dataset(self, userid:int,tenantid:int, dataset_name:str,path: str,metadata_types=None) -> int:
         # Insert dataset entry and get the generated dataset_id
         dataset_query = """
             INSERT INTO datasets
@@ -141,7 +142,7 @@ class DatasetStore:
                 return None
 
 
-    def get_list_datasets(self, userid:int, tenantid:int, offset:int,limit:int):
+    def get_list_datasets(self, userid:int, tenantid:int, offset:int,limit:int) -> List[Dataset]:
         query = "SELECT * FROM datasets WHERE userid = :userid AND tenantid = :tenantid ORDER BY createdat OFFSET :offset LIMIT :limit;"
         with self.session_scope() as session:
             try:
@@ -168,7 +169,7 @@ class DatasetStore:
                 print(f"Error fetching datasets: {e}")
                 return None
 
-    def get_dataset_metadata(self,name:str, userid:int, tenantid:int):
+    def get_dataset_metadata(self,name:str, userid:int, tenantid:int) -> List[Metadata]:
         query1 = "SELECT * FROM datasets WHERE dataset_name=:name AND userid = :userid AND tenantid = :tenantid;"
         query2 = "SELECT * FROM metadata WHERE dataset_id = :dataset_id AND userid = :userid AND tenantid = :tenantid ORDER BY column_id;"
         with self.session_scope() as session:
@@ -205,7 +206,7 @@ class DatasetStore:
 
 
 
-    def get_dataset_content(self,name:str, userid:int, tenantid:int, offset:int,limit:int): # TODO pagination
+    def get_dataset_content(self,name:str, userid:int, tenantid:int, offset:int,limit:int) -> List[List[str]]: # TODO pagination
         # we order by column and line number
         query1 = "SELECT * FROM datasets WHERE dataset_name=:name AND userid = :userid AND tenantid = :tenantid;"
         query2 = "SELECT * FROM dataset_content WHERE dataset_id = :dataset_id AND userid = :userid AND tenantid = :tenantid ORDER BY column_id,line_id OFFSET :offset LIMIT :limit;"
@@ -234,52 +235,47 @@ class DatasetStore:
                     print("Error: No data found in the dataset.")
                     return None
 
-                # Fetch the column names
-                metadata_query = """
-                    SELECT column_id, type_ FROM metadata WHERE dataset_id = :id AND userid = :userid AND tenantid = :tenantid ORDER BY column_id;
-                """
-                metadata = session.execute(text(metadata_query), {
-                                                'dataset_id':dataset_id,
-                                                'userid': userid,
-                                                'tenantid': tenantid,
-                                            }).mappings().fetchall()
-                if not metadata:
-                        print("Error: No metadata found for the dataset.")
-                        return None
-                # Create a dictionary to map column_id to column name
-                column_names = {col_id: f"Column_{col_id}" for col_id, _ in metadata}
+                columns = defaultdict(list)
+                for row in rows:
+                    columns[row.column_id].append(row.val) # it is already sorted
+                columns_as_lists = list(columns.values())
+                return columns_as_lists
+                # # Fetch the column names
+                # metadata_query = """
+                #     SELECT column_id, type_ FROM metadata WHERE dataset_id = :id AND userid = :userid AND tenantid = :tenantid ORDER BY column_id;
+                # """
+                # metadata = session.execute(text(metadata_query), {
+                #                                 'dataset_id':dataset_id,
+                #                                 'userid': userid,
+                #                                 'tenantid': tenantid,
+                #                             }).mappings().fetchall()
+                # if not metadata:
+                #         print("Error: No metadata found for the dataset.")
+                #         return None
+                # # Create a dictionary to map column_id to column name
+                # column_names = {col_id: f"Column_{col_id}" for col_id, _ in metadata}
 
-                # Create a dictionary to hold the data by columns
-                data_dict = {column_names[col_id]: [] for col_id, _ in metadata}
+                # # Create a dictionary to hold the data by columns
+                # data_dict = {column_names[col_id]: [] for col_id, _ in metadata}
 
-                # Populate the data dictionary with values
-                max_line = max(row[1] for row in rows)
-                for col_id in column_names.keys():
-                    data_dict[column_names[col_id]] = [''] * (max_line + 1)
+                # # Populate the data dictionary with values
+                # max_line = max(row[1] for row in rows)
+                # for col_id in column_names.keys():
+                #     data_dict[column_names[col_id]] = [''] * (max_line + 1)
 
-                for col_id, line, value in rows:
-                    data_dict[column_names[col_id]][line] = value
-                # Create the DataFrame
-                df = pd.DataFrame(data_dict)
-
-                # result = [ Dataset_content(
-                #         userid=val_.userid,
-                #         tenantid=val_.tenantid,
-                #         dataset_id=val_.dataset_id,
-                #         column_id= val_.column_id,
-                #         line_id= val_.line_id,
-                #         val= val_.val,
-                #     ) for val_ in rows ]
-
-                return df
-
+                # for col_id, line, value in rows:
+                #     data_dict[column_names[col_id]][line] = value
+                # # Create the DataFrame
+                # df = pd.DataFrame(data_dict)
+                # columns_list = [df[col].astype(str).tolist() for col in df.columns]
+                # return columns_list
             except Exception as e:
                 print(f"Error fetching dataset: {e}")
                 return None
 
 
 
-    def delete_dataset(self,name:str,userid:int, tenantid:int):
+    def delete_dataset(self,name:str,userid:int, tenantid:int) -> bool:
         query = """UPDATE datasets
                 SET deleted_at = NOW()
                 WHERE dataset_name = :name AND userid = :userid AND tenantid = :tenantid
@@ -292,11 +288,12 @@ class DatasetStore:
                     'tenantid': tenantid,
                 }) # TODO mappings ? fetchall? qu'est ce que ça retourne?
 
-                return True # TODO
+
             except Exception as e:
                 print(f"Error deleting dataset: {e}")
-                return None
+                return False
 
+        return True
 
 
 

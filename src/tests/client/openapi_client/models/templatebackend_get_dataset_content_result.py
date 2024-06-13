@@ -19,10 +19,9 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, ClassVar, Dict, List, Optional, Union
-from pydantic import BaseModel, field_validator
-from pydantic import Field
-from typing_extensions import Annotated
+from typing import Any, ClassVar, Dict, List, Optional
+from pydantic import BaseModel
+from openapi_client.models.templatebackend_column import TemplatebackendColumn
 try:
     from typing import Self
 except ImportError:
@@ -32,18 +31,8 @@ class TemplatebackendGetDatasetContentResult(BaseModel):
     """
     TemplatebackendGetDatasetContentResult
     """ # noqa: E501
-    dataframe: Optional[Union[Annotated[bytes, Field(strict=True)], Annotated[str, Field(strict=True)]]] = None
-    __properties: ClassVar[List[str]] = ["dataframe"]
-
-    @field_validator('dataframe')
-    def dataframe_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if value is None:
-            return value
-
-        if not re.match(r"^(?:[A-Za-z0-9+\/]{4})*(?:[A-Za-z0-9+\/]{2}==|[A-Za-z0-9+\/]{3}=)?$", value):
-            raise ValueError(r"must validate the regular expression /^(?:[A-Za-z0-9+\/]{4})*(?:[A-Za-z0-9+\/]{2}==|[A-Za-z0-9+\/]{3}=)?$/")
-        return value
+    columns: Optional[List[TemplatebackendColumn]] = None
+    __properties: ClassVar[List[str]] = ["columns"]
 
     model_config = {
         "populate_by_name": True,
@@ -82,6 +71,13 @@ class TemplatebackendGetDatasetContentResult(BaseModel):
             },
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of each item in columns (list)
+        _items = []
+        if self.columns:
+            for _item in self.columns:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['columns'] = _items
         return _dict
 
     @classmethod
@@ -94,7 +90,7 @@ class TemplatebackendGetDatasetContentResult(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "dataframe": obj.get("dataframe")
+            "columns": [TemplatebackendColumn.from_dict(_item) for _item in obj.get("columns")] if obj.get("columns") is not None else None
         })
         return _obj
 

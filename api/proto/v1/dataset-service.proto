@@ -95,9 +95,12 @@ message GetDatasetContentReply {
 }
 
 message GetDatasetContentResult {
-    bytes dataframe = 1;
+    repeated Column columns = 1;
 }
 
+message Column {
+    repeated string value = 1;
+}
 
 message DeleteDatasetRequest {
     uint32 id = 1;

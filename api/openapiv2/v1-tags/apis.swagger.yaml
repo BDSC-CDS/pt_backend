@@ -398,6 +398,13 @@ definitions:
     properties:
       token:
         type: string
+  templatebackendColumn:
+    type: object
+    properties:
+      value:
+        type: array
+        items:
+          type: string
   templatebackendCreateHelloReply:
     type: object
     properties:
@@ -474,9 +481,11 @@ definitions:
   templatebackendGetDatasetContentResult:
     type: object
     properties:
-      dataframe:
-        type: string
-        format: byte
+      columns:
+        type: array
+        items:
+          type: object
+          $ref: '#/definitions/templatebackendColumn'
   templatebackendGetDatasetMetadataReply:
     type: object
     properties:

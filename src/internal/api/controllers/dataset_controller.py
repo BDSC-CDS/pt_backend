@@ -21,6 +21,7 @@ class DatasetController:
         self.dataset_service = dataset_service
 
     def dataset_service_store_dataset(self, user, body: TemplatebackendStoreDatasetRequest):
+        dataset = dataset_converter.dataset_to_business(body)
         try:
             # TODO where do I find tenantid?
             # TODO metadata types
@@ -63,8 +64,10 @@ class DatasetController:
             print("error", e)
             traceback.print_exception(e)
             return str(e), 500
-
-        return TemplatebackendGetDatasetContentReply(TemplatebackendGetDatasetContentResult())
+        if dataset_content is None:
+            return TemplatebackendGetDatasetContentReply(TemplatebackendGetDatasetContentResult(columns=None))
+        dataset_content = dataset_converter.content_from_business(dataset_content)
+        return TemplatebackendGetDatasetContentReply(TemplatebackendGetDatasetContentResult(columns=dataset_content))
 
     def dataset_service_list_datasets(self, user, offset: int=None, limit: int=None):
         try:

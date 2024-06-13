@@ -4,6 +4,7 @@ from typing import List
 from src.pkg.dataset.model.dataset import Dataset, Metadata, Dataset_content
 from server_template.models import TemplatebackendDataset
 from server_template.models import TemplatebackendMetadata
+from server_template.models import TemplatebackendColumn
 
 # TODO
 def dataset_to_business(dataset: TemplatebackendDataset) -> Dataset:
@@ -50,3 +51,12 @@ def datasets_from_business(datasets: List[Dataset]) -> List[TemplatebackendDatas
         ) for data in datasets
     ]
     return d
+
+def content_from_business(columns: List[List[str]]) -> List[TemplatebackendColumn]:
+    print(columns)
+    c = [
+        TemplatebackendColumn(
+            value=col
+        ) for col in columns
+    ]
+    return c
