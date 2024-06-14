@@ -56,7 +56,7 @@ class DatasetControllerAudit():
     def dataset_service_get_dataset_content(self, user, name: str, offset: int=None, limit: int=None):
         try:
             response : TemplatebackendGetDatasetContentReply =  self.next.dataset_service_get_dataset_content(user, name,offset,limit)
-            response_serialized = f"dataframe: {response.result.dataframe or ''}"
+            response_serialized = f"columns: {response.result.columns or ''}"
 
             self.auditLogService.log_event(AuditLog(service="dataset", userid=user.id,action="accessed content of dataset "+ name, response=response_serialized))
             return response
