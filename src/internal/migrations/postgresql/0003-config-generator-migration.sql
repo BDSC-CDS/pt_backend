@@ -15,7 +15,7 @@ CREATE TABLE IF NOT EXISTS config_generator (
     subFieldRegex_fields TEXT,
     subFieldRegex_regex TEXT,
     subFieldRegex_replacement TEXT,
-    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 
     -- CONSTRAINT config_generator_fk FOREIGN KEY (userid) REFERENCES users(id)
     -- CONSTRAINT config_generator_fk FOREIGN KEY (questionnaireid) REFERENCES questionnaire(id)
