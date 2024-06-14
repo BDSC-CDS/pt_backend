@@ -44,7 +44,7 @@ class DatasetControllerAudit():
         try:
             response : TemplatebackendGetDatasetMetadataReply =  self.next.dataset_service_get_dataset_metadata(user, name)
             final_response = response.metadata.metadata
-            response_serialized = f"dataset id: {final_response.dataset_id or ''}, column id: {final_response.column_id or ''}, type: {final_response.type or ''}"
+            response_serialized =[ f"dataset id: {r.dataset_id or ''}, column id: {r.column_id or ''}, type: {r.type or ''}" for r in final_response]
 
             self.auditLogService.log_event(AuditLog(service="dataset", userid=user.id,action="accessed metadata of dataset "+ name, response=response_serialized))
             return response

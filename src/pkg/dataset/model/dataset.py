@@ -15,6 +15,7 @@ class Dataset:
     def to_dict(self):
         return asdict(self)
 
+@dataclass
 class Metadata:
     userid: int = None
     tenantid:int = None
@@ -25,6 +26,7 @@ class Metadata:
     def to_dict(self):
         return asdict(self)
 
+@dataclass
 class Dataset_content:
     userid: int = None
     tenantid:int = None

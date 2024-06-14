@@ -216,17 +216,19 @@ class DatasetStore:
                     'userid': userid,
                     'tenantid': tenantid,
                 }).mappings().fetchone()
-
+                print("dataset: ",dataset)
                 if dataset.deleted_at:
+                    print("deleted")
                     return # if the dataset was deleted we don't return anything (TODO)
 
                 dataset_id = dataset.id
+                print("DATASET ID ",dataset_id)
                 metadatas = session.execute(text(query2), {
                     'dataset_id':dataset_id,
                     'userid': userid,
                     'tenantid': tenantid,
                 }).mappings().fetchall()
-
+                print("METADATAS: ",metadatas)
                 result = [
                     Metadata(
                         userid=metadata.userid,
