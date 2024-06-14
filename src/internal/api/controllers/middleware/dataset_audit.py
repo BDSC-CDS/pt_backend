@@ -32,8 +32,8 @@ class DatasetControllerAudit():
 
     def dataset_service_delete_dataset(self, user, name:str):
         try:
-            response =  self.next.dataset_service_delete_dataset(user, name)
-            self.auditLogService.log_event(AuditLog(service="dataset", userid=user.id,action="deleted dataset "+name, response=response))
+            response : TemplatebackendDeleteDatasetReply =  self.next.dataset_service_delete_dataset(user, name)
+            self.auditLogService.log_event(AuditLog(service="dataset", userid=user.id,action="deleted dataset "+name+ ": ", response=response.result.success))
             return response
         except Exception as e:
             self.auditLogService.log_event(AuditLog(service="dataset", userid=user.id,action="Error deleting dataset "+ name, response=e, error=True))
@@ -43,7 +43,12 @@ class DatasetControllerAudit():
     def dataset_service_get_dataset_metadata(self, user, name: str):
         try:
             response : TemplatebackendGetDatasetMetadataReply =  self.next.dataset_service_get_dataset_metadata(user, name)
-            final_response = response.metadata.metadata
+            print("RESPONE: ",response)
+            if type(response) is tuple and response[1] == 404:
+                final_response = []
+            else:
+                final_response = response.metadata.metadata
+
             response_serialized =[ f"dataset id: {r.dataset_id or ''}, column id: {r.column_id or ''}, type: {r.type or ''}" for r in final_response]
 
             self.auditLogService.log_event(AuditLog(service="dataset", userid=user.id,action="accessed metadata of dataset "+ name, response=response_serialized))
