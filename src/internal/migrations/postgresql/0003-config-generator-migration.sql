@@ -9,7 +9,7 @@ CREATE TABLE IF NOT EXISTS config_generator (
     scrambleField_fields TEXT,
     dateShift_lowrange INT,
     dateShift_highrange INT,
-    subFieldList_fields: TEXT,
+    subFieldList_fields TEXT,
     subFieldList_substitute TEXT,
     subFieldList_replacement TEXT,
     subFieldRegex_fields TEXT,
