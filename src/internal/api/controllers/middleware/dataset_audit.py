@@ -67,10 +67,10 @@ class DatasetControllerAudit():
     def dataset_service_list_datasets(self, user, offset: int=None, limit: int=None):
         try:
             response : TemplatebackendListDatasetsReply =  self.next.dataset_service_list_datasets(user,offset,limit)
-            response_serialized = f"number of datasets: {response.result.datasets.length or ''}"
+            response_serialized = f"number of datasets: {str(len(response.result.datasets)) or ''}"
 
-            self.auditLogService.log_event(AuditLog(service="dataset", userid=user.id,action="accessed list of datasets for user of size "+ response.result.datasets.length, response=response_serialized))
+            self.auditLogService.log_event(AuditLog(service="dataset", userid=user.id,action="accessed list of datasets for user of size "+ str(len(response.result.datasets)), response=response_serialized))
             return response
         except  Exception as e:
-            self.auditLogService.log_event(AuditLog(service="dataset", userid=user.id,action="Error accessing list of datasets for user of size"+ response.result.datasets.length, response=e, error=True))
+            self.auditLogService.log_event(AuditLog(service="dataset", userid=user.id,action="Error accessing list of datasets for user of size"+ str(len(response.result.datasets)), response=e, error=True))
             raise e

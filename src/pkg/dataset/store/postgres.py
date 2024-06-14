@@ -180,7 +180,7 @@ class DatasetStore:
         return dataset_id
 
     def get_list_datasets(self, userid:int, tenantid:int, offset:int,limit:int) -> List[Dataset]:
-        query = "SELECT * FROM datasets WHERE userid = :userid AND tenantid = :tenantid ORDER BY createdat OFFSET :offset LIMIT :limit;"
+        query = "SELECT * FROM datasets WHERE userid = :userid AND tenantid = :tenantid ORDER BY created_at OFFSET :offset LIMIT :limit;"
         with self.session_scope() as session:
             try:
                 datasets = session.execute(text(query), {
