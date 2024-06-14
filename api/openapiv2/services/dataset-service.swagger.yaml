@@ -279,8 +279,9 @@ definitions:
     properties:
       datasetName:
         type: string
-      path:
+      dataset:
         type: string
+        format: byte
     title: Create a Dataset
   templatebackendStoreDatasetResult:
     type: object

@@ -21,11 +21,11 @@ class DatasetController:
         self.dataset_service = dataset_service
 
     def dataset_service_store_dataset(self, user, body: TemplatebackendStoreDatasetRequest):
-        dataset = dataset_converter.dataset_to_business(body)
+        # name, csv = dataset_converter.csv_to_business(body)
         try:
             # TODO where do I find tenantid?
             # TODO metadata types
-            dataset = self.dataset_service.store_dataset(user.id,user.tenantid, body.dataset_name, body.path)
+            dataset = self.dataset_service.store_dataset(user.id,user.tenantid, body.dataset_name, body.dataset)
         except Exception as e:
             print("error", e)
             traceback.print_exception(e)
@@ -58,7 +58,6 @@ class DatasetController:
 
     def dataset_service_get_dataset_content(self, user, name: str,offset: int=None, limit: int=None):
         try:
-            #TODO dataframe returned
             dataset_content = self.dataset_service.get_dataset_content(name,user.id,user.tenantid,offset,limit)
         except Exception as e:
             print("error", e)

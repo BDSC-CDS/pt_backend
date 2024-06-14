@@ -1,3 +1,4 @@
+from io import StringIO
 from typing import List
 from sqlalchemy.engine import Engine
 from sqlalchemy.exc import SQLAlchemyError
@@ -49,7 +50,7 @@ class DatasetStore:
         finally:
             session.close()
 
-    def store_dataset(self, userid:int,tenantid:int, dataset_name:str,path: str,metadata_types=None) -> int:
+    def store_dataset(self, userid:int,tenantid:int, dataset_name:str,dataset: str,metadata_types=None) -> int:
         # Insert dataset entry and get the generated dataset_id
         dataset_query = """
             INSERT INTO datasets
@@ -72,8 +73,10 @@ class DatasetStore:
                 raise e
 
         try:
-            # Read the CSV file once to infer column types
-            with open(path, newline='') as csvfile:
+                csvfile = StringIO(dataset)
+
+                # Read the CSV file once to infer column type
+                # with open(path, newline='') as csvfile:
                 csv_reader = csv.reader(csvfile)
                 headers = next(csv_reader)  # Read the header row
                 column_data = [[] for _ in headers]

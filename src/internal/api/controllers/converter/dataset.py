@@ -1,17 +1,41 @@
 from datetime import datetime
+from io import StringIO
 from typing import List
+import pandas as pd
 
 from src.pkg.dataset.model.dataset import Dataset, Metadata, Dataset_content
 from server_template.models import TemplatebackendDataset
 from server_template.models import TemplatebackendMetadata
 from server_template.models import TemplatebackendColumn
-
+from server_template.models import TemplatebackendStoreDatasetRequest
 # TODO
-def dataset_to_business(dataset: TemplatebackendDataset) -> Dataset:
-    d = Dataset(
-        dataset_name = dataset.dataset_name,
-    )
-    return d
+def csv_to_business(user,body: TemplatebackendStoreDatasetRequest):
+    name = body.dataset_name
+    csv_data = StringIO(body.dataset)
+    df = pd.read_csv(csv_data)
+    dataset = Dataset(user.id, user.tenantid, name)
+
+    dataset_entry = None
+    metadatas = []
+    contents = []
+
+    # Example logic for populating data, adjust according to actual CSV structure
+    for _, row in df.iterrows():
+        # Create and append dataset object
+        dataset = Dataset(userid=row['userid'], tenantid=row['tenantid'], dataset_name=body.dataset_name)
+        datasets.append(dataset)
+
+        # Assume multiple metadata entries per dataset
+        metadata = Metadata(userid=row['userid'], tenantid=row['tenantid'], dataset_id=dataset.id, column_id=row['column_id'], type_=row['type'])
+        metadatas.append(metadata)
+
+        # Assume multiple content entries per dataset
+        content = DatasetContent(userid=row['userid'], tenantid=row['tenantid'], dataset_id=dataset.id, column_id=row['column_id'], line_id=row['line_id'], val=row['val'])
+        contents.append(content)
+
+    return datasets, metadatas, contents
+
+    return name,d
 
 # TODO
 def dataset_from_business(dataset: Dataset) -> TemplatebackendDataset:

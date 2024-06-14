@@ -5,8 +5,8 @@ class DatasetService:
         self.dataset_store = dataset_store
 
     # store new dataset (store in metadata, dataset,values)
-    def store_dataset(self, userid:int,tenantid:int, dataset_name:str,path: str,metadata_types=None):
-        self.dataset_store.store_dataset(userid,tenantid,dataset_name,path)
+    def store_dataset(self, userid:int,tenantid:int, dataset_name:str,dataset: str,metadata_types=None):
+        self.dataset_store.store_dataset(userid,tenantid,dataset_name,dataset)
 
     # get names of datasets related to this user (if not deleted)
     def get_list_datasets(self, userid:int, tenantid:int, offset:int,limit:int):
