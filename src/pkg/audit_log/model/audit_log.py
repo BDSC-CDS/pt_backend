@@ -1,4 +1,3 @@
-# Assuming AuditLog is a model representing an audit log entry
 import datetime
 from dataclasses import dataclass, asdict
 
