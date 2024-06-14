@@ -34,12 +34,12 @@ paths:
           in: query
           required: false
           type: integer
-          format: int32
+          format: int64
         - name: limit
           in: query
           required: false
           type: integer
-          format: int32
+          format: int64
       tags:
         - Dataset
       x-openapi-router-controller: dataset_controller
@@ -65,7 +65,7 @@ paths:
       tags:
         - Dataset
       x-openapi-router-controller: dataset_controller
-  /api/v1/dataset/content/{id}:
+  /api/v1/dataset/content/{name}:
     get:
       summary: Get Dataset Content
       description: This endpoint allow getting a specific user's Dataset Content
@@ -80,14 +80,9 @@ paths:
           schema:
             $ref: '#/definitions/rpcStatus'
       parameters:
-        - name: id
+        - name: name
           in: path
           required: true
-          type: integer
-          format: int64
-        - name: name
-          in: query
-          required: false
           type: string
         - name: offset
           in: query
@@ -102,7 +97,7 @@ paths:
       tags:
         - Dataset
       x-openapi-router-controller: dataset_controller
-  /api/v1/dataset/metadata/{id}:
+  /api/v1/dataset/metadata/{name}:
     get:
       summary: Get Dataset Metadata
       description: This endpoint allow getting a specific user's Dataset Metadata
@@ -117,19 +112,14 @@ paths:
           schema:
             $ref: '#/definitions/rpcStatus'
       parameters:
-        - name: id
+        - name: name
           in: path
           required: true
-          type: integer
-          format: int64
-        - name: name
-          in: query
-          required: false
           type: string
       tags:
         - Dataset
       x-openapi-router-controller: dataset_controller
-  /api/v1/dataset/{id}:
+  /api/v1/dataset/{name}:
     delete:
       summary: Deletes a dataset
       description: This endpoint deletes a dataset
@@ -144,14 +134,9 @@ paths:
           schema:
             $ref: '#/definitions/rpcStatus'
       parameters:
-        - name: id
+        - name: name
           in: path
           required: true
-          type: integer
-          format: int64
-        - name: name
-          in: query
-          required: false
           type: string
       tags:
         - Dataset
@@ -281,7 +266,6 @@ definitions:
         type: string
       dataset:
         type: string
-        format: byte
     title: Create a Dataset
   templatebackendStoreDatasetResult:
     type: object

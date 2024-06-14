@@ -10,17 +10,19 @@ import csv
 import pandas as pd
 from collections import defaultdict
 def infer_column_type(values):
-    is_int = True
-    is_float = True
+    is_int = False
+    is_float = False
 
     for value in values:
         try:
             int(value)
+            is_int=True
         except ValueError:
             is_int = False
 
         try:
             float(value)
+            is_float=True
         except ValueError:
             is_float = False
 
@@ -65,7 +67,7 @@ class DatasetStore:
                 result = session.execute(text(dataset_query), {
                     'userid': userid,
                     'tenantid': tenantid,
-                    'name':dataset_name,
+                    'dataset_name':dataset_name,
                 }).fetchone()
                 dataset_id = result[0]
 
@@ -73,16 +75,20 @@ class DatasetStore:
                 raise e
 
         try:
-                csvfile = StringIO(dataset)
+                csv_data = dataset.replace("\\n", "\n")
+                csvfile = StringIO(csv_data)
 
                 # Read the CSV file once to infer column type
                 # with open(path, newline='') as csvfile:
                 csv_reader = csv.reader(csvfile)
                 headers = next(csv_reader)  # Read the header row
+                print("CSV headers", headers)
+
                 column_data = [[] for _ in headers]
                 for row in csv_reader:
                     for col_index, value in enumerate(row):
                         column_data[col_index].append(value)
+                print("CSV column data: ",column_data)
 
                 # Infer types for each column
                 column_types = {}
@@ -91,7 +97,7 @@ class DatasetStore:
                         column_types[header] = metadata_types[header]
                     else:
                         column_types[header] = infer_column_type(column_data[col_index])
-
+                print("CSV inference")
                 # Insert metadata
                 metadata_to_insert = []
                 for column_id, header in enumerate(headers):
@@ -103,7 +109,7 @@ class DatasetStore:
                 """
                 with self.session_scope() as session:
                     try:
-                        session.execute(query,metadata_to_insert) # TODO verifier que ça fonctionne
+                        session.execute(text(query),metadata_to_insert) # TODO verifier que ça fonctionne
                     except SQLAlchemyError as e:
                         raise e
 
@@ -123,7 +129,7 @@ class DatasetStore:
                             """
                             with self.session_scope() as session:
                                 try:
-                                    session.execute(query,data_to_insert) # TODO verifier que ça fonctionne
+                                    session.execute(text(query),data_to_insert) # TODO verifier que ça fonctionne
                                 except SQLAlchemyError as e:
                                     raise e
                             data_to_insert = []
@@ -135,7 +141,7 @@ class DatasetStore:
                             """
                     with self.session_scope() as session:
                         try:
-                            session.execute(query,data_to_insert) # TODO verifier que ça fonctionne
+                            session.execute(text(query),data_to_insert) # TODO verifier que ça fonctionne
                         except SQLAlchemyError as e:
                             raise e
 

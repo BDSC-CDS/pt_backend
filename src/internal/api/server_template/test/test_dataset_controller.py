@@ -22,16 +22,14 @@ class TestDatasetController(BaseTestCase):
 
         Deletes a dataset
         """
-        query_string = [('name', 'name_example')]
         headers = { 
             'Accept': 'application/json',
             'Bearer': 'special-key',
         }
         response = self.client.open(
-            '/api/v1/dataset/{id}'.format(id=56),
+            '/api/v1/dataset/{name}'.format(name='name_example'),
             method='DELETE',
-            headers=headers,
-            query_string=query_string)
+            headers=headers)
         self.assert200(response,
                        'Response body is : ' + response.data.decode('utf-8'))
 
@@ -40,15 +38,14 @@ class TestDatasetController(BaseTestCase):
 
         Get Dataset Content
         """
-        query_string = [('name', 'name_example'),
-                        ('offset', 56),
+        query_string = [('offset', 56),
                         ('limit', 56)]
         headers = { 
             'Accept': 'application/json',
             'Bearer': 'special-key',
         }
         response = self.client.open(
-            '/api/v1/dataset/content/{id}'.format(id=56),
+            '/api/v1/dataset/content/{name}'.format(name='name_example'),
             method='GET',
             headers=headers,
             query_string=query_string)
@@ -60,16 +57,14 @@ class TestDatasetController(BaseTestCase):
 
         Get Dataset Metadata
         """
-        query_string = [('name', 'name_example')]
         headers = { 
             'Accept': 'application/json',
             'Bearer': 'special-key',
         }
         response = self.client.open(
-            '/api/v1/dataset/metadata/{id}'.format(id=56),
+            '/api/v1/dataset/metadata/{name}'.format(name='name_example'),
             method='GET',
-            headers=headers,
-            query_string=query_string)
+            headers=headers)
         self.assert200(response,
                        'Response body is : ' + response.data.decode('utf-8'))
 

@@ -33,7 +33,7 @@ class DatasetController:
         # return new dataset id
         return TemplatebackendStoreDatasetReply(TemplatebackendStoreDatasetResult(id=dataset.id))
 
-    def dataset_service_delete_dataset(self, user, name: str):
+    def dataset_service_delete_dataset(self, user, name:str ):
         try:
             #TODO tenantid
             result = self.dataset_service.delete_dataset(name, user.id, user.tenantid)

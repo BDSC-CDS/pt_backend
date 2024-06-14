@@ -19,10 +19,9 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, ClassVar, Dict, List, Optional, Union
-from pydantic import BaseModel, StrictStr, field_validator
+from typing import Any, ClassVar, Dict, List, Optional
+from pydantic import BaseModel, StrictStr
 from pydantic import Field
-from typing_extensions import Annotated
 try:
     from typing import Self
 except ImportError:
@@ -33,18 +32,8 @@ class TemplatebackendStoreDatasetRequest(BaseModel):
     TemplatebackendStoreDatasetRequest
     """ # noqa: E501
     dataset_name: Optional[StrictStr] = Field(default=None, alias="datasetName")
-    dataset: Optional[Union[Annotated[bytes, Field(strict=True)], Annotated[str, Field(strict=True)]]] = None
+    dataset: Optional[StrictStr] = None
     __properties: ClassVar[List[str]] = ["datasetName", "dataset"]
-
-    @field_validator('dataset')
-    def dataset_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if value is None:
-            return value
-
-        if not re.match(r"^(?:[A-Za-z0-9+\/]{4})*(?:[A-Za-z0-9+\/]{2}==|[A-Za-z0-9+\/]{3}=)?$", value):
-            raise ValueError(r"must validate the regular expression /^(?:[A-Za-z0-9+\/]{4})*(?:[A-Za-z0-9+\/]{2}==|[A-Za-z0-9+\/]{3}=)?$/")
-        return value
 
     model_config = {
         "populate_by_name": True,

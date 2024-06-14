@@ -6,7 +6,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **dataset_name** | **str** |  | [optional] 
-**dataset** | **bytearray** |  | [optional] 
+**dataset** | **str** |  | [optional] 
 
 ## Example
 

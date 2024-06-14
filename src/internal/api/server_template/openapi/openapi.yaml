@@ -220,12 +220,12 @@ paths:
       - in: query
         name: offset
         schema:
-          format: int32
+          format: int64
           type: integer
       - in: query
         name: limit
         schema:
-          format: int32
+          format: int64
           type: integer
       responses:
         "200":
@@ -271,19 +271,14 @@ paths:
       - Dataset
       x-openapi-router-controller: dataset_controller
       x-codegen-request-body-name: body
-  /api/v1/dataset/content/{id}:
+  /api/v1/dataset/content/{name}:
     get:
       description: This endpoint allow getting a specific user's Dataset Content
       operationId: dataset_service_get_dataset_content
       parameters:
       - in: path
-        name: id
-        required: true
-        schema:
-          format: int64
-          type: integer
-      - in: query
         name: name
+        required: true
         schema:
           type: string
       - in: query
@@ -313,19 +308,14 @@ paths:
       tags:
       - Dataset
       x-openapi-router-controller: dataset_controller
-  /api/v1/dataset/metadata/{id}:
+  /api/v1/dataset/metadata/{name}:
     get:
       description: This endpoint allow getting a specific user's Dataset Metadata
       operationId: dataset_service_get_dataset_metadata
       parameters:
       - in: path
-        name: id
-        required: true
-        schema:
-          format: int64
-          type: integer
-      - in: query
         name: name
+        required: true
         schema:
           type: string
       responses:
@@ -345,19 +335,14 @@ paths:
       tags:
       - Dataset
       x-openapi-router-controller: dataset_controller
-  /api/v1/dataset/{id}:
+  /api/v1/dataset/{name}:
     delete:
       description: This endpoint deletes a dataset
       operationId: dataset_service_delete_dataset
       parameters:
       - in: path
-        name: id
-        required: true
-        schema:
-          format: int64
-          type: integer
-      - in: query
         name: name
+        required: true
         schema:
           type: string
       responses:
@@ -879,8 +864,6 @@ components:
           title: datasetName
           type: string
         dataset:
-          format: byte
-          pattern: "^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$"
           title: dataset
           type: string
       title: Create a Dataset

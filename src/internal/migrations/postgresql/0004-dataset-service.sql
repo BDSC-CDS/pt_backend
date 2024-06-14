@@ -17,10 +17,11 @@ CREATE TABLE IF NOT EXISTS metadata (
     column_id INTEGER,
     type_ TEXT,
     PRIMARY KEY (dataset_id, column_id),
-    CONSTRAINT metadata_fk FOREIGN KEY (dataset_id) REFERENCES datasets(id)
-    CONSTRAINT metadata_fk FOREIGN KEY (userid) REFERENCES users(id)
+    CONSTRAINT metadata_fk1 FOREIGN KEY (dataset_id) REFERENCES datasets(id),
+    CONSTRAINT metadata_fk2 FOREIGN KEY (userid) REFERENCES users(id)
 );
-CREATE INDEX idx_metadata_dataset_id_userid ON metadata (userid, dataset_id, column_id);/*TODO ? */
+
+CREATE INDEX idx_metadata_dataset_id_userid ON metadata (userid, dataset_id, column_id); /*TODO ? */
 
 CREATE TABLE IF NOT EXISTS dataset_content (
     userid INTEGER,
@@ -29,8 +30,9 @@ CREATE TABLE IF NOT EXISTS dataset_content (
     column_id INTEGER,
     line_id INTEGER,
     val TEXT,
-    PRIMARY KEY (dataset_id, column_id, line_),
-    CONSTRAINT dataset_content_fk FOREIGN KEY (dataset_id) REFERENCES datasets(id)
-    CONSTRAINT dataset_content_fk FOREIGN KEY (userid) REFERENCES users(id)
+    PRIMARY KEY (dataset_id, column_id, line_id),
+    CONSTRAINT dataset_content_fk1 FOREIGN KEY (dataset_id) REFERENCES datasets(id),
+    CONSTRAINT dataset_content_fk2 FOREIGN KEY (userid) REFERENCES users(id)
 );
-CREATE INDEX idx_dataset_content_dataset_id_userid ON dataset_content (userid, dataset_id, column_id,line_id);/*TODO ? */
+
+CREATE INDEX idx_dataset_content_dataset_id_userid ON dataset_content (userid, dataset_id, column_id,line_id); /*TODO ? */

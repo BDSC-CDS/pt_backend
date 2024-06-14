@@ -4,15 +4,15 @@ All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**dataset_service_delete_dataset**](DatasetApi.md#dataset_service_delete_dataset) | **DELETE** /api/v1/dataset/{id} | Deletes a dataset
-[**dataset_service_get_dataset_content**](DatasetApi.md#dataset_service_get_dataset_content) | **GET** /api/v1/dataset/content/{id} | Get Dataset Content
-[**dataset_service_get_dataset_metadata**](DatasetApi.md#dataset_service_get_dataset_metadata) | **GET** /api/v1/dataset/metadata/{id} | Get Dataset Metadata
+[**dataset_service_delete_dataset**](DatasetApi.md#dataset_service_delete_dataset) | **DELETE** /api/v1/dataset/{name} | Deletes a dataset
+[**dataset_service_get_dataset_content**](DatasetApi.md#dataset_service_get_dataset_content) | **GET** /api/v1/dataset/content/{name} | Get Dataset Content
+[**dataset_service_get_dataset_metadata**](DatasetApi.md#dataset_service_get_dataset_metadata) | **GET** /api/v1/dataset/metadata/{name} | Get Dataset Metadata
 [**dataset_service_list_datasets**](DatasetApi.md#dataset_service_list_datasets) | **GET** /api/v1/dataset | List datasets
 [**dataset_service_store_dataset**](DatasetApi.md#dataset_service_store_dataset) | **POST** /api/v1/dataset | Store a dataset
 
 
 # **dataset_service_delete_dataset**
-> TemplatebackendDeleteDatasetReply dataset_service_delete_dataset(id, name=name)
+> TemplatebackendDeleteDatasetReply dataset_service_delete_dataset(name)
 
 Deletes a dataset
 
@@ -51,12 +51,11 @@ configuration.api_key['Bearer'] = os.environ["API_KEY"]
 with openapi_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = openapi_client.DatasetApi(api_client)
-    id = 56 # int | 
-    name = 'name_example' # str |  (optional)
+    name = 'name_example' # str | 
 
     try:
         # Deletes a dataset
-        api_response = api_instance.dataset_service_delete_dataset(id, name=name)
+        api_response = api_instance.dataset_service_delete_dataset(name)
         print("The response of DatasetApi->dataset_service_delete_dataset:\n")
         pprint(api_response)
     except Exception as e:
@@ -70,8 +69,7 @@ with openapi_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **int**|  | 
- **name** | **str**|  | [optional] 
+ **name** | **str**|  | 
 
 ### Return type
 
@@ -96,7 +94,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **dataset_service_get_dataset_content**
-> TemplatebackendGetDatasetContentReply dataset_service_get_dataset_content(id, name=name, offset=offset, limit=limit)
+> TemplatebackendGetDatasetContentReply dataset_service_get_dataset_content(name, offset=offset, limit=limit)
 
 Get Dataset Content
 
@@ -135,14 +133,13 @@ configuration.api_key['Bearer'] = os.environ["API_KEY"]
 with openapi_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = openapi_client.DatasetApi(api_client)
-    id = 56 # int | 
-    name = 'name_example' # str |  (optional)
+    name = 'name_example' # str | 
     offset = 56 # int |  (optional)
     limit = 56 # int |  (optional)
 
     try:
         # Get Dataset Content
-        api_response = api_instance.dataset_service_get_dataset_content(id, name=name, offset=offset, limit=limit)
+        api_response = api_instance.dataset_service_get_dataset_content(name, offset=offset, limit=limit)
         print("The response of DatasetApi->dataset_service_get_dataset_content:\n")
         pprint(api_response)
     except Exception as e:
@@ -156,8 +153,7 @@ with openapi_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **int**|  | 
- **name** | **str**|  | [optional] 
+ **name** | **str**|  | 
  **offset** | **int**|  | [optional] 
  **limit** | **int**|  | [optional] 
 
@@ -184,7 +180,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **dataset_service_get_dataset_metadata**
-> TemplatebackendGetDatasetMetadataReply dataset_service_get_dataset_metadata(id, name=name)
+> TemplatebackendGetDatasetMetadataReply dataset_service_get_dataset_metadata(name)
 
 Get Dataset Metadata
 
@@ -223,12 +219,11 @@ configuration.api_key['Bearer'] = os.environ["API_KEY"]
 with openapi_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = openapi_client.DatasetApi(api_client)
-    id = 56 # int | 
-    name = 'name_example' # str |  (optional)
+    name = 'name_example' # str | 
 
     try:
         # Get Dataset Metadata
-        api_response = api_instance.dataset_service_get_dataset_metadata(id, name=name)
+        api_response = api_instance.dataset_service_get_dataset_metadata(name)
         print("The response of DatasetApi->dataset_service_get_dataset_metadata:\n")
         pprint(api_response)
     except Exception as e:
@@ -242,8 +237,7 @@ with openapi_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **int**|  | 
- **name** | **str**|  | [optional] 
+ **name** | **str**|  | 
 
 ### Return type
 
