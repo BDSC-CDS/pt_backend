@@ -14,6 +14,7 @@ security:
 tags:
 - name: AuthenticationService
 - name: IndexService
+- name: QuestionnaireService
 - name: UserService
 paths:
   /api/rest/v1/authentication/login:
@@ -267,6 +268,119 @@ paths:
       - Index
       x-openapi-router-controller: index_controller
       x-codegen-request-body-name: body
+  /api/v1/questionnaire:
+    get:
+      description: This endpoint allows listing a user's questionnaires
+      operationId: questionnaire_service_list_questionnaire
+      parameters:
+      - in: query
+        name: offset
+        schema:
+          format: int64
+          type: integer
+      - in: query
+        name: limit
+        schema:
+          format: int64
+          type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/templatebackendListQuestionnaireReply'
+          description: A successful response.
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+          description: An unexpected error response.
+      summary: List questionnaires
+      tags:
+      - Questionnaire
+      x-openapi-router-controller: questionnaire_controller
+    post:
+      description: This endpoint creates a questionnaire
+      operationId: questionnaire_service_create_questionnaire
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/templatebackendCreateQuestionnaireRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/templatebackendCreateQuestionnaireReply'
+          description: A successful response.
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+          description: An unexpected error response.
+      summary: Create a questionnaire
+      tags:
+      - Questionnaire
+      x-openapi-router-controller: questionnaire_controller
+      x-codegen-request-body-name: body
+  /api/v1/questionnaire/{id}:
+    delete:
+      description: This endpoint creates a questionnaire
+      operationId: questionnaire_service_delete_questionnaire
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/templatebackendDeleteQuestionnaireReply'
+          description: A successful response.
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+          description: An unexpected error response.
+      summary: Create a questionnaire
+      tags:
+      - Questionnaire
+      x-openapi-router-controller: questionnaire_controller
+    get:
+      description: This endpoint allow getting a single user's questionnaire
+      operationId: questionnaire_service_get_questionnaire
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/templatebackendGetQuestionnaireReply'
+          description: A successful response.
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+          description: An unexpected error response.
+      summary: Get questionnaires
+      tags:
+      - Questionnaire
+      x-openapi-router-controller: questionnaire_controller
 components:
   schemas:
     protobufAny:
@@ -329,6 +443,31 @@ components:
           type: string
       title: templatebackendCreateHelloReply
       type: object
+    templatebackendCreateQuestionnaireReply:
+      example:
+        result:
+          id: 0
+      properties:
+        result:
+          $ref: '#/components/schemas/templatebackendCreateQuestionnaireResult'
+      title: templatebackendCreateQuestionnaireReply
+      type: object
+    templatebackendCreateQuestionnaireRequest:
+      properties:
+        questionnaire:
+          $ref: '#/components/schemas/templatebackendQuestionnaire'
+      title: Message definitions for requests and responses
+      type: object
+    templatebackendCreateQuestionnaireResult:
+      example:
+        id: 0
+      properties:
+        id:
+          format: int64
+          title: id
+          type: integer
+      title: templatebackendCreateQuestionnaireResult
+      type: object
     templatebackendCreateUserReply:
       example:
         result:
@@ -361,6 +500,24 @@ components:
           type: string
       title: templatebackendCredentials
       type: object
+    templatebackendDeleteQuestionnaireReply:
+      example:
+        result:
+          success: true
+      properties:
+        result:
+          $ref: '#/components/schemas/templatebackendDeleteQuestionnaireResult'
+      title: templatebackendDeleteQuestionnaireReply
+      type: object
+    templatebackendDeleteQuestionnaireResult:
+      example:
+        success: true
+      properties:
+        success:
+          title: success
+          type: boolean
+      title: templatebackendDeleteQuestionnaireResult
+      type: object
     templatebackendDeleteUserReply:
       example:
         result: "{}"
@@ -381,6 +538,423 @@ components:
           title: content
           type: string
       title: templatebackendGetHelloReply
+      type: object
+    templatebackendGetQuestionnaireReply:
+      example:
+        result:
+          questionnaire:
+            replyEditable: true
+            createdAt: 2000-01-23T04:56:07.000+00:00
+            versions:
+            - createdAt: 2000-01-23T04:56:07.000+00:00
+              questions:
+              - createdAt: 2000-01-23T04:56:07.000+00:00
+                flag: flag
+                tab: tab
+                question: question
+                answerType: answerType
+                tooltip: tooltip
+                answers:
+                - rulePrefills:
+                  - answerId: 3
+                    createdAt: 2000-01-23T04:56:07.000+00:00
+                    questionId: 9
+                    answerText: answerText
+                    id: 7
+                    updatedAt: 2000-01-23T04:56:07.000+00:00
+                  - answerId: 3
+                    createdAt: 2000-01-23T04:56:07.000+00:00
+                    questionId: 9
+                    answerText: answerText
+                    id: 7
+                    updatedAt: 2000-01-23T04:56:07.000+00:00
+                  createdAt: 2000-01-23T04:56:07.000+00:00
+                  riskLevel: 2
+                  id: 5
+                  text: text
+                  updatedAt: 2000-01-23T04:56:07.000+00:00
+                - rulePrefills:
+                  - answerId: 3
+                    createdAt: 2000-01-23T04:56:07.000+00:00
+                    questionId: 9
+                    answerText: answerText
+                    id: 7
+                    updatedAt: 2000-01-23T04:56:07.000+00:00
+                  - answerId: 3
+                    createdAt: 2000-01-23T04:56:07.000+00:00
+                    questionId: 9
+                    answerText: answerText
+                    id: 7
+                    updatedAt: 2000-01-23T04:56:07.000+00:00
+                  createdAt: 2000-01-23T04:56:07.000+00:00
+                  riskLevel: 2
+                  id: 5
+                  text: text
+                  updatedAt: 2000-01-23T04:56:07.000+00:00
+                riskWeight: 5
+                id: 1
+                updatedAt: 2000-01-23T04:56:07.000+00:00
+              - createdAt: 2000-01-23T04:56:07.000+00:00
+                flag: flag
+                tab: tab
+                question: question
+                answerType: answerType
+                tooltip: tooltip
+                answers:
+                - rulePrefills:
+                  - answerId: 3
+                    createdAt: 2000-01-23T04:56:07.000+00:00
+                    questionId: 9
+                    answerText: answerText
+                    id: 7
+                    updatedAt: 2000-01-23T04:56:07.000+00:00
+                  - answerId: 3
+                    createdAt: 2000-01-23T04:56:07.000+00:00
+                    questionId: 9
+                    answerText: answerText
+                    id: 7
+                    updatedAt: 2000-01-23T04:56:07.000+00:00
+                  createdAt: 2000-01-23T04:56:07.000+00:00
+                  riskLevel: 2
+                  id: 5
+                  text: text
+                  updatedAt: 2000-01-23T04:56:07.000+00:00
+                - rulePrefills:
+                  - answerId: 3
+                    createdAt: 2000-01-23T04:56:07.000+00:00
+                    questionId: 9
+                    answerText: answerText
+                    id: 7
+                    updatedAt: 2000-01-23T04:56:07.000+00:00
+                  - answerId: 3
+                    createdAt: 2000-01-23T04:56:07.000+00:00
+                    questionId: 9
+                    answerText: answerText
+                    id: 7
+                    updatedAt: 2000-01-23T04:56:07.000+00:00
+                  createdAt: 2000-01-23T04:56:07.000+00:00
+                  riskLevel: 2
+                  id: 5
+                  text: text
+                  updatedAt: 2000-01-23T04:56:07.000+00:00
+                riskWeight: 5
+                id: 1
+                updatedAt: 2000-01-23T04:56:07.000+00:00
+              id: 6
+              version: version
+              updatedAt: 2000-01-23T04:56:07.000+00:00
+            - createdAt: 2000-01-23T04:56:07.000+00:00
+              questions:
+              - createdAt: 2000-01-23T04:56:07.000+00:00
+                flag: flag
+                tab: tab
+                question: question
+                answerType: answerType
+                tooltip: tooltip
+                answers:
+                - rulePrefills:
+                  - answerId: 3
+                    createdAt: 2000-01-23T04:56:07.000+00:00
+                    questionId: 9
+                    answerText: answerText
+                    id: 7
+                    updatedAt: 2000-01-23T04:56:07.000+00:00
+                  - answerId: 3
+                    createdAt: 2000-01-23T04:56:07.000+00:00
+                    questionId: 9
+                    answerText: answerText
+                    id: 7
+                    updatedAt: 2000-01-23T04:56:07.000+00:00
+                  createdAt: 2000-01-23T04:56:07.000+00:00
+                  riskLevel: 2
+                  id: 5
+                  text: text
+                  updatedAt: 2000-01-23T04:56:07.000+00:00
+                - rulePrefills:
+                  - answerId: 3
+                    createdAt: 2000-01-23T04:56:07.000+00:00
+                    questionId: 9
+                    answerText: answerText
+                    id: 7
+                    updatedAt: 2000-01-23T04:56:07.000+00:00
+                  - answerId: 3
+                    createdAt: 2000-01-23T04:56:07.000+00:00
+                    questionId: 9
+                    answerText: answerText
+                    id: 7
+                    updatedAt: 2000-01-23T04:56:07.000+00:00
+                  createdAt: 2000-01-23T04:56:07.000+00:00
+                  riskLevel: 2
+                  id: 5
+                  text: text
+                  updatedAt: 2000-01-23T04:56:07.000+00:00
+                riskWeight: 5
+                id: 1
+                updatedAt: 2000-01-23T04:56:07.000+00:00
+              - createdAt: 2000-01-23T04:56:07.000+00:00
+                flag: flag
+                tab: tab
+                question: question
+                answerType: answerType
+                tooltip: tooltip
+                answers:
+                - rulePrefills:
+                  - answerId: 3
+                    createdAt: 2000-01-23T04:56:07.000+00:00
+                    questionId: 9
+                    answerText: answerText
+                    id: 7
+                    updatedAt: 2000-01-23T04:56:07.000+00:00
+                  - answerId: 3
+                    createdAt: 2000-01-23T04:56:07.000+00:00
+                    questionId: 9
+                    answerText: answerText
+                    id: 7
+                    updatedAt: 2000-01-23T04:56:07.000+00:00
+                  createdAt: 2000-01-23T04:56:07.000+00:00
+                  riskLevel: 2
+                  id: 5
+                  text: text
+                  updatedAt: 2000-01-23T04:56:07.000+00:00
+                - rulePrefills:
+                  - answerId: 3
+                    createdAt: 2000-01-23T04:56:07.000+00:00
+                    questionId: 9
+                    answerText: answerText
+                    id: 7
+                    updatedAt: 2000-01-23T04:56:07.000+00:00
+                  - answerId: 3
+                    createdAt: 2000-01-23T04:56:07.000+00:00
+                    questionId: 9
+                    answerText: answerText
+                    id: 7
+                    updatedAt: 2000-01-23T04:56:07.000+00:00
+                  createdAt: 2000-01-23T04:56:07.000+00:00
+                  riskLevel: 2
+                  id: 5
+                  text: text
+                  updatedAt: 2000-01-23T04:56:07.000+00:00
+                riskWeight: 5
+                id: 1
+                updatedAt: 2000-01-23T04:56:07.000+00:00
+              id: 6
+              version: version
+              updatedAt: 2000-01-23T04:56:07.000+00:00
+            name: name
+            id: 0
+            updatedAt: 2000-01-23T04:56:07.000+00:00
+      properties:
+        result:
+          $ref: '#/components/schemas/templatebackendGetQuestionnaireResult'
+      title: templatebackendGetQuestionnaireReply
+      type: object
+    templatebackendGetQuestionnaireResult:
+      example:
+        questionnaire:
+          replyEditable: true
+          createdAt: 2000-01-23T04:56:07.000+00:00
+          versions:
+          - createdAt: 2000-01-23T04:56:07.000+00:00
+            questions:
+            - createdAt: 2000-01-23T04:56:07.000+00:00
+              flag: flag
+              tab: tab
+              question: question
+              answerType: answerType
+              tooltip: tooltip
+              answers:
+              - rulePrefills:
+                - answerId: 3
+                  createdAt: 2000-01-23T04:56:07.000+00:00
+                  questionId: 9
+                  answerText: answerText
+                  id: 7
+                  updatedAt: 2000-01-23T04:56:07.000+00:00
+                - answerId: 3
+                  createdAt: 2000-01-23T04:56:07.000+00:00
+                  questionId: 9
+                  answerText: answerText
+                  id: 7
+                  updatedAt: 2000-01-23T04:56:07.000+00:00
+                createdAt: 2000-01-23T04:56:07.000+00:00
+                riskLevel: 2
+                id: 5
+                text: text
+                updatedAt: 2000-01-23T04:56:07.000+00:00
+              - rulePrefills:
+                - answerId: 3
+                  createdAt: 2000-01-23T04:56:07.000+00:00
+                  questionId: 9
+                  answerText: answerText
+                  id: 7
+                  updatedAt: 2000-01-23T04:56:07.000+00:00
+                - answerId: 3
+                  createdAt: 2000-01-23T04:56:07.000+00:00
+                  questionId: 9
+                  answerText: answerText
+                  id: 7
+                  updatedAt: 2000-01-23T04:56:07.000+00:00
+                createdAt: 2000-01-23T04:56:07.000+00:00
+                riskLevel: 2
+                id: 5
+                text: text
+                updatedAt: 2000-01-23T04:56:07.000+00:00
+              riskWeight: 5
+              id: 1
+              updatedAt: 2000-01-23T04:56:07.000+00:00
+            - createdAt: 2000-01-23T04:56:07.000+00:00
+              flag: flag
+              tab: tab
+              question: question
+              answerType: answerType
+              tooltip: tooltip
+              answers:
+              - rulePrefills:
+                - answerId: 3
+                  createdAt: 2000-01-23T04:56:07.000+00:00
+                  questionId: 9
+                  answerText: answerText
+                  id: 7
+                  updatedAt: 2000-01-23T04:56:07.000+00:00
+                - answerId: 3
+                  createdAt: 2000-01-23T04:56:07.000+00:00
+                  questionId: 9
+                  answerText: answerText
+                  id: 7
+                  updatedAt: 2000-01-23T04:56:07.000+00:00
+                createdAt: 2000-01-23T04:56:07.000+00:00
+                riskLevel: 2
+                id: 5
+                text: text
+                updatedAt: 2000-01-23T04:56:07.000+00:00
+              - rulePrefills:
+                - answerId: 3
+                  createdAt: 2000-01-23T04:56:07.000+00:00
+                  questionId: 9
+                  answerText: answerText
+                  id: 7
+                  updatedAt: 2000-01-23T04:56:07.000+00:00
+                - answerId: 3
+                  createdAt: 2000-01-23T04:56:07.000+00:00
+                  questionId: 9
+                  answerText: answerText
+                  id: 7
+                  updatedAt: 2000-01-23T04:56:07.000+00:00
+                createdAt: 2000-01-23T04:56:07.000+00:00
+                riskLevel: 2
+                id: 5
+                text: text
+                updatedAt: 2000-01-23T04:56:07.000+00:00
+              riskWeight: 5
+              id: 1
+              updatedAt: 2000-01-23T04:56:07.000+00:00
+            id: 6
+            version: version
+            updatedAt: 2000-01-23T04:56:07.000+00:00
+          - createdAt: 2000-01-23T04:56:07.000+00:00
+            questions:
+            - createdAt: 2000-01-23T04:56:07.000+00:00
+              flag: flag
+              tab: tab
+              question: question
+              answerType: answerType
+              tooltip: tooltip
+              answers:
+              - rulePrefills:
+                - answerId: 3
+                  createdAt: 2000-01-23T04:56:07.000+00:00
+                  questionId: 9
+                  answerText: answerText
+                  id: 7
+                  updatedAt: 2000-01-23T04:56:07.000+00:00
+                - answerId: 3
+                  createdAt: 2000-01-23T04:56:07.000+00:00
+                  questionId: 9
+                  answerText: answerText
+                  id: 7
+                  updatedAt: 2000-01-23T04:56:07.000+00:00
+                createdAt: 2000-01-23T04:56:07.000+00:00
+                riskLevel: 2
+                id: 5
+                text: text
+                updatedAt: 2000-01-23T04:56:07.000+00:00
+              - rulePrefills:
+                - answerId: 3
+                  createdAt: 2000-01-23T04:56:07.000+00:00
+                  questionId: 9
+                  answerText: answerText
+                  id: 7
+                  updatedAt: 2000-01-23T04:56:07.000+00:00
+                - answerId: 3
+                  createdAt: 2000-01-23T04:56:07.000+00:00
+                  questionId: 9
+                  answerText: answerText
+                  id: 7
+                  updatedAt: 2000-01-23T04:56:07.000+00:00
+                createdAt: 2000-01-23T04:56:07.000+00:00
+                riskLevel: 2
+                id: 5
+                text: text
+                updatedAt: 2000-01-23T04:56:07.000+00:00
+              riskWeight: 5
+              id: 1
+              updatedAt: 2000-01-23T04:56:07.000+00:00
+            - createdAt: 2000-01-23T04:56:07.000+00:00
+              flag: flag
+              tab: tab
+              question: question
+              answerType: answerType
+              tooltip: tooltip
+              answers:
+              - rulePrefills:
+                - answerId: 3
+                  createdAt: 2000-01-23T04:56:07.000+00:00
+                  questionId: 9
+                  answerText: answerText
+                  id: 7
+                  updatedAt: 2000-01-23T04:56:07.000+00:00
+                - answerId: 3
+                  createdAt: 2000-01-23T04:56:07.000+00:00
+                  questionId: 9
+                  answerText: answerText
+                  id: 7
+                  updatedAt: 2000-01-23T04:56:07.000+00:00
+                createdAt: 2000-01-23T04:56:07.000+00:00
+                riskLevel: 2
+                id: 5
+                text: text
+                updatedAt: 2000-01-23T04:56:07.000+00:00
+              - rulePrefills:
+                - answerId: 3
+                  createdAt: 2000-01-23T04:56:07.000+00:00
+                  questionId: 9
+                  answerText: answerText
+                  id: 7
+                  updatedAt: 2000-01-23T04:56:07.000+00:00
+                - answerId: 3
+                  createdAt: 2000-01-23T04:56:07.000+00:00
+                  questionId: 9
+                  answerText: answerText
+                  id: 7
+                  updatedAt: 2000-01-23T04:56:07.000+00:00
+                createdAt: 2000-01-23T04:56:07.000+00:00
+                riskLevel: 2
+                id: 5
+                text: text
+                updatedAt: 2000-01-23T04:56:07.000+00:00
+              riskWeight: 5
+              id: 1
+              updatedAt: 2000-01-23T04:56:07.000+00:00
+            id: 6
+            version: version
+            updatedAt: 2000-01-23T04:56:07.000+00:00
+          name: name
+          id: 0
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+      properties:
+        questionnaire:
+          $ref: '#/components/schemas/templatebackendQuestionnaire'
+      title: templatebackendGetQuestionnaireResult
       type: object
     templatebackendGetUserMeReply:
       example:
@@ -471,6 +1045,1344 @@ components:
         user:
           $ref: '#/components/schemas/templatebackendUser'
       title: templatebackendGetUserResult
+      type: object
+    templatebackendListQuestionnaireReply:
+      example:
+        result:
+          questionnaires:
+          - replyEditable: true
+            createdAt: 2000-01-23T04:56:07.000+00:00
+            versions:
+            - createdAt: 2000-01-23T04:56:07.000+00:00
+              questions:
+              - createdAt: 2000-01-23T04:56:07.000+00:00
+                flag: flag
+                tab: tab
+                question: question
+                answerType: answerType
+                tooltip: tooltip
+                answers:
+                - rulePrefills:
+                  - answerId: 3
+                    createdAt: 2000-01-23T04:56:07.000+00:00
+                    questionId: 9
+                    answerText: answerText
+                    id: 7
+                    updatedAt: 2000-01-23T04:56:07.000+00:00
+                  - answerId: 3
+                    createdAt: 2000-01-23T04:56:07.000+00:00
+                    questionId: 9
+                    answerText: answerText
+                    id: 7
+                    updatedAt: 2000-01-23T04:56:07.000+00:00
+                  createdAt: 2000-01-23T04:56:07.000+00:00
+                  riskLevel: 2
+                  id: 5
+                  text: text
+                  updatedAt: 2000-01-23T04:56:07.000+00:00
+                - rulePrefills:
+                  - answerId: 3
+                    createdAt: 2000-01-23T04:56:07.000+00:00
+                    questionId: 9
+                    answerText: answerText
+                    id: 7
+                    updatedAt: 2000-01-23T04:56:07.000+00:00
+                  - answerId: 3
+                    createdAt: 2000-01-23T04:56:07.000+00:00
+                    questionId: 9
+                    answerText: answerText
+                    id: 7
+                    updatedAt: 2000-01-23T04:56:07.000+00:00
+                  createdAt: 2000-01-23T04:56:07.000+00:00
+                  riskLevel: 2
+                  id: 5
+                  text: text
+                  updatedAt: 2000-01-23T04:56:07.000+00:00
+                riskWeight: 5
+                id: 1
+                updatedAt: 2000-01-23T04:56:07.000+00:00
+              - createdAt: 2000-01-23T04:56:07.000+00:00
+                flag: flag
+                tab: tab
+                question: question
+                answerType: answerType
+                tooltip: tooltip
+                answers:
+                - rulePrefills:
+                  - answerId: 3
+                    createdAt: 2000-01-23T04:56:07.000+00:00
+                    questionId: 9
+                    answerText: answerText
+                    id: 7
+                    updatedAt: 2000-01-23T04:56:07.000+00:00
+                  - answerId: 3
+                    createdAt: 2000-01-23T04:56:07.000+00:00
+                    questionId: 9
+                    answerText: answerText
+                    id: 7
+                    updatedAt: 2000-01-23T04:56:07.000+00:00
+                  createdAt: 2000-01-23T04:56:07.000+00:00
+                  riskLevel: 2
+                  id: 5
+                  text: text
+                  updatedAt: 2000-01-23T04:56:07.000+00:00
+                - rulePrefills:
+                  - answerId: 3
+                    createdAt: 2000-01-23T04:56:07.000+00:00
+                    questionId: 9
+                    answerText: answerText
+                    id: 7
+                    updatedAt: 2000-01-23T04:56:07.000+00:00
+                  - answerId: 3
+                    createdAt: 2000-01-23T04:56:07.000+00:00
+                    questionId: 9
+                    answerText: answerText
+                    id: 7
+                    updatedAt: 2000-01-23T04:56:07.000+00:00
+                  createdAt: 2000-01-23T04:56:07.000+00:00
+                  riskLevel: 2
+                  id: 5
+                  text: text
+                  updatedAt: 2000-01-23T04:56:07.000+00:00
+                riskWeight: 5
+                id: 1
+                updatedAt: 2000-01-23T04:56:07.000+00:00
+              id: 6
+              version: version
+              updatedAt: 2000-01-23T04:56:07.000+00:00
+            - createdAt: 2000-01-23T04:56:07.000+00:00
+              questions:
+              - createdAt: 2000-01-23T04:56:07.000+00:00
+                flag: flag
+                tab: tab
+                question: question
+                answerType: answerType
+                tooltip: tooltip
+                answers:
+                - rulePrefills:
+                  - answerId: 3
+                    createdAt: 2000-01-23T04:56:07.000+00:00
+                    questionId: 9
+                    answerText: answerText
+                    id: 7
+                    updatedAt: 2000-01-23T04:56:07.000+00:00
+                  - answerId: 3
+                    createdAt: 2000-01-23T04:56:07.000+00:00
+                    questionId: 9
+                    answerText: answerText
+                    id: 7
+                    updatedAt: 2000-01-23T04:56:07.000+00:00
+                  createdAt: 2000-01-23T04:56:07.000+00:00
+                  riskLevel: 2
+                  id: 5
+                  text: text
+                  updatedAt: 2000-01-23T04:56:07.000+00:00
+                - rulePrefills:
+                  - answerId: 3
+                    createdAt: 2000-01-23T04:56:07.000+00:00
+                    questionId: 9
+                    answerText: answerText
+                    id: 7
+                    updatedAt: 2000-01-23T04:56:07.000+00:00
+                  - answerId: 3
+                    createdAt: 2000-01-23T04:56:07.000+00:00
+                    questionId: 9
+                    answerText: answerText
+                    id: 7
+                    updatedAt: 2000-01-23T04:56:07.000+00:00
+                  createdAt: 2000-01-23T04:56:07.000+00:00
+                  riskLevel: 2
+                  id: 5
+                  text: text
+                  updatedAt: 2000-01-23T04:56:07.000+00:00
+                riskWeight: 5
+                id: 1
+                updatedAt: 2000-01-23T04:56:07.000+00:00
+              - createdAt: 2000-01-23T04:56:07.000+00:00
+                flag: flag
+                tab: tab
+                question: question
+                answerType: answerType
+                tooltip: tooltip
+                answers:
+                - rulePrefills:
+                  - answerId: 3
+                    createdAt: 2000-01-23T04:56:07.000+00:00
+                    questionId: 9
+                    answerText: answerText
+                    id: 7
+                    updatedAt: 2000-01-23T04:56:07.000+00:00
+                  - answerId: 3
+                    createdAt: 2000-01-23T04:56:07.000+00:00
+                    questionId: 9
+                    answerText: answerText
+                    id: 7
+                    updatedAt: 2000-01-23T04:56:07.000+00:00
+                  createdAt: 2000-01-23T04:56:07.000+00:00
+                  riskLevel: 2
+                  id: 5
+                  text: text
+                  updatedAt: 2000-01-23T04:56:07.000+00:00
+                - rulePrefills:
+                  - answerId: 3
+                    createdAt: 2000-01-23T04:56:07.000+00:00
+                    questionId: 9
+                    answerText: answerText
+                    id: 7
+                    updatedAt: 2000-01-23T04:56:07.000+00:00
+                  - answerId: 3
+                    createdAt: 2000-01-23T04:56:07.000+00:00
+                    questionId: 9
+                    answerText: answerText
+                    id: 7
+                    updatedAt: 2000-01-23T04:56:07.000+00:00
+                  createdAt: 2000-01-23T04:56:07.000+00:00
+                  riskLevel: 2
+                  id: 5
+                  text: text
+                  updatedAt: 2000-01-23T04:56:07.000+00:00
+                riskWeight: 5
+                id: 1
+                updatedAt: 2000-01-23T04:56:07.000+00:00
+              id: 6
+              version: version
+              updatedAt: 2000-01-23T04:56:07.000+00:00
+            name: name
+            id: 0
+            updatedAt: 2000-01-23T04:56:07.000+00:00
+          - replyEditable: true
+            createdAt: 2000-01-23T04:56:07.000+00:00
+            versions:
+            - createdAt: 2000-01-23T04:56:07.000+00:00
+              questions:
+              - createdAt: 2000-01-23T04:56:07.000+00:00
+                flag: flag
+                tab: tab
+                question: question
+                answerType: answerType
+                tooltip: tooltip
+                answers:
+                - rulePrefills:
+                  - answerId: 3
+                    createdAt: 2000-01-23T04:56:07.000+00:00
+                    questionId: 9
+                    answerText: answerText
+                    id: 7
+                    updatedAt: 2000-01-23T04:56:07.000+00:00
+                  - answerId: 3
+                    createdAt: 2000-01-23T04:56:07.000+00:00
+                    questionId: 9
+                    answerText: answerText
+                    id: 7
+                    updatedAt: 2000-01-23T04:56:07.000+00:00
+                  createdAt: 2000-01-23T04:56:07.000+00:00
+                  riskLevel: 2
+                  id: 5
+                  text: text
+                  updatedAt: 2000-01-23T04:56:07.000+00:00
+                - rulePrefills:
+                  - answerId: 3
+                    createdAt: 2000-01-23T04:56:07.000+00:00
+                    questionId: 9
+                    answerText: answerText
+                    id: 7
+                    updatedAt: 2000-01-23T04:56:07.000+00:00
+                  - answerId: 3
+                    createdAt: 2000-01-23T04:56:07.000+00:00
+                    questionId: 9
+                    answerText: answerText
+                    id: 7
+                    updatedAt: 2000-01-23T04:56:07.000+00:00
+                  createdAt: 2000-01-23T04:56:07.000+00:00
+                  riskLevel: 2
+                  id: 5
+                  text: text
+                  updatedAt: 2000-01-23T04:56:07.000+00:00
+                riskWeight: 5
+                id: 1
+                updatedAt: 2000-01-23T04:56:07.000+00:00
+              - createdAt: 2000-01-23T04:56:07.000+00:00
+                flag: flag
+                tab: tab
+                question: question
+                answerType: answerType
+                tooltip: tooltip
+                answers:
+                - rulePrefills:
+                  - answerId: 3
+                    createdAt: 2000-01-23T04:56:07.000+00:00
+                    questionId: 9
+                    answerText: answerText
+                    id: 7
+                    updatedAt: 2000-01-23T04:56:07.000+00:00
+                  - answerId: 3
+                    createdAt: 2000-01-23T04:56:07.000+00:00
+                    questionId: 9
+                    answerText: answerText
+                    id: 7
+                    updatedAt: 2000-01-23T04:56:07.000+00:00
+                  createdAt: 2000-01-23T04:56:07.000+00:00
+                  riskLevel: 2
+                  id: 5
+                  text: text
+                  updatedAt: 2000-01-23T04:56:07.000+00:00
+                - rulePrefills:
+                  - answerId: 3
+                    createdAt: 2000-01-23T04:56:07.000+00:00
+                    questionId: 9
+                    answerText: answerText
+                    id: 7
+                    updatedAt: 2000-01-23T04:56:07.000+00:00
+                  - answerId: 3
+                    createdAt: 2000-01-23T04:56:07.000+00:00
+                    questionId: 9
+                    answerText: answerText
+                    id: 7
+                    updatedAt: 2000-01-23T04:56:07.000+00:00
+                  createdAt: 2000-01-23T04:56:07.000+00:00
+                  riskLevel: 2
+                  id: 5
+                  text: text
+                  updatedAt: 2000-01-23T04:56:07.000+00:00
+                riskWeight: 5
+                id: 1
+                updatedAt: 2000-01-23T04:56:07.000+00:00
+              id: 6
+              version: version
+              updatedAt: 2000-01-23T04:56:07.000+00:00
+            - createdAt: 2000-01-23T04:56:07.000+00:00
+              questions:
+              - createdAt: 2000-01-23T04:56:07.000+00:00
+                flag: flag
+                tab: tab
+                question: question
+                answerType: answerType
+                tooltip: tooltip
+                answers:
+                - rulePrefills:
+                  - answerId: 3
+                    createdAt: 2000-01-23T04:56:07.000+00:00
+                    questionId: 9
+                    answerText: answerText
+                    id: 7
+                    updatedAt: 2000-01-23T04:56:07.000+00:00
+                  - answerId: 3
+                    createdAt: 2000-01-23T04:56:07.000+00:00
+                    questionId: 9
+                    answerText: answerText
+                    id: 7
+                    updatedAt: 2000-01-23T04:56:07.000+00:00
+                  createdAt: 2000-01-23T04:56:07.000+00:00
+                  riskLevel: 2
+                  id: 5
+                  text: text
+                  updatedAt: 2000-01-23T04:56:07.000+00:00
+                - rulePrefills:
+                  - answerId: 3
+                    createdAt: 2000-01-23T04:56:07.000+00:00
+                    questionId: 9
+                    answerText: answerText
+                    id: 7
+                    updatedAt: 2000-01-23T04:56:07.000+00:00
+                  - answerId: 3
+                    createdAt: 2000-01-23T04:56:07.000+00:00
+                    questionId: 9
+                    answerText: answerText
+                    id: 7
+                    updatedAt: 2000-01-23T04:56:07.000+00:00
+                  createdAt: 2000-01-23T04:56:07.000+00:00
+                  riskLevel: 2
+                  id: 5
+                  text: text
+                  updatedAt: 2000-01-23T04:56:07.000+00:00
+                riskWeight: 5
+                id: 1
+                updatedAt: 2000-01-23T04:56:07.000+00:00
+              - createdAt: 2000-01-23T04:56:07.000+00:00
+                flag: flag
+                tab: tab
+                question: question
+                answerType: answerType
+                tooltip: tooltip
+                answers:
+                - rulePrefills:
+                  - answerId: 3
+                    createdAt: 2000-01-23T04:56:07.000+00:00
+                    questionId: 9
+                    answerText: answerText
+                    id: 7
+                    updatedAt: 2000-01-23T04:56:07.000+00:00
+                  - answerId: 3
+                    createdAt: 2000-01-23T04:56:07.000+00:00
+                    questionId: 9
+                    answerText: answerText
+                    id: 7
+                    updatedAt: 2000-01-23T04:56:07.000+00:00
+                  createdAt: 2000-01-23T04:56:07.000+00:00
+                  riskLevel: 2
+                  id: 5
+                  text: text
+                  updatedAt: 2000-01-23T04:56:07.000+00:00
+                - rulePrefills:
+                  - answerId: 3
+                    createdAt: 2000-01-23T04:56:07.000+00:00
+                    questionId: 9
+                    answerText: answerText
+                    id: 7
+                    updatedAt: 2000-01-23T04:56:07.000+00:00
+                  - answerId: 3
+                    createdAt: 2000-01-23T04:56:07.000+00:00
+                    questionId: 9
+                    answerText: answerText
+                    id: 7
+                    updatedAt: 2000-01-23T04:56:07.000+00:00
+                  createdAt: 2000-01-23T04:56:07.000+00:00
+                  riskLevel: 2
+                  id: 5
+                  text: text
+                  updatedAt: 2000-01-23T04:56:07.000+00:00
+                riskWeight: 5
+                id: 1
+                updatedAt: 2000-01-23T04:56:07.000+00:00
+              id: 6
+              version: version
+              updatedAt: 2000-01-23T04:56:07.000+00:00
+            name: name
+            id: 0
+            updatedAt: 2000-01-23T04:56:07.000+00:00
+      properties:
+        result:
+          $ref: '#/components/schemas/templatebackendListQuestionnaireResult'
+      title: templatebackendListQuestionnaireReply
+      type: object
+    templatebackendListQuestionnaireResult:
+      example:
+        questionnaires:
+        - replyEditable: true
+          createdAt: 2000-01-23T04:56:07.000+00:00
+          versions:
+          - createdAt: 2000-01-23T04:56:07.000+00:00
+            questions:
+            - createdAt: 2000-01-23T04:56:07.000+00:00
+              flag: flag
+              tab: tab
+              question: question
+              answerType: answerType
+              tooltip: tooltip
+              answers:
+              - rulePrefills:
+                - answerId: 3
+                  createdAt: 2000-01-23T04:56:07.000+00:00
+                  questionId: 9
+                  answerText: answerText
+                  id: 7
+                  updatedAt: 2000-01-23T04:56:07.000+00:00
+                - answerId: 3
+                  createdAt: 2000-01-23T04:56:07.000+00:00
+                  questionId: 9
+                  answerText: answerText
+                  id: 7
+                  updatedAt: 2000-01-23T04:56:07.000+00:00
+                createdAt: 2000-01-23T04:56:07.000+00:00
+                riskLevel: 2
+                id: 5
+                text: text
+                updatedAt: 2000-01-23T04:56:07.000+00:00
+              - rulePrefills:
+                - answerId: 3
+                  createdAt: 2000-01-23T04:56:07.000+00:00
+                  questionId: 9
+                  answerText: answerText
+                  id: 7
+                  updatedAt: 2000-01-23T04:56:07.000+00:00
+                - answerId: 3
+                  createdAt: 2000-01-23T04:56:07.000+00:00
+                  questionId: 9
+                  answerText: answerText
+                  id: 7
+                  updatedAt: 2000-01-23T04:56:07.000+00:00
+                createdAt: 2000-01-23T04:56:07.000+00:00
+                riskLevel: 2
+                id: 5
+                text: text
+                updatedAt: 2000-01-23T04:56:07.000+00:00
+              riskWeight: 5
+              id: 1
+              updatedAt: 2000-01-23T04:56:07.000+00:00
+            - createdAt: 2000-01-23T04:56:07.000+00:00
+              flag: flag
+              tab: tab
+              question: question
+              answerType: answerType
+              tooltip: tooltip
+              answers:
+              - rulePrefills:
+                - answerId: 3
+                  createdAt: 2000-01-23T04:56:07.000+00:00
+                  questionId: 9
+                  answerText: answerText
+                  id: 7
+                  updatedAt: 2000-01-23T04:56:07.000+00:00
+                - answerId: 3
+                  createdAt: 2000-01-23T04:56:07.000+00:00
+                  questionId: 9
+                  answerText: answerText
+                  id: 7
+                  updatedAt: 2000-01-23T04:56:07.000+00:00
+                createdAt: 2000-01-23T04:56:07.000+00:00
+                riskLevel: 2
+                id: 5
+                text: text
+                updatedAt: 2000-01-23T04:56:07.000+00:00
+              - rulePrefills:
+                - answerId: 3
+                  createdAt: 2000-01-23T04:56:07.000+00:00
+                  questionId: 9
+                  answerText: answerText
+                  id: 7
+                  updatedAt: 2000-01-23T04:56:07.000+00:00
+                - answerId: 3
+                  createdAt: 2000-01-23T04:56:07.000+00:00
+                  questionId: 9
+                  answerText: answerText
+                  id: 7
+                  updatedAt: 2000-01-23T04:56:07.000+00:00
+                createdAt: 2000-01-23T04:56:07.000+00:00
+                riskLevel: 2
+                id: 5
+                text: text
+                updatedAt: 2000-01-23T04:56:07.000+00:00
+              riskWeight: 5
+              id: 1
+              updatedAt: 2000-01-23T04:56:07.000+00:00
+            id: 6
+            version: version
+            updatedAt: 2000-01-23T04:56:07.000+00:00
+          - createdAt: 2000-01-23T04:56:07.000+00:00
+            questions:
+            - createdAt: 2000-01-23T04:56:07.000+00:00
+              flag: flag
+              tab: tab
+              question: question
+              answerType: answerType
+              tooltip: tooltip
+              answers:
+              - rulePrefills:
+                - answerId: 3
+                  createdAt: 2000-01-23T04:56:07.000+00:00
+                  questionId: 9
+                  answerText: answerText
+                  id: 7
+                  updatedAt: 2000-01-23T04:56:07.000+00:00
+                - answerId: 3
+                  createdAt: 2000-01-23T04:56:07.000+00:00
+                  questionId: 9
+                  answerText: answerText
+                  id: 7
+                  updatedAt: 2000-01-23T04:56:07.000+00:00
+                createdAt: 2000-01-23T04:56:07.000+00:00
+                riskLevel: 2
+                id: 5
+                text: text
+                updatedAt: 2000-01-23T04:56:07.000+00:00
+              - rulePrefills:
+                - answerId: 3
+                  createdAt: 2000-01-23T04:56:07.000+00:00
+                  questionId: 9
+                  answerText: answerText
+                  id: 7
+                  updatedAt: 2000-01-23T04:56:07.000+00:00
+                - answerId: 3
+                  createdAt: 2000-01-23T04:56:07.000+00:00
+                  questionId: 9
+                  answerText: answerText
+                  id: 7
+                  updatedAt: 2000-01-23T04:56:07.000+00:00
+                createdAt: 2000-01-23T04:56:07.000+00:00
+                riskLevel: 2
+                id: 5
+                text: text
+                updatedAt: 2000-01-23T04:56:07.000+00:00
+              riskWeight: 5
+              id: 1
+              updatedAt: 2000-01-23T04:56:07.000+00:00
+            - createdAt: 2000-01-23T04:56:07.000+00:00
+              flag: flag
+              tab: tab
+              question: question
+              answerType: answerType
+              tooltip: tooltip
+              answers:
+              - rulePrefills:
+                - answerId: 3
+                  createdAt: 2000-01-23T04:56:07.000+00:00
+                  questionId: 9
+                  answerText: answerText
+                  id: 7
+                  updatedAt: 2000-01-23T04:56:07.000+00:00
+                - answerId: 3
+                  createdAt: 2000-01-23T04:56:07.000+00:00
+                  questionId: 9
+                  answerText: answerText
+                  id: 7
+                  updatedAt: 2000-01-23T04:56:07.000+00:00
+                createdAt: 2000-01-23T04:56:07.000+00:00
+                riskLevel: 2
+                id: 5
+                text: text
+                updatedAt: 2000-01-23T04:56:07.000+00:00
+              - rulePrefills:
+                - answerId: 3
+                  createdAt: 2000-01-23T04:56:07.000+00:00
+                  questionId: 9
+                  answerText: answerText
+                  id: 7
+                  updatedAt: 2000-01-23T04:56:07.000+00:00
+                - answerId: 3
+                  createdAt: 2000-01-23T04:56:07.000+00:00
+                  questionId: 9
+                  answerText: answerText
+                  id: 7
+                  updatedAt: 2000-01-23T04:56:07.000+00:00
+                createdAt: 2000-01-23T04:56:07.000+00:00
+                riskLevel: 2
+                id: 5
+                text: text
+                updatedAt: 2000-01-23T04:56:07.000+00:00
+              riskWeight: 5
+              id: 1
+              updatedAt: 2000-01-23T04:56:07.000+00:00
+            id: 6
+            version: version
+            updatedAt: 2000-01-23T04:56:07.000+00:00
+          name: name
+          id: 0
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+        - replyEditable: true
+          createdAt: 2000-01-23T04:56:07.000+00:00
+          versions:
+          - createdAt: 2000-01-23T04:56:07.000+00:00
+            questions:
+            - createdAt: 2000-01-23T04:56:07.000+00:00
+              flag: flag
+              tab: tab
+              question: question
+              answerType: answerType
+              tooltip: tooltip
+              answers:
+              - rulePrefills:
+                - answerId: 3
+                  createdAt: 2000-01-23T04:56:07.000+00:00
+                  questionId: 9
+                  answerText: answerText
+                  id: 7
+                  updatedAt: 2000-01-23T04:56:07.000+00:00
+                - answerId: 3
+                  createdAt: 2000-01-23T04:56:07.000+00:00
+                  questionId: 9
+                  answerText: answerText
+                  id: 7
+                  updatedAt: 2000-01-23T04:56:07.000+00:00
+                createdAt: 2000-01-23T04:56:07.000+00:00
+                riskLevel: 2
+                id: 5
+                text: text
+                updatedAt: 2000-01-23T04:56:07.000+00:00
+              - rulePrefills:
+                - answerId: 3
+                  createdAt: 2000-01-23T04:56:07.000+00:00
+                  questionId: 9
+                  answerText: answerText
+                  id: 7
+                  updatedAt: 2000-01-23T04:56:07.000+00:00
+                - answerId: 3
+                  createdAt: 2000-01-23T04:56:07.000+00:00
+                  questionId: 9
+                  answerText: answerText
+                  id: 7
+                  updatedAt: 2000-01-23T04:56:07.000+00:00
+                createdAt: 2000-01-23T04:56:07.000+00:00
+                riskLevel: 2
+                id: 5
+                text: text
+                updatedAt: 2000-01-23T04:56:07.000+00:00
+              riskWeight: 5
+              id: 1
+              updatedAt: 2000-01-23T04:56:07.000+00:00
+            - createdAt: 2000-01-23T04:56:07.000+00:00
+              flag: flag
+              tab: tab
+              question: question
+              answerType: answerType
+              tooltip: tooltip
+              answers:
+              - rulePrefills:
+                - answerId: 3
+                  createdAt: 2000-01-23T04:56:07.000+00:00
+                  questionId: 9
+                  answerText: answerText
+                  id: 7
+                  updatedAt: 2000-01-23T04:56:07.000+00:00
+                - answerId: 3
+                  createdAt: 2000-01-23T04:56:07.000+00:00
+                  questionId: 9
+                  answerText: answerText
+                  id: 7
+                  updatedAt: 2000-01-23T04:56:07.000+00:00
+                createdAt: 2000-01-23T04:56:07.000+00:00
+                riskLevel: 2
+                id: 5
+                text: text
+                updatedAt: 2000-01-23T04:56:07.000+00:00
+              - rulePrefills:
+                - answerId: 3
+                  createdAt: 2000-01-23T04:56:07.000+00:00
+                  questionId: 9
+                  answerText: answerText
+                  id: 7
+                  updatedAt: 2000-01-23T04:56:07.000+00:00
+                - answerId: 3
+                  createdAt: 2000-01-23T04:56:07.000+00:00
+                  questionId: 9
+                  answerText: answerText
+                  id: 7
+                  updatedAt: 2000-01-23T04:56:07.000+00:00
+                createdAt: 2000-01-23T04:56:07.000+00:00
+                riskLevel: 2
+                id: 5
+                text: text
+                updatedAt: 2000-01-23T04:56:07.000+00:00
+              riskWeight: 5
+              id: 1
+              updatedAt: 2000-01-23T04:56:07.000+00:00
+            id: 6
+            version: version
+            updatedAt: 2000-01-23T04:56:07.000+00:00
+          - createdAt: 2000-01-23T04:56:07.000+00:00
+            questions:
+            - createdAt: 2000-01-23T04:56:07.000+00:00
+              flag: flag
+              tab: tab
+              question: question
+              answerType: answerType
+              tooltip: tooltip
+              answers:
+              - rulePrefills:
+                - answerId: 3
+                  createdAt: 2000-01-23T04:56:07.000+00:00
+                  questionId: 9
+                  answerText: answerText
+                  id: 7
+                  updatedAt: 2000-01-23T04:56:07.000+00:00
+                - answerId: 3
+                  createdAt: 2000-01-23T04:56:07.000+00:00
+                  questionId: 9
+                  answerText: answerText
+                  id: 7
+                  updatedAt: 2000-01-23T04:56:07.000+00:00
+                createdAt: 2000-01-23T04:56:07.000+00:00
+                riskLevel: 2
+                id: 5
+                text: text
+                updatedAt: 2000-01-23T04:56:07.000+00:00
+              - rulePrefills:
+                - answerId: 3
+                  createdAt: 2000-01-23T04:56:07.000+00:00
+                  questionId: 9
+                  answerText: answerText
+                  id: 7
+                  updatedAt: 2000-01-23T04:56:07.000+00:00
+                - answerId: 3
+                  createdAt: 2000-01-23T04:56:07.000+00:00
+                  questionId: 9
+                  answerText: answerText
+                  id: 7
+                  updatedAt: 2000-01-23T04:56:07.000+00:00
+                createdAt: 2000-01-23T04:56:07.000+00:00
+                riskLevel: 2
+                id: 5
+                text: text
+                updatedAt: 2000-01-23T04:56:07.000+00:00
+              riskWeight: 5
+              id: 1
+              updatedAt: 2000-01-23T04:56:07.000+00:00
+            - createdAt: 2000-01-23T04:56:07.000+00:00
+              flag: flag
+              tab: tab
+              question: question
+              answerType: answerType
+              tooltip: tooltip
+              answers:
+              - rulePrefills:
+                - answerId: 3
+                  createdAt: 2000-01-23T04:56:07.000+00:00
+                  questionId: 9
+                  answerText: answerText
+                  id: 7
+                  updatedAt: 2000-01-23T04:56:07.000+00:00
+                - answerId: 3
+                  createdAt: 2000-01-23T04:56:07.000+00:00
+                  questionId: 9
+                  answerText: answerText
+                  id: 7
+                  updatedAt: 2000-01-23T04:56:07.000+00:00
+                createdAt: 2000-01-23T04:56:07.000+00:00
+                riskLevel: 2
+                id: 5
+                text: text
+                updatedAt: 2000-01-23T04:56:07.000+00:00
+              - rulePrefills:
+                - answerId: 3
+                  createdAt: 2000-01-23T04:56:07.000+00:00
+                  questionId: 9
+                  answerText: answerText
+                  id: 7
+                  updatedAt: 2000-01-23T04:56:07.000+00:00
+                - answerId: 3
+                  createdAt: 2000-01-23T04:56:07.000+00:00
+                  questionId: 9
+                  answerText: answerText
+                  id: 7
+                  updatedAt: 2000-01-23T04:56:07.000+00:00
+                createdAt: 2000-01-23T04:56:07.000+00:00
+                riskLevel: 2
+                id: 5
+                text: text
+                updatedAt: 2000-01-23T04:56:07.000+00:00
+              riskWeight: 5
+              id: 1
+              updatedAt: 2000-01-23T04:56:07.000+00:00
+            id: 6
+            version: version
+            updatedAt: 2000-01-23T04:56:07.000+00:00
+          name: name
+          id: 0
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+      properties:
+        questionnaires:
+          items:
+            $ref: '#/components/schemas/templatebackendQuestionnaire'
+          title: questionnaires
+          type: array
+      title: templatebackendListQuestionnaireResult
+      type: object
+    templatebackendQuestionnaire:
+      example:
+        replyEditable: true
+        createdAt: 2000-01-23T04:56:07.000+00:00
+        versions:
+        - createdAt: 2000-01-23T04:56:07.000+00:00
+          questions:
+          - createdAt: 2000-01-23T04:56:07.000+00:00
+            flag: flag
+            tab: tab
+            question: question
+            answerType: answerType
+            tooltip: tooltip
+            answers:
+            - rulePrefills:
+              - answerId: 3
+                createdAt: 2000-01-23T04:56:07.000+00:00
+                questionId: 9
+                answerText: answerText
+                id: 7
+                updatedAt: 2000-01-23T04:56:07.000+00:00
+              - answerId: 3
+                createdAt: 2000-01-23T04:56:07.000+00:00
+                questionId: 9
+                answerText: answerText
+                id: 7
+                updatedAt: 2000-01-23T04:56:07.000+00:00
+              createdAt: 2000-01-23T04:56:07.000+00:00
+              riskLevel: 2
+              id: 5
+              text: text
+              updatedAt: 2000-01-23T04:56:07.000+00:00
+            - rulePrefills:
+              - answerId: 3
+                createdAt: 2000-01-23T04:56:07.000+00:00
+                questionId: 9
+                answerText: answerText
+                id: 7
+                updatedAt: 2000-01-23T04:56:07.000+00:00
+              - answerId: 3
+                createdAt: 2000-01-23T04:56:07.000+00:00
+                questionId: 9
+                answerText: answerText
+                id: 7
+                updatedAt: 2000-01-23T04:56:07.000+00:00
+              createdAt: 2000-01-23T04:56:07.000+00:00
+              riskLevel: 2
+              id: 5
+              text: text
+              updatedAt: 2000-01-23T04:56:07.000+00:00
+            riskWeight: 5
+            id: 1
+            updatedAt: 2000-01-23T04:56:07.000+00:00
+          - createdAt: 2000-01-23T04:56:07.000+00:00
+            flag: flag
+            tab: tab
+            question: question
+            answerType: answerType
+            tooltip: tooltip
+            answers:
+            - rulePrefills:
+              - answerId: 3
+                createdAt: 2000-01-23T04:56:07.000+00:00
+                questionId: 9
+                answerText: answerText
+                id: 7
+                updatedAt: 2000-01-23T04:56:07.000+00:00
+              - answerId: 3
+                createdAt: 2000-01-23T04:56:07.000+00:00
+                questionId: 9
+                answerText: answerText
+                id: 7
+                updatedAt: 2000-01-23T04:56:07.000+00:00
+              createdAt: 2000-01-23T04:56:07.000+00:00
+              riskLevel: 2
+              id: 5
+              text: text
+              updatedAt: 2000-01-23T04:56:07.000+00:00
+            - rulePrefills:
+              - answerId: 3
+                createdAt: 2000-01-23T04:56:07.000+00:00
+                questionId: 9
+                answerText: answerText
+                id: 7
+                updatedAt: 2000-01-23T04:56:07.000+00:00
+              - answerId: 3
+                createdAt: 2000-01-23T04:56:07.000+00:00
+                questionId: 9
+                answerText: answerText
+                id: 7
+                updatedAt: 2000-01-23T04:56:07.000+00:00
+              createdAt: 2000-01-23T04:56:07.000+00:00
+              riskLevel: 2
+              id: 5
+              text: text
+              updatedAt: 2000-01-23T04:56:07.000+00:00
+            riskWeight: 5
+            id: 1
+            updatedAt: 2000-01-23T04:56:07.000+00:00
+          id: 6
+          version: version
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+        - createdAt: 2000-01-23T04:56:07.000+00:00
+          questions:
+          - createdAt: 2000-01-23T04:56:07.000+00:00
+            flag: flag
+            tab: tab
+            question: question
+            answerType: answerType
+            tooltip: tooltip
+            answers:
+            - rulePrefills:
+              - answerId: 3
+                createdAt: 2000-01-23T04:56:07.000+00:00
+                questionId: 9
+                answerText: answerText
+                id: 7
+                updatedAt: 2000-01-23T04:56:07.000+00:00
+              - answerId: 3
+                createdAt: 2000-01-23T04:56:07.000+00:00
+                questionId: 9
+                answerText: answerText
+                id: 7
+                updatedAt: 2000-01-23T04:56:07.000+00:00
+              createdAt: 2000-01-23T04:56:07.000+00:00
+              riskLevel: 2
+              id: 5
+              text: text
+              updatedAt: 2000-01-23T04:56:07.000+00:00
+            - rulePrefills:
+              - answerId: 3
+                createdAt: 2000-01-23T04:56:07.000+00:00
+                questionId: 9
+                answerText: answerText
+                id: 7
+                updatedAt: 2000-01-23T04:56:07.000+00:00
+              - answerId: 3
+                createdAt: 2000-01-23T04:56:07.000+00:00
+                questionId: 9
+                answerText: answerText
+                id: 7
+                updatedAt: 2000-01-23T04:56:07.000+00:00
+              createdAt: 2000-01-23T04:56:07.000+00:00
+              riskLevel: 2
+              id: 5
+              text: text
+              updatedAt: 2000-01-23T04:56:07.000+00:00
+            riskWeight: 5
+            id: 1
+            updatedAt: 2000-01-23T04:56:07.000+00:00
+          - createdAt: 2000-01-23T04:56:07.000+00:00
+            flag: flag
+            tab: tab
+            question: question
+            answerType: answerType
+            tooltip: tooltip
+            answers:
+            - rulePrefills:
+              - answerId: 3
+                createdAt: 2000-01-23T04:56:07.000+00:00
+                questionId: 9
+                answerText: answerText
+                id: 7
+                updatedAt: 2000-01-23T04:56:07.000+00:00
+              - answerId: 3
+                createdAt: 2000-01-23T04:56:07.000+00:00
+                questionId: 9
+                answerText: answerText
+                id: 7
+                updatedAt: 2000-01-23T04:56:07.000+00:00
+              createdAt: 2000-01-23T04:56:07.000+00:00
+              riskLevel: 2
+              id: 5
+              text: text
+              updatedAt: 2000-01-23T04:56:07.000+00:00
+            - rulePrefills:
+              - answerId: 3
+                createdAt: 2000-01-23T04:56:07.000+00:00
+                questionId: 9
+                answerText: answerText
+                id: 7
+                updatedAt: 2000-01-23T04:56:07.000+00:00
+              - answerId: 3
+                createdAt: 2000-01-23T04:56:07.000+00:00
+                questionId: 9
+                answerText: answerText
+                id: 7
+                updatedAt: 2000-01-23T04:56:07.000+00:00
+              createdAt: 2000-01-23T04:56:07.000+00:00
+              riskLevel: 2
+              id: 5
+              text: text
+              updatedAt: 2000-01-23T04:56:07.000+00:00
+            riskWeight: 5
+            id: 1
+            updatedAt: 2000-01-23T04:56:07.000+00:00
+          id: 6
+          version: version
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+        name: name
+        id: 0
+        updatedAt: 2000-01-23T04:56:07.000+00:00
+      properties:
+        id:
+          format: int64
+          title: id
+          type: integer
+        name:
+          title: name
+          type: string
+        replyEditable:
+          title: replyEditable
+          type: boolean
+        versions:
+          items:
+            $ref: '#/components/schemas/templatebackendQuestionnaireVersion'
+          title: versions
+          type: array
+        createdAt:
+          format: date-time
+          title: createdAt
+          type: string
+        updatedAt:
+          format: date-time
+          title: google.protobuf.Timestamp deletedAt = 7;
+          type: string
+      title: templatebackendQuestionnaire
+      type: object
+    templatebackendQuestionnaireQuestion:
+      example:
+        createdAt: 2000-01-23T04:56:07.000+00:00
+        flag: flag
+        tab: tab
+        question: question
+        answerType: answerType
+        tooltip: tooltip
+        answers:
+        - rulePrefills:
+          - answerId: 3
+            createdAt: 2000-01-23T04:56:07.000+00:00
+            questionId: 9
+            answerText: answerText
+            id: 7
+            updatedAt: 2000-01-23T04:56:07.000+00:00
+          - answerId: 3
+            createdAt: 2000-01-23T04:56:07.000+00:00
+            questionId: 9
+            answerText: answerText
+            id: 7
+            updatedAt: 2000-01-23T04:56:07.000+00:00
+          createdAt: 2000-01-23T04:56:07.000+00:00
+          riskLevel: 2
+          id: 5
+          text: text
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+        - rulePrefills:
+          - answerId: 3
+            createdAt: 2000-01-23T04:56:07.000+00:00
+            questionId: 9
+            answerText: answerText
+            id: 7
+            updatedAt: 2000-01-23T04:56:07.000+00:00
+          - answerId: 3
+            createdAt: 2000-01-23T04:56:07.000+00:00
+            questionId: 9
+            answerText: answerText
+            id: 7
+            updatedAt: 2000-01-23T04:56:07.000+00:00
+          createdAt: 2000-01-23T04:56:07.000+00:00
+          riskLevel: 2
+          id: 5
+          text: text
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+        riskWeight: 5
+        id: 1
+        updatedAt: 2000-01-23T04:56:07.000+00:00
+      properties:
+        id:
+          format: int64
+          title: id
+          type: integer
+        tab:
+          title: tab
+          type: string
+        question:
+          title: question
+          type: string
+        riskWeight:
+          format: int64
+          title: riskWeight
+          type: integer
+        answerType:
+          title: answerType
+          type: string
+        flag:
+          title: flag
+          type: string
+        tooltip:
+          title: tooltip
+          type: string
+        answers:
+          items:
+            $ref: '#/components/schemas/templatebackendQuestionnaireQuestionAnswer'
+          title: answers
+          type: array
+        createdAt:
+          format: date-time
+          title: createdAt
+          type: string
+        updatedAt:
+          format: date-time
+          title: google.protobuf.Timestamp deletedAt = 11;
+          type: string
+      title: templatebackendQuestionnaireQuestion
+      type: object
+    templatebackendQuestionnaireQuestionAnswer:
+      example:
+        rulePrefills:
+        - answerId: 3
+          createdAt: 2000-01-23T04:56:07.000+00:00
+          questionId: 9
+          answerText: answerText
+          id: 7
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+        - answerId: 3
+          createdAt: 2000-01-23T04:56:07.000+00:00
+          questionId: 9
+          answerText: answerText
+          id: 7
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+        createdAt: 2000-01-23T04:56:07.000+00:00
+        riskLevel: 2
+        id: 5
+        text: text
+        updatedAt: 2000-01-23T04:56:07.000+00:00
+      properties:
+        id:
+          format: int64
+          title: id
+          type: integer
+        text:
+          title: text
+          type: string
+        riskLevel:
+          format: int64
+          title: riskLevel
+          type: integer
+        rulePrefills:
+          items:
+            $ref: '#/components/schemas/templatebackendQuestionnaireQuestionAnswerRulePrefill'
+          title: rulePrefills
+          type: array
+        createdAt:
+          format: date-time
+          title: createdAt
+          type: string
+        updatedAt:
+          format: date-time
+          title: google.protobuf.Timestamp deletedAt = 7;
+          type: string
+      title: templatebackendQuestionnaireQuestionAnswer
+      type: object
+    templatebackendQuestionnaireQuestionAnswerRulePrefill:
+      example:
+        answerId: 3
+        createdAt: 2000-01-23T04:56:07.000+00:00
+        questionId: 9
+        answerText: answerText
+        id: 7
+        updatedAt: 2000-01-23T04:56:07.000+00:00
+      properties:
+        id:
+          format: int64
+          title: id
+          type: integer
+        questionId:
+          format: int64
+          title: questionId
+          type: integer
+        answerId:
+          format: int64
+          title: answerId
+          type: integer
+        answerText:
+          title: answerText
+          type: string
+        createdAt:
+          format: date-time
+          title: createdAt
+          type: string
+        updatedAt:
+          format: date-time
+          title: google.protobuf.Timestamp deletedAt = 7;
+          type: string
+      title: templatebackendQuestionnaireQuestionAnswerRulePrefill
+      type: object
+    templatebackendQuestionnaireVersion:
+      example:
+        createdAt: 2000-01-23T04:56:07.000+00:00
+        questions:
+        - createdAt: 2000-01-23T04:56:07.000+00:00
+          flag: flag
+          tab: tab
+          question: question
+          answerType: answerType
+          tooltip: tooltip
+          answers:
+          - rulePrefills:
+            - answerId: 3
+              createdAt: 2000-01-23T04:56:07.000+00:00
+              questionId: 9
+              answerText: answerText
+              id: 7
+              updatedAt: 2000-01-23T04:56:07.000+00:00
+            - answerId: 3
+              createdAt: 2000-01-23T04:56:07.000+00:00
+              questionId: 9
+              answerText: answerText
+              id: 7
+              updatedAt: 2000-01-23T04:56:07.000+00:00
+            createdAt: 2000-01-23T04:56:07.000+00:00
+            riskLevel: 2
+            id: 5
+            text: text
+            updatedAt: 2000-01-23T04:56:07.000+00:00
+          - rulePrefills:
+            - answerId: 3
+              createdAt: 2000-01-23T04:56:07.000+00:00
+              questionId: 9
+              answerText: answerText
+              id: 7
+              updatedAt: 2000-01-23T04:56:07.000+00:00
+            - answerId: 3
+              createdAt: 2000-01-23T04:56:07.000+00:00
+              questionId: 9
+              answerText: answerText
+              id: 7
+              updatedAt: 2000-01-23T04:56:07.000+00:00
+            createdAt: 2000-01-23T04:56:07.000+00:00
+            riskLevel: 2
+            id: 5
+            text: text
+            updatedAt: 2000-01-23T04:56:07.000+00:00
+          riskWeight: 5
+          id: 1
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+        - createdAt: 2000-01-23T04:56:07.000+00:00
+          flag: flag
+          tab: tab
+          question: question
+          answerType: answerType
+          tooltip: tooltip
+          answers:
+          - rulePrefills:
+            - answerId: 3
+              createdAt: 2000-01-23T04:56:07.000+00:00
+              questionId: 9
+              answerText: answerText
+              id: 7
+              updatedAt: 2000-01-23T04:56:07.000+00:00
+            - answerId: 3
+              createdAt: 2000-01-23T04:56:07.000+00:00
+              questionId: 9
+              answerText: answerText
+              id: 7
+              updatedAt: 2000-01-23T04:56:07.000+00:00
+            createdAt: 2000-01-23T04:56:07.000+00:00
+            riskLevel: 2
+            id: 5
+            text: text
+            updatedAt: 2000-01-23T04:56:07.000+00:00
+          - rulePrefills:
+            - answerId: 3
+              createdAt: 2000-01-23T04:56:07.000+00:00
+              questionId: 9
+              answerText: answerText
+              id: 7
+              updatedAt: 2000-01-23T04:56:07.000+00:00
+            - answerId: 3
+              createdAt: 2000-01-23T04:56:07.000+00:00
+              questionId: 9
+              answerText: answerText
+              id: 7
+              updatedAt: 2000-01-23T04:56:07.000+00:00
+            createdAt: 2000-01-23T04:56:07.000+00:00
+            riskLevel: 2
+            id: 5
+            text: text
+            updatedAt: 2000-01-23T04:56:07.000+00:00
+          riskWeight: 5
+          id: 1
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+        id: 6
+        version: version
+        updatedAt: 2000-01-23T04:56:07.000+00:00
+      properties:
+        id:
+          format: int64
+          title: id
+          type: integer
+        version:
+          title: version
+          type: string
+        questions:
+          items:
+            $ref: '#/components/schemas/templatebackendQuestionnaireQuestion'
+          title: questions
+          type: array
+        createdAt:
+          format: date-time
+          title: createdAt
+          type: string
+        updatedAt:
+          format: date-time
+          title: google.protobuf.Timestamp deletedAt = 6;
+          type: string
+      title: templatebackendQuestionnaireVersion
       type: object
     templatebackendResetPasswordReply:
       example:

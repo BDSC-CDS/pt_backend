@@ -24,6 +24,8 @@ python3 -m src.cmd.start
 python3 -m unittest discover ./src/tests/acceptance
 ```
 
+### API Doc
+When the server runs, the api doc is served at [http://127.0.0.1:5000/ui](http://127.0.0.1:5000/ui)
 
 ## Developer documentation
 

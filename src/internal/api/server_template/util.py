@@ -186,4 +186,6 @@ def implements_interface(A, B):
         # Check return type
         if 'return' in a_type_hints and 'return' in b_type_hints and a_type_hints['return'] != b_type_hints['return']:
             raise NotImplementedError(f"operation {op} has an incorrect return type")
+        
+        print("op", op, a_signature, a_type_hints, b_signature, b_type_hints)
 

@@ -99,6 +99,10 @@ Class | Method | HTTP request | Description
 *AuthenticationApi* | [**authentication_service_authenticate**](docs/AuthenticationApi.md#authentication_service_authenticate) | **POST** /api/rest/v1/authentication/login | Authenticate
 *IndexApi* | [**index_service_create_hello**](docs/IndexApi.md#index_service_create_hello) | **POST** /api/v1/hello/{identifier} | Get a hello
 *IndexApi* | [**index_service_get_hello**](docs/IndexApi.md#index_service_get_hello) | **GET** /api/v1/hello | Get a hello
+*QuestionnaireApi* | [**questionnaire_service_create_questionnaire**](docs/QuestionnaireApi.md#questionnaire_service_create_questionnaire) | **POST** /api/v1/questionnaire | Create a questionnaire
+*QuestionnaireApi* | [**questionnaire_service_delete_questionnaire**](docs/QuestionnaireApi.md#questionnaire_service_delete_questionnaire) | **DELETE** /api/v1/questionnaire/{id} | Create a questionnaire
+*QuestionnaireApi* | [**questionnaire_service_get_questionnaire**](docs/QuestionnaireApi.md#questionnaire_service_get_questionnaire) | **GET** /api/v1/questionnaire/{id} | Get questionnaires
+*QuestionnaireApi* | [**questionnaire_service_list_questionnaire**](docs/QuestionnaireApi.md#questionnaire_service_list_questionnaire) | **GET** /api/v1/questionnaire | List questionnaires
 *UsersApi* | [**user_service_create_user**](docs/UsersApi.md#user_service_create_user) | **POST** /api/rest/v1/users | Create a user
 *UsersApi* | [**user_service_delete_user**](docs/UsersApi.md#user_service_delete_user) | **DELETE** /api/rest/v1/users/{id} | Delete a user
 *UsersApi* | [**user_service_get_user**](docs/UsersApi.md#user_service_get_user) | **GET** /api/rest/v1/users/{id} | Get a user
@@ -115,15 +119,29 @@ Class | Method | HTTP request | Description
  - [TemplatebackendAuthenticationReply](docs/TemplatebackendAuthenticationReply.md)
  - [TemplatebackendAuthenticationResult](docs/TemplatebackendAuthenticationResult.md)
  - [TemplatebackendCreateHelloReply](docs/TemplatebackendCreateHelloReply.md)
+ - [TemplatebackendCreateQuestionnaireReply](docs/TemplatebackendCreateQuestionnaireReply.md)
+ - [TemplatebackendCreateQuestionnaireRequest](docs/TemplatebackendCreateQuestionnaireRequest.md)
+ - [TemplatebackendCreateQuestionnaireResult](docs/TemplatebackendCreateQuestionnaireResult.md)
  - [TemplatebackendCreateUserReply](docs/TemplatebackendCreateUserReply.md)
  - [TemplatebackendCreateUserResult](docs/TemplatebackendCreateUserResult.md)
  - [TemplatebackendCredentials](docs/TemplatebackendCredentials.md)
+ - [TemplatebackendDeleteQuestionnaireReply](docs/TemplatebackendDeleteQuestionnaireReply.md)
+ - [TemplatebackendDeleteQuestionnaireResult](docs/TemplatebackendDeleteQuestionnaireResult.md)
  - [TemplatebackendDeleteUserReply](docs/TemplatebackendDeleteUserReply.md)
  - [TemplatebackendGetHelloReply](docs/TemplatebackendGetHelloReply.md)
+ - [TemplatebackendGetQuestionnaireReply](docs/TemplatebackendGetQuestionnaireReply.md)
+ - [TemplatebackendGetQuestionnaireResult](docs/TemplatebackendGetQuestionnaireResult.md)
  - [TemplatebackendGetUserMeReply](docs/TemplatebackendGetUserMeReply.md)
  - [TemplatebackendGetUserMeResult](docs/TemplatebackendGetUserMeResult.md)
  - [TemplatebackendGetUserReply](docs/TemplatebackendGetUserReply.md)
  - [TemplatebackendGetUserResult](docs/TemplatebackendGetUserResult.md)
+ - [TemplatebackendListQuestionnaireReply](docs/TemplatebackendListQuestionnaireReply.md)
+ - [TemplatebackendListQuestionnaireResult](docs/TemplatebackendListQuestionnaireResult.md)
+ - [TemplatebackendQuestionnaire](docs/TemplatebackendQuestionnaire.md)
+ - [TemplatebackendQuestionnaireQuestion](docs/TemplatebackendQuestionnaireQuestion.md)
+ - [TemplatebackendQuestionnaireQuestionAnswer](docs/TemplatebackendQuestionnaireQuestionAnswer.md)
+ - [TemplatebackendQuestionnaireQuestionAnswerRulePrefill](docs/TemplatebackendQuestionnaireQuestionAnswerRulePrefill.md)
+ - [TemplatebackendQuestionnaireVersion](docs/TemplatebackendQuestionnaireVersion.md)
  - [TemplatebackendResetPasswordReply](docs/TemplatebackendResetPasswordReply.md)
  - [TemplatebackendUpdatePasswordReply](docs/TemplatebackendUpdatePasswordReply.md)
  - [TemplatebackendUpdatePasswordRequest](docs/TemplatebackendUpdatePasswordRequest.md)

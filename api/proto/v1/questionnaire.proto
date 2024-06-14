@@ -1,0 +1,72 @@
+syntax = "proto3";
+package templatebackend;
+option go_package = ".;templatebackend";
+
+import "google/protobuf/timestamp.proto";
+
+message QuestionnaireQuestionAnswerRulePrefill {
+    uint32 id = 1;
+
+    uint32 question_id = 2;
+    uint32 answer_id = 3;
+    string answer_text = 4;
+
+    google.protobuf.Timestamp createdAt = 5;
+    google.protobuf.Timestamp updatedAt = 6;
+    // google.protobuf.Timestamp deletedAt = 7;
+}
+
+message QuestionnaireQuestionAnswer {
+    uint32 id = 1;
+
+    string text = 2;
+    uint32 risk_level = 3;
+
+    repeated QuestionnaireQuestionAnswerRulePrefill rule_prefills = 4;
+
+    google.protobuf.Timestamp createdAt = 5;
+    google.protobuf.Timestamp updatedAt = 6;
+    // google.protobuf.Timestamp deletedAt = 7;
+}
+
+message QuestionnaireQuestion {
+    uint32 id = 1;
+
+    string tab = 2;
+    string question = 3;
+    uint32 risk_weight = 4;
+    string answer_type = 5;
+    string flag = 6;
+    string tooltip = 7;
+
+    repeated QuestionnaireQuestionAnswer answers = 8;
+
+    google.protobuf.Timestamp createdAt = 9;
+    google.protobuf.Timestamp updatedAt = 10;
+    // google.protobuf.Timestamp deletedAt = 11;
+}
+
+message QuestionnaireVersion {
+    uint32 id = 1;
+
+    string version = 2;
+
+    repeated QuestionnaireQuestion questions = 3;
+
+    google.protobuf.Timestamp createdAt = 4;
+    google.protobuf.Timestamp updatedAt = 5;
+    // google.protobuf.Timestamp deletedAt = 6;
+}
+
+message Questionnaire {
+    uint32 id = 1;
+
+    string name = 2;
+    bool reply_editable = 3;
+
+    repeated QuestionnaireVersion versions = 4;
+
+    google.protobuf.Timestamp createdAt = 5;
+    google.protobuf.Timestamp updatedAt = 6;
+    // google.protobuf.Timestamp deletedAt = 7;
+}

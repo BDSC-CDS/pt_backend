@@ -7,7 +7,7 @@ from .authorization import *
 class UsersControllerAuthentication():
     def __init__(self, next: UsersController):
         self.next = next
-        implements_interface(UsersController, UsersControllerAuthentication)
+        implements_interface(UsersControllerAuthentication, UsersController)
 
     def user_service_create_user(self, user, body: TemplatebackendUser):
         return self.next.user_service_create_user(user, body)
