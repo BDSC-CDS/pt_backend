@@ -82,13 +82,11 @@ class DatasetStore:
                 # with open(path, newline='') as csvfile:
                 csv_reader = csv.reader(csvfile)
                 headers = next(csv_reader)  # Read the header row
-                print("CSV headers", headers)
 
                 column_data = [[] for _ in headers]
                 for row in csv_reader:
                     for col_index, value in enumerate(row):
                         column_data[col_index].append(value)
-                print("CSV column data: ",column_data)
 
                 # Infer types for each column
                 column_types = {}
@@ -97,59 +95,89 @@ class DatasetStore:
                         column_types[header] = metadata_types[header]
                     else:
                         column_types[header] = infer_column_type(column_data[col_index])
-                print("CSV inference")
                 # Insert metadata
                 metadata_to_insert = []
                 for column_id, header in enumerate(headers):
                     column_type = column_types[header]
-                    metadata_to_insert.append((userid, tenantid, dataset_id, column_id, column_type))
+                    metadata_to_insert.append((int(userid), int(tenantid), int(dataset_id), int(column_id), str(column_type)))
                 query = """
                     INSERT INTO metadata (userid, tenantid, dataset_id, column_id, type_)
-                    VALUES (%s, %s, %s, %s, %s);
+                    VALUES (:userid, :tenantid, :dataset_id, :column_id, :type_);
                 """
                 with self.session_scope() as session:
                     try:
-                        session.execute(text(query),metadata_to_insert) # TODO verifier que ça fonctionne
+                        #session.execute(text(query),metadata_to_insert) # TODO verifier que ça fonctionne
+                        for record in metadata_to_insert:
+                            session.execute(text(query), {
+                                'userid': record[0],
+                                'tenantid': record[1],
+                                'dataset_id': record[2],
+                                'column_id': record[3],
+                                'type_': record[4]
+                            })
                     except SQLAlchemyError as e:
                         raise e
 
-                # insert data content
+                # # insert data content
+                csvfile.seek(0)
                 csv_reader = csv.reader(csvfile)
+                print("csv reader")
                 next(csv_reader)  # Skip the header row
+                print("skipped header")
                 data_to_insert = []
+                print("before loop")
                 for line_number, row in enumerate(csv_reader):
+                    print("line number: ", line_number)
                     for column_id, value in enumerate(row):
-                        data_to_insert.append((userid, tenantid, dataset_id, column_id, line_number, value))
+                        #data_to_insert.append((userid, tenantid, dataset_id, column_id, line_number, value))
 
-                        # Batch insert every 1000 rows
-                        if len(data_to_insert) >= 1000:
-                            query = """
-                                INSERT INTO dataset_content (userid, tenantid, dataset_id, column_id, line_id, val)
-                                VALUES (%s, %s, %s, %s, %s, %s);
-                            """
-                            with self.session_scope() as session:
-                                try:
-                                    session.execute(text(query),data_to_insert) # TODO verifier que ça fonctionne
-                                except SQLAlchemyError as e:
-                                    raise e
-                            data_to_insert = []
+                        # Batch insert every 1000 rows TODO
+                        #if len(data_to_insert) >= 1000:
+                        query = """
+                            INSERT INTO dataset_content (userid, tenantid, dataset_id, column_id, line_id, val)
+                            VALUES (:userid, :tenantid, :dataset_id, :column_id, :line_id, :val);
+                        """
+                        with self.session_scope() as session:
+                            try:
+                                # session.execute(text(query),data_to_insert)
+                                # for record in data_to_insert:
+                                    session.execute(text(query), {
+                                        'userid': userid,
+                                        'tenantid': tenantid,
+                                        'dataset_id': dataset_id,
+                                        'column_id': column_id,
+                                        'line_id': line_number,
+                                        'val': value
+                                    })
+                            except SQLAlchemyError as e:
+                                raise e
+                            #data_to_insert = []
 
-                if data_to_insert:
-                    query = """
-                                INSERT INTO dataset_content (userid, tenantid, dataset_id, column_id, line_id, val)
-                                VALUES (%s, %s, %s, %s, %s, %s);
-                            """
-                    with self.session_scope() as session:
-                        try:
-                            session.execute(text(query),data_to_insert) # TODO verifier que ça fonctionne
-                        except SQLAlchemyError as e:
-                            raise e
+                # if data_to_insert:
+                #     query = """
+                #                 INSERT INTO dataset_content (userid, tenantid, dataset_id, column_id, line_id, val)
+                #                 VALUES (:userid, :tenantid, :dataset_id, :column_id, :line_id, :val);
+                #             """
+                #     with self.session_scope() as session:
+                #         try:
+                #             #session.execute(text(query),data_to_insert) # TODO verifier que ça fonctionne
+                #             for record in data_to_insert:
+                #                         session.execute(text(query), {
+                #                             'userid': record[0],
+                #                             'tenantid': record[1],
+                #                             'dataset_id': record[2],
+                #                             'column_id': record[3],
+                #                             'line_id': record[4],
+                #                             'val': record[5]
+                #                         })
+                #         except SQLAlchemyError as e:
+                #             raise e
 
-                return dataset_id
         except Exception as e:
                 print(f"Error storing dataset: {e}")
                 return None
-
+        print("POSTGRES id", dataset_id)
+        return dataset_id
 
     def get_list_datasets(self, userid:int, tenantid:int, offset:int,limit:int) -> List[Dataset]:
         query = "SELECT * FROM datasets WHERE userid = :userid AND tenantid = :tenantid ORDER BY createdat OFFSET :offset LIMIT :limit;"

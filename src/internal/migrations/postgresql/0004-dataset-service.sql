@@ -8,7 +8,7 @@
     CONSTRAINT datasets_fk FOREIGN KEY (userid) REFERENCES users(id)
 );
 
-CREATE INDEX idx_datasets_userid_createdat ON datasets (userid, created_at); /*TODO do index on name instead of created? */
+CREATE INDEX IF NOT EXISTS idx_datasets_userid_createdat ON datasets (userid, created_at); /*TODO do index on name instead of created? */
 
 CREATE TABLE IF NOT EXISTS metadata (
     userid INTEGER,
@@ -21,7 +21,7 @@ CREATE TABLE IF NOT EXISTS metadata (
     CONSTRAINT metadata_fk2 FOREIGN KEY (userid) REFERENCES users(id)
 );
 
-CREATE INDEX idx_metadata_dataset_id_userid ON metadata (userid, dataset_id, column_id); /*TODO ? */
+CREATE INDEX IF NOT EXISTS idx_metadata_dataset_id_userid ON metadata (userid, dataset_id, column_id); /*TODO ? */
 
 CREATE TABLE IF NOT EXISTS dataset_content (
     userid INTEGER,
@@ -35,4 +35,4 @@ CREATE TABLE IF NOT EXISTS dataset_content (
     CONSTRAINT dataset_content_fk2 FOREIGN KEY (userid) REFERENCES users(id)
 );
 
-CREATE INDEX idx_dataset_content_dataset_id_userid ON dataset_content (userid, dataset_id, column_id,line_id); /*TODO ? */
+CREATE INDEX IF NOT EXISTS idx_dataset_content_dataset_id_userid ON dataset_content (userid, dataset_id, column_id,line_id); /*TODO ? */

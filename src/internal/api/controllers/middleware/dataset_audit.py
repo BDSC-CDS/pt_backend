@@ -22,11 +22,12 @@ class DatasetControllerAudit():
 
         try:
             response : TemplatebackendStoreDatasetReply =  self.next.dataset_service_store_dataset(user, body)
+            print("response audit: ",response)
             response_serialized = response.result.id
             self.auditLogService.log_event(AuditLog(service="dataset", userid=user.id,action="stored dataset",body=body_serialized,response=response_serialized))
             return response
         except Exception as e:
-            self.auditLogService.log_event(AuditLog(service="dataset", userid=user.id,action="Error storing dataset",body=body_serialized,response=e, error=True))
+            self.auditLogService.log_event(AuditLog(service="dataset", userid=user.id,action="Error storing dataset",body=body.dataset_name,response=e, error=True))
             raise e
 
     def dataset_service_delete_dataset(self, user, name:str):

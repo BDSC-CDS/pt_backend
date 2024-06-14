@@ -25,13 +25,14 @@ class DatasetController:
         try:
             # TODO where do I find tenantid?
             # TODO metadata types
-            dataset = self.dataset_service.store_dataset(user.id,user.tenantid, body.dataset_name, body.dataset)
+            dataset_id = self.dataset_service.store_dataset(user.id,user.tenantid, body.dataset_name, body.dataset)
+            print("Dataset controller Id", dataset_id)
+            return TemplatebackendStoreDatasetReply(TemplatebackendStoreDatasetResult(id=dataset_id))
+
         except Exception as e:
             print("error", e)
             traceback.print_exception(e)
             return str(e), 500
-        # return new dataset id
-        return TemplatebackendStoreDatasetReply(TemplatebackendStoreDatasetResult(id=dataset.id))
 
     def dataset_service_delete_dataset(self, user, name:str ):
         try:
