@@ -218,7 +218,6 @@ class DatasetStore:
                     'userid': userid,
                     'tenantid': tenantid,
                 }).mappings().fetchone()
-                print("dataset: ",dataset)
                 if dataset.deleted_at:
                     print("deleted")
                     return # if the dataset was deleted we don't return anything (TODO)
@@ -235,6 +234,7 @@ class DatasetStore:
                         tenantid=metadata.tenantid,
                         dataset_id=metadata.dataset_id,
                         column_id= metadata.column_id,
+                        column_name=metadata.column_name,
                         type_= metadata.type_
                     ) for metadata in metadatas ]
 

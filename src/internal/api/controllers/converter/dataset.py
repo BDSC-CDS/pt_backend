@@ -57,6 +57,7 @@ def metadata_from_business(metadata: List[Metadata]) -> List[TemplatebackendMeta
             tenantid=met.tenantid,
             dataset_id=met.dataset_id,
             column_id=met.column_id,
+            column_name=met.column_name,
             type=met.type_,
         ) for met in metadata
     ]
