@@ -21,5 +21,6 @@ message Metadata {
     uint32 tenantid = 2;
     uint32 dataset_id = 3;
     uint32 column_id = 4;
-    string type_ = 5;
+    string column_name = 5;
+    string type_ = 6;
 }

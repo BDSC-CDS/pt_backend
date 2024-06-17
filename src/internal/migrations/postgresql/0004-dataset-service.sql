@@ -15,6 +15,7 @@ CREATE TABLE IF NOT EXISTS metadata (
     tenantid INTEGER,
     dataset_id INTEGER,
     column_id INTEGER,
+    column_name TEXT,
     type_ TEXT,
     PRIMARY KEY (dataset_id, column_id),
     CONSTRAINT metadata_fk1 FOREIGN KEY (dataset_id) REFERENCES datasets(id),

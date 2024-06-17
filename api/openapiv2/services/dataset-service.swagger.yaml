@@ -255,6 +255,8 @@ definitions:
       columnId:
         type: integer
         format: int64
+      columnName:
+        type: string
       type:
         type: string
   templatebackendStoreDatasetReply:

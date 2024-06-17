@@ -633,11 +633,13 @@ components:
             datasetId: 1
             type: type
             userid: 0
+            columnName: columnName
           - columnId: 5
             tenantid: 6
             datasetId: 1
             type: type
             userid: 0
+            columnName: columnName
       properties:
         metadata:
           $ref: '#/components/schemas/templatebackendGetDatasetMetadataResult'
@@ -651,11 +653,13 @@ components:
           datasetId: 1
           type: type
           userid: 0
+          columnName: columnName
         - columnId: 5
           tenantid: 6
           datasetId: 1
           type: type
           userid: 0
+          columnName: columnName
       properties:
         metadata:
           items:
@@ -818,6 +822,7 @@ components:
         datasetId: 1
         type: type
         userid: 0
+        columnName: columnName
       properties:
         userid:
           format: int64
@@ -835,6 +840,9 @@ components:
           format: int64
           title: columnId
           type: integer
+        columnName:
+          title: columnName
+          type: string
         type:
           title: type
           type: string

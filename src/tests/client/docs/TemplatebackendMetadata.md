@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **tenantid** | **int** |  | [optional] 
 **dataset_id** | **int** |  | [optional] 
 **column_id** | **int** |  | [optional] 
+**column_name** | **str** |  | [optional] 
 **type** | **str** |  | [optional] 
 
 ## Example

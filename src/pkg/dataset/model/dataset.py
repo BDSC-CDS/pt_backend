@@ -21,6 +21,7 @@ class Metadata:
     tenantid:int = None
     dataset_id:int = None
     column_id:int = None
+    column_name:str = ""
     type_:str = ""
 
     def to_dict(self):

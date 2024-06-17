@@ -14,7 +14,7 @@ class TemplatebackendMetadata(Model):
     Do not edit the class manually.
     """
 
-    def __init__(self, userid=None, tenantid=None, dataset_id=None, column_id=None, type=None):
+    def __init__(self, userid=None, tenantid=None, dataset_id=None, column_id=None, column_name=None, type=None):
         """TemplatebackendMetadata - a model defined in OpenAPI
 
         :param userid: The userid of this TemplatebackendMetadata.
@@ -25,6 +25,8 @@ class TemplatebackendMetadata(Model):
         :type dataset_id: int
         :param column_id: The column_id of this TemplatebackendMetadata.
         :type column_id: int
+        :param column_name: The column_name of this TemplatebackendMetadata.
+        :type column_name: str
         :param type: The type of this TemplatebackendMetadata.
         :type type: str
         """
@@ -33,6 +35,7 @@ class TemplatebackendMetadata(Model):
             'tenantid': int,
             'dataset_id': int,
             'column_id': int,
+            'column_name': str,
             'type': str
         }
 
@@ -41,6 +44,7 @@ class TemplatebackendMetadata(Model):
             'tenantid': 'tenantid',
             'dataset_id': 'datasetId',
             'column_id': 'columnId',
+            'column_name': 'columnName',
             'type': 'type'
         }
 
@@ -48,6 +52,7 @@ class TemplatebackendMetadata(Model):
         self._tenantid = tenantid
         self._dataset_id = dataset_id
         self._column_id = column_id
+        self._column_name = column_name
         self._type = type
 
     @classmethod
@@ -144,6 +149,27 @@ class TemplatebackendMetadata(Model):
         """
 
         self._column_id = column_id
+
+    @property
+    def column_name(self) -> str:
+        """Gets the column_name of this TemplatebackendMetadata.
+
+
+        :return: The column_name of this TemplatebackendMetadata.
+        :rtype: str
+        """
+        return self._column_name
+
+    @column_name.setter
+    def column_name(self, column_name: str):
+        """Sets the column_name of this TemplatebackendMetadata.
+
+
+        :param column_name: The column_name of this TemplatebackendMetadata.
+        :type column_name: str
+        """
+
+        self._column_name = column_name
 
     @property
     def type(self) -> str:

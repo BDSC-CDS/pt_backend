@@ -99,10 +99,11 @@ class DatasetStore:
                 metadata_to_insert = []
                 for column_id, header in enumerate(headers):
                     column_type = column_types[header]
-                    metadata_to_insert.append((int(userid), int(tenantid), int(dataset_id), int(column_id), str(column_type)))
+                    column_name = header
+                    metadata_to_insert.append((int(userid), int(tenantid), int(dataset_id), int(column_id), str(column_name), str(column_type)))
                 query = """
-                    INSERT INTO metadata (userid, tenantid, dataset_id, column_id, type_)
-                    VALUES (:userid, :tenantid, :dataset_id, :column_id, :type_);
+                    INSERT INTO metadata (userid, tenantid, dataset_id, column_id, column_name, type_)
+                    VALUES (:userid, :tenantid, :dataset_id, :column_id, :column_name, :type_);
                 """
                 with self.session_scope() as session:
                     try:
@@ -113,7 +114,8 @@ class DatasetStore:
                                 'tenantid': record[1],
                                 'dataset_id': record[2],
                                 'column_id': record[3],
-                                'type_': record[4]
+                                'column_name': record[4],
+                                'type_': record[5]
                             })
                     except SQLAlchemyError as e:
                         raise e
