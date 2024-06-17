@@ -36,27 +36,27 @@ class DatasetController:
         self.controller=controller
 
 
-    def dataset_service_delete_dataset(self, user, name: str):
+    def dataset_service_delete_dataset(self, user, id: int):
         """Deletes a dataset
 
         This endpoint deletes a dataset
 
-        :param name: 
-        :type name: str
+        :param id: 
+        :type id: int
 
         :rtype: Union[TemplatebackendDeleteDatasetReply, Tuple[TemplatebackendDeleteDatasetReply, int], Tuple[TemplatebackendDeleteDatasetReply, int, Dict[str, str]]
         """
 
-        return self.controller.dataset_service_delete_dataset(user, name)
+        return self.controller.dataset_service_delete_dataset(user, id)
 
 
-    def dataset_service_get_dataset_content(self, user, name: str, offset: int=None, limit: int=None):
+    def dataset_service_get_dataset_content(self, user, id: int, offset: int=None, limit: int=None):
         """Get Dataset Content
 
         This endpoint allow getting a specific user&#39;s Dataset Content
 
-        :param name: 
-        :type name: str
+        :param id: 
+        :type id: int
         :param offset: 
         :type offset: int
         :param limit: 
@@ -65,21 +65,21 @@ class DatasetController:
         :rtype: Union[TemplatebackendGetDatasetContentReply, Tuple[TemplatebackendGetDatasetContentReply, int], Tuple[TemplatebackendGetDatasetContentReply, int, Dict[str, str]]
         """
 
-        return self.controller.dataset_service_get_dataset_content(user, name, offset, limit)
+        return self.controller.dataset_service_get_dataset_content(user, id, offset, limit)
 
 
-    def dataset_service_get_dataset_metadata(self, user, name: str):
+    def dataset_service_get_dataset_metadata(self, user, id: int):
         """Get Dataset Metadata
 
         This endpoint allow getting a specific user&#39;s Dataset Metadata
 
-        :param name: 
-        :type name: str
+        :param id: 
+        :type id: int
 
         :rtype: Union[TemplatebackendGetDatasetMetadataReply, Tuple[TemplatebackendGetDatasetMetadataReply, int], Tuple[TemplatebackendGetDatasetMetadataReply, int, Dict[str, str]]
         """
 
-        return self.controller.dataset_service_get_dataset_metadata(user, name)
+        return self.controller.dataset_service_get_dataset_metadata(user, id)
 
 
     def dataset_service_list_datasets(self, user, offset: int=None, limit: int=None):

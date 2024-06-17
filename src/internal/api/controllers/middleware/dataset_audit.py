@@ -30,19 +30,19 @@ class DatasetControllerAudit():
             self.auditLogService.log_event(AuditLog(service="dataset", userid=user.id,action="Error storing dataset",body=body.dataset_name,response=e, error=True))
             raise e
 
-    def dataset_service_delete_dataset(self, user, name:str):
+    def dataset_service_delete_dataset(self, user, id:int):
         try:
-            response : TemplatebackendDeleteDatasetReply =  self.next.dataset_service_delete_dataset(user, name)
-            self.auditLogService.log_event(AuditLog(service="dataset", userid=user.id,action="deleted dataset "+name+ ": ", response=response.result.success))
+            response : TemplatebackendDeleteDatasetReply =  self.next.dataset_service_delete_dataset(user, id)
+            self.auditLogService.log_event(AuditLog(service="dataset", userid=user.id,action="deleted dataset "+str(id)+ ": ", response=response.result.success))
             return response
         except Exception as e:
-            self.auditLogService.log_event(AuditLog(service="dataset", userid=user.id,action="Error deleting dataset "+ name, response=e, error=True))
+            self.auditLogService.log_event(AuditLog(service="dataset", userid=user.id,action="Error deleting dataset "+ str(id), response=e, error=True))
             raise e
 
 
-    def dataset_service_get_dataset_metadata(self, user, name: str):
+    def dataset_service_get_dataset_metadata(self, user, id: int):
         try:
-            response : TemplatebackendGetDatasetMetadataReply =  self.next.dataset_service_get_dataset_metadata(user, name)
+            response : TemplatebackendGetDatasetMetadataReply =  self.next.dataset_service_get_dataset_metadata(user, id)
             print("RESPONE: ",response)
             if type(response) is tuple and response[1] == 404:
                 final_response = []
@@ -51,22 +51,21 @@ class DatasetControllerAudit():
 
             response_serialized =[ f"dataset id: {r.dataset_id or ''}, column id: {r.column_id or ''}, type: {r.type or ''}" for r in final_response]
 
-            self.auditLogService.log_event(AuditLog(service="dataset", userid=user.id,action="accessed metadata of dataset "+ name, response=response_serialized))
+            self.auditLogService.log_event(AuditLog(service="dataset", userid=user.id,action="accessed metadata of dataset "+ str(id), response=response_serialized))
             return response
         except  Exception as e:
-            self.auditLogService.log_event(AuditLog(service="dataset", userid=user.id,action="Error accessing metadata of dataset "+ name, response=e, error=True))
+            self.auditLogService.log_event(AuditLog(service="dataset", userid=user.id,action="Error accessing metadata of dataset "+ str(id), response=e, error=True))
             raise e
 
-    # TODO cette méthode va pas
-    def dataset_service_get_dataset_content(self, user, name: str, offset: int=None, limit: int=None):
+    def dataset_service_get_dataset_content(self, user, id: int, offset: int=None, limit: int=None):
         try:
-            response : TemplatebackendGetDatasetContentReply =  self.next.dataset_service_get_dataset_content(user, name,offset,limit)
+            response : TemplatebackendGetDatasetContentReply =  self.next.dataset_service_get_dataset_content(user, id,offset,limit)
             response_serialized = f"columns: {response.result.columns or ''}"
 
-            self.auditLogService.log_event(AuditLog(service="dataset", userid=user.id,action="accessed content of dataset "+ name, response=response_serialized))
+            self.auditLogService.log_event(AuditLog(service="dataset", userid=user.id,action="accessed content of dataset "+ str(id), response=response_serialized))
             return response
         except  Exception as e:
-            self.auditLogService.log_event(AuditLog(service="dataset", userid=user.id,action="Error accessing content of dataset "+ name, response=e, error=True))
+            self.auditLogService.log_event(AuditLog(service="dataset", userid=user.id,action="Error accessing content of dataset "+ str(id), response=e, error=True))
             raise e
 
     def dataset_service_list_datasets(self, user, offset: int=None, limit: int=None):

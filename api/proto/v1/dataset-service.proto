@@ -72,7 +72,7 @@ message ListDatasetsResult {
 }
 // get metadata
 message GetDatasetMetadataRequest {
-    string name = 1;
+    uint32 id = 1;
 }
 
 message GetDatasetMetadataReply {
@@ -83,7 +83,7 @@ message GetDatasetMetadataResult {
 }
 // Get dataset
 message GetDatasetContentRequest {
-    string name = 1;
+    uint32 id = 1;
     int32 offset = 2;
     int32 limit = 3;
 }
@@ -100,7 +100,7 @@ message Column {
 }
 // Delete dataset
 message DeleteDatasetRequest {
-    string name = 1;
+    uint32 id = 1;
 }
 
 message DeleteDatasetReply {
@@ -145,7 +145,7 @@ service DatasetService {
     // Get a dataset's metadata
     rpc GetDatasetMetadata(GetDatasetMetadataRequest) returns (GetDatasetMetadataReply) {
         option (google.api.http) = {
-            get: "/api/v1/dataset/metadata/{name}"
+            get: "/api/v1/dataset/metadata/{id}"
         };
         option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
             summary: "Get Dataset Metadata";
@@ -161,7 +161,7 @@ service DatasetService {
     // Get a dataset's content
     rpc GetDatasetContent(GetDatasetContentRequest) returns (GetDatasetContentReply) {
         option (google.api.http) = {
-            get: "/api/v1/dataset/content/{name}"
+            get: "/api/v1/dataset/content/{id}"
         };
         option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
             summary: "Get Dataset Content";
@@ -178,7 +178,7 @@ service DatasetService {
     // Delete a dataset entry
     rpc DeleteDataset(DeleteDatasetRequest) returns (DeleteDatasetReply) {
         option (google.api.http) = {
-            delete: "/api/v1/dataset/{name}"
+            delete: "/api/v1/dataset/{id}"
         };
         option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
             summary: "Deletes a dataset";

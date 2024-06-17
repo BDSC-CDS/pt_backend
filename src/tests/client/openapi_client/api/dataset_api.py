@@ -24,7 +24,7 @@ try:
 except ImportError:
     from typing_extensions import Annotated
 
-from pydantic import StrictInt, StrictStr
+from pydantic import StrictInt
 
 from typing import Optional
 
@@ -56,7 +56,7 @@ class DatasetApi:
     @validate_call
     def dataset_service_delete_dataset(
         self,
-        name: StrictStr,
+        id: StrictInt,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -74,8 +74,8 @@ class DatasetApi:
 
         This endpoint deletes a dataset
 
-        :param name: (required)
-        :type name: str
+        :param id: (required)
+        :type id: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -99,7 +99,7 @@ class DatasetApi:
         """ # noqa: E501
 
         _param = self._dataset_service_delete_dataset_serialize(
-            name=name,
+            id=id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -123,7 +123,7 @@ class DatasetApi:
     @validate_call
     def dataset_service_delete_dataset_with_http_info(
         self,
-        name: StrictStr,
+        id: StrictInt,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -141,8 +141,8 @@ class DatasetApi:
 
         This endpoint deletes a dataset
 
-        :param name: (required)
-        :type name: str
+        :param id: (required)
+        :type id: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -166,7 +166,7 @@ class DatasetApi:
         """ # noqa: E501
 
         _param = self._dataset_service_delete_dataset_serialize(
-            name=name,
+            id=id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -190,7 +190,7 @@ class DatasetApi:
     @validate_call
     def dataset_service_delete_dataset_without_preload_content(
         self,
-        name: StrictStr,
+        id: StrictInt,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -208,8 +208,8 @@ class DatasetApi:
 
         This endpoint deletes a dataset
 
-        :param name: (required)
-        :type name: str
+        :param id: (required)
+        :type id: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -233,7 +233,7 @@ class DatasetApi:
         """ # noqa: E501
 
         _param = self._dataset_service_delete_dataset_serialize(
-            name=name,
+            id=id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -252,7 +252,7 @@ class DatasetApi:
 
     def _dataset_service_delete_dataset_serialize(
         self,
-        name,
+        id,
         _request_auth,
         _content_type,
         _headers,
@@ -272,8 +272,8 @@ class DatasetApi:
         _body_params: Optional[bytes] = None
 
         # process the path parameters
-        if name is not None:
-            _path_params['name'] = name
+        if id is not None:
+            _path_params['id'] = id
         # process the query parameters
         # process the header parameters
         # process the form parameters
@@ -295,7 +295,7 @@ class DatasetApi:
 
         return self.api_client.param_serialize(
             method='DELETE',
-            resource_path='/api/v1/dataset/{name}',
+            resource_path='/api/v1/dataset/{id}',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -314,7 +314,7 @@ class DatasetApi:
     @validate_call
     def dataset_service_get_dataset_content(
         self,
-        name: StrictStr,
+        id: StrictInt,
         offset: Optional[StrictInt] = None,
         limit: Optional[StrictInt] = None,
         _request_timeout: Union[
@@ -334,8 +334,8 @@ class DatasetApi:
 
         This endpoint allow getting a specific user's Dataset Content
 
-        :param name: (required)
-        :type name: str
+        :param id: (required)
+        :type id: int
         :param offset:
         :type offset: int
         :param limit:
@@ -363,7 +363,7 @@ class DatasetApi:
         """ # noqa: E501
 
         _param = self._dataset_service_get_dataset_content_serialize(
-            name=name,
+            id=id,
             offset=offset,
             limit=limit,
             _request_auth=_request_auth,
@@ -389,7 +389,7 @@ class DatasetApi:
     @validate_call
     def dataset_service_get_dataset_content_with_http_info(
         self,
-        name: StrictStr,
+        id: StrictInt,
         offset: Optional[StrictInt] = None,
         limit: Optional[StrictInt] = None,
         _request_timeout: Union[
@@ -409,8 +409,8 @@ class DatasetApi:
 
         This endpoint allow getting a specific user's Dataset Content
 
-        :param name: (required)
-        :type name: str
+        :param id: (required)
+        :type id: int
         :param offset:
         :type offset: int
         :param limit:
@@ -438,7 +438,7 @@ class DatasetApi:
         """ # noqa: E501
 
         _param = self._dataset_service_get_dataset_content_serialize(
-            name=name,
+            id=id,
             offset=offset,
             limit=limit,
             _request_auth=_request_auth,
@@ -464,7 +464,7 @@ class DatasetApi:
     @validate_call
     def dataset_service_get_dataset_content_without_preload_content(
         self,
-        name: StrictStr,
+        id: StrictInt,
         offset: Optional[StrictInt] = None,
         limit: Optional[StrictInt] = None,
         _request_timeout: Union[
@@ -484,8 +484,8 @@ class DatasetApi:
 
         This endpoint allow getting a specific user's Dataset Content
 
-        :param name: (required)
-        :type name: str
+        :param id: (required)
+        :type id: int
         :param offset:
         :type offset: int
         :param limit:
@@ -513,7 +513,7 @@ class DatasetApi:
         """ # noqa: E501
 
         _param = self._dataset_service_get_dataset_content_serialize(
-            name=name,
+            id=id,
             offset=offset,
             limit=limit,
             _request_auth=_request_auth,
@@ -534,7 +534,7 @@ class DatasetApi:
 
     def _dataset_service_get_dataset_content_serialize(
         self,
-        name,
+        id,
         offset,
         limit,
         _request_auth,
@@ -556,8 +556,8 @@ class DatasetApi:
         _body_params: Optional[bytes] = None
 
         # process the path parameters
-        if name is not None:
-            _path_params['name'] = name
+        if id is not None:
+            _path_params['id'] = id
         # process the query parameters
         if offset is not None:
             
@@ -587,7 +587,7 @@ class DatasetApi:
 
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/v1/dataset/content/{name}',
+            resource_path='/api/v1/dataset/content/{id}',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -606,7 +606,7 @@ class DatasetApi:
     @validate_call
     def dataset_service_get_dataset_metadata(
         self,
-        name: StrictStr,
+        id: StrictInt,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -624,8 +624,8 @@ class DatasetApi:
 
         This endpoint allow getting a specific user's Dataset Metadata
 
-        :param name: (required)
-        :type name: str
+        :param id: (required)
+        :type id: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -649,7 +649,7 @@ class DatasetApi:
         """ # noqa: E501
 
         _param = self._dataset_service_get_dataset_metadata_serialize(
-            name=name,
+            id=id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -673,7 +673,7 @@ class DatasetApi:
     @validate_call
     def dataset_service_get_dataset_metadata_with_http_info(
         self,
-        name: StrictStr,
+        id: StrictInt,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -691,8 +691,8 @@ class DatasetApi:
 
         This endpoint allow getting a specific user's Dataset Metadata
 
-        :param name: (required)
-        :type name: str
+        :param id: (required)
+        :type id: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -716,7 +716,7 @@ class DatasetApi:
         """ # noqa: E501
 
         _param = self._dataset_service_get_dataset_metadata_serialize(
-            name=name,
+            id=id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -740,7 +740,7 @@ class DatasetApi:
     @validate_call
     def dataset_service_get_dataset_metadata_without_preload_content(
         self,
-        name: StrictStr,
+        id: StrictInt,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -758,8 +758,8 @@ class DatasetApi:
 
         This endpoint allow getting a specific user's Dataset Metadata
 
-        :param name: (required)
-        :type name: str
+        :param id: (required)
+        :type id: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -783,7 +783,7 @@ class DatasetApi:
         """ # noqa: E501
 
         _param = self._dataset_service_get_dataset_metadata_serialize(
-            name=name,
+            id=id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -802,7 +802,7 @@ class DatasetApi:
 
     def _dataset_service_get_dataset_metadata_serialize(
         self,
-        name,
+        id,
         _request_auth,
         _content_type,
         _headers,
@@ -822,8 +822,8 @@ class DatasetApi:
         _body_params: Optional[bytes] = None
 
         # process the path parameters
-        if name is not None:
-            _path_params['name'] = name
+        if id is not None:
+            _path_params['id'] = id
         # process the query parameters
         # process the header parameters
         # process the form parameters
@@ -845,7 +845,7 @@ class DatasetApi:
 
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/v1/dataset/metadata/{name}',
+            resource_path='/api/v1/dataset/metadata/{id}',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

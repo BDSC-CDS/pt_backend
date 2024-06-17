@@ -27,7 +27,7 @@ class TestDatasetController(BaseTestCase):
             'Bearer': 'special-key',
         }
         response = self.client.open(
-            '/api/v1/dataset/{name}'.format(name='name_example'),
+            '/api/v1/dataset/{id}'.format(id=56),
             method='DELETE',
             headers=headers)
         self.assert200(response,
@@ -45,7 +45,7 @@ class TestDatasetController(BaseTestCase):
             'Bearer': 'special-key',
         }
         response = self.client.open(
-            '/api/v1/dataset/content/{name}'.format(name='name_example'),
+            '/api/v1/dataset/content/{id}'.format(id=56),
             method='GET',
             headers=headers,
             query_string=query_string)
@@ -62,7 +62,7 @@ class TestDatasetController(BaseTestCase):
             'Bearer': 'special-key',
         }
         response = self.client.open(
-            '/api/v1/dataset/metadata/{name}'.format(name='name_example'),
+            '/api/v1/dataset/metadata/{id}'.format(id=56),
             method='GET',
             headers=headers)
         self.assert200(response,

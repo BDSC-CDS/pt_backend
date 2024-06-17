@@ -206,13 +206,13 @@ class DatasetStore:
                 print(f"Error fetching datasets: {e}")
                 return None
 
-    def get_dataset_metadata(self,name:str, userid:int, tenantid:int) -> List[Metadata]:
-        query1 = "SELECT * FROM datasets WHERE dataset_name=:name AND userid = :userid AND tenantid = :tenantid;"
+    def get_dataset_metadata(self,id:int, userid:int, tenantid:int) -> List[Metadata]:
+        query1 = "SELECT * FROM datasets WHERE id=:id AND userid = :userid AND tenantid = :tenantid;"
         query2 = "SELECT * FROM metadata WHERE dataset_id = :dataset_id AND userid = :userid AND tenantid = :tenantid ORDER BY column_id;"
         with self.session_scope() as session:
             try:
                 dataset = session.execute(text(query1), {
-                    'name':name,
+                    'id':id,
                     'userid': userid,
                     'tenantid': tenantid,
                 }).mappings().fetchone()
@@ -221,10 +221,8 @@ class DatasetStore:
                     print("deleted")
                     return # if the dataset was deleted we don't return anything (TODO)
 
-                dataset_id = dataset.id
-                print("DATASET ID ",dataset_id)
                 metadatas = session.execute(text(query2), {
-                    'dataset_id':dataset_id,
+                    'dataset_id':id,
                     'userid': userid,
                     'tenantid': tenantid,
                 }).mappings().fetchall()
@@ -245,14 +243,14 @@ class DatasetStore:
 
 
 
-    def get_dataset_content(self,name:str, userid:int, tenantid:int, offset:int,limit:int) -> List[List[str]]: # TODO pagination
+    def get_dataset_content(self,id:int, userid:int, tenantid:int, offset:int,limit:int) -> List[List[str]]: # TODO pagination
         # we order by column and line number
-        query1 = "SELECT * FROM datasets WHERE dataset_name=:name AND userid = :userid AND tenantid = :tenantid;"
+        query1 = "SELECT * FROM datasets WHERE id=:id AND userid = :userid AND tenantid = :tenantid;"
         query2 = "SELECT * FROM dataset_content WHERE dataset_id = :dataset_id AND userid = :userid AND tenantid = :tenantid ORDER BY column_id,line_id OFFSET :offset LIMIT :limit;"
         with self.session_scope() as session:
             try:
                 dataset = session.execute(text(query1), {
-                                'name':name,
+                                'id':id,
                                 'userid': userid,
                                 'tenantid': tenantid,
                             }).mappings().fetchone()
@@ -261,9 +259,8 @@ class DatasetStore:
                     print("Error: Dataset not found (might have been deleted).")
                     return None # if the dataset was deleted we don't return anything (TODO)
 
-                dataset_id = dataset.id
                 rows = session.execute(text(query2), {
-                    'dataset_id': dataset_id,
+                    'dataset_id': id,
                     'userid': userid,
                     'tenantid': tenantid,
                     'offset':offset,
@@ -314,15 +311,15 @@ class DatasetStore:
 
 
 
-    def delete_dataset(self,name:str,userid:int, tenantid:int) -> bool:
+    def delete_dataset(self,id:int,userid:int, tenantid:int) -> bool:
         query = """UPDATE datasets
                 SET deleted_at = NOW()
-                WHERE dataset_name = :name AND userid = :userid AND tenantid = :tenantid
+                WHERE id = :id AND userid = :userid AND tenantid = :tenantid
                 """
         with self.session_scope() as session:
             try:
                 session.execute(text(query), {
-                    'name': name,
+                    'id': id,
                     'userid': userid,
                     'tenantid': tenantid,
                 }) # TODO mappings ? fetchall? qu'est ce que ça retourne?

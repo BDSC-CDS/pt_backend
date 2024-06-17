@@ -271,16 +271,17 @@ paths:
       - Dataset
       x-openapi-router-controller: dataset_controller
       x-codegen-request-body-name: body
-  /api/v1/dataset/content/{name}:
+  /api/v1/dataset/content/{id}:
     get:
       description: This endpoint allow getting a specific user's Dataset Content
       operationId: dataset_service_get_dataset_content
       parameters:
       - in: path
-        name: name
+        name: id
         required: true
         schema:
-          type: string
+          format: int64
+          type: integer
       - in: query
         name: offset
         schema:
@@ -308,16 +309,17 @@ paths:
       tags:
       - Dataset
       x-openapi-router-controller: dataset_controller
-  /api/v1/dataset/metadata/{name}:
+  /api/v1/dataset/metadata/{id}:
     get:
       description: This endpoint allow getting a specific user's Dataset Metadata
       operationId: dataset_service_get_dataset_metadata
       parameters:
       - in: path
-        name: name
+        name: id
         required: true
         schema:
-          type: string
+          format: int64
+          type: integer
       responses:
         "200":
           content:
@@ -335,16 +337,17 @@ paths:
       tags:
       - Dataset
       x-openapi-router-controller: dataset_controller
-  /api/v1/dataset/{name}:
+  /api/v1/dataset/{id}:
     delete:
       description: This endpoint deletes a dataset
       operationId: dataset_service_delete_dataset
       parameters:
       - in: path
-        name: name
+        name: id
         required: true
         schema:
-          type: string
+          format: int64
+          type: integer
       responses:
         "200":
           content:

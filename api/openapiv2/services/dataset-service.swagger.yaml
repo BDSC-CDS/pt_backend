@@ -65,7 +65,7 @@ paths:
       tags:
         - Dataset
       x-openapi-router-controller: dataset_controller
-  /api/v1/dataset/content/{name}:
+  /api/v1/dataset/content/{id}:
     get:
       summary: Get Dataset Content
       description: This endpoint allow getting a specific user's Dataset Content
@@ -80,10 +80,11 @@ paths:
           schema:
             $ref: '#/definitions/rpcStatus'
       parameters:
-        - name: name
+        - name: id
           in: path
           required: true
-          type: string
+          type: integer
+          format: int64
         - name: offset
           in: query
           required: false
@@ -97,7 +98,7 @@ paths:
       tags:
         - Dataset
       x-openapi-router-controller: dataset_controller
-  /api/v1/dataset/metadata/{name}:
+  /api/v1/dataset/metadata/{id}:
     get:
       summary: Get Dataset Metadata
       description: This endpoint allow getting a specific user's Dataset Metadata
@@ -112,14 +113,15 @@ paths:
           schema:
             $ref: '#/definitions/rpcStatus'
       parameters:
-        - name: name
+        - name: id
           in: path
           required: true
-          type: string
+          type: integer
+          format: int64
       tags:
         - Dataset
       x-openapi-router-controller: dataset_controller
-  /api/v1/dataset/{name}:
+  /api/v1/dataset/{id}:
     delete:
       summary: Deletes a dataset
       description: This endpoint deletes a dataset
@@ -134,10 +136,11 @@ paths:
           schema:
             $ref: '#/definitions/rpcStatus'
       parameters:
-        - name: name
+        - name: id
           in: path
           required: true
-          type: string
+          type: integer
+          format: int64
       tags:
         - Dataset
       x-openapi-router-controller: dataset_controller

@@ -15,16 +15,16 @@ class DatasetService:
         return datasets
 
     # get metadata for a dataset (if not deleted)
-    def get_dataset_metadata(self,name:str, userid:int, tenantid:int):
-        dataset = self.dataset_store.get_dataset_metadata(name=name,userid=userid,tenantid=tenantid)
+    def get_dataset_metadata(self,id:int, userid:int, tenantid:int):
+        dataset = self.dataset_store.get_dataset_metadata(id=id,userid=userid,tenantid=tenantid)
         return dataset
 
     # get dataset (if not deleted)
-    def get_dataset_content(self,name:str, userid:int, tenantid:int, offset:int,limit:int):
-        dataset = self.dataset_store.get_dataset_content(name=name,userid=userid,tenantid=tenantid, offset=offset,limit=limit)
+    def get_dataset_content(self,id:int, userid:int, tenantid:int, offset:int,limit:int):
+        dataset = self.dataset_store.get_dataset_content(id=id,userid=userid,tenantid=tenantid, offset=offset,limit=limit)
         return dataset
 
     # delete dataset (just update deleted_at, don't actually delete it)
-    def delete_dataset(self,name:str,userid:int, tenantid:int):
-        deleted = self.dataset_store.delete_dataset(name=name,userid=userid,tenantid=tenantid)
+    def delete_dataset(self,id:int,userid:int, tenantid:int):
+        deleted = self.dataset_store.delete_dataset(id=id,userid=userid,tenantid=tenantid)
         return deleted

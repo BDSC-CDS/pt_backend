@@ -34,19 +34,19 @@ class DatasetController:
             traceback.print_exception(e)
             return str(e), 500
 
-    def dataset_service_delete_dataset(self, user, name:str ):
+    def dataset_service_delete_dataset(self, user, id:int ):
         try:
             #TODO tenantid
-            result = self.dataset_service.delete_dataset(name, user.id, user.tenantid)
+            result = self.dataset_service.delete_dataset(id, user.id, user.tenantid)
         except Exception as e:
             print("error", e)
             traceback.print_exception(e)
             return str(e), 500
         return TemplatebackendDeleteDatasetReply(TemplatebackendDeleteDatasetResult(success=result))
 
-    def dataset_service_get_dataset_metadata(self, user, name: str):
+    def dataset_service_get_dataset_metadata(self, user, id: int):
         try:
-            metadata = self.dataset_service.get_dataset_metadata(name,user.id,user.tenantid)
+            metadata = self.dataset_service.get_dataset_metadata(id,user.id,user.tenantid)
         except Exception as e:
             print("error", e)
             traceback.print_exception(e)
@@ -57,9 +57,9 @@ class DatasetController:
         metadata = dataset_converter.metadata_from_business(metadata)
         return TemplatebackendGetDatasetMetadataReply(TemplatebackendGetDatasetMetadataResult(metadata=metadata))
 
-    def dataset_service_get_dataset_content(self, user, name: str,offset: int=None, limit: int=None):
+    def dataset_service_get_dataset_content(self, user, id: int,offset: int=None, limit: int=None):
         try:
-            dataset_content = self.dataset_service.get_dataset_content(name,user.id,user.tenantid,offset,limit)
+            dataset_content = self.dataset_service.get_dataset_content(id,user.id,user.tenantid,offset,limit)
         except Exception as e:
             print("error", e)
             traceback.print_exception(e)
