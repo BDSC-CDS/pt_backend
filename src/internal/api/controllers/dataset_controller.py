@@ -15,7 +15,6 @@ from server_template.models import TemplatebackendDeleteDatasetResult
 import src.internal.api.controllers.converter.dataset as dataset_converter
 from src.pkg.dataset.service.dataset import DatasetService
 
-# TODO implement logic
 class DatasetController:
     def __init__(self, dataset_service):
         self.dataset_service = dataset_service
@@ -23,7 +22,6 @@ class DatasetController:
     def dataset_service_store_dataset(self, user, body: TemplatebackendStoreDatasetRequest):
         # name, csv = dataset_converter.csv_to_business(body)
         try:
-            # TODO where do I find tenantid?
             # TODO metadata types
             dataset_id = self.dataset_service.store_dataset(user.id,user.tenantid, body.dataset_name, body.dataset)
             print("Dataset controller Id", dataset_id)
@@ -36,7 +34,6 @@ class DatasetController:
 
     def dataset_service_delete_dataset(self, user, id:int ):
         try:
-            #TODO tenantid
             result = self.dataset_service.delete_dataset(id, user.id, user.tenantid)
         except Exception as e:
             print("error", e)
