@@ -38,7 +38,7 @@ INSERT INTO user_role (userid, roleid) VALUES (:userid, :roleid);
         """
         #TODO change
         if not user.tenantid:
-            user.tenantid = 1
+            user.tenantid = 0
 
         with self.session_scope() as session:
             try:
