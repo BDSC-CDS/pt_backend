@@ -12,5 +12,3 @@ bcrypt
 pydantic
 python-dateutil
 Flask-Testing
-pandas
-collections
