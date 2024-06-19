@@ -20,21 +20,19 @@ import json
 
 
 from typing import Any, ClassVar, Dict, List, Optional
-from pydantic import BaseModel, StrictStr
-from pydantic import Field
+from pydantic import BaseModel
+from openapi_client.models.templatebackend_get_config_result import TemplatebackendGetConfigResult
 try:
     from typing import Self
 except ImportError:
     from typing_extensions import Self
 
-class TemplatebackendStoreDatasetRequest(BaseModel):
+class TemplatebackendGetConfigReply(BaseModel):
     """
-    TemplatebackendStoreDatasetRequest
+    TemplatebackendGetConfigReply
     """ # noqa: E501
-    dataset_name: Optional[StrictStr] = Field(default=None, alias="datasetName")
-    dataset: Optional[StrictStr] = None
-    types: Optional[StrictStr] = None
-    __properties: ClassVar[List[str]] = ["datasetName", "dataset", "types"]
+    result: Optional[TemplatebackendGetConfigResult] = None
+    __properties: ClassVar[List[str]] = ["result"]
 
     model_config = {
         "populate_by_name": True,
@@ -54,7 +52,7 @@ class TemplatebackendStoreDatasetRequest(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Self:
-        """Create an instance of TemplatebackendStoreDatasetRequest from a JSON string"""
+        """Create an instance of TemplatebackendGetConfigReply from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -73,11 +71,14 @@ class TemplatebackendStoreDatasetRequest(BaseModel):
             },
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of result
+        if self.result:
+            _dict['result'] = self.result.to_dict()
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Dict) -> Self:
-        """Create an instance of TemplatebackendStoreDatasetRequest from a dict"""
+        """Create an instance of TemplatebackendGetConfigReply from a dict"""
         if obj is None:
             return None
 
@@ -85,9 +86,7 @@ class TemplatebackendStoreDatasetRequest(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "datasetName": obj.get("datasetName"),
-            "dataset": obj.get("dataset"),
-            "types": obj.get("types")
+            "result": TemplatebackendGetConfigResult.from_dict(obj.get("result")) if obj.get("result") is not None else None
         })
         return _obj
 

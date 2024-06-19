@@ -8,29 +8,31 @@ from contextlib import contextmanager
 from src.pkg.dataset.model.dataset import Dataset,Metadata,Dataset_content
 import csv
 from collections import defaultdict
-def infer_column_type(values):
-    is_int = False
-    is_float = False
+import json
 
-    for value in values:
-        try:
-            int(value)
-            is_int=True
-        except ValueError:
-            is_int = False
+# def infer_column_type(values):
+#     is_int = False
+#     is_float = False
 
-        try:
-            float(value)
-            is_float=True
-        except ValueError:
-            is_float = False
+#     for value in values:
+#         try:
+#             int(value)
+#             is_int=True
+#         except ValueError:
+#             is_int = False
 
-    if is_int:
-        return "INTEGER"
-    elif is_float:
-        return "FLOAT"
-    else:
-        return "TEXT"
+#         try:
+#             float(value)
+#             is_float=True
+#         except ValueError:
+#             is_float = False
+
+#     if is_int:
+#         return "INTEGER"
+#     elif is_float:
+#         return "FLOAT"
+#     else:
+#         return "TEXT"
 
 
 class DatasetStore:
@@ -51,7 +53,7 @@ class DatasetStore:
         finally:
             session.close()
 
-    def store_dataset(self, userid:int,tenantid:int, dataset_name:str,dataset: str,metadata_types=None) -> int:
+    def store_dataset(self, userid:int,tenantid:int, dataset_name:str,dataset: str,types:str) -> int:
         # Insert dataset entry and get the generated dataset_id
         dataset_query = """
             INSERT INTO datasets
@@ -88,13 +90,17 @@ class DatasetStore:
                         column_data[col_index].append(value)
 
                 # Infer types for each column
-                column_types = {}
-                for col_index, header in enumerate(headers):
-                    if metadata_types and header in metadata_types:
-                        column_types[header] = metadata_types[header]
-                    else:
-                        column_types[header] = infer_column_type(column_data[col_index])
+                # column_types = {}
+                # for col_index, header in enumerate(headers):
+                #     if metadata_types and header in metadata_types:
+                #         column_types[header] = metadata_types[header]
+                #     else:
+                #         column_types[header] = infer_column_type(column_data[col_index])
                 # Insert metadata
+                print("TYPES: ",types)
+                column_types = json.loads(types)
+                print("JSON TYPES: ", column_types)
+
                 metadata_to_insert = []
                 for column_id, header in enumerate(headers):
                     column_type = column_types[header]

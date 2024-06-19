@@ -23,7 +23,7 @@ class DatasetController:
         # name, csv = dataset_converter.csv_to_business(body)
         try:
             # TODO metadata types
-            dataset_id = self.dataset_service.store_dataset(user.id,user.tenantid, body.dataset_name, body.dataset)
+            dataset_id = self.dataset_service.store_dataset(user.id,user.tenantid, body.dataset_name, body.dataset, body.types)
             print("Dataset controller Id", dataset_id)
             return TemplatebackendStoreDatasetReply(TemplatebackendStoreDatasetResult(id=dataset_id))
 
