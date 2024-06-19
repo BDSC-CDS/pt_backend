@@ -14,26 +14,31 @@ class TemplatebackendStoreDatasetRequest(Model):
     Do not edit the class manually.
     """
 
-    def __init__(self, dataset_name=None, dataset=None):
+    def __init__(self, dataset_name=None, dataset=None, types=None):
         """TemplatebackendStoreDatasetRequest - a model defined in OpenAPI
 
         :param dataset_name: The dataset_name of this TemplatebackendStoreDatasetRequest.
         :type dataset_name: str
         :param dataset: The dataset of this TemplatebackendStoreDatasetRequest.
         :type dataset: str
+        :param types: The types of this TemplatebackendStoreDatasetRequest.
+        :type types: str
         """
         self.openapi_types = {
             'dataset_name': str,
-            'dataset': str
+            'dataset': str,
+            'types': str
         }
 
         self.attribute_map = {
             'dataset_name': 'datasetName',
-            'dataset': 'dataset'
+            'dataset': 'dataset',
+            'types': 'types'
         }
 
         self._dataset_name = dataset_name
         self._dataset = dataset
+        self._types = types
 
     @classmethod
     def from_dict(cls, dikt) -> 'TemplatebackendStoreDatasetRequest':
@@ -87,3 +92,24 @@ class TemplatebackendStoreDatasetRequest(Model):
         """
 
         self._dataset = dataset
+
+    @property
+    def types(self) -> str:
+        """Gets the types of this TemplatebackendStoreDatasetRequest.
+
+
+        :return: The types of this TemplatebackendStoreDatasetRequest.
+        :rtype: str
+        """
+        return self._types
+
+    @types.setter
+    def types(self, types: str):
+        """Sets the types of this TemplatebackendStoreDatasetRequest.
+
+
+        :param types: The types of this TemplatebackendStoreDatasetRequest.
+        :type types: str
+        """
+
+        self._types = types

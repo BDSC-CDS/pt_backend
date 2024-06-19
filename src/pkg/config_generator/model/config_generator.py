@@ -1,4 +1,5 @@
-from dataclasses import dataclass, asdict
+from dataclasses import dataclass, asdict,field
+from typing import List
 
 @dataclass
 class ConfigGenerator:
@@ -8,13 +9,13 @@ class ConfigGenerator:
     hasDateShift: bool = False
     hassubFieldList: bool = False
     hassubFieldRegex: bool = False
-    scrambleField_fields : list = []
+    scrambleField_fields: List[str] = field(default_factory=list)
     dateShift_lowrange: int = None
     dateShift_highrange: int = None
-    subFieldList_fields: list = []
-    subFieldList_substitute: list = []
+    subFieldList_fields: List[str] = field(default_factory=list)
+    subFieldList_substitute: List[str] = field(default_factory=list)
     subFieldList_replacement: str = None
-    subFieldRegex_fields: list = []
+    subFieldRegex_fields: List[str] = field(default_factory=list)
     subFieldRegex_regex: str = None
     subFieldRegex_replacement: str = None
     created_at: str = ""

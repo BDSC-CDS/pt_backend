@@ -13,6 +13,7 @@ security:
 - {}
 tags:
 - name: AuthenticationService
+- name: ConfigService
 - name: DatasetService
 - name: IndexService
 - name: UserService
@@ -45,6 +46,34 @@ paths:
       - Authentication
       x-openapi-router-controller: authentication_controller
       x-codegen-request-body-name: body
+  /api/rest/v1/configs/{id}:
+    get:
+      description: This endpoint returns a configuration file for a given user
+      operationId: config_service_get_config
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/templatebackendGetConfigReply'
+          description: A successful response.
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+          description: An unexpected error response.
+      summary: Get a configuration file
+      tags:
+      - Configuration
+      x-openapi-router-controller: config_generator_controller
   /api/rest/v1/users:
     post:
       description: This endpoint creates a user
@@ -478,6 +507,96 @@ components:
           type: array
       title: templatebackendColumn
       type: object
+    templatebackendConfig:
+      example:
+        hassubFieldList: true
+        subFieldListReplacement: subFieldListReplacement
+        subFieldListFields:
+        - subFieldListFields
+        - subFieldListFields
+        subFieldRegexRegex: subFieldRegexRegex
+        hasDateShift: true
+        hassubFieldRegex: true
+        scrambleFieldFields:
+        - scrambleFieldFields
+        - scrambleFieldFields
+        questionnaireid: 6
+        dateShiftLowrange: 1
+        hasScrambleField: true
+        createdAt: 2000-01-23T04:56:07.000+00:00
+        dateShiftHighrange: 5
+        id: 0
+        subFieldListSubstitute:
+        - subFieldListSubstitute
+        - subFieldListSubstitute
+        subFieldRegexFields:
+        - subFieldRegexFields
+        - subFieldRegexFields
+        subFieldRegexReplacement: subFieldRegexReplacement
+      properties:
+        id:
+          format: int64
+          title: id
+          type: integer
+        questionnaireid:
+          format: int64
+          title: questionnaireid
+          type: integer
+        hasScrambleField:
+          title: hasScrambleField
+          type: boolean
+        hasDateShift:
+          title: hasDateShift
+          type: boolean
+        hassubFieldList:
+          title: hassubFieldList
+          type: boolean
+        hassubFieldRegex:
+          title: hassubFieldRegex
+          type: boolean
+        scrambleFieldFields:
+          items:
+            type: string
+          title: scrambleFieldFields
+          type: array
+        dateShiftLowrange:
+          format: int32
+          title: dateShiftLowrange
+          type: integer
+        dateShiftHighrange:
+          format: int32
+          title: dateShiftHighrange
+          type: integer
+        subFieldListFields:
+          items:
+            type: string
+          title: subFieldListFields
+          type: array
+        subFieldListSubstitute:
+          items:
+            type: string
+          title: subFieldListSubstitute
+          type: array
+        subFieldListReplacement:
+          title: subFieldListReplacement
+          type: string
+        subFieldRegexFields:
+          items:
+            type: string
+          title: subFieldRegexFields
+          type: array
+        subFieldRegexRegex:
+          title: subFieldRegexRegex
+          type: string
+        subFieldRegexReplacement:
+          title: subFieldRegexReplacement
+          type: string
+        createdAt:
+          format: date-time
+          title: createdAt
+          type: string
+      title: templatebackendConfig
+      type: object
     templatebackendCreateHelloReply:
       example:
         identifier: 0
@@ -591,6 +710,71 @@ components:
       type: object
     templatebackendDeleteUserResult:
       title: result
+      type: object
+    templatebackendGetConfigReply:
+      example:
+        result:
+          config:
+            hassubFieldList: true
+            subFieldListReplacement: subFieldListReplacement
+            subFieldListFields:
+            - subFieldListFields
+            - subFieldListFields
+            subFieldRegexRegex: subFieldRegexRegex
+            hasDateShift: true
+            hassubFieldRegex: true
+            scrambleFieldFields:
+            - scrambleFieldFields
+            - scrambleFieldFields
+            questionnaireid: 6
+            dateShiftLowrange: 1
+            hasScrambleField: true
+            createdAt: 2000-01-23T04:56:07.000+00:00
+            dateShiftHighrange: 5
+            id: 0
+            subFieldListSubstitute:
+            - subFieldListSubstitute
+            - subFieldListSubstitute
+            subFieldRegexFields:
+            - subFieldRegexFields
+            - subFieldRegexFields
+            subFieldRegexReplacement: subFieldRegexReplacement
+      properties:
+        result:
+          $ref: '#/components/schemas/templatebackendGetConfigResult'
+      title: templatebackendGetConfigReply
+      type: object
+    templatebackendGetConfigResult:
+      example:
+        config:
+          hassubFieldList: true
+          subFieldListReplacement: subFieldListReplacement
+          subFieldListFields:
+          - subFieldListFields
+          - subFieldListFields
+          subFieldRegexRegex: subFieldRegexRegex
+          hasDateShift: true
+          hassubFieldRegex: true
+          scrambleFieldFields:
+          - scrambleFieldFields
+          - scrambleFieldFields
+          questionnaireid: 6
+          dateShiftLowrange: 1
+          hasScrambleField: true
+          createdAt: 2000-01-23T04:56:07.000+00:00
+          dateShiftHighrange: 5
+          id: 0
+          subFieldListSubstitute:
+          - subFieldListSubstitute
+          - subFieldListSubstitute
+          subFieldRegexFields:
+          - subFieldRegexFields
+          - subFieldRegexFields
+          subFieldRegexReplacement: subFieldRegexReplacement
+      properties:
+        config:
+          $ref: '#/components/schemas/templatebackendConfig'
+      title: templatebackendGetConfigResult
       type: object
     templatebackendGetDatasetContentReply:
       example:
@@ -876,6 +1060,9 @@ components:
           type: string
         dataset:
           title: dataset
+          type: string
+        types:
+          title: types
           type: string
       title: Create a Dataset
       type: object

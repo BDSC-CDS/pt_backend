@@ -5,9 +5,10 @@ from src.pkg.audit_log.model.audit_log import AuditLog
 from src.pkg.config_generator.model.config_generator import ConfigGenerator
 
 class ConfigGeneratorController():
-    def __init__(self, config, configgenerator_service,auditlog_service):
+    def __init__(self,  configgenerator_service):
+    #,auditlog_service,config):
         self.configgenerator_service = configgenerator_service
-        self.auditlog_service = auditlog_service
+        # self.auditlog_service = auditlog_service
 
     # def authentication_service_authenticate(self, user, body: ConfigGenerator):
     #     try:
@@ -17,3 +18,5 @@ class ConfigGeneratorController():
     #     except Exception as e:
     #         self.auditlog_service.log_event(AuditLog(service="AuthenticationController", action="Error authenticating",body=body.username, error=True))
     #         raise e
+    def config_service_get_config(self,user,id:int):
+        return "Not implemented", 501

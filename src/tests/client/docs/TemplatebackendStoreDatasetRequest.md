@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **dataset_name** | **str** |  | [optional] 
 **dataset** | **str** |  | [optional] 
+**types** | **str** |  | [optional] 
 
 ## Example
 

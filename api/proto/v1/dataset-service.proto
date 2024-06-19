@@ -49,6 +49,7 @@ option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
 message StoreDatasetRequest {
     string dataset_name = 1;
     string dataset = 2;
+    string types = 3;
 }
 
 message StoreDatasetReply {
