@@ -97,6 +97,11 @@ All URIs are relative to *http://localhost*
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *AuthenticationApi* | [**authentication_service_authenticate**](docs/AuthenticationApi.md#authentication_service_authenticate) | **POST** /api/rest/v1/authentication/login | Authenticate
+*DatasetApi* | [**dataset_service_delete_dataset**](docs/DatasetApi.md#dataset_service_delete_dataset) | **DELETE** /api/v1/dataset/{id} | Deletes a dataset
+*DatasetApi* | [**dataset_service_get_dataset_content**](docs/DatasetApi.md#dataset_service_get_dataset_content) | **GET** /api/v1/dataset/content/{id} | Get Dataset Content
+*DatasetApi* | [**dataset_service_get_dataset_metadata**](docs/DatasetApi.md#dataset_service_get_dataset_metadata) | **GET** /api/v1/dataset/metadata/{id} | Get Dataset Metadata
+*DatasetApi* | [**dataset_service_list_datasets**](docs/DatasetApi.md#dataset_service_list_datasets) | **GET** /api/v1/dataset | List datasets
+*DatasetApi* | [**dataset_service_store_dataset**](docs/DatasetApi.md#dataset_service_store_dataset) | **POST** /api/v1/dataset | Store a dataset
 *IndexApi* | [**index_service_create_hello**](docs/IndexApi.md#index_service_create_hello) | **POST** /api/v1/hello/{identifier} | Get a hello
 *IndexApi* | [**index_service_get_hello**](docs/IndexApi.md#index_service_get_hello) | **GET** /api/v1/hello | Get a hello
 *UsersApi* | [**user_service_create_user**](docs/UsersApi.md#user_service_create_user) | **POST** /api/rest/v1/users | Create a user
@@ -114,17 +119,31 @@ Class | Method | HTTP request | Description
  - [RpcStatus](docs/RpcStatus.md)
  - [TemplatebackendAuthenticationReply](docs/TemplatebackendAuthenticationReply.md)
  - [TemplatebackendAuthenticationResult](docs/TemplatebackendAuthenticationResult.md)
+ - [TemplatebackendColumn](docs/TemplatebackendColumn.md)
  - [TemplatebackendCreateHelloReply](docs/TemplatebackendCreateHelloReply.md)
  - [TemplatebackendCreateUserReply](docs/TemplatebackendCreateUserReply.md)
  - [TemplatebackendCreateUserResult](docs/TemplatebackendCreateUserResult.md)
  - [TemplatebackendCredentials](docs/TemplatebackendCredentials.md)
+ - [TemplatebackendDataset](docs/TemplatebackendDataset.md)
+ - [TemplatebackendDeleteDatasetReply](docs/TemplatebackendDeleteDatasetReply.md)
+ - [TemplatebackendDeleteDatasetResult](docs/TemplatebackendDeleteDatasetResult.md)
  - [TemplatebackendDeleteUserReply](docs/TemplatebackendDeleteUserReply.md)
+ - [TemplatebackendGetDatasetContentReply](docs/TemplatebackendGetDatasetContentReply.md)
+ - [TemplatebackendGetDatasetContentResult](docs/TemplatebackendGetDatasetContentResult.md)
+ - [TemplatebackendGetDatasetMetadataReply](docs/TemplatebackendGetDatasetMetadataReply.md)
+ - [TemplatebackendGetDatasetMetadataResult](docs/TemplatebackendGetDatasetMetadataResult.md)
  - [TemplatebackendGetHelloReply](docs/TemplatebackendGetHelloReply.md)
  - [TemplatebackendGetUserMeReply](docs/TemplatebackendGetUserMeReply.md)
  - [TemplatebackendGetUserMeResult](docs/TemplatebackendGetUserMeResult.md)
  - [TemplatebackendGetUserReply](docs/TemplatebackendGetUserReply.md)
  - [TemplatebackendGetUserResult](docs/TemplatebackendGetUserResult.md)
+ - [TemplatebackendListDatasetsReply](docs/TemplatebackendListDatasetsReply.md)
+ - [TemplatebackendListDatasetsResult](docs/TemplatebackendListDatasetsResult.md)
+ - [TemplatebackendMetadata](docs/TemplatebackendMetadata.md)
  - [TemplatebackendResetPasswordReply](docs/TemplatebackendResetPasswordReply.md)
+ - [TemplatebackendStoreDatasetReply](docs/TemplatebackendStoreDatasetReply.md)
+ - [TemplatebackendStoreDatasetRequest](docs/TemplatebackendStoreDatasetRequest.md)
+ - [TemplatebackendStoreDatasetResult](docs/TemplatebackendStoreDatasetResult.md)
  - [TemplatebackendUpdatePasswordReply](docs/TemplatebackendUpdatePasswordReply.md)
  - [TemplatebackendUpdatePasswordRequest](docs/TemplatebackendUpdatePasswordRequest.md)
  - [TemplatebackendUser](docs/TemplatebackendUser.md)

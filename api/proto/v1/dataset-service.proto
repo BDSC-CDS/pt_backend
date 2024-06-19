@@ -1,0 +1,193 @@
+syntax = "proto3";
+package templatebackend;
+option go_package = ".;templatebackend";
+
+import "google/api/annotations.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
+
+import "dataset.proto";
+
+
+option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
+    info: {
+        title: "pt backend";
+        version: "1.0";
+        contact: {
+            name: "pt backend dataset service";
+            url: "https://pt-backend.rdeid.unil.ch";
+            email: "development.bdsc@chuv.ch";
+        };
+    };
+
+    schemes: HTTP;
+    consumes: "application/json";
+    produces: "application/json";
+
+    security_definitions: {
+        security: {
+            key: "Bearer";
+            value: {
+                type: TYPE_API_KEY;
+                in: IN_HEADER;
+                name: "Authorization";
+            }
+        }
+    }
+
+    security: {
+        security_requirement: {
+            key: "Bearer";
+            value: {};
+        }
+    }
+    security: {}
+};
+
+
+
+// Create a Dataset
+message StoreDatasetRequest {
+    string dataset_name = 1;
+    string dataset = 2;
+}
+
+message StoreDatasetReply {
+    StoreDatasetResult result = 1;
+}
+message StoreDatasetResult {
+    uint32 id = 1;
+}
+//List datasets
+message ListDatasetsRequest {
+    uint32 offset = 1;
+    uint32 limit = 2;
+}
+
+message ListDatasetsReply {
+    ListDatasetsResult result = 1;
+}
+
+message ListDatasetsResult {
+    repeated Dataset Datasets = 1;
+}
+// get metadata
+message GetDatasetMetadataRequest {
+    uint32 id = 1;
+}
+
+message GetDatasetMetadataReply {
+    GetDatasetMetadataResult metadata = 1;
+}
+message GetDatasetMetadataResult {
+    repeated Metadata metadata = 1;
+}
+// Get dataset
+message GetDatasetContentRequest {
+    uint32 id = 1;
+    int32 offset = 2;
+    int32 limit = 3;
+}
+message GetDatasetContentReply {
+    GetDatasetContentResult result = 1;
+}
+
+message GetDatasetContentResult {
+    repeated Column columns = 1;
+}
+
+message Column {
+    repeated string value = 1;
+}
+// Delete dataset
+message DeleteDatasetRequest {
+    uint32 id = 1;
+}
+
+message DeleteDatasetReply {
+    DeleteDatasetResult result = 1;
+}
+message DeleteDatasetResult {
+    bool success = 1;
+}
+
+service DatasetService {
+    // Create a dataset
+    rpc StoreDataset(StoreDatasetRequest) returns (StoreDatasetReply) {
+        option (google.api.http) = {
+            post: "/api/v1/dataset"
+            body: "*"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            summary: "Store a dataset";
+            description: "This endpoint stores a dataset";
+            tags: "Dataset";
+            extensions: {
+                key: "x-openapi-router-controller";
+                value {string_value: "dataset_controller"};
+            };
+        };
+    };
+    // Retrieve all datasets for a user
+    rpc ListDatasets(ListDatasetsRequest) returns (ListDatasetsReply) {
+        option (google.api.http) = {
+            get: "/api/v1/dataset"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            summary: "List datasets";
+            description: "This endpoint allows listing a user's datasets";
+            tags: "Dataset";
+            extensions: {
+                key: "x-openapi-router-controller";
+                value {string_value: "dataset_controller"};
+            };
+        };
+    };
+    // Get a dataset's metadata
+    rpc GetDatasetMetadata(GetDatasetMetadataRequest) returns (GetDatasetMetadataReply) {
+        option (google.api.http) = {
+            get: "/api/v1/dataset/metadata/{id}"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            summary: "Get Dataset Metadata";
+            description: "This endpoint allow getting a specific user's Dataset Metadata";
+            tags: "Dataset";
+            extensions: {
+                key: "x-openapi-router-controller";
+                value {string_value: "dataset_controller"};
+            };
+        };
+    };
+
+    // Get a dataset's content
+    rpc GetDatasetContent(GetDatasetContentRequest) returns (GetDatasetContentReply) {
+        option (google.api.http) = {
+            get: "/api/v1/dataset/content/{id}"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            summary: "Get Dataset Content";
+            description: "This endpoint allow getting a specific user's Dataset Content";
+            tags: "Dataset";
+            extensions: {
+                key: "x-openapi-router-controller";
+                value {string_value: "dataset_controller"};
+            };
+        };
+    };
+
+
+    // Delete a dataset entry
+    rpc DeleteDataset(DeleteDatasetRequest) returns (DeleteDatasetReply) {
+        option (google.api.http) = {
+            delete: "/api/v1/dataset/{id}"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            summary: "Deletes a dataset";
+            description: "This endpoint deletes a dataset";
+            tags: "Dataset";
+            extensions: {
+                key: "x-openapi-router-controller";
+                value {string_value: "dataset_controller"};
+            };
+        };
+    };
+}

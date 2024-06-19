@@ -6,6 +6,7 @@ from server_template.models import TemplatebackendUser
 
 def user_to_business(user: TemplatebackendUser) -> User:
     u = User(
+        tenantid=user.tenantid,
         username = user.username,
         email = user.email,
         password = user.password,
@@ -21,6 +22,7 @@ def user_from_business(user: User) -> TemplatebackendUser:
     print(user)
     u = TemplatebackendUser(
         id=user.id,
+        tenantid=user.tenantid,
         username = user.username,
         email = user.email,
         first_name = user.firstname,
