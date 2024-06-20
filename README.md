@@ -100,7 +100,7 @@ service MedicationService {
             tags: "Medication";
             extensions: {
                 key: "x-openapi-router-controller";
-                value {string_value: "medication_controller"};
+                value: {string_value: "medication_controller"};
             };
         };
     };

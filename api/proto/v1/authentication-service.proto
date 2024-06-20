@@ -67,7 +67,7 @@ service AuthenticationService {
             tags: "Authentication";
             extensions: {
                 key: "x-openapi-router-controller";
-                value {string_value: "authentication_controller"};
+                value: {string_value: "authentication_controller"};
             };
         };
     };

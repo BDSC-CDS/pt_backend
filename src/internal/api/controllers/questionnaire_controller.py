@@ -16,6 +16,13 @@ class QuestionnaireController:
         self.config = config
         self.questionnaire_service = questionnaire_service
 
+    
+    def questionnaire_service_get_reply(self, user, questionnaire_version_id: int, reply_id: int):
+        return None
+
+    def questionnaire_service_list_replies(self, user, questionnaire_version_id: int, offset: int=None, limit: int=None):
+        return None
+
     def questionnaire_service_create_questionnaire(self, user, body: TemplatebackendCreateQuestionnaireRequest):
         questionnaire = questionnaire_converter.questionnaire_to_business(body.questionnaire)
         questionnaire.userid = user.id
@@ -39,3 +46,5 @@ class QuestionnaireController:
         questionnaires = self.questionnaire_service.list_questionnaires(user.tenantid, user.id, offset, limit)
         ms = [questionnaire_converter.questionnaire_from_business(m) for m in questionnaires]
         return TemplatebackendListQuestionnaireReply(TemplatebackendListQuestionnaireResult(ms))
+    
+

@@ -4,6 +4,29 @@ option go_package = ".;templatebackend";
 
 import "google/protobuf/timestamp.proto";
 
+message QuestionnaireQuestionReply {
+    uint32 id = 1;
+
+    uint32 questionnaire_question_id = 2;
+    string answer = 3;    
+
+    google.protobuf.Timestamp createdAt = 4;
+    google.protobuf.Timestamp updatedAt = 5;
+    // google.protobuf.Timestamp deletedAt = 7;
+}
+
+message QuestionnaireReply {
+    uint32 id = 1;
+
+    uint32 questionnaire_question_id = 2;
+
+    repeated QuestionnaireQuestionReply replies = 3;
+
+    google.protobuf.Timestamp createdAt = 4;
+    google.protobuf.Timestamp updatedAt = 5;
+    // google.protobuf.Timestamp deletedAt = 11;
+}
+
 message QuestionnaireQuestionAnswerRulePrefill {
     uint32 id = 1;
 

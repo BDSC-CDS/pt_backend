@@ -564,6 +564,78 @@ paths:
       tags:
       - Questionnaire
       x-openapi-router-controller: questionnaire_controller
+  /api/v1/questionnaire/{questionnaireVersionId}/replies:
+    get:
+      description: This endpoint allows listing a user's questionnaires replies
+      operationId: questionnaire_service_list_replies
+      parameters:
+      - in: path
+        name: questionnaireVersionId
+        required: true
+        schema:
+          format: int64
+          type: integer
+      - in: query
+        name: offset
+        schema:
+          format: int64
+          type: integer
+      - in: query
+        name: limit
+        schema:
+          format: int64
+          type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/templatebackendListRepliesReply'
+          description: A successful response.
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+          description: An unexpected error response.
+      summary: List questionnaires replies
+      tags:
+      - Questionnaire
+      x-openapi-router-controller: questionnaire_controller
+  /api/v1/questionnaire/{questionnaireVersionId}/replies/{replyId}:
+    get:
+      description: This endpoint allows getting a user's questionnaires reply
+      operationId: questionnaire_service_get_reply
+      parameters:
+      - in: path
+        name: questionnaireVersionId
+        required: true
+        schema:
+          format: int64
+          type: integer
+      - in: path
+        name: replyId
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/templatebackendGetReplyReply'
+          description: A successful response.
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+          description: An unexpected error response.
+      summary: Get a questionnaires reply
+      tags:
+      - Questionnaire
+      x-openapi-router-controller: questionnaire_controller
 components:
   schemas:
     protobufAny:
@@ -1434,6 +1506,53 @@ components:
         questionnaire:
           $ref: '#/components/schemas/templatebackendQuestionnaire'
       title: templatebackendGetQuestionnaireResult
+      type: object
+    templatebackendGetReplyReply:
+      example:
+        result:
+          reply:
+            createdAt: 2000-01-23T04:56:07.000+00:00
+            questionnaireQuestionId: 6
+            replies:
+            - createdAt: 2000-01-23T04:56:07.000+00:00
+              questionnaireQuestionId: 5
+              answer: answer
+              id: 1
+              updatedAt: 2000-01-23T04:56:07.000+00:00
+            - createdAt: 2000-01-23T04:56:07.000+00:00
+              questionnaireQuestionId: 5
+              answer: answer
+              id: 1
+              updatedAt: 2000-01-23T04:56:07.000+00:00
+            id: 0
+            updatedAt: 2000-01-23T04:56:07.000+00:00
+      properties:
+        result:
+          $ref: '#/components/schemas/templatebackendGetReplyResult'
+      title: templatebackendGetReplyReply
+      type: object
+    templatebackendGetReplyResult:
+      example:
+        reply:
+          createdAt: 2000-01-23T04:56:07.000+00:00
+          questionnaireQuestionId: 6
+          replies:
+          - createdAt: 2000-01-23T04:56:07.000+00:00
+            questionnaireQuestionId: 5
+            answer: answer
+            id: 1
+            updatedAt: 2000-01-23T04:56:07.000+00:00
+          - createdAt: 2000-01-23T04:56:07.000+00:00
+            questionnaireQuestionId: 5
+            answer: answer
+            id: 1
+            updatedAt: 2000-01-23T04:56:07.000+00:00
+          id: 0
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+      properties:
+        reply:
+          $ref: '#/components/schemas/templatebackendQuestionnaireReply'
+      title: templatebackendGetReplyResult
       type: object
     templatebackendGetUserMeReply:
       example:
@@ -2393,6 +2512,86 @@ components:
           type: array
       title: templatebackendListQuestionnaireResult
       type: object
+    templatebackendListRepliesReply:
+      example:
+        result:
+          replies:
+          - createdAt: 2000-01-23T04:56:07.000+00:00
+            questionnaireQuestionId: 6
+            replies:
+            - createdAt: 2000-01-23T04:56:07.000+00:00
+              questionnaireQuestionId: 5
+              answer: answer
+              id: 1
+              updatedAt: 2000-01-23T04:56:07.000+00:00
+            - createdAt: 2000-01-23T04:56:07.000+00:00
+              questionnaireQuestionId: 5
+              answer: answer
+              id: 1
+              updatedAt: 2000-01-23T04:56:07.000+00:00
+            id: 0
+            updatedAt: 2000-01-23T04:56:07.000+00:00
+          - createdAt: 2000-01-23T04:56:07.000+00:00
+            questionnaireQuestionId: 6
+            replies:
+            - createdAt: 2000-01-23T04:56:07.000+00:00
+              questionnaireQuestionId: 5
+              answer: answer
+              id: 1
+              updatedAt: 2000-01-23T04:56:07.000+00:00
+            - createdAt: 2000-01-23T04:56:07.000+00:00
+              questionnaireQuestionId: 5
+              answer: answer
+              id: 1
+              updatedAt: 2000-01-23T04:56:07.000+00:00
+            id: 0
+            updatedAt: 2000-01-23T04:56:07.000+00:00
+      properties:
+        result:
+          $ref: '#/components/schemas/templatebackendListRepliesResult'
+      title: templatebackendListRepliesReply
+      type: object
+    templatebackendListRepliesResult:
+      example:
+        replies:
+        - createdAt: 2000-01-23T04:56:07.000+00:00
+          questionnaireQuestionId: 6
+          replies:
+          - createdAt: 2000-01-23T04:56:07.000+00:00
+            questionnaireQuestionId: 5
+            answer: answer
+            id: 1
+            updatedAt: 2000-01-23T04:56:07.000+00:00
+          - createdAt: 2000-01-23T04:56:07.000+00:00
+            questionnaireQuestionId: 5
+            answer: answer
+            id: 1
+            updatedAt: 2000-01-23T04:56:07.000+00:00
+          id: 0
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+        - createdAt: 2000-01-23T04:56:07.000+00:00
+          questionnaireQuestionId: 6
+          replies:
+          - createdAt: 2000-01-23T04:56:07.000+00:00
+            questionnaireQuestionId: 5
+            answer: answer
+            id: 1
+            updatedAt: 2000-01-23T04:56:07.000+00:00
+          - createdAt: 2000-01-23T04:56:07.000+00:00
+            questionnaireQuestionId: 5
+            answer: answer
+            id: 1
+            updatedAt: 2000-01-23T04:56:07.000+00:00
+          id: 0
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+      properties:
+        replies:
+          items:
+            $ref: '#/components/schemas/templatebackendQuestionnaireReply'
+          title: replies
+          type: array
+      title: templatebackendListRepliesResult
+      type: object
     templatebackendMetadata:
       example:
         columnId: 5
@@ -2821,6 +3020,76 @@ components:
           title: google.protobuf.Timestamp deletedAt = 7;
           type: string
       title: templatebackendQuestionnaireQuestionAnswerRulePrefill
+      type: object
+    templatebackendQuestionnaireQuestionReply:
+      example:
+        createdAt: 2000-01-23T04:56:07.000+00:00
+        questionnaireQuestionId: 5
+        answer: answer
+        id: 1
+        updatedAt: 2000-01-23T04:56:07.000+00:00
+      properties:
+        id:
+          format: int64
+          title: id
+          type: integer
+        questionnaireQuestionId:
+          format: int64
+          title: questionnaireQuestionId
+          type: integer
+        answer:
+          title: answer
+          type: string
+        createdAt:
+          format: date-time
+          title: createdAt
+          type: string
+        updatedAt:
+          format: date-time
+          title: google.protobuf.Timestamp deletedAt = 7;
+          type: string
+      title: templatebackendQuestionnaireQuestionReply
+      type: object
+    templatebackendQuestionnaireReply:
+      example:
+        createdAt: 2000-01-23T04:56:07.000+00:00
+        questionnaireQuestionId: 6
+        replies:
+        - createdAt: 2000-01-23T04:56:07.000+00:00
+          questionnaireQuestionId: 5
+          answer: answer
+          id: 1
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+        - createdAt: 2000-01-23T04:56:07.000+00:00
+          questionnaireQuestionId: 5
+          answer: answer
+          id: 1
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+        id: 0
+        updatedAt: 2000-01-23T04:56:07.000+00:00
+      properties:
+        id:
+          format: int64
+          title: id
+          type: integer
+        questionnaireQuestionId:
+          format: int64
+          title: questionnaireQuestionId
+          type: integer
+        replies:
+          items:
+            $ref: '#/components/schemas/templatebackendQuestionnaireQuestionReply'
+          title: replies
+          type: array
+        createdAt:
+          format: date-time
+          title: createdAt
+          type: string
+        updatedAt:
+          format: date-time
+          title: google.protobuf.Timestamp deletedAt = 11;
+          type: string
+      title: templatebackendQuestionnaireReply
       type: object
     templatebackendQuestionnaireVersion:
       example:

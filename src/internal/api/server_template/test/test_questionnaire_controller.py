@@ -9,7 +9,9 @@ from server_template.models.templatebackend_create_questionnaire_reply import Te
 from server_template.models.templatebackend_create_questionnaire_request import TemplatebackendCreateQuestionnaireRequest
 from server_template.models.templatebackend_delete_questionnaire_reply import TemplatebackendDeleteQuestionnaireReply
 from server_template.models.templatebackend_get_questionnaire_reply import TemplatebackendGetQuestionnaireReply
+from server_template.models.templatebackend_get_reply_reply import TemplatebackendGetReplyReply
 from server_template.models.templatebackend_list_questionnaire_reply import TemplatebackendListQuestionnaireReply
+from server_template.models.templatebackend_list_replies_reply import TemplatebackendListRepliesReply
 from server_template.test import BaseTestCase
 
 
@@ -68,6 +70,22 @@ class TestQuestionnaireController(BaseTestCase):
         self.assert200(response,
                        'Response body is : ' + response.data.decode('utf-8'))
 
+    def test_questionnaire_service_get_reply(self):
+        """Test case for questionnaire_service_get_reply
+
+        Get a questionnaires reply
+        """
+        headers = { 
+            'Accept': 'application/json',
+            'Bearer': 'special-key',
+        }
+        response = self.client.open(
+            '/api/v1/questionnaire/{questionnaire_version_id}/replies/{reply_id}'.format(questionnaire_version_id=56, reply_id=56),
+            method='GET',
+            headers=headers)
+        self.assert200(response,
+                       'Response body is : ' + response.data.decode('utf-8'))
+
     def test_questionnaire_service_list_questionnaire(self):
         """Test case for questionnaire_service_list_questionnaire
 
@@ -81,6 +99,25 @@ class TestQuestionnaireController(BaseTestCase):
         }
         response = self.client.open(
             '/api/v1/questionnaire',
+            method='GET',
+            headers=headers,
+            query_string=query_string)
+        self.assert200(response,
+                       'Response body is : ' + response.data.decode('utf-8'))
+
+    def test_questionnaire_service_list_replies(self):
+        """Test case for questionnaire_service_list_replies
+
+        List questionnaires replies
+        """
+        query_string = [('offset', 56),
+                        ('limit', 56)]
+        headers = { 
+            'Accept': 'application/json',
+            'Bearer': 'special-key',
+        }
+        response = self.client.open(
+            '/api/v1/questionnaire/{questionnaire_version_id}/replies'.format(questionnaire_version_id=56),
             method='GET',
             headers=headers,
             query_string=query_string)

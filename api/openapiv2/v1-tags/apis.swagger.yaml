@@ -475,6 +475,67 @@ paths:
       tags:
         - Questionnaire
       x-openapi-router-controller: questionnaire_controller
+  /api/v1/questionnaire/{questionnaireVersionId}/replies:
+    get:
+      summary: List questionnaires replies
+      description: This endpoint allows listing a user's questionnaires replies
+      operationId: QuestionnaireService_ListReplies
+      responses:
+        "200":
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/templatebackendListRepliesReply'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/rpcStatus'
+      parameters:
+        - name: questionnaireVersionId
+          in: path
+          required: true
+          type: integer
+          format: int64
+        - name: offset
+          in: query
+          required: false
+          type: integer
+          format: int64
+        - name: limit
+          in: query
+          required: false
+          type: integer
+          format: int64
+      tags:
+        - Questionnaire
+      x-openapi-router-controller: questionnaire_controller
+  /api/v1/questionnaire/{questionnaireVersionId}/replies/{replyId}:
+    get:
+      summary: Get a questionnaires reply
+      description: This endpoint allows getting a user's questionnaires reply
+      operationId: QuestionnaireService_GetReply
+      responses:
+        "200":
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/templatebackendGetReplyReply'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/rpcStatus'
+      parameters:
+        - name: questionnaireVersionId
+          in: path
+          required: true
+          type: integer
+          format: int64
+        - name: replyId
+          in: path
+          required: true
+          type: integer
+          format: int64
+      tags:
+        - Questionnaire
+      x-openapi-router-controller: questionnaire_controller
 definitions:
   protobufAny:
     type: object
@@ -706,6 +767,16 @@ definitions:
     properties:
       questionnaire:
         $ref: '#/definitions/templatebackendQuestionnaire'
+  templatebackendGetReplyReply:
+    type: object
+    properties:
+      result:
+        $ref: '#/definitions/templatebackendGetReplyResult'
+  templatebackendGetReplyResult:
+    type: object
+    properties:
+      reply:
+        $ref: '#/definitions/templatebackendQuestionnaireReply'
   templatebackendGetUserMeReply:
     type: object
     properties:
@@ -753,6 +824,19 @@ definitions:
         items:
           type: object
           $ref: '#/definitions/templatebackendQuestionnaire'
+  templatebackendListRepliesReply:
+    type: object
+    properties:
+      result:
+        $ref: '#/definitions/templatebackendListRepliesResult'
+  templatebackendListRepliesResult:
+    type: object
+    properties:
+      replies:
+        type: array
+        items:
+          type: object
+          $ref: '#/definitions/templatebackendQuestionnaireReply'
   templatebackendMetadata:
     type: object
     properties:
@@ -869,6 +953,45 @@ definitions:
         type: string
         format: date-time
         title: google.protobuf.Timestamp deletedAt = 7;
+  templatebackendQuestionnaireQuestionReply:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+      questionnaireQuestionId:
+        type: integer
+        format: int64
+      answer:
+        type: string
+      createdAt:
+        type: string
+        format: date-time
+      updatedAt:
+        type: string
+        format: date-time
+        title: google.protobuf.Timestamp deletedAt = 7;
+  templatebackendQuestionnaireReply:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+      questionnaireQuestionId:
+        type: integer
+        format: int64
+      replies:
+        type: array
+        items:
+          type: object
+          $ref: '#/definitions/templatebackendQuestionnaireQuestionReply'
+      createdAt:
+        type: string
+        format: date-time
+      updatedAt:
+        type: string
+        format: date-time
+        title: google.protobuf.Timestamp deletedAt = 11;
   templatebackendQuestionnaireVersion:
     type: object
     properties:

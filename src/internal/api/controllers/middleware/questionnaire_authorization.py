@@ -8,6 +8,12 @@ class QuestionnaireControllerAuthentication():
         self.next = next
         implements_interface(QuestionnaireControllerAuthentication, QuestionnaireController)
 
+    def questionnaire_service_get_reply(self, user, questionnaire_version_id: int, reply_id: int):
+        return None
+
+    def questionnaire_service_list_replies(self, user, questionnaire_version_id: int, offset: int=None, limit: int=None):
+        return None
+
     def questionnaire_service_create_questionnaire(self, user, body: TemplatebackendCreateQuestionnaireRequest):
         if not is_authenticated(user):
             return None, 403

@@ -15,7 +15,7 @@ def implements_interface(A, B):
 
     for op, (a_signature, a_type_hints) in a_signatures.items():
         if op not in b_signatures:
-            raise NotImplementedError(f"operation {op} is not implemented by provided controller")
+            raise NotImplementedError(f"operation {op} is not implemented by provided controller or middlewares")
         
         b_signature, b_type_hints = b_signatures[op]
 
