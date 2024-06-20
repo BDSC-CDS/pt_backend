@@ -608,14 +608,6 @@ definitions:
         type: string
       totp:
         type: string
-<<<<<<< HEAD
-  templatebackendDeleteQuestionnaireReply:
-    type: object
-    properties:
-      result:
-        $ref: '#/definitions/templatebackendDeleteQuestionnaireResult'
-  templatebackendDeleteQuestionnaireResult:
-=======
   templatebackendDataset:
     type: object
     properties:
@@ -642,7 +634,16 @@ definitions:
       result:
         $ref: '#/definitions/templatebackendDeleteDatasetResult'
   templatebackendDeleteDatasetResult:
->>>>>>> master
+    type: object
+    properties:
+      success:
+        type: boolean
+  templatebackendDeleteQuestionnaireReply:
+    type: object
+    properties:
+      result:
+        $ref: '#/definitions/templatebackendDeleteQuestionnaireResult'
+  templatebackendDeleteQuestionnaireResult:
     type: object
     properties:
       success:
@@ -726,7 +727,19 @@ definitions:
     properties:
       user:
         $ref: '#/definitions/templatebackendUser'
-<<<<<<< HEAD
+  templatebackendListDatasetsReply:
+    type: object
+    properties:
+      result:
+        $ref: '#/definitions/templatebackendListDatasetsResult'
+  templatebackendListDatasetsResult:
+    type: object
+    properties:
+      Datasets:
+        type: array
+        items:
+          type: object
+          $ref: '#/definitions/templatebackendDataset'
   templatebackendListQuestionnaireReply:
     type: object
     properties:
@@ -740,6 +753,25 @@ definitions:
         items:
           type: object
           $ref: '#/definitions/templatebackendQuestionnaire'
+  templatebackendMetadata:
+    type: object
+    properties:
+      userid:
+        type: integer
+        format: int64
+      tenantid:
+        type: integer
+        format: int64
+      datasetId:
+        type: integer
+        format: int64
+      columnId:
+        type: integer
+        format: int64
+      columnName:
+        type: string
+      type:
+        type: string
   templatebackendQuestionnaire:
     type: object
     properties:
@@ -857,40 +889,6 @@ definitions:
         type: string
         format: date-time
         title: google.protobuf.Timestamp deletedAt = 6;
-=======
-  templatebackendListDatasetsReply:
-    type: object
-    properties:
-      result:
-        $ref: '#/definitions/templatebackendListDatasetsResult'
-  templatebackendListDatasetsResult:
-    type: object
-    properties:
-      Datasets:
-        type: array
-        items:
-          type: object
-          $ref: '#/definitions/templatebackendDataset'
-  templatebackendMetadata:
-    type: object
-    properties:
-      userid:
-        type: integer
-        format: int64
-      tenantid:
-        type: integer
-        format: int64
-      datasetId:
-        type: integer
-        format: int64
-      columnId:
-        type: integer
-        format: int64
-      columnName:
-        type: string
-      type:
-        type: string
->>>>>>> master
   templatebackendResetPasswordReply:
     type: object
     properties:

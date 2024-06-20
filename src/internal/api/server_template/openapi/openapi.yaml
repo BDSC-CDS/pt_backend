@@ -786,9 +786,6 @@ components:
           type: string
       title: templatebackendCredentials
       type: object
-<<<<<<< HEAD
-    templatebackendDeleteQuestionnaireReply:
-=======
     templatebackendDataset:
       example:
         createdAt: 2000-01-23T04:56:07.000+00:00
@@ -824,34 +821,40 @@ components:
       title: templatebackendDataset
       type: object
     templatebackendDeleteDatasetReply:
->>>>>>> master
       example:
         result:
           success: true
       properties:
         result:
-<<<<<<< HEAD
-          $ref: '#/components/schemas/templatebackendDeleteQuestionnaireResult'
-      title: templatebackendDeleteQuestionnaireReply
-      type: object
-    templatebackendDeleteQuestionnaireResult:
-=======
           $ref: '#/components/schemas/templatebackendDeleteDatasetResult'
       title: templatebackendDeleteDatasetReply
       type: object
     templatebackendDeleteDatasetResult:
->>>>>>> master
       example:
         success: true
       properties:
         success:
           title: success
           type: boolean
-<<<<<<< HEAD
-      title: templatebackendDeleteQuestionnaireResult
-=======
       title: templatebackendDeleteDatasetResult
->>>>>>> master
+      type: object
+    templatebackendDeleteQuestionnaireReply:
+      example:
+        result:
+          success: true
+      properties:
+        result:
+          $ref: '#/components/schemas/templatebackendDeleteQuestionnaireResult'
+      title: templatebackendDeleteQuestionnaireReply
+      type: object
+    templatebackendDeleteQuestionnaireResult:
+      example:
+        success: true
+      properties:
+        success:
+          title: success
+          type: boolean
+      title: templatebackendDeleteQuestionnaireResult
       type: object
     templatebackendDeleteUserReply:
       example:
@@ -1526,7 +1529,50 @@ components:
           $ref: '#/components/schemas/templatebackendUser'
       title: templatebackendGetUserResult
       type: object
-<<<<<<< HEAD
+    templatebackendListDatasetsReply:
+      example:
+        result:
+          Datasets:
+          - createdAt: 2000-01-23T04:56:07.000+00:00
+            deletedAt: 2000-01-23T04:56:07.000+00:00
+            tenantid: 1
+            datasetName: datasetName
+            id: 0
+            userid: 6
+          - createdAt: 2000-01-23T04:56:07.000+00:00
+            deletedAt: 2000-01-23T04:56:07.000+00:00
+            tenantid: 1
+            datasetName: datasetName
+            id: 0
+            userid: 6
+      properties:
+        result:
+          $ref: '#/components/schemas/templatebackendListDatasetsResult'
+      title: templatebackendListDatasetsReply
+      type: object
+    templatebackendListDatasetsResult:
+      example:
+        Datasets:
+        - createdAt: 2000-01-23T04:56:07.000+00:00
+          deletedAt: 2000-01-23T04:56:07.000+00:00
+          tenantid: 1
+          datasetName: datasetName
+          id: 0
+          userid: 6
+        - createdAt: 2000-01-23T04:56:07.000+00:00
+          deletedAt: 2000-01-23T04:56:07.000+00:00
+          tenantid: 1
+          datasetName: datasetName
+          id: 0
+          userid: 6
+      properties:
+        Datasets:
+          items:
+            $ref: '#/components/schemas/templatebackendDataset'
+          title: Datasets
+          type: array
+      title: templatebackendListDatasetsResult
+      type: object
     templatebackendListQuestionnaireReply:
       example:
         result:
@@ -2347,6 +2393,39 @@ components:
           type: array
       title: templatebackendListQuestionnaireResult
       type: object
+    templatebackendMetadata:
+      example:
+        columnId: 5
+        tenantid: 6
+        datasetId: 1
+        type: type
+        userid: 0
+        columnName: columnName
+      properties:
+        userid:
+          format: int64
+          title: userid
+          type: integer
+        tenantid:
+          format: int64
+          title: tenantid
+          type: integer
+        datasetId:
+          format: int64
+          title: datasetId
+          type: integer
+        columnId:
+          format: int64
+          title: columnId
+          type: integer
+        columnName:
+          title: columnName
+          type: string
+        type:
+          title: type
+          type: string
+      title: templatebackendMetadata
+      type: object
     templatebackendQuestionnaire:
       example:
         replyEditable: true
@@ -2864,84 +2943,6 @@ components:
           title: google.protobuf.Timestamp deletedAt = 6;
           type: string
       title: templatebackendQuestionnaireVersion
-=======
-    templatebackendListDatasetsReply:
-      example:
-        result:
-          Datasets:
-          - createdAt: 2000-01-23T04:56:07.000+00:00
-            deletedAt: 2000-01-23T04:56:07.000+00:00
-            tenantid: 1
-            datasetName: datasetName
-            id: 0
-            userid: 6
-          - createdAt: 2000-01-23T04:56:07.000+00:00
-            deletedAt: 2000-01-23T04:56:07.000+00:00
-            tenantid: 1
-            datasetName: datasetName
-            id: 0
-            userid: 6
-      properties:
-        result:
-          $ref: '#/components/schemas/templatebackendListDatasetsResult'
-      title: templatebackendListDatasetsReply
-      type: object
-    templatebackendListDatasetsResult:
-      example:
-        Datasets:
-        - createdAt: 2000-01-23T04:56:07.000+00:00
-          deletedAt: 2000-01-23T04:56:07.000+00:00
-          tenantid: 1
-          datasetName: datasetName
-          id: 0
-          userid: 6
-        - createdAt: 2000-01-23T04:56:07.000+00:00
-          deletedAt: 2000-01-23T04:56:07.000+00:00
-          tenantid: 1
-          datasetName: datasetName
-          id: 0
-          userid: 6
-      properties:
-        Datasets:
-          items:
-            $ref: '#/components/schemas/templatebackendDataset'
-          title: Datasets
-          type: array
-      title: templatebackendListDatasetsResult
-      type: object
-    templatebackendMetadata:
-      example:
-        columnId: 5
-        tenantid: 6
-        datasetId: 1
-        type: type
-        userid: 0
-        columnName: columnName
-      properties:
-        userid:
-          format: int64
-          title: userid
-          type: integer
-        tenantid:
-          format: int64
-          title: tenantid
-          type: integer
-        datasetId:
-          format: int64
-          title: datasetId
-          type: integer
-        columnId:
-          format: int64
-          title: columnId
-          type: integer
-        columnName:
-          title: columnName
-          type: string
-        type:
-          title: type
-          type: string
-      title: templatebackendMetadata
->>>>>>> master
       type: object
     templatebackendResetPasswordReply:
       example:

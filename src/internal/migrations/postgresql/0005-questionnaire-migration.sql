@@ -98,3 +98,42 @@ CREATE TABLE IF NOT EXISTS questionnaire_question_answer_rule_prefills (
     CONSTRAINT questionnaire_question_answer_rule_prefill_selected_answer_fk FOREIGN KEY (answerid) REFERENCES questionnaire_question_answers(id)
 
 );
+
+CREATE TABLE IF NOT EXISTS questionnaire_replies (
+    id SERIAL PRIMARY KEY,
+    userid INT NOT NULL,
+    tenantid INT NOT NULL,
+
+    questionnaireid INT NOT NULL,
+    questionnaire_versionid INT NOT NULL,
+
+    createdat TIMESTAMP NOT NULL DEFAULT now(),
+    updatedat TIMESTAMP NOT NULL DEFAULT now(),
+    deletedat TIMESTAMP,
+
+
+    CONSTRAINT questionnaire_questions_user_fk FOREIGN KEY (userid) REFERENCES users(id),
+    CONSTRAINT questionnaire_questions_questionnaire_fk FOREIGN KEY (questionnaireid) REFERENCES questionnaires(id),
+    CONSTRAINT questionnaire_questions_questionnaire_version_fk FOREIGN KEY (questionnaire_versionid) REFERENCES questionnaire_versions(id)
+);
+
+CREATE TABLE IF NOT EXISTS questionnaire_question_reply (
+    id SERIAL PRIMARY KEY,
+    userid INT NOT NULL,
+    tenantid INT NOT NULL,
+
+    questionnaireid INT NOT NULL,
+    questionnaire_versionid INT NOT NULL,
+    questionnaire_questionid INT NOT NULL,
+
+    answer TEXT NOT NULL,
+
+    createdat TIMESTAMP NOT NULL DEFAULT now(),
+    updatedat TIMESTAMP NOT NULL DEFAULT now(),
+    deletedat TIMESTAMP,
+
+    CONSTRAINT questionnaire_questions_user_fk FOREIGN KEY (userid) REFERENCES users(id),
+    CONSTRAINT questionnaire_questions_questionnaire_fk FOREIGN KEY (questionnaireid) REFERENCES questionnaires(id),
+    CONSTRAINT questionnaire_questions_questionnaire_version_fk FOREIGN KEY (questionnaire_versionid) REFERENCES questionnaire_versions(id),
+    CONSTRAINT questionnaire_question_answer_question_fk FOREIGN KEY (questionnaire_questionid) REFERENCES questionnaire_questions(id)
+);

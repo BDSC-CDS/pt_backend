@@ -133,14 +133,11 @@ Class | Method | HTTP request | Description
  - [TemplatebackendCreateUserReply](docs/TemplatebackendCreateUserReply.md)
  - [TemplatebackendCreateUserResult](docs/TemplatebackendCreateUserResult.md)
  - [TemplatebackendCredentials](docs/TemplatebackendCredentials.md)
-<<<<<<< HEAD
- - [TemplatebackendDeleteQuestionnaireReply](docs/TemplatebackendDeleteQuestionnaireReply.md)
- - [TemplatebackendDeleteQuestionnaireResult](docs/TemplatebackendDeleteQuestionnaireResult.md)
-=======
  - [TemplatebackendDataset](docs/TemplatebackendDataset.md)
  - [TemplatebackendDeleteDatasetReply](docs/TemplatebackendDeleteDatasetReply.md)
  - [TemplatebackendDeleteDatasetResult](docs/TemplatebackendDeleteDatasetResult.md)
->>>>>>> master
+ - [TemplatebackendDeleteQuestionnaireReply](docs/TemplatebackendDeleteQuestionnaireReply.md)
+ - [TemplatebackendDeleteQuestionnaireResult](docs/TemplatebackendDeleteQuestionnaireResult.md)
  - [TemplatebackendDeleteUserReply](docs/TemplatebackendDeleteUserReply.md)
  - [TemplatebackendGetConfigReply](docs/TemplatebackendGetConfigReply.md)
  - [TemplatebackendGetConfigResult](docs/TemplatebackendGetConfigResult.md)
@@ -155,19 +152,16 @@ Class | Method | HTTP request | Description
  - [TemplatebackendGetUserMeResult](docs/TemplatebackendGetUserMeResult.md)
  - [TemplatebackendGetUserReply](docs/TemplatebackendGetUserReply.md)
  - [TemplatebackendGetUserResult](docs/TemplatebackendGetUserResult.md)
-<<<<<<< HEAD
+ - [TemplatebackendListDatasetsReply](docs/TemplatebackendListDatasetsReply.md)
+ - [TemplatebackendListDatasetsResult](docs/TemplatebackendListDatasetsResult.md)
  - [TemplatebackendListQuestionnaireReply](docs/TemplatebackendListQuestionnaireReply.md)
  - [TemplatebackendListQuestionnaireResult](docs/TemplatebackendListQuestionnaireResult.md)
+ - [TemplatebackendMetadata](docs/TemplatebackendMetadata.md)
  - [TemplatebackendQuestionnaire](docs/TemplatebackendQuestionnaire.md)
  - [TemplatebackendQuestionnaireQuestion](docs/TemplatebackendQuestionnaireQuestion.md)
  - [TemplatebackendQuestionnaireQuestionAnswer](docs/TemplatebackendQuestionnaireQuestionAnswer.md)
  - [TemplatebackendQuestionnaireQuestionAnswerRulePrefill](docs/TemplatebackendQuestionnaireQuestionAnswerRulePrefill.md)
  - [TemplatebackendQuestionnaireVersion](docs/TemplatebackendQuestionnaireVersion.md)
-=======
- - [TemplatebackendListDatasetsReply](docs/TemplatebackendListDatasetsReply.md)
- - [TemplatebackendListDatasetsResult](docs/TemplatebackendListDatasetsResult.md)
- - [TemplatebackendMetadata](docs/TemplatebackendMetadata.md)
->>>>>>> master
  - [TemplatebackendResetPasswordReply](docs/TemplatebackendResetPasswordReply.md)
  - [TemplatebackendStoreDatasetReply](docs/TemplatebackendStoreDatasetReply.md)
  - [TemplatebackendStoreDatasetRequest](docs/TemplatebackendStoreDatasetRequest.md)
