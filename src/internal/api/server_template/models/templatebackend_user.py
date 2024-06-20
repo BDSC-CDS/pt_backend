@@ -14,11 +14,13 @@ class TemplatebackendUser(Model):
     Do not edit the class manually.
     """
 
-    def __init__(self, id=None, first_name=None, last_name=None, username=None, email=None, password=None, status=None, roles=None, totp_enabled=None, created_at=None, updated_at=None, password_changed=None):
+    def __init__(self, id=None, tenantid=None, first_name=None, last_name=None, username=None, email=None, password=None, status=None, roles=None, totp_enabled=None, created_at=None, updated_at=None, password_changed=None):
         """TemplatebackendUser - a model defined in OpenAPI
 
         :param id: The id of this TemplatebackendUser.
         :type id: int
+        :param tenantid: The tenantid of this TemplatebackendUser.
+        :type tenantid: int
         :param first_name: The first_name of this TemplatebackendUser.
         :type first_name: str
         :param last_name: The last_name of this TemplatebackendUser.
@@ -44,6 +46,7 @@ class TemplatebackendUser(Model):
         """
         self.openapi_types = {
             'id': int,
+            'tenantid': int,
             'first_name': str,
             'last_name': str,
             'username': str,
@@ -59,6 +62,7 @@ class TemplatebackendUser(Model):
 
         self.attribute_map = {
             'id': 'id',
+            'tenantid': 'tenantid',
             'first_name': 'firstName',
             'last_name': 'lastName',
             'username': 'username',
@@ -73,6 +77,7 @@ class TemplatebackendUser(Model):
         }
 
         self._id = id
+        self._tenantid = tenantid
         self._first_name = first_name
         self._last_name = last_name
         self._username = username
@@ -116,6 +121,27 @@ class TemplatebackendUser(Model):
         """
 
         self._id = id
+
+    @property
+    def tenantid(self) -> int:
+        """Gets the tenantid of this TemplatebackendUser.
+
+
+        :return: The tenantid of this TemplatebackendUser.
+        :rtype: int
+        """
+        return self._tenantid
+
+    @tenantid.setter
+    def tenantid(self, tenantid: int):
+        """Sets the tenantid of this TemplatebackendUser.
+
+
+        :param tenantid: The tenantid of this TemplatebackendUser.
+        :type tenantid: int
+        """
+
+        self._tenantid = tenantid
 
     @property
     def first_name(self) -> str:

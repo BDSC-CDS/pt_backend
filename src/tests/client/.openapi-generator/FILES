@@ -4,6 +4,8 @@
 .travis.yml
 README.md
 docs/AuthenticationApi.md
+docs/ConfigurationApi.md
+docs/DatasetApi.md
 docs/IndexApi.md
 docs/IndexServiceCreateHelloRequest.md
 docs/ProtobufAny.md
@@ -11,6 +13,8 @@ docs/QuestionnaireApi.md
 docs/RpcStatus.md
 docs/TemplatebackendAuthenticationReply.md
 docs/TemplatebackendAuthenticationResult.md
+docs/TemplatebackendColumn.md
+docs/TemplatebackendConfig.md
 docs/TemplatebackendCreateHelloReply.md
 docs/TemplatebackendCreateQuestionnaireReply.md
 docs/TemplatebackendCreateQuestionnaireRequest.md
@@ -18,9 +22,21 @@ docs/TemplatebackendCreateQuestionnaireResult.md
 docs/TemplatebackendCreateUserReply.md
 docs/TemplatebackendCreateUserResult.md
 docs/TemplatebackendCredentials.md
+<<<<<<< HEAD
 docs/TemplatebackendDeleteQuestionnaireReply.md
 docs/TemplatebackendDeleteQuestionnaireResult.md
+=======
+docs/TemplatebackendDataset.md
+docs/TemplatebackendDeleteDatasetReply.md
+docs/TemplatebackendDeleteDatasetResult.md
+>>>>>>> master
 docs/TemplatebackendDeleteUserReply.md
+docs/TemplatebackendGetConfigReply.md
+docs/TemplatebackendGetConfigResult.md
+docs/TemplatebackendGetDatasetContentReply.md
+docs/TemplatebackendGetDatasetContentResult.md
+docs/TemplatebackendGetDatasetMetadataReply.md
+docs/TemplatebackendGetDatasetMetadataResult.md
 docs/TemplatebackendGetHelloReply.md
 docs/TemplatebackendGetQuestionnaireReply.md
 docs/TemplatebackendGetQuestionnaireResult.md
@@ -28,6 +44,7 @@ docs/TemplatebackendGetUserMeReply.md
 docs/TemplatebackendGetUserMeResult.md
 docs/TemplatebackendGetUserReply.md
 docs/TemplatebackendGetUserResult.md
+<<<<<<< HEAD
 docs/TemplatebackendListQuestionnaireReply.md
 docs/TemplatebackendListQuestionnaireResult.md
 docs/TemplatebackendQuestionnaire.md
@@ -35,7 +52,15 @@ docs/TemplatebackendQuestionnaireQuestion.md
 docs/TemplatebackendQuestionnaireQuestionAnswer.md
 docs/TemplatebackendQuestionnaireQuestionAnswerRulePrefill.md
 docs/TemplatebackendQuestionnaireVersion.md
+=======
+docs/TemplatebackendListDatasetsReply.md
+docs/TemplatebackendListDatasetsResult.md
+docs/TemplatebackendMetadata.md
+>>>>>>> master
 docs/TemplatebackendResetPasswordReply.md
+docs/TemplatebackendStoreDatasetReply.md
+docs/TemplatebackendStoreDatasetRequest.md
+docs/TemplatebackendStoreDatasetResult.md
 docs/TemplatebackendUpdatePasswordReply.md
 docs/TemplatebackendUpdatePasswordRequest.md
 docs/TemplatebackendUser.md
@@ -44,6 +69,8 @@ git_push.sh
 openapi_client/__init__.py
 openapi_client/api/__init__.py
 openapi_client/api/authentication_api.py
+openapi_client/api/configuration_api.py
+openapi_client/api/dataset_api.py
 openapi_client/api/index_api.py
 openapi_client/api/questionnaire_api.py
 openapi_client/api/users_api.py
@@ -57,6 +84,8 @@ openapi_client/models/protobuf_any.py
 openapi_client/models/rpc_status.py
 openapi_client/models/templatebackend_authentication_reply.py
 openapi_client/models/templatebackend_authentication_result.py
+openapi_client/models/templatebackend_column.py
+openapi_client/models/templatebackend_config.py
 openapi_client/models/templatebackend_create_hello_reply.py
 openapi_client/models/templatebackend_create_questionnaire_reply.py
 openapi_client/models/templatebackend_create_questionnaire_request.py
@@ -64,9 +93,21 @@ openapi_client/models/templatebackend_create_questionnaire_result.py
 openapi_client/models/templatebackend_create_user_reply.py
 openapi_client/models/templatebackend_create_user_result.py
 openapi_client/models/templatebackend_credentials.py
+<<<<<<< HEAD
 openapi_client/models/templatebackend_delete_questionnaire_reply.py
 openapi_client/models/templatebackend_delete_questionnaire_result.py
+=======
+openapi_client/models/templatebackend_dataset.py
+openapi_client/models/templatebackend_delete_dataset_reply.py
+openapi_client/models/templatebackend_delete_dataset_result.py
+>>>>>>> master
 openapi_client/models/templatebackend_delete_user_reply.py
+openapi_client/models/templatebackend_get_config_reply.py
+openapi_client/models/templatebackend_get_config_result.py
+openapi_client/models/templatebackend_get_dataset_content_reply.py
+openapi_client/models/templatebackend_get_dataset_content_result.py
+openapi_client/models/templatebackend_get_dataset_metadata_reply.py
+openapi_client/models/templatebackend_get_dataset_metadata_result.py
 openapi_client/models/templatebackend_get_hello_reply.py
 openapi_client/models/templatebackend_get_questionnaire_reply.py
 openapi_client/models/templatebackend_get_questionnaire_result.py
@@ -74,6 +115,7 @@ openapi_client/models/templatebackend_get_user_me_reply.py
 openapi_client/models/templatebackend_get_user_me_result.py
 openapi_client/models/templatebackend_get_user_reply.py
 openapi_client/models/templatebackend_get_user_result.py
+<<<<<<< HEAD
 openapi_client/models/templatebackend_list_questionnaire_reply.py
 openapi_client/models/templatebackend_list_questionnaire_result.py
 openapi_client/models/templatebackend_questionnaire.py
@@ -81,7 +123,15 @@ openapi_client/models/templatebackend_questionnaire_question.py
 openapi_client/models/templatebackend_questionnaire_question_answer.py
 openapi_client/models/templatebackend_questionnaire_question_answer_rule_prefill.py
 openapi_client/models/templatebackend_questionnaire_version.py
+=======
+openapi_client/models/templatebackend_list_datasets_reply.py
+openapi_client/models/templatebackend_list_datasets_result.py
+openapi_client/models/templatebackend_metadata.py
+>>>>>>> master
 openapi_client/models/templatebackend_reset_password_reply.py
+openapi_client/models/templatebackend_store_dataset_reply.py
+openapi_client/models/templatebackend_store_dataset_request.py
+openapi_client/models/templatebackend_store_dataset_result.py
 openapi_client/models/templatebackend_update_password_reply.py
 openapi_client/models/templatebackend_update_password_request.py
 openapi_client/models/templatebackend_user.py
@@ -93,4 +143,8 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
+test/test_configuration_api.py
+test/test_templatebackend_config.py
+test/test_templatebackend_get_config_reply.py
+test/test_templatebackend_get_config_result.py
 tox.ini

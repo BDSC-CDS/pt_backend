@@ -13,6 +13,8 @@ security:
 - {}
 tags:
 - name: AuthenticationService
+- name: ConfigService
+- name: DatasetService
 - name: IndexService
 - name: QuestionnaireService
 - name: UserService
@@ -45,6 +47,34 @@ paths:
       - Authentication
       x-openapi-router-controller: authentication_controller
       x-codegen-request-body-name: body
+  /api/rest/v1/configs/{id}:
+    get:
+      description: This endpoint returns a configuration file for a given user
+      operationId: config_service_get_config
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/templatebackendGetConfigReply'
+          description: A successful response.
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+          description: An unexpected error response.
+      summary: Get a configuration file
+      tags:
+      - Configuration
+      x-openapi-router-controller: config_generator_controller
   /api/rest/v1/users:
     post:
       description: This endpoint creates a user
@@ -212,6 +242,159 @@ paths:
       - Users
       x-openapi-router-controller: user_controller
       x-codegen-request-body-name: body
+  /api/v1/dataset:
+    get:
+      description: This endpoint allows listing a user's datasets
+      operationId: dataset_service_list_datasets
+      parameters:
+      - in: query
+        name: offset
+        schema:
+          format: int64
+          type: integer
+      - in: query
+        name: limit
+        schema:
+          format: int64
+          type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/templatebackendListDatasetsReply'
+          description: A successful response.
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+          description: An unexpected error response.
+      summary: List datasets
+      tags:
+      - Dataset
+      x-openapi-router-controller: dataset_controller
+    post:
+      description: This endpoint stores a dataset
+      operationId: dataset_service_store_dataset
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/templatebackendStoreDatasetRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/templatebackendStoreDatasetReply'
+          description: A successful response.
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+          description: An unexpected error response.
+      summary: Store a dataset
+      tags:
+      - Dataset
+      x-openapi-router-controller: dataset_controller
+      x-codegen-request-body-name: body
+  /api/v1/dataset/content/{id}:
+    get:
+      description: This endpoint allow getting a specific user's Dataset Content
+      operationId: dataset_service_get_dataset_content
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      - in: query
+        name: offset
+        schema:
+          format: int32
+          type: integer
+      - in: query
+        name: limit
+        schema:
+          format: int32
+          type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/templatebackendGetDatasetContentReply'
+          description: A successful response.
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+          description: An unexpected error response.
+      summary: Get Dataset Content
+      tags:
+      - Dataset
+      x-openapi-router-controller: dataset_controller
+  /api/v1/dataset/metadata/{id}:
+    get:
+      description: This endpoint allow getting a specific user's Dataset Metadata
+      operationId: dataset_service_get_dataset_metadata
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/templatebackendGetDatasetMetadataReply'
+          description: A successful response.
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+          description: An unexpected error response.
+      summary: Get Dataset Metadata
+      tags:
+      - Dataset
+      x-openapi-router-controller: dataset_controller
+  /api/v1/dataset/{id}:
+    delete:
+      description: This endpoint deletes a dataset
+      operationId: dataset_service_delete_dataset
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/templatebackendDeleteDatasetReply'
+          description: A successful response.
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+          description: An unexpected error response.
+      summary: Deletes a dataset
+      tags:
+      - Dataset
+      x-openapi-router-controller: dataset_controller
   /api/v1/hello:
     get:
       description: This endpoint returns a hello
@@ -425,6 +608,109 @@ components:
           type: string
       title: templatebackendAuthenticationResult
       type: object
+    templatebackendColumn:
+      example:
+        value:
+        - value
+        - value
+      properties:
+        value:
+          items:
+            type: string
+          title: value
+          type: array
+      title: templatebackendColumn
+      type: object
+    templatebackendConfig:
+      example:
+        hassubFieldList: true
+        subFieldListReplacement: subFieldListReplacement
+        subFieldListFields:
+        - subFieldListFields
+        - subFieldListFields
+        subFieldRegexRegex: subFieldRegexRegex
+        hasDateShift: true
+        hassubFieldRegex: true
+        scrambleFieldFields:
+        - scrambleFieldFields
+        - scrambleFieldFields
+        questionnaireid: 6
+        dateShiftLowrange: 1
+        hasScrambleField: true
+        createdAt: 2000-01-23T04:56:07.000+00:00
+        dateShiftHighrange: 5
+        id: 0
+        subFieldListSubstitute:
+        - subFieldListSubstitute
+        - subFieldListSubstitute
+        subFieldRegexFields:
+        - subFieldRegexFields
+        - subFieldRegexFields
+        subFieldRegexReplacement: subFieldRegexReplacement
+      properties:
+        id:
+          format: int64
+          title: id
+          type: integer
+        questionnaireid:
+          format: int64
+          title: questionnaireid
+          type: integer
+        hasScrambleField:
+          title: hasScrambleField
+          type: boolean
+        hasDateShift:
+          title: hasDateShift
+          type: boolean
+        hassubFieldList:
+          title: hassubFieldList
+          type: boolean
+        hassubFieldRegex:
+          title: hassubFieldRegex
+          type: boolean
+        scrambleFieldFields:
+          items:
+            type: string
+          title: scrambleFieldFields
+          type: array
+        dateShiftLowrange:
+          format: int32
+          title: dateShiftLowrange
+          type: integer
+        dateShiftHighrange:
+          format: int32
+          title: dateShiftHighrange
+          type: integer
+        subFieldListFields:
+          items:
+            type: string
+          title: subFieldListFields
+          type: array
+        subFieldListSubstitute:
+          items:
+            type: string
+          title: subFieldListSubstitute
+          type: array
+        subFieldListReplacement:
+          title: subFieldListReplacement
+          type: string
+        subFieldRegexFields:
+          items:
+            type: string
+          title: subFieldRegexFields
+          type: array
+        subFieldRegexRegex:
+          title: subFieldRegexRegex
+          type: string
+        subFieldRegexReplacement:
+          title: subFieldRegexReplacement
+          type: string
+        createdAt:
+          format: date-time
+          title: createdAt
+          type: string
+      title: templatebackendConfig
+      type: object
     templatebackendCreateHelloReply:
       example:
         identifier: 0
@@ -500,23 +786,72 @@ components:
           type: string
       title: templatebackendCredentials
       type: object
+<<<<<<< HEAD
     templatebackendDeleteQuestionnaireReply:
+=======
+    templatebackendDataset:
+      example:
+        createdAt: 2000-01-23T04:56:07.000+00:00
+        deletedAt: 2000-01-23T04:56:07.000+00:00
+        tenantid: 1
+        datasetName: datasetName
+        id: 0
+        userid: 6
+      properties:
+        id:
+          format: int64
+          title: id
+          type: integer
+        userid:
+          format: int64
+          title: userid
+          type: integer
+        tenantid:
+          format: int64
+          title: tenantid
+          type: integer
+        datasetName:
+          title: datasetName
+          type: string
+        createdAt:
+          format: date-time
+          title: createdAt
+          type: string
+        deletedAt:
+          format: date-time
+          title: deletedAt
+          type: string
+      title: templatebackendDataset
+      type: object
+    templatebackendDeleteDatasetReply:
+>>>>>>> master
       example:
         result:
           success: true
       properties:
         result:
+<<<<<<< HEAD
           $ref: '#/components/schemas/templatebackendDeleteQuestionnaireResult'
       title: templatebackendDeleteQuestionnaireReply
       type: object
     templatebackendDeleteQuestionnaireResult:
+=======
+          $ref: '#/components/schemas/templatebackendDeleteDatasetResult'
+      title: templatebackendDeleteDatasetReply
+      type: object
+    templatebackendDeleteDatasetResult:
+>>>>>>> master
       example:
         success: true
       properties:
         success:
           title: success
           type: boolean
+<<<<<<< HEAD
       title: templatebackendDeleteQuestionnaireResult
+=======
+      title: templatebackendDeleteDatasetResult
+>>>>>>> master
       type: object
     templatebackendDeleteUserReply:
       example:
@@ -529,6 +864,147 @@ components:
       type: object
     templatebackendDeleteUserResult:
       title: result
+      type: object
+    templatebackendGetConfigReply:
+      example:
+        result:
+          config:
+            hassubFieldList: true
+            subFieldListReplacement: subFieldListReplacement
+            subFieldListFields:
+            - subFieldListFields
+            - subFieldListFields
+            subFieldRegexRegex: subFieldRegexRegex
+            hasDateShift: true
+            hassubFieldRegex: true
+            scrambleFieldFields:
+            - scrambleFieldFields
+            - scrambleFieldFields
+            questionnaireid: 6
+            dateShiftLowrange: 1
+            hasScrambleField: true
+            createdAt: 2000-01-23T04:56:07.000+00:00
+            dateShiftHighrange: 5
+            id: 0
+            subFieldListSubstitute:
+            - subFieldListSubstitute
+            - subFieldListSubstitute
+            subFieldRegexFields:
+            - subFieldRegexFields
+            - subFieldRegexFields
+            subFieldRegexReplacement: subFieldRegexReplacement
+      properties:
+        result:
+          $ref: '#/components/schemas/templatebackendGetConfigResult'
+      title: templatebackendGetConfigReply
+      type: object
+    templatebackendGetConfigResult:
+      example:
+        config:
+          hassubFieldList: true
+          subFieldListReplacement: subFieldListReplacement
+          subFieldListFields:
+          - subFieldListFields
+          - subFieldListFields
+          subFieldRegexRegex: subFieldRegexRegex
+          hasDateShift: true
+          hassubFieldRegex: true
+          scrambleFieldFields:
+          - scrambleFieldFields
+          - scrambleFieldFields
+          questionnaireid: 6
+          dateShiftLowrange: 1
+          hasScrambleField: true
+          createdAt: 2000-01-23T04:56:07.000+00:00
+          dateShiftHighrange: 5
+          id: 0
+          subFieldListSubstitute:
+          - subFieldListSubstitute
+          - subFieldListSubstitute
+          subFieldRegexFields:
+          - subFieldRegexFields
+          - subFieldRegexFields
+          subFieldRegexReplacement: subFieldRegexReplacement
+      properties:
+        config:
+          $ref: '#/components/schemas/templatebackendConfig'
+      title: templatebackendGetConfigResult
+      type: object
+    templatebackendGetDatasetContentReply:
+      example:
+        result:
+          columns:
+          - value:
+            - value
+            - value
+          - value:
+            - value
+            - value
+      properties:
+        result:
+          $ref: '#/components/schemas/templatebackendGetDatasetContentResult'
+      title: templatebackendGetDatasetContentReply
+      type: object
+    templatebackendGetDatasetContentResult:
+      example:
+        columns:
+        - value:
+          - value
+          - value
+        - value:
+          - value
+          - value
+      properties:
+        columns:
+          items:
+            $ref: '#/components/schemas/templatebackendColumn'
+          title: columns
+          type: array
+      title: templatebackendGetDatasetContentResult
+      type: object
+    templatebackendGetDatasetMetadataReply:
+      example:
+        metadata:
+          metadata:
+          - columnId: 5
+            tenantid: 6
+            datasetId: 1
+            type: type
+            userid: 0
+            columnName: columnName
+          - columnId: 5
+            tenantid: 6
+            datasetId: 1
+            type: type
+            userid: 0
+            columnName: columnName
+      properties:
+        metadata:
+          $ref: '#/components/schemas/templatebackendGetDatasetMetadataResult'
+      title: templatebackendGetDatasetMetadataReply
+      type: object
+    templatebackendGetDatasetMetadataResult:
+      example:
+        metadata:
+        - columnId: 5
+          tenantid: 6
+          datasetId: 1
+          type: type
+          userid: 0
+          columnName: columnName
+        - columnId: 5
+          tenantid: 6
+          datasetId: 1
+          type: type
+          userid: 0
+          columnName: columnName
+      properties:
+        metadata:
+          items:
+            $ref: '#/components/schemas/templatebackendMetadata'
+          title: metadata
+          type: array
+      title: templatebackendGetDatasetMetadataResult
       type: object
     templatebackendGetHelloReply:
       example:
@@ -960,16 +1436,17 @@ components:
       example:
         result:
           me:
-            firstName: firstName
             lastName: lastName
-            createdAt: 2000-01-23T04:56:07.000+00:00
-            password: password
-            passwordChanged: true
             roles:
             - roles
             - roles
-            id: 0
             totpEnabled: true
+            firstName: firstName
+            createdAt: 2000-01-23T04:56:07.000+00:00
+            password: password
+            passwordChanged: true
+            tenantid: 6
+            id: 0
             email: email
             username: username
             status: status
@@ -982,16 +1459,17 @@ components:
     templatebackendGetUserMeResult:
       example:
         me:
-          firstName: firstName
           lastName: lastName
-          createdAt: 2000-01-23T04:56:07.000+00:00
-          password: password
-          passwordChanged: true
           roles:
           - roles
           - roles
-          id: 0
           totpEnabled: true
+          firstName: firstName
+          createdAt: 2000-01-23T04:56:07.000+00:00
+          password: password
+          passwordChanged: true
+          tenantid: 6
+          id: 0
           email: email
           username: username
           status: status
@@ -1005,16 +1483,17 @@ components:
       example:
         result:
           user:
-            firstName: firstName
             lastName: lastName
-            createdAt: 2000-01-23T04:56:07.000+00:00
-            password: password
-            passwordChanged: true
             roles:
             - roles
             - roles
-            id: 0
             totpEnabled: true
+            firstName: firstName
+            createdAt: 2000-01-23T04:56:07.000+00:00
+            password: password
+            passwordChanged: true
+            tenantid: 6
+            id: 0
             email: email
             username: username
             status: status
@@ -1027,16 +1506,17 @@ components:
     templatebackendGetUserResult:
       example:
         user:
-          firstName: firstName
           lastName: lastName
-          createdAt: 2000-01-23T04:56:07.000+00:00
-          password: password
-          passwordChanged: true
           roles:
           - roles
           - roles
-          id: 0
           totpEnabled: true
+          firstName: firstName
+          createdAt: 2000-01-23T04:56:07.000+00:00
+          password: password
+          passwordChanged: true
+          tenantid: 6
+          id: 0
           email: email
           username: username
           status: status
@@ -1046,6 +1526,7 @@ components:
           $ref: '#/components/schemas/templatebackendUser'
       title: templatebackendGetUserResult
       type: object
+<<<<<<< HEAD
     templatebackendListQuestionnaireReply:
       example:
         result:
@@ -2383,6 +2864,84 @@ components:
           title: google.protobuf.Timestamp deletedAt = 6;
           type: string
       title: templatebackendQuestionnaireVersion
+=======
+    templatebackendListDatasetsReply:
+      example:
+        result:
+          Datasets:
+          - createdAt: 2000-01-23T04:56:07.000+00:00
+            deletedAt: 2000-01-23T04:56:07.000+00:00
+            tenantid: 1
+            datasetName: datasetName
+            id: 0
+            userid: 6
+          - createdAt: 2000-01-23T04:56:07.000+00:00
+            deletedAt: 2000-01-23T04:56:07.000+00:00
+            tenantid: 1
+            datasetName: datasetName
+            id: 0
+            userid: 6
+      properties:
+        result:
+          $ref: '#/components/schemas/templatebackendListDatasetsResult'
+      title: templatebackendListDatasetsReply
+      type: object
+    templatebackendListDatasetsResult:
+      example:
+        Datasets:
+        - createdAt: 2000-01-23T04:56:07.000+00:00
+          deletedAt: 2000-01-23T04:56:07.000+00:00
+          tenantid: 1
+          datasetName: datasetName
+          id: 0
+          userid: 6
+        - createdAt: 2000-01-23T04:56:07.000+00:00
+          deletedAt: 2000-01-23T04:56:07.000+00:00
+          tenantid: 1
+          datasetName: datasetName
+          id: 0
+          userid: 6
+      properties:
+        Datasets:
+          items:
+            $ref: '#/components/schemas/templatebackendDataset'
+          title: Datasets
+          type: array
+      title: templatebackendListDatasetsResult
+      type: object
+    templatebackendMetadata:
+      example:
+        columnId: 5
+        tenantid: 6
+        datasetId: 1
+        type: type
+        userid: 0
+        columnName: columnName
+      properties:
+        userid:
+          format: int64
+          title: userid
+          type: integer
+        tenantid:
+          format: int64
+          title: tenantid
+          type: integer
+        datasetId:
+          format: int64
+          title: datasetId
+          type: integer
+        columnId:
+          format: int64
+          title: columnId
+          type: integer
+        columnName:
+          title: columnName
+          type: string
+        type:
+          title: type
+          type: string
+      title: templatebackendMetadata
+>>>>>>> master
       type: object
     templatebackendResetPasswordReply:
       example:
@@ -2395,6 +2954,38 @@ components:
       type: object
     templatebackendResetPasswordResult:
       title: result
+      type: object
+    templatebackendStoreDatasetReply:
+      example:
+        result:
+          id: 0
+      properties:
+        result:
+          $ref: '#/components/schemas/templatebackendStoreDatasetResult'
+      title: templatebackendStoreDatasetReply
+      type: object
+    templatebackendStoreDatasetRequest:
+      properties:
+        datasetName:
+          title: datasetName
+          type: string
+        dataset:
+          title: dataset
+          type: string
+        types:
+          title: types
+          type: string
+      title: Create a Dataset
+      type: object
+    templatebackendStoreDatasetResult:
+      example:
+        id: 0
+      properties:
+        id:
+          format: int64
+          title: id
+          type: integer
+      title: templatebackendStoreDatasetResult
       type: object
     templatebackendUpdatePasswordReply:
       example:
@@ -2420,16 +3011,17 @@ components:
       type: object
     templatebackendUser:
       example:
-        firstName: firstName
         lastName: lastName
-        createdAt: 2000-01-23T04:56:07.000+00:00
-        password: password
-        passwordChanged: true
         roles:
         - roles
         - roles
-        id: 0
         totpEnabled: true
+        firstName: firstName
+        createdAt: 2000-01-23T04:56:07.000+00:00
+        password: password
+        passwordChanged: true
+        tenantid: 6
+        id: 0
         email: email
         username: username
         status: status
@@ -2438,6 +3030,10 @@ components:
         id:
           format: int64
           title: id
+          type: integer
+        tenantid:
+          format: int64
+          title: tenantid
           type: integer
         firstName:
           title: firstName

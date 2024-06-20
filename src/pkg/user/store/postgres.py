@@ -26,27 +26,30 @@ class UserStore:
 
     def create_user(self, user: User) -> User:
         user_query = """
-INSERT INTO users 
+INSERT INTO users
     (tenantid, firstname, lastname, username, email, password, status, source, totpsecret, createdat, updatedat)
-VALUES 
-    (:tenantid, :firstname, :lastname, :username, :email, :password, :status, :source, :totpsecret, NOW(), NOW()) 
+VALUES
+    (:tenantid, :firstname, :lastname, :username, :email, :password, :status, :source, :totpsecret, NOW(), NOW())
 RETURNING id;
 """
 
         user_role_query = """
 INSERT INTO user_role (userid, roleid) VALUES (:userid, :roleid);
         """
+        #TODO change
+        if not user.tenantid:
+            user.tenantid = 0
 
         with self.session_scope() as session:
             try:
                 result = session.execute(text(user_query), {
                     'tenantid': user.tenantid,
-                    'firstname': user.firstname, 
+                    'firstname': user.firstname,
                     'lastname': user.lastname,
-                    'username': user.username, 
+                    'username': user.username,
                     'email': user.email,
-                    'password': user.password, 
-                    'status': user.status.value, 
+                    'password': user.password,
+                    'status': user.status.value,
                     'source': user.source.value,
                     'totpsecret': user.totpsecret
                 }).fetchone()
@@ -60,7 +63,7 @@ INSERT INTO user_role (userid, roleid) VALUES (:userid, :roleid);
                         if ur.id == r.id:
                             session.execute(text(user_role_query), {
                                 'tenantid': user.tenantid,
-                                'userid': user_id, 
+                                'userid': user_id,
                                 'roleid': r.id,
                             })
                             found = True
@@ -78,16 +81,16 @@ INSERT INTO user_role (userid, roleid) VALUES (:userid, :roleid);
         with self.session_scope() as session:
             roles = session.execute(text(query)).fetchall()
             return [Role(id=row[0]) for row in roles]
-    
-    def get_user(self, by: str, identifier: str | int) -> User : 
+
+    def get_user(self, by: str, identifier: str | int) -> User :
         if by not in ['id', 'username', 'email']:
             raise Exception("identifier must be one of 'id', 'username', 'email'")
-        
+
         role_query = "SELECT role FROM user_role WHERE userid = :userid;"
         query = "SELECT * FROM users where " + by + " = :identifier;"
         with self.session_scope() as session:
             user = session.execute(text(query), {
-                'identifier': identifier, 
+                'identifier': identifier,
             }).mappings().fetchone()
 
             if user is None:
@@ -108,7 +111,7 @@ INSERT INTO user_role (userid, roleid) VALUES (:userid, :roleid);
             )
 
             roles = session.execute(text(role_query), {
-                'userid': u.id, 
+                'userid': u.id,
             }).mappings().fetchall()
 
             roles = [Role(id=role.role) for role in roles]

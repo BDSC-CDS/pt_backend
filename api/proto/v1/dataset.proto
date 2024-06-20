@@ -1,0 +1,26 @@
+syntax = "proto3";
+package templatebackend;
+option go_package = ".;templatebackend";
+
+import "google/protobuf/timestamp.proto";
+
+message Dataset {
+
+    uint32 id = 1;
+    uint32 userid = 2;
+    uint32 tenantid = 3;
+    string dataset_name = 4;
+
+    google.protobuf.Timestamp createdAt = 5;
+    google.protobuf.Timestamp deletedAt = 6;
+
+}
+
+message Metadata {
+    uint32 userid = 1;
+    uint32 tenantid = 2;
+    uint32 dataset_id = 3;
+    uint32 column_id = 4;
+    string column_name = 5;
+    string type_ = 6;
+}

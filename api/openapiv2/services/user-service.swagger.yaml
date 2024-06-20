@@ -239,6 +239,9 @@ definitions:
       id:
         type: integer
         format: int64
+      tenantid:
+        type: integer
+        format: int64
       firstName:
         type: string
       lastName:
