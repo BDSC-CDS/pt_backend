@@ -37,9 +37,10 @@ class UsersControllerAudit():
     def user_service_get_user(self, user, id: int):
         try:
             response : TemplatebackendGetUserReply =  self.next.user_service_get_user(user, id)
-            response_serialized = f"id: {response.result.user.id}, first_name: {response.result.user.first_name or ''}, last_name: {response.result.user.last_name or ''},  \
-                username: {response.result.user.username or ''}, email: {response.result.user.email or ''}, status: {response.result.user.status or ''},  \
-                roles: {response.result.user.roles or ''}"
+            user = response.result.me
+            response_serialized = f"id: {user.id}, first_name: {user.first_name or ''}, last_name: {user.last_name or ''},  \
+                username: {user.username or ''}, email: {user.email or ''}, status: {user.status or ''},  \
+                roles: {user.roles or ''}"
 
             self.auditLogService.log_event(AuditLog(service="user", userid=user.id,action="accessed user of id "+str(id), response=response_serialized))
             return response
@@ -51,13 +52,14 @@ class UsersControllerAudit():
     def user_service_get_user_me(self, user):
         try:
             response : TemplatebackendGetUserReply = self.next.user_service_get_user_me(user)
-            response_serialized = f"id: {response.result.user.id}, first_name: {response.result.user.first_name or ''}, last_name: {response.result.user.last_name or ''},  \
-                username: {response.result.user.username or ''}, email: {response.result.user.email or ''}, status: {response.result.user.status or ''},  \
-                roles: {response.result.user.roles or ''}"
-            self.auditLogService.log_event(AuditLog(service="user", userid=user.id,action="accessed user of id "+user, response=response_serialized))
+            user = response.result.me
+            response_serialized = f"id: {user.id}, first_name: {user.first_name or ''}, last_name: {user.last_name or ''},  \
+                username: {user.username or ''}, email: {user.email or ''}, status: {user.status or ''},  \
+                roles: {user.roles or ''}"
+            self.auditLogService.log_event(AuditLog(service="user", userid=user.id,action="accessed user of id "+str(user.id), response=response_serialized))
             return response
         except Exception as e:
-            self.auditLogService.log_event(AuditLog(service="user", userid=user.id,action="Error accessing user of id "+user, response=e, error=True))
+            self.auditLogService.log_event(AuditLog(service="user", userid=user.id,action="Error accessing user of id "+str(user.id), response=e, error=True))
             raise e
 
 
