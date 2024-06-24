@@ -14,6 +14,8 @@ docs/TemplatebackendAuthenticationReply.md
 docs/TemplatebackendAuthenticationResult.md
 docs/TemplatebackendColumn.md
 docs/TemplatebackendConfig.md
+docs/TemplatebackendCreateConfigReply.md
+docs/TemplatebackendCreateConfigResult.md
 docs/TemplatebackendCreateHelloReply.md
 docs/TemplatebackendCreateUserReply.md
 docs/TemplatebackendCreateUserResult.md
@@ -22,8 +24,8 @@ docs/TemplatebackendDataset.md
 docs/TemplatebackendDeleteDatasetReply.md
 docs/TemplatebackendDeleteDatasetResult.md
 docs/TemplatebackendDeleteUserReply.md
-docs/TemplatebackendGetConfigReply.md
-docs/TemplatebackendGetConfigResult.md
+docs/TemplatebackendGetConfigsReply.md
+docs/TemplatebackendGetConfigsResult.md
 docs/TemplatebackendGetDatasetContentReply.md
 docs/TemplatebackendGetDatasetContentResult.md
 docs/TemplatebackendGetDatasetMetadataReply.md
@@ -64,6 +66,8 @@ openapi_client/models/templatebackend_authentication_reply.py
 openapi_client/models/templatebackend_authentication_result.py
 openapi_client/models/templatebackend_column.py
 openapi_client/models/templatebackend_config.py
+openapi_client/models/templatebackend_create_config_reply.py
+openapi_client/models/templatebackend_create_config_result.py
 openapi_client/models/templatebackend_create_hello_reply.py
 openapi_client/models/templatebackend_create_user_reply.py
 openapi_client/models/templatebackend_create_user_result.py
@@ -72,8 +76,8 @@ openapi_client/models/templatebackend_dataset.py
 openapi_client/models/templatebackend_delete_dataset_reply.py
 openapi_client/models/templatebackend_delete_dataset_result.py
 openapi_client/models/templatebackend_delete_user_reply.py
-openapi_client/models/templatebackend_get_config_reply.py
-openapi_client/models/templatebackend_get_config_result.py
+openapi_client/models/templatebackend_get_configs_reply.py
+openapi_client/models/templatebackend_get_configs_result.py
 openapi_client/models/templatebackend_get_dataset_content_reply.py
 openapi_client/models/templatebackend_get_dataset_content_result.py
 openapi_client/models/templatebackend_get_dataset_metadata_reply.py
@@ -101,8 +105,4 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
-test/test_configuration_api.py
-test/test_templatebackend_config.py
-test/test_templatebackend_get_config_reply.py
-test/test_templatebackend_get_config_result.py
 tox.ini

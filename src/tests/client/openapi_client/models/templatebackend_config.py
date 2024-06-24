@@ -32,6 +32,8 @@ class TemplatebackendConfig(BaseModel):
     TemplatebackendConfig
     """ # noqa: E501
     id: Optional[StrictInt] = None
+    userid: Optional[StrictInt] = None
+    tenantid: Optional[StrictInt] = None
     questionnaireid: Optional[StrictInt] = None
     has_scramble_field: Optional[StrictBool] = Field(default=None, alias="hasScrambleField")
     has_date_shift: Optional[StrictBool] = Field(default=None, alias="hasDateShift")
@@ -47,7 +49,7 @@ class TemplatebackendConfig(BaseModel):
     sub_field_regex_regex: Optional[StrictStr] = Field(default=None, alias="subFieldRegexRegex")
     sub_field_regex_replacement: Optional[StrictStr] = Field(default=None, alias="subFieldRegexReplacement")
     created_at: Optional[datetime] = Field(default=None, alias="createdAt")
-    __properties: ClassVar[List[str]] = ["id", "questionnaireid", "hasScrambleField", "hasDateShift", "hassubFieldList", "hassubFieldRegex", "scrambleFieldFields", "dateShiftLowrange", "dateShiftHighrange", "subFieldListFields", "subFieldListSubstitute", "subFieldListReplacement", "subFieldRegexFields", "subFieldRegexRegex", "subFieldRegexReplacement", "createdAt"]
+    __properties: ClassVar[List[str]] = ["id", "userid", "tenantid", "questionnaireid", "hasScrambleField", "hasDateShift", "hassubFieldList", "hassubFieldRegex", "scrambleFieldFields", "dateShiftLowrange", "dateShiftHighrange", "subFieldListFields", "subFieldListSubstitute", "subFieldListReplacement", "subFieldRegexFields", "subFieldRegexRegex", "subFieldRegexReplacement", "createdAt"]
 
     model_config = {
         "populate_by_name": True,
@@ -99,6 +101,8 @@ class TemplatebackendConfig(BaseModel):
 
         _obj = cls.model_validate({
             "id": obj.get("id"),
+            "userid": obj.get("userid"),
+            "tenantid": obj.get("tenantid"),
             "questionnaireid": obj.get("questionnaireid"),
             "hasScrambleField": obj.get("hasScrambleField"),
             "hasDateShift": obj.get("hasDateShift"),

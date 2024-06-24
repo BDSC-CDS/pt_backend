@@ -14,11 +14,15 @@ class TemplatebackendConfig(Model):
     Do not edit the class manually.
     """
 
-    def __init__(self, id=None, questionnaireid=None, has_scramble_field=None, has_date_shift=None, hassub_field_list=None, hassub_field_regex=None, scramble_field_fields=None, date_shift_lowrange=None, date_shift_highrange=None, sub_field_list_fields=None, sub_field_list_substitute=None, sub_field_list_replacement=None, sub_field_regex_fields=None, sub_field_regex_regex=None, sub_field_regex_replacement=None, created_at=None):
+    def __init__(self, id=None, userid=None, tenantid=None, questionnaireid=None, has_scramble_field=None, has_date_shift=None, hassub_field_list=None, hassub_field_regex=None, scramble_field_fields=None, date_shift_lowrange=None, date_shift_highrange=None, sub_field_list_fields=None, sub_field_list_substitute=None, sub_field_list_replacement=None, sub_field_regex_fields=None, sub_field_regex_regex=None, sub_field_regex_replacement=None, created_at=None):
         """TemplatebackendConfig - a model defined in OpenAPI
 
         :param id: The id of this TemplatebackendConfig.
         :type id: int
+        :param userid: The userid of this TemplatebackendConfig.
+        :type userid: int
+        :param tenantid: The tenantid of this TemplatebackendConfig.
+        :type tenantid: int
         :param questionnaireid: The questionnaireid of this TemplatebackendConfig.
         :type questionnaireid: int
         :param has_scramble_field: The has_scramble_field of this TemplatebackendConfig.
@@ -52,6 +56,8 @@ class TemplatebackendConfig(Model):
         """
         self.openapi_types = {
             'id': int,
+            'userid': int,
+            'tenantid': int,
             'questionnaireid': int,
             'has_scramble_field': bool,
             'has_date_shift': bool,
@@ -71,6 +77,8 @@ class TemplatebackendConfig(Model):
 
         self.attribute_map = {
             'id': 'id',
+            'userid': 'userid',
+            'tenantid': 'tenantid',
             'questionnaireid': 'questionnaireid',
             'has_scramble_field': 'hasScrambleField',
             'has_date_shift': 'hasDateShift',
@@ -89,6 +97,8 @@ class TemplatebackendConfig(Model):
         }
 
         self._id = id
+        self._userid = userid
+        self._tenantid = tenantid
         self._questionnaireid = questionnaireid
         self._has_scramble_field = has_scramble_field
         self._has_date_shift = has_date_shift
@@ -136,6 +146,48 @@ class TemplatebackendConfig(Model):
         """
 
         self._id = id
+
+    @property
+    def userid(self) -> int:
+        """Gets the userid of this TemplatebackendConfig.
+
+
+        :return: The userid of this TemplatebackendConfig.
+        :rtype: int
+        """
+        return self._userid
+
+    @userid.setter
+    def userid(self, userid: int):
+        """Sets the userid of this TemplatebackendConfig.
+
+
+        :param userid: The userid of this TemplatebackendConfig.
+        :type userid: int
+        """
+
+        self._userid = userid
+
+    @property
+    def tenantid(self) -> int:
+        """Gets the tenantid of this TemplatebackendConfig.
+
+
+        :return: The tenantid of this TemplatebackendConfig.
+        :rtype: int
+        """
+        return self._tenantid
+
+    @tenantid.setter
+    def tenantid(self, tenantid: int):
+        """Sets the tenantid of this TemplatebackendConfig.
+
+
+        :param tenantid: The tenantid of this TemplatebackendConfig.
+        :type tenantid: int
+        """
+
+        self._tenantid = tenantid
 
     @property
     def questionnaireid(self) -> int:
