@@ -37,7 +37,7 @@ class UsersControllerAudit():
     def user_service_get_user(self, user, id: int):
         try:
             response : TemplatebackendGetUserReply =  self.next.user_service_get_user(user, id)
-            user = response.result.me
+            user = response.result.user
             response_serialized = f"id: {user.id}, first_name: {user.first_name or ''}, last_name: {user.last_name or ''},  \
                 username: {user.username or ''}, email: {user.email or ''}, status: {user.status or ''},  \
                 roles: {user.roles or ''}"
