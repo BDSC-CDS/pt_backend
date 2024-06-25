@@ -42,6 +42,9 @@ docs/TemplatebackendResetPasswordReply.md
 docs/TemplatebackendStoreDatasetReply.md
 docs/TemplatebackendStoreDatasetRequest.md
 docs/TemplatebackendStoreDatasetResult.md
+docs/TemplatebackendTransformDatasetReply.md
+docs/TemplatebackendTransformDatasetRequest.md
+docs/TemplatebackendTransformDatasetResult.md
 docs/TemplatebackendUpdatePasswordReply.md
 docs/TemplatebackendUpdatePasswordRequest.md
 docs/TemplatebackendUser.md
@@ -94,6 +97,9 @@ openapi_client/models/templatebackend_reset_password_reply.py
 openapi_client/models/templatebackend_store_dataset_reply.py
 openapi_client/models/templatebackend_store_dataset_request.py
 openapi_client/models/templatebackend_store_dataset_result.py
+openapi_client/models/templatebackend_transform_dataset_reply.py
+openapi_client/models/templatebackend_transform_dataset_request.py
+openapi_client/models/templatebackend_transform_dataset_result.py
 openapi_client/models/templatebackend_update_password_reply.py
 openapi_client/models/templatebackend_update_password_request.py
 openapi_client/models/templatebackend_user.py
@@ -105,4 +111,7 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
+test/test_templatebackend_transform_dataset_reply.py
+test/test_templatebackend_transform_dataset_request.py
+test/test_templatebackend_transform_dataset_result.py
 tox.ini

@@ -11,9 +11,10 @@ from server_template.models import TemplatebackendGetDatasetContentReply
 from server_template.models import TemplatebackendGetDatasetContentResult
 from server_template.models import TemplatebackendDeleteDatasetReply
 from server_template.models import TemplatebackendDeleteDatasetResult
+from server_template.models import TemplatebackendTransformDatasetResult
+from server_template.models import TemplatebackendTransformDatasetReply
 
 import src.internal.api.controllers.converter.dataset as dataset_converter
-from src.pkg.dataset.service.dataset import DatasetService
 
 class DatasetController:
     def __init__(self, dataset_service):
@@ -80,3 +81,13 @@ class DatasetController:
         datasets = dataset_converter.datasets_from_business(datasets)
 
         return TemplatebackendListDatasetsReply(TemplatebackendListDatasetsResult(datasets=datasets))
+
+
+    def dataset_service_transform_dataset(self, user, dataset_id:int,config_id:int):
+        try:
+            new_dataset : str = self.dataset_service.transform_dataset(user.id,user.tenantid,dataset_id,config_id)
+        except Exception as e:
+            print("error", e)
+            traceback.print_exception(e)
+            return str(e), 500
+        return TemplatebackendTransformDatasetReply(TemplatebackendTransformDatasetResult(dataset=new_dataset))

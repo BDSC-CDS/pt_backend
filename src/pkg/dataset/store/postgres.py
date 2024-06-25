@@ -6,34 +6,10 @@ from sqlalchemy.orm import sessionmaker
 from sqlalchemy.sql import text
 from contextlib import contextmanager
 from src.pkg.dataset.model.dataset import Dataset,Metadata,Dataset_content
+from src.pkg.config_generator.store import get_config
 import csv
 from collections import defaultdict
 import json
-
-# def infer_column_type(values):
-#     is_int = False
-#     is_float = False
-
-#     for value in values:
-#         try:
-#             int(value)
-#             is_int=True
-#         except ValueError:
-#             is_int = False
-
-#         try:
-#             float(value)
-#             is_float=True
-#         except ValueError:
-#             is_float = False
-
-#     if is_int:
-#         return "INTEGER"
-#     elif is_float:
-#         return "FLOAT"
-#     else:
-#         return "TEXT"
-
 
 class DatasetStore:
     def __init__(self, db: Engine):
@@ -339,37 +315,54 @@ class DatasetStore:
         return True
 
 
+    def transform_dataset(self,userid:int,tenantid:int,dataset_id:int,config_id:int) -> str:
+        # first get the dataset and the config
+        query1 = "SELECT * FROM datasets WHERE id=:id AND userid = :userid AND tenantid = :tenantid;"
+        query2 = "SELECT * FROM config_generator WHERE id=:id AND userid = :userid AND tenantid = :tenantid;"
+
+        with self.session_scope() as session:
+            try:
+                dataset = session.execute(text(query1), {
+                    'id': dataset_id,
+                    'userid': userid,
+                    'tenantid': tenantid,
+                }).mappings().fetchone()
+                config = session.execute(text(query2), {
+                    'id': config_id,
+                    'userid': userid,
+                    'tenantid': tenantid,
+                }).mappings().fetchone()
+                # check dataset is not deleted
+                if (not dataset or dataset.deleted_at):
+                    print("Error: Dataset not found (might have been deleted).")
+                    return None
+                # check if config with this id exists
+                if (not config):
+                    print("Error: Config not found.")
+                    return None
+
+                # if no transformation was selected
+                if (not config.hasScrambleField and not config.hasDateShift and
+                    not config.hassubFieldList and not config.hassubFieldRegex):
+                    print("No transformation was selected")
+                    return None
+
+                # parse dataset depending on transformation
+                new_dataset = None
+                if (config.hasScrambleField):
+                    new_dataset = scramble_fields(new_dataset,dataset_id, config.scrambleField_fields)
+
+                if (config.hasDateShift):
+                    new_dataset = shift_dates(new_dataset,dataset_id, config.dateShift_lowrange, config.dateShift_highrange)
 
 
+            except Exception as e:
+                print(f"Error transforming dataset: {e}")
+                return False
+
+        return new_dataset
 
 
-
-
-    # def update_metadata_dataset(self,name:str,userid:int, tenantid:int,metadata:str):
-    #     query = """UPDATE metadata
-    #             SET col1 = :col1
-    #             WHERE name = :name AND userid = :userid AND tenantid = :tenantid
-    #             """ #TODO
-    #     with self.session_scope() as session:
-    #         session.execute(text(query), {
-    #             'name': name,
-    #             'userid': userid,
-    #             'tenantid': tenantid,
-    #         }) # TODO mappings ? fetchall? qu'est ce que ça retourne?
-
-    #         return True # TODO
-
-    # # TODO qu'estce qu'on modifie
-    # def update_dataset(self,name:str,userid:int, tenantid:int,dataset:Dataset):
-    #     query = """UPDATE values
-    #             SET col1 = :col1
-    #             WHERE name = :name AND userid = :userid AND tenantid = :tenantid
-    #             """ #TODO
-    #     with self.session_scope() as session:
-    #         session.execute(text(query), {
-    #             'name': name,
-    #             'userid': userid,
-    #             'tenantid': tenantid,
-    #         }) # TODO mappings ? fetchall? qu'est ce que ça retourne?
-
-    #         return True # TODO
+    def shift_dates(new_dataset: str, dataset_id:int, lowrange:int,highrange:int):
+        if new_dataset:
+            #

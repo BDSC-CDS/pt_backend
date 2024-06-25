@@ -38,3 +38,8 @@ class DatasetControllerAuthentication():
         if not is_authenticated(user):
             return None, 403
         return self.next.dataset_service_list_datasets(user, offset,limit)
+
+    def dataset_service_transform_dataset(self, user, dataset_id:int,config_id:int):
+        if not is_authenticated(user):
+            return None, 403
+        return self.next.dataset_service_transform_dataset(user, dataset_id,config_id)
