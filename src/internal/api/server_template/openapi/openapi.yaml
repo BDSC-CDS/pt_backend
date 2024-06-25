@@ -46,23 +46,16 @@ paths:
       - Authentication
       x-openapi-router-controller: authentication_controller
       x-codegen-request-body-name: body
-  /api/rest/v1/configs/{id}:
+  /api/rest/v1/configs:
     get:
-      description: This endpoint returns a configuration file for a given user
-      operationId: config_service_get_config
-      parameters:
-      - in: path
-        name: id
-        required: true
-        schema:
-          format: int64
-          type: integer
+      description: This endpoint returns the configuration files for a given user
+      operationId: config_service_get_configs
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/templatebackendGetConfigReply'
+                $ref: '#/components/schemas/templatebackendGetConfigsReply'
           description: A successful response.
         default:
           content:
@@ -70,10 +63,37 @@ paths:
               schema:
                 $ref: '#/components/schemas/rpcStatus'
           description: An unexpected error response.
-      summary: Get a configuration file
+      summary: Get configuration files
       tags:
       - Configuration
       x-openapi-router-controller: config_generator_controller
+    post:
+      description: This endpoint creates a usconfigurationer
+      operationId: config_service_create_config
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/templatebackendConfig'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/templatebackendCreateConfigReply'
+          description: A successful response.
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+          description: An unexpected error response.
+      summary: Create a configuration
+      tags:
+      - Configuration
+      x-openapi-router-controller: config_generator_controller
+      x-codegen-request-body-name: body
   /api/rest/v1/users:
     post:
       description: This endpoint creates a user
@@ -520,11 +540,13 @@ components:
         scrambleFieldFields:
         - scrambleFieldFields
         - scrambleFieldFields
-        questionnaireid: 6
-        dateShiftLowrange: 1
+        questionnaireid: 5
+        dateShiftLowrange: 5
+        userid: 6
         hasScrambleField: true
         createdAt: 2000-01-23T04:56:07.000+00:00
-        dateShiftHighrange: 5
+        dateShiftHighrange: 2
+        tenantid: 1
         id: 0
         subFieldListSubstitute:
         - subFieldListSubstitute
@@ -537,6 +559,14 @@ components:
         id:
           format: int64
           title: id
+          type: integer
+        userid:
+          format: int64
+          title: userid
+          type: integer
+        tenantid:
+          format: int64
+          title: tenantid
           type: integer
         questionnaireid:
           format: int64
@@ -596,6 +626,25 @@ components:
           title: createdAt
           type: string
       title: templatebackendConfig
+      type: object
+    templatebackendCreateConfigReply:
+      example:
+        result:
+          id: 0
+      properties:
+        result:
+          $ref: '#/components/schemas/templatebackendCreateConfigResult'
+      title: templatebackendCreateConfigReply
+      type: object
+    templatebackendCreateConfigResult:
+      example:
+        id: 0
+      properties:
+        id:
+          format: int64
+          title: id
+          type: integer
+      title: templatebackendCreateConfigResult
       type: object
     templatebackendCreateHelloReply:
       example:
@@ -711,11 +760,11 @@ components:
     templatebackendDeleteUserResult:
       title: result
       type: object
-    templatebackendGetConfigReply:
+    templatebackendGetConfigsReply:
       example:
         result:
           config:
-            hassubFieldList: true
+          - hassubFieldList: true
             subFieldListReplacement: subFieldListReplacement
             subFieldListFields:
             - subFieldListFields
@@ -726,11 +775,39 @@ components:
             scrambleFieldFields:
             - scrambleFieldFields
             - scrambleFieldFields
-            questionnaireid: 6
-            dateShiftLowrange: 1
+            questionnaireid: 5
+            dateShiftLowrange: 5
+            userid: 6
             hasScrambleField: true
             createdAt: 2000-01-23T04:56:07.000+00:00
-            dateShiftHighrange: 5
+            dateShiftHighrange: 2
+            tenantid: 1
+            id: 0
+            subFieldListSubstitute:
+            - subFieldListSubstitute
+            - subFieldListSubstitute
+            subFieldRegexFields:
+            - subFieldRegexFields
+            - subFieldRegexFields
+            subFieldRegexReplacement: subFieldRegexReplacement
+          - hassubFieldList: true
+            subFieldListReplacement: subFieldListReplacement
+            subFieldListFields:
+            - subFieldListFields
+            - subFieldListFields
+            subFieldRegexRegex: subFieldRegexRegex
+            hasDateShift: true
+            hassubFieldRegex: true
+            scrambleFieldFields:
+            - scrambleFieldFields
+            - scrambleFieldFields
+            questionnaireid: 5
+            dateShiftLowrange: 5
+            userid: 6
+            hasScrambleField: true
+            createdAt: 2000-01-23T04:56:07.000+00:00
+            dateShiftHighrange: 2
+            tenantid: 1
             id: 0
             subFieldListSubstitute:
             - subFieldListSubstitute
@@ -741,13 +818,13 @@ components:
             subFieldRegexReplacement: subFieldRegexReplacement
       properties:
         result:
-          $ref: '#/components/schemas/templatebackendGetConfigResult'
-      title: templatebackendGetConfigReply
+          $ref: '#/components/schemas/templatebackendGetConfigsResult'
+      title: templatebackendGetConfigsReply
       type: object
-    templatebackendGetConfigResult:
+    templatebackendGetConfigsResult:
       example:
         config:
-          hassubFieldList: true
+        - hassubFieldList: true
           subFieldListReplacement: subFieldListReplacement
           subFieldListFields:
           - subFieldListFields
@@ -758,11 +835,39 @@ components:
           scrambleFieldFields:
           - scrambleFieldFields
           - scrambleFieldFields
-          questionnaireid: 6
-          dateShiftLowrange: 1
+          questionnaireid: 5
+          dateShiftLowrange: 5
+          userid: 6
           hasScrambleField: true
           createdAt: 2000-01-23T04:56:07.000+00:00
-          dateShiftHighrange: 5
+          dateShiftHighrange: 2
+          tenantid: 1
+          id: 0
+          subFieldListSubstitute:
+          - subFieldListSubstitute
+          - subFieldListSubstitute
+          subFieldRegexFields:
+          - subFieldRegexFields
+          - subFieldRegexFields
+          subFieldRegexReplacement: subFieldRegexReplacement
+        - hassubFieldList: true
+          subFieldListReplacement: subFieldListReplacement
+          subFieldListFields:
+          - subFieldListFields
+          - subFieldListFields
+          subFieldRegexRegex: subFieldRegexRegex
+          hasDateShift: true
+          hassubFieldRegex: true
+          scrambleFieldFields:
+          - scrambleFieldFields
+          - scrambleFieldFields
+          questionnaireid: 5
+          dateShiftLowrange: 5
+          userid: 6
+          hasScrambleField: true
+          createdAt: 2000-01-23T04:56:07.000+00:00
+          dateShiftHighrange: 2
+          tenantid: 1
           id: 0
           subFieldListSubstitute:
           - subFieldListSubstitute
@@ -773,8 +878,11 @@ components:
           subFieldRegexReplacement: subFieldRegexReplacement
       properties:
         config:
-          $ref: '#/components/schemas/templatebackendConfig'
-      title: templatebackendGetConfigResult
+          items:
+            $ref: '#/components/schemas/templatebackendConfig'
+          title: config
+          type: array
+      title: templatebackendGetConfigsResult
       type: object
     templatebackendGetDatasetContentReply:
       example:

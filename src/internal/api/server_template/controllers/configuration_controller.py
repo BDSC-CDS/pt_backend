@@ -8,13 +8,15 @@ from inspect import getmembers, isfunction, ismethod
 
 
 from server_template.models.rpc_status import RpcStatus
-from server_template.models.templatebackend_get_config_reply import TemplatebackendGetConfigReply
+from server_template.models.templatebackend_config import TemplatebackendConfig
+from server_template.models.templatebackend_create_config_reply import TemplatebackendCreateConfigReply
+from server_template.models.templatebackend_get_configs_reply import TemplatebackendGetConfigsReply
 from server_template import util
 
 
 #from src.internal.api.controllers import configuration_controller
 #controller_functions =  [func_tupple[0] for func_tupple in getmembers(configuration_controller, isfunction)]
-#needed_functions = ["config_service_get_config"]
+#needed_functions = ["config_service_create_config", "config_service_get_configs"]
 #for op in needed_functions:
 #    if op not in controller_functions:
 #        raise NotImplementedError("operation " + op + " is not implemented by src.internal.api.controllers.configuration_controller")
@@ -22,7 +24,7 @@ from server_template import util
 class ConfigurationController:
     def __init__(self, controller):
         #controller_functions =  [func_tupple[0] for func_tupple in getmembers(controller, ismethod)]
-        #needed_functions = ["config_service_get_config"]
+        #needed_functions = ["config_service_create_config", "config_service_get_configs"]
         #for op in needed_functions:
         #    if op not in controller_functions:
         #        raise NotImplementedError("operation " + op + " is not implemented by provided controller")
@@ -31,15 +33,29 @@ class ConfigurationController:
         self.controller=controller
 
 
-    def config_service_get_config(self, user, id: int):
-        """Get a configuration file
+    def config_service_create_config(self, user, body: TemplatebackendConfig):
+        """Create a configuration
 
-        This endpoint returns a configuration file for a given user
+        This endpoint creates a usconfigurationer
 
-        :param id: 
-        :type id: int
+        :param body: 
+        :type body: dict | bytes
 
-        :rtype: Union[TemplatebackendGetConfigReply, Tuple[TemplatebackendGetConfigReply, int], Tuple[TemplatebackendGetConfigReply, int, Dict[str, str]]
+        :rtype: Union[TemplatebackendCreateConfigReply, Tuple[TemplatebackendCreateConfigReply, int], Tuple[TemplatebackendCreateConfigReply, int, Dict[str, str]]
+        """
+        if connexion.request.is_json:
+            body = TemplatebackendConfig.from_dict(connexion.request.get_json())
+
+        return self.controller.config_service_create_config(user, body)
+
+
+    def config_service_get_configs(self, user):
+        """Get configuration files
+
+        This endpoint returns the configuration files for a given user
+
+
+        :rtype: Union[TemplatebackendGetConfigsReply, Tuple[TemplatebackendGetConfigsReply, int], Tuple[TemplatebackendGetConfigsReply, int, Dict[str, str]]
         """
 
-        return self.controller.config_service_get_config(user, id)
+        return self.controller.config_service_get_configs(user, )

@@ -28,17 +28,18 @@ class ConfigGeneratorService:
 
         return json.dumps(result)
 
-    def create_config(self, config: ConfigGenerator):
-        self.config_generator_store.create_config(config)
+    def create_config(self, user,config: ConfigGenerator):
+        response = self.config_generator_store.create_config(user,config)
+        return response
 
-    def get_configs(self,offset:int,limit:int) -> List[ConfigGenerator]:
-        configs = self.config_generator_store.get_configs(offset,limit)
+    def get_configs(self,userid:int,tenantid:int) -> List[ConfigGenerator]:
+        configs = self.config_generator_store.get_configs(userid,tenantid)
         # result = [self.format_json_config(config) for config in configs]
         # return result
         return configs
 
-    def get_configs_for_questionnaire(self, identifier:int,offset:int,limit:int) -> List[ConfigGenerator]:
-        configs = self.config_generator_store.get_configs_for_questionnaire(identifier=identifier,offset=offset,limit=limit)
+    def get_configs_for_questionnaire(self, userid:int,questionnaireid:int,offset:int,limit:int) -> List[ConfigGenerator]:
+        configs = self.config_generator_store.get_configs_for_questionnaire(userid=userid,questionnaireid=questionnaireid,offset=offset,limit=limit)
         # result = [self.format_json_config(config) for config in configs]
         # return result
         return configs

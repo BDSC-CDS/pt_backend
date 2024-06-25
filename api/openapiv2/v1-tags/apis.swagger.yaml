@@ -42,26 +42,42 @@ paths:
       tags:
         - Authentication
       x-openapi-router-controller: authentication_controller
-  /api/rest/v1/configs/{id}:
+  /api/rest/v1/configs:
     get:
-      summary: Get a configuration file
-      description: This endpoint returns a configuration file for a given user
-      operationId: ConfigService_GetConfig
+      summary: Get configuration files
+      description: This endpoint returns the configuration files for a given user
+      operationId: ConfigService_GetConfigs
       responses:
         "200":
           description: A successful response.
           schema:
-            $ref: '#/definitions/templatebackendGetConfigReply'
+            $ref: '#/definitions/templatebackendGetConfigsReply'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/rpcStatus'
+      tags:
+        - Configuration
+      x-openapi-router-controller: config_generator_controller
+    post:
+      summary: Create a configuration
+      description: This endpoint creates a usconfigurationer
+      operationId: ConfigService_CreateConfig
+      responses:
+        "200":
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/templatebackendCreateConfigReply'
         default:
           description: An unexpected error response.
           schema:
             $ref: '#/definitions/rpcStatus'
       parameters:
-        - name: id
-          in: path
+        - name: body
+          in: body
           required: true
-          type: integer
-          format: int64
+          schema:
+            $ref: '#/definitions/templatebackendConfig'
       tags:
         - Configuration
       x-openapi-router-controller: config_generator_controller
@@ -423,6 +439,12 @@ definitions:
       id:
         type: integer
         format: int64
+      userid:
+        type: integer
+        format: int64
+      tenantid:
+        type: integer
+        format: int64
       questionnaireid:
         type: integer
         format: int64
@@ -465,6 +487,17 @@ definitions:
       createdAt:
         type: string
         format: date-time
+  templatebackendCreateConfigReply:
+    type: object
+    properties:
+      result:
+        $ref: '#/definitions/templatebackendCreateConfigResult'
+  templatebackendCreateConfigResult:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
   templatebackendCreateHelloReply:
     type: object
     properties:
@@ -533,16 +566,19 @@ definitions:
         $ref: '#/definitions/templatebackendDeleteUserResult'
   templatebackendDeleteUserResult:
     type: object
-  templatebackendGetConfigReply:
+  templatebackendGetConfigsReply:
     type: object
     properties:
       result:
-        $ref: '#/definitions/templatebackendGetConfigResult'
-  templatebackendGetConfigResult:
+        $ref: '#/definitions/templatebackendGetConfigsResult'
+  templatebackendGetConfigsResult:
     type: object
     properties:
       config:
-        $ref: '#/definitions/templatebackendConfig'
+        type: array
+        items:
+          type: object
+          $ref: '#/definitions/templatebackendConfig'
   templatebackendGetDatasetContentReply:
     type: object
     properties:

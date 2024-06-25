@@ -4,6 +4,8 @@ from typing import List
 @dataclass
 class ConfigGenerator:
     id: int = None
+    userid:int = None
+    tenantid:int = None
     questionnaireid:int = None
     hasScrambleField: bool = False # useful? if boolean but not list
     hasDateShift: bool = False
