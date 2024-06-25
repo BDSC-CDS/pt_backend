@@ -5,6 +5,8 @@ from server_template.models import TemplatebackendCreateUserReply
 from server_template.models import TemplatebackendCreateUserResult
 from server_template.models import TemplatebackendGetUserReply
 from server_template.models import TemplatebackendGetUserResult
+from server_template.models import TemplatebackendGetUserMeReply
+from server_template.models import TemplatebackendGetUserMeResult
 from server_template.models import TemplatebackendUpdatePasswordRequest
 
 import src.internal.api.controllers.converter.user as user_converter
@@ -46,7 +48,19 @@ class UsersController():
 
 
     def user_service_get_user_me(self, user):
-        return "Not implemented", 501
+        try:
+            user = self.user_service.get_user(by='id', identifier=user.id)
+        except Exception as e:
+            print("error", e)
+            traceback.print_exception(e)
+            return str(e), 500
+
+        if user is None:
+            return TemplatebackendGetUserMeReply(TemplatebackendGetUserMeResult(me=None)), 404
+
+        user = user_converter.user_from_business(user)
+
+        return TemplatebackendGetUserMeReply(TemplatebackendGetUserMeResult(me=user))
 
 
     def user_service_reset_password(self, user, id: int, body: object):
