@@ -35,10 +35,11 @@ class TemplatebackendQuestionnaire(BaseModel):
     id: Optional[StrictInt] = None
     name: Optional[StrictStr] = None
     reply_editable: Optional[StrictBool] = Field(default=None, alias="replyEditable")
+    last_version: Optional[StrictStr] = Field(default=None, alias="lastVersion")
     versions: Optional[List[TemplatebackendQuestionnaireVersion]] = None
     created_at: Optional[datetime] = Field(default=None, alias="createdAt")
     updated_at: Optional[datetime] = Field(default=None, alias="updatedAt")
-    __properties: ClassVar[List[str]] = ["id", "name", "replyEditable", "versions", "createdAt", "updatedAt"]
+    __properties: ClassVar[List[str]] = ["id", "name", "replyEditable", "lastVersion", "versions", "createdAt", "updatedAt"]
 
     model_config = {
         "populate_by_name": True,
@@ -99,6 +100,7 @@ class TemplatebackendQuestionnaire(BaseModel):
             "id": obj.get("id"),
             "name": obj.get("name"),
             "replyEditable": obj.get("replyEditable"),
+            "lastVersion": obj.get("lastVersion"),
             "versions": [TemplatebackendQuestionnaireVersion.from_dict(_item) for _item in obj.get("versions")] if obj.get("versions") is not None else None,
             "createdAt": obj.get("createdAt"),
             "updatedAt": obj.get("updatedAt")

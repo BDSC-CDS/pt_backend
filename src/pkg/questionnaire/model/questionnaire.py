@@ -87,6 +87,7 @@ class Questionnaire:
     reply_editable: bool = False
 
     versions: list[QuestionnaireVersion] = None
+    last_version: str = ""
 
     createdat: datetime.datetime = None
     updatedat: datetime.datetime = None

@@ -86,10 +86,11 @@ message Questionnaire {
 
     string name = 2;
     bool reply_editable = 3;
+    string last_version = 4;
 
-    repeated QuestionnaireVersion versions = 4;
+    repeated QuestionnaireVersion versions = 5;
 
-    google.protobuf.Timestamp createdAt = 5;
-    google.protobuf.Timestamp updatedAt = 6;
+    google.protobuf.Timestamp createdAt = 6;
+    google.protobuf.Timestamp updatedAt = 7;
     // google.protobuf.Timestamp deletedAt = 7;
 }

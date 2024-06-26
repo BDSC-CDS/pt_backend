@@ -866,6 +866,8 @@ definitions:
         type: string
       replyEditable:
         type: boolean
+      lastVersion:
+        type: string
       versions:
         type: array
         items:

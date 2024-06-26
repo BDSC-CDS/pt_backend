@@ -16,7 +16,7 @@ class TemplatebackendQuestionnaire(Model):
     Do not edit the class manually.
     """
 
-    def __init__(self, id=None, name=None, reply_editable=None, versions=None, created_at=None, updated_at=None):
+    def __init__(self, id=None, name=None, reply_editable=None, last_version=None, versions=None, created_at=None, updated_at=None):
         """TemplatebackendQuestionnaire - a model defined in OpenAPI
 
         :param id: The id of this TemplatebackendQuestionnaire.
@@ -25,6 +25,8 @@ class TemplatebackendQuestionnaire(Model):
         :type name: str
         :param reply_editable: The reply_editable of this TemplatebackendQuestionnaire.
         :type reply_editable: bool
+        :param last_version: The last_version of this TemplatebackendQuestionnaire.
+        :type last_version: str
         :param versions: The versions of this TemplatebackendQuestionnaire.
         :type versions: List[TemplatebackendQuestionnaireVersion]
         :param created_at: The created_at of this TemplatebackendQuestionnaire.
@@ -36,6 +38,7 @@ class TemplatebackendQuestionnaire(Model):
             'id': int,
             'name': str,
             'reply_editable': bool,
+            'last_version': str,
             'versions': List[TemplatebackendQuestionnaireVersion],
             'created_at': datetime,
             'updated_at': datetime
@@ -45,6 +48,7 @@ class TemplatebackendQuestionnaire(Model):
             'id': 'id',
             'name': 'name',
             'reply_editable': 'replyEditable',
+            'last_version': 'lastVersion',
             'versions': 'versions',
             'created_at': 'createdAt',
             'updated_at': 'updatedAt'
@@ -53,6 +57,7 @@ class TemplatebackendQuestionnaire(Model):
         self._id = id
         self._name = name
         self._reply_editable = reply_editable
+        self._last_version = last_version
         self._versions = versions
         self._created_at = created_at
         self._updated_at = updated_at
@@ -130,6 +135,27 @@ class TemplatebackendQuestionnaire(Model):
         """
 
         self._reply_editable = reply_editable
+
+    @property
+    def last_version(self) -> str:
+        """Gets the last_version of this TemplatebackendQuestionnaire.
+
+
+        :return: The last_version of this TemplatebackendQuestionnaire.
+        :rtype: str
+        """
+        return self._last_version
+
+    @last_version.setter
+    def last_version(self, last_version: str):
+        """Sets the last_version of this TemplatebackendQuestionnaire.
+
+
+        :param last_version: The last_version of this TemplatebackendQuestionnaire.
+        :type last_version: str
+        """
+
+        self._last_version = last_version
 
     @property
     def versions(self) -> List[TemplatebackendQuestionnaireVersion]:

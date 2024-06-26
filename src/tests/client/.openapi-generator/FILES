@@ -143,10 +143,4 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
-test/test_templatebackend_get_reply_reply.py
-test/test_templatebackend_get_reply_result.py
-test/test_templatebackend_list_replies_reply.py
-test/test_templatebackend_list_replies_result.py
-test/test_templatebackend_questionnaire_question_reply.py
-test/test_templatebackend_questionnaire_reply.py
 tox.ini

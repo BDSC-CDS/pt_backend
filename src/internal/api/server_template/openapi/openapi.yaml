@@ -1095,6 +1095,7 @@ components:
         result:
           questionnaire:
             replyEditable: true
+            lastVersion: lastVersion
             createdAt: 2000-01-23T04:56:07.000+00:00
             versions:
             - createdAt: 2000-01-23T04:56:07.000+00:00
@@ -1303,6 +1304,7 @@ components:
       example:
         questionnaire:
           replyEditable: true
+          lastVersion: lastVersion
           createdAt: 2000-01-23T04:56:07.000+00:00
           versions:
           - createdAt: 2000-01-23T04:56:07.000+00:00
@@ -1697,6 +1699,7 @@ components:
         result:
           questionnaires:
           - replyEditable: true
+            lastVersion: lastVersion
             createdAt: 2000-01-23T04:56:07.000+00:00
             versions:
             - createdAt: 2000-01-23T04:56:07.000+00:00
@@ -1897,6 +1900,7 @@ components:
             id: 0
             updatedAt: 2000-01-23T04:56:07.000+00:00
           - replyEditable: true
+            lastVersion: lastVersion
             createdAt: 2000-01-23T04:56:07.000+00:00
             versions:
             - createdAt: 2000-01-23T04:56:07.000+00:00
@@ -2105,6 +2109,7 @@ components:
       example:
         questionnaires:
         - replyEditable: true
+          lastVersion: lastVersion
           createdAt: 2000-01-23T04:56:07.000+00:00
           versions:
           - createdAt: 2000-01-23T04:56:07.000+00:00
@@ -2305,6 +2310,7 @@ components:
           id: 0
           updatedAt: 2000-01-23T04:56:07.000+00:00
         - replyEditable: true
+          lastVersion: lastVersion
           createdAt: 2000-01-23T04:56:07.000+00:00
           versions:
           - createdAt: 2000-01-23T04:56:07.000+00:00
@@ -2628,6 +2634,7 @@ components:
     templatebackendQuestionnaire:
       example:
         replyEditable: true
+        lastVersion: lastVersion
         createdAt: 2000-01-23T04:56:07.000+00:00
         versions:
         - createdAt: 2000-01-23T04:56:07.000+00:00
@@ -2838,6 +2845,9 @@ components:
         replyEditable:
           title: replyEditable
           type: boolean
+        lastVersion:
+          title: lastVersion
+          type: string
         versions:
           items:
             $ref: '#/components/schemas/templatebackendQuestionnaireVersion'

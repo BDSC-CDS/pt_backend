@@ -38,7 +38,7 @@ class QuestionnaireController:
     def questionnaire_service_get_questionnaire(self, user, id: int):
         questionnaire = self.questionnaire_service.get_questionnaire(user.tenantid, user, id)
         ms = questionnaire_converter.questionnaire_from_business(questionnaire)
-        return TemplatebackendListQuestionnaireReply(TemplatebackendListQuestionnaireResult(ms))
+        return TemplatebackendListQuestionnaireReply(TemplatebackendGetQuestionnaireResult(ms))
 
         # return TemplatebackendGetQuestionnaireReply(TemplatebackendGetQuestionnaireResult())
 

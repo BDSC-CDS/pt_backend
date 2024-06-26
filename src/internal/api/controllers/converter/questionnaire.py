@@ -30,6 +30,7 @@ def questionnaire_from_business(questionnaire: Questionnaire) -> Templatebackend
         name=questionnaire.name,
         reply_editable=questionnaire.reply_editable,
         versions=[questionnaire_version_from_business(version) for version in questionnaire.versions] if questionnaire.versions else [],
+        last_version=questionnaire.last_version,
         created_at=questionnaire.createdat,
         updated_at=questionnaire.updatedat,
     )

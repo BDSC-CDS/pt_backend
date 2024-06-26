@@ -247,3 +247,124 @@ class QuestionnaireStore:
                 raise e
 
             return questionnaire
+
+    def list_questionnaires(self, tenantid: int, userid: int, offset: int = 0, limit: int = None) -> list[Questionnaire]:
+        questionnaire_query = """
+        SELECT 
+            q.id, 
+            q.userid, 
+            q.tenantid, 
+            q.name, 
+            q.reply_editable, 
+            q.createdat, 
+            q.updatedat, 
+            q.deletedat,
+            v.version as last_version
+        FROM 
+            questionnaires q
+        LEFT JOIN (
+            SELECT 
+                questionnaireid, 
+                MAX(id) AS max_version_id
+            FROM 
+                questionnaire_versions
+            WHERE 
+                deletedat IS NULL
+            GROUP BY 
+                questionnaireid
+        ) subq ON q.id = subq.questionnaireid
+        LEFT JOIN 
+            questionnaire_versions v ON subq.max_version_id = v.id
+        OFFSET 
+            :offset 
+        LIMIT 
+            :limit;
+        """
+
+
+        with self.session_scope() as session:
+            try:
+                # Fetch the questionnaire
+                results = session.execute(text(questionnaire_query), {'offset': offset, 'limit': limit}).mappings().fetchall()
+                if not results:
+                    return None  # or raise an exception if you prefer
+
+                questionnaires = [
+                    Questionnaire(
+                        id=result['id'],
+                        userid=result['userid'],
+                        tenantid=result['tenantid'],
+                        name=result['name'],
+                        reply_editable=result['reply_editable'],
+                        createdat=result['createdat'],
+                        updatedat=result['updatedat'],
+                        deletedat=result['deletedat'],
+                        versions=[],
+                        last_version=result['last_version'],
+                    ) for result in results
+                ]
+
+                # # Fetch the versions
+                # version_results = session.execute(text(questionnaire_version_query), {'questionnaire_id': questionnaire_id}).mappings().fetchall()
+                # for version_row in version_results:
+                #     version = QuestionnaireVersion(
+                #         id=version_row['id'],
+                #         version=version_row['version'],
+                #         createdat=version_row['createdat'],
+                #         updatedat=version_row['updatedat'],
+                #         deletedat=version_row['deletedat'],
+                #         questions=[]
+                #     )
+
+                #     # Fetch the questions for this version
+                #     question_results = session.execute(text(questionnaire_question_query), {'questionnaire_id': questionnaire_id, 'version_id': version.id}).mappings().fetchall()
+                #     for question_row in question_results:
+                #         question = QuestionnaireQuestion(
+                #             id=question_row['id'],
+                #             tab=question_row['tab'],
+                #             question=question_row['question'],
+                #             risk_weight=question_row['risk_weight'],
+                #             answer_type=question_row['answer_type'],
+                #             flag=question_row['flag'],
+                #             tooltip=question_row['tooltip'],
+                #             createdat=question_row['createdat'],
+                #             updatedat=question_row['updatedat'],
+                #             deletedat=question_row['deletedat'],
+                #             answers=[]
+                #         )
+
+                #         # Fetch the answers for this question
+                #         answer_results = session.execute(text(questionnaire_answer_query), {'question_id': question.id}).mappings().fetchall()
+                #         for answer_row in answer_results:
+                #             answer = QuestionnaireQuestionAnswer(
+                #                 id=answer_row['id'],
+                #                 text=answer_row['text'],
+                #                 risk_level=answer_row['risk_level'],
+                #                 createdat=answer_row['createdat'],
+                #                 updatedat=answer_row['updatedat'],
+                #                 deletedat=answer_row['deletedat'],
+                #                 rule_prefills=[]
+                #             )
+
+                #             # Fetch the rule prefills for this answer
+                #             rule_prefill_results = session.execute(text(questionnaire_rule_prefill_query), {'answer_id': answer.id}).mappings().fetchall()
+                #             for rule_prefill_row in rule_prefill_results:
+                #                 rule_prefill = QuestionnaireQuestionAnswerRulePrefill(
+                #                     id=rule_prefill_row['id'],
+                #                     questionid=rule_prefill_row['questionid'],
+                #                     answerid=rule_prefill_row['answerid'],
+                #                     answer_text=rule_prefill_row['answer_text'],
+                #                     createdat=rule_prefill_row['createdat'],
+                #                     updatedat=rule_prefill_row['updatedat'],
+                #                     deletedat=rule_prefill_row['deletedat']
+                #                 )
+                #                 answer.rule_prefills.append(rule_prefill)
+
+                #             question.answers.append(answer)
+                #         version.questions.append(question)
+                #     questionnaire.versions.append(version)
+
+            except SQLAlchemyError as e:
+                raise e
+
+            return questionnaires
