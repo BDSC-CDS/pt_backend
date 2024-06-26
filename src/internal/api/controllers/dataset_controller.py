@@ -1,4 +1,5 @@
 import traceback
+from typing import List
 
 from server_template.models import TemplatebackendStoreDatasetReply
 from server_template.models import TemplatebackendStoreDatasetResult
@@ -85,7 +86,7 @@ class DatasetController:
 
     def dataset_service_transform_dataset(self, user, dataset_id:int,config_id:int):
         try:
-            new_dataset : str = self.dataset_service.transform_dataset(user.id,user.tenantid,dataset_id,config_id)
+            new_dataset : List[List[str]] = self.dataset_service.transform_dataset(user.id,user.tenantid,dataset_id,config_id)
         except Exception as e:
             print("error", e)
             traceback.print_exception(e)

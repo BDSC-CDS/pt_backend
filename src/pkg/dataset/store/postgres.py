@@ -10,6 +10,9 @@ from src.pkg.config_generator.store import get_config
 import csv
 from collections import defaultdict
 import json
+import random
+from datetime import datetime, timedelta
+from dateutil import parser
 
 class DatasetStore:
     def __init__(self, db: Engine):
@@ -315,26 +318,21 @@ class DatasetStore:
         return True
 
 
-    def transform_dataset(self,userid:int,tenantid:int,dataset_id:int,config_id:int) -> str:
-        # first get the dataset and the config
-        query1 = "SELECT * FROM datasets WHERE id=:id AND userid = :userid AND tenantid = :tenantid;"
-        query2 = "SELECT * FROM config_generator WHERE id=:id AND userid = :userid AND tenantid = :tenantid;"
 
+    def transform_dataset(self,userid:int,tenantid:int,dataset_id:int,config_id:int) -> str:
+        # first get the config
+        query_config = "SELECT * FROM config_generator WHERE id=:id AND userid = :userid AND tenantid = :tenantid;"
         with self.session_scope() as session:
             try:
-                dataset = session.execute(text(query1), {
-                    'id': dataset_id,
-                    'userid': userid,
-                    'tenantid': tenantid,
-                }).mappings().fetchone()
-                config = session.execute(text(query2), {
+                dataset =  self.get_dataset_content(dataset_id, userid, tenantid)
+                config = session.execute(text(query_config), {
                     'id': config_id,
                     'userid': userid,
                     'tenantid': tenantid,
                 }).mappings().fetchone()
-                # check dataset is not deleted
-                if (not dataset or dataset.deleted_at):
-                    print("Error: Dataset not found (might have been deleted).")
+                # check dataset
+                if (not dataset ):
+                    print("Error: Dataset not found.")
                     return None
                 # check if config with this id exists
                 if (not config):
@@ -348,12 +346,13 @@ class DatasetStore:
                     return None
 
                 # parse dataset depending on transformation
-                new_dataset = None
+                new_dataset = dataset
                 if (config.hasScrambleField):
-                    new_dataset = scramble_fields(new_dataset,dataset_id, config.scrambleField_fields)
+                    new_dataset = self.scramble_fields(new_dataset,dataset_id, config.scrambleField_fields)
 
                 if (config.hasDateShift):
-                    new_dataset = shift_dates(new_dataset,dataset_id, config.dateShift_lowrange, config.dateShift_highrange)
+                    print("shift dates")
+                    new_dataset = self.shift_dates(userid,tenantid,new_dataset, dataset_id,config.dateShift_lowrange, config.dateShift_highrange)
 
 
             except Exception as e:
@@ -362,7 +361,28 @@ class DatasetStore:
 
         return new_dataset
 
+# ---------------- utils -------------------------------------------- #
 
-    def shift_dates(new_dataset: str, dataset_id:int, lowrange:int,highrange:int):
-        if new_dataset:
-            #
+    # Function to shift a list of dates by n days
+    def shift_date_col(self,date_list: List[str], n: int) -> List[str]:
+        shifted_dates = []
+        for date_str in date_list:
+            date_obj = parser.parse(date_str)  # Automatically detect and parse the date string
+            shifted_date_obj = date_obj + timedelta(days=n)  # Shift the date by n days
+            shifted_date_str = shifted_date_obj.strftime("%Y-%m-%d")  # Convert back to string in desired format
+            shifted_dates.append(shifted_date_str)
+        return shifted_dates
+
+    def shift_dates(self, userid:int,tenantid:int,new_dataset: List[List[str]], dataset_id:int,lowrange:int,highrange:int):
+        metadata_list : List[Metadata] = self.get_dataset_metadata(dataset_id,userid,tenantid)
+        if (not metadata_list):
+            print("No metadata found for this dataset")
+            return None
+        date_column_ids = [metadata.column_id for metadata in metadata_list if metadata.type_ == "date"]
+        random_shift = random.randint(lowrange, highrange)
+        for col_id in date_column_ids:
+            print("Old date column: ", new_dataset[col_id])
+            new_dataset[col_id] = self.shift_date_col(new_dataset[col_id], random_shift)
+            print("New date column: ", new_dataset[col_id])
+
+        return new_dataset

@@ -1215,7 +1215,13 @@ components:
     templatebackendTransformDatasetReply:
       example:
         result:
-          dataset: dataset
+          columns:
+          - value:
+            - value
+            - value
+          - value:
+            - value
+            - value
       properties:
         result:
           $ref: '#/components/schemas/templatebackendTransformDatasetResult'
@@ -1235,11 +1241,19 @@ components:
       type: object
     templatebackendTransformDatasetResult:
       example:
-        dataset: dataset
+        columns:
+        - value:
+          - value
+          - value
+        - value:
+          - value
+          - value
       properties:
-        dataset:
-          title: dataset
-          type: string
+        columns:
+          items:
+            $ref: '#/components/schemas/templatebackendColumn'
+          title: columns
+          type: array
       title: templatebackendTransformDatasetResult
       type: object
     templatebackendUpdatePasswordReply:

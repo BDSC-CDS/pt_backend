@@ -320,8 +320,11 @@ definitions:
   templatebackendTransformDatasetResult:
     type: object
     properties:
-      dataset:
-        type: string
+      columns:
+        type: array
+        items:
+          type: object
+          $ref: '#/definitions/templatebackendColumn'
 securityDefinitions:
   Bearer:
     type: apiKey

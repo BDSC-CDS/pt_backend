@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**dataset** | **str** |  | [optional] 
+**columns** | [**List[TemplatebackendColumn]**](TemplatebackendColumn.md) |  | [optional] 
 
 ## Example
 

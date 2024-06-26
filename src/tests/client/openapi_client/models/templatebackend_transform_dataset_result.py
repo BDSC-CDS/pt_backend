@@ -20,7 +20,8 @@ import json
 
 
 from typing import Any, ClassVar, Dict, List, Optional
-from pydantic import BaseModel, StrictStr
+from pydantic import BaseModel
+from openapi_client.models.templatebackend_column import TemplatebackendColumn
 try:
     from typing import Self
 except ImportError:
@@ -30,8 +31,8 @@ class TemplatebackendTransformDatasetResult(BaseModel):
     """
     TemplatebackendTransformDatasetResult
     """ # noqa: E501
-    dataset: Optional[StrictStr] = None
-    __properties: ClassVar[List[str]] = ["dataset"]
+    columns: Optional[List[TemplatebackendColumn]] = None
+    __properties: ClassVar[List[str]] = ["columns"]
 
     model_config = {
         "populate_by_name": True,
@@ -70,6 +71,13 @@ class TemplatebackendTransformDatasetResult(BaseModel):
             },
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of each item in columns (list)
+        _items = []
+        if self.columns:
+            for _item in self.columns:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['columns'] = _items
         return _dict
 
     @classmethod
@@ -82,7 +90,7 @@ class TemplatebackendTransformDatasetResult(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "dataset": obj.get("dataset")
+            "columns": [TemplatebackendColumn.from_dict(_item) for _item in obj.get("columns")] if obj.get("columns") is not None else None
         })
         return _obj
 

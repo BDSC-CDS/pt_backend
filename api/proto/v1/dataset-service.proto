@@ -120,7 +120,7 @@ message TransformDatasetReply {
     TransformDatasetResult result = 1;
 }
 message TransformDatasetResult {
-    string dataset = 1;
+    repeated Column columns = 1;
 }
 
 service DatasetService {
