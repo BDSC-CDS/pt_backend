@@ -43,27 +43,49 @@ option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
 };
 
 
-// Get config (by questionnaire id)
-message GetConfigRequest {
+// Get all configs for a user
+
+message GetConfigsReply {
+    GetConfigsResult result = 1;
+}
+
+message GetConfigsResult {
+    repeated Config config = 1;
+}
+
+
+message CreateConfigReply {
+    CreateConfigResult result = 1;
+}
+
+message CreateConfigResult {
     uint32 id = 1;
 }
 
-message GetConfigResult {
-    Config config = 1;
-}
-message GetConfigReply {
-    GetConfigResult result = 1;
-}
-
-
 service ConfigService {
-    rpc GetConfig(GetConfigRequest) returns (GetConfigReply) {
+    rpc GetConfigs(google.protobuf.Empty) returns (GetConfigsReply) {
         option (google.api.http) = {
-            get: "/api/rest/v1/configs/{id}"
+            get: "/api/rest/v1/configs"
         };
         option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-            summary: "Get a configuration file";
-            description: "This endpoint returns a configuration file for a given user";
+            summary: "Get configuration files";
+            description: "This endpoint returns the configuration files for a given user";
+            tags: "Configuration";
+            extensions: {
+                key: "x-openapi-router-controller";
+                value {string_value: "config_generator_controller"};
+            };
+        };
+    };
+
+    rpc CreateConfig(Config) returns (CreateConfigReply) {
+       option (google.api.http) = {
+            post: "/api/rest/v1/configs"
+            body: "*"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            summary: "Create a configuration";
+            description: "This endpoint creates a usconfigurationer";
             tags: "Configuration";
             extensions: {
                 key: "x-openapi-router-controller";

@@ -97,7 +97,8 @@ All URIs are relative to *http://localhost*
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *AuthenticationApi* | [**authentication_service_authenticate**](docs/AuthenticationApi.md#authentication_service_authenticate) | **POST** /api/rest/v1/authentication/login | Authenticate
-*ConfigurationApi* | [**config_service_get_config**](docs/ConfigurationApi.md#config_service_get_config) | **GET** /api/rest/v1/configs/{id} | Get a configuration file
+*ConfigurationApi* | [**config_service_create_config**](docs/ConfigurationApi.md#config_service_create_config) | **POST** /api/rest/v1/configs | Create a configuration
+*ConfigurationApi* | [**config_service_get_configs**](docs/ConfigurationApi.md#config_service_get_configs) | **GET** /api/rest/v1/configs | Get configuration files
 *DatasetApi* | [**dataset_service_delete_dataset**](docs/DatasetApi.md#dataset_service_delete_dataset) | **DELETE** /api/v1/dataset/{id} | Deletes a dataset
 *DatasetApi* | [**dataset_service_get_dataset_content**](docs/DatasetApi.md#dataset_service_get_dataset_content) | **GET** /api/v1/dataset/content/{id} | Get Dataset Content
 *DatasetApi* | [**dataset_service_get_dataset_metadata**](docs/DatasetApi.md#dataset_service_get_dataset_metadata) | **GET** /api/v1/dataset/metadata/{id} | Get Dataset Metadata
@@ -128,6 +129,8 @@ Class | Method | HTTP request | Description
  - [TemplatebackendAuthenticationResult](docs/TemplatebackendAuthenticationResult.md)
  - [TemplatebackendColumn](docs/TemplatebackendColumn.md)
  - [TemplatebackendConfig](docs/TemplatebackendConfig.md)
+ - [TemplatebackendCreateConfigReply](docs/TemplatebackendCreateConfigReply.md)
+ - [TemplatebackendCreateConfigResult](docs/TemplatebackendCreateConfigResult.md)
  - [TemplatebackendCreateHelloReply](docs/TemplatebackendCreateHelloReply.md)
  - [TemplatebackendCreateQuestionnaireReply](docs/TemplatebackendCreateQuestionnaireReply.md)
  - [TemplatebackendCreateQuestionnaireRequest](docs/TemplatebackendCreateQuestionnaireRequest.md)
@@ -141,8 +144,8 @@ Class | Method | HTTP request | Description
  - [TemplatebackendDeleteQuestionnaireReply](docs/TemplatebackendDeleteQuestionnaireReply.md)
  - [TemplatebackendDeleteQuestionnaireResult](docs/TemplatebackendDeleteQuestionnaireResult.md)
  - [TemplatebackendDeleteUserReply](docs/TemplatebackendDeleteUserReply.md)
- - [TemplatebackendGetConfigReply](docs/TemplatebackendGetConfigReply.md)
- - [TemplatebackendGetConfigResult](docs/TemplatebackendGetConfigResult.md)
+ - [TemplatebackendGetConfigsReply](docs/TemplatebackendGetConfigsReply.md)
+ - [TemplatebackendGetConfigsResult](docs/TemplatebackendGetConfigsResult.md)
  - [TemplatebackendGetDatasetContentReply](docs/TemplatebackendGetDatasetContentReply.md)
  - [TemplatebackendGetDatasetContentResult](docs/TemplatebackendGetDatasetContentResult.md)
  - [TemplatebackendGetDatasetMetadataReply](docs/TemplatebackendGetDatasetMetadataReply.md)

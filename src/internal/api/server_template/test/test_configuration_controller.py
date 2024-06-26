@@ -5,24 +5,46 @@ import unittest
 from flask import json
 
 from server_template.models.rpc_status import RpcStatus
-from server_template.models.templatebackend_get_config_reply import TemplatebackendGetConfigReply
+from server_template.models.templatebackend_config import TemplatebackendConfig
+from server_template.models.templatebackend_create_config_reply import TemplatebackendCreateConfigReply
+from server_template.models.templatebackend_get_configs_reply import TemplatebackendGetConfigsReply
 from server_template.test import BaseTestCase
 
 
 class TestConfigurationController(BaseTestCase):
     """ConfigurationController integration test stubs"""
 
-    def test_config_service_get_config(self):
-        """Test case for config_service_get_config
+    def test_config_service_create_config(self):
+        """Test case for config_service_create_config
 
-        Get a configuration file
+        Create a configuration
+        """
+        body = server_template.TemplatebackendConfig()
+        headers = { 
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Bearer': 'special-key',
+        }
+        response = self.client.open(
+            '/api/rest/v1/configs',
+            method='POST',
+            headers=headers,
+            data=json.dumps(body),
+            content_type='application/json')
+        self.assert200(response,
+                       'Response body is : ' + response.data.decode('utf-8'))
+
+    def test_config_service_get_configs(self):
+        """Test case for config_service_get_configs
+
+        Get configuration files
         """
         headers = { 
             'Accept': 'application/json',
             'Bearer': 'special-key',
         }
         response = self.client.open(
-            '/api/rest/v1/configs/{id}'.format(id=56),
+            '/api/rest/v1/configs',
             method='GET',
             headers=headers)
         self.assert200(response,

@@ -6,6 +6,8 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **int** |  | [optional] 
+**userid** | **int** |  | [optional] 
+**tenantid** | **int** |  | [optional] 
 **questionnaireid** | **int** |  | [optional] 
 **has_scramble_field** | **bool** |  | [optional] 
 **has_date_shift** | **bool** |  | [optional] 
