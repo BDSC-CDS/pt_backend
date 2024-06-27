@@ -41,13 +41,6 @@ class TestAuditLogApi(unittest.TestCase):
         """
         pass
 
-    def test_audit_log_service_log_event(self) -> None:
-        """Test case for audit_log_service_log_event
-
-        Log an event
-        """
-        pass
-
 
 if __name__ == '__main__':
     unittest.main()

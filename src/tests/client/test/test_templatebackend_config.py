@@ -38,6 +38,8 @@ class TestTemplatebackendConfig(unittest.TestCase):
         if include_optional:
             return TemplatebackendConfig(
                 id = 56,
+                userid = 56,
+                tenantid = 56,
                 questionnaireid = 56,
                 has_scramble_field = True,
                 has_date_shift = True,
