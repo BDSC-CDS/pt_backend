@@ -21,8 +21,6 @@ def provide_audit_log_controller():
     controller = audit_log_controller_authorization.AuditLogControllerAuthentication(controller)
     audit_log_controller = connexion_audit_log_controller.AuditLogController(controller)
 
-    security_controller.inject_dependencies(provide_config(), provide_audit_log_service())
-
     return audit_log_controller
 
 def provide_audit_log_service():
