@@ -27,6 +27,11 @@ python3 -m unittest discover ./src/tests/acceptance
 ### API Doc
 When the server runs, the api doc is served at [http://127.0.0.1:5000/ui](http://127.0.0.1:5000/ui)
 
+### To make a user admin
+```bash
+python3 -m src.cmd.set_admin --userid 1
+```
+
 ## Developer documentation
 
 To document how to develop within the backend we will implement a concrete service and make backend into a real use case. The goal is to develop a simple medication tracker, so that for instance elderly can save the list of their medication, including the name, the posology and frequency of intake and get reminder for it. 
