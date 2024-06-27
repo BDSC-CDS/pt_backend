@@ -118,3 +118,24 @@ INSERT INTO user_role (userid, roleid) VALUES (:userid, :roleid);
             u.roles = roles
 
             return u
+    
+    def set_admin(self, userid):
+        return self.set_role(userid, 'admin')
+
+    def set_role(self, userid, role):
+        query = """
+            INSERT INTO user_role 
+                ("tenantid", "userid", "role")
+            VALUES 
+                ((SELECT tenantid FROM users WHERE users.id=:userid), :userid, :roleid)
+            RETURNING id;
+        """
+        with self.session_scope() as session:
+            result = session.execute(text(query),{
+                'userid': userid,
+                'roleid': role,
+            }).fetchone()
+
+            return result
+        
+    

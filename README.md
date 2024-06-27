@@ -24,6 +24,11 @@ python3 -m src.cmd.start
 python3 -m unittest discover ./src/tests/acceptance
 ```
 
+### To make a user admin
+```bash
+python3 -m src.cmd.set_admin --userid 1
+```
+
 
 ## Developer documentation
 
