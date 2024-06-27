@@ -1,60 +1,94 @@
-from src.pkg.audit_log.model.audit_log import AuditLog
-from sqlalchemy import create_engine, Column, Integer, String, Text, Boolean, TIMESTAMP
-from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.engine import Engine
+from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy.orm import sessionmaker
-import datetime
-
-Base = declarative_base()
-
-class AuditLogORM(Base):
-    __tablename__ = 'audit_logs'
-    id = Column(Integer, primary_key=True, autoincrement=True)
-    userid = Column(Integer, nullable=False)
-    service = Column(String, nullable=False)
-    action = Column(Text, nullable=False)
-    body = Column(Text, nullable=True)
-    response = Column(Text, nullable=True)
-    created_at = Column(TIMESTAMP, nullable=False, default=datetime.datetime.utcnow)
-    error = Column(Boolean, nullable=False, default=False)
-
-    def to_dict(self):
-        return {
-            'id': self.id,
-            'userid': self.userid,
-            'service': self.service,
-            'action': self.action,
-            'body': self.body,
-            'response': self.response,
-            'created_at': self.created_at.isoformat(),
-            'error': self.error
-        }
+from sqlalchemy.sql import text
+from contextlib import contextmanager
+from src.pkg.audit_log.model.audit_log import AuditLog
 
 class AuditLogStore:
-    def __init__(self, db):
-        self.engine = db.engine  # Use the provided database engine
-        self.Session = sessionmaker(bind=self.engine)
-        Base.metadata.create_all(self.engine)
+    def __init__(self, db: Engine):
+        self.db = db
 
-    def log_event(self, log: AuditLog):
-        session = self.Session()
-        log_orm = AuditLogORM(
-            userid=log.userid,
-            service=log.service,
-            action=log.action,
-            body=log.body,
-            response=log.response,
-            created_at=log.created_at,
-            error=log.error
-        )
-        session.add(log_orm)
-        session.commit()
+    @contextmanager
+    def session_scope(self):
+        """Provide a transactional scope around a series of operations."""
+        Session = sessionmaker(bind=self.db)
+        session = Session()
+        try:
+            yield session
+            session.commit()
+        except Exception:
+            session.rollback()
+            raise
+        finally:
+            session.close()
 
-    def get_logs(self, offset: int, limit: int):
-        session = self.Session()
-        logs = session.query(AuditLogORM).offset(offset).limit(limit).all()
-        return logs
+    def log_event(self, audit_log: AuditLog):
+        audit_log_query = """
+INSERT INTO audit_log
+    (userid, service, action, body, response, error, created_at)
+VALUES
+    (:userid, :service, :action, :body, :response, :error, NOW())
+RETURNING id;
+"""
+        with self.session_scope() as session:
+            try:
+                result = session.execute(text(audit_log_query), {
+                    'userid': audit_log.userid,
+                    'service':audit_log.service,
+                    'action': audit_log.action,
+                    'body': audit_log.body,
+                    'response': audit_log.response,
+                    'error': audit_log.error,
+                }).fetchone()
+                audit_id = result[0]
 
-    def get_logs_for_user(self, identifier: int, offset: int, limit: int):
-        session = self.Session()
-        logs = session.query(AuditLogORM).filter(AuditLogORM.userid == identifier).offset(offset).limit(limit).all()
-        return logs
+            except SQLAlchemyError as e:
+                raise e
+
+            return AuditLog(id=audit_id)
+
+    def get_logs(self,offset:int,limit:int) -> list[AuditLog]:
+        query = "SELECT * FROM audit_log ORDER BY createdat OFFSET :offset LIMIT :limit;"
+        with self.session_scope() as session:
+            logs = session.execute(text(query),{
+                'offset': offset,
+                'limit': limit,
+            }).mappings().fetchall()
+
+            result = [
+                AuditLog(
+                    id=log.id,
+                    userid=log.userid,
+                    service=log.service,
+                    action=log.action,
+                    body=log.body,
+                    response=log.response,
+                    error=log.error,
+                    created_at= log.created_at
+                ) for log in logs
+            ]
+            return result
+
+    def get_logs_for_user(self, id:int, offset:int, limit:int) -> list[AuditLog]:
+        query = "SELECT * FROM audit_log WHERE userid = :userid ORDER BY createdat OFFSET :offset LIMIT :limit;"
+        with self.session_scope() as session:
+            logs = session.execute(text(query), {
+                'userid': id,
+                'offset':offset,
+                'limit':limit
+            }).mappings().fetchall()
+
+            result = [
+                AuditLog(
+                    id=log.id,
+                    userid=log.userid,
+                    service=log.service,
+                    action=log.action,
+                    body=log.body,
+                    response=log.response,
+                    error=log.error,
+                    created_at=log.created_at
+                ) for log in logs
+            ]
+            return result
