@@ -8,15 +8,13 @@ from inspect import getmembers, isfunction, ismethod
 
 
 from server_template.models.rpc_status import RpcStatus
-from server_template.models.v1_get_logs_response import V1GetLogsResponse
-from server_template.models.v1_log_event_request import V1LogEventRequest
-from server_template.models.v1_log_event_response import V1LogEventResponse
+from server_template.models.templatebackend_get_logs_response import TemplatebackendGetLogsResponse
 from server_template import util
 
 
 #from src.internal.api.controllers import audit_log_controller
 #controller_functions =  [func_tupple[0] for func_tupple in getmembers(audit_log_controller, isfunction)]
-#needed_functions = ["audit_log_service_get_logs", "audit_log_service_get_logs_for_user", "audit_log_service_log_event"]
+#needed_functions = ["audit_log_service_get_logs", "audit_log_service_get_logs_for_user"]
 #for op in needed_functions:
 #    if op not in controller_functions:
 #        raise NotImplementedError("operation " + op + " is not implemented by src.internal.api.controllers.audit_log_controller")
@@ -24,7 +22,7 @@ from server_template import util
 class AuditLogController:
     def __init__(self, controller):
         #controller_functions =  [func_tupple[0] for func_tupple in getmembers(controller, ismethod)]
-        #needed_functions = ["audit_log_service_get_logs", "audit_log_service_get_logs_for_user", "audit_log_service_log_event"]
+        #needed_functions = ["audit_log_service_get_logs", "audit_log_service_get_logs_for_user"]
         #for op in needed_functions:
         #    if op not in controller_functions:
         #        raise NotImplementedError("operation " + op + " is not implemented by provided controller")
@@ -43,7 +41,7 @@ class AuditLogController:
         :param limit: 
         :type limit: int
 
-        :rtype: Union[V1GetLogsResponse, Tuple[V1GetLogsResponse, int], Tuple[V1GetLogsResponse, int, Dict[str, str]]
+        :rtype: Union[TemplatebackendGetLogsResponse, Tuple[TemplatebackendGetLogsResponse, int], Tuple[TemplatebackendGetLogsResponse, int, Dict[str, str]]
         """
 
         return self.controller.audit_log_service_get_logs(user, offset, limit)
@@ -61,23 +59,7 @@ class AuditLogController:
         :param limit: 
         :type limit: int
 
-        :rtype: Union[V1GetLogsResponse, Tuple[V1GetLogsResponse, int], Tuple[V1GetLogsResponse, int, Dict[str, str]]
+        :rtype: Union[TemplatebackendGetLogsResponse, Tuple[TemplatebackendGetLogsResponse, int], Tuple[TemplatebackendGetLogsResponse, int, Dict[str, str]]
         """
 
         return self.controller.audit_log_service_get_logs_for_user(user, userid, offset, limit)
-
-
-    def audit_log_service_log_event(self, user, body: V1LogEventRequest):
-        """Log an event
-
-        Logs an audit event.
-
-        :param body: The request message containing the audit log details.
-        :type body: dict | bytes
-
-        :rtype: Union[V1LogEventResponse, Tuple[V1LogEventResponse, int], Tuple[V1LogEventResponse, int, Dict[str, str]]
-        """
-        if connexion.request.is_json:
-            body = V1LogEventRequest.from_dict(connexion.request.get_json())
-
-        return self.controller.audit_log_service_log_event(user, body)

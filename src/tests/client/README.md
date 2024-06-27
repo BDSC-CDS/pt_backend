@@ -99,7 +99,6 @@ Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *AuditLogApi* | [**audit_log_service_get_logs**](docs/AuditLogApi.md#audit_log_service_get_logs) | **GET** /api/v1/audit/logs | Get logs
 *AuditLogApi* | [**audit_log_service_get_logs_for_user**](docs/AuditLogApi.md#audit_log_service_get_logs_for_user) | **GET** /api/v1/audit/users/{userid}/logs | Get logs for a user
-*AuditLogApi* | [**audit_log_service_log_event**](docs/AuditLogApi.md#audit_log_service_log_event) | **POST** /api/v1/audit/logEvent | Log an event
 *AuthenticationApi* | [**authentication_service_authenticate**](docs/AuthenticationApi.md#authentication_service_authenticate) | **POST** /api/rest/v1/authentication/login | Authenticate
 *ConfigurationApi* | [**config_service_get_config**](docs/ConfigurationApi.md#config_service_get_config) | **GET** /api/rest/v1/configs/{id} | Get a configuration file
 *DatasetApi* | [**dataset_service_delete_dataset**](docs/DatasetApi.md#dataset_service_delete_dataset) | **DELETE** /api/v1/dataset/{id} | Deletes a dataset
@@ -122,6 +121,7 @@ Class | Method | HTTP request | Description
  - [IndexServiceCreateHelloRequest](docs/IndexServiceCreateHelloRequest.md)
  - [ProtobufAny](docs/ProtobufAny.md)
  - [RpcStatus](docs/RpcStatus.md)
+ - [TemplatebackendAuditLog](docs/TemplatebackendAuditLog.md)
  - [TemplatebackendAuthenticationReply](docs/TemplatebackendAuthenticationReply.md)
  - [TemplatebackendAuthenticationResult](docs/TemplatebackendAuthenticationResult.md)
  - [TemplatebackendColumn](docs/TemplatebackendColumn.md)
@@ -141,6 +141,7 @@ Class | Method | HTTP request | Description
  - [TemplatebackendGetDatasetMetadataReply](docs/TemplatebackendGetDatasetMetadataReply.md)
  - [TemplatebackendGetDatasetMetadataResult](docs/TemplatebackendGetDatasetMetadataResult.md)
  - [TemplatebackendGetHelloReply](docs/TemplatebackendGetHelloReply.md)
+ - [TemplatebackendGetLogsResponse](docs/TemplatebackendGetLogsResponse.md)
  - [TemplatebackendGetUserMeReply](docs/TemplatebackendGetUserMeReply.md)
  - [TemplatebackendGetUserMeResult](docs/TemplatebackendGetUserMeResult.md)
  - [TemplatebackendGetUserReply](docs/TemplatebackendGetUserReply.md)
@@ -155,10 +156,6 @@ Class | Method | HTTP request | Description
  - [TemplatebackendUpdatePasswordReply](docs/TemplatebackendUpdatePasswordReply.md)
  - [TemplatebackendUpdatePasswordRequest](docs/TemplatebackendUpdatePasswordRequest.md)
  - [TemplatebackendUser](docs/TemplatebackendUser.md)
- - [V1AuditLog](docs/V1AuditLog.md)
- - [V1GetLogsResponse](docs/V1GetLogsResponse.md)
- - [V1LogEventRequest](docs/V1LogEventRequest.md)
- - [V1LogEventResponse](docs/V1LogEventResponse.md)
 
 
 <a id="documentation-for-authorization"></a>

@@ -1,31 +1,71 @@
 syntax = "proto3";
+package templatebackend;
+option go_package = ".;templatebackend";
 
-package api.proto.v1;
-
-option go_package = "github.com/your-repo/your-project/api/proto/v1";
-
-import "google/protobuf/timestamp.proto";
 import "google/api/annotations.proto";
 import "protoc-gen-openapiv2/options/annotations.proto";
+import "audit-log.proto";
+
+
+option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
+    info: {
+        title: "pt backend";
+        version: "1.0";
+        contact: {
+            name: "pt backend audit log service";
+            url: "https://pt-backend.rdeid.unil.ch";
+            email: "development.bdsc@chuv.ch";
+        };
+    };
+
+    schemes: HTTP;
+    consumes: "application/json";
+    produces: "application/json";
+
+    security_definitions: {
+        security: {
+            key: "Bearer";
+            value: {
+                type: TYPE_API_KEY;
+                in: IN_HEADER;
+                name: "Authorization";
+            }
+        }
+    }
+
+    security: {
+        security_requirement: {
+            key: "Bearer";
+            value: {};
+        }
+    }
+    security: {}
+};
+
+
+message LogEventResponse {
+    bool success = 1;
+}
+
+message GetLogsRequest {
+    int32 offset = 1;
+    int32 limit = 2;
+}
+
+message GetLogsForUserRequest {
+    int32 userid = 1;
+    int32 offset = 2;
+    int32 limit = 3;
+}
+
+message GetLogsResponse {
+    repeated AuditLog logs = 1;
+}
+
+
 
 
 service AuditLogService {
-    rpc LogEvent(LogEventRequest) returns (LogEventResponse) {
-        option (google.api.http) = {
-            post: "/api/v1/audit/logEvent"
-            body: "*"
-        };
-        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-            summary: "Log an event";
-            description: "Logs an audit event.";
-            tags: "AuditLog";
-            extensions: {
-                key: "x-openapi-router-controller";
-                value {string_value: "audit_log_controller"};
-            };
-        };
-    }
-
     rpc GetLogs(GetLogsRequest) returns (GetLogsResponse) {
         option (google.api.http) = {
             get: "/api/v1/audit/logs"
@@ -55,44 +95,4 @@ service AuditLogService {
             };
         };
     }
-}
-
-message LogEventRequest {
-    int32 userid = 1;
-    string service = 2;
-    string action = 3;
-    string body = 4;
-    string response = 5;
-    bool error = 6;
-}
-
-
-message LogEventResponse {
-    bool success = 1;
-}
-
-message GetLogsRequest {
-    int32 offset = 1;
-    int32 limit = 2;
-}
-
-message GetLogsForUserRequest {
-    int32 userid = 1;
-    int32 offset = 2;
-    int32 limit = 3;
-}
-
-message GetLogsResponse {
-    repeated AuditLog logs = 1;
-}
-
-message AuditLog {
-    int32 id = 1;
-    int32 userid = 2;
-    string service = 3;
-    string action = 4;
-    string body = 5;
-    string response = 6;
-    google.protobuf.Timestamp created_at = 7;
-    bool error = 8;
 }

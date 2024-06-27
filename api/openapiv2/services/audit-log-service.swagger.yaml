@@ -1,38 +1,20 @@
 swagger: "2.0"
 info:
-  title: audit-log-service.proto
-  version: version not set
+  title: pt backend
+  version: "1.0"
+  contact:
+    name: pt backend audit log service
+    url: https://pt-backend.rdeid.unil.ch
+    email: development.bdsc@chuv.ch
 tags:
   - name: AuditLogService
+schemes:
+  - http
 consumes:
   - application/json
 produces:
   - application/json
 paths:
-  /api/v1/audit/logEvent:
-    post:
-      summary: Log an event
-      description: Logs an audit event.
-      operationId: AuditLogService_LogEvent
-      responses:
-        "200":
-          description: A successful response.
-          schema:
-            $ref: '#/definitions/v1LogEventResponse'
-        default:
-          description: An unexpected error response.
-          schema:
-            $ref: '#/definitions/rpcStatus'
-      parameters:
-        - name: body
-          description: The request message containing the audit log details.
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/v1LogEventRequest'
-      tags:
-        - AuditLog
-      x-openapi-router-controller: audit_log_controller
   /api/v1/audit/logs:
     get:
       summary: Get logs
@@ -42,7 +24,7 @@ paths:
         "200":
           description: A successful response.
           schema:
-            $ref: '#/definitions/v1GetLogsResponse'
+            $ref: '#/definitions/templatebackendGetLogsResponse'
         default:
           description: An unexpected error response.
           schema:
@@ -70,7 +52,7 @@ paths:
         "200":
           description: A successful response.
           schema:
-            $ref: '#/definitions/v1GetLogsResponse'
+            $ref: '#/definitions/templatebackendGetLogsResponse'
         default:
           description: An unexpected error response.
           schema:
@@ -114,7 +96,7 @@ definitions:
         items:
           type: object
           $ref: '#/definitions/protobufAny'
-  v1AuditLog:
+  templatebackendAuditLog:
     type: object
     properties:
       id:
@@ -136,36 +118,19 @@ definitions:
         format: date-time
       error:
         type: boolean
-    description: The audit log message.
-  v1GetLogsResponse:
+  templatebackendGetLogsResponse:
     type: object
     properties:
       logs:
         type: array
         items:
           type: object
-          $ref: '#/definitions/v1AuditLog'
-    description: The response message containing the list of logs.
-  v1LogEventRequest:
-    type: object
-    properties:
-      userid:
-        type: integer
-        format: int32
-      service:
-        type: string
-      action:
-        type: string
-      body:
-        type: string
-      response:
-        type: string
-      error:
-        type: boolean
-    description: The request message containing the audit log details.
-  v1LogEventResponse:
-    type: object
-    properties:
-      success:
-        type: boolean
-    description: The response message for logging an event.
+          $ref: '#/definitions/templatebackendAuditLog'
+securityDefinitions:
+  Bearer:
+    type: apiKey
+    name: Authorization
+    in: header
+security:
+  - Bearer: []
+  - {}

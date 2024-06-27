@@ -4,7 +4,7 @@ from .index import provide_index_controller
 from .user import provide_user_controller
 from .dataset import provide_dataset_controller
 from .config_generator import provide_config_generator_controller
-from .audit_log import get_logs_for_user, log_event
+from .audit_log import provide_audit_log_controller
 controllers = None
 
 def provide_controllers():
@@ -20,6 +20,5 @@ def provide_controllers():
     controllers['user_controller'] = provide_user_controller()
     controllers['dataset_controller'] = provide_dataset_controller()
     controllers['config_generator_controller'] = provide_config_generator_controller()
-    controllers['audit_log_get_logs_for_user'] = get_logs_for_user
-    controllers['audit_log_log_event'] = log_event
+    controllers['audit_log_controller'] = provide_audit_log_controller()
     return controllers

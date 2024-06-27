@@ -5,9 +5,7 @@ import unittest
 from flask import json
 
 from server_template.models.rpc_status import RpcStatus
-from server_template.models.v1_get_logs_response import V1GetLogsResponse
-from server_template.models.v1_log_event_request import V1LogEventRequest
-from server_template.models.v1_log_event_response import V1LogEventResponse
+from server_template.models.templatebackend_get_logs_response import TemplatebackendGetLogsResponse
 from server_template.test import BaseTestCase
 
 
@@ -49,26 +47,6 @@ class TestAuditLogController(BaseTestCase):
             method='GET',
             headers=headers,
             query_string=query_string)
-        self.assert200(response,
-                       'Response body is : ' + response.data.decode('utf-8'))
-
-    def test_audit_log_service_log_event(self):
-        """Test case for audit_log_service_log_event
-
-        Log an event
-        """
-        body = server_template.V1LogEventRequest()
-        headers = { 
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-            'Bearer': 'special-key',
-        }
-        response = self.client.open(
-            '/api/v1/audit/logEvent',
-            method='POST',
-            headers=headers,
-            data=json.dumps(body),
-            content_type='application/json')
         self.assert200(response,
                        'Response body is : ' + response.data.decode('utf-8'))
 
