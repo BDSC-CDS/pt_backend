@@ -3,6 +3,7 @@
 .gitlab-ci.yml
 .travis.yml
 README.md
+docs/AuditLogApi.md
 docs/AuthenticationApi.md
 docs/ConfigurationApi.md
 docs/DatasetApi.md
@@ -44,9 +45,14 @@ docs/TemplatebackendUpdatePasswordReply.md
 docs/TemplatebackendUpdatePasswordRequest.md
 docs/TemplatebackendUser.md
 docs/UsersApi.md
+docs/V1AuditLog.md
+docs/V1GetLogsResponse.md
+docs/V1LogEventRequest.md
+docs/V1LogEventResponse.md
 git_push.sh
 openapi_client/__init__.py
 openapi_client/api/__init__.py
+openapi_client/api/audit_log_api.py
 openapi_client/api/authentication_api.py
 openapi_client/api/configuration_api.py
 openapi_client/api/dataset_api.py
@@ -93,6 +99,10 @@ openapi_client/models/templatebackend_store_dataset_result.py
 openapi_client/models/templatebackend_update_password_reply.py
 openapi_client/models/templatebackend_update_password_request.py
 openapi_client/models/templatebackend_user.py
+openapi_client/models/v1_audit_log.py
+openapi_client/models/v1_get_logs_response.py
+openapi_client/models/v1_log_event_request.py
+openapi_client/models/v1_log_event_response.py
 openapi_client/py.typed
 openapi_client/rest.py
 pyproject.toml
@@ -101,8 +111,6 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
-test/test_configuration_api.py
-test/test_templatebackend_config.py
-test/test_templatebackend_get_config_reply.py
-test/test_templatebackend_get_config_result.py
+test/test_audit_log_api.py
+test/test_v1_log_event_request.py
 tox.ini

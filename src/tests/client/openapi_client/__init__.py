@@ -18,6 +18,7 @@
 __version__ = "1.0.0"
 
 # import apis into sdk package
+from openapi_client.api.audit_log_api import AuditLogApi
 from openapi_client.api.authentication_api import AuthenticationApi
 from openapi_client.api.configuration_api import ConfigurationApi
 from openapi_client.api.dataset_api import DatasetApi
@@ -72,3 +73,7 @@ from openapi_client.models.templatebackend_store_dataset_result import Templateb
 from openapi_client.models.templatebackend_update_password_reply import TemplatebackendUpdatePasswordReply
 from openapi_client.models.templatebackend_update_password_request import TemplatebackendUpdatePasswordRequest
 from openapi_client.models.templatebackend_user import TemplatebackendUser
+from openapi_client.models.v1_audit_log import V1AuditLog
+from openapi_client.models.v1_get_logs_response import V1GetLogsResponse
+from openapi_client.models.v1_log_event_request import V1LogEventRequest
+from openapi_client.models.v1_log_event_response import V1LogEventResponse

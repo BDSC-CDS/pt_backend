@@ -1,0 +1,98 @@
+syntax = "proto3";
+
+package api.proto.v1;
+
+option go_package = "github.com/your-repo/your-project/api/proto/v1";
+
+import "google/protobuf/timestamp.proto";
+import "google/api/annotations.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
+
+
+service AuditLogService {
+    rpc LogEvent(LogEventRequest) returns (LogEventResponse) {
+        option (google.api.http) = {
+            post: "/api/v1/audit/logEvent"
+            body: "*"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            summary: "Log an event";
+            description: "Logs an audit event.";
+            tags: "AuditLog";
+            extensions: {
+                key: "x-openapi-router-controller";
+                value {string_value: "audit_log_controller"};
+            };
+        };
+    }
+
+    rpc GetLogs(GetLogsRequest) returns (GetLogsResponse) {
+        option (google.api.http) = {
+            get: "/api/v1/audit/logs"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            summary: "Get logs";
+            description: "Gets a list of logs.";
+            tags: "AuditLog";
+            extensions: {
+                key: "x-openapi-router-controller";
+                value {string_value: "audit_log_controller"};
+            };
+        };
+    }
+
+    rpc GetLogsForUser(GetLogsForUserRequest) returns (GetLogsResponse) {
+        option (google.api.http) = {
+            get: "/api/v1/audit/users/{userid}/logs"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            summary: "Get logs for a user";
+            description: "Gets logs for a specific user.";
+            tags: "AuditLog";
+            extensions: {
+                key: "x-openapi-router-controller";
+                value {string_value: "audit_log_controller"};
+            };
+        };
+    }
+}
+
+message LogEventRequest {
+    int32 userid = 1;
+    string service = 2;
+    string action = 3;
+    string body = 4;
+    string response = 5;
+    bool error = 6;
+}
+
+
+message LogEventResponse {
+    bool success = 1;
+}
+
+message GetLogsRequest {
+    int32 offset = 1;
+    int32 limit = 2;
+}
+
+message GetLogsForUserRequest {
+    int32 userid = 1;
+    int32 offset = 2;
+    int32 limit = 3;
+}
+
+message GetLogsResponse {
+    repeated AuditLog logs = 1;
+}
+
+message AuditLog {
+    int32 id = 1;
+    int32 userid = 2;
+    string service = 3;
+    string action = 4;
+    string body = 5;
+    string response = 6;
+    google.protobuf.Timestamp created_at = 7;
+    bool error = 8;
+}

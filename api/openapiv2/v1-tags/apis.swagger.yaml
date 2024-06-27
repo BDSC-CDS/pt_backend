@@ -8,6 +8,7 @@ info:
     email: development.bdsc@chuv.ch
 tags:
   - name: AuthenticationService
+  - name: AuditLogService
   - name: ConfigService
   - name: DatasetService
   - name: IndexService
@@ -201,6 +202,91 @@ paths:
       tags:
         - Users
       x-openapi-router-controller: user_controller
+  /api/v1/audit/logEvent:
+    post:
+      summary: Log an event
+      description: Logs an audit event.
+      operationId: AuditLogService_LogEvent
+      responses:
+        "200":
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/v1LogEventResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/rpcStatus'
+      parameters:
+        - name: body
+          description: The request message containing the audit log details.
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/v1LogEventRequest'
+      tags:
+        - AuditLog
+      x-openapi-router-controller: audit_log_controller
+  /api/v1/audit/logs:
+    get:
+      summary: Get logs
+      description: Gets a list of logs.
+      operationId: AuditLogService_GetLogs
+      responses:
+        "200":
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/v1GetLogsResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/rpcStatus'
+      parameters:
+        - name: offset
+          in: query
+          required: false
+          type: integer
+          format: int32
+        - name: limit
+          in: query
+          required: false
+          type: integer
+          format: int32
+      tags:
+        - AuditLog
+      x-openapi-router-controller: audit_log_controller
+  /api/v1/audit/users/{userid}/logs:
+    get:
+      summary: Get logs for a user
+      description: Gets logs for a specific user.
+      operationId: AuditLogService_GetLogsForUser
+      responses:
+        "200":
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/v1GetLogsResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/rpcStatus'
+      parameters:
+        - name: userid
+          in: path
+          required: true
+          type: integer
+          format: int32
+        - name: offset
+          in: query
+          required: false
+          type: integer
+          format: int32
+        - name: limit
+          in: query
+          required: false
+          type: integer
+          format: int32
+      tags:
+        - AuditLog
+      x-openapi-router-controller: audit_log_controller
   /api/v1/dataset:
     get:
       summary: List datasets
@@ -705,6 +791,61 @@ definitions:
         format: date-time
       passwordChanged:
         type: boolean
+  v1AuditLog:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int32
+      userid:
+        type: integer
+        format: int32
+      service:
+        type: string
+      action:
+        type: string
+      body:
+        type: string
+      response:
+        type: string
+      createdAt:
+        type: string
+        format: date-time
+      error:
+        type: boolean
+    description: The audit log message.
+  v1GetLogsResponse:
+    type: object
+    properties:
+      logs:
+        type: array
+        items:
+          type: object
+          $ref: '#/definitions/v1AuditLog'
+    description: The response message containing the list of logs.
+  v1LogEventRequest:
+    type: object
+    properties:
+      userid:
+        type: integer
+        format: int32
+      service:
+        type: string
+      action:
+        type: string
+      body:
+        type: string
+      response:
+        type: string
+      error:
+        type: boolean
+    description: The request message containing the audit log details.
+  v1LogEventResponse:
+    type: object
+    properties:
+      success:
+        type: boolean
+    description: The response message for logging an event.
 securityDefinitions:
   Bearer:
     type: apiKey

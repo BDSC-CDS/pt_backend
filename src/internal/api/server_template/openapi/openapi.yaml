@@ -13,6 +13,7 @@ security:
 - {}
 tags:
 - name: AuthenticationService
+- name: AuditLogService
 - name: ConfigService
 - name: DatasetService
 - name: IndexService
@@ -241,6 +242,105 @@ paths:
       - Users
       x-openapi-router-controller: user_controller
       x-codegen-request-body-name: body
+  /api/v1/audit/logEvent:
+    post:
+      description: Logs an audit event.
+      operationId: audit_log_service_log_event
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v1LogEventRequest'
+        description: The request message containing the audit log details.
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1LogEventResponse'
+          description: A successful response.
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+          description: An unexpected error response.
+      summary: Log an event
+      tags:
+      - AuditLog
+      x-openapi-router-controller: audit_log_controller
+      x-codegen-request-body-name: body
+  /api/v1/audit/logs:
+    get:
+      description: Gets a list of logs.
+      operationId: audit_log_service_get_logs
+      parameters:
+      - in: query
+        name: offset
+        schema:
+          format: int32
+          type: integer
+      - in: query
+        name: limit
+        schema:
+          format: int32
+          type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1GetLogsResponse'
+          description: A successful response.
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+          description: An unexpected error response.
+      summary: Get logs
+      tags:
+      - AuditLog
+      x-openapi-router-controller: audit_log_controller
+  /api/v1/audit/users/{userid}/logs:
+    get:
+      description: Gets logs for a specific user.
+      operationId: audit_log_service_get_logs_for_user
+      parameters:
+      - in: path
+        name: userid
+        required: true
+        schema:
+          format: int32
+          type: integer
+      - in: query
+        name: offset
+        schema:
+          format: int32
+          type: integer
+      - in: query
+        name: limit
+        schema:
+          format: int32
+          type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1GetLogsResponse'
+          description: A successful response.
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+          description: An unexpected error response.
+      summary: Get logs for a user
+      tags:
+      - AuditLog
+      x-openapi-router-controller: audit_log_controller
   /api/v1/dataset:
     get:
       description: This endpoint allows listing a user's datasets
@@ -1162,6 +1262,109 @@ components:
           title: passwordChanged
           type: boolean
       title: templatebackendUser
+      type: object
+    v1AuditLog:
+      description: The audit log message.
+      example:
+        createdAt: 2000-01-23T04:56:07.000+00:00
+        service: service
+        response: response
+        action: action
+        id: 0
+        body: body
+        error: true
+        userid: 6
+      properties:
+        id:
+          format: int32
+          title: id
+          type: integer
+        userid:
+          format: int32
+          title: userid
+          type: integer
+        service:
+          title: service
+          type: string
+        action:
+          title: action
+          type: string
+        body:
+          title: body
+          type: string
+        response:
+          title: response
+          type: string
+        createdAt:
+          format: date-time
+          title: createdAt
+          type: string
+        error:
+          title: error
+          type: boolean
+      title: v1AuditLog
+      type: object
+    v1GetLogsResponse:
+      description: The response message containing the list of logs.
+      example:
+        logs:
+        - createdAt: 2000-01-23T04:56:07.000+00:00
+          service: service
+          response: response
+          action: action
+          id: 0
+          body: body
+          error: true
+          userid: 6
+        - createdAt: 2000-01-23T04:56:07.000+00:00
+          service: service
+          response: response
+          action: action
+          id: 0
+          body: body
+          error: true
+          userid: 6
+      properties:
+        logs:
+          items:
+            $ref: '#/components/schemas/v1AuditLog'
+          title: logs
+          type: array
+      title: v1GetLogsResponse
+      type: object
+    v1LogEventRequest:
+      description: The request message containing the audit log details.
+      properties:
+        userid:
+          format: int32
+          title: userid
+          type: integer
+        service:
+          title: service
+          type: string
+        action:
+          title: action
+          type: string
+        body:
+          title: body
+          type: string
+        response:
+          title: response
+          type: string
+        error:
+          title: error
+          type: boolean
+      title: v1LogEventRequest
+      type: object
+    v1LogEventResponse:
+      description: The response message for logging an event.
+      example:
+        success: true
+      properties:
+        success:
+          title: success
+          type: boolean
+      title: v1LogEventResponse
       type: object
     IndexService_CreateHello_request:
       properties:

@@ -77,16 +77,17 @@ configuration.api_key['Bearer'] = os.environ["API_KEY"]
 # Enter a context with an instance of the API client
 with openapi_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.AuthenticationApi(api_client)
-    body = openapi_client.TemplatebackendCredentials() # TemplatebackendCredentials | 
+    api_instance = openapi_client.AuditLogApi(api_client)
+    offset = 56 # int |  (optional)
+    limit = 56 # int |  (optional)
 
     try:
-        # Authenticate
-        api_response = api_instance.authentication_service_authenticate(body)
-        print("The response of AuthenticationApi->authentication_service_authenticate:\n")
+        # Get logs
+        api_response = api_instance.audit_log_service_get_logs(offset=offset, limit=limit)
+        print("The response of AuditLogApi->audit_log_service_get_logs:\n")
         pprint(api_response)
     except ApiException as e:
-        print("Exception when calling AuthenticationApi->authentication_service_authenticate: %s\n" % e)
+        print("Exception when calling AuditLogApi->audit_log_service_get_logs: %s\n" % e)
 
 ```
 
@@ -96,6 +97,9 @@ All URIs are relative to *http://localhost*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
+*AuditLogApi* | [**audit_log_service_get_logs**](docs/AuditLogApi.md#audit_log_service_get_logs) | **GET** /api/v1/audit/logs | Get logs
+*AuditLogApi* | [**audit_log_service_get_logs_for_user**](docs/AuditLogApi.md#audit_log_service_get_logs_for_user) | **GET** /api/v1/audit/users/{userid}/logs | Get logs for a user
+*AuditLogApi* | [**audit_log_service_log_event**](docs/AuditLogApi.md#audit_log_service_log_event) | **POST** /api/v1/audit/logEvent | Log an event
 *AuthenticationApi* | [**authentication_service_authenticate**](docs/AuthenticationApi.md#authentication_service_authenticate) | **POST** /api/rest/v1/authentication/login | Authenticate
 *ConfigurationApi* | [**config_service_get_config**](docs/ConfigurationApi.md#config_service_get_config) | **GET** /api/rest/v1/configs/{id} | Get a configuration file
 *DatasetApi* | [**dataset_service_delete_dataset**](docs/DatasetApi.md#dataset_service_delete_dataset) | **DELETE** /api/v1/dataset/{id} | Deletes a dataset
@@ -151,6 +155,10 @@ Class | Method | HTTP request | Description
  - [TemplatebackendUpdatePasswordReply](docs/TemplatebackendUpdatePasswordReply.md)
  - [TemplatebackendUpdatePasswordRequest](docs/TemplatebackendUpdatePasswordRequest.md)
  - [TemplatebackendUser](docs/TemplatebackendUser.md)
+ - [V1AuditLog](docs/V1AuditLog.md)
+ - [V1GetLogsResponse](docs/V1GetLogsResponse.md)
+ - [V1LogEventRequest](docs/V1LogEventRequest.md)
+ - [V1LogEventResponse](docs/V1LogEventResponse.md)
 
 
 <a id="documentation-for-authorization"></a>
