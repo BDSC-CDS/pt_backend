@@ -6,7 +6,6 @@ from sqlalchemy.orm import sessionmaker
 from sqlalchemy.sql import text
 from contextlib import contextmanager
 from src.pkg.dataset.model.dataset import Dataset,Metadata,Dataset_content
-from src.pkg.config_generator.store import get_config
 import csv
 from collections import defaultdict
 import json
