@@ -228,7 +228,7 @@ class DatasetStore:
 
 
 
-    def get_dataset_content(self,id:int, userid:int, tenantid:int, offset:int,limit:int) -> List[List[str]]: # TODO pagination
+    def get_dataset_content(self,id:int, userid:int, tenantid:int, offset:int=None,limit:int=None) -> List[List[str]]: # TODO pagination
         # we order by column and line number
         query1 = "SELECT * FROM datasets WHERE id=:id AND userid = :userid AND tenantid = :tenantid;"
         query2 = "SELECT * FROM dataset_content WHERE dataset_id = :dataset_id AND userid = :userid AND tenantid = :tenantid ORDER BY column_id,line_id OFFSET :offset LIMIT :limit;"
@@ -339,19 +339,20 @@ class DatasetStore:
                     return None
 
                 # if no transformation was selected
-                if (not config.hasScrambleField and not config.hasDateShift and
-                    not config.hassubFieldList and not config.hassubFieldRegex):
+                print("CONFIG:",config)
+                if (not config.hasscramblefield and not config.hasdateshift and
+                    not config.hassubfieldlist and not config.hassubfieldregex):
                     print("No transformation was selected")
                     return None
 
                 # parse dataset depending on transformation
                 new_dataset = dataset
-                if (config.hasScrambleField):
-                    new_dataset = self.scramble_fields(new_dataset,dataset_id, config.scrambleField_fields)
+                if (config.hasscramblefield):
+                    new_dataset = self.scramble_fields(new_dataset,dataset_id, config.scramblefield_fields)
 
-                if (config.hasDateShift):
+                if (config.hasdateshift):
                     print("shift dates")
-                    new_dataset = self.shift_dates(userid,tenantid,new_dataset, dataset_id,config.dateShift_lowrange, config.dateShift_highrange)
+                    new_dataset = self.shift_dates(userid,tenantid,new_dataset, dataset_id,config.dateshift_lowrange, config.dateshift_highrange)
 
 
             except Exception as e:

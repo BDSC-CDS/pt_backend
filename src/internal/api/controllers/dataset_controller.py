@@ -92,4 +92,4 @@ class DatasetController:
             print("error", e)
             traceback.print_exception(e)
             return str(e), 500
-        return TemplatebackendTransformDatasetReply(TemplatebackendTransformDatasetResult(dataset=new_dataset))
+        return TemplatebackendTransformDatasetReply(TemplatebackendTransformDatasetResult(columns=new_dataset))

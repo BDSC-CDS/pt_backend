@@ -85,7 +85,7 @@ class DatasetControllerAudit():
     def dataset_service_transform_dataset(self, user, body:TemplatebackendTransformDatasetRequest):
         try:
             response : TemplatebackendTransformDatasetReply =  self.next.dataset_service_transform_dataset(user,body)
-            response_serialized = response.result.dataset or ''
+            response_serialized = response.result.columns or ''
             self.auditLogService.log_event(AuditLog(service="dataset", userid=user.id,action="transformed dataset "+ str(body.dataset_id) + " with config " + str(body.config_id), response=response_serialized))
             return response
         except  Exception as e:
