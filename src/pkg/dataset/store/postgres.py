@@ -58,7 +58,6 @@ class DatasetStore:
                 csvfile = StringIO(csv_data)
 
                 # Read the CSV file once to infer column type
-                # with open(path, newline='') as csvfile:
                 csv_reader = csv.reader(csvfile)
                 headers = next(csv_reader)  # Read the header row
 
@@ -67,18 +66,7 @@ class DatasetStore:
                     for col_index, value in enumerate(row):
                         column_data[col_index].append(value)
 
-                # Infer types for each column
-                # column_types = {}
-                # for col_index, header in enumerate(headers):
-                #     if metadata_types and header in metadata_types:
-                #         column_types[header] = metadata_types[header]
-                #     else:
-                #         column_types[header] = infer_column_type(column_data[col_index])
-                # Insert metadata
-                print("TYPES: ",types)
                 column_types = json.loads(types)
-                print("JSON TYPES: ", column_types)
-
                 metadata_to_insert = []
                 for column_id, header in enumerate(headers):
                     column_type = column_types[header]
@@ -106,26 +94,17 @@ class DatasetStore:
                 # # insert data content
                 csvfile.seek(0)
                 csv_reader = csv.reader(csvfile)
-                print("csv reader")
                 next(csv_reader)  # Skip the header row
-                print("skipped header")
-                data_to_insert = []
-                print("before loop")
                 for line_number, row in enumerate(csv_reader):
-                    print("line number: ", line_number)
                     for column_id, value in enumerate(row):
-                        #data_to_insert.append((userid, tenantid, dataset_id, column_id, line_number, value))
-
                         # Batch insert every 1000 rows TODO
-                        #if len(data_to_insert) >= 1000:
                         query = """
                             INSERT INTO dataset_content (userid, tenantid, dataset_id, column_id, line_id, val)
                             VALUES (:userid, :tenantid, :dataset_id, :column_id, :line_id, :val);
                         """
                         with self.session_scope() as session:
                             try:
-                                # session.execute(text(query),data_to_insert)
-                                # for record in data_to_insert:
+
                                     session.execute(text(query), {
                                         'userid': userid,
                                         'tenantid': tenantid,
@@ -136,32 +115,10 @@ class DatasetStore:
                                     })
                             except SQLAlchemyError as e:
                                 raise e
-                            #data_to_insert = []
-
-                # if data_to_insert:
-                #     query = """
-                #                 INSERT INTO dataset_content (userid, tenantid, dataset_id, column_id, line_id, val)
-                #                 VALUES (:userid, :tenantid, :dataset_id, :column_id, :line_id, :val);
-                #             """
-                #     with self.session_scope() as session:
-                #         try:
-                #             #session.execute(text(query),data_to_insert) # TODO verifier que ça fonctionne
-                #             for record in data_to_insert:
-                #                         session.execute(text(query), {
-                #                             'userid': record[0],
-                #                             'tenantid': record[1],
-                #                             'dataset_id': record[2],
-                #                             'column_id': record[3],
-                #                             'line_id': record[4],
-                #                             'val': record[5]
-                #                         })
-                #         except SQLAlchemyError as e:
-                #             raise e
 
         except Exception as e:
                 print(f"Error storing dataset: {e}")
                 return None
-        print("POSTGRES id", dataset_id)
         return dataset_id
 
     def get_list_datasets(self, userid:int, tenantid:int, offset:int,limit:int) -> List[Dataset]:
@@ -210,7 +167,6 @@ class DatasetStore:
                     'userid': userid,
                     'tenantid': tenantid,
                 }).mappings().fetchall()
-                print("METADATAS: ",metadatas)
                 result = [
                     Metadata(
                         userid=metadata.userid,
@@ -339,7 +295,6 @@ class DatasetStore:
                     return None
 
                 # if no transformation was selected
-                print("CONFIG:",config)
                 if (not config.hasscramblefield and not config.hasdateshift and
                     not config.hassubfieldlist and not config.hassubfieldregex):
                     print("No transformation was selected")
@@ -347,14 +302,27 @@ class DatasetStore:
 
                 # parse dataset depending on transformation
                 new_dataset = dataset
+                metadata_list : List[Metadata] = self.get_dataset_metadata(dataset_id,userid,tenantid)
+                if (not metadata_list):
+                    print("No metadata found for this dataset")
+                    return None
                 if (config.hasscramblefield):
                     new_dataset = self.scramble_fields(new_dataset,dataset_id, config.scramblefield_fields)
 
                 if (config.hasdateshift):
-                    print("shift dates")
-                    new_dataset = self.shift_dates(userid,tenantid,new_dataset, dataset_id,config.dateshift_lowrange, config.dateshift_highrange)
+                    new_dataset = self.shift_dates(new_dataset, metadata_list,config.dateshift_lowrange, config.dateshift_highrange)
 
-
+                # store the new dataset
+                # Generate headers from metadata
+                headers = ','.join(f'"{m.column_name}"' for m in metadata_list)
+                data_rows = list(zip(*new_dataset))
+                csv_rows = [headers] + [','.join(f'"{item}"' for item in row) for row in data_rows]
+                csv_string = '\n'.join(csv_rows)
+                print("CSV_STRING: ", csv_string)
+                types_dict = {meta.column_name: meta.type_ for meta in metadata_list}
+                types = json.dumps(types_dict)
+                new_dataset_id = self.store_dataset(userid,tenantid,"dataset "+str(dataset_id)+ " transformed",csv_string,types)
+                print(new_dataset_id)
             except Exception as e:
                 print(f"Error transforming dataset: {e}")
                 return False
@@ -373,16 +341,16 @@ class DatasetStore:
             shifted_dates.append(shifted_date_str)
         return shifted_dates
 
-    def shift_dates(self, userid:int,tenantid:int,new_dataset: List[List[str]], dataset_id:int,lowrange:int,highrange:int):
-        metadata_list : List[Metadata] = self.get_dataset_metadata(dataset_id,userid,tenantid)
-        if (not metadata_list):
-            print("No metadata found for this dataset")
-            return None
+    def shift_dates(self, new_dataset: List[List[str]], metadata_list:List[Metadata],lowrange:int,highrange:int):
+        if lowrange == highrange == 0:
+            raise ValueError("Both range limits are zero; a non-zero shift cannot be generated.")
+
         date_column_ids = [metadata.column_id for metadata in metadata_list if metadata.type_ == "date"]
         random_shift = random.randint(lowrange, highrange)
+        while random_shift == 0:
+            random_shift = random.randint(lowrange, highrange)
+
         for col_id in date_column_ids:
-            print("Old date column: ", new_dataset[col_id])
             new_dataset[col_id] = self.shift_date_col(new_dataset[col_id], random_shift)
-            print("New date column: ", new_dataset[col_id])
 
         return new_dataset
