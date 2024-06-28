@@ -21,4 +21,4 @@ CREATE TABLE IF NOT EXISTS config_generator (
 );
 
 
-CREATE INDEX idx_config_userid_createdat ON config_generator (userid, created_at);
+-- CREATE INDEX idx_config_userid_createdat ON config_generator (userid, created_at);
