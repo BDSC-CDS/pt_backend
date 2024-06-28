@@ -28,3 +28,7 @@ class DatasetService:
     def delete_dataset(self,id:int,userid:int, tenantid:int):
         deleted = self.dataset_store.delete_dataset(id=id,userid=userid,tenantid=tenantid)
         return deleted
+
+    def transform_dataset(self,userid:int,tenantid:int,dataset_id:int,config_id:int):
+        new_dataset = self.dataset_store.transform_dataset(userid,tenantid,dataset_id,config_id)
+        return new_dataset

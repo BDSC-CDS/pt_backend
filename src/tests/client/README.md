@@ -104,6 +104,7 @@ Class | Method | HTTP request | Description
 *DatasetApi* | [**dataset_service_get_dataset_metadata**](docs/DatasetApi.md#dataset_service_get_dataset_metadata) | **GET** /api/v1/dataset/metadata/{id} | Get Dataset Metadata
 *DatasetApi* | [**dataset_service_list_datasets**](docs/DatasetApi.md#dataset_service_list_datasets) | **GET** /api/v1/dataset | List datasets
 *DatasetApi* | [**dataset_service_store_dataset**](docs/DatasetApi.md#dataset_service_store_dataset) | **POST** /api/v1/dataset | Store a dataset
+*DatasetApi* | [**dataset_service_transform_dataset**](docs/DatasetApi.md#dataset_service_transform_dataset) | **POST** /api/v1/dataset/transform | Transform a dataset
 *IndexApi* | [**index_service_create_hello**](docs/IndexApi.md#index_service_create_hello) | **POST** /api/v1/hello/{identifier} | Get a hello
 *IndexApi* | [**index_service_get_hello**](docs/IndexApi.md#index_service_get_hello) | **GET** /api/v1/hello | Get a hello
 *QuestionnaireApi* | [**questionnaire_service_create_questionnaire**](docs/QuestionnaireApi.md#questionnaire_service_create_questionnaire) | **POST** /api/v1/questionnaire | Create a questionnaire
@@ -177,6 +178,9 @@ Class | Method | HTTP request | Description
  - [TemplatebackendStoreDatasetReply](docs/TemplatebackendStoreDatasetReply.md)
  - [TemplatebackendStoreDatasetRequest](docs/TemplatebackendStoreDatasetRequest.md)
  - [TemplatebackendStoreDatasetResult](docs/TemplatebackendStoreDatasetResult.md)
+ - [TemplatebackendTransformDatasetReply](docs/TemplatebackendTransformDatasetReply.md)
+ - [TemplatebackendTransformDatasetRequest](docs/TemplatebackendTransformDatasetRequest.md)
+ - [TemplatebackendTransformDatasetResult](docs/TemplatebackendTransformDatasetResult.md)
  - [TemplatebackendUpdatePasswordReply](docs/TemplatebackendUpdatePasswordReply.md)
  - [TemplatebackendUpdatePasswordRequest](docs/TemplatebackendUpdatePasswordRequest.md)
  - [TemplatebackendUser](docs/TemplatebackendUser.md)

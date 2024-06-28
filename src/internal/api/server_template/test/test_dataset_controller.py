@@ -11,6 +11,8 @@ from server_template.models.templatebackend_get_dataset_metadata_reply import Te
 from server_template.models.templatebackend_list_datasets_reply import TemplatebackendListDatasetsReply
 from server_template.models.templatebackend_store_dataset_reply import TemplatebackendStoreDatasetReply
 from server_template.models.templatebackend_store_dataset_request import TemplatebackendStoreDatasetRequest
+from server_template.models.templatebackend_transform_dataset_reply import TemplatebackendTransformDatasetReply
+from server_template.models.templatebackend_transform_dataset_request import TemplatebackendTransformDatasetRequest
 from server_template.test import BaseTestCase
 
 
@@ -100,6 +102,26 @@ class TestDatasetController(BaseTestCase):
         }
         response = self.client.open(
             '/api/v1/dataset',
+            method='POST',
+            headers=headers,
+            data=json.dumps(body),
+            content_type='application/json')
+        self.assert200(response,
+                       'Response body is : ' + response.data.decode('utf-8'))
+
+    def test_dataset_service_transform_dataset(self):
+        """Test case for dataset_service_transform_dataset
+
+        Transform a dataset
+        """
+        body = server_template.TemplatebackendTransformDatasetRequest()
+        headers = { 
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Bearer': 'special-key',
+        }
+        response = self.client.open(
+            '/api/v1/dataset/transform',
             method='POST',
             headers=headers,
             data=json.dumps(body),
