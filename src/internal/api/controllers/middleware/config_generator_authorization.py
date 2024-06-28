@@ -1,7 +1,7 @@
 from server_template.models import TemplatebackendConfig
 
 # from server_template.models import TemplatebackendUpdatePasswordRequest
-from src.internal.api.controllers.config_gen_controller import ConfigGeneratorController
+from src.internal.api.controllers.config_generator_controller import ConfigGeneratorController
 from src.internal.util.interface.implements import implements_interface
 from .authorization import *
 

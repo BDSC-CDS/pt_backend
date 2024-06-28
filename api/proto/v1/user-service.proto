@@ -165,7 +165,7 @@ service UserService {
             tags: "Users";
             extensions: {
                 key: "x-openapi-router-controller";
-                value {string_value: "user_controller"};
+                value: {string_value: "user_controller"};
             };
         };
     };
@@ -181,7 +181,7 @@ service UserService {
     //         tags: "Users";
     //         extensions: {
     //             key: "x-openapi-router-controller";
-    //             value {string_value: "user_controller"};
+    //             value: {string_value: "user_controller"};
     //         };
     //     };
     // };
@@ -197,7 +197,7 @@ service UserService {
     //         tags: "Users";
     //         extensions: {
     //             key: "x-openapi-router-controller";
-    //             value {string_value: "user_controller"};
+    //             value: {string_value: "user_controller"};
     //         };
     //     };
     // };
@@ -212,7 +212,7 @@ service UserService {
             tags: "Users";
             extensions: {
                 key: "x-openapi-router-controller";
-                value {string_value: "user_controller"};
+                value: {string_value: "user_controller"};
             };
         };
     };
@@ -227,7 +227,7 @@ service UserService {
     //         tags: "Users";
     //         extensions: {
     //             key: "x-openapi-router-controller";
-    //             value {string_value: "user_controller"};
+    //             value: {string_value: "user_controller"};
     //         };
     //     };
     // };
@@ -243,7 +243,7 @@ service UserService {
     //         tags: "Users";
     //         extensions: {
     //             key: "x-openapi-router-controller";
-    //             value {string_value: "user_controller"};
+    //             value: {string_value: "user_controller"};
     //         };
     //     };
     // };
@@ -259,7 +259,7 @@ service UserService {
             tags: "Users";
             extensions: {
                 key: "x-openapi-router-controller";
-                value {string_value: "user_controller"};
+                value: {string_value: "user_controller"};
             };
         };
     };
@@ -274,7 +274,7 @@ service UserService {
             tags: "Users";
             extensions: {
                 key: "x-openapi-router-controller";
-                value {string_value: "user_controller"};
+                value: {string_value: "user_controller"};
             };
         };
     };
@@ -289,7 +289,7 @@ service UserService {
             tags: "Users";
             extensions: {
                 key: "x-openapi-router-controller";
-                value {string_value: "user_controller"};
+                value: {string_value: "user_controller"};
             };
         };
     };
@@ -305,7 +305,7 @@ service UserService {
             tags: "Users";
             extensions: {
                 key: "x-openapi-router-controller";
-                value {string_value: "user_controller"};
+                value: {string_value: "user_controller"};
             };
         };
     };

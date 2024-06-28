@@ -2,5 +2,6 @@
     "python.analysis.extraPaths": [
         "./src/internal/api",
         "./src/tests/client"
-    ]
+    ],
+    "window.title": "pt_backend",
 }

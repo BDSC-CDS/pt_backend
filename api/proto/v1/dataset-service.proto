@@ -124,7 +124,7 @@ service DatasetService {
             tags: "Dataset";
             extensions: {
                 key: "x-openapi-router-controller";
-                value {string_value: "dataset_controller"};
+                value: {string_value: "dataset_controller"};
             };
         };
     };
@@ -139,7 +139,7 @@ service DatasetService {
             tags: "Dataset";
             extensions: {
                 key: "x-openapi-router-controller";
-                value {string_value: "dataset_controller"};
+                value: {string_value: "dataset_controller"};
             };
         };
     };
@@ -154,7 +154,7 @@ service DatasetService {
             tags: "Dataset";
             extensions: {
                 key: "x-openapi-router-controller";
-                value {string_value: "dataset_controller"};
+                value: {string_value: "dataset_controller"};
             };
         };
     };
@@ -170,7 +170,7 @@ service DatasetService {
             tags: "Dataset";
             extensions: {
                 key: "x-openapi-router-controller";
-                value {string_value: "dataset_controller"};
+                value: {string_value: "dataset_controller"};
             };
         };
     };
@@ -187,7 +187,7 @@ service DatasetService {
             tags: "Dataset";
             extensions: {
                 key: "x-openapi-router-controller";
-                value {string_value: "dataset_controller"};
+                value: {string_value: "dataset_controller"};
             };
         };
     };
