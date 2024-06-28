@@ -89,7 +89,7 @@ service ConfigService {
             tags: "Configuration";
             extensions: {
                 key: "x-openapi-router-controller";
-                value {string_value: "config_generator_controller"};
+                value: {string_value: "config_generator_controller"};
             };
         };
     };

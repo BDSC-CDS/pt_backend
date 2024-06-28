@@ -24,11 +24,13 @@ python3 -m src.cmd.start
 python3 -m unittest discover ./src/tests/acceptance
 ```
 
+### API Doc
+When the server runs, the api doc is served at [http://127.0.0.1:5000/ui](http://127.0.0.1:5000/ui)
+
 ### To make a user admin
 ```bash
 python3 -m src.cmd.set_admin --userid 1
 ```
-
 
 ## Developer documentation
 
@@ -103,7 +105,7 @@ service MedicationService {
             tags: "Medication";
             extensions: {
                 key: "x-openapi-router-controller";
-                value {string_value: "medication_controller"};
+                value: {string_value: "medication_controller"};
             };
         };
     };

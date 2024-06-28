@@ -1,0 +1,824 @@
+{
+  "questionnaire": {
+    "name": "Use case assesment and risk evaluation",
+    "versions": [
+      {
+        "version": "1.4",
+        "questions": [
+          {
+            "tab": "Structured data",
+            "question": "Direct identifiers (e.g., name, phone number social security number, email address, medical record number, license number)",
+            "risk_weight": 10,
+            "answer_type": "multiple_choice",
+            "answers": [
+              {
+                "text": "Identifiers are not used in the project (default)",
+                "risk_level": 0
+              },
+              {
+                "text": "Identifiers are replaced by pseudonym ",
+                "risk_level": 0
+              },
+              {
+                "text": "Original values of one or more direct identifiers are kept (*if this rules is selected the data set is not considered de-identified)",
+                "risk_level": 0
+              }
+            ]
+          },
+          {
+            "tab": "Structured data",
+            "question": "Patient ID",
+            "risk_weight": 10,
+            "answer_type": "multiple_choice",
+            "answers": [
+              {
+                "text": "Identifiers are replaced by pseudonym (project specific patient identifier) (default) ",
+                "risk_level": 0
+              },
+              {
+                "text": "No patient ID used, no project specific patient identifier created",
+                "risk_level": 0
+              },
+              {
+                "text": "Original values are kept (hospital internal patient identifier) (*if this rules is selected the data set is not considered de-identified)",
+                "risk_level": 0
+              },
+              {
+                "text": "Sample ID is not use in the project",
+                "risk_level": 0
+              }
+            ]
+          },
+          {
+            "tab": "Structured data",
+            "question": "Sample ID",
+            "risk_weight": 7,
+            "answer_type": "multiple_choice",
+            "answers": [
+              {
+                "text": "Identifiers are replaced by pseudonym (project specific sample identifier) (default)  ",
+                "risk_level": 0
+              },
+              {
+                "text": "Original values are kept (hospital internal sample identifier)",
+                "risk_level": 0
+              }
+            ]
+          },
+          {
+            "tab": "Structured data",
+            "question": "Administrative case ID",
+            "risk_weight": null,
+            "answer_type": "multiple_choice",
+            "answers": [
+              {
+                "text": "Administrative case ID is not use in the project (default)  ",
+                "risk_level": 0
+              },
+              {
+                "text": "Identifiers are replaced by pseudonym (project specific identifier) ",
+                "risk_level": 0
+              },
+              {
+                "text": "Original values are kept (hospital internal sample identifier)",
+                "risk_level": 0
+              }
+            ]
+          },
+          {
+            "tab": "Structured data",
+            "question": "Lab report ID",
+            "risk_weight": null,
+            "answer_type": "multiple_choice",
+            "answers": [
+              {
+                "text": "Lab report ID and Lab order ID is not use in the project (default)  ",
+                "risk_level": 0
+              },
+              {
+                "text": "Identifiers are replaced by pseudonym (project specific identifier) ",
+                "risk_level": 0
+              },
+              {
+                "text": "Original values are kept (hospital internal sample identifier)",
+                "risk_level": 0
+              }
+            ]
+          },
+          {
+            "tab": "Structured data",
+            "question": "Dates in the patient record (dates of birth and death excluded)",
+            "risk_weight": 3,
+            "answer_type": "multiple_choice",
+            "answers": [
+              {
+                "text": "Dates are suppressed or replaced with a surrogate date or not used in the project",
+                "risk_level": -2
+              },
+              {
+                "text": "Dates are shifted by a random number of days within +/- 365 days",
+                "risk_level": -1
+              },
+              {
+                "text": "Dates are shifted by a random number of days within +/- 90 days (default,one quarter offset to preserve seasonality)",
+                "risk_level": 0
+              },
+              {
+                "text": "Dates are shifted by a random number of days within +/- 30 days (one month offset to preserve seasonality) ",
+                "risk_level": 1
+              },
+              {
+                "text": "Dates are shifted by a random number of days within +/- 7 days (one week offset) ",
+                "risk_level": 2
+              },
+              {
+                "text": "Dates in the patient record are not used in the project",
+                "risk_level": 0
+              },
+              {
+                "text": "Original dates are kept",
+                "risk_level": 3
+              }
+            ]
+          },
+          {
+            "tab": "Structured data",
+            "question": "Date of birth",
+            "risk_weight": 6,
+            "answer_type": "multiple_choice",
+            "answers": [
+              {
+                "text": "Date of birth concept is not used in the project ",
+                "risk_level": -1
+              },
+              {
+                "text": "Date of birth is shifted with the same random numbers as the other dates in rule D-04 (default)",
+                "risk_level": 0
+              },
+              {
+                "text": "Only the year of the original birth date is kept ",
+                "risk_level": 1
+              },
+              {
+                "text": "Only the year and month of the original birth date are kept",
+                "risk_level": 2
+              },
+              {
+                "text": "Full original date of birth is kept (dd/mm/yyyy)",
+                "risk_level": 0
+              }
+            ]
+          },
+          {
+            "tab": "Structured data",
+            "question": "Date of death",
+            "risk_weight": 6,
+            "answer_type": "multiple_choice",
+            "answers": [
+              {
+                "text": "Date of death concept is not used in the project",
+                "risk_level": -1
+              },
+              {
+                "text": "Date of death is shifted with the same random numbers as the other dates in rule D-04 (default)",
+                "risk_level": 0
+              },
+              {
+                "text": "Only the year of the original death date is kept ",
+                "risk_level": 1
+              },
+              {
+                "text": "Only the year and month of the original death date are kept",
+                "risk_level": 2
+              },
+              {
+                "text": "Full original date of death is kept (dd/mm/yyyy)",
+                "risk_level": 0
+              }
+            ]
+          },
+          {
+            "tab": "Structured data",
+            "question": "Age",
+            "risk_weight": 3,
+            "answer_type": "multiple_choice",
+            "answers": [
+              {
+                "text": "Age is suppressed (e.g. default for reports) ",
+                "risk_level": -2
+              },
+              {
+                "text": "The age concept is not used in the project",
+                "risk_level": 0
+              },
+              {
+                "text": "Age in generalized in groups of 5 or more years",
+                "risk_level": -1
+              },
+              {
+                "text": "Original age is kept except for people with more than 89y old who are put in the age class \"90y+\" (default)",
+                "risk_level": 0
+              },
+              {
+                "text": "Original age is kept",
+                "risk_level": 1
+              }
+            ]
+          },
+          {
+            "tab": "Structured data",
+            "question": "Professions",
+            "risk_weight": 2,
+            "answer_type": "multiple_choice",
+            "answers": [
+              {
+                "text": "Profession is not used in the project (default)",
+                "risk_level": 0
+              },
+              {
+                "text": "Original profession is kept, but replaced by a random profession for identifying ones",
+                "risk_level": 1
+              }
+            ]
+          },
+          {
+            "tab": "Structured data",
+            "question": "Residential address  (street, zip code, city, region, country)",
+            "risk_weight": 7,
+            "answer_type": "multiple_choice",
+            "answers": [
+              {
+                "text": "Locations are not used in the project (default)",
+                "risk_level": -2
+              },
+              {
+                "text": "Locations are generalized",
+                "risk_level": 0
+              },
+              {
+                "text": "Only countries are kept",
+                "risk_level": -1
+              },
+              {
+                "text": "Only regions are kept",
+                "risk_level": 0
+              },
+              {
+                "text": "Only cities are kept. If cities have less than 20.000 inhabitants, cities are replaced by region",
+                "risk_level": 1
+              },
+              {
+                "text": "Only the zip codes are kept. If zip codes refer to regions with less than 20.000 inhabitants, the last 2 numbers of the zip codes are suppressed",
+                "risk_level": 2
+              },
+              {
+                "text": "The original locations are kept",
+                "risk_level": 0
+              }
+            ]
+          },
+          {
+            "tab": "Structured data",
+            "question": "Organizations (data provider organization excluded)",
+            "risk_weight": 1,
+            "answer_type": "multiple_choice",
+            "answers": [
+              {
+                "text": "Organization name is not used in the project  (default)",
+                "risk_level": 0
+              },
+              {
+                "text": "Organization type is kept (e.g., hospital, clinic, etc.) ",
+                "risk_level": 1
+              },
+              {
+                "text": "Organization name is kept (e.g., University Hospital Basel) ",
+                "risk_level": 2
+              }
+            ]
+          },
+          {
+            "tab": "Structured data",
+            "question": "Organizational Units (data provider organizational unit excluded)",
+            "risk_weight": 2,
+            "answer_type": "multiple_choice",
+            "answers": [
+              {
+                "text": "Organizational unit is not used in the project (default)",
+                "risk_level": -1
+              },
+              {
+                "text": "Organizational unit is generalized (e.g., Neurology, Radiology, Urology, etc.) ",
+                "risk_level": 0
+              },
+              {
+                "text": "Organizational unit is kept (e.g.,328 Kardiologie ME) ",
+                "risk_level": 2
+              }
+            ]
+          },
+          {
+            "tab": "Multimedia variables",
+            "question": "Audio Data",
+            "risk_weight": 5,
+            "answer_type": "multiple_choice",
+            "answers": [
+              {
+                "text": "No audio data is used in the project",
+                "risk_level": 0
+              },
+              {
+                "text": "Patient voice is kept in audio files",
+                "risk_level": 0
+              },
+              {
+                "text": "Patient voice blurring/noise algorithm (default)",
+                "risk_level": 0
+              }
+            ]
+          },
+          {
+            "tab": "Multimedia variables",
+            "question": "Images (including photos) & Videos with patient face or identifying body parts (e.g., tatoos, malformations)",
+            "risk_weight": 5,
+            "answer_type": "multiple_choice",
+            "answers": [
+              {
+                "text": "No images are used in the project",
+                "risk_level": 0
+              },
+              {
+                "text": "Original image or video files are kept",
+                "risk_level": 0
+              },
+              {
+                "text": "Blurring of identifying parts (default)",
+                "risk_level": 0
+              },
+              {
+                "text": "Removing of identifying face or identifying patient body parts (e.g., by defacing algorithms)",
+                "risk_level": -1
+              }
+            ]
+          },
+          {
+            "tab": "DICOM attributes (DICOM attributes listed in the confidentiality list (http://dicom.nema.org/medical/dicom/current/output/chtml/part15/chapter_E.html) will be removed unless they are listed under DCM-06",
+            "question": "Hardware Identifying Attributes",
+            "risk_weight": 3,
+            "answer_type": "multiple_choice",
+            "answers": [
+              {
+                "text": "Original value is suppressed",
+                "risk_level": -1
+              },
+              {
+                "text": "Original value is replaced by pseudonym (default)",
+                "risk_level": 0
+              },
+              {
+                "text": "Original values are kept",
+                "risk_level": 1
+              }
+            ]
+          },
+          {
+            "tab": "DICOM attributes (DICOM attributes listed in the confidentiality list (http://dicom.nema.org/medical/dicom/current/output/chtml/part15/chapter_E.html) will be removed unless they are listed under DCM-06",
+            "question": "Study Description",
+            "risk_weight": 3,
+            "answer_type": "multiple_choice",
+            "answers": [
+              {
+                "text": "Original value is suppressed",
+                "risk_level": -1
+              },
+              {
+                "text": "Original value is replaced by pseudonym (default)",
+                "risk_level": 0
+              },
+              {
+                "text": "Original values are kept",
+                "risk_level": 1
+              }
+            ]
+          },
+          {
+            "tab": "DICOM attributes (DICOM attributes listed in the confidentiality list (http://dicom.nema.org/medical/dicom/current/output/chtml/part15/chapter_E.html) will be removed unless they are listed under DCM-06",
+            "question": "Series Description",
+            "risk_weight": 3,
+            "answer_type": "multiple_choice",
+            "answers": [
+              {
+                "text": "Original value is suppressed",
+                "risk_level": -1
+              },
+              {
+                "text": "Original value is replaced by pseudonym (default)",
+                "risk_level": 0
+              },
+              {
+                "text": "Original values are kept",
+                "risk_level": 1
+              }
+            ]
+          },
+          {
+            "tab": "DICOM attributes (DICOM attributes listed in the confidentiality list (http://dicom.nema.org/medical/dicom/current/output/chtml/part15/chapter_E.html) will be removed unless they are listed under DCM-06",
+            "question": "Derivation Description",
+            "risk_weight": 3,
+            "answer_type": "multiple_choice",
+            "answers": [
+              {
+                "text": "Original value is suppressed",
+                "risk_level": -1
+              },
+              {
+                "text": "Original value is replaced by pseudonym (default)",
+                "risk_level": 0
+              },
+              {
+                "text": "Original values are kept",
+                "risk_level": 1
+              }
+            ]
+          },
+          {
+            "tab": "DICOM attributes (DICOM attributes listed in the confidentiality list (http://dicom.nema.org/medical/dicom/current/output/chtml/part15/chapter_E.html) will be removed unless they are listed under DCM-06",
+            "question": "Contrast Bolus Agent",
+            "risk_weight": 3,
+            "answer_type": "multiple_choice",
+            "answers": [
+              {
+                "text": "Original value is suppressed",
+                "risk_level": -1
+              },
+              {
+                "text": "Original value is replaced by pseudonym (default)",
+                "risk_level": 0
+              },
+              {
+                "text": "Original values are kept",
+                "risk_level": 1
+              }
+            ]
+          },
+          {
+            "tab": "DICOM attributes (DICOM attributes listed in the confidentiality list (http://dicom.nema.org/medical/dicom/current/output/chtml/part15/chapter_E.html) will be removed unless they are listed under DCM-06",
+            "question": "Retain original values of other DICOM attributes that would be removed by default according to the recommendations of nema.org",
+            "risk_weight": 3,
+            "answer_type": "multiple_choice",
+            "answers": [
+              {
+                "text": "Original value is suppressed",
+                "risk_level": -1
+              },
+              {
+                "text": "Original value is replaced by pseudonym (default)",
+                "risk_level": 0
+              },
+              {
+                "text": "Original values are kept",
+                "risk_level": 1
+              }
+            ]
+          },
+          {
+            "tab": "Genomic variables",
+            "question": "Germline genomic sequences",
+            "risk_weight": 7,
+            "answer_type": "multiple_choice",
+            "answers": [
+              {
+                "text": "No germline genomic sequences are used in the project ",
+                "risk_level": 0
+              },
+              {
+                "text": "Only blurred summary statistics (e.g., MAF, p-values, ORs) are released (default)",
+                "risk_level": 0
+              },
+              {
+                "text": "Only exact summary statistics (e.g., MAF, p-values, ORs) are released ",
+                "risk_level": 1
+              },
+              {
+                "text": "Original individual-level values are released",
+                "risk_level": 0
+              }
+            ]
+          },
+          {
+            "tab": "Other variables",
+            "question": "Additional project specific quasi-identifiers that can be used for linkage by the data recipient (e.g., clinical variables) ",
+            "risk_weight": 5,
+            "answer_type": "multiple_choice",
+            "answers": [
+              {
+                "text": " no other quasi-identifiers used in the project ",
+                "risk_level": -1
+              },
+              {
+                "text": "Quasi-identifiers have been modified to reduce risks (e.g. generalization) (default)",
+                "risk_level": 0
+              },
+              {
+                "text": "Original values are kept",
+                "risk_level": 0
+              }
+            ]
+          },
+          {
+            "tab": "Jurisdiction",
+            "question": "In which jurisdiction the project data is planned to be stored and processed?\n",
+            "risk_weight": 2,
+            "answer_type": "multiple_choice",
+            "answers": [
+              {
+                "text": "In Switzerland (default)",
+                "risk_level": 0
+              },
+              {
+                "text": "In EU or another country providing an adequate level of protection, recognized as such by the Federal Council",
+                "risk_level": 1
+              },
+              {
+                "text": "In a country that does not provide an adequate level of protection, but with adequate safeguards according to Swiss law",
+                "risk_level": 2
+              },
+              {
+                "text": "In a country that does not provide an adequate level of protection and without adequate safeguards according to Swiss law",
+                "risk_level": 0
+              }
+            ]
+          },
+          {
+            "tab": "Contracts and policies",
+            "question": "Is there a legal agreement between the data provider(s) and the data recipient(s) (e.g., a data transfer and use agreement) that regulates  the conditions under which data are disclosed to the data recipient(s)?",
+            "risk_weight": 4,
+            "answer_type": "multiple_choice",
+            "answers": [
+              {
+                "text": "Yes (default)",
+                "risk_level": 0
+              },
+              {
+                "text": "No",
+                "risk_level": 0
+              }
+            ]
+          },
+          {
+            "tab": "Contracts and policies",
+            "question": "Does the legal agreement between the data provider(s) and the data recipient(s) forbid the recipient(s) from disclosing the data to third parties or only with measures equivalent to those contractually agreed between the data provider and the data recipient?",
+            "risk_weight": 4,
+            "answer_type": "multiple_choice",
+            "answers": [
+              {
+                "text": "Yes (default)",
+                "risk_level": 0
+              }
+            ]
+          },
+          {
+            "tab": "Contracts and policies",
+            "question": "",
+            "risk_weight": null,
+            "answer_type": "multiple_choice",
+            "answers": [
+              {
+                "text": "No",
+                "risk_level": 1
+              },
+              {
+                "text": "No (default)",
+                "risk_level": 0
+              },
+              {
+                "text": "No (default)",
+                "risk_level": 0
+              },
+              {
+                "text": "No (default)",
+                "risk_level": 0
+              }
+            ]
+          },
+          {
+            "tab": "Contracts and policies",
+            "question": "Does the legal agreement between the data provider(s) and the data recipient(s) stipulate that external audits of the data management practices of the data recipient may be performed?",
+            "risk_weight": 4,
+            "answer_type": "multiple_choice",
+            "answers": [
+              {
+                "text": "Yes",
+                "risk_level": -1
+              }
+            ]
+          },
+          {
+            "tab": "Contracts and policies",
+            "question": "Does the legal agreement between the data provider(s) and the data recipient(s) stipulate that regular external audits of privacy and security practices of the data recipient may be performed?",
+            "risk_weight": 4,
+            "answer_type": "multiple_choice",
+            "answers": [
+              {
+                "text": "Yes",
+                "risk_level": -1
+              }
+            ]
+          },
+          {
+            "tab": "Contracts and policies",
+            "question": "Does the legal agreement between the data provider(s) and the data recipient(s) associate penalties in case of health-related data misuse by the recipient?",
+            "risk_weight": 4,
+            "answer_type": "multiple_choice",
+            "answers": [
+              {
+                "text": "Yes",
+                "risk_level": -1
+              }
+            ]
+          },
+          {
+            "tab": "Contracts and policies",
+            "question": "Are the recipient's staff members personally bound by a duty of confidentiality (e.g. confidential agreement, access policy imposing a duty of confidentiality, personal legal obligation of confidentiality)? ",
+            "risk_weight": 6,
+            "answer_type": "multiple_choice",
+            "answers": [
+              {
+                "text": "Yes (default)",
+                "risk_level": 0
+              },
+              {
+                "text": "No",
+                "risk_level": 1
+              }
+            ]
+          },
+          {
+            "tab": "Contracts and policies",
+            "question": "Are there IT security and privacy policies in effect at the data recipient site?",
+            "risk_weight": 5,
+            "answer_type": "multiple_choice",
+            "answers": [
+              {
+                "text": "Yes (default)",
+                "risk_level": 0
+              },
+              {
+                "text": "No",
+                "risk_level": 1
+              }
+            ]
+          },
+          {
+            "tab": "Cohort characteristics",
+            "question": "Is the project collecting health-related data on rare disease patients?",
+            "risk_weight": 5,
+            "answer_type": "multiple_choice",
+            "answers": [
+              {
+                "text": "No health-related data on rare diseases are included (default)",
+                "risk_level": -1
+              },
+              {
+                "text": "The disease occurs less than one in 80.000 (i.e., max. 100 cases in Switzerland)",
+                "risk_level": 1
+              },
+              {
+                "text": "The disease occurs less than one in 2.000 (i.e., max. 4.000 cases in Switzerland)",
+                "risk_level": 0
+              }
+            ]
+          },
+          {
+            "tab": "Cohort characteristics",
+            "question": "Is one or more of the following sensitive/stigmatizing information included in the dataset?\n\n- religious, ideological, political or trade union-related views or activities\n- disease associated with stigma (e.g. HIV status, psycological conditions), the intimate sphere or the racial origin\n- social security measures\n- administrative or criminal proceedings and sanctions",
+            "risk_weight": 5,
+            "answer_type": "multiple_choice",
+            "answers": [
+              {
+                "text": "No (default)",
+                "risk_level": 0
+              },
+              {
+                "text": "Yes",
+                "risk_level": 1
+              }
+            ]
+          },
+          {
+            "tab": "Cohort characteristics",
+            "question": "Does anyone in the data recipient's project team has access to mapping table for patient re-identification (i.e., data subjects)?",
+            "risk_weight": 3,
+            "answer_type": "multiple_choice",
+            "answers": [
+              {
+                "text": "No (default)",
+                "risk_level": 0
+              },
+              {
+                "text": "Yes",
+                "risk_level": 0
+              }
+            ]
+          },
+          {
+            "tab": "Data users",
+            "question": "Who will have access to health-related data shared during the project?\nMultiple selections possible.",
+            "risk_weight": 3,
+            "answer_type": "multiple_choice",
+            "answers": [
+              {
+                "text": "Internal users of the hospital (i.e., the provider) from where the data is coming from, but who do not have access to the Electronic Health Records (EHC) of the hospital (default)",
+                "risk_level": 0
+              },
+              {
+                "text": "Internal users of the hospital (i.e., the provider) from where the data is coming from and who have access to the Electronic Health Records (EHC) of the hospital (this excludes internal Clinical Data Warehouse (CDW) employees)",
+                "risk_level": 1
+              },
+              {
+                "text": "External users from Switzerland or EU",
+                "risk_level": 2
+              },
+              {
+                "text": "External users outside of Switzerland or EU",
+                "risk_level": 0
+              }
+            ]
+          },
+          {
+            "tab": "IT Infrastructure and security",
+            "question": "Where does the project data will be stored and processed (select the worst answer that applies)?",
+            "risk_weight": 10,
+            "answer_type": "multiple_choice",
+            "answers": [
+              {
+                "text": "On the hospital IT infrastructure of the data recipient (default)",
+                "risk_level": 0
+              },
+              {
+                "text": "On  computer(s) controlled by the hospital IT department of the data recipient",
+                "risk_level": 1
+              },
+              {
+                "text": "On an external third party's IT infrastructure (e.e., cloud provider, HPC provider) such as the BioMedIT network",
+                "risk_level": 2
+              },
+              {
+                "text": "On PRIVATE computer (e.g., desktop, laptop, etc.)",
+                "risk_level": 0
+              }
+            ]
+          },
+          {
+            "tab": "IT Infrastructure and security",
+            "question": "If the project data is stored or processed on the IT infrastructure of an external provider, does such provider comply with the BioMedIT Information Security Policy?",
+            "risk_weight": 10,
+            "answer_type": "multiple_choice",
+            "answers": [
+              {
+                "text": "Yes (default)",
+                "risk_level": -2
+              },
+              {
+                "text": "No",
+                "risk_level": 0
+              }
+            ]
+          },
+          {
+            "tab": "IT Infrastructure and security",
+            "question": "If the project data is stored or processed on the IT infrastructure of an external provider, does the Management System of the provider's Information Security has been also audited and certified from an Information Security perspective (e.g., ISO 27001) and from a data protection perspective (GDPR,...)",
+            "risk_weight": 10,
+            "answer_type": "multiple_choice",
+            "answers": [
+              {
+                "text": "Yes",
+                "risk_level": -1
+              },
+              {
+                "text": "No (default)",
+                "risk_level": 0
+              }
+            ]
+          },
+          {
+            "tab": "IT Infrastructure and security",
+            "question": "If the project data is stored or processed on the IT infrastructure of an external provider, is there a legal processing agreement with the external provider of the infrastructure such as the BioMedIT Network (e.g., data processor agreement)?",
+            "risk_weight": 10,
+            "answer_type": "multiple_choice",
+            "answers": [
+              {
+                "text": "Yes (default)",
+                "risk_level": 0
+              },
+              {
+                "text": "No",
+                "risk_level": 1
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

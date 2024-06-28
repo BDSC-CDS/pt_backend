@@ -1,0 +1,39 @@
+from server_template.models import TemplatebackendCreateQuestionnaireRequest
+from src.internal.api.controllers.questionnaire_controller import QuestionnaireController
+from src.internal.util.interface.implements import implements_interface
+from .authorization import *
+
+class QuestionnaireControllerAuthentication():
+    def __init__(self, next: QuestionnaireController):
+        self.next = next
+        implements_interface(QuestionnaireControllerAuthentication, QuestionnaireController)
+
+    def questionnaire_service_get_reply(self, user, questionnaire_version_id: int, reply_id: int):
+        return None
+
+    def questionnaire_service_list_replies(self, user, questionnaire_version_id: int, offset: int=None, limit: int=None):
+        return None
+
+    def questionnaire_service_create_questionnaire(self, user, body: TemplatebackendCreateQuestionnaireRequest):
+        if not is_authenticated(user):
+            return None, 403
+        
+        return self.next.questionnaire_service_create_questionnaire(user, body)
+
+    def questionnaire_service_delete_questionnaire(self, user, id: str):
+        if not is_authenticated(user):
+            return None, 403
+        
+        return self.next.questionnaire_service_delete_questionnaire(user, id)
+
+    def questionnaire_service_get_questionnaire(self, user, id: int):
+        if not is_authenticated(user):
+            return None, 403
+        
+        return self.next.questionnaire_service_get_questionnaire(user, id)
+
+    def questionnaire_service_list_questionnaire(self, user, offset: int=None, limit: int=None):
+        if not is_authenticated(user):
+            return None, 403
+        
+        return self.next.questionnaire_service_list_questionnaire(user, offset, limit)

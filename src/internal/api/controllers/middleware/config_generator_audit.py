@@ -3,7 +3,7 @@ from server_template.models import TemplatebackendGetConfigsReply
 from server_template.models import TemplatebackendCreateConfigReply
 
 
-from src.internal.api.controllers.config_gen_controller import ConfigGeneratorController
+from src.internal.api.controllers.config_generator_controller import ConfigGeneratorController
 from src.internal.util.interface.implements import implements_interface
 from src.pkg.audit_log.model.audit_log import AuditLog
 from src.pkg.audit_log.service.audit_log import AuditLogService
