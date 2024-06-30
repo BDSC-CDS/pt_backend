@@ -21,18 +21,18 @@ import json
 
 from typing import Any, ClassVar, Dict, List, Optional
 from pydantic import BaseModel
-from openapi_client.models.templatebackend_config import TemplatebackendConfig
+from openapi_client.models.templatebackend_audit_log import TemplatebackendAuditLog
 try:
     from typing import Self
 except ImportError:
     from typing_extensions import Self
 
-class TemplatebackendGetConfigResult(BaseModel):
+class TemplatebackendGetLogsResponse(BaseModel):
     """
-    TemplatebackendGetConfigResult
+    TemplatebackendGetLogsResponse
     """ # noqa: E501
-    config: Optional[TemplatebackendConfig] = None
-    __properties: ClassVar[List[str]] = ["config"]
+    logs: Optional[List[TemplatebackendAuditLog]] = None
+    __properties: ClassVar[List[str]] = ["logs"]
 
     model_config = {
         "populate_by_name": True,
@@ -52,7 +52,7 @@ class TemplatebackendGetConfigResult(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Self:
-        """Create an instance of TemplatebackendGetConfigResult from a JSON string"""
+        """Create an instance of TemplatebackendGetLogsResponse from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -71,14 +71,18 @@ class TemplatebackendGetConfigResult(BaseModel):
             },
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of config
-        if self.config:
-            _dict['config'] = self.config.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of each item in logs (list)
+        _items = []
+        if self.logs:
+            for _item in self.logs:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['logs'] = _items
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Dict) -> Self:
-        """Create an instance of TemplatebackendGetConfigResult from a dict"""
+        """Create an instance of TemplatebackendGetLogsResponse from a dict"""
         if obj is None:
             return None
 
@@ -86,7 +90,7 @@ class TemplatebackendGetConfigResult(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "config": TemplatebackendConfig.from_dict(obj.get("config")) if obj.get("config") is not None else None
+            "logs": [TemplatebackendAuditLog.from_dict(_item) for _item in obj.get("logs")] if obj.get("logs") is not None else None
         })
         return _obj
 

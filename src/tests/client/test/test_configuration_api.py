@@ -27,10 +27,17 @@ class TestConfigurationApi(unittest.TestCase):
     def tearDown(self) -> None:
         pass
 
-    def test_config_service_get_config(self) -> None:
-        """Test case for config_service_get_config
+    def test_config_service_create_config(self) -> None:
+        """Test case for config_service_create_config
 
-        Get a configuration file
+        Create a configuration
+        """
+        pass
+
+    def test_config_service_get_configs(self) -> None:
+        """Test case for config_service_get_configs
+
+        Get configuration files
         """
         pass
 

@@ -37,10 +37,9 @@ class TestTemplatebackendStoreDatasetRequest(unittest.TestCase):
         model = TemplatebackendStoreDatasetRequest()
         if include_optional:
             return TemplatebackendStoreDatasetRequest(
-                userid = 56,
-                tenantid = 56,
                 dataset_name = '',
-                path = ''
+                dataset = '',
+                types = ''
             )
         else:
             return TemplatebackendStoreDatasetRequest(

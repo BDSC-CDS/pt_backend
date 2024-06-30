@@ -65,6 +65,8 @@ function generate_client() {
     echo
     echo "==> Handling openapi file:"
 
+    rm -rf src/tests/client 
+
     echo "---> generating flask server ..."
     java -jar ./scripts/tools/openapi-generator-cli.jar generate \
        -i api/openapiv2/v1-tags/apis.swagger.yaml \

@@ -18,21 +18,30 @@ import pprint
 import re  # noqa: F401
 import json
 
-
+from datetime import datetime
 from typing import Any, ClassVar, Dict, List, Optional
-from pydantic import BaseModel
-from openapi_client.models.templatebackend_get_config_result import TemplatebackendGetConfigResult
+from pydantic import BaseModel, StrictBool, StrictInt, StrictStr
+from pydantic import Field
+from openapi_client.models.templatebackend_user import TemplatebackendUser
 try:
     from typing import Self
 except ImportError:
     from typing_extensions import Self
 
-class TemplatebackendGetConfigReply(BaseModel):
+class TemplatebackendAuditLog(BaseModel):
     """
-    TemplatebackendGetConfigReply
+    TemplatebackendAuditLog
     """ # noqa: E501
-    result: Optional[TemplatebackendGetConfigResult] = None
-    __properties: ClassVar[List[str]] = ["result"]
+    id: Optional[StrictInt] = None
+    userid: Optional[StrictInt] = None
+    service: Optional[StrictStr] = None
+    action: Optional[StrictStr] = None
+    body: Optional[StrictStr] = None
+    response: Optional[StrictStr] = None
+    created_at: Optional[datetime] = Field(default=None, alias="createdAt")
+    error: Optional[StrictBool] = None
+    user: Optional[TemplatebackendUser] = None
+    __properties: ClassVar[List[str]] = ["id", "userid", "service", "action", "body", "response", "createdAt", "error", "user"]
 
     model_config = {
         "populate_by_name": True,
@@ -52,7 +61,7 @@ class TemplatebackendGetConfigReply(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Self:
-        """Create an instance of TemplatebackendGetConfigReply from a JSON string"""
+        """Create an instance of TemplatebackendAuditLog from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -71,14 +80,14 @@ class TemplatebackendGetConfigReply(BaseModel):
             },
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of result
-        if self.result:
-            _dict['result'] = self.result.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of user
+        if self.user:
+            _dict['user'] = self.user.to_dict()
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Dict) -> Self:
-        """Create an instance of TemplatebackendGetConfigReply from a dict"""
+        """Create an instance of TemplatebackendAuditLog from a dict"""
         if obj is None:
             return None
 
@@ -86,7 +95,15 @@ class TemplatebackendGetConfigReply(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "result": TemplatebackendGetConfigResult.from_dict(obj.get("result")) if obj.get("result") is not None else None
+            "id": obj.get("id"),
+            "userid": obj.get("userid"),
+            "service": obj.get("service"),
+            "action": obj.get("action"),
+            "body": obj.get("body"),
+            "response": obj.get("response"),
+            "createdAt": obj.get("createdAt"),
+            "error": obj.get("error"),
+            "user": TemplatebackendUser.from_dict(obj.get("user")) if obj.get("user") is not None else None
         })
         return _obj
 

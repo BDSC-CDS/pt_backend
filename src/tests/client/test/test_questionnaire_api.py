@@ -48,10 +48,24 @@ class TestQuestionnaireApi(unittest.TestCase):
         """
         pass
 
+    def test_questionnaire_service_get_reply(self) -> None:
+        """Test case for questionnaire_service_get_reply
+
+        Get a questionnaires reply
+        """
+        pass
+
     def test_questionnaire_service_list_questionnaire(self) -> None:
         """Test case for questionnaire_service_list_questionnaire
 
         List questionnaires
+        """
+        pass
+
+    def test_questionnaire_service_list_replies(self) -> None:
+        """Test case for questionnaire_service_list_replies
+
+        List questionnaires replies
         """
         pass
 

@@ -35,7 +35,7 @@ setup(
     name=NAME,
     version=VERSION,
     description="pt backend",
-    author="pt backend authentication service",
+    author="pt backend audit log service",
     author_email="development.bdsc@chuv.ch",
     url="",
     keywords=["OpenAPI", "OpenAPI-Generator", "pt backend"],

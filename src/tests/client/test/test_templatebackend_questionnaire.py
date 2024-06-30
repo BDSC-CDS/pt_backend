@@ -40,6 +40,7 @@ class TestTemplatebackendQuestionnaire(unittest.TestCase):
                 id = 56,
                 name = '',
                 reply_editable = True,
+                last_version = '',
                 versions = [
                     openapi_client.models.templatebackend_questionnaire_version.templatebackendQuestionnaireVersion(
                         id = 56, 

@@ -2,7 +2,7 @@ openapi: 3.0.1
 info:
   contact:
     email: development.bdsc@chuv.ch
-    name: pt backend authentication service
+    name: pt backend audit log service
     url: https://pt-backend.rdeid.unil.ch
   title: pt backend
   version: "1.0"
@@ -12,6 +12,7 @@ security:
 - Bearer: []
 - {}
 tags:
+- name: AuditLogService
 - name: AuthenticationService
 - name: ConfigService
 - name: DatasetService
@@ -262,6 +263,76 @@ paths:
       - Users
       x-openapi-router-controller: user_controller
       x-codegen-request-body-name: body
+  /api/v1/audit/logs:
+    get:
+      description: Gets a list of logs.
+      operationId: audit_log_service_get_logs
+      parameters:
+      - in: query
+        name: offset
+        schema:
+          format: int32
+          type: integer
+      - in: query
+        name: limit
+        schema:
+          format: int32
+          type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/templatebackendGetLogsResponse'
+          description: A successful response.
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+          description: An unexpected error response.
+      summary: Get logs
+      tags:
+      - AuditLog
+      x-openapi-router-controller: audit_log_controller
+  /api/v1/audit/users/{userid}/logs:
+    get:
+      description: Gets logs for a specific user.
+      operationId: audit_log_service_get_logs_for_user
+      parameters:
+      - in: path
+        name: userid
+        required: true
+        schema:
+          format: int32
+          type: integer
+      - in: query
+        name: offset
+        schema:
+          format: int32
+          type: integer
+      - in: query
+        name: limit
+        schema:
+          format: int32
+          type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/templatebackendGetLogsResponse'
+          description: A successful response.
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+          description: An unexpected error response.
+      summary: Get logs for a user
+      tags:
+      - AuditLog
+      x-openapi-router-controller: audit_log_controller
   /api/v1/dataset:
     get:
       description: This endpoint allows listing a user's datasets
@@ -709,6 +780,64 @@ components:
           title: details
           type: array
       title: rpcStatus
+      type: object
+    templatebackendAuditLog:
+      example:
+        createdAt: 2000-01-23T04:56:07.000+00:00
+        service: service
+        response: response
+        action: action
+        id: 0
+        body: body
+        error: true
+        userid: 6
+        user:
+          lastName: lastName
+          roles:
+          - roles
+          - roles
+          totpEnabled: true
+          firstName: firstName
+          createdAt: 2000-01-23T04:56:07.000+00:00
+          password: password
+          passwordChanged: true
+          tenantid: 6
+          id: 0
+          email: email
+          username: username
+          status: status
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+      properties:
+        id:
+          format: int32
+          title: id
+          type: integer
+        userid:
+          format: int32
+          title: userid
+          type: integer
+        service:
+          title: service
+          type: string
+        action:
+          title: action
+          type: string
+        body:
+          title: body
+          type: string
+        response:
+          title: response
+          type: string
+        createdAt:
+          format: date-time
+          title: createdAt
+          type: string
+        error:
+          title: error
+          type: boolean
+        user:
+          $ref: '#/components/schemas/templatebackendUser'
+      title: templatebackendAuditLog
       type: object
     templatebackendAuthenticationReply:
       example:
@@ -1225,6 +1354,65 @@ components:
           title: content
           type: string
       title: templatebackendGetHelloReply
+      type: object
+    templatebackendGetLogsResponse:
+      example:
+        logs:
+        - createdAt: 2000-01-23T04:56:07.000+00:00
+          service: service
+          response: response
+          action: action
+          id: 0
+          body: body
+          error: true
+          userid: 6
+          user:
+            lastName: lastName
+            roles:
+            - roles
+            - roles
+            totpEnabled: true
+            firstName: firstName
+            createdAt: 2000-01-23T04:56:07.000+00:00
+            password: password
+            passwordChanged: true
+            tenantid: 6
+            id: 0
+            email: email
+            username: username
+            status: status
+            updatedAt: 2000-01-23T04:56:07.000+00:00
+        - createdAt: 2000-01-23T04:56:07.000+00:00
+          service: service
+          response: response
+          action: action
+          id: 0
+          body: body
+          error: true
+          userid: 6
+          user:
+            lastName: lastName
+            roles:
+            - roles
+            - roles
+            totpEnabled: true
+            firstName: firstName
+            createdAt: 2000-01-23T04:56:07.000+00:00
+            password: password
+            passwordChanged: true
+            tenantid: 6
+            id: 0
+            email: email
+            username: username
+            status: status
+            updatedAt: 2000-01-23T04:56:07.000+00:00
+      properties:
+        logs:
+          items:
+            $ref: '#/components/schemas/templatebackendAuditLog'
+          title: logs
+          type: array
+      title: templatebackendGetLogsResponse
       type: object
     templatebackendGetQuestionnaireReply:
       example:

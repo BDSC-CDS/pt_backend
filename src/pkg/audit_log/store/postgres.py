@@ -4,6 +4,7 @@ from sqlalchemy.orm import sessionmaker
 from sqlalchemy.sql import text
 from contextlib import contextmanager
 from src.pkg.audit_log.model.audit_log import AuditLog
+from src.pkg.user.model.user import User
 
 class AuditLogStore:
     def __init__(self, db: Engine):
@@ -49,7 +50,18 @@ RETURNING id;
             return AuditLog(id=audit_id)
 
     def get_logs(self,offset:int,limit:int) -> list[AuditLog]:
-        query = "SELECT * FROM audit_log ORDER BY createdat OFFSET :offset LIMIT :limit;"
+        query = """
+            SELECT
+                a.id, a.userid, a.service, 
+                a.action, a.body, a.response, 
+                a.error, a.created_at,
+                u.username as username, 
+                u.firstname as firstname, 
+                u.lastname as lastname 
+            FROM audit_log a
+            LEFT JOIN users u ON a.userid = u.id
+            ORDER BY created_at OFFSET :offset LIMIT :limit;
+        """
         with self.session_scope() as session:
             logs = session.execute(text(query),{
                 'offset': offset,
@@ -65,12 +77,31 @@ RETURNING id;
                     body=log.body,
                     response=log.response,
                     error=log.error,
-                    created_at= log.created_at
+                    created_at= log.created_at,
+                    user=User(
+                        id=log.userid,
+                        username=log.username,
+                        firstname=log.firstname,
+                        lastname=log.lastname,
+                    )
                 ) for log in logs
             ]
             return result
 
     def get_logs_for_user(self, id:int, offset:int, limit:int) -> list[AuditLog]:
+        query = """
+            SELECT
+                a.id, a.userid, a.service, 
+                a.action, a.body, a.response, 
+                a.error, a.created_at,
+                u.username as username, 
+                u.firstname as firstname, 
+                u.lastname as lastname 
+            FROM audit_log a
+            LEFT JOIN users u ON a.userid = u.id
+            WHERE userid = :userid
+            ORDER BY created_at OFFSET :offset LIMIT :limit;
+        """
         query = "SELECT * FROM audit_log WHERE userid = :userid ORDER BY createdat OFFSET :offset LIMIT :limit;"
         with self.session_scope() as session:
             logs = session.execute(text(query), {
@@ -88,7 +119,13 @@ RETURNING id;
                     body=log.body,
                     response=log.response,
                     error=log.error,
-                    created_at=log.created_at
+                    created_at=log.created_at,
+                    user=User(
+                        id=log.userid,
+                        username=log.username,
+                        firstname=log.firstname,
+                        lastname=log.lastname,
+                    )
                 ) for log in logs
             ]
             return result

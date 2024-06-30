@@ -37,12 +37,15 @@ class TestTemplatebackendGetDatasetMetadataResult(unittest.TestCase):
         model = TemplatebackendGetDatasetMetadataResult()
         if include_optional:
             return TemplatebackendGetDatasetMetadataResult(
-                metadata = openapi_client.models.templatebackend_metadata.templatebackendMetadata(
-                    userid = 56, 
-                    tenantid = 56, 
-                    dataset_id = 56, 
-                    column_id = 56, 
-                    type = '', )
+                metadata = [
+                    openapi_client.models.templatebackend_metadata.templatebackendMetadata(
+                        userid = 56, 
+                        tenantid = 56, 
+                        dataset_id = 56, 
+                        column_id = 56, 
+                        column_name = '', 
+                        type = '', )
+                    ]
             )
         else:
             return TemplatebackendGetDatasetMetadataResult(

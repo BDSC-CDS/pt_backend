@@ -18,6 +18,7 @@
 __version__ = "1.0.0"
 
 # import apis into sdk package
+from openapi_client.api.audit_log_api import AuditLogApi
 from openapi_client.api.authentication_api import AuthenticationApi
 from openapi_client.api.configuration_api import ConfigurationApi
 from openapi_client.api.dataset_api import DatasetApi
@@ -40,6 +41,7 @@ from openapi_client.exceptions import ApiException
 from openapi_client.models.index_service_create_hello_request import IndexServiceCreateHelloRequest
 from openapi_client.models.protobuf_any import ProtobufAny
 from openapi_client.models.rpc_status import RpcStatus
+from openapi_client.models.templatebackend_audit_log import TemplatebackendAuditLog
 from openapi_client.models.templatebackend_authentication_reply import TemplatebackendAuthenticationReply
 from openapi_client.models.templatebackend_authentication_result import TemplatebackendAuthenticationResult
 from openapi_client.models.templatebackend_column import TemplatebackendColumn
@@ -66,6 +68,7 @@ from openapi_client.models.templatebackend_get_dataset_content_result import Tem
 from openapi_client.models.templatebackend_get_dataset_metadata_reply import TemplatebackendGetDatasetMetadataReply
 from openapi_client.models.templatebackend_get_dataset_metadata_result import TemplatebackendGetDatasetMetadataResult
 from openapi_client.models.templatebackend_get_hello_reply import TemplatebackendGetHelloReply
+from openapi_client.models.templatebackend_get_logs_response import TemplatebackendGetLogsResponse
 from openapi_client.models.templatebackend_get_questionnaire_reply import TemplatebackendGetQuestionnaireReply
 from openapi_client.models.templatebackend_get_questionnaire_result import TemplatebackendGetQuestionnaireResult
 from openapi_client.models.templatebackend_get_reply_reply import TemplatebackendGetReplyReply
