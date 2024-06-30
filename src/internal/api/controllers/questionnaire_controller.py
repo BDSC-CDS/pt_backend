@@ -1,3 +1,10 @@
+from server_template.models import TemplatebackendCreateReplyReply
+from server_template.models import TemplatebackendCreateReplyRequest
+from server_template.models import TemplatebackendCreateReplyResult
+from server_template.models import TemplatebackendGetReplyReply
+from server_template.models import TemplatebackendGetReplyResult
+from server_template.models import TemplatebackendListRepliesReply
+from server_template.models import TemplatebackendListRepliesResult
 from server_template.models import TemplatebackendCreateQuestionnaireReply
 from server_template.models import TemplatebackendCreateQuestionnaireResult
 from server_template.models import TemplatebackendCreateQuestionnaireRequest
@@ -19,12 +26,21 @@ class QuestionnaireController:
         self.config = config
         self.questionnaire_service = questionnaire_service
 
+    def questionnaire_service_create_reply(self, user, body: TemplatebackendCreateReplyRequest):
+        reply = questionnaire_converter.reply_to_business(body.reply)
+        r = self.questionnaire_service.create_reply(user, reply)
+        return TemplatebackendCreateReplyReply(TemplatebackendCreateReplyResult(id=r.id))
     
-    def questionnaire_service_get_reply(self, user, questionnaire_version_id: int, reply_id: int):
-        return None
+    def questionnaire_service_list_replies(self, user, offset: int=None, limit: int=None):
+        replies = self.questionnaire_service.list_replies(user, offset, limit)
+        rs = [questionnaire_converter.reply_from_business(r) for r in replies]
+        return TemplatebackendListRepliesReply(TemplatebackendListRepliesResult(replies=rs))
 
-    def questionnaire_service_list_replies(self, user, questionnaire_version_id: int, offset: int=None, limit: int=None):
-        return None
+    def questionnaire_service_get_reply(self, user, id: int):
+        reply = self.questionnaire_service.get_reply(user, id)
+        r = questionnaire_converter.reply_from_business(reply)
+        print("r", reply, r)
+        return TemplatebackendGetReplyReply(TemplatebackendGetReplyResult(r))
 
     def questionnaire_service_create_questionnaire(self, user, body: TemplatebackendCreateQuestionnaireRequest):
         questionnaire = questionnaire_converter.questionnaire_to_business(body.questionnaire)

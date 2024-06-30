@@ -1,3 +1,4 @@
+from server_template.models import TemplatebackendCreateReplyRequest
 from server_template.models import TemplatebackendCreateQuestionnaireRequest
 from server_template.models import TemplatebackendCreateQuestionnaireVersionRequest
 from src.internal.api.controllers.questionnaire_controller import QuestionnaireController
@@ -9,11 +10,23 @@ class QuestionnaireControllerAuthentication():
         self.next = next
         implements_interface(QuestionnaireControllerAuthentication, QuestionnaireController)
 
-    def questionnaire_service_get_reply(self, user, questionnaire_version_id: int, reply_id: int):
-        return None
+    def questionnaire_service_create_reply(self, user, body: TemplatebackendCreateReplyRequest):
+        if not is_authenticated(user):
+            return None, 403
+        
+        return self.next.questionnaire_service_create_reply(user, body)
+    
+    def questionnaire_service_list_replies(self, user, offset: int=None, limit: int=None):
+        if not is_authenticated(user):
+            return None, 403
+        
+        return self.next.questionnaire_service_list_replies(user, offset, limit)
 
-    def questionnaire_service_list_replies(self, user, questionnaire_version_id: int, offset: int=None, limit: int=None):
-        return None
+    def questionnaire_service_get_reply(self, user, id: int):
+        if not is_authenticated(user):
+            return None, 403
+        
+        return self.next.questionnaire_service_get_reply(user, id)
 
     def questionnaire_service_create_questionnaire(self, user, body: TemplatebackendCreateQuestionnaireRequest):
         if not is_authenticated(user):

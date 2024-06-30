@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **int** |  | [optional] 
 **questionnaire_version_id** | **int** |  | [optional] 
+**project_name** | **str** |  | [optional] 
 **replies** | [**List[TemplatebackendQuestionnaireQuestionReply]**](TemplatebackendQuestionnaireQuestionReply.md) |  | [optional] 
 **created_at** | **datetime** |  | [optional] 
 **updated_at** | **datetime** |  | [optional] 

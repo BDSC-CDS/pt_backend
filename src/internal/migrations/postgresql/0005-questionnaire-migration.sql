@@ -122,6 +122,7 @@ CREATE TABLE IF NOT EXISTS questionnaire_question_reply (
     userid INT NOT NULL,
     tenantid INT NOT NULL,
 
+    
     questionnaireid INT NOT NULL,
     questionnaire_versionid INT NOT NULL,
     questionnaire_questionid INT NOT NULL,

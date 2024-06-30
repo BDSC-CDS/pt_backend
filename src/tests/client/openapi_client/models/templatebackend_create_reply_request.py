@@ -18,27 +18,21 @@ import pprint
 import re  # noqa: F401
 import json
 
-from datetime import datetime
+
 from typing import Any, ClassVar, Dict, List, Optional
-from pydantic import BaseModel, StrictInt, StrictStr
-from pydantic import Field
-from openapi_client.models.templatebackend_questionnaire_question_reply import TemplatebackendQuestionnaireQuestionReply
+from pydantic import BaseModel
+from openapi_client.models.templatebackend_questionnaire_reply import TemplatebackendQuestionnaireReply
 try:
     from typing import Self
 except ImportError:
     from typing_extensions import Self
 
-class TemplatebackendQuestionnaireReply(BaseModel):
+class TemplatebackendCreateReplyRequest(BaseModel):
     """
-    TemplatebackendQuestionnaireReply
+    TemplatebackendCreateReplyRequest
     """ # noqa: E501
-    id: Optional[StrictInt] = None
-    questionnaire_version_id: Optional[StrictInt] = Field(default=None, alias="questionnaireVersionId")
-    project_name: Optional[StrictStr] = Field(default=None, alias="projectName")
-    replies: Optional[List[TemplatebackendQuestionnaireQuestionReply]] = None
-    created_at: Optional[datetime] = Field(default=None, alias="createdAt")
-    updated_at: Optional[datetime] = Field(default=None, alias="updatedAt")
-    __properties: ClassVar[List[str]] = ["id", "questionnaireVersionId", "projectName", "replies", "createdAt", "updatedAt"]
+    reply: Optional[TemplatebackendQuestionnaireReply] = None
+    __properties: ClassVar[List[str]] = ["reply"]
 
     model_config = {
         "populate_by_name": True,
@@ -58,7 +52,7 @@ class TemplatebackendQuestionnaireReply(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Self:
-        """Create an instance of TemplatebackendQuestionnaireReply from a JSON string"""
+        """Create an instance of TemplatebackendCreateReplyRequest from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -77,18 +71,14 @@ class TemplatebackendQuestionnaireReply(BaseModel):
             },
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of each item in replies (list)
-        _items = []
-        if self.replies:
-            for _item in self.replies:
-                if _item:
-                    _items.append(_item.to_dict())
-            _dict['replies'] = _items
+        # override the default output from pydantic by calling `to_dict()` of reply
+        if self.reply:
+            _dict['reply'] = self.reply.to_dict()
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Dict) -> Self:
-        """Create an instance of TemplatebackendQuestionnaireReply from a dict"""
+        """Create an instance of TemplatebackendCreateReplyRequest from a dict"""
         if obj is None:
             return None
 
@@ -96,12 +86,7 @@ class TemplatebackendQuestionnaireReply(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "id": obj.get("id"),
-            "questionnaireVersionId": obj.get("questionnaireVersionId"),
-            "projectName": obj.get("projectName"),
-            "replies": [TemplatebackendQuestionnaireQuestionReply.from_dict(_item) for _item in obj.get("replies")] if obj.get("replies") is not None else None,
-            "createdAt": obj.get("createdAt"),
-            "updatedAt": obj.get("updatedAt")
+            "reply": TemplatebackendQuestionnaireReply.from_dict(obj.get("reply")) if obj.get("reply") is not None else None
         })
         return _obj
 

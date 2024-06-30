@@ -39,6 +39,7 @@ class TestTemplatebackendQuestionnaireReply(unittest.TestCase):
             return TemplatebackendQuestionnaireReply(
                 id = 56,
                 questionnaire_version_id = 56,
+                project_name = '',
                 replies = [
                     openapi_client.models.templatebackend_questionnaire_question_reply.templatebackendQuestionnaireQuestionReply(
                         id = 56, 

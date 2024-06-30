@@ -8,6 +8,8 @@ from src.pkg.questionnaire.model.questionnaire import QuestionnaireVersion
 from src.pkg.questionnaire.model.questionnaire import QuestionnaireQuestion
 from src.pkg.questionnaire.model.questionnaire import QuestionnaireQuestionAnswer
 from src.pkg.questionnaire.model.questionnaire import QuestionnaireQuestionAnswerRulePrefill
+from src.pkg.questionnaire.model.questionnaire import Reply
+from src.pkg.questionnaire.model.questionnaire import QuestionReply
 
 
 class QuestionnaireStore:
@@ -162,6 +164,136 @@ class QuestionnaireStore:
                 raise e
 
             return QuestionnaireVersion(id=version_id)
+        
+    def create_reply(self, tenantid: int, userid: int, reply: Reply) -> Reply:
+        questionnaire_reply_query = """
+        INSERT INTO questionnaire_replies 
+            (project_name, userid, tenantid, questionnaire_versionid, questionnaireid, createdat, updatedat) 
+        VALUES 
+            (:project_name, :userid, :tenantid, :questionnaire_versionid, (select questionnaireid from questionnaire_versions where id = :questionnaire_versionid), now(), now()) 
+        RETURNING id;
+        """
+
+        questionnaire_question_reply_query = """
+        INSERT INTO questionnaire_question_reply 
+            (replyid, userid, tenantid, questionnaire_versionid, questionnaire_questionid, questionnaireid, answer, createdat, updatedat) 
+        VALUES 
+            (:replyid, :userid, :tenantid, :questionnaire_versionid, :questionnaire_questionid, (select questionnaireid from questionnaire_versions where id = :questionnaire_versionid), :answer, now(), now()) 
+        RETURNING id;
+        """
+
+        with self.session_scope() as session:
+            try:
+                result = session.execute(text(questionnaire_reply_query), {
+                    'project_name': reply.project_name,
+                    'userid': userid,
+                    'tenantid': tenantid,
+                    'questionnaire_versionid': reply.questionnaire_version_id
+                }).fetchone()
+                reply_id = result[0]
+
+                for question_reply in reply.replies:
+                    session.execute(text(questionnaire_question_reply_query), {
+                        'replyid': reply_id,
+                        'userid': userid,
+                        'tenantid': tenantid,
+                        'questionnaire_versionid': reply.questionnaire_version_id,
+                        'questionnaire_questionid': question_reply.questionnaire_question_id,
+                        'answer': question_reply.answer
+                    })
+
+            except SQLAlchemyError as e:
+                raise e
+
+            return Reply(
+                id=reply_id
+            )
+    
+    def get_reply(self, tenantid: int, userid: int, reply_id: int) -> Reply:
+        reply_query = """
+        SELECT id, userid, tenantid, project_name, questionnaire_versionid, createdat, updatedat, deletedat
+        FROM questionnaire_replies
+        WHERE id = :reply_id and deletedat is null;
+        """
+
+        question_reply_query = """
+        SELECT id, userid, tenantid, questionnaire_questionid, answer, createdat, updatedat, deletedat
+        FROM questionnaire_question_reply
+        WHERE replyid = :reply_id;
+        """
+
+        with self.session_scope() as session:
+            try:
+                result = session.execute(text(reply_query), {'reply_id': reply_id}).mappings().fetchone()
+                if not result:
+                    return None  
+
+                reply = Reply(
+                    id=result['id'],
+                    userid=result['userid'],
+                    tenantid=result['tenantid'],
+                    project_name=result['project_name'],
+                    questionnaire_version_id=result['questionnaire_versionid'],
+                    createdat=result['createdat'],
+                    updatedat=result['updatedat'],
+                    deletedat=result['deletedat'],
+                    replies=[]
+                )
+
+                question_reply_results = session.execute(text(question_reply_query), {'reply_id': reply.id}).mappings().fetchall()
+                for question_reply_row in question_reply_results:
+                    question_reply = QuestionReply(
+                        id=question_reply_row['id'],
+                        userid=question_reply_row['userid'],
+                        tenantid=question_reply_row['tenantid'],
+                        questionnaire_question_id=question_reply_row['questionnaire_questionid'],
+                        answer=question_reply_row['answer'],
+                        createdat=question_reply_row['createdat'],
+                        updatedat=question_reply_row['updatedat'],
+                        deletedat=question_reply_row['deletedat']
+                    )
+                    reply.replies.append(question_reply)
+
+            except SQLAlchemyError as e:
+                raise e
+
+            return reply
+    
+    def list_replies(self, tenantid: int, userid: int, offset: int, limit: int) -> list[Reply]:
+        reply_query = """
+        SELECT id, userid, tenantid, project_name, questionnaire_versionid, createdat, updatedat, deletedat
+        FROM questionnaire_replies
+        WHERE userid = :userid and deletedat is null
+        OFFSET :offset
+        LIMIT :limit;
+        """
+
+        with self.session_scope() as session:
+            try:
+                results = session.execute(text(reply_query), {
+                    'userid': userid,
+                    'offset': offset,
+                    'limit': limit,
+                }).mappings().fetchall()
+
+                replies = [
+                    Reply(
+                        id=result['id'],
+                        userid=result['userid'],
+                        tenantid=result['tenantid'],
+                        project_name=result['project_name'],
+                        questionnaire_version_id=result['questionnaire_versionid'],
+                        createdat=result['createdat'],
+                        updatedat=result['updatedat'],
+                        deletedat=result['deletedat'],
+                        replies=[]
+                    ) for result in results
+                ]
+
+            except SQLAlchemyError as e:
+                raise e
+
+            return replies
 
         
     def get_questionnaire(self, tenantid: int, userid: int, questionnaire_id: int) -> Questionnaire:

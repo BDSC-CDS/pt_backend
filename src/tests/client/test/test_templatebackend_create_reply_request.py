@@ -16,10 +16,10 @@
 import unittest
 import datetime
 
-from openapi_client.models.templatebackend_get_reply_result import TemplatebackendGetReplyResult
+from openapi_client.models.templatebackend_create_reply_request import TemplatebackendCreateReplyRequest
 
-class TestTemplatebackendGetReplyResult(unittest.TestCase):
-    """TemplatebackendGetReplyResult unit test stubs"""
+class TestTemplatebackendCreateReplyRequest(unittest.TestCase):
+    """TemplatebackendCreateReplyRequest unit test stubs"""
 
     def setUp(self):
         pass
@@ -27,16 +27,16 @@ class TestTemplatebackendGetReplyResult(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional) -> TemplatebackendGetReplyResult:
-        """Test TemplatebackendGetReplyResult
+    def make_instance(self, include_optional) -> TemplatebackendCreateReplyRequest:
+        """Test TemplatebackendCreateReplyRequest
             include_option is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
-        # uncomment below to create an instance of `TemplatebackendGetReplyResult`
+        # uncomment below to create an instance of `TemplatebackendCreateReplyRequest`
         """
-        model = TemplatebackendGetReplyResult()
+        model = TemplatebackendCreateReplyRequest()
         if include_optional:
-            return TemplatebackendGetReplyResult(
+            return TemplatebackendCreateReplyRequest(
                 reply = openapi_client.models.templatebackend_questionnaire_reply.templatebackendQuestionnaireReply(
                     id = 56, 
                     questionnaire_version_id = 56, 
@@ -53,12 +53,12 @@ class TestTemplatebackendGetReplyResult(unittest.TestCase):
                     updated_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), )
             )
         else:
-            return TemplatebackendGetReplyResult(
+            return TemplatebackendCreateReplyRequest(
         )
         """
 
-    def testTemplatebackendGetReplyResult(self):
-        """Test TemplatebackendGetReplyResult"""
+    def testTemplatebackendCreateReplyRequest(self):
+        """Test TemplatebackendCreateReplyRequest"""
         # inst_req_only = self.make_instance(include_optional=False)
         # inst_req_and_optional = self.make_instance(include_optional=True)
 
