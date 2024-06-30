@@ -67,6 +67,7 @@ class QuestionnaireVersion:
     version: str = ""
 
     questions: list[QuestionnaireQuestion] = None
+    published: bool = False
 
     createdat: datetime.datetime = None
     updatedat: datetime.datetime = None

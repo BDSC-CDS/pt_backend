@@ -7,6 +7,8 @@ from flask import json
 from server_template.models.rpc_status import RpcStatus
 from server_template.models.templatebackend_create_questionnaire_reply import TemplatebackendCreateQuestionnaireReply
 from server_template.models.templatebackend_create_questionnaire_request import TemplatebackendCreateQuestionnaireRequest
+from server_template.models.templatebackend_create_questionnaire_version_reply import TemplatebackendCreateQuestionnaireVersionReply
+from server_template.models.templatebackend_create_questionnaire_version_request import TemplatebackendCreateQuestionnaireVersionRequest
 from server_template.models.templatebackend_delete_questionnaire_reply import TemplatebackendDeleteQuestionnaireReply
 from server_template.models.templatebackend_get_questionnaire_reply import TemplatebackendGetQuestionnaireReply
 from server_template.models.templatebackend_get_reply_reply import TemplatebackendGetReplyReply
@@ -31,6 +33,26 @@ class TestQuestionnaireController(BaseTestCase):
         }
         response = self.client.open(
             '/api/v1/questionnaire',
+            method='POST',
+            headers=headers,
+            data=json.dumps(body),
+            content_type='application/json')
+        self.assert200(response,
+                       'Response body is : ' + response.data.decode('utf-8'))
+
+    def test_questionnaire_service_create_questionnaire_version(self):
+        """Test case for questionnaire_service_create_questionnaire_version
+
+        Create a questionnaire version
+        """
+        body = server_template.TemplatebackendCreateQuestionnaireVersionRequest()
+        headers = { 
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Bearer': 'special-key',
+        }
+        response = self.client.open(
+            '/api/v1/questionnaire/version',
             method='POST',
             headers=headers,
             data=json.dumps(body),

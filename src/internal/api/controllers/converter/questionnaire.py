@@ -41,6 +41,7 @@ def questionnaire_version_from_business(version: QuestionnaireVersion) -> Templa
         id=version.id,
         version=version.version,
         questions=[questionnaire_question_from_business(question) for question in version.questions] if version.questions else [],
+        published=version.published,
         created_at=version.createdat,
         updated_at=version.updatedat,
     )
@@ -97,6 +98,7 @@ def questionnaire_version_to_business(version: TemplatebackendQuestionnaireVersi
         id=version.id,
         version=version.version,
         questions=[questionnaire_question_to_business(question) for question in version.questions] if version.questions else [],
+        published=version.published,
         createdat=version.created_at,
         updatedat=version.updated_at,
     )

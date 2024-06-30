@@ -629,6 +629,34 @@ paths:
       - Questionnaire
       x-openapi-router-controller: questionnaire_controller
       x-codegen-request-body-name: body
+  /api/v1/questionnaire/version:
+    post:
+      description: This endpoint creates a questionnaire version
+      operationId: questionnaire_service_create_questionnaire_version
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/templatebackendCreateQuestionnaireVersionRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/templatebackendCreateQuestionnaireVersionReply'
+          description: A successful response.
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+          description: An unexpected error response.
+      summary: Create a questionnaire version
+      tags:
+      - Questionnaire
+      x-openapi-router-controller: questionnaire_controller
+      x-codegen-request-body-name: body
   /api/v1/questionnaire/{id}:
     delete:
       description: This endpoint creates a questionnaire
@@ -1031,6 +1059,35 @@ components:
           title: id
           type: integer
       title: templatebackendCreateQuestionnaireResult
+      type: object
+    templatebackendCreateQuestionnaireVersionReply:
+      example:
+        result:
+          id: 0
+      properties:
+        result:
+          $ref: '#/components/schemas/templatebackendCreateQuestionnaireVersionResult'
+      title: templatebackendCreateQuestionnaireVersionReply
+      type: object
+    templatebackendCreateQuestionnaireVersionRequest:
+      properties:
+        id:
+          format: int64
+          title: id
+          type: integer
+        version:
+          $ref: '#/components/schemas/templatebackendQuestionnaireVersion'
+      title: Message definitions for requests and responses
+      type: object
+    templatebackendCreateQuestionnaireVersionResult:
+      example:
+        id: 0
+      properties:
+        id:
+          format: int64
+          title: id
+          type: integer
+      title: templatebackendCreateQuestionnaireVersionResult
       type: object
     templatebackendCreateUserReply:
       example:
@@ -1517,6 +1574,7 @@ components:
                 id: 1
                 updatedAt: 2000-01-23T04:56:07.000+00:00
               id: 6
+              published: true
               version: version
               updatedAt: 2000-01-23T04:56:07.000+00:00
             - createdAt: 2000-01-23T04:56:07.000+00:00
@@ -1614,6 +1672,7 @@ components:
                 id: 1
                 updatedAt: 2000-01-23T04:56:07.000+00:00
               id: 6
+              published: true
               version: version
               updatedAt: 2000-01-23T04:56:07.000+00:00
             name: name
@@ -1726,6 +1785,7 @@ components:
               id: 1
               updatedAt: 2000-01-23T04:56:07.000+00:00
             id: 6
+            published: true
             version: version
             updatedAt: 2000-01-23T04:56:07.000+00:00
           - createdAt: 2000-01-23T04:56:07.000+00:00
@@ -1823,6 +1883,7 @@ components:
               id: 1
               updatedAt: 2000-01-23T04:56:07.000+00:00
             id: 6
+            published: true
             version: version
             updatedAt: 2000-01-23T04:56:07.000+00:00
           name: name
@@ -1838,7 +1899,7 @@ components:
         result:
           reply:
             createdAt: 2000-01-23T04:56:07.000+00:00
-            questionnaireQuestionId: 6
+            questionnaireVersionId: 6
             replies:
             - createdAt: 2000-01-23T04:56:07.000+00:00
               questionnaireQuestionId: 5
@@ -1861,7 +1922,7 @@ components:
       example:
         reply:
           createdAt: 2000-01-23T04:56:07.000+00:00
-          questionnaireQuestionId: 6
+          questionnaireVersionId: 6
           replies:
           - createdAt: 2000-01-23T04:56:07.000+00:00
             questionnaireQuestionId: 5
@@ -2121,6 +2182,7 @@ components:
                 id: 1
                 updatedAt: 2000-01-23T04:56:07.000+00:00
               id: 6
+              published: true
               version: version
               updatedAt: 2000-01-23T04:56:07.000+00:00
             - createdAt: 2000-01-23T04:56:07.000+00:00
@@ -2218,6 +2280,7 @@ components:
                 id: 1
                 updatedAt: 2000-01-23T04:56:07.000+00:00
               id: 6
+              published: true
               version: version
               updatedAt: 2000-01-23T04:56:07.000+00:00
             name: name
@@ -2322,6 +2385,7 @@ components:
                 id: 1
                 updatedAt: 2000-01-23T04:56:07.000+00:00
               id: 6
+              published: true
               version: version
               updatedAt: 2000-01-23T04:56:07.000+00:00
             - createdAt: 2000-01-23T04:56:07.000+00:00
@@ -2419,6 +2483,7 @@ components:
                 id: 1
                 updatedAt: 2000-01-23T04:56:07.000+00:00
               id: 6
+              published: true
               version: version
               updatedAt: 2000-01-23T04:56:07.000+00:00
             name: name
@@ -2531,6 +2596,7 @@ components:
               id: 1
               updatedAt: 2000-01-23T04:56:07.000+00:00
             id: 6
+            published: true
             version: version
             updatedAt: 2000-01-23T04:56:07.000+00:00
           - createdAt: 2000-01-23T04:56:07.000+00:00
@@ -2628,6 +2694,7 @@ components:
               id: 1
               updatedAt: 2000-01-23T04:56:07.000+00:00
             id: 6
+            published: true
             version: version
             updatedAt: 2000-01-23T04:56:07.000+00:00
           name: name
@@ -2732,6 +2799,7 @@ components:
               id: 1
               updatedAt: 2000-01-23T04:56:07.000+00:00
             id: 6
+            published: true
             version: version
             updatedAt: 2000-01-23T04:56:07.000+00:00
           - createdAt: 2000-01-23T04:56:07.000+00:00
@@ -2829,6 +2897,7 @@ components:
               id: 1
               updatedAt: 2000-01-23T04:56:07.000+00:00
             id: 6
+            published: true
             version: version
             updatedAt: 2000-01-23T04:56:07.000+00:00
           name: name
@@ -2847,7 +2916,7 @@ components:
         result:
           replies:
           - createdAt: 2000-01-23T04:56:07.000+00:00
-            questionnaireQuestionId: 6
+            questionnaireVersionId: 6
             replies:
             - createdAt: 2000-01-23T04:56:07.000+00:00
               questionnaireQuestionId: 5
@@ -2862,7 +2931,7 @@ components:
             id: 0
             updatedAt: 2000-01-23T04:56:07.000+00:00
           - createdAt: 2000-01-23T04:56:07.000+00:00
-            questionnaireQuestionId: 6
+            questionnaireVersionId: 6
             replies:
             - createdAt: 2000-01-23T04:56:07.000+00:00
               questionnaireQuestionId: 5
@@ -2885,7 +2954,7 @@ components:
       example:
         replies:
         - createdAt: 2000-01-23T04:56:07.000+00:00
-          questionnaireQuestionId: 6
+          questionnaireVersionId: 6
           replies:
           - createdAt: 2000-01-23T04:56:07.000+00:00
             questionnaireQuestionId: 5
@@ -2900,7 +2969,7 @@ components:
           id: 0
           updatedAt: 2000-01-23T04:56:07.000+00:00
         - createdAt: 2000-01-23T04:56:07.000+00:00
-          questionnaireQuestionId: 6
+          questionnaireVersionId: 6
           replies:
           - createdAt: 2000-01-23T04:56:07.000+00:00
             questionnaireQuestionId: 5
@@ -3056,6 +3125,7 @@ components:
             id: 1
             updatedAt: 2000-01-23T04:56:07.000+00:00
           id: 6
+          published: true
           version: version
           updatedAt: 2000-01-23T04:56:07.000+00:00
         - createdAt: 2000-01-23T04:56:07.000+00:00
@@ -3153,6 +3223,7 @@ components:
             id: 1
             updatedAt: 2000-01-23T04:56:07.000+00:00
           id: 6
+          published: true
           version: version
           updatedAt: 2000-01-23T04:56:07.000+00:00
         name: name
@@ -3387,7 +3458,7 @@ components:
     templatebackendQuestionnaireReply:
       example:
         createdAt: 2000-01-23T04:56:07.000+00:00
-        questionnaireQuestionId: 6
+        questionnaireVersionId: 6
         replies:
         - createdAt: 2000-01-23T04:56:07.000+00:00
           questionnaireQuestionId: 5
@@ -3406,9 +3477,9 @@ components:
           format: int64
           title: id
           type: integer
-        questionnaireQuestionId:
+        questionnaireVersionId:
           format: int64
-          title: questionnaireQuestionId
+          title: questionnaireVersionId
           type: integer
         replies:
           items:
@@ -3522,6 +3593,7 @@ components:
           id: 1
           updatedAt: 2000-01-23T04:56:07.000+00:00
         id: 6
+        published: true
         version: version
         updatedAt: 2000-01-23T04:56:07.000+00:00
       properties:
@@ -3537,6 +3609,9 @@ components:
             $ref: '#/components/schemas/templatebackendQuestionnaireQuestion'
           title: questions
           type: array
+        published:
+          title: published
+          type: boolean
         createdAt:
           format: date-time
           title: createdAt

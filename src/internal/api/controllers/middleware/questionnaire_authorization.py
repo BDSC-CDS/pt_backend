@@ -1,4 +1,5 @@
 from server_template.models import TemplatebackendCreateQuestionnaireRequest
+from server_template.models import TemplatebackendCreateQuestionnaireVersionRequest
 from src.internal.api.controllers.questionnaire_controller import QuestionnaireController
 from src.internal.util.interface.implements import implements_interface
 from .authorization import *
@@ -19,6 +20,12 @@ class QuestionnaireControllerAuthentication():
             return None, 403
         
         return self.next.questionnaire_service_create_questionnaire(user, body)
+    
+    def questionnaire_service_create_questionnaire_version(self, user, body: TemplatebackendCreateQuestionnaireVersionRequest):
+        if not is_authenticated(user):
+            return None, 403
+        
+        return self.next.questionnaire_service_create_questionnaire_version(user, body)
 
     def questionnaire_service_delete_questionnaire(self, user, id: str):
         if not is_authenticated(user):

@@ -16,13 +16,13 @@ class TemplatebackendQuestionnaireReply(Model):
     Do not edit the class manually.
     """
 
-    def __init__(self, id=None, questionnaire_question_id=None, replies=None, created_at=None, updated_at=None):
+    def __init__(self, id=None, questionnaire_version_id=None, replies=None, created_at=None, updated_at=None):
         """TemplatebackendQuestionnaireReply - a model defined in OpenAPI
 
         :param id: The id of this TemplatebackendQuestionnaireReply.
         :type id: int
-        :param questionnaire_question_id: The questionnaire_question_id of this TemplatebackendQuestionnaireReply.
-        :type questionnaire_question_id: int
+        :param questionnaire_version_id: The questionnaire_version_id of this TemplatebackendQuestionnaireReply.
+        :type questionnaire_version_id: int
         :param replies: The replies of this TemplatebackendQuestionnaireReply.
         :type replies: List[TemplatebackendQuestionnaireQuestionReply]
         :param created_at: The created_at of this TemplatebackendQuestionnaireReply.
@@ -32,7 +32,7 @@ class TemplatebackendQuestionnaireReply(Model):
         """
         self.openapi_types = {
             'id': int,
-            'questionnaire_question_id': int,
+            'questionnaire_version_id': int,
             'replies': List[TemplatebackendQuestionnaireQuestionReply],
             'created_at': datetime,
             'updated_at': datetime
@@ -40,14 +40,14 @@ class TemplatebackendQuestionnaireReply(Model):
 
         self.attribute_map = {
             'id': 'id',
-            'questionnaire_question_id': 'questionnaireQuestionId',
+            'questionnaire_version_id': 'questionnaireVersionId',
             'replies': 'replies',
             'created_at': 'createdAt',
             'updated_at': 'updatedAt'
         }
 
         self._id = id
-        self._questionnaire_question_id = questionnaire_question_id
+        self._questionnaire_version_id = questionnaire_version_id
         self._replies = replies
         self._created_at = created_at
         self._updated_at = updated_at
@@ -85,25 +85,25 @@ class TemplatebackendQuestionnaireReply(Model):
         self._id = id
 
     @property
-    def questionnaire_question_id(self) -> int:
-        """Gets the questionnaire_question_id of this TemplatebackendQuestionnaireReply.
+    def questionnaire_version_id(self) -> int:
+        """Gets the questionnaire_version_id of this TemplatebackendQuestionnaireReply.
 
 
-        :return: The questionnaire_question_id of this TemplatebackendQuestionnaireReply.
+        :return: The questionnaire_version_id of this TemplatebackendQuestionnaireReply.
         :rtype: int
         """
-        return self._questionnaire_question_id
+        return self._questionnaire_version_id
 
-    @questionnaire_question_id.setter
-    def questionnaire_question_id(self, questionnaire_question_id: int):
-        """Sets the questionnaire_question_id of this TemplatebackendQuestionnaireReply.
+    @questionnaire_version_id.setter
+    def questionnaire_version_id(self, questionnaire_version_id: int):
+        """Sets the questionnaire_version_id of this TemplatebackendQuestionnaireReply.
 
 
-        :param questionnaire_question_id: The questionnaire_question_id of this TemplatebackendQuestionnaireReply.
-        :type questionnaire_question_id: int
+        :param questionnaire_version_id: The questionnaire_version_id of this TemplatebackendQuestionnaireReply.
+        :type questionnaire_version_id: int
         """
 
-        self._questionnaire_question_id = questionnaire_question_id
+        self._questionnaire_version_id = questionnaire_version_id
 
     @property
     def replies(self) -> List[TemplatebackendQuestionnaireQuestionReply]:

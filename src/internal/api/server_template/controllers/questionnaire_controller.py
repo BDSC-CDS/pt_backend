@@ -10,6 +10,8 @@ from inspect import getmembers, isfunction, ismethod
 from server_template.models.rpc_status import RpcStatus
 from server_template.models.templatebackend_create_questionnaire_reply import TemplatebackendCreateQuestionnaireReply
 from server_template.models.templatebackend_create_questionnaire_request import TemplatebackendCreateQuestionnaireRequest
+from server_template.models.templatebackend_create_questionnaire_version_reply import TemplatebackendCreateQuestionnaireVersionReply
+from server_template.models.templatebackend_create_questionnaire_version_request import TemplatebackendCreateQuestionnaireVersionRequest
 from server_template.models.templatebackend_delete_questionnaire_reply import TemplatebackendDeleteQuestionnaireReply
 from server_template.models.templatebackend_get_questionnaire_reply import TemplatebackendGetQuestionnaireReply
 from server_template.models.templatebackend_get_reply_reply import TemplatebackendGetReplyReply
@@ -20,7 +22,7 @@ from server_template import util
 
 #from src.internal.api.controllers import questionnaire_controller
 #controller_functions =  [func_tupple[0] for func_tupple in getmembers(questionnaire_controller, isfunction)]
-#needed_functions = ["questionnaire_service_create_questionnaire", "questionnaire_service_delete_questionnaire", "questionnaire_service_get_questionnaire", "questionnaire_service_get_reply", "questionnaire_service_list_questionnaire", "questionnaire_service_list_replies"]
+#needed_functions = ["questionnaire_service_create_questionnaire", "questionnaire_service_create_questionnaire_version", "questionnaire_service_delete_questionnaire", "questionnaire_service_get_questionnaire", "questionnaire_service_get_reply", "questionnaire_service_list_questionnaire", "questionnaire_service_list_replies"]
 #for op in needed_functions:
 #    if op not in controller_functions:
 #        raise NotImplementedError("operation " + op + " is not implemented by src.internal.api.controllers.questionnaire_controller")
@@ -28,7 +30,7 @@ from server_template import util
 class QuestionnaireController:
     def __init__(self, controller):
         #controller_functions =  [func_tupple[0] for func_tupple in getmembers(controller, ismethod)]
-        #needed_functions = ["questionnaire_service_create_questionnaire", "questionnaire_service_delete_questionnaire", "questionnaire_service_get_questionnaire", "questionnaire_service_get_reply", "questionnaire_service_list_questionnaire", "questionnaire_service_list_replies"]
+        #needed_functions = ["questionnaire_service_create_questionnaire", "questionnaire_service_create_questionnaire_version", "questionnaire_service_delete_questionnaire", "questionnaire_service_get_questionnaire", "questionnaire_service_get_reply", "questionnaire_service_list_questionnaire", "questionnaire_service_list_replies"]
         #for op in needed_functions:
         #    if op not in controller_functions:
         #        raise NotImplementedError("operation " + op + " is not implemented by provided controller")
@@ -51,6 +53,22 @@ class QuestionnaireController:
             body = TemplatebackendCreateQuestionnaireRequest.from_dict(connexion.request.get_json())
 
         return self.controller.questionnaire_service_create_questionnaire(user, body)
+
+
+    def questionnaire_service_create_questionnaire_version(self, user, body: TemplatebackendCreateQuestionnaireVersionRequest):
+        """Create a questionnaire version
+
+        This endpoint creates a questionnaire version
+
+        :param body: 
+        :type body: dict | bytes
+
+        :rtype: Union[TemplatebackendCreateQuestionnaireVersionReply, Tuple[TemplatebackendCreateQuestionnaireVersionReply, int], Tuple[TemplatebackendCreateQuestionnaireVersionReply, int, Dict[str, str]]
+        """
+        if connexion.request.is_json:
+            body = TemplatebackendCreateQuestionnaireVersionRequest.from_dict(connexion.request.get_json())
+
+        return self.controller.questionnaire_service_create_questionnaire_version(user, body)
 
 
     def questionnaire_service_delete_questionnaire(self, user, id: str):
