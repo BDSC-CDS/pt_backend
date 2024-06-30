@@ -55,6 +55,18 @@ message CreateQuestionnaireResult {
     uint32 id = 1;
 }
 
+// Message definitions for requests and responses
+message CreateQuestionnaireVersionRequest {
+    uint32 id = 1;
+    QuestionnaireVersion version = 2;
+}
+message CreateQuestionnaireVersionReply {
+    CreateQuestionnaireVersionResult result = 1;
+}
+message CreateQuestionnaireVersionResult {
+    uint32 id = 1;
+}
+
 message GetQuestionnaireRequest {
     uint32 id = 1;
 }
@@ -86,8 +98,18 @@ message DeleteQuestionnaireResult {
     bool success = 1;
 }
 
+message CreateReplyRequest {
+    QuestionnaireReply reply = 1;
+}
+message CreateReplyReply {
+    CreateReplyResult result = 1;
+}
+message CreateReplyResult {
+    uint32 id = 1;
+}
+
 message ListRepliesRequest {
-    uint32 questionnaire_version_id = 1;
+    // uint32 questionnaire_version_id = 1;
     uint32 offset = 2;
     uint32 limit = 3;
 }
@@ -99,8 +121,8 @@ message ListRepliesResult {
 }
 
 message GetReplyRequest {
-    uint32 questionnaire_version_id = 1;
-    uint32 reply_id = 2;
+    // uint32 questionnaire_version_id = 1;
+    uint32 id = 1;
 }
 message GetReplyReply {
     GetReplyResult result = 1;
@@ -111,7 +133,6 @@ message GetReplyResult {
 
 // Service definition
 service QuestionnaireService {
-    // Create a new questionnaire entry
     rpc CreateQuestionnaire(CreateQuestionnaireRequest) returns (CreateQuestionnaireReply) {
         option (google.api.http) = {
             post: "/api/v1/questionnaire"
@@ -120,6 +141,22 @@ service QuestionnaireService {
         option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
             summary: "Create a questionnaire";
             description: "This endpoint creates a questionnaire";
+            tags: "Questionnaire";
+            extensions: {
+                key: "x-openapi-router-controller";
+                value: {string_value: "questionnaire_controller"};
+            };
+        };
+    };
+    
+    rpc CreateQuestionnaireVersion(CreateQuestionnaireVersionRequest) returns (CreateQuestionnaireVersionReply) {
+        option (google.api.http) = {
+            post: "/api/v1/questionnaire/version"
+            body: "*"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            summary: "Create a questionnaire version";
+            description: "This endpoint creates a questionnaire version";
             tags: "Questionnaire";
             extensions: {
                 key: "x-openapi-router-controller";
@@ -176,9 +213,25 @@ service QuestionnaireService {
         };
     };
 
+    rpc CreateReply(CreateReplyRequest) returns (CreateReplyReply) {
+        option (google.api.http) = {
+            post: "/api/v1/questionnaire/replies"
+            body: "*"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            summary: "Create questionnaires reply";
+            description: "This endpoint allows ceating a user's questionnaires reply";
+            tags: "Questionnaire";
+            extensions: {
+                key: "x-openapi-router-controller";
+                value: {string_value: "questionnaire_controller"};
+            };
+        };
+    };
+
     rpc ListReplies(ListRepliesRequest) returns (ListRepliesReply) {
         option (google.api.http) = {
-            get: "/api/v1/questionnaire/{questionnaire_version_id}/replies"
+            get: "/api/v1/questionnaire/replies"
         };
         option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
             summary: "List questionnaires replies";
@@ -193,7 +246,7 @@ service QuestionnaireService {
 
     rpc GetReply(GetReplyRequest) returns (GetReplyReply) {
         option (google.api.http) = {
-            get: "/api/v1/questionnaire/{questionnaire_version_id}/replies/{reply_id}"
+            get: "/api/v1/questionnaire/replies/{id}"
         };
         option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
             summary: "Get a questionnaires reply";

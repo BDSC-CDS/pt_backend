@@ -41,7 +41,8 @@ class TestTemplatebackendListRepliesReply(unittest.TestCase):
                     replies = [
                         openapi_client.models.templatebackend_questionnaire_reply.templatebackendQuestionnaireReply(
                             id = 56, 
-                            questionnaire_question_id = 56, 
+                            questionnaire_version_id = 56, 
+                            project_name = '', 
                             created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
                             updated_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), )
                         ], )

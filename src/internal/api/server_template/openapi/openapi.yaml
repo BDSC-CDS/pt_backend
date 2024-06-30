@@ -629,6 +629,123 @@ paths:
       - Questionnaire
       x-openapi-router-controller: questionnaire_controller
       x-codegen-request-body-name: body
+  /api/v1/questionnaire/replies:
+    get:
+      description: This endpoint allows listing a user's questionnaires replies
+      operationId: questionnaire_service_list_replies
+      parameters:
+      - description: uint32 questionnaire_version_id = 1;
+        in: query
+        name: offset
+        schema:
+          format: int64
+          type: integer
+      - in: query
+        name: limit
+        schema:
+          format: int64
+          type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/templatebackendListRepliesReply'
+          description: A successful response.
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+          description: An unexpected error response.
+      summary: List questionnaires replies
+      tags:
+      - Questionnaire
+      x-openapi-router-controller: questionnaire_controller
+    post:
+      description: This endpoint allows ceating a user's questionnaires reply
+      operationId: questionnaire_service_create_reply
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/templatebackendCreateReplyRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/templatebackendCreateReplyReply'
+          description: A successful response.
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+          description: An unexpected error response.
+      summary: Create questionnaires reply
+      tags:
+      - Questionnaire
+      x-openapi-router-controller: questionnaire_controller
+      x-codegen-request-body-name: body
+  /api/v1/questionnaire/replies/{id}:
+    get:
+      description: This endpoint allows getting a user's questionnaires reply
+      operationId: questionnaire_service_get_reply
+      parameters:
+      - description: uint32 questionnaire_version_id = 1;
+        in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/templatebackendGetReplyReply'
+          description: A successful response.
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+          description: An unexpected error response.
+      summary: Get a questionnaires reply
+      tags:
+      - Questionnaire
+      x-openapi-router-controller: questionnaire_controller
+  /api/v1/questionnaire/version:
+    post:
+      description: This endpoint creates a questionnaire version
+      operationId: questionnaire_service_create_questionnaire_version
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/templatebackendCreateQuestionnaireVersionRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/templatebackendCreateQuestionnaireVersionReply'
+          description: A successful response.
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+          description: An unexpected error response.
+      summary: Create a questionnaire version
+      tags:
+      - Questionnaire
+      x-openapi-router-controller: questionnaire_controller
+      x-codegen-request-body-name: body
   /api/v1/questionnaire/{id}:
     delete:
       description: This endpoint creates a questionnaire
@@ -680,78 +797,6 @@ paths:
                 $ref: '#/components/schemas/rpcStatus'
           description: An unexpected error response.
       summary: Get questionnaires
-      tags:
-      - Questionnaire
-      x-openapi-router-controller: questionnaire_controller
-  /api/v1/questionnaire/{questionnaireVersionId}/replies:
-    get:
-      description: This endpoint allows listing a user's questionnaires replies
-      operationId: questionnaire_service_list_replies
-      parameters:
-      - in: path
-        name: questionnaireVersionId
-        required: true
-        schema:
-          format: int64
-          type: integer
-      - in: query
-        name: offset
-        schema:
-          format: int64
-          type: integer
-      - in: query
-        name: limit
-        schema:
-          format: int64
-          type: integer
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/templatebackendListRepliesReply'
-          description: A successful response.
-        default:
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/rpcStatus'
-          description: An unexpected error response.
-      summary: List questionnaires replies
-      tags:
-      - Questionnaire
-      x-openapi-router-controller: questionnaire_controller
-  /api/v1/questionnaire/{questionnaireVersionId}/replies/{replyId}:
-    get:
-      description: This endpoint allows getting a user's questionnaires reply
-      operationId: questionnaire_service_get_reply
-      parameters:
-      - in: path
-        name: questionnaireVersionId
-        required: true
-        schema:
-          format: int64
-          type: integer
-      - in: path
-        name: replyId
-        required: true
-        schema:
-          format: int64
-          type: integer
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/templatebackendGetReplyReply'
-          description: A successful response.
-        default:
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/rpcStatus'
-          description: An unexpected error response.
-      summary: Get a questionnaires reply
       tags:
       - Questionnaire
       x-openapi-router-controller: questionnaire_controller
@@ -1031,6 +1076,60 @@ components:
           title: id
           type: integer
       title: templatebackendCreateQuestionnaireResult
+      type: object
+    templatebackendCreateQuestionnaireVersionReply:
+      example:
+        result:
+          id: 0
+      properties:
+        result:
+          $ref: '#/components/schemas/templatebackendCreateQuestionnaireVersionResult'
+      title: templatebackendCreateQuestionnaireVersionReply
+      type: object
+    templatebackendCreateQuestionnaireVersionRequest:
+      properties:
+        id:
+          format: int64
+          title: id
+          type: integer
+        version:
+          $ref: '#/components/schemas/templatebackendQuestionnaireVersion'
+      title: Message definitions for requests and responses
+      type: object
+    templatebackendCreateQuestionnaireVersionResult:
+      example:
+        id: 0
+      properties:
+        id:
+          format: int64
+          title: id
+          type: integer
+      title: templatebackendCreateQuestionnaireVersionResult
+      type: object
+    templatebackendCreateReplyReply:
+      example:
+        result:
+          id: 0
+      properties:
+        result:
+          $ref: '#/components/schemas/templatebackendCreateReplyResult'
+      title: templatebackendCreateReplyReply
+      type: object
+    templatebackendCreateReplyRequest:
+      properties:
+        reply:
+          $ref: '#/components/schemas/templatebackendQuestionnaireReply'
+      title: templatebackendCreateReplyRequest
+      type: object
+    templatebackendCreateReplyResult:
+      example:
+        id: 0
+      properties:
+        id:
+          format: int64
+          title: id
+          type: integer
+      title: templatebackendCreateReplyResult
       type: object
     templatebackendCreateUserReply:
       example:
@@ -1517,6 +1616,7 @@ components:
                 id: 1
                 updatedAt: 2000-01-23T04:56:07.000+00:00
               id: 6
+              published: true
               version: version
               updatedAt: 2000-01-23T04:56:07.000+00:00
             - createdAt: 2000-01-23T04:56:07.000+00:00
@@ -1614,6 +1714,7 @@ components:
                 id: 1
                 updatedAt: 2000-01-23T04:56:07.000+00:00
               id: 6
+              published: true
               version: version
               updatedAt: 2000-01-23T04:56:07.000+00:00
             name: name
@@ -1726,6 +1827,7 @@ components:
               id: 1
               updatedAt: 2000-01-23T04:56:07.000+00:00
             id: 6
+            published: true
             version: version
             updatedAt: 2000-01-23T04:56:07.000+00:00
           - createdAt: 2000-01-23T04:56:07.000+00:00
@@ -1823,6 +1925,7 @@ components:
               id: 1
               updatedAt: 2000-01-23T04:56:07.000+00:00
             id: 6
+            published: true
             version: version
             updatedAt: 2000-01-23T04:56:07.000+00:00
           name: name
@@ -1838,7 +1941,7 @@ components:
         result:
           reply:
             createdAt: 2000-01-23T04:56:07.000+00:00
-            questionnaireQuestionId: 6
+            questionnaireVersionId: 6
             replies:
             - createdAt: 2000-01-23T04:56:07.000+00:00
               questionnaireQuestionId: 5
@@ -1851,6 +1954,7 @@ components:
               id: 1
               updatedAt: 2000-01-23T04:56:07.000+00:00
             id: 0
+            projectName: projectName
             updatedAt: 2000-01-23T04:56:07.000+00:00
       properties:
         result:
@@ -1861,7 +1965,7 @@ components:
       example:
         reply:
           createdAt: 2000-01-23T04:56:07.000+00:00
-          questionnaireQuestionId: 6
+          questionnaireVersionId: 6
           replies:
           - createdAt: 2000-01-23T04:56:07.000+00:00
             questionnaireQuestionId: 5
@@ -1874,6 +1978,7 @@ components:
             id: 1
             updatedAt: 2000-01-23T04:56:07.000+00:00
           id: 0
+          projectName: projectName
           updatedAt: 2000-01-23T04:56:07.000+00:00
       properties:
         reply:
@@ -2121,6 +2226,7 @@ components:
                 id: 1
                 updatedAt: 2000-01-23T04:56:07.000+00:00
               id: 6
+              published: true
               version: version
               updatedAt: 2000-01-23T04:56:07.000+00:00
             - createdAt: 2000-01-23T04:56:07.000+00:00
@@ -2218,6 +2324,7 @@ components:
                 id: 1
                 updatedAt: 2000-01-23T04:56:07.000+00:00
               id: 6
+              published: true
               version: version
               updatedAt: 2000-01-23T04:56:07.000+00:00
             name: name
@@ -2322,6 +2429,7 @@ components:
                 id: 1
                 updatedAt: 2000-01-23T04:56:07.000+00:00
               id: 6
+              published: true
               version: version
               updatedAt: 2000-01-23T04:56:07.000+00:00
             - createdAt: 2000-01-23T04:56:07.000+00:00
@@ -2419,6 +2527,7 @@ components:
                 id: 1
                 updatedAt: 2000-01-23T04:56:07.000+00:00
               id: 6
+              published: true
               version: version
               updatedAt: 2000-01-23T04:56:07.000+00:00
             name: name
@@ -2531,6 +2640,7 @@ components:
               id: 1
               updatedAt: 2000-01-23T04:56:07.000+00:00
             id: 6
+            published: true
             version: version
             updatedAt: 2000-01-23T04:56:07.000+00:00
           - createdAt: 2000-01-23T04:56:07.000+00:00
@@ -2628,6 +2738,7 @@ components:
               id: 1
               updatedAt: 2000-01-23T04:56:07.000+00:00
             id: 6
+            published: true
             version: version
             updatedAt: 2000-01-23T04:56:07.000+00:00
           name: name
@@ -2732,6 +2843,7 @@ components:
               id: 1
               updatedAt: 2000-01-23T04:56:07.000+00:00
             id: 6
+            published: true
             version: version
             updatedAt: 2000-01-23T04:56:07.000+00:00
           - createdAt: 2000-01-23T04:56:07.000+00:00
@@ -2829,6 +2941,7 @@ components:
               id: 1
               updatedAt: 2000-01-23T04:56:07.000+00:00
             id: 6
+            published: true
             version: version
             updatedAt: 2000-01-23T04:56:07.000+00:00
           name: name
@@ -2847,7 +2960,7 @@ components:
         result:
           replies:
           - createdAt: 2000-01-23T04:56:07.000+00:00
-            questionnaireQuestionId: 6
+            questionnaireVersionId: 6
             replies:
             - createdAt: 2000-01-23T04:56:07.000+00:00
               questionnaireQuestionId: 5
@@ -2860,9 +2973,10 @@ components:
               id: 1
               updatedAt: 2000-01-23T04:56:07.000+00:00
             id: 0
+            projectName: projectName
             updatedAt: 2000-01-23T04:56:07.000+00:00
           - createdAt: 2000-01-23T04:56:07.000+00:00
-            questionnaireQuestionId: 6
+            questionnaireVersionId: 6
             replies:
             - createdAt: 2000-01-23T04:56:07.000+00:00
               questionnaireQuestionId: 5
@@ -2875,6 +2989,7 @@ components:
               id: 1
               updatedAt: 2000-01-23T04:56:07.000+00:00
             id: 0
+            projectName: projectName
             updatedAt: 2000-01-23T04:56:07.000+00:00
       properties:
         result:
@@ -2885,7 +3000,7 @@ components:
       example:
         replies:
         - createdAt: 2000-01-23T04:56:07.000+00:00
-          questionnaireQuestionId: 6
+          questionnaireVersionId: 6
           replies:
           - createdAt: 2000-01-23T04:56:07.000+00:00
             questionnaireQuestionId: 5
@@ -2898,9 +3013,10 @@ components:
             id: 1
             updatedAt: 2000-01-23T04:56:07.000+00:00
           id: 0
+          projectName: projectName
           updatedAt: 2000-01-23T04:56:07.000+00:00
         - createdAt: 2000-01-23T04:56:07.000+00:00
-          questionnaireQuestionId: 6
+          questionnaireVersionId: 6
           replies:
           - createdAt: 2000-01-23T04:56:07.000+00:00
             questionnaireQuestionId: 5
@@ -2913,6 +3029,7 @@ components:
             id: 1
             updatedAt: 2000-01-23T04:56:07.000+00:00
           id: 0
+          projectName: projectName
           updatedAt: 2000-01-23T04:56:07.000+00:00
       properties:
         replies:
@@ -3056,6 +3173,7 @@ components:
             id: 1
             updatedAt: 2000-01-23T04:56:07.000+00:00
           id: 6
+          published: true
           version: version
           updatedAt: 2000-01-23T04:56:07.000+00:00
         - createdAt: 2000-01-23T04:56:07.000+00:00
@@ -3153,6 +3271,7 @@ components:
             id: 1
             updatedAt: 2000-01-23T04:56:07.000+00:00
           id: 6
+          published: true
           version: version
           updatedAt: 2000-01-23T04:56:07.000+00:00
         name: name
@@ -3387,7 +3506,7 @@ components:
     templatebackendQuestionnaireReply:
       example:
         createdAt: 2000-01-23T04:56:07.000+00:00
-        questionnaireQuestionId: 6
+        questionnaireVersionId: 6
         replies:
         - createdAt: 2000-01-23T04:56:07.000+00:00
           questionnaireQuestionId: 5
@@ -3400,16 +3519,20 @@ components:
           id: 1
           updatedAt: 2000-01-23T04:56:07.000+00:00
         id: 0
+        projectName: projectName
         updatedAt: 2000-01-23T04:56:07.000+00:00
       properties:
         id:
           format: int64
           title: id
           type: integer
-        questionnaireQuestionId:
+        questionnaireVersionId:
           format: int64
-          title: questionnaireQuestionId
+          title: questionnaireVersionId
           type: integer
+        projectName:
+          title: projectName
+          type: string
         replies:
           items:
             $ref: '#/components/schemas/templatebackendQuestionnaireQuestionReply'
@@ -3522,6 +3645,7 @@ components:
           id: 1
           updatedAt: 2000-01-23T04:56:07.000+00:00
         id: 6
+        published: true
         version: version
         updatedAt: 2000-01-23T04:56:07.000+00:00
       properties:
@@ -3537,6 +3661,9 @@ components:
             $ref: '#/components/schemas/templatebackendQuestionnaireQuestion'
           title: questions
           type: array
+        published:
+          title: published
+          type: boolean
         createdAt:
           format: date-time
           title: createdAt
