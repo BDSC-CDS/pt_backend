@@ -51,10 +51,10 @@ class QuestionnaireStore:
                 questionnaire_id = result[0]
 
                 for version in questionnaire.versions:
-                    self.create_questionnaire_version(
+                    self.create_questionnaire_version_inner(
                         tenantid=questionnaire.tenantid, userid=questionnaire.userid, 
                         questionnaire_id=questionnaire_id, version=version, 
-                        existing_session=session
+                        session=session
                     )
 
             except SQLAlchemyError as e:
@@ -62,7 +62,15 @@ class QuestionnaireStore:
 
             return Questionnaire(id=questionnaire_id)
         
-    def create_questionnaire_version(self, tenantid: int, userid: int, questionnaire_id: int, version: QuestionnaireVersion, existing_session=None) -> QuestionnaireVersion:
+    def create_questionnaire_version(self, tenantid: int, userid: int, questionnaire_id: int, version: QuestionnaireVersion) -> QuestionnaireVersion:
+        with self.session_scope() as session:
+            try:
+                res = self.create_questionnaire_version_inner(tenantid, userid, questionnaire_id, version, session)
+            except SQLAlchemyError as e:
+                raise e
+        return res
+
+    def create_questionnaire_version_inner(self, tenantid: int, userid: int, questionnaire_id: int, version: QuestionnaireVersion, session) -> QuestionnaireVersion:
         questionnaires_unpublish_all = """
         UPDATE questionnaire_versions SET
             published=false,
@@ -103,67 +111,61 @@ class QuestionnaireStore:
         RETURNING id;
         """
 
-        with existing_session or self.session_scope() as session:
-            try:
-                if version.published:
-                    # first unplish all other versions
-                    session.execute(text(questionnaires_unpublish_all), {
-                        'questionnaireid': questionnaire_id,
-                    })
+        if version.published:
+            # first unplish all other versions
+            session.execute(text(questionnaires_unpublish_all), {
+                'questionnaireid': questionnaire_id,
+            })
 
-                # Insert questionnaire version
-                result = session.execute(text(questionnaire_version_query), {
+        # Insert questionnaire version
+        result = session.execute(text(questionnaire_version_query), {
+            'userid': userid,
+            'tenantid': tenantid,
+            'questionnaireid': questionnaire_id,
+            'published': version.published,
+            'version': version.version
+        }).fetchone()
+        version_id = result[0]
+
+        for question in version.questions:
+            # Insert questionnaire question
+            result = session.execute(text(questionnaire_question_query), {
+                'userid': userid,
+                'tenantid': tenantid,
+                'questionnaireid': questionnaire_id,
+                'questionnaire_versionid': version_id,
+                'tab': question.tab,
+                'question': question.question,
+                'risk_weight': question.risk_weight,
+                'answer_type': question.answer_type,
+                'flag': question.flag,
+                'tooltip': question.tooltip
+            }).fetchone()
+            question_id = result[0]
+
+            for answer in question.answers:
+                # Insert questionnaire question answer
+                result = session.execute(text(questionnaire_answer_query), {
                     'userid': userid,
                     'tenantid': tenantid,
-                    'questionnaireid': questionnaire_id,
-                    'published': version.published,
-                    'version': version.version
+                    'questionnaire_questionid': question_id,
+                    'text': answer.text,
+                    'risk_level': answer.risk_level
                 }).fetchone()
-                version_id = result[0]
+                answer_id = result[0]
 
-                for question in version.questions:
-                    # Insert questionnaire question
-                    result = session.execute(text(questionnaire_question_query), {
+                for rule_prefill in answer.rule_prefills:
+                    # Insert questionnaire question answer rule prefill
+                    session.execute(text(questionnaire_rule_prefill_query), {
                         'userid': userid,
                         'tenantid': tenantid,
-                        'questionnaireid': questionnaire_id,
-                        'questionnaire_versionid': version_id,
-                        'tab': question.tab,
-                        'question': question.question,
-                        'risk_weight': question.risk_weight,
-                        'answer_type': question.answer_type,
-                        'flag': question.flag,
-                        'tooltip': question.tooltip
-                    }).fetchone()
-                    question_id = result[0]
+                        'questionnaire_question_answerid': answer_id,
+                        'questionid': rule_prefill.questionid,
+                        'answerid': rule_prefill.answerid,
+                        'answer_text': rule_prefill.answer_text
+                    })
 
-                    for answer in question.answers:
-                        # Insert questionnaire question answer
-                        result = session.execute(text(questionnaire_answer_query), {
-                            'userid': userid,
-                            'tenantid': tenantid,
-                            'questionnaire_questionid': question_id,
-                            'text': answer.text,
-                            'risk_level': answer.risk_level
-                        }).fetchone()
-                        answer_id = result[0]
-
-                        for rule_prefill in answer.rule_prefills:
-                            # Insert questionnaire question answer rule prefill
-                            session.execute(text(questionnaire_rule_prefill_query), {
-                                'userid': userid,
-                                'tenantid': tenantid,
-                                'questionnaire_question_answerid': answer_id,
-                                'questionid': rule_prefill.questionid,
-                                'answerid': rule_prefill.answerid,
-                                'answer_text': rule_prefill.answer_text
-                            })
-                    
-
-            except SQLAlchemyError as e:
-                raise e
-
-            return QuestionnaireVersion(id=version_id)
+        return QuestionnaireVersion(id=version_id)
         
     def create_reply(self, tenantid: int, userid: int, reply: Reply) -> Reply:
         questionnaire_reply_query = """
