@@ -13,6 +13,7 @@ Name | Type | Description | Notes
 **response** | **str** |  | [optional] 
 **created_at** | **datetime** |  | [optional] 
 **error** | **bool** |  | [optional] 
+**user** | [**TemplatebackendUser**](TemplatebackendUser.md) |  | [optional] 
 
 ## Example
 

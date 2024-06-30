@@ -11,10 +11,10 @@ class AuditLogControllerAuthentication():
         if not is_admin(user):
             return None, 403
         
-        return None
+        return self.next.audit_log_service_get_logs(user, offset, limit)
 
     def audit_log_service_get_logs_for_user(self, user, userid: int, offset: int=None, limit: int=None):
         if not is_admin_or_self(user, userid):
             return None, 403
         
-        return None
+        return self.next.audit_log_service_get_logs_for_user(user, userid, offset, limit)

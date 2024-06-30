@@ -3,6 +3,7 @@ package templatebackend;
 option go_package = ".;templatebackend";
 
 import "google/protobuf/timestamp.proto";
+import "user.proto";
 
 message AuditLog {
     int32 id = 1;
@@ -13,4 +14,5 @@ message AuditLog {
     string response = 6;
     google.protobuf.Timestamp created_at = 7;
     bool error = 8;
+    User user = 9;
 }

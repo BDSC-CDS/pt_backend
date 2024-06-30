@@ -118,6 +118,8 @@ definitions:
         format: date-time
       error:
         type: boolean
+      user:
+        $ref: '#/definitions/templatebackendUser'
   templatebackendGetLogsResponse:
     type: object
     properties:
@@ -126,6 +128,41 @@ definitions:
         items:
           type: object
           $ref: '#/definitions/templatebackendAuditLog'
+  templatebackendUser:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+      tenantid:
+        type: integer
+        format: int64
+      firstName:
+        type: string
+      lastName:
+        type: string
+      username:
+        type: string
+      email:
+        type: string
+      password:
+        type: string
+      status:
+        type: string
+      roles:
+        type: array
+        items:
+          type: string
+      totpEnabled:
+        type: boolean
+      createdAt:
+        type: string
+        format: date-time
+      updatedAt:
+        type: string
+        format: date-time
+      passwordChanged:
+        type: boolean
 securityDefinitions:
   Bearer:
     type: apiKey

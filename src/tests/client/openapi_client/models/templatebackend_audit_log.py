@@ -22,6 +22,7 @@ from datetime import datetime
 from typing import Any, ClassVar, Dict, List, Optional
 from pydantic import BaseModel, StrictBool, StrictInt, StrictStr
 from pydantic import Field
+from openapi_client.models.templatebackend_user import TemplatebackendUser
 try:
     from typing import Self
 except ImportError:
@@ -39,7 +40,8 @@ class TemplatebackendAuditLog(BaseModel):
     response: Optional[StrictStr] = None
     created_at: Optional[datetime] = Field(default=None, alias="createdAt")
     error: Optional[StrictBool] = None
-    __properties: ClassVar[List[str]] = ["id", "userid", "service", "action", "body", "response", "createdAt", "error"]
+    user: Optional[TemplatebackendUser] = None
+    __properties: ClassVar[List[str]] = ["id", "userid", "service", "action", "body", "response", "createdAt", "error", "user"]
 
     model_config = {
         "populate_by_name": True,
@@ -78,6 +80,9 @@ class TemplatebackendAuditLog(BaseModel):
             },
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of user
+        if self.user:
+            _dict['user'] = self.user.to_dict()
         return _dict
 
     @classmethod
@@ -97,7 +102,8 @@ class TemplatebackendAuditLog(BaseModel):
             "body": obj.get("body"),
             "response": obj.get("response"),
             "createdAt": obj.get("createdAt"),
-            "error": obj.get("error")
+            "error": obj.get("error"),
+            "user": TemplatebackendUser.from_dict(obj.get("user")) if obj.get("user") is not None else None
         })
         return _obj
 

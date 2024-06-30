@@ -46,7 +46,23 @@ class TestTemplatebackendGetLogsResponse(unittest.TestCase):
                         body = '', 
                         response = '', 
                         created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
-                        error = True, )
+                        error = True, 
+                        user = openapi_client.models.templatebackend_user.templatebackendUser(
+                            id = 56, 
+                            tenantid = 56, 
+                            first_name = '', 
+                            last_name = '', 
+                            username = '', 
+                            email = '', 
+                            password = '', 
+                            status = '', 
+                            roles = [
+                                ''
+                                ], 
+                            totp_enabled = True, 
+                            created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
+                            updated_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
+                            password_changed = True, ), )
                     ]
             )
         else:

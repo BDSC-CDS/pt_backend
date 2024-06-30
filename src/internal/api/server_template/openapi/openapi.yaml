@@ -791,6 +791,22 @@ components:
         body: body
         error: true
         userid: 6
+        user:
+          lastName: lastName
+          roles:
+          - roles
+          - roles
+          totpEnabled: true
+          firstName: firstName
+          createdAt: 2000-01-23T04:56:07.000+00:00
+          password: password
+          passwordChanged: true
+          tenantid: 6
+          id: 0
+          email: email
+          username: username
+          status: status
+          updatedAt: 2000-01-23T04:56:07.000+00:00
       properties:
         id:
           format: int32
@@ -819,6 +835,8 @@ components:
         error:
           title: error
           type: boolean
+        user:
+          $ref: '#/components/schemas/templatebackendUser'
       title: templatebackendAuditLog
       type: object
     templatebackendAuthenticationReply:
@@ -1348,6 +1366,22 @@ components:
           body: body
           error: true
           userid: 6
+          user:
+            lastName: lastName
+            roles:
+            - roles
+            - roles
+            totpEnabled: true
+            firstName: firstName
+            createdAt: 2000-01-23T04:56:07.000+00:00
+            password: password
+            passwordChanged: true
+            tenantid: 6
+            id: 0
+            email: email
+            username: username
+            status: status
+            updatedAt: 2000-01-23T04:56:07.000+00:00
         - createdAt: 2000-01-23T04:56:07.000+00:00
           service: service
           response: response
@@ -1356,6 +1390,22 @@ components:
           body: body
           error: true
           userid: 6
+          user:
+            lastName: lastName
+            roles:
+            - roles
+            - roles
+            totpEnabled: true
+            firstName: firstName
+            createdAt: 2000-01-23T04:56:07.000+00:00
+            password: password
+            passwordChanged: true
+            tenantid: 6
+            id: 0
+            email: email
+            username: username
+            status: status
+            updatedAt: 2000-01-23T04:56:07.000+00:00
       properties:
         logs:
           items:

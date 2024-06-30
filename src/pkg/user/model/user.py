@@ -51,6 +51,7 @@ class User:
         self.status = None
         self.source = None
         self.totpsecret = ""
+        return self
 
     def to_dict(self):
         return asdict(self)
