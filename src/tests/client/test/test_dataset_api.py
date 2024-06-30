@@ -62,6 +62,13 @@ class TestDatasetApi(unittest.TestCase):
         """
         pass
 
+    def test_dataset_service_transform_dataset(self) -> None:
+        """Test case for dataset_service_transform_dataset
+
+        Transform a dataset
+        """
+        pass
+
 
 if __name__ == '__main__':
     unittest.main()

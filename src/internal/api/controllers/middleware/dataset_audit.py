@@ -5,6 +5,9 @@ from server_template.models import TemplatebackendStoreDatasetRequest
 from  server_template.models import TemplatebackendGetDatasetContentReply
 from  server_template.models import TemplatebackendGetDatasetMetadataReply
 from  server_template.models import TemplatebackendListDatasetsReply
+from  server_template.models import TemplatebackendDeleteDatasetReply
+from  server_template.models import TemplatebackendTransformDatasetReply
+from  server_template.models import TemplatebackendTransformDatasetRequest
 
 from src.internal.api.controllers.dataset_controller import DatasetController
 from src.internal.util.interface.implements import implements_interface
@@ -77,4 +80,14 @@ class DatasetControllerAudit():
             return response
         except  Exception as e:
             self.auditLogService.log_event(AuditLog(service="dataset", userid=user.id,action="Error accessing list of datasets for user of size"+ str(len(response.result.datasets)), response=e, error=True))
+            raise e
+
+    def dataset_service_transform_dataset(self, user, body:TemplatebackendTransformDatasetRequest):
+        try:
+            response : TemplatebackendTransformDatasetReply =  self.next.dataset_service_transform_dataset(user,body)
+            response_serialized = response.result.columns or ''
+            self.auditLogService.log_event(AuditLog(service="dataset", userid=user.id,action="transformed dataset "+ str(body.dataset_id) + " with config " + str(body.config_id), response=response_serialized))
+            return response
+        except  Exception as e:
+            self.auditLogService.log_event(AuditLog(service="dataset", userid=user.id,action="Error transforming dataset "+ str(body.dataset_id) + " with config " + str(body.config_id), response=e, error=True))
             raise e

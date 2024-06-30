@@ -458,6 +458,34 @@ paths:
       tags:
       - Dataset
       x-openapi-router-controller: dataset_controller
+  /api/v1/dataset/transform:
+    post:
+      description: This endpoint transforms a dataset
+      operationId: dataset_service_transform_dataset
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/templatebackendTransformDatasetRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/templatebackendTransformDatasetReply'
+          description: A successful response.
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+          description: An unexpected error response.
+      summary: Transform a dataset
+      tags:
+      - Dataset
+      x-openapi-router-controller: dataset_controller
+      x-codegen-request-body-name: body
   /api/v1/dataset/{id}:
     delete:
       description: This endpoint deletes a dataset
@@ -3512,6 +3540,50 @@ components:
           title: id
           type: integer
       title: templatebackendStoreDatasetResult
+      type: object
+    templatebackendTransformDatasetReply:
+      example:
+        result:
+          columns:
+          - value:
+            - value
+            - value
+          - value:
+            - value
+            - value
+      properties:
+        result:
+          $ref: '#/components/schemas/templatebackendTransformDatasetResult'
+      title: templatebackendTransformDatasetReply
+      type: object
+    templatebackendTransformDatasetRequest:
+      properties:
+        datasetId:
+          format: int64
+          title: datasetId
+          type: integer
+        configId:
+          format: int64
+          title: configId
+          type: integer
+      title: templatebackendTransformDatasetRequest
+      type: object
+    templatebackendTransformDatasetResult:
+      example:
+        columns:
+        - value:
+          - value
+          - value
+        - value:
+          - value
+          - value
+      properties:
+        columns:
+          items:
+            $ref: '#/components/schemas/templatebackendColumn'
+          title: columns
+          type: array
+      title: templatebackendTransformDatasetResult
       type: object
     templatebackendUpdatePasswordReply:
       example:

@@ -130,3 +130,38 @@ class ConfigGeneratorStore:
             ]
 
             return result
+
+    def get_config(self, userid:int, tenantid:int,config_id:int) -> ConfigGenerator:
+        query = "SELECT * FROM config_generator WHERE  id =:id AND userid=:userid AND tenantid=:tenantid;"
+        with self.session_scope() as session:
+            config = session.execute(text(query), {
+                'id':config_id,
+                'userid':userid,
+                'tenantid':tenantid
+            }).mappings().fetchone()
+
+            if not config:
+                print("No config found")
+                return None
+
+            result = ConfigGenerator(
+                    id=config.id,
+                    userid=userid,
+                    tenantid=config.tenantid,
+                    questionnaireid=config.questionnaireid,
+                    hasScrambleField=config.hasScrambleField,
+                    hasDateShift=config.hasDateShift,
+                    hassubFieldList=config.hassubFieldList,
+                    hassubFieldRegex=config.hassubFieldRegex,
+                    scrambleField_fields=config.scrambleField_fields.split(","),
+                    dateShift_lowrange=config.dateShift_lowrange,
+                    dateShift_highrange=config.dateShift_highrange,
+                    subFieldList_fields=config.subFieldList_fields.split(","),
+                    subFieldList_substitute=config.subFieldList_substitute.split(","),
+                    subFieldList_replacement=config.subFieldList_replacement,
+                    suFieldRegex_fields=config.subFieldRegex_fields.split(","),
+                    subFieldRegex_regex=config.subFieldRegex_regex,
+                    subFieldRegex_replacement=config.subFieldRegex_replacement,
+                    created_at= config.created_at
+                )
+            return result

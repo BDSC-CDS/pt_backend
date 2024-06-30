@@ -111,6 +111,18 @@ message DeleteDatasetResult {
     bool success = 1;
 }
 
+message TransformDatasetRequest {
+    uint32 dataset_id = 1;
+    uint32 config_id = 2;
+}
+
+message TransformDatasetReply {
+    TransformDatasetResult result = 1;
+}
+message TransformDatasetResult {
+    repeated Column columns = 1;
+}
+
 service DatasetService {
     // Create a dataset
     rpc StoreDataset(StoreDatasetRequest) returns (StoreDatasetReply) {
@@ -188,6 +200,23 @@ service DatasetService {
             extensions: {
                 key: "x-openapi-router-controller";
                 value: {string_value: "dataset_controller"};
+            };
+        };
+    };
+
+    // Transform a dataset with a specific configuration
+    rpc TransformDataset(TransformDatasetRequest) returns (TransformDatasetReply) {
+        option (google.api.http) = {
+            post: "/api/v1/dataset/transform"
+            body: "*"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            summary: "Transform a dataset";
+            description: "This endpoint transforms a dataset";
+            tags: "Dataset";
+            extensions: {
+                key: "x-openapi-router-controller";
+                value {string_value: "dataset_controller"};
             };
         };
     };

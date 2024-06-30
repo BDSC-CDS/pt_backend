@@ -1,6 +1,6 @@
 from server_template.models import TemplatebackendDataset
 from server_template.models import TemplatebackendStoreDatasetRequest
-
+from server_template.models import TemplatebackendTransformDatasetRequest
 # from server_template.models import TemplatebackendUpdatePasswordRequest
 from src.internal.api.controllers.dataset_controller import DatasetController
 from src.internal.util.interface.implements import implements_interface
@@ -38,3 +38,8 @@ class DatasetControllerAuthentication():
         if not is_authenticated(user):
             return None, 403
         return self.next.dataset_service_list_datasets(user, offset,limit)
+
+    def dataset_service_transform_dataset(self, user, body:TemplatebackendTransformDatasetRequest):
+        if not is_authenticated(user):
+            return None, 403
+        return self.next.dataset_service_transform_dataset(user, body)
