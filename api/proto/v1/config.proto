@@ -17,10 +17,10 @@ message Config {
     repeated string scrambleField_fields = 9;
     int32 dateShift_lowrange = 10;
     int32 dateShift_highrange = 11;
-    repeated string subFieldList_fields = 12;
+    string subFieldList_field = 12;
     repeated string subFieldList_substitute = 13;
     string subFieldList_replacement = 14;
-    repeated string subFieldRegex_fields = 15;
+    string subFieldRegex_field = 15;
     string subFieldRegex_regex = 16;
     string subFieldRegex_replacement = 17;
 

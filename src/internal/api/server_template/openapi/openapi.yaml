@@ -745,9 +745,6 @@ components:
       example:
         hassubFieldList: true
         subFieldListReplacement: subFieldListReplacement
-        subFieldListFields:
-        - subFieldListFields
-        - subFieldListFields
         subFieldRegexRegex: subFieldRegexRegex
         hasDateShift: true
         hassubFieldRegex: true
@@ -758,16 +755,15 @@ components:
         dateShiftLowrange: 5
         userid: 6
         hasScrambleField: true
+        subFieldListField: subFieldListField
         createdAt: 2000-01-23T04:56:07.000+00:00
         dateShiftHighrange: 2
         tenantid: 1
+        subFieldRegexField: subFieldRegexField
         id: 0
         subFieldListSubstitute:
         - subFieldListSubstitute
         - subFieldListSubstitute
-        subFieldRegexFields:
-        - subFieldRegexFields
-        - subFieldRegexFields
         subFieldRegexReplacement: subFieldRegexReplacement
       properties:
         id:
@@ -811,11 +807,9 @@ components:
           format: int32
           title: dateShiftHighrange
           type: integer
-        subFieldListFields:
-          items:
-            type: string
-          title: subFieldListFields
-          type: array
+        subFieldListField:
+          title: subFieldListField
+          type: string
         subFieldListSubstitute:
           items:
             type: string
@@ -824,11 +818,9 @@ components:
         subFieldListReplacement:
           title: subFieldListReplacement
           type: string
-        subFieldRegexFields:
-          items:
-            type: string
-          title: subFieldRegexFields
-          type: array
+        subFieldRegexField:
+          title: subFieldRegexField
+          type: string
         subFieldRegexRegex:
           title: subFieldRegexRegex
           type: string
@@ -1023,9 +1015,6 @@ components:
           config:
           - hassubFieldList: true
             subFieldListReplacement: subFieldListReplacement
-            subFieldListFields:
-            - subFieldListFields
-            - subFieldListFields
             subFieldRegexRegex: subFieldRegexRegex
             hasDateShift: true
             hassubFieldRegex: true
@@ -1036,22 +1025,18 @@ components:
             dateShiftLowrange: 5
             userid: 6
             hasScrambleField: true
+            subFieldListField: subFieldListField
             createdAt: 2000-01-23T04:56:07.000+00:00
             dateShiftHighrange: 2
             tenantid: 1
+            subFieldRegexField: subFieldRegexField
             id: 0
             subFieldListSubstitute:
             - subFieldListSubstitute
             - subFieldListSubstitute
-            subFieldRegexFields:
-            - subFieldRegexFields
-            - subFieldRegexFields
             subFieldRegexReplacement: subFieldRegexReplacement
           - hassubFieldList: true
             subFieldListReplacement: subFieldListReplacement
-            subFieldListFields:
-            - subFieldListFields
-            - subFieldListFields
             subFieldRegexRegex: subFieldRegexRegex
             hasDateShift: true
             hassubFieldRegex: true
@@ -1062,16 +1047,15 @@ components:
             dateShiftLowrange: 5
             userid: 6
             hasScrambleField: true
+            subFieldListField: subFieldListField
             createdAt: 2000-01-23T04:56:07.000+00:00
             dateShiftHighrange: 2
             tenantid: 1
+            subFieldRegexField: subFieldRegexField
             id: 0
             subFieldListSubstitute:
             - subFieldListSubstitute
             - subFieldListSubstitute
-            subFieldRegexFields:
-            - subFieldRegexFields
-            - subFieldRegexFields
             subFieldRegexReplacement: subFieldRegexReplacement
       properties:
         result:
@@ -1083,9 +1067,6 @@ components:
         config:
         - hassubFieldList: true
           subFieldListReplacement: subFieldListReplacement
-          subFieldListFields:
-          - subFieldListFields
-          - subFieldListFields
           subFieldRegexRegex: subFieldRegexRegex
           hasDateShift: true
           hassubFieldRegex: true
@@ -1096,22 +1077,18 @@ components:
           dateShiftLowrange: 5
           userid: 6
           hasScrambleField: true
+          subFieldListField: subFieldListField
           createdAt: 2000-01-23T04:56:07.000+00:00
           dateShiftHighrange: 2
           tenantid: 1
+          subFieldRegexField: subFieldRegexField
           id: 0
           subFieldListSubstitute:
           - subFieldListSubstitute
           - subFieldListSubstitute
-          subFieldRegexFields:
-          - subFieldRegexFields
-          - subFieldRegexFields
           subFieldRegexReplacement: subFieldRegexReplacement
         - hassubFieldList: true
           subFieldListReplacement: subFieldListReplacement
-          subFieldListFields:
-          - subFieldListFields
-          - subFieldListFields
           subFieldRegexRegex: subFieldRegexRegex
           hasDateShift: true
           hassubFieldRegex: true
@@ -1122,16 +1099,15 @@ components:
           dateShiftLowrange: 5
           userid: 6
           hasScrambleField: true
+          subFieldListField: subFieldListField
           createdAt: 2000-01-23T04:56:07.000+00:00
           dateShiftHighrange: 2
           tenantid: 1
+          subFieldRegexField: subFieldRegexField
           id: 0
           subFieldListSubstitute:
           - subFieldListSubstitute
           - subFieldListSubstitute
-          subFieldRegexFields:
-          - subFieldRegexFields
-          - subFieldRegexFields
           subFieldRegexReplacement: subFieldRegexReplacement
       properties:
         config:
