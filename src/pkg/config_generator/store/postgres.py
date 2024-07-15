@@ -51,10 +51,10 @@ class ConfigGeneratorStore:
                     'scrambleField_fields': ','.join(config_generator.scrambleField_fields) if config_generator.scrambleField_fields else '',
                     'dateShift_lowrange': config_generator.dateShift_lowrange,
                     'dateShift_highrange': config_generator.dateShift_highrange,
-                    'subFieldList_field': ','.join(config_generator.subFieldList_field) if config_generator.subFieldList_field else '',
+                    'subFieldList_field': config_generator.subFieldList_field,
                     'subFieldList_substitute': ','.join(config_generator.subFieldList_substitute) if config_generator.subFieldList_substitute else '',
                     'subFieldList_replacement': config_generator.subFieldList_replacement,
-                    'subFieldRegex_field': ','.join(config_generator.subFieldRegex_field) if config_generator.subFieldRegex_field else '',
+                    'subFieldRegex_field':config_generator.subFieldRegex_field,
                     'subFieldRegex_regex': config_generator.subFieldRegex_regex,
                     'subFieldRegex_replacement': config_generator.subFieldRegex_replacement
                 }).fetchone()
