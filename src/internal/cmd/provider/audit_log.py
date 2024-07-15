@@ -1,12 +1,31 @@
+from src.internal.api.controllers import security_controller
+import src.internal.api.controllers.audit_log_controller as internal_audit_log_controller
+import src.internal.api.server_template.controllers.audit_log_controller as connexion_audit_log_controller
+import src.internal.api.controllers.middleware.audit_log_authorization as audit_log_controller_authorization
 from src.pkg.audit_log.service.audit_log import AuditLogService
+from .config import provide_config
 from src.pkg.audit_log.store.postgres import AuditLogStore as PostgresAuditStore
 from .db import provide_db_type, provide_db
 
+audit_log_controller = None
 audit_log_service = None
 audit_log_store = None
 
+def provide_audit_log_controller():
+    global audit_log_controller
+
+    if audit_log_controller is not None:
+        return audit_log_controller
+
+    controller = internal_audit_log_controller.AuditLogController(provide_config(), provide_audit_log_service())
+    controller = audit_log_controller_authorization.AuditLogControllerAuthentication(controller)
+    audit_log_controller = connexion_audit_log_controller.AuditLogController(controller)
+
+    return audit_log_controller
+
 def provide_audit_log_service():
     global audit_log_service
+
     if audit_log_service is not None:
         return audit_log_service
 

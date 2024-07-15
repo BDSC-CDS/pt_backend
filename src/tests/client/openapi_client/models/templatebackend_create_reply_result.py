@@ -20,19 +20,18 @@ import json
 
 
 from typing import Any, ClassVar, Dict, List, Optional
-from pydantic import BaseModel
-from openapi_client.models.templatebackend_get_config_result import TemplatebackendGetConfigResult
+from pydantic import BaseModel, StrictInt
 try:
     from typing import Self
 except ImportError:
     from typing_extensions import Self
 
-class TemplatebackendGetConfigReply(BaseModel):
+class TemplatebackendCreateReplyResult(BaseModel):
     """
-    TemplatebackendGetConfigReply
+    TemplatebackendCreateReplyResult
     """ # noqa: E501
-    result: Optional[TemplatebackendGetConfigResult] = None
-    __properties: ClassVar[List[str]] = ["result"]
+    id: Optional[StrictInt] = None
+    __properties: ClassVar[List[str]] = ["id"]
 
     model_config = {
         "populate_by_name": True,
@@ -52,7 +51,7 @@ class TemplatebackendGetConfigReply(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Self:
-        """Create an instance of TemplatebackendGetConfigReply from a JSON string"""
+        """Create an instance of TemplatebackendCreateReplyResult from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -71,14 +70,11 @@ class TemplatebackendGetConfigReply(BaseModel):
             },
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of result
-        if self.result:
-            _dict['result'] = self.result.to_dict()
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Dict) -> Self:
-        """Create an instance of TemplatebackendGetConfigReply from a dict"""
+        """Create an instance of TemplatebackendCreateReplyResult from a dict"""
         if obj is None:
             return None
 
@@ -86,7 +82,7 @@ class TemplatebackendGetConfigReply(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "result": TemplatebackendGetConfigResult.from_dict(obj.get("result")) if obj.get("result") is not None else None
+            "id": obj.get("id")
         })
         return _obj
 

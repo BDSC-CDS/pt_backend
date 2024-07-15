@@ -276,14 +276,14 @@ class DatasetStore:
 
     def transform_dataset(self,userid:int,tenantid:int,dataset_id:int,config_id:int) -> str:
         # first get the config
-        query_config = "SELECT * FROM config_generator WHERE id=:id AND userid = :userid AND tenantid = :tenantid;"
+        query_config = "SELECT * FROM config_generator WHERE id=:id;"
         with self.session_scope() as session:
             try:
                 dataset =  self.get_dataset_content(dataset_id, userid, tenantid)
                 config = session.execute(text(query_config), {
                     'id': config_id,
-                    'userid': userid,
-                    'tenantid': tenantid,
+                    # 'userid': userid,
+                    # 'tenantid': tenantid,
                 }).mappings().fetchone()
                 # check dataset
                 if (not dataset ):

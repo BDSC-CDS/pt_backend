@@ -3,11 +3,15 @@ from src.pkg.questionnaire.model.questionnaire import QuestionnaireVersion
 from src.pkg.questionnaire.model.questionnaire import QuestionnaireQuestion
 from src.pkg.questionnaire.model.questionnaire import QuestionnaireQuestionAnswer
 from src.pkg.questionnaire.model.questionnaire import QuestionnaireQuestionAnswerRulePrefill
+from src.pkg.questionnaire.model.questionnaire import Reply
+from src.pkg.questionnaire.model.questionnaire import QuestionReply
 from server_template.models import TemplatebackendQuestionnaire
 from server_template.models import TemplatebackendQuestionnaireVersion
 from server_template.models import TemplatebackendQuestionnaireQuestion
 from server_template.models import TemplatebackendQuestionnaireQuestionAnswer
 from server_template.models import TemplatebackendQuestionnaireQuestionAnswerRulePrefill
+from server_template.models import TemplatebackendQuestionnaireReply
+from server_template.models import TemplatebackendQuestionnaireQuestionReply
 
 # def questionnaire_to_business(questionnaire: TemplatebackendQuestionnaire) -> Questionnaire:
 #     return Questionnaire(
@@ -41,6 +45,7 @@ def questionnaire_version_from_business(version: QuestionnaireVersion) -> Templa
         id=version.id,
         version=version.version,
         questions=[questionnaire_question_from_business(question) for question in version.questions] if version.questions else [],
+        published=version.published,
         created_at=version.createdat,
         updated_at=version.updatedat,
     )
@@ -97,6 +102,7 @@ def questionnaire_version_to_business(version: TemplatebackendQuestionnaireVersi
         id=version.id,
         version=version.version,
         questions=[questionnaire_question_to_business(question) for question in version.questions] if version.questions else [],
+        published=version.published,
         createdat=version.created_at,
         updatedat=version.updated_at,
     )
@@ -133,4 +139,44 @@ def questionnaire_question_answer_rule_prefill_to_business(rule: Templatebackend
         answer_text=rule.answer_text,
         createdat=rule.created_at,
         updatedat=rule.updated_at,
+    )
+
+def question_reply_to_business(reply: TemplatebackendQuestionnaireQuestionReply) -> Reply:
+    print("to busi reply", reply)
+    return QuestionReply(
+        id=reply.id,
+        questionnaire_question_id=reply.questionnaire_question_id,
+        answer=reply.answer,
+        createdat=reply.created_at,
+        updatedat=reply.updated_at,
+    )
+
+def reply_to_business(reply: TemplatebackendQuestionnaireReply) -> Reply:
+    print("to busi reply", reply)
+    return Reply(
+        id=reply.id,
+        project_name=reply.project_name,
+        questionnaire_version_id=reply.questionnaire_version_id,
+        replies=[question_reply_to_business(qr) for qr in reply.replies],
+        createdat=reply.created_at,
+        updatedat=reply.updated_at,
+    )
+
+def question_reply_from_business(reply:QuestionReply) -> TemplatebackendQuestionnaireQuestionReply:
+    return TemplatebackendQuestionnaireQuestionReply(
+        id=reply.id,
+        questionnaire_question_id=reply.questionnaire_question_id,
+        answer=reply.answer,
+        created_at=reply.createdat,
+        updated_at=reply.updatedat,
+    )
+
+def reply_from_business(reply: Reply) -> TemplatebackendQuestionnaireReply:
+    return TemplatebackendQuestionnaireReply(
+        id=reply.id,
+        project_name=reply.project_name,
+        questionnaire_version_id=reply.questionnaire_version_id,
+        replies=[question_reply_from_business(qr) for qr in reply.replies],
+        created_at=reply.createdat,
+        updated_at=reply.updatedat,
     )

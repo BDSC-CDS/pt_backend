@@ -38,7 +38,12 @@ class TestTemplatebackendGetDatasetContentReply(unittest.TestCase):
         if include_optional:
             return TemplatebackendGetDatasetContentReply(
                 result = openapi_client.models.templatebackend_get_dataset_content_result.templatebackendGetDatasetContentResult(
-                    dataframe = 'YQ==', )
+                    columns = [
+                        openapi_client.models.templatebackend_column.templatebackendColumn(
+                            value = [
+                                ''
+                                ], )
+                        ], )
             )
         else:
             return TemplatebackendGetDatasetContentReply(

@@ -41,6 +41,7 @@ class TestTemplatebackendCreateQuestionnaireRequest(unittest.TestCase):
                     id = 56, 
                     name = '', 
                     reply_editable = True, 
+                    last_version = '', 
                     versions = [
                         openapi_client.models.templatebackend_questionnaire_version.templatebackendQuestionnaireVersion(
                             id = 56, 
@@ -74,6 +75,7 @@ class TestTemplatebackendCreateQuestionnaireRequest(unittest.TestCase):
                                     created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
                                     updated_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), )
                                 ], 
+                            published = True, 
                             created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
                             updated_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), )
                         ], 

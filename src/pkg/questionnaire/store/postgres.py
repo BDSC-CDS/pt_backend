@@ -8,6 +8,8 @@ from src.pkg.questionnaire.model.questionnaire import QuestionnaireVersion
 from src.pkg.questionnaire.model.questionnaire import QuestionnaireQuestion
 from src.pkg.questionnaire.model.questionnaire import QuestionnaireQuestionAnswer
 from src.pkg.questionnaire.model.questionnaire import QuestionnaireQuestionAnswerRulePrefill
+from src.pkg.questionnaire.model.questionnaire import Reply
+from src.pkg.questionnaire.model.questionnaire import QuestionReply
 
 
 class QuestionnaireStore:
@@ -37,11 +39,51 @@ class QuestionnaireStore:
         RETURNING id;
         """
 
+        with self.session_scope() as session:
+            try:
+                # Insert questionnaire
+                result = session.execute(text(questionnaire_query), {
+                    'userid': questionnaire.userid,
+                    'tenantid': questionnaire.tenantid,
+                    'name': questionnaire.name,
+                    'reply_editable': questionnaire.reply_editable
+                }).fetchone()
+                questionnaire_id = result[0]
+
+                for version in questionnaire.versions:
+                    self.create_questionnaire_version_inner(
+                        tenantid=questionnaire.tenantid, userid=questionnaire.userid, 
+                        questionnaire_id=questionnaire_id, version=version, 
+                        session=session
+                    )
+
+            except SQLAlchemyError as e:
+                raise e
+
+            return Questionnaire(id=questionnaire_id)
+        
+    def create_questionnaire_version(self, tenantid: int, userid: int, questionnaire_id: int, version: QuestionnaireVersion) -> QuestionnaireVersion:
+        with self.session_scope() as session:
+            try:
+                res = self.create_questionnaire_version_inner(tenantid, userid, questionnaire_id, version, session)
+            except SQLAlchemyError as e:
+                raise e
+        return res
+
+    def create_questionnaire_version_inner(self, tenantid: int, userid: int, questionnaire_id: int, version: QuestionnaireVersion, session) -> QuestionnaireVersion:
+        questionnaires_unpublish_all = """
+        UPDATE questionnaire_versions SET
+            published=false,
+            updatedat=now()
+        WHERE
+            questionnaireid = :questionnaireid;
+        """
+        
         questionnaire_version_query = """
         INSERT INTO questionnaire_versions 
-            (userid, tenantid, questionnaireid, version, createdat, updatedat) 
+            (userid, tenantid, questionnaireid, version, published, createdat, updatedat) 
         VALUES 
-            (:userid, :tenantid, :questionnaireid, :version, now(), now()) 
+            (:userid, :tenantid, :questionnaireid, :version, :published, now(), now()) 
         RETURNING id;
         """
 
@@ -69,81 +111,205 @@ class QuestionnaireStore:
         RETURNING id;
         """
 
+        if version.published:
+            # first unplish all other versions
+            session.execute(text(questionnaires_unpublish_all), {
+                'questionnaireid': questionnaire_id,
+            })
+
+        # Insert questionnaire version
+        result = session.execute(text(questionnaire_version_query), {
+            'userid': userid,
+            'tenantid': tenantid,
+            'questionnaireid': questionnaire_id,
+            'published': version.published,
+            'version': version.version
+        }).fetchone()
+        version_id = result[0]
+
+        for question in version.questions:
+            # Insert questionnaire question
+            result = session.execute(text(questionnaire_question_query), {
+                'userid': userid,
+                'tenantid': tenantid,
+                'questionnaireid': questionnaire_id,
+                'questionnaire_versionid': version_id,
+                'tab': question.tab,
+                'question': question.question,
+                'risk_weight': question.risk_weight,
+                'answer_type': question.answer_type,
+                'flag': question.flag,
+                'tooltip': question.tooltip
+            }).fetchone()
+            question_id = result[0]
+
+            for answer in question.answers:
+                # Insert questionnaire question answer
+                result = session.execute(text(questionnaire_answer_query), {
+                    'userid': userid,
+                    'tenantid': tenantid,
+                    'questionnaire_questionid': question_id,
+                    'text': answer.text,
+                    'risk_level': answer.risk_level
+                }).fetchone()
+                answer_id = result[0]
+
+                for rule_prefill in answer.rule_prefills:
+                    # Insert questionnaire question answer rule prefill
+                    session.execute(text(questionnaire_rule_prefill_query), {
+                        'userid': userid,
+                        'tenantid': tenantid,
+                        'questionnaire_question_answerid': answer_id,
+                        'questionid': rule_prefill.questionid,
+                        'answerid': rule_prefill.answerid,
+                        'answer_text': rule_prefill.answer_text
+                    })
+
+        return QuestionnaireVersion(id=version_id)
+        
+    def create_reply(self, tenantid: int, userid: int, reply: Reply) -> Reply:
+        questionnaire_reply_query = """
+        INSERT INTO questionnaire_replies 
+            (project_name, userid, tenantid, questionnaire_versionid, questionnaireid, createdat, updatedat) 
+        VALUES 
+            (:project_name, :userid, :tenantid, :questionnaire_versionid, (select questionnaireid from questionnaire_versions where id = :questionnaire_versionid), now(), now()) 
+        RETURNING id;
+        """
+
+        questionnaire_question_reply_query = """
+        INSERT INTO questionnaire_question_reply 
+            (replyid, userid, tenantid, questionnaire_versionid, questionnaire_questionid, questionnaireid, answer, createdat, updatedat) 
+        VALUES 
+            (:replyid, :userid, :tenantid, :questionnaire_versionid, :questionnaire_questionid, (select questionnaireid from questionnaire_versions where id = :questionnaire_versionid), :answer, now(), now()) 
+        RETURNING id;
+        """
+
         with self.session_scope() as session:
             try:
-                # Insert questionnaire
-                result = session.execute(text(questionnaire_query), {
-                    'userid': questionnaire.userid,
-                    'tenantid': questionnaire.tenantid,
-                    'name': questionnaire.name,
-                    'reply_editable': questionnaire.reply_editable
+                result = session.execute(text(questionnaire_reply_query), {
+                    'project_name': reply.project_name,
+                    'userid': userid,
+                    'tenantid': tenantid,
+                    'questionnaire_versionid': reply.questionnaire_version_id
                 }).fetchone()
-                questionnaire_id = result[0]
+                reply_id = result[0]
 
-                for version in questionnaire.versions:
-                    # Insert questionnaire version
-                    result = session.execute(text(questionnaire_version_query), {
-                        'userid': questionnaire.userid,
-                        'tenantid': questionnaire.tenantid,
-                        'questionnaireid': questionnaire_id,
-                        'version': version.version
-                    }).fetchone()
-                    version_id = result[0]
-
-                    for question in version.questions:
-                        # Insert questionnaire question
-                        result = session.execute(text(questionnaire_question_query), {
-                            'userid': questionnaire.userid,
-                            'tenantid': questionnaire.tenantid,
-                            'questionnaireid': questionnaire_id,
-                            'questionnaire_versionid': version_id,
-                            'tab': question.tab,
-                            'question': question.question,
-                            'risk_weight': question.risk_weight,
-                            'answer_type': question.answer_type,
-                            'flag': question.flag,
-                            'tooltip': question.tooltip
-                        }).fetchone()
-                        question_id = result[0]
-
-                        for answer in question.answers:
-                            # Insert questionnaire question answer
-                            result = session.execute(text(questionnaire_answer_query), {
-                                'userid': questionnaire.userid,
-                                'tenantid': questionnaire.tenantid,
-                                'questionnaire_questionid': question_id,
-                                'text': answer.text,
-                                'risk_level': answer.risk_level
-                            }).fetchone()
-                            answer_id = result[0]
-
-                            for rule_prefill in answer.rule_prefills:
-                                # Insert questionnaire question answer rule prefill
-                                session.execute(text(questionnaire_rule_prefill_query), {
-                                    'userid': questionnaire.userid,
-                                    'tenantid': questionnaire.tenantid,
-                                    'questionnaire_question_answerid': answer_id,
-                                    'questionid': rule_prefill.questionid,
-                                    'answerid': rule_prefill.answerid,
-                                    'answer_text': rule_prefill.answer_text
-                                })
+                for question_reply in reply.replies:
+                    session.execute(text(questionnaire_question_reply_query), {
+                        'replyid': reply_id,
+                        'userid': userid,
+                        'tenantid': tenantid,
+                        'questionnaire_versionid': reply.questionnaire_version_id,
+                        'questionnaire_questionid': question_reply.questionnaire_question_id,
+                        'answer': question_reply.answer
+                    })
 
             except SQLAlchemyError as e:
                 raise e
 
-            return Questionnaire(id=questionnaire_id)
+            return Reply(
+                id=reply_id
+            )
+    
+    def get_reply(self, tenantid: int, userid: int, reply_id: int) -> Reply:
+        reply_query = """
+        SELECT id, userid, tenantid, project_name, questionnaire_versionid, createdat, updatedat, deletedat
+        FROM questionnaire_replies
+        WHERE id = :reply_id and deletedat is null;
+        """
+
+        question_reply_query = """
+        SELECT id, userid, tenantid, questionnaire_questionid, answer, createdat, updatedat, deletedat
+        FROM questionnaire_question_reply
+        WHERE replyid = :reply_id;
+        """
+
+        with self.session_scope() as session:
+            try:
+                result = session.execute(text(reply_query), {'reply_id': reply_id}).mappings().fetchone()
+                if not result:
+                    return None  
+
+                reply = Reply(
+                    id=result['id'],
+                    userid=result['userid'],
+                    tenantid=result['tenantid'],
+                    project_name=result['project_name'],
+                    questionnaire_version_id=result['questionnaire_versionid'],
+                    createdat=result['createdat'],
+                    updatedat=result['updatedat'],
+                    deletedat=result['deletedat'],
+                    replies=[]
+                )
+
+                question_reply_results = session.execute(text(question_reply_query), {'reply_id': reply.id}).mappings().fetchall()
+                for question_reply_row in question_reply_results:
+                    question_reply = QuestionReply(
+                        id=question_reply_row['id'],
+                        userid=question_reply_row['userid'],
+                        tenantid=question_reply_row['tenantid'],
+                        questionnaire_question_id=question_reply_row['questionnaire_questionid'],
+                        answer=question_reply_row['answer'],
+                        createdat=question_reply_row['createdat'],
+                        updatedat=question_reply_row['updatedat'],
+                        deletedat=question_reply_row['deletedat']
+                    )
+                    reply.replies.append(question_reply)
+
+            except SQLAlchemyError as e:
+                raise e
+
+            return reply
+    
+    def list_replies(self, tenantid: int, userid: int, offset: int, limit: int) -> list[Reply]:
+        reply_query = """
+        SELECT id, userid, tenantid, project_name, questionnaire_versionid, createdat, updatedat, deletedat
+        FROM questionnaire_replies
+        WHERE userid = :userid and deletedat is null
+        OFFSET :offset
+        LIMIT :limit;
+        """
+
+        with self.session_scope() as session:
+            try:
+                results = session.execute(text(reply_query), {
+                    'userid': userid,
+                    'offset': offset,
+                    'limit': limit,
+                }).mappings().fetchall()
+
+                replies = [
+                    Reply(
+                        id=result['id'],
+                        userid=result['userid'],
+                        tenantid=result['tenantid'],
+                        project_name=result['project_name'],
+                        questionnaire_version_id=result['questionnaire_versionid'],
+                        createdat=result['createdat'],
+                        updatedat=result['updatedat'],
+                        deletedat=result['deletedat'],
+                        replies=[]
+                    ) for result in results
+                ]
+
+            except SQLAlchemyError as e:
+                raise e
+
+            return replies
+
         
     def get_questionnaire(self, tenantid: int, userid: int, questionnaire_id: int) -> Questionnaire:
         questionnaire_query = """
         SELECT id, userid, tenantid, name, reply_editable, createdat, updatedat, deletedat
         FROM questionnaires
-        WHERE id = :questionnaire_id;
+        WHERE id = :questionnaire_id and deletedat is null;
         """
 
         questionnaire_version_query = """
-        SELECT id, version, createdat, updatedat, deletedat
+        SELECT id, version, published, createdat, updatedat, deletedat
         FROM questionnaire_versions
-        WHERE questionnaireid = :questionnaire_id;
+        WHERE questionnaireid = :questionnaire_id  and deletedat is null
+        ORDER BY createdat DESC;
         """
 
         questionnaire_question_query = """
@@ -189,6 +355,7 @@ class QuestionnaireStore:
                     version = QuestionnaireVersion(
                         id=version_row['id'],
                         version=version_row['version'],
+                        published=version_row['published'],
                         createdat=version_row['createdat'],
                         updatedat=version_row['updatedat'],
                         deletedat=version_row['deletedat'],
@@ -275,6 +442,8 @@ class QuestionnaireStore:
         ) subq ON q.id = subq.questionnaireid
         LEFT JOIN 
             questionnaire_versions v ON subq.max_version_id = v.id
+        WHERE
+            q.deletedat is null
         OFFSET 
             :offset 
         LIMIT 
@@ -310,6 +479,7 @@ class QuestionnaireStore:
                 #     version = QuestionnaireVersion(
                 #         id=version_row['id'],
                 #         version=version_row['version'],
+                #         published=version_row['published'],
                 #         createdat=version_row['createdat'],
                 #         updatedat=version_row['updatedat'],
                 #         deletedat=version_row['deletedat'],

@@ -7,6 +7,10 @@ from flask import json
 from server_template.models.rpc_status import RpcStatus
 from server_template.models.templatebackend_create_questionnaire_reply import TemplatebackendCreateQuestionnaireReply
 from server_template.models.templatebackend_create_questionnaire_request import TemplatebackendCreateQuestionnaireRequest
+from server_template.models.templatebackend_create_questionnaire_version_reply import TemplatebackendCreateQuestionnaireVersionReply
+from server_template.models.templatebackend_create_questionnaire_version_request import TemplatebackendCreateQuestionnaireVersionRequest
+from server_template.models.templatebackend_create_reply_reply import TemplatebackendCreateReplyReply
+from server_template.models.templatebackend_create_reply_request import TemplatebackendCreateReplyRequest
 from server_template.models.templatebackend_delete_questionnaire_reply import TemplatebackendDeleteQuestionnaireReply
 from server_template.models.templatebackend_get_questionnaire_reply import TemplatebackendGetQuestionnaireReply
 from server_template.models.templatebackend_get_reply_reply import TemplatebackendGetReplyReply
@@ -31,6 +35,46 @@ class TestQuestionnaireController(BaseTestCase):
         }
         response = self.client.open(
             '/api/v1/questionnaire',
+            method='POST',
+            headers=headers,
+            data=json.dumps(body),
+            content_type='application/json')
+        self.assert200(response,
+                       'Response body is : ' + response.data.decode('utf-8'))
+
+    def test_questionnaire_service_create_questionnaire_version(self):
+        """Test case for questionnaire_service_create_questionnaire_version
+
+        Create a questionnaire version
+        """
+        body = server_template.TemplatebackendCreateQuestionnaireVersionRequest()
+        headers = { 
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Bearer': 'special-key',
+        }
+        response = self.client.open(
+            '/api/v1/questionnaire/version',
+            method='POST',
+            headers=headers,
+            data=json.dumps(body),
+            content_type='application/json')
+        self.assert200(response,
+                       'Response body is : ' + response.data.decode('utf-8'))
+
+    def test_questionnaire_service_create_reply(self):
+        """Test case for questionnaire_service_create_reply
+
+        Create questionnaires reply
+        """
+        body = server_template.TemplatebackendCreateReplyRequest()
+        headers = { 
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Bearer': 'special-key',
+        }
+        response = self.client.open(
+            '/api/v1/questionnaire/replies',
             method='POST',
             headers=headers,
             data=json.dumps(body),
@@ -80,7 +124,7 @@ class TestQuestionnaireController(BaseTestCase):
             'Bearer': 'special-key',
         }
         response = self.client.open(
-            '/api/v1/questionnaire/{questionnaire_version_id}/replies/{reply_id}'.format(questionnaire_version_id=56, reply_id=56),
+            '/api/v1/questionnaire/replies/{id}'.format(id=56),
             method='GET',
             headers=headers)
         self.assert200(response,
@@ -117,7 +161,7 @@ class TestQuestionnaireController(BaseTestCase):
             'Bearer': 'special-key',
         }
         response = self.client.open(
-            '/api/v1/questionnaire/{questionnaire_version_id}/replies'.format(questionnaire_version_id=56),
+            '/api/v1/questionnaire/replies',
             method='GET',
             headers=headers,
             query_string=query_string)

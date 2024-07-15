@@ -13,6 +13,7 @@ class TestAuditLogModel(unittest.TestCase):
             'error': False,
             'created_at': '01-01-2024',
             'id': None,
+            'user': None,
         }
         self.assertEqual(log.to_dict(), expected)
 

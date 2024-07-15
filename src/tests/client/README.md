@@ -77,16 +77,17 @@ configuration.api_key['Bearer'] = os.environ["API_KEY"]
 # Enter a context with an instance of the API client
 with openapi_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.AuthenticationApi(api_client)
-    body = openapi_client.TemplatebackendCredentials() # TemplatebackendCredentials | 
+    api_instance = openapi_client.AuditLogApi(api_client)
+    offset = 56 # int |  (optional)
+    limit = 56 # int |  (optional)
 
     try:
-        # Authenticate
-        api_response = api_instance.authentication_service_authenticate(body)
-        print("The response of AuthenticationApi->authentication_service_authenticate:\n")
+        # Get logs
+        api_response = api_instance.audit_log_service_get_logs(offset=offset, limit=limit)
+        print("The response of AuditLogApi->audit_log_service_get_logs:\n")
         pprint(api_response)
     except ApiException as e:
-        print("Exception when calling AuthenticationApi->authentication_service_authenticate: %s\n" % e)
+        print("Exception when calling AuditLogApi->audit_log_service_get_logs: %s\n" % e)
 
 ```
 
@@ -96,6 +97,8 @@ All URIs are relative to *http://localhost*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
+*AuditLogApi* | [**audit_log_service_get_logs**](docs/AuditLogApi.md#audit_log_service_get_logs) | **GET** /api/v1/audit/logs | Get logs
+*AuditLogApi* | [**audit_log_service_get_logs_for_user**](docs/AuditLogApi.md#audit_log_service_get_logs_for_user) | **GET** /api/v1/audit/users/{userid}/logs | Get logs for a user
 *AuthenticationApi* | [**authentication_service_authenticate**](docs/AuthenticationApi.md#authentication_service_authenticate) | **POST** /api/rest/v1/authentication/login | Authenticate
 *ConfigurationApi* | [**config_service_create_config**](docs/ConfigurationApi.md#config_service_create_config) | **POST** /api/rest/v1/configs | Create a configuration
 *ConfigurationApi* | [**config_service_get_configs**](docs/ConfigurationApi.md#config_service_get_configs) | **GET** /api/rest/v1/configs | Get configuration files
@@ -108,11 +111,13 @@ Class | Method | HTTP request | Description
 *IndexApi* | [**index_service_create_hello**](docs/IndexApi.md#index_service_create_hello) | **POST** /api/v1/hello/{identifier} | Get a hello
 *IndexApi* | [**index_service_get_hello**](docs/IndexApi.md#index_service_get_hello) | **GET** /api/v1/hello | Get a hello
 *QuestionnaireApi* | [**questionnaire_service_create_questionnaire**](docs/QuestionnaireApi.md#questionnaire_service_create_questionnaire) | **POST** /api/v1/questionnaire | Create a questionnaire
+*QuestionnaireApi* | [**questionnaire_service_create_questionnaire_version**](docs/QuestionnaireApi.md#questionnaire_service_create_questionnaire_version) | **POST** /api/v1/questionnaire/version | Create a questionnaire version
+*QuestionnaireApi* | [**questionnaire_service_create_reply**](docs/QuestionnaireApi.md#questionnaire_service_create_reply) | **POST** /api/v1/questionnaire/replies | Create questionnaires reply
 *QuestionnaireApi* | [**questionnaire_service_delete_questionnaire**](docs/QuestionnaireApi.md#questionnaire_service_delete_questionnaire) | **DELETE** /api/v1/questionnaire/{id} | Create a questionnaire
 *QuestionnaireApi* | [**questionnaire_service_get_questionnaire**](docs/QuestionnaireApi.md#questionnaire_service_get_questionnaire) | **GET** /api/v1/questionnaire/{id} | Get questionnaires
-*QuestionnaireApi* | [**questionnaire_service_get_reply**](docs/QuestionnaireApi.md#questionnaire_service_get_reply) | **GET** /api/v1/questionnaire/{questionnaireVersionId}/replies/{replyId} | Get a questionnaires reply
+*QuestionnaireApi* | [**questionnaire_service_get_reply**](docs/QuestionnaireApi.md#questionnaire_service_get_reply) | **GET** /api/v1/questionnaire/replies/{id} | Get a questionnaires reply
 *QuestionnaireApi* | [**questionnaire_service_list_questionnaire**](docs/QuestionnaireApi.md#questionnaire_service_list_questionnaire) | **GET** /api/v1/questionnaire | List questionnaires
-*QuestionnaireApi* | [**questionnaire_service_list_replies**](docs/QuestionnaireApi.md#questionnaire_service_list_replies) | **GET** /api/v1/questionnaire/{questionnaireVersionId}/replies | List questionnaires replies
+*QuestionnaireApi* | [**questionnaire_service_list_replies**](docs/QuestionnaireApi.md#questionnaire_service_list_replies) | **GET** /api/v1/questionnaire/replies | List questionnaires replies
 *UsersApi* | [**user_service_create_user**](docs/UsersApi.md#user_service_create_user) | **POST** /api/rest/v1/users | Create a user
 *UsersApi* | [**user_service_delete_user**](docs/UsersApi.md#user_service_delete_user) | **DELETE** /api/rest/v1/users/{id} | Delete a user
 *UsersApi* | [**user_service_get_user**](docs/UsersApi.md#user_service_get_user) | **GET** /api/rest/v1/users/{id} | Get a user
@@ -126,6 +131,7 @@ Class | Method | HTTP request | Description
  - [IndexServiceCreateHelloRequest](docs/IndexServiceCreateHelloRequest.md)
  - [ProtobufAny](docs/ProtobufAny.md)
  - [RpcStatus](docs/RpcStatus.md)
+ - [TemplatebackendAuditLog](docs/TemplatebackendAuditLog.md)
  - [TemplatebackendAuthenticationReply](docs/TemplatebackendAuthenticationReply.md)
  - [TemplatebackendAuthenticationResult](docs/TemplatebackendAuthenticationResult.md)
  - [TemplatebackendColumn](docs/TemplatebackendColumn.md)
@@ -136,6 +142,12 @@ Class | Method | HTTP request | Description
  - [TemplatebackendCreateQuestionnaireReply](docs/TemplatebackendCreateQuestionnaireReply.md)
  - [TemplatebackendCreateQuestionnaireRequest](docs/TemplatebackendCreateQuestionnaireRequest.md)
  - [TemplatebackendCreateQuestionnaireResult](docs/TemplatebackendCreateQuestionnaireResult.md)
+ - [TemplatebackendCreateQuestionnaireVersionReply](docs/TemplatebackendCreateQuestionnaireVersionReply.md)
+ - [TemplatebackendCreateQuestionnaireVersionRequest](docs/TemplatebackendCreateQuestionnaireVersionRequest.md)
+ - [TemplatebackendCreateQuestionnaireVersionResult](docs/TemplatebackendCreateQuestionnaireVersionResult.md)
+ - [TemplatebackendCreateReplyReply](docs/TemplatebackendCreateReplyReply.md)
+ - [TemplatebackendCreateReplyRequest](docs/TemplatebackendCreateReplyRequest.md)
+ - [TemplatebackendCreateReplyResult](docs/TemplatebackendCreateReplyResult.md)
  - [TemplatebackendCreateUserReply](docs/TemplatebackendCreateUserReply.md)
  - [TemplatebackendCreateUserResult](docs/TemplatebackendCreateUserResult.md)
  - [TemplatebackendCredentials](docs/TemplatebackendCredentials.md)
@@ -152,6 +164,7 @@ Class | Method | HTTP request | Description
  - [TemplatebackendGetDatasetMetadataReply](docs/TemplatebackendGetDatasetMetadataReply.md)
  - [TemplatebackendGetDatasetMetadataResult](docs/TemplatebackendGetDatasetMetadataResult.md)
  - [TemplatebackendGetHelloReply](docs/TemplatebackendGetHelloReply.md)
+ - [TemplatebackendGetLogsResponse](docs/TemplatebackendGetLogsResponse.md)
  - [TemplatebackendGetQuestionnaireReply](docs/TemplatebackendGetQuestionnaireReply.md)
  - [TemplatebackendGetQuestionnaireResult](docs/TemplatebackendGetQuestionnaireResult.md)
  - [TemplatebackendGetReplyReply](docs/TemplatebackendGetReplyReply.md)
