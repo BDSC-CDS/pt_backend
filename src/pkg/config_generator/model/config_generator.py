@@ -14,10 +14,10 @@ class ConfigGenerator:
     scrambleField_fields: List[str] = field(default_factory=list)
     dateShift_lowrange: int = None
     dateShift_highrange: int = None
-    subFieldList_fields: List[str] = field(default_factory=list)
+    subFieldList_field: str = None
     subFieldList_substitute: List[str] = field(default_factory=list)
     subFieldList_replacement: str = None
-    subFieldRegex_fields: List[str] = field(default_factory=list)
+    subFieldRegex_field: str = None
     subFieldRegex_regex: str = None
     subFieldRegex_replacement: str = None
     created_at: str = ""

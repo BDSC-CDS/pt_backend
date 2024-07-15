@@ -14,7 +14,7 @@ class TemplatebackendConfig(Model):
     Do not edit the class manually.
     """
 
-    def __init__(self, id=None, userid=None, tenantid=None, questionnaireid=None, has_scramble_field=None, has_date_shift=None, hassub_field_list=None, hassub_field_regex=None, scramble_field_fields=None, date_shift_lowrange=None, date_shift_highrange=None, sub_field_list_fields=None, sub_field_list_substitute=None, sub_field_list_replacement=None, sub_field_regex_fields=None, sub_field_regex_regex=None, sub_field_regex_replacement=None, created_at=None):
+    def __init__(self, id=None, userid=None, tenantid=None, questionnaireid=None, has_scramble_field=None, has_date_shift=None, hassub_field_list=None, hassub_field_regex=None, scramble_field_fields=None, date_shift_lowrange=None, date_shift_highrange=None, sub_field_list_field=None, sub_field_list_substitute=None, sub_field_list_replacement=None, sub_field_regex_field=None, sub_field_regex_regex=None, sub_field_regex_replacement=None, created_at=None):
         """TemplatebackendConfig - a model defined in OpenAPI
 
         :param id: The id of this TemplatebackendConfig.
@@ -39,14 +39,14 @@ class TemplatebackendConfig(Model):
         :type date_shift_lowrange: int
         :param date_shift_highrange: The date_shift_highrange of this TemplatebackendConfig.
         :type date_shift_highrange: int
-        :param sub_field_list_fields: The sub_field_list_fields of this TemplatebackendConfig.
-        :type sub_field_list_fields: List[str]
+        :param sub_field_list_field: The sub_field_list_field of this TemplatebackendConfig.
+        :type sub_field_list_field: str
         :param sub_field_list_substitute: The sub_field_list_substitute of this TemplatebackendConfig.
         :type sub_field_list_substitute: List[str]
         :param sub_field_list_replacement: The sub_field_list_replacement of this TemplatebackendConfig.
         :type sub_field_list_replacement: str
-        :param sub_field_regex_fields: The sub_field_regex_fields of this TemplatebackendConfig.
-        :type sub_field_regex_fields: List[str]
+        :param sub_field_regex_field: The sub_field_regex_field of this TemplatebackendConfig.
+        :type sub_field_regex_field: str
         :param sub_field_regex_regex: The sub_field_regex_regex of this TemplatebackendConfig.
         :type sub_field_regex_regex: str
         :param sub_field_regex_replacement: The sub_field_regex_replacement of this TemplatebackendConfig.
@@ -66,10 +66,10 @@ class TemplatebackendConfig(Model):
             'scramble_field_fields': List[str],
             'date_shift_lowrange': int,
             'date_shift_highrange': int,
-            'sub_field_list_fields': List[str],
+            'sub_field_list_field': str,
             'sub_field_list_substitute': List[str],
             'sub_field_list_replacement': str,
-            'sub_field_regex_fields': List[str],
+            'sub_field_regex_field': str,
             'sub_field_regex_regex': str,
             'sub_field_regex_replacement': str,
             'created_at': datetime
@@ -87,10 +87,10 @@ class TemplatebackendConfig(Model):
             'scramble_field_fields': 'scrambleFieldFields',
             'date_shift_lowrange': 'dateShiftLowrange',
             'date_shift_highrange': 'dateShiftHighrange',
-            'sub_field_list_fields': 'subFieldListFields',
+            'sub_field_list_field': 'subFieldListField',
             'sub_field_list_substitute': 'subFieldListSubstitute',
             'sub_field_list_replacement': 'subFieldListReplacement',
-            'sub_field_regex_fields': 'subFieldRegexFields',
+            'sub_field_regex_field': 'subFieldRegexField',
             'sub_field_regex_regex': 'subFieldRegexRegex',
             'sub_field_regex_replacement': 'subFieldRegexReplacement',
             'created_at': 'createdAt'
@@ -107,10 +107,10 @@ class TemplatebackendConfig(Model):
         self._scramble_field_fields = scramble_field_fields
         self._date_shift_lowrange = date_shift_lowrange
         self._date_shift_highrange = date_shift_highrange
-        self._sub_field_list_fields = sub_field_list_fields
+        self._sub_field_list_field = sub_field_list_field
         self._sub_field_list_substitute = sub_field_list_substitute
         self._sub_field_list_replacement = sub_field_list_replacement
-        self._sub_field_regex_fields = sub_field_regex_fields
+        self._sub_field_regex_field = sub_field_regex_field
         self._sub_field_regex_regex = sub_field_regex_regex
         self._sub_field_regex_replacement = sub_field_regex_replacement
         self._created_at = created_at
@@ -358,25 +358,25 @@ class TemplatebackendConfig(Model):
         self._date_shift_highrange = date_shift_highrange
 
     @property
-    def sub_field_list_fields(self) -> List[str]:
-        """Gets the sub_field_list_fields of this TemplatebackendConfig.
+    def sub_field_list_field(self) -> str:
+        """Gets the sub_field_list_field of this TemplatebackendConfig.
 
 
-        :return: The sub_field_list_fields of this TemplatebackendConfig.
-        :rtype: List[str]
+        :return: The sub_field_list_field of this TemplatebackendConfig.
+        :rtype: str
         """
-        return self._sub_field_list_fields
+        return self._sub_field_list_field
 
-    @sub_field_list_fields.setter
-    def sub_field_list_fields(self, sub_field_list_fields: List[str]):
-        """Sets the sub_field_list_fields of this TemplatebackendConfig.
+    @sub_field_list_field.setter
+    def sub_field_list_field(self, sub_field_list_field: str):
+        """Sets the sub_field_list_field of this TemplatebackendConfig.
 
 
-        :param sub_field_list_fields: The sub_field_list_fields of this TemplatebackendConfig.
-        :type sub_field_list_fields: List[str]
+        :param sub_field_list_field: The sub_field_list_field of this TemplatebackendConfig.
+        :type sub_field_list_field: str
         """
 
-        self._sub_field_list_fields = sub_field_list_fields
+        self._sub_field_list_field = sub_field_list_field
 
     @property
     def sub_field_list_substitute(self) -> List[str]:
@@ -421,25 +421,25 @@ class TemplatebackendConfig(Model):
         self._sub_field_list_replacement = sub_field_list_replacement
 
     @property
-    def sub_field_regex_fields(self) -> List[str]:
-        """Gets the sub_field_regex_fields of this TemplatebackendConfig.
+    def sub_field_regex_field(self) -> str:
+        """Gets the sub_field_regex_field of this TemplatebackendConfig.
 
 
-        :return: The sub_field_regex_fields of this TemplatebackendConfig.
-        :rtype: List[str]
+        :return: The sub_field_regex_field of this TemplatebackendConfig.
+        :rtype: str
         """
-        return self._sub_field_regex_fields
+        return self._sub_field_regex_field
 
-    @sub_field_regex_fields.setter
-    def sub_field_regex_fields(self, sub_field_regex_fields: List[str]):
-        """Sets the sub_field_regex_fields of this TemplatebackendConfig.
+    @sub_field_regex_field.setter
+    def sub_field_regex_field(self, sub_field_regex_field: str):
+        """Sets the sub_field_regex_field of this TemplatebackendConfig.
 
 
-        :param sub_field_regex_fields: The sub_field_regex_fields of this TemplatebackendConfig.
-        :type sub_field_regex_fields: List[str]
+        :param sub_field_regex_field: The sub_field_regex_field of this TemplatebackendConfig.
+        :type sub_field_regex_field: str
         """
 
-        self._sub_field_regex_fields = sub_field_regex_fields
+        self._sub_field_regex_field = sub_field_regex_field
 
     @property
     def sub_field_regex_regex(self) -> str:

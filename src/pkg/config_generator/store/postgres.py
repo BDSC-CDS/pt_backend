@@ -27,13 +27,13 @@ class ConfigGeneratorStore:
         config_query = """
             INSERT INTO config_generator
                 (userid, tenantid, questionnaireid, hasScrambleField, hasDateShift, hassubFieldList, hassubFieldRegex,
-                scrambleField_fields, dateShift_lowrange, dateShift_highrange, subFieldList_fields,
-                subFieldList_substitute, subFieldList_replacement, subFieldRegex_fields,
+                scrambleField_fields, dateShift_lowrange, dateShift_highrange, subFieldList_field,
+                subFieldList_substitute, subFieldList_replacement, subFieldRegex_field,
                 subFieldRegex_regex,subFieldRegex_replacement, created_at)
             VALUES
                 (:userid, :tenantid, :questionnaireid, :hasScrambleField, :hasDateShift, :hassubFieldList, :hassubFieldRegex,
-                :scrambleField_fields, :dateShift_lowrange, :dateShift_highrange, :subFieldList_fields,
-                :subFieldList_substitute, :subFieldList_replacement, :subFieldRegex_fields,
+                :scrambleField_fields, :dateShift_lowrange, :dateShift_highrange, :subFieldList_field,
+                :subFieldList_substitute, :subFieldList_replacement, :subFieldRegex_field,
                 :subFieldRegex_regex, :subFieldRegex_replacement, NOW())
             RETURNING id;
             """
@@ -51,10 +51,10 @@ class ConfigGeneratorStore:
                     'scrambleField_fields': ','.join(config_generator.scrambleField_fields) if config_generator.scrambleField_fields else '',
                     'dateShift_lowrange': config_generator.dateShift_lowrange,
                     'dateShift_highrange': config_generator.dateShift_highrange,
-                    'subFieldList_fields': ','.join(config_generator.subFieldList_fields) if config_generator.subFieldList_fields else '',
+                    'subFieldList_field': ','.join(config_generator.subFieldList_field) if config_generator.subFieldList_field else '',
                     'subFieldList_substitute': ','.join(config_generator.subFieldList_substitute) if config_generator.subFieldList_substitute else '',
                     'subFieldList_replacement': config_generator.subFieldList_replacement,
-                    'subFieldRegex_fields': ','.join(config_generator.subFieldRegex_fields) if config_generator.subFieldRegex_fields else '',
+                    'subFieldRegex_field': ','.join(config_generator.subFieldRegex_field) if config_generator.subFieldRegex_field else '',
                     'subFieldRegex_regex': config_generator.subFieldRegex_regex,
                     'subFieldRegex_replacement': config_generator.subFieldRegex_replacement
                 }).fetchone()
@@ -87,10 +87,10 @@ class ConfigGeneratorStore:
                     scrambleField_fields=config.scramblefield_fields.split(","),
                     dateShift_lowrange=config.dateshift_lowrange,
                     dateShift_highrange=config.dateshift_highrange,
-                    subFieldList_fields=config.subfieldlist_fields.split(","),
+                    subFieldList_field=config.subfieldlist_field.split(","),
                     subFieldList_substitute=config.subfieldlist_substitute.split(","),
                     subFieldList_replacement=config.subfieldlist_replacement,
-                    subFieldRegex_fields=config.subfieldregex_fields.split(","),
+                    subFieldRegex_field=config.subfieldregex_field.split(","),
                     subFieldRegex_regex=config.subfieldregex_regex,
                     subFieldRegex_replacement=config.subfieldregex_replacement,
                     created_at= config.created_at
@@ -119,10 +119,10 @@ class ConfigGeneratorStore:
                     scrambleField_fields=config.scrambleField_fields.split(","),
                     dateShift_lowrange=config.dateShift_lowrange,
                     dateShift_highrange=config.dateShift_highrange,
-                    subFieldList_fields=config.subFieldList_fields.split(","),
+                    subFieldList_field=config.subFieldList_field.split(","),
                     subFieldList_substitute=config.subFieldList_substitute.split(","),
                     subFieldList_replacement=config.subFieldList_replacement,
-                    suFieldRegex_fields=config.subFieldRegex_fields.split(","),
+                    suFieldRegex_field=config.subFieldRegex_field.split(","),
                     subFieldRegex_regex=config.subFieldRegex_regex,
                     subFieldRegex_replacement=config.subFieldRegex_replacement,
                     created_at= config.created_at
@@ -156,10 +156,10 @@ class ConfigGeneratorStore:
                     scrambleField_fields=config.scrambleField_fields.split(","),
                     dateShift_lowrange=config.dateShift_lowrange,
                     dateShift_highrange=config.dateShift_highrange,
-                    subFieldList_fields=config.subFieldList_fields.split(","),
+                    subFieldList_field=config.subFieldList_field.split(","),
                     subFieldList_substitute=config.subFieldList_substitute.split(","),
                     subFieldList_replacement=config.subFieldList_replacement,
-                    suFieldRegex_fields=config.subFieldRegex_fields.split(","),
+                    suFieldRegex_field=config.subFieldRegex_field.split(","),
                     subFieldRegex_regex=config.subFieldRegex_regex,
                     subFieldRegex_replacement=config.subFieldRegex_replacement,
                     created_at= config.created_at
