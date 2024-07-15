@@ -10,6 +10,7 @@ import csv
 from collections import defaultdict
 import json
 import random
+import string
 from datetime import datetime, timedelta
 from dateutil import parser
 
@@ -217,35 +218,7 @@ class DatasetStore:
                     columns[row.column_id].append(row.val) # it is already sorted
                 columns_as_lists = list(columns.values())
                 return columns_as_lists
-                # # Fetch the column names
-                # metadata_query = """
-                #     SELECT column_id, type_ FROM metadata WHERE dataset_id = :id AND userid = :userid AND tenantid = :tenantid ORDER BY column_id;
-                # """
-                # metadata = session.execute(text(metadata_query), {
-                #                                 'dataset_id':dataset_id,
-                #                                 'userid': userid,
-                #                                 'tenantid': tenantid,
-                #                             }).mappings().fetchall()
-                # if not metadata:
-                #         print("Error: No metadata found for the dataset.")
-                #         return None
-                # # Create a dictionary to map column_id to column name
-                # column_names = {col_id: f"Column_{col_id}" for col_id, _ in metadata}
 
-                # # Create a dictionary to hold the data by columns
-                # data_dict = {column_names[col_id]: [] for col_id, _ in metadata}
-
-                # # Populate the data dictionary with values
-                # max_line = max(row[1] for row in rows)
-                # for col_id in column_names.keys():
-                #     data_dict[column_names[col_id]] = [''] * (max_line + 1)
-
-                # for col_id, line, value in rows:
-                #     data_dict[column_names[col_id]][line] = value
-                # # Create the DataFrame
-                # df = pd.DataFrame(data_dict)
-                # columns_list = [df[col].astype(str).tolist() for col in df.columns]
-                # return columns_list
             except Exception as e:
                 print(f"Error fetching dataset: {e}")
                 return None
@@ -306,11 +279,14 @@ class DatasetStore:
                 if (not metadata_list):
                     print("No metadata found for this dataset")
                     return None
+                print("dataset before transformation: ", new_dataset)
                 if (config.hasscramblefield):
-                    new_dataset = self.scramble_fields(new_dataset,dataset_id, config.scramblefield_fields)
+                    new_dataset = self.scramble_fields(new_dataset, metadata_list, dataset_id, config.scramblefield_fields)
+                print("dataset after scramble fields: ", new_dataset)
 
                 if (config.hasdateshift):
                     new_dataset = self.shift_dates(new_dataset, metadata_list,config.dateshift_lowrange, config.dateshift_highrange)
+                print("dataset after date shift: ", new_dataset)
 
                 # store the new dataset
                 # Generate headers from metadata
@@ -352,5 +328,22 @@ class DatasetStore:
 
         for col_id in date_column_ids:
             new_dataset[col_id] = self.shift_date_col(new_dataset[col_id], random_shift)
+
+        return new_dataset
+
+    def generate_random_identifier(self):
+        characters = string.ascii_letters + string.digits + "!@#$%^&*()-_=+"
+        length = 18
+        random_string = ''.join(random.choice(characters) for _ in range(length))
+        return random_string
+
+    def scramble_fields(self,new_dataset: List[List[str]], metadata_list:List[Metadata], dataset_id:int, scramble_fields : List[str]):
+        if not scramble_fields:
+            raise ValueError("No fields given")
+        column_indices = {meta.column_name: meta.column_id for meta in metadata_list if meta.column_name in scramble_fields}
+        # Replace each specified field's value with a unique identifier
+        for col_name, col_index in column_indices.items():
+            for i in range(len(new_dataset[col_index])):
+                new_dataset[col_index][i] = self.generate_random_identifier()
 
         return new_dataset
