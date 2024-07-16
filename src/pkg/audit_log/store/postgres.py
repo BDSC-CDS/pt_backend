@@ -49,7 +49,7 @@ RETURNING id;
 
             return AuditLog(id=audit_id)
 
-    def get_logs(self,offset:int,limit:int) -> list[AuditLog]:
+    def get_logs(self, offset: int, limit: int, filters: dict = None, sort_by: str = None) -> list[AuditLog]:
         query = """
             SELECT
                 a.id, a.userid, a.service, 
@@ -60,13 +60,21 @@ RETURNING id;
                 u.lastname as lastname 
             FROM audit_log a
             LEFT JOIN users u ON a.userid = u.id
-            ORDER BY created_at OFFSET :offset LIMIT :limit;
         """
+        
+        if filters:
+            filter_conditions = " AND ".join([f"{key} = :{key}" for key in filters.keys()])
+            query += f" WHERE {filter_conditions}"
+
+        if sort_by:
+            query += f" ORDER BY {sort_by}"
+        else:
+            query += " ORDER BY created_at"
+
+        query += " OFFSET :offset LIMIT :limit;"
+        
         with self.session_scope() as session:
-            logs = session.execute(text(query),{
-                'offset': offset,
-                'limit': limit,
-            }).mappings().fetchall()
+            logs = session.execute(text(query), {**filters, 'offset': offset, 'limit': limit}).mappings().fetchall()
 
             result = [
                 AuditLog(
@@ -88,7 +96,7 @@ RETURNING id;
             ]
             return result
 
-    def get_logs_for_user(self, id:int, offset:int, limit:int) -> list[AuditLog]:
+    def get_logs_for_user(self, id: int, offset: int, limit: int, filters: dict = None, sort_by: str = None) -> list[AuditLog]:
         query = """
             SELECT
                 a.id, a.userid, a.service, 
@@ -99,16 +107,22 @@ RETURNING id;
                 u.lastname as lastname 
             FROM audit_log a
             LEFT JOIN users u ON a.userid = u.id
-            WHERE userid = :userid
-            ORDER BY created_at OFFSET :offset LIMIT :limit;
+            WHERE a.userid = :userid
         """
-        query = "SELECT * FROM audit_log WHERE userid = :userid ORDER BY createdat OFFSET :offset LIMIT :limit;"
+        
+        if filters:
+            filter_conditions = " AND ".join([f"{key} = :{key}" for key in filters.keys()])
+            query += f" AND {filter_conditions}"
+
+        if sort_by:
+            query += f" ORDER BY {sort_by}"
+        else:
+            query += " ORDER BY created_at"
+
+        query += " OFFSET :offset LIMIT :limit;"
+        
         with self.session_scope() as session:
-            logs = session.execute(text(query), {
-                'userid': id,
-                'offset':offset,
-                'limit':limit
-            }).mappings().fetchall()
+            logs = session.execute(text(query), {**filters, 'userid': id, 'offset': offset, 'limit': limit}).mappings().fetchall()
 
             result = [
                 AuditLog(
