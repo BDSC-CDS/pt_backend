@@ -17,6 +17,7 @@ from sqlalchemy import text, bindparam
 from sqlalchemy.dialects.postgresql import ARRAY
 from sqlalchemy.dialects.postgresql import VARCHAR, INTEGER
 from sqlalchemy.types import String
+from src.pkg.config_generator.store.postgres import ConfigGeneratorStore
 
 class DatasetStore:
     def __init__(self, db: Engine):
@@ -254,56 +255,52 @@ class DatasetStore:
     def transform_dataset(self,userid:int,tenantid:int,dataset_id:int,config_id:int) -> str:
         # first get the config
         query_config = "SELECT * FROM config_generator WHERE id=:id;"
-        with self.session_scope() as session:
-            try:
-                dataset =  self.get_dataset_content(dataset_id, userid, tenantid)
-                config = session.execute(text(query_config), {
-                    'id': config_id,
-                    # 'userid': userid,
-                    # 'tenantid': tenantid,
-                }).mappings().fetchone()
-                # check dataset
-                if (not dataset ):
-                    print("Error: Dataset not found.")
-                    return None
-                # check if config with this id exists
-                if (not config):
-                    print("Error: Config not found.")
-                    return None
+        try:
+            dataset =  self.get_dataset_content(dataset_id, userid, tenantid)
+            config_store = ConfigGeneratorStore(self.db)
+            config : ConfigGenerator = config_store.get_config(userid,tenantid,config_id)
 
-                # if no transformation was selected
-                if (not config.hasscramblefield and not config.hasdateshift and
-                    not config.hassubfieldlist and not config.hassubfieldregex):
-                    print("No transformation was selected")
-                    return None
+            # check dataset
+            if (not dataset ):
+                print("Error: Dataset not found.")
+                return None
+            # check if config with this id exists
+            if (not config):
+                print("Error: Config not found.")
+                return None
 
-                # parse dataset depending on transformation
-                new_dataset = dataset
-                metadata_list : List[Metadata] = self.get_dataset_metadata(dataset_id,userid,tenantid)
-                if (not metadata_list):
-                    print("No metadata found for this dataset")
-                    return None
-                print("dataset before transformation: ", new_dataset)
-                if (config.hasscramblefield):
-                    new_dataset = self.scramble_fields(new_dataset, metadata_list, dataset_id, config.scramblefield_fields)
-                print("dataset after scramble fields: ", new_dataset)
+            # if no transformation was selected
+            if (not config.hasScrambleField and not config.hasDateShift and
+                not config.hassubFieldList and not config.hassubFieldRegex):
+                print("No transformation was selected")
+                return None
 
-                if (config.hasdateshift):
-                    new_dataset = self.shift_dates(new_dataset, metadata_list,config.dateshift_lowrange, config.dateshift_highrange)
-                print("dataset after date shift: ", new_dataset)
+            # parse dataset depending on transformation
+            new_dataset = dataset
+            metadata_list : List[Metadata] = self.get_dataset_metadata(dataset_id,userid,tenantid)
+            if (not metadata_list):
+                print("No metadata found for this dataset")
+                return None
+            if (config.hasScrambleField):
+                new_dataset = self.scramble_fields(new_dataset, metadata_list, dataset_id, config.scrambleField_fields)
 
-                # store the new dataset
-                # Generate headers from metadata
-                headers = ','.join(f'"{m.column_name}"' for m in metadata_list)
-                data_rows = list(zip(*new_dataset))
-                csv_rows = [headers] + [','.join(f'"{item}"' for item in row) for row in data_rows]
-                csv_string = '\n'.join(csv_rows)
-                print("CSV_STRING: ", csv_string)
-                types_dict = {meta.column_name: meta.type_ for meta in metadata_list}
-                types = json.dumps(types_dict)
-                new_dataset_id = self.store_dataset(userid,tenantid,"dataset "+str(dataset_id)+ " transformed",csv_string,types)
-                print(new_dataset_id)
-            except Exception as e:
+            if (config.hasDateShift):
+                new_dataset = self.shift_dates(new_dataset, metadata_list,config.dateShift_lowrange, config.dateShift_highrange)
+
+            # if (config.hassubfieldlist):
+            #     new_dataset = self.substitute_field(new_dataset, metadata_list, config.subFieldList_field, config.subFieldList_substitute, config.subFieldList_replacement)
+
+
+            # store the new dataset
+            # Generate headers from metadata
+            headers = ','.join(f'"{m.column_name}"' for m in metadata_list)
+            data_rows = list(zip(*new_dataset))
+            csv_rows = [headers] + [','.join(f'"{item}"' for item in row) for row in data_rows]
+            csv_string = '\n'.join(csv_rows)
+            types_dict = {meta.column_name: meta.type_ for meta in metadata_list}
+            types = json.dumps(types_dict)
+            new_dataset_id = self.store_dataset(userid,tenantid,"dataset "+str(dataset_id)+ " transformed",csv_string,types)
+        except Exception as e:
                 print(f"Error transforming dataset: {e}")
                 return False
 
@@ -381,3 +378,6 @@ class DatasetStore:
             raise Exception("The updating of the metadata did not work")
 
         return new_dataset
+
+
+    # def substitute_field(self, new_dataset: List[List[str]], metadata_list:List[Metadata], subFieldList_field : str, subFieldList_substitute: str, subFieldList_replacement:str)
