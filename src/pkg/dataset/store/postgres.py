@@ -13,6 +13,10 @@ import random
 import string
 from datetime import datetime, timedelta
 from dateutil import parser
+from sqlalchemy import text, bindparam
+from sqlalchemy.dialects.postgresql import ARRAY
+from sqlalchemy.dialects.postgresql import VARCHAR, INTEGER
+from sqlalchemy.types import String
 
 class DatasetStore:
     def __init__(self, db: Engine):
@@ -331,11 +335,30 @@ class DatasetStore:
 
         return new_dataset
 
+    def update_metadata_type(self,dataset_id:int, new_type:str, columns:List[str]):
+        query = "UPDATE metadata SET type_ = :new_type WHERE dataset_id = :dataset_id AND column_name = ANY (:fields);"
+
+        with self.session_scope() as session:
+            try:
+                session.execute(text(query), {
+                    'dataset_id':dataset_id,
+                    'new_type':new_type,
+                    'fields': columns
+                })
+
+            except Exception as e:
+                print(f"Error updating metadata: {e}")
+                return False
+        return True
+
+
     def generate_random_identifier(self):
         characters = string.ascii_letters + string.digits + "!@#$%^&*()-_=+"
         length = 18
         random_string = ''.join(random.choice(characters) for _ in range(length))
         return random_string
+
+
 
     def scramble_fields(self,new_dataset: List[List[str]], metadata_list:List[Metadata], dataset_id:int, scramble_fields : List[str]):
         if not scramble_fields:
@@ -345,5 +368,16 @@ class DatasetStore:
         for col_name, col_index in column_indices.items():
             for i in range(len(new_dataset[col_index])):
                 new_dataset[col_index][i] = self.generate_random_identifier()
+
+        # update the metadata types to string for these columns
+        try:
+            print("UPDATE METADA: ", list(column_indices.keys()))
+            result = self.update_metadata_type(dataset_id,'string',list(column_indices.keys()))
+            print(result)
+        except:
+            raise Exception("The updating of the metadata did not work")
+
+        if not result:
+            raise Exception("The updating of the metadata did not work")
 
         return new_dataset
