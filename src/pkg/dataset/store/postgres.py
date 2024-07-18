@@ -5,6 +5,7 @@ from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.sql import text
 from contextlib import contextmanager
+from src.pkg.config_generator.model.config_generator import ConfigGenerator
 from src.pkg.dataset.model.dataset import Dataset,Metadata,Dataset_content
 import csv
 from collections import defaultdict
@@ -253,42 +254,44 @@ class DatasetStore:
 
 
     def transform_dataset(self,userid:int,tenantid:int,dataset_id:int,config_id:int) -> str:
-        # first get the config
-        query_config = "SELECT * FROM config_generator WHERE id=:id;"
         try:
             dataset =  self.get_dataset_content(dataset_id, userid, tenantid)
+            # get the configuration
             config_store = ConfigGeneratorStore(self.db)
             config : ConfigGenerator = config_store.get_config(userid,tenantid,config_id)
 
             # check dataset
             if (not dataset ):
-                print("Error: Dataset not found.")
-                return None
+                raise Exception("Error: Dataset not found.")
             # check if config with this id exists
             if (not config):
-                print("Error: Config not found.")
-                return None
+                raise Exception("Error: Config not found.")
 
             # if no transformation was selected
             if (not config.hasScrambleField and not config.hasDateShift and
                 not config.hassubFieldList and not config.hassubFieldRegex):
-                print("No transformation was selected")
-                return None
+                raise Exception("No transformation was selected")
 
             # parse dataset depending on transformation
             new_dataset = dataset
             metadata_list : List[Metadata] = self.get_dataset_metadata(dataset_id,userid,tenantid)
             if (not metadata_list):
-                print("No metadata found for this dataset")
-                return None
+                raise Exception("No metadata found for this dataset")
+
             if (config.hasScrambleField):
+                if not config.scrambleField_fields:
+                    raise Exception("No fields given to scramble.")
                 new_dataset = self.scramble_fields(new_dataset, metadata_list, dataset_id, config.scrambleField_fields)
 
             if (config.hasDateShift):
+                if not config.dateShift_lowrange or not config.dateShift_highrange:
+                    raise Exception("Please provide both ranges.")
                 new_dataset = self.shift_dates(new_dataset, metadata_list,config.dateShift_lowrange, config.dateShift_highrange)
 
-            # if (config.hassubfieldlist):
-            #     new_dataset = self.substitute_field(new_dataset, metadata_list, config.subFieldList_field, config.subFieldList_substitute, config.subFieldList_replacement)
+            if (config.hassubFieldList):
+                if not config.subFieldList_field or not config.subFieldList_substitute or not config.subFieldList_replacement:
+                    raise Exception("Missing parameters for the substitution.")
+                new_dataset = self.substitute_field(new_dataset, metadata_list, config.subFieldList_field, config.subFieldList_substitute, config.subFieldList_replacement)
 
 
             # store the new dataset
@@ -358,8 +361,6 @@ class DatasetStore:
 
 
     def scramble_fields(self,new_dataset: List[List[str]], metadata_list:List[Metadata], dataset_id:int, scramble_fields : List[str]):
-        if not scramble_fields:
-            raise ValueError("No fields given")
         column_indices = {meta.column_name: meta.column_id for meta in metadata_list if meta.column_name in scramble_fields}
         # Replace each specified field's value with a unique identifier
         for col_name, col_index in column_indices.items():
@@ -368,9 +369,7 @@ class DatasetStore:
 
         # update the metadata types to string for these columns
         try:
-            print("UPDATE METADA: ", list(column_indices.keys()))
             result = self.update_metadata_type(dataset_id,'string',list(column_indices.keys()))
-            print(result)
         except:
             raise Exception("The updating of the metadata did not work")
 
@@ -380,4 +379,17 @@ class DatasetStore:
         return new_dataset
 
 
-    # def substitute_field(self, new_dataset: List[List[str]], metadata_list:List[Metadata], subFieldList_field : str, subFieldList_substitute: str, subFieldList_replacement:str)
+    def substitute_field(self, new_dataset: List[List[str]], metadata_list:List[Metadata], subFieldList_field : str, subFieldList_substitute: List[str], subFieldList_replacement:str):
+        print("subfieldlist field: ", subFieldList_field)
+
+        for metadata in metadata_list:
+            print("metadata name and id: ", metadata.column_name, metadata.column_id)
+            if metadata.column_name == subFieldList_field:
+                    print("yeah they are equal")
+                    column_id = metadata.column_id
+                    break
+
+        target_column = new_dataset[column_id]
+        target_column[:] = [subFieldList_replacement if value in subFieldList_substitute else value for value in target_column]
+
+        return new_dataset
