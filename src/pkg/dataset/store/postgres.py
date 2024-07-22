@@ -19,6 +19,7 @@ from sqlalchemy.dialects.postgresql import ARRAY
 from sqlalchemy.dialects.postgresql import VARCHAR, INTEGER
 from sqlalchemy.types import String
 from src.pkg.config_generator.store.postgres import ConfigGeneratorStore
+import re
 
 class DatasetStore:
     def __init__(self, db: Engine):
@@ -293,6 +294,11 @@ class DatasetStore:
                     raise Exception("Missing parameters for the substitution.")
                 new_dataset = self.substitute_field(new_dataset, metadata_list, config.subFieldList_field, config.subFieldList_substitute, config.subFieldList_replacement)
 
+            if (config.hassubFieldRegex):
+                if not config.subFieldRegex_field or not config.subFieldRegex_regex or not config.subFieldRegex_replacement:
+                    raise Exception("Missing parameters for the substitution.")
+                new_dataset = self.substitute_field_regex(new_dataset, metadata_list, config.subFieldRegex_field, config.subFieldRegex_regex, config.subFieldRegex_replacement)
+
 
             # store the new dataset
             # Generate headers from metadata
@@ -379,17 +385,39 @@ class DatasetStore:
         return new_dataset
 
 
-    def substitute_field(self, new_dataset: List[List[str]], metadata_list:List[Metadata], subFieldList_field : str, subFieldList_substitute: List[str], subFieldList_replacement:str):
-        print("subfieldlist field: ", subFieldList_field)
-
+    def substitute_field(self, new_dataset: List[List[str]], metadata_list:List[Metadata],  subFieldList_field: str, subFieldList_substitute: List[str], subFieldList_replacement:str):
+        # get the corresponding column id
         for metadata in metadata_list:
-            print("metadata name and id: ", metadata.column_name, metadata.column_id)
             if metadata.column_name == subFieldList_field:
-                    print("yeah they are equal")
                     column_id = metadata.column_id
                     break
-
+        # replace the values in the goal column if they match the substitute values
         target_column = new_dataset[column_id]
         target_column[:] = [subFieldList_replacement if value in subFieldList_substitute else value for value in target_column]
 
+        return new_dataset
+
+    def substitute_field_regex(self, new_dataset: List[List[str]], metadata_list:List[Metadata], subFieldRegex_field : str, subFieldRegex_regex: str, subFieldRegex_replacement:str):
+         # check validity of regex
+        try:
+            pattern = re.compile(subFieldRegex_regex.rstrip('\n'))
+        except:
+            raise Exception("The regex is not valid.")
+
+        # get the corresponding column id
+        for metadata in metadata_list:
+            if metadata.column_name == subFieldRegex_field:
+                    column_id = metadata.column_id
+                    break
+
+        # replace the values in the goal column if they match the regex
+        original_column = new_dataset[column_id].copy()
+        target_column = new_dataset[column_id]
+        target_column[:] = [subFieldRegex_replacement if pattern.match(value) else value for value in target_column]
+        changes_made = original_column != new_dataset[column_id]
+        # raise error if nothing matched the regex
+        if not changes_made:
+            print("RAISING EXCEPTION")
+            raise Exception("Nothing matched the regex in the indicated column.")
+        print("CHANGES MADE: ", changes_made)
         return new_dataset
