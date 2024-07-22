@@ -107,24 +107,24 @@ class ConfigGeneratorStore:
             }).mappings().fetchall()
 
             result = [
-                ConfigGenerator(
+               ConfigGenerator(
                     id=config.id,
                     userid=userid,
                     tenantid=config.tenantid,
                     questionnaireid=config.questionnaireid,
-                    hasScrambleField=config.hasScrambleField,
-                    hasDateShift=config.hasDateShift,
-                    hassubFieldList=config.hassubFieldList,
-                    hassubFieldRegex=config.hassubFieldRegex,
-                    scrambleField_fields=config.scrambleField_fields.split(","),
-                    dateShift_lowrange=config.dateShift_lowrange,
-                    dateShift_highrange=config.dateShift_highrange,
-                    subFieldList_field=config.subFieldList_field,
-                    subFieldList_substitute=config.subFieldList_substitute.split(","),
-                    subFieldList_replacement=config.subFieldList_replacement,
-                    suFieldRegex_field=config.subFieldRegex_field,
-                    subFieldRegex_regex=config.subFieldRegex_regex,
-                    subFieldRegex_replacement=config.subFieldRegex_replacement,
+                    hasScrambleField=config.hasscramblefield,
+                    hasDateShift=config.hasdateshift,
+                    hassubFieldList=config.hassubfieldlist,
+                    hassubFieldRegex=config.hassubfieldregex,
+                    scrambleField_fields=config.scramblefield_fields.split(","),
+                    dateShift_lowrange=config.dateshift_lowrange,
+                    dateShift_highrange=config.dateshift_highrange,
+                    subFieldList_field=config.subfieldlist_field,
+                    subFieldList_substitute=config.subfieldlist_substitute.split(","),
+                    subFieldList_replacement=config.subfieldlist_replacement,
+                    subFieldRegex_field=config.subfieldregex_field,
+                    subFieldRegex_regex=config.subfieldregex_regex,
+                    subFieldRegex_replacement=config.subfieldregex_replacement,
                     created_at= config.created_at
                 ) for config in configs
             ]
@@ -144,24 +144,24 @@ class ConfigGeneratorStore:
                 print("No config found")
                 return None
 
-            result = ConfigGenerator(
+            result =ConfigGenerator(
                     id=config.id,
                     userid=userid,
                     tenantid=config.tenantid,
                     questionnaireid=config.questionnaireid,
-                    hasScrambleField=config.hasScrambleField,
-                    hasDateShift=config.hasDateShift,
-                    hassubFieldList=config.hassubFieldList,
-                    hassubFieldRegex=config.hassubFieldRegex,
-                    scrambleField_fields=config.scrambleField_fields.split(","),
-                    dateShift_lowrange=config.dateShift_lowrange,
-                    dateShift_highrange=config.dateShift_highrange,
-                    subFieldList_field=config.subFieldList_field,
-                    subFieldList_substitute=config.subFieldList_substitute.split(","),
-                    subFieldList_replacement=config.subFieldList_replacement,
-                    suFieldRegex_field=config.subFieldRegex_field,
-                    subFieldRegex_regex=config.subFieldRegex_regex,
-                    subFieldRegex_replacement=config.subFieldRegex_replacement,
+                    hasScrambleField=config.hasscramblefield,
+                    hasDateShift=config.hasdateshift,
+                    hassubFieldList=config.hassubfieldlist,
+                    hassubFieldRegex=config.hassubfieldregex,
+                    scrambleField_fields=config.scramblefield_fields.split(","),
+                    dateShift_lowrange=config.dateshift_lowrange,
+                    dateShift_highrange=config.dateshift_highrange,
+                    subFieldList_field=config.subfieldlist_field,
+                    subFieldList_substitute=config.subfieldlist_substitute.split(","),
+                    subFieldList_replacement=config.subfieldlist_replacement,
+                    subFieldRegex_field=config.subfieldregex_field,
+                    subFieldRegex_regex=config.subfieldregex_regex,
+                    subFieldRegex_replacement=config.subfieldregex_replacement,
                     created_at= config.created_at
                 )
             return result
