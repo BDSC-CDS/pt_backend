@@ -24,7 +24,7 @@ try:
 except ImportError:
     from typing_extensions import Annotated
 
-from pydantic import StrictInt
+from pydantic import StrictInt, StrictStr
 
 from typing import Optional
 
@@ -53,6 +53,8 @@ class AuditLogApi:
         self,
         offset: Optional[StrictInt] = None,
         limit: Optional[StrictInt] = None,
+        filters: Optional[StrictStr] = None,
+        sort_by: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -74,6 +76,10 @@ class AuditLogApi:
         :type offset: int
         :param limit:
         :type limit: int
+        :param filters:
+        :type filters: str
+        :param sort_by:
+        :type sort_by: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -99,6 +105,8 @@ class AuditLogApi:
         _param = self._audit_log_service_get_logs_serialize(
             offset=offset,
             limit=limit,
+            filters=filters,
+            sort_by=sort_by,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -124,6 +132,8 @@ class AuditLogApi:
         self,
         offset: Optional[StrictInt] = None,
         limit: Optional[StrictInt] = None,
+        filters: Optional[StrictStr] = None,
+        sort_by: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -145,6 +155,10 @@ class AuditLogApi:
         :type offset: int
         :param limit:
         :type limit: int
+        :param filters:
+        :type filters: str
+        :param sort_by:
+        :type sort_by: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -170,6 +184,8 @@ class AuditLogApi:
         _param = self._audit_log_service_get_logs_serialize(
             offset=offset,
             limit=limit,
+            filters=filters,
+            sort_by=sort_by,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -195,6 +211,8 @@ class AuditLogApi:
         self,
         offset: Optional[StrictInt] = None,
         limit: Optional[StrictInt] = None,
+        filters: Optional[StrictStr] = None,
+        sort_by: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -216,6 +234,10 @@ class AuditLogApi:
         :type offset: int
         :param limit:
         :type limit: int
+        :param filters:
+        :type filters: str
+        :param sort_by:
+        :type sort_by: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -241,6 +263,8 @@ class AuditLogApi:
         _param = self._audit_log_service_get_logs_serialize(
             offset=offset,
             limit=limit,
+            filters=filters,
+            sort_by=sort_by,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -261,6 +285,8 @@ class AuditLogApi:
         self,
         offset,
         limit,
+        filters,
+        sort_by,
         _request_auth,
         _content_type,
         _headers,
@@ -288,6 +314,14 @@ class AuditLogApi:
         if limit is not None:
             
             _query_params.append(('limit', limit))
+            
+        if filters is not None:
+            
+            _query_params.append(('filters', filters))
+            
+        if sort_by is not None:
+            
+            _query_params.append(('sortBy', sort_by))
             
         # process the header parameters
         # process the form parameters
@@ -331,6 +365,8 @@ class AuditLogApi:
         userid: StrictInt,
         offset: Optional[StrictInt] = None,
         limit: Optional[StrictInt] = None,
+        filters: Optional[StrictStr] = None,
+        sort_by: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -354,6 +390,10 @@ class AuditLogApi:
         :type offset: int
         :param limit:
         :type limit: int
+        :param filters:
+        :type filters: str
+        :param sort_by:
+        :type sort_by: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -380,6 +420,8 @@ class AuditLogApi:
             userid=userid,
             offset=offset,
             limit=limit,
+            filters=filters,
+            sort_by=sort_by,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -406,6 +448,8 @@ class AuditLogApi:
         userid: StrictInt,
         offset: Optional[StrictInt] = None,
         limit: Optional[StrictInt] = None,
+        filters: Optional[StrictStr] = None,
+        sort_by: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -429,6 +473,10 @@ class AuditLogApi:
         :type offset: int
         :param limit:
         :type limit: int
+        :param filters:
+        :type filters: str
+        :param sort_by:
+        :type sort_by: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -455,6 +503,8 @@ class AuditLogApi:
             userid=userid,
             offset=offset,
             limit=limit,
+            filters=filters,
+            sort_by=sort_by,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -481,6 +531,8 @@ class AuditLogApi:
         userid: StrictInt,
         offset: Optional[StrictInt] = None,
         limit: Optional[StrictInt] = None,
+        filters: Optional[StrictStr] = None,
+        sort_by: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -504,6 +556,10 @@ class AuditLogApi:
         :type offset: int
         :param limit:
         :type limit: int
+        :param filters:
+        :type filters: str
+        :param sort_by:
+        :type sort_by: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -530,6 +586,8 @@ class AuditLogApi:
             userid=userid,
             offset=offset,
             limit=limit,
+            filters=filters,
+            sort_by=sort_by,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -551,6 +609,8 @@ class AuditLogApi:
         userid,
         offset,
         limit,
+        filters,
+        sort_by,
         _request_auth,
         _content_type,
         _headers,
@@ -580,6 +640,14 @@ class AuditLogApi:
         if limit is not None:
             
             _query_params.append(('limit', limit))
+            
+        if filters is not None:
+            
+            _query_params.append(('filters', filters))
+            
+        if sort_by is not None:
+            
+            _query_params.append(('sortBy', sort_by))
             
         # process the header parameters
         # process the form parameters

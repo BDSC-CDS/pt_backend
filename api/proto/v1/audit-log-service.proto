@@ -50,12 +50,16 @@ message LogEventResponse {
 message GetLogsRequest {
     int32 offset = 1;
     int32 limit = 2;
+    string filters = 3;
+    string sort_by = 4;
 }
 
 message GetLogsForUserRequest {
     int32 userid = 1;
     int32 offset = 2;
     int32 limit = 3;
+    string filters = 4;
+    string sort_by = 5;
 }
 
 message GetLogsResponse {
