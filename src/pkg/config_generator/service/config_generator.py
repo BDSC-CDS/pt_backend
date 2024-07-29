@@ -43,3 +43,7 @@ class ConfigGeneratorService:
         # result = [self.format_json_config(config) for config in configs]
         # return result
         return configs
+
+    def delete_config(self,user,config_id:int):
+        success = self.config_generator_store.delete_config(user,config_id)
+        return success

@@ -23,7 +23,8 @@ def config_to_business(config: TemplatebackendConfig) -> ConfigGenerator:
         subFieldRegex_field=config.sub_field_regex_field,
         subFieldRegex_regex=config.sub_field_regex_regex,
         subFieldRegex_replacement=config.sub_field_regex_replacement,
-        created_at=config.created_at
+        created_at=config.created_at,
+        deleted_at=config.deleted_at
     )
 
     return c
@@ -47,6 +48,7 @@ def config_from_business(config: ConfigGenerator) -> TemplatebackendConfig:
         sub_field_regex_field=config.subFieldRegex_field,
         sub_field_regex_regex=config.subFieldRegex_regex,
         sub_field_regex_replacement=config.subFieldRegex_replacement,
-        created_at=config.created_at
+        created_at=config.created_at,
+        deleted_at=config.deleted_at
     )
     return c

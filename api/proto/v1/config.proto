@@ -25,4 +25,6 @@ message Config {
     string subFieldRegex_replacement = 17;
 
     google.protobuf.Timestamp createdAt = 18;
+    google.protobuf.Timestamp deletedAt = 19;
+
 }

@@ -93,8 +93,9 @@ class ConfigGeneratorStore:
                     subFieldRegex_field=config.subfieldregex_field,
                     subFieldRegex_regex=config.subfieldregex_regex,
                     subFieldRegex_replacement=config.subfieldregex_replacement,
-                    created_at= config.created_at
-                ) for config in configs
+                    created_at= config.created_at,
+                    deleted_at=config.deleted_at
+                ) for config in configs if not config.deleted_at
             ]
             return result
 
@@ -125,8 +126,9 @@ class ConfigGeneratorStore:
                     subFieldRegex_field=config.subfieldregex_field,
                     subFieldRegex_regex=config.subfieldregex_regex,
                     subFieldRegex_replacement=config.subfieldregex_replacement,
-                    created_at= config.created_at
-                ) for config in configs
+                    created_at= config.created_at,
+                    deleted_at=config.deleted_at
+                ) for config in configs if not config.deleted_at
             ]
 
             return result
@@ -143,6 +145,10 @@ class ConfigGeneratorStore:
             if not config:
                 print("No config found")
                 return None
+
+            if config.deleted_at:
+                    print("deleted")
+                    return #TODO
 
             result =ConfigGenerator(
                     id=config.id,
@@ -162,6 +168,28 @@ class ConfigGeneratorStore:
                     subFieldRegex_field=config.subfieldregex_field,
                     subFieldRegex_regex=config.subfieldregex_regex,
                     subFieldRegex_replacement=config.subfieldregex_replacement,
-                    created_at= config.created_at
+                    created_at= config.created_at,
+                    deleted_at=config.deleted_at
                 )
             return result
+
+
+    def delete_config(self,user,config_id:int):
+        query = """UPDATE config_generator
+                SET deleted_at = NOW()
+                WHERE id = :id AND userid = :userid AND tenantid = :tenantid
+                """
+        with self.session_scope() as session:
+            try:
+                session.execute(text(query), {
+                    'id': config_id,
+                    'userid': user.id,
+                    'tenantid': user.tenantid,
+                })
+
+
+            except Exception as e:
+                print(f"Error deleting configuration: {e}")
+                return False
+
+        return True
