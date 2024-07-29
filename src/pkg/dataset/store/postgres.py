@@ -413,11 +413,11 @@ class DatasetStore:
         # replace the values in the goal column if they match the regex
         original_column = new_dataset[column_id].copy()
         target_column = new_dataset[column_id]
-        target_column[:] = [subFieldRegex_replacement if pattern.match(value) else value for value in target_column]
+        target_column[:] = [subFieldRegex_replacement if re.search(pattern,value) else value for value in target_column]
         changes_made = original_column != new_dataset[column_id]
         # raise error if nothing matched the regex
         if not changes_made:
             print("RAISING EXCEPTION")
             raise Exception("Nothing matched the regex in the indicated column.")
-        print("CHANGES MADE: ", changes_made)
+
         return new_dataset
