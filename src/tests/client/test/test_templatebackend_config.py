@@ -58,7 +58,8 @@ class TestTemplatebackendConfig(unittest.TestCase):
                 sub_field_regex_field = '',
                 sub_field_regex_regex = '',
                 sub_field_regex_replacement = '',
-                created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f')
+                created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
+                deleted_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f')
             )
         else:
             return TemplatebackendConfig(

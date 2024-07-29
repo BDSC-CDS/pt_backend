@@ -23,6 +23,7 @@ Name | Type | Description | Notes
 **sub_field_regex_regex** | **str** |  | [optional] 
 **sub_field_regex_replacement** | **str** |  | [optional] 
 **created_at** | **datetime** |  | [optional] 
+**deleted_at** | **datetime** |  | [optional] 
 
 ## Example
 

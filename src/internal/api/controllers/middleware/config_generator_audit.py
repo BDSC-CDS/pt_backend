@@ -1,7 +1,7 @@
 from server_template.models import TemplatebackendConfig
 from server_template.models import TemplatebackendGetConfigsReply
 from server_template.models import TemplatebackendCreateConfigReply
-
+from server_template.models import TemplatebackendDeleteConfigReply
 
 from src.internal.api.controllers.config_generator_controller import ConfigGeneratorController
 from src.internal.util.interface.implements import implements_interface
@@ -54,4 +54,13 @@ class ConfigGeneratorControllerAudit():
             return response
         except Exception as e:
             self.auditLogService.log_event(AuditLog(service="config generator", userid=user.id,action="error creating configurations",body=body_serialized,response=e,error=True))
+            raise e
+
+    def config_service_delete_config(self, user, id:int):
+        try:
+            response : TemplatebackendDeleteConfigReply =  self.next.config_service_delete_config(user, id)
+            self.auditLogService.log_event(AuditLog(service="config generator", userid=user.id,action="deleted config "+str(id)+ ": ", response=response.result.success))
+            return response
+        except Exception as e:
+            self.auditLogService.log_event(AuditLog(service="config generator", userid=user.id,action="Error deleting config "+ str(id), response=e, error=True))
             raise e

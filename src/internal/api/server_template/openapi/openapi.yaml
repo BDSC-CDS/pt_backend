@@ -333,6 +333,34 @@ paths:
       tags:
       - AuditLog
       x-openapi-router-controller: audit_log_controller
+  /api/v1/config/{id}:
+    delete:
+      description: This endpoint deletes a config
+      operationId: config_service_delete_config
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/templatebackendDeleteConfigReply'
+          description: A successful response.
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+          description: An unexpected error response.
+      summary: Deletes a config
+      tags:
+      - Configuration
+      x-openapi-router-controller: config_generator_controller
   /api/v1/dataset:
     get:
       description: This endpoint allows listing a user's datasets
@@ -931,6 +959,7 @@ components:
         hasScrambleField: true
         subFieldListField: subFieldListField
         createdAt: 2000-01-23T04:56:07.000+00:00
+        deletedAt: 2000-01-23T04:56:07.000+00:00
         dateShiftHighrange: 2
         tenantid: 1
         subFieldRegexField: subFieldRegexField
@@ -1004,6 +1033,10 @@ components:
         createdAt:
           format: date-time
           title: createdAt
+          type: string
+        deletedAt:
+          format: date-time
+          title: deletedAt
           type: string
       title: templatebackendConfig
       type: object
@@ -1189,6 +1222,24 @@ components:
           type: string
       title: templatebackendDataset
       type: object
+    templatebackendDeleteConfigReply:
+      example:
+        result:
+          success: true
+      properties:
+        result:
+          $ref: '#/components/schemas/templatebackendDeleteConfigResult'
+      title: templatebackendDeleteConfigReply
+      type: object
+    templatebackendDeleteConfigResult:
+      example:
+        success: true
+      properties:
+        success:
+          title: success
+          type: boolean
+      title: templatebackendDeleteConfigResult
+      type: object
     templatebackendDeleteDatasetReply:
       example:
         result:
@@ -1255,6 +1306,7 @@ components:
             hasScrambleField: true
             subFieldListField: subFieldListField
             createdAt: 2000-01-23T04:56:07.000+00:00
+            deletedAt: 2000-01-23T04:56:07.000+00:00
             dateShiftHighrange: 2
             tenantid: 1
             subFieldRegexField: subFieldRegexField
@@ -1277,6 +1329,7 @@ components:
             hasScrambleField: true
             subFieldListField: subFieldListField
             createdAt: 2000-01-23T04:56:07.000+00:00
+            deletedAt: 2000-01-23T04:56:07.000+00:00
             dateShiftHighrange: 2
             tenantid: 1
             subFieldRegexField: subFieldRegexField
@@ -1307,6 +1360,7 @@ components:
           hasScrambleField: true
           subFieldListField: subFieldListField
           createdAt: 2000-01-23T04:56:07.000+00:00
+          deletedAt: 2000-01-23T04:56:07.000+00:00
           dateShiftHighrange: 2
           tenantid: 1
           subFieldRegexField: subFieldRegexField
@@ -1329,6 +1383,7 @@ components:
           hasScrambleField: true
           subFieldListField: subFieldListField
           createdAt: 2000-01-23T04:56:07.000+00:00
+          deletedAt: 2000-01-23T04:56:07.000+00:00
           dateShiftHighrange: 2
           tenantid: 1
           subFieldRegexField: subFieldRegexField

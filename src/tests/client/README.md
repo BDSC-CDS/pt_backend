@@ -101,6 +101,7 @@ Class | Method | HTTP request | Description
 *AuditLogApi* | [**audit_log_service_get_logs_for_user**](docs/AuditLogApi.md#audit_log_service_get_logs_for_user) | **GET** /api/v1/audit/users/{userid}/logs | Get logs for a user
 *AuthenticationApi* | [**authentication_service_authenticate**](docs/AuthenticationApi.md#authentication_service_authenticate) | **POST** /api/rest/v1/authentication/login | Authenticate
 *ConfigurationApi* | [**config_service_create_config**](docs/ConfigurationApi.md#config_service_create_config) | **POST** /api/rest/v1/configs | Create a configuration
+*ConfigurationApi* | [**config_service_delete_config**](docs/ConfigurationApi.md#config_service_delete_config) | **DELETE** /api/v1/config/{id} | Deletes a config
 *ConfigurationApi* | [**config_service_get_configs**](docs/ConfigurationApi.md#config_service_get_configs) | **GET** /api/rest/v1/configs | Get configuration files
 *DatasetApi* | [**dataset_service_delete_dataset**](docs/DatasetApi.md#dataset_service_delete_dataset) | **DELETE** /api/v1/dataset/{id} | Deletes a dataset
 *DatasetApi* | [**dataset_service_get_dataset_content**](docs/DatasetApi.md#dataset_service_get_dataset_content) | **GET** /api/v1/dataset/content/{id} | Get Dataset Content
@@ -152,6 +153,8 @@ Class | Method | HTTP request | Description
  - [TemplatebackendCreateUserResult](docs/TemplatebackendCreateUserResult.md)
  - [TemplatebackendCredentials](docs/TemplatebackendCredentials.md)
  - [TemplatebackendDataset](docs/TemplatebackendDataset.md)
+ - [TemplatebackendDeleteConfigReply](docs/TemplatebackendDeleteConfigReply.md)
+ - [TemplatebackendDeleteConfigResult](docs/TemplatebackendDeleteConfigResult.md)
  - [TemplatebackendDeleteDatasetReply](docs/TemplatebackendDeleteDatasetReply.md)
  - [TemplatebackendDeleteDatasetResult](docs/TemplatebackendDeleteDatasetResult.md)
  - [TemplatebackendDeleteQuestionnaireReply](docs/TemplatebackendDeleteQuestionnaireReply.md)

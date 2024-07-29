@@ -21,6 +21,7 @@ class ConfigGenerator:
     subFieldRegex_regex: str = None
     subFieldRegex_replacement: str = None
     created_at: str = ""
+    deleted_at: str = ""
 
     def to_dict(self):
         return asdict(self)

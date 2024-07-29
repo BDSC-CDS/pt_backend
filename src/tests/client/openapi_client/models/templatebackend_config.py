@@ -49,7 +49,8 @@ class TemplatebackendConfig(BaseModel):
     sub_field_regex_regex: Optional[StrictStr] = Field(default=None, alias="subFieldRegexRegex")
     sub_field_regex_replacement: Optional[StrictStr] = Field(default=None, alias="subFieldRegexReplacement")
     created_at: Optional[datetime] = Field(default=None, alias="createdAt")
-    __properties: ClassVar[List[str]] = ["id", "userid", "tenantid", "questionnaireid", "hasScrambleField", "hasDateShift", "hassubFieldList", "hassubFieldRegex", "scrambleFieldFields", "dateShiftLowrange", "dateShiftHighrange", "subFieldListField", "subFieldListSubstitute", "subFieldListReplacement", "subFieldRegexField", "subFieldRegexRegex", "subFieldRegexReplacement", "createdAt"]
+    deleted_at: Optional[datetime] = Field(default=None, alias="deletedAt")
+    __properties: ClassVar[List[str]] = ["id", "userid", "tenantid", "questionnaireid", "hasScrambleField", "hasDateShift", "hassubFieldList", "hassubFieldRegex", "scrambleFieldFields", "dateShiftLowrange", "dateShiftHighrange", "subFieldListField", "subFieldListSubstitute", "subFieldListReplacement", "subFieldRegexField", "subFieldRegexRegex", "subFieldRegexReplacement", "createdAt", "deletedAt"]
 
     model_config = {
         "populate_by_name": True,
@@ -117,7 +118,8 @@ class TemplatebackendConfig(BaseModel):
             "subFieldRegexField": obj.get("subFieldRegexField"),
             "subFieldRegexRegex": obj.get("subFieldRegexRegex"),
             "subFieldRegexReplacement": obj.get("subFieldRegexReplacement"),
-            "createdAt": obj.get("createdAt")
+            "createdAt": obj.get("createdAt"),
+            "deletedAt": obj.get("deletedAt")
         })
         return _obj
 

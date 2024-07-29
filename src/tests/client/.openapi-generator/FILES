@@ -34,6 +34,8 @@ docs/TemplatebackendCreateUserReply.md
 docs/TemplatebackendCreateUserResult.md
 docs/TemplatebackendCredentials.md
 docs/TemplatebackendDataset.md
+docs/TemplatebackendDeleteConfigReply.md
+docs/TemplatebackendDeleteConfigResult.md
 docs/TemplatebackendDeleteDatasetReply.md
 docs/TemplatebackendDeleteDatasetResult.md
 docs/TemplatebackendDeleteQuestionnaireReply.md
@@ -119,6 +121,8 @@ openapi_client/models/templatebackend_create_user_reply.py
 openapi_client/models/templatebackend_create_user_result.py
 openapi_client/models/templatebackend_credentials.py
 openapi_client/models/templatebackend_dataset.py
+openapi_client/models/templatebackend_delete_config_reply.py
+openapi_client/models/templatebackend_delete_config_result.py
 openapi_client/models/templatebackend_delete_dataset_reply.py
 openapi_client/models/templatebackend_delete_dataset_result.py
 openapi_client/models/templatebackend_delete_questionnaire_reply.py
@@ -202,6 +206,8 @@ test/test_templatebackend_create_user_reply.py
 test/test_templatebackend_create_user_result.py
 test/test_templatebackend_credentials.py
 test/test_templatebackend_dataset.py
+test/test_templatebackend_delete_config_reply.py
+test/test_templatebackend_delete_config_result.py
 test/test_templatebackend_delete_dataset_reply.py
 test/test_templatebackend_delete_dataset_result.py
 test/test_templatebackend_delete_questionnaire_reply.py

@@ -14,7 +14,7 @@ class TemplatebackendConfig(Model):
     Do not edit the class manually.
     """
 
-    def __init__(self, id=None, userid=None, tenantid=None, questionnaireid=None, has_scramble_field=None, has_date_shift=None, hassub_field_list=None, hassub_field_regex=None, scramble_field_fields=None, date_shift_lowrange=None, date_shift_highrange=None, sub_field_list_field=None, sub_field_list_substitute=None, sub_field_list_replacement=None, sub_field_regex_field=None, sub_field_regex_regex=None, sub_field_regex_replacement=None, created_at=None):
+    def __init__(self, id=None, userid=None, tenantid=None, questionnaireid=None, has_scramble_field=None, has_date_shift=None, hassub_field_list=None, hassub_field_regex=None, scramble_field_fields=None, date_shift_lowrange=None, date_shift_highrange=None, sub_field_list_field=None, sub_field_list_substitute=None, sub_field_list_replacement=None, sub_field_regex_field=None, sub_field_regex_regex=None, sub_field_regex_replacement=None, created_at=None, deleted_at=None):
         """TemplatebackendConfig - a model defined in OpenAPI
 
         :param id: The id of this TemplatebackendConfig.
@@ -53,6 +53,8 @@ class TemplatebackendConfig(Model):
         :type sub_field_regex_replacement: str
         :param created_at: The created_at of this TemplatebackendConfig.
         :type created_at: datetime
+        :param deleted_at: The deleted_at of this TemplatebackendConfig.
+        :type deleted_at: datetime
         """
         self.openapi_types = {
             'id': int,
@@ -72,7 +74,8 @@ class TemplatebackendConfig(Model):
             'sub_field_regex_field': str,
             'sub_field_regex_regex': str,
             'sub_field_regex_replacement': str,
-            'created_at': datetime
+            'created_at': datetime,
+            'deleted_at': datetime
         }
 
         self.attribute_map = {
@@ -93,7 +96,8 @@ class TemplatebackendConfig(Model):
             'sub_field_regex_field': 'subFieldRegexField',
             'sub_field_regex_regex': 'subFieldRegexRegex',
             'sub_field_regex_replacement': 'subFieldRegexReplacement',
-            'created_at': 'createdAt'
+            'created_at': 'createdAt',
+            'deleted_at': 'deletedAt'
         }
 
         self._id = id
@@ -114,6 +118,7 @@ class TemplatebackendConfig(Model):
         self._sub_field_regex_regex = sub_field_regex_regex
         self._sub_field_regex_replacement = sub_field_regex_replacement
         self._created_at = created_at
+        self._deleted_at = deleted_at
 
     @classmethod
     def from_dict(cls, dikt) -> 'TemplatebackendConfig':
@@ -503,3 +508,24 @@ class TemplatebackendConfig(Model):
         """
 
         self._created_at = created_at
+
+    @property
+    def deleted_at(self) -> datetime:
+        """Gets the deleted_at of this TemplatebackendConfig.
+
+
+        :return: The deleted_at of this TemplatebackendConfig.
+        :rtype: datetime
+        """
+        return self._deleted_at
+
+    @deleted_at.setter
+    def deleted_at(self, deleted_at: datetime):
+        """Sets the deleted_at of this TemplatebackendConfig.
+
+
+        :param deleted_at: The deleted_at of this TemplatebackendConfig.
+        :type deleted_at: datetime
+        """
+
+        self._deleted_at = deleted_at

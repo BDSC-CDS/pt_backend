@@ -34,6 +34,13 @@ class TestConfigurationApi(unittest.TestCase):
         """
         pass
 
+    def test_config_service_delete_config(self) -> None:
+        """Test case for config_service_delete_config
+
+        Deletes a config
+        """
+        pass
+
     def test_config_service_get_configs(self) -> None:
         """Test case for config_service_get_configs
 
