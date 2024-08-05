@@ -1436,13 +1436,15 @@ components:
       example:
         metadata:
           metadata:
-          - columnId: 5
+          - identifier: identifier
+            columnId: 5
             tenantid: 6
             datasetId: 1
             type: type
             userid: 0
             columnName: columnName
-          - columnId: 5
+          - identifier: identifier
+            columnId: 5
             tenantid: 6
             datasetId: 1
             type: type
@@ -1456,13 +1458,15 @@ components:
     templatebackendGetDatasetMetadataResult:
       example:
         metadata:
-        - columnId: 5
+        - identifier: identifier
+          columnId: 5
           tenantid: 6
           datasetId: 1
           type: type
           userid: 0
           columnName: columnName
-        - columnId: 5
+        - identifier: identifier
+          columnId: 5
           tenantid: 6
           datasetId: 1
           type: type
@@ -3072,6 +3076,7 @@ components:
       type: object
     templatebackendMetadata:
       example:
+        identifier: identifier
         columnId: 5
         tenantid: 6
         datasetId: 1
@@ -3100,6 +3105,9 @@ components:
           type: string
         type:
           title: type
+          type: string
+        identifier:
+          title: identifier
           type: string
       title: templatebackendMetadata
       type: object
@@ -3737,6 +3745,9 @@ components:
         types:
           title: types
           type: string
+        identifiers:
+          title: identifiers
+          type: string
       title: Create a Dataset
       type: object
     templatebackendStoreDatasetResult:
@@ -3752,13 +3763,7 @@ components:
     templatebackendTransformDatasetReply:
       example:
         result:
-          columns:
-          - value:
-            - value
-            - value
-          - value:
-            - value
-            - value
+          id: 0
       properties:
         result:
           $ref: '#/components/schemas/templatebackendTransformDatasetResult'
@@ -3778,19 +3783,12 @@ components:
       type: object
     templatebackendTransformDatasetResult:
       example:
-        columns:
-        - value:
-          - value
-          - value
-        - value:
-          - value
-          - value
+        id: 0
       properties:
-        columns:
-          items:
-            $ref: '#/components/schemas/templatebackendColumn'
-          title: columns
-          type: array
+        id:
+          format: int64
+          title: id
+          type: integer
       title: templatebackendTransformDatasetResult
       type: object
     templatebackendUpdatePasswordReply:

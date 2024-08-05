@@ -39,7 +39,7 @@ class DatasetStore:
         finally:
             session.close()
 
-    def store_dataset(self, userid:int,tenantid:int, dataset_name:str,dataset: str,types:str) -> int:
+    def store_dataset(self, userid:int,tenantid:int, dataset_name:str,dataset: str,types:str,identifiers:str) -> int:
         # Insert dataset entry and get the generated dataset_id
         dataset_query = """
             INSERT INTO datasets
@@ -75,14 +75,18 @@ class DatasetStore:
                         column_data[col_index].append(value)
 
                 column_types = json.loads(types)
+                column_identifiers = json.loads(identifiers)
+                print("COLUMN TYPES: ",column_types)
+                print("COLUMN IDENTIFIERS: ", column_identifiers)
                 metadata_to_insert = []
                 for column_id, header in enumerate(headers):
                     column_type = column_types[header]
+                    column_identifier = column_identifiers[header]
                     column_name = header
-                    metadata_to_insert.append((int(userid), int(tenantid), int(dataset_id), int(column_id), str(column_name), str(column_type)))
+                    metadata_to_insert.append((int(userid), int(tenantid), int(dataset_id), int(column_id), str(column_name), str(column_type), str(column_identifier)))
                 query = """
-                    INSERT INTO metadata (userid, tenantid, dataset_id, column_id, column_name, type_)
-                    VALUES (:userid, :tenantid, :dataset_id, :column_id, :column_name, :type_);
+                    INSERT INTO metadata (userid, tenantid, dataset_id, column_id, column_name, type_, identifier)
+                    VALUES (:userid, :tenantid, :dataset_id, :column_id, :column_name, :type_, :identifier);
                 """
                 with self.session_scope() as session:
                     try:
@@ -94,7 +98,8 @@ class DatasetStore:
                                 'dataset_id': record[2],
                                 'column_id': record[3],
                                 'column_name': record[4],
-                                'type_': record[5]
+                                'type_': record[5],
+                                'identifier':record[6],
                             })
                     except SQLAlchemyError as e:
                         raise e
@@ -182,7 +187,8 @@ class DatasetStore:
                         dataset_id=metadata.dataset_id,
                         column_id= metadata.column_id,
                         column_name=metadata.column_name,
-                        type_= metadata.type_
+                        type_= metadata.type_,
+                        identifier=metadata.identifier
                     ) for metadata in metadatas ]
 
                 return result
@@ -308,12 +314,14 @@ class DatasetStore:
             csv_string = '\n'.join(csv_rows)
             types_dict = {meta.column_name: meta.type_ for meta in metadata_list}
             types = json.dumps(types_dict)
-            new_dataset_id = self.store_dataset(userid,tenantid,"dataset "+str(dataset_id)+ " transformed",csv_string,types)
+            identifiers_dict = {meta.column_name: meta.identifier for meta in metadata_list}
+            identifiers = json.dumps(identifiers_dict)
+            new_dataset_id = self.store_dataset(userid,tenantid,"dataset "+str(dataset_id)+ " transformed",csv_string,types,identifiers)
         except Exception as e:
                 print(f"Error transforming dataset: {e}")
                 return False
 
-        return new_dataset
+        return new_dataset_id
 
 # ---------------- utils -------------------------------------------- #
 

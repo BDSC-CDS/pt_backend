@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **column_id** | **int** |  | [optional] 
 **column_name** | **str** |  | [optional] 
 **type** | **str** |  | [optional] 
+**identifier** | **str** |  | [optional] 
 
 ## Example
 

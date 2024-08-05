@@ -14,7 +14,7 @@ class TemplatebackendMetadata(Model):
     Do not edit the class manually.
     """
 
-    def __init__(self, userid=None, tenantid=None, dataset_id=None, column_id=None, column_name=None, type=None):
+    def __init__(self, userid=None, tenantid=None, dataset_id=None, column_id=None, column_name=None, type=None, identifier=None):
         """TemplatebackendMetadata - a model defined in OpenAPI
 
         :param userid: The userid of this TemplatebackendMetadata.
@@ -29,6 +29,8 @@ class TemplatebackendMetadata(Model):
         :type column_name: str
         :param type: The type of this TemplatebackendMetadata.
         :type type: str
+        :param identifier: The identifier of this TemplatebackendMetadata.
+        :type identifier: str
         """
         self.openapi_types = {
             'userid': int,
@@ -36,7 +38,8 @@ class TemplatebackendMetadata(Model):
             'dataset_id': int,
             'column_id': int,
             'column_name': str,
-            'type': str
+            'type': str,
+            'identifier': str
         }
 
         self.attribute_map = {
@@ -45,7 +48,8 @@ class TemplatebackendMetadata(Model):
             'dataset_id': 'datasetId',
             'column_id': 'columnId',
             'column_name': 'columnName',
-            'type': 'type'
+            'type': 'type',
+            'identifier': 'identifier'
         }
 
         self._userid = userid
@@ -54,6 +58,7 @@ class TemplatebackendMetadata(Model):
         self._column_id = column_id
         self._column_name = column_name
         self._type = type
+        self._identifier = identifier
 
     @classmethod
     def from_dict(cls, dikt) -> 'TemplatebackendMetadata':
@@ -191,3 +196,24 @@ class TemplatebackendMetadata(Model):
         """
 
         self._type = type
+
+    @property
+    def identifier(self) -> str:
+        """Gets the identifier of this TemplatebackendMetadata.
+
+
+        :return: The identifier of this TemplatebackendMetadata.
+        :rtype: str
+        """
+        return self._identifier
+
+    @identifier.setter
+    def identifier(self, identifier: str):
+        """Sets the identifier of this TemplatebackendMetadata.
+
+
+        :param identifier: The identifier of this TemplatebackendMetadata.
+        :type identifier: str
+        """
+
+        self._identifier = identifier

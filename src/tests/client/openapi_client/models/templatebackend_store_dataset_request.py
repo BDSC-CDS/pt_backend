@@ -34,7 +34,8 @@ class TemplatebackendStoreDatasetRequest(BaseModel):
     dataset_name: Optional[StrictStr] = Field(default=None, alias="datasetName")
     dataset: Optional[StrictStr] = None
     types: Optional[StrictStr] = None
-    __properties: ClassVar[List[str]] = ["datasetName", "dataset", "types"]
+    identifiers: Optional[StrictStr] = None
+    __properties: ClassVar[List[str]] = ["datasetName", "dataset", "types", "identifiers"]
 
     model_config = {
         "populate_by_name": True,
@@ -87,7 +88,8 @@ class TemplatebackendStoreDatasetRequest(BaseModel):
         _obj = cls.model_validate({
             "datasetName": obj.get("datasetName"),
             "dataset": obj.get("dataset"),
-            "types": obj.get("types")
+            "types": obj.get("types"),
+            "identifiers": obj.get("identifiers")
         })
         return _obj
 

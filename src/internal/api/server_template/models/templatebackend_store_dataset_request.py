@@ -14,7 +14,7 @@ class TemplatebackendStoreDatasetRequest(Model):
     Do not edit the class manually.
     """
 
-    def __init__(self, dataset_name=None, dataset=None, types=None):
+    def __init__(self, dataset_name=None, dataset=None, types=None, identifiers=None):
         """TemplatebackendStoreDatasetRequest - a model defined in OpenAPI
 
         :param dataset_name: The dataset_name of this TemplatebackendStoreDatasetRequest.
@@ -23,22 +23,27 @@ class TemplatebackendStoreDatasetRequest(Model):
         :type dataset: str
         :param types: The types of this TemplatebackendStoreDatasetRequest.
         :type types: str
+        :param identifiers: The identifiers of this TemplatebackendStoreDatasetRequest.
+        :type identifiers: str
         """
         self.openapi_types = {
             'dataset_name': str,
             'dataset': str,
-            'types': str
+            'types': str,
+            'identifiers': str
         }
 
         self.attribute_map = {
             'dataset_name': 'datasetName',
             'dataset': 'dataset',
-            'types': 'types'
+            'types': 'types',
+            'identifiers': 'identifiers'
         }
 
         self._dataset_name = dataset_name
         self._dataset = dataset
         self._types = types
+        self._identifiers = identifiers
 
     @classmethod
     def from_dict(cls, dikt) -> 'TemplatebackendStoreDatasetRequest':
@@ -113,3 +118,24 @@ class TemplatebackendStoreDatasetRequest(Model):
         """
 
         self._types = types
+
+    @property
+    def identifiers(self) -> str:
+        """Gets the identifiers of this TemplatebackendStoreDatasetRequest.
+
+
+        :return: The identifiers of this TemplatebackendStoreDatasetRequest.
+        :rtype: str
+        """
+        return self._identifiers
+
+    @identifiers.setter
+    def identifiers(self, identifiers: str):
+        """Sets the identifiers of this TemplatebackendStoreDatasetRequest.
+
+
+        :param identifiers: The identifiers of this TemplatebackendStoreDatasetRequest.
+        :type identifiers: str
+        """
+
+        self._identifiers = identifiers

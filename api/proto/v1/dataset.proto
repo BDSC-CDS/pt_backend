@@ -23,4 +23,5 @@ message Metadata {
     uint32 column_id = 4;
     string column_name = 5;
     string type_ = 6;
+    string identifier = 7;
 }
