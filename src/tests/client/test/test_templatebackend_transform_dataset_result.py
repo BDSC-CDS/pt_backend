@@ -37,12 +37,7 @@ class TestTemplatebackendTransformDatasetResult(unittest.TestCase):
         model = TemplatebackendTransformDatasetResult()
         if include_optional:
             return TemplatebackendTransformDatasetResult(
-                columns = [
-                    openapi_client.models.templatebackend_column.templatebackendColumn(
-                        value = [
-                            ''
-                            ], )
-                    ]
+                id = 56
             )
         else:
             return TemplatebackendTransformDatasetResult(

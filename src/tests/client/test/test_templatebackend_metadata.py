@@ -42,7 +42,8 @@ class TestTemplatebackendMetadata(unittest.TestCase):
                 dataset_id = 56,
                 column_id = 56,
                 column_name = '',
-                type = ''
+                type = '',
+                identifier = ''
             )
         else:
             return TemplatebackendMetadata(

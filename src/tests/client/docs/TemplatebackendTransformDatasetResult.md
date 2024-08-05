@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**columns** | [**List[TemplatebackendColumn]**](TemplatebackendColumn.md) |  | [optional] 
+**id** | **int** |  | [optional] 
 
 ## Example
 
