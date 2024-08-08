@@ -12,6 +12,8 @@ from server_template.models.templatebackend_delete_dataset_reply import Template
 from server_template.models.templatebackend_get_dataset_content_reply import TemplatebackendGetDatasetContentReply
 from server_template.models.templatebackend_get_dataset_metadata_reply import TemplatebackendGetDatasetMetadataReply
 from server_template.models.templatebackend_list_datasets_reply import TemplatebackendListDatasetsReply
+from server_template.models.templatebackend_revert_dataset_reply import TemplatebackendRevertDatasetReply
+from server_template.models.templatebackend_revert_dataset_request import TemplatebackendRevertDatasetRequest
 from server_template.models.templatebackend_store_dataset_reply import TemplatebackendStoreDatasetReply
 from server_template.models.templatebackend_store_dataset_request import TemplatebackendStoreDatasetRequest
 from server_template.models.templatebackend_transform_dataset_reply import TemplatebackendTransformDatasetReply
@@ -21,7 +23,7 @@ from server_template import util
 
 #from src.internal.api.controllers import dataset_controller
 #controller_functions =  [func_tupple[0] for func_tupple in getmembers(dataset_controller, isfunction)]
-#needed_functions = ["dataset_service_delete_dataset", "dataset_service_get_dataset_content", "dataset_service_get_dataset_metadata", "dataset_service_list_datasets", "dataset_service_store_dataset", "dataset_service_transform_dataset"]
+#needed_functions = ["dataset_service_delete_dataset", "dataset_service_get_dataset_content", "dataset_service_get_dataset_metadata", "dataset_service_list_datasets", "dataset_service_revert_dataset", "dataset_service_store_dataset", "dataset_service_transform_dataset"]
 #for op in needed_functions:
 #    if op not in controller_functions:
 #        raise NotImplementedError("operation " + op + " is not implemented by src.internal.api.controllers.dataset_controller")
@@ -29,7 +31,7 @@ from server_template import util
 class DatasetController:
     def __init__(self, controller):
         #controller_functions =  [func_tupple[0] for func_tupple in getmembers(controller, ismethod)]
-        #needed_functions = ["dataset_service_delete_dataset", "dataset_service_get_dataset_content", "dataset_service_get_dataset_metadata", "dataset_service_list_datasets", "dataset_service_store_dataset", "dataset_service_transform_dataset"]
+        #needed_functions = ["dataset_service_delete_dataset", "dataset_service_get_dataset_content", "dataset_service_get_dataset_metadata", "dataset_service_list_datasets", "dataset_service_revert_dataset", "dataset_service_store_dataset", "dataset_service_transform_dataset"]
         #for op in needed_functions:
         #    if op not in controller_functions:
         #        raise NotImplementedError("operation " + op + " is not implemented by provided controller")
@@ -98,6 +100,22 @@ class DatasetController:
         """
 
         return self.controller.dataset_service_list_datasets(user, offset, limit)
+
+
+    def dataset_service_revert_dataset(self, user, body: TemplatebackendRevertDatasetRequest):
+        """Revert a dataset
+
+        This endpoint reverts a dataset
+
+        :param body: 
+        :type body: dict | bytes
+
+        :rtype: Union[TemplatebackendRevertDatasetReply, Tuple[TemplatebackendRevertDatasetReply, int], Tuple[TemplatebackendRevertDatasetReply, int, Dict[str, str]]
+        """
+        if connexion.request.is_json:
+            body = TemplatebackendRevertDatasetRequest.from_dict(connexion.request.get_json())
+
+        return self.controller.dataset_service_revert_dataset(user, body)
 
 
     def dataset_service_store_dataset(self, user, body: TemplatebackendStoreDatasetRequest):

@@ -486,6 +486,34 @@ paths:
       tags:
       - Dataset
       x-openapi-router-controller: dataset_controller
+  /api/v1/dataset/revert:
+    post:
+      description: This endpoint reverts a dataset
+      operationId: dataset_service_revert_dataset
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/templatebackendRevertDatasetRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/templatebackendRevertDatasetReply'
+          description: A successful response.
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+          description: An unexpected error response.
+      summary: Revert a dataset
+      tags:
+      - Dataset
+      x-openapi-router-controller: dataset_controller
+      x-codegen-request-body-name: body
   /api/v1/dataset/transform:
     post:
       description: This endpoint transforms a dataset
@@ -3724,6 +3752,24 @@ components:
       type: object
     templatebackendResetPasswordResult:
       title: result
+      type: object
+    templatebackendRevertDatasetReply:
+      example:
+        id: 0
+      properties:
+        id:
+          format: int64
+          title: id
+          type: integer
+      title: templatebackendRevertDatasetReply
+      type: object
+    templatebackendRevertDatasetRequest:
+      properties:
+        id:
+          format: int64
+          title: id
+          type: integer
+      title: templatebackendRevertDatasetRequest
       type: object
     templatebackendStoreDatasetReply:
       example:

@@ -76,8 +76,7 @@ class DatasetStore:
 
                 column_types = json.loads(types)
                 column_identifiers = json.loads(identifiers)
-                print("COLUMN TYPES: ",column_types)
-                print("COLUMN IDENTIFIERS: ", column_identifiers)
+
                 metadata_to_insert = []
                 for column_id, header in enumerate(headers):
                     column_type = column_types[header]
@@ -258,7 +257,32 @@ class DatasetStore:
 
         return True
 
+    def insert_transformation_entry(self, userid, tenantid, new_dataset_id, config_id, scramble_field_cols, date_shift, sub_list_col, sub_regex_col):
+        query = """
+            INSERT INTO transformations (userid, tenantid, old_dataset_id, config_id, scramble_fields_cols, date_shift, sub_list_col, sub_regex_col)
+            VALUES (:userid, :tenantid, :old_dataset_id, :config_id, :scramble_fields_cols, :date_shift, :sub_list_col, :sub_regex_col);
+        """
 
+        # Creating a dictionary to store parameters
+        params = {
+            'userid': userid,
+            'tenantid': tenantid,
+            'old_dataset_id': new_dataset_id,
+            'config_id': config_id,
+            'scramble_fields_cols': json.dumps(scramble_field_cols) if scramble_field_cols is not None else None,
+            'date_shift': date_shift,
+            'sub_list_col': json.dumps(sub_list_col) if sub_list_col is not None else None,
+            'sub_regex_col': json.dumps(sub_regex_col) if sub_regex_col is not None else None
+        }
+
+        # # Optional: Remove None values from the dictionary
+        # params = {k: v for k, v in params.items() if v is not None}
+
+        with self.session_scope() as session:
+            try:
+                session.execute(text(query), params)
+            except SQLAlchemyError as e:
+                raise e
 
     def transform_dataset(self,userid:int,tenantid:int,dataset_id:int,config_id:int) -> str:
         try:
@@ -285,25 +309,30 @@ class DatasetStore:
             if (not metadata_list):
                 raise Exception("No metadata found for this dataset")
 
+            scramble_field_cols = None
+            date_shift = None
+            sub_list_col = None
+            sub_regex_col = None
+
             if (config.hasScrambleField):
                 if not config.scrambleField_fields:
                     raise Exception("No fields given to scramble.")
-                new_dataset = self.scramble_fields(new_dataset, metadata_list, dataset_id, config.scrambleField_fields)
+                new_dataset, scramble_field_cols = self.scramble_fields(new_dataset, metadata_list, dataset_id, config.scrambleField_fields)
 
             if (config.hasDateShift):
                 if not config.dateShift_lowrange or not config.dateShift_highrange:
                     raise Exception("Please provide both ranges.")
-                new_dataset = self.shift_dates(new_dataset, metadata_list,config.dateShift_lowrange, config.dateShift_highrange)
+                new_dataset,date_shift = self.shift_dates(new_dataset, metadata_list,config.dateShift_lowrange, config.dateShift_highrange)
 
             if (config.hassubFieldList):
                 if not config.subFieldList_field or not config.subFieldList_substitute or not config.subFieldList_replacement:
                     raise Exception("Missing parameters for the substitution.")
-                new_dataset = self.substitute_field(new_dataset, metadata_list, config.subFieldList_field, config.subFieldList_substitute, config.subFieldList_replacement)
+                new_dataset, sub_list_col = self.substitute_field(new_dataset, metadata_list, config.subFieldList_field, config.subFieldList_substitute, config.subFieldList_replacement)
 
             if (config.hassubFieldRegex):
                 if not config.subFieldRegex_field or not config.subFieldRegex_regex or not config.subFieldRegex_replacement:
                     raise Exception("Missing parameters for the substitution.")
-                new_dataset = self.substitute_field_regex(new_dataset, metadata_list, config.subFieldRegex_field, config.subFieldRegex_regex, config.subFieldRegex_replacement)
+                new_dataset, sub_regex_col = self.substitute_field_regex(new_dataset, metadata_list, config.subFieldRegex_field, config.subFieldRegex_regex, config.subFieldRegex_replacement)
 
 
             # store the new dataset
@@ -317,11 +346,74 @@ class DatasetStore:
             identifiers_dict = {meta.column_name: meta.identifier for meta in metadata_list}
             identifiers = json.dumps(identifiers_dict)
             new_dataset_id = self.store_dataset(userid,tenantid,"dataset "+str(dataset_id)+ " transformed",csv_string,types,identifiers)
+
+            # Create transformation entry
+            self.insert_transformation_entry(userid, tenantid, new_dataset_id, config_id, scramble_field_cols, date_shift, sub_list_col, sub_regex_col)
+
+
         except Exception as e:
                 print(f"Error transforming dataset: {e}")
                 return False
 
         return new_dataset_id
+
+
+
+    def revert_dataset(self,userid:int,tenantid:int,dataset_id:int) -> str:
+        query = "SELECT * FROM transformations WHERE old_dataset_id = :dataset_id AND userid = :userid AND tenantid = :tenantid;"
+        with self.session_scope() as session:
+            try:
+                transformation = session.execute(text(query), {
+                                'dataset_id':dataset_id,
+                                'userid': userid,
+                                'tenantid': tenantid,
+                            }).mappings().fetchone()
+
+                if not transformation:
+                    raise Exception("This dataset was not transformed.")
+
+                config_store = ConfigGeneratorStore(self.db)
+                config : ConfigGenerator = config_store.get_config(userid,tenantid,transformation.config_id)
+                dataset =  self.get_dataset_content(dataset_id, userid, tenantid)
+
+                # check dataset
+                if (not dataset):
+                    raise Exception("Error: Dataset not found.")
+
+                # if no transformation was selected
+                if (not config.hasScrambleField and not config.hasDateShift and
+                    not config.hassubFieldList and not config.hassubFieldRegex):
+                    raise Exception("This data was not transformed.")
+
+                new_dataset = dataset
+                metadata_list : List[Metadata] = self.get_dataset_metadata(dataset_id,userid,tenantid)
+                if config.hasScrambleField:
+                        new_dataset = self.revert_scramble_field(new_dataset, metadata_list, transformation.scramble_fields_cols)
+                if config.hasDateShift:
+                    new_dataset = self.revert_date_shift(new_dataset, metadata_list, transformation.date_shift)
+                if config.hassubFieldList:
+                    new_dataset = self.revert_substitute(new_dataset, metadata_list, config.subFieldList_field, transformation.sub_list_col)
+                if config.hassubFieldRegex:
+                    new_dataset = self.revert_substitute(new_dataset, metadata_list, config.subFieldRegex_field, transformation.sub_regex_col)
+
+                # store the new dataset
+                # Generate headers from metadata
+                headers = ','.join(f'"{m.column_name}"' for m in metadata_list)
+                data_rows = list(zip(*new_dataset))
+                csv_rows = [headers] + [','.join(f'"{item}"' for item in row) for row in data_rows]
+                csv_string = '\n'.join(csv_rows)
+                types_dict = {meta.column_name: meta.type_ for meta in metadata_list}
+                types = json.dumps(types_dict)
+                identifiers_dict = {meta.column_name: meta.identifier for meta in metadata_list}
+                identifiers = json.dumps(identifiers_dict)
+                new_dataset_id = self.store_dataset(userid,tenantid,"dataset "+str(dataset_id)+ " reverted",csv_string,types,identifiers)
+
+            except Exception as e:
+                print(f"Error reverting dataset: {e}")
+                return None
+
+        return new_dataset_id
+
 
 # ---------------- utils -------------------------------------------- #
 
@@ -347,7 +439,7 @@ class DatasetStore:
         for col_id in date_column_ids:
             new_dataset[col_id] = self.shift_date_col(new_dataset[col_id], random_shift)
 
-        return new_dataset
+        return new_dataset, random_shift
 
     def update_metadata_type(self,dataset_id:int, new_type:str, columns:List[str]):
         query = "UPDATE metadata SET type_ = :new_type WHERE dataset_id = :dataset_id AND column_name = ANY (:fields);"
@@ -377,7 +469,9 @@ class DatasetStore:
     def scramble_fields(self,new_dataset: List[List[str]], metadata_list:List[Metadata], dataset_id:int, scramble_fields : List[str]):
         column_indices = {meta.column_name: meta.column_id for meta in metadata_list if meta.column_name in scramble_fields}
         # Replace each specified field's value with a unique identifier
+        scramble_field_cols = {}
         for col_name, col_index in column_indices.items():
+            scramble_field_cols[col_name] = new_dataset[col_index].copy()
             for i in range(len(new_dataset[col_index])):
                 new_dataset[col_index][i] = self.generate_random_identifier()
 
@@ -390,7 +484,7 @@ class DatasetStore:
         if not result:
             raise Exception("The updating of the metadata did not work")
 
-        return new_dataset
+        return new_dataset, scramble_field_cols
 
 
     def substitute_field(self, new_dataset: List[List[str]], metadata_list:List[Metadata],  subFieldList_field: str, subFieldList_substitute: List[str], subFieldList_replacement:str):
@@ -401,9 +495,10 @@ class DatasetStore:
                     break
         # replace the values in the goal column if they match the substitute values
         target_column = new_dataset[column_id]
+        sub_field_col = target_column.copy()
         target_column[:] = [subFieldList_replacement if value in subFieldList_substitute else value for value in target_column]
 
-        return new_dataset
+        return new_dataset,sub_field_col
 
     def substitute_field_regex(self, new_dataset: List[List[str]], metadata_list:List[Metadata], subFieldRegex_field : str, subFieldRegex_regex: str, subFieldRegex_replacement:str):
          # check validity of regex
@@ -427,5 +522,50 @@ class DatasetStore:
         if not changes_made:
             print("RAISING EXCEPTION")
             raise Exception("Nothing matched the regex in the indicated column.")
+
+        return new_dataset, original_column
+
+
+    def revert_scramble_field(self, new_dataset: List[List[str]], metadata_list:List[Metadata], scramble_fields_cols:str):
+        cols_dict = json.loads(scramble_fields_cols)
+        column_mapping = {meta.column_name: meta.column_id for meta in metadata_list}
+         # Iterate over the dictionary to replace corresponding columns in the dataset
+        for col_name, old_values in cols_dict.items():
+            if col_name in column_mapping:
+                col_id = column_mapping[col_name]
+                # Replace the entire column with the old values
+                new_dataset[col_id] = old_values
+
+        return new_dataset
+
+    def revert_date_shift(self,new_dataset: List[List[str]], metadata_list: List[Metadata], date_shift : int) :
+        # get the columns that are dates
+        date_column_ids = [metadata.column_id for metadata in metadata_list if metadata.type_ == "date"]
+        # shift back to the old dates
+        for col_id in date_column_ids:
+            new_dataset[col_id] = self.shift_date_col(new_dataset[col_id], -date_shift)
+
+        return new_dataset
+
+    def revert_substitute(self, new_dataset: List[List[str]], metadata_list: List[Metadata], field: str, sub_col:str):
+        # get the array of old values corresponding to the old column
+        old_column = json.loads(sub_col)
+        print("REVERT PARAMETERS: ")
+        print("metadata: ", metadata_list)
+        print("field: ",field)
+        print("sub_col", sub_col)
+        # find the column id to replace
+        column_id = None
+        for meta in metadata_list:
+            print("meta: ", meta.column_name)
+            print("is equal to field? ", meta.column_name == field)
+            if meta.column_name == field:
+                column_id = meta.column_id
+                print("equal to field so now column id is ", column_id)
+        if column_id is None:
+            raise Exception("This column does not exist.")
+
+        # replace the old column
+        new_dataset[column_id] = old_column
 
         return new_dataset

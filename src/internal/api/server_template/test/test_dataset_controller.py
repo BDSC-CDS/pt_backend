@@ -9,6 +9,8 @@ from server_template.models.templatebackend_delete_dataset_reply import Template
 from server_template.models.templatebackend_get_dataset_content_reply import TemplatebackendGetDatasetContentReply
 from server_template.models.templatebackend_get_dataset_metadata_reply import TemplatebackendGetDatasetMetadataReply
 from server_template.models.templatebackend_list_datasets_reply import TemplatebackendListDatasetsReply
+from server_template.models.templatebackend_revert_dataset_reply import TemplatebackendRevertDatasetReply
+from server_template.models.templatebackend_revert_dataset_request import TemplatebackendRevertDatasetRequest
 from server_template.models.templatebackend_store_dataset_reply import TemplatebackendStoreDatasetReply
 from server_template.models.templatebackend_store_dataset_request import TemplatebackendStoreDatasetRequest
 from server_template.models.templatebackend_transform_dataset_reply import TemplatebackendTransformDatasetReply
@@ -86,6 +88,26 @@ class TestDatasetController(BaseTestCase):
             method='GET',
             headers=headers,
             query_string=query_string)
+        self.assert200(response,
+                       'Response body is : ' + response.data.decode('utf-8'))
+
+    def test_dataset_service_revert_dataset(self):
+        """Test case for dataset_service_revert_dataset
+
+        Revert a dataset
+        """
+        body = server_template.TemplatebackendRevertDatasetRequest()
+        headers = { 
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Bearer': 'special-key',
+        }
+        response = self.client.open(
+            '/api/v1/dataset/revert',
+            method='POST',
+            headers=headers,
+            data=json.dumps(body),
+            content_type='application/json')
         self.assert200(response,
                        'Response body is : ' + response.data.decode('utf-8'))
 

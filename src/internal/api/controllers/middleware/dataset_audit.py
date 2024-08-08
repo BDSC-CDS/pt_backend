@@ -8,7 +8,8 @@ from  server_template.models import TemplatebackendListDatasetsReply
 from  server_template.models import TemplatebackendDeleteDatasetReply
 from  server_template.models import TemplatebackendTransformDatasetReply
 from  server_template.models import TemplatebackendTransformDatasetRequest
-
+from server_template.models import TemplatebackendRevertDatasetReply
+from server_template.models import TemplatebackendRevertDatasetRequest
 from src.internal.api.controllers.dataset_controller import DatasetController
 from src.internal.util.interface.implements import implements_interface
 from src.pkg.audit_log.model.audit_log import AuditLog
@@ -90,4 +91,15 @@ class DatasetControllerAudit():
             return response
         except  Exception as e:
             self.auditLogService.log_event(AuditLog(service="dataset", userid=user.id,action="Error transforming dataset "+ str(body.dataset_id) + " with config " + str(body.config_id), response=e, error=True))
+            raise e
+
+
+    def dataset_service_revert_dataset(self, user, body:TemplatebackendRevertDatasetRequest):
+        try:
+            response : TemplatebackendRevertDatasetReply =  self.next.dataset_service_revert_dataset(user,body)
+            response_serialized = response.id or ''
+            self.auditLogService.log_event(AuditLog(service="dataset", userid=user.id,action="reverted dataset "+ str(body.id), response=response_serialized))
+            return response
+        except  Exception as e:
+            self.auditLogService.log_event(AuditLog(service="dataset", userid=user.id,action="Error reverting dataset "+ str(body.id), response=e, error=True))
             raise e
