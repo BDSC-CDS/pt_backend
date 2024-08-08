@@ -15,6 +15,8 @@ from server_template.models import TemplatebackendDeleteDatasetResult
 from server_template.models import TemplatebackendTransformDatasetResult
 from server_template.models import TemplatebackendTransformDatasetReply
 from server_template.models import TemplatebackendTransformDatasetRequest
+from server_template.models import TemplatebackendRevertDatasetReply
+from server_template.models import TemplatebackendRevertDatasetRequest
 
 import src.internal.api.controllers.converter.dataset as dataset_converter
 
@@ -92,3 +94,12 @@ class DatasetController:
             traceback.print_exception(e)
             return str(e), 500
         return TemplatebackendTransformDatasetReply(TemplatebackendTransformDatasetResult(id=new_dataset_id))
+
+    def dataset_service_revert_dataset(self, user, body:TemplatebackendRevertDatasetRequest):
+        try:
+            new_dataset_id = self.dataset_service.revert_dataset(user.id,user.tenantid,body.id)
+        except Exception as e:
+            print("error", e)
+            traceback.print_exception(e)
+            return str(e), 500
+        return TemplatebackendRevertDatasetReply(id=new_dataset_id)

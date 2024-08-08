@@ -55,6 +55,13 @@ class TestDatasetApi(unittest.TestCase):
         """
         pass
 
+    def test_dataset_service_revert_dataset(self) -> None:
+        """Test case for dataset_service_revert_dataset
+
+        Revert a dataset
+        """
+        pass
+
     def test_dataset_service_store_dataset(self) -> None:
         """Test case for dataset_service_store_dataset
 
