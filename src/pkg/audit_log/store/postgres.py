@@ -49,7 +49,7 @@ RETURNING id;
 
             return AuditLog(id=audit_id)
 
-    def get_logs(self, offset: int, limit: int, filters: dict = None, sort_by: str = None) -> list[AuditLog]:
+    def get_logs(self, offset: int, limit: int, filters: dict = {}, sort_by: str = None) -> list[AuditLog]:
         query = """
             SELECT
                 a.id, a.userid, a.service, 
@@ -73,8 +73,6 @@ RETURNING id;
 
         query += " OFFSET :offset LIMIT :limit;"
 
-        print("query", query, offset, limit, filters)
-        
         with self.session_scope() as session:
             logs = session.execute(text(query), {**filters, 'offset': offset, 'limit': limit}).mappings().fetchall()
 
@@ -96,7 +94,9 @@ RETURNING id;
                     )
                 ) for log in logs
             ]
+
             return result
+        
 
     def get_logs_for_user(self, id: int, offset: int, limit: int, filters: dict = None, sort_by: str = None) -> list[AuditLog]:
         query = """
