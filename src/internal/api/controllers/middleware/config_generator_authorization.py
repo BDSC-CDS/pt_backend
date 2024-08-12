@@ -19,3 +19,8 @@ class ConfigGeneratorControllerAuthentication():
         if not is_authenticated(user): # TODO admin?
             return None, 403
         return self.next.config_service_create_config(user,body)
+
+    def config_service_delete_config(self,user,id:int):
+        if not is_authenticated(user): # TODO admin?
+            return None, 403
+        return self.next.config_service_delete_config(user,id)

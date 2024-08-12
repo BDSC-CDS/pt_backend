@@ -27,13 +27,13 @@ class ConfigGeneratorStore:
         config_query = """
             INSERT INTO config_generator
                 (userid, tenantid, questionnaireid, hasScrambleField, hasDateShift, hassubFieldList, hassubFieldRegex,
-                scrambleField_fields, dateShift_lowrange, dateShift_highrange, subFieldList_fields,
-                subFieldList_substitute, subFieldList_replacement, subFieldRegex_fields,
+                scrambleField_fields, dateShift_lowrange, dateShift_highrange, subFieldList_field,
+                subFieldList_substitute, subFieldList_replacement, subFieldRegex_field,
                 subFieldRegex_regex,subFieldRegex_replacement, created_at)
             VALUES
                 (:userid, :tenantid, :questionnaireid, :hasScrambleField, :hasDateShift, :hassubFieldList, :hassubFieldRegex,
-                :scrambleField_fields, :dateShift_lowrange, :dateShift_highrange, :subFieldList_fields,
-                :subFieldList_substitute, :subFieldList_replacement, :subFieldRegex_fields,
+                :scrambleField_fields, :dateShift_lowrange, :dateShift_highrange, :subFieldList_field,
+                :subFieldList_substitute, :subFieldList_replacement, :subFieldRegex_field,
                 :subFieldRegex_regex, :subFieldRegex_replacement, NOW())
             RETURNING id;
             """
@@ -51,10 +51,10 @@ class ConfigGeneratorStore:
                     'scrambleField_fields': ','.join(config_generator.scrambleField_fields) if config_generator.scrambleField_fields else '',
                     'dateShift_lowrange': config_generator.dateShift_lowrange,
                     'dateShift_highrange': config_generator.dateShift_highrange,
-                    'subFieldList_fields': ','.join(config_generator.subFieldList_fields) if config_generator.subFieldList_fields else '',
+                    'subFieldList_field': config_generator.subFieldList_field,
                     'subFieldList_substitute': ','.join(config_generator.subFieldList_substitute) if config_generator.subFieldList_substitute else '',
                     'subFieldList_replacement': config_generator.subFieldList_replacement,
-                    'subFieldRegex_fields': ','.join(config_generator.subFieldRegex_fields) if config_generator.subFieldRegex_fields else '',
+                    'subFieldRegex_field':config_generator.subFieldRegex_field,
                     'subFieldRegex_regex': config_generator.subFieldRegex_regex,
                     'subFieldRegex_replacement': config_generator.subFieldRegex_replacement
                 }).fetchone()
@@ -87,14 +87,15 @@ class ConfigGeneratorStore:
                     scrambleField_fields=config.scramblefield_fields.split(","),
                     dateShift_lowrange=config.dateshift_lowrange,
                     dateShift_highrange=config.dateshift_highrange,
-                    subFieldList_fields=config.subfieldlist_fields.split(","),
+                    subFieldList_field=config.subfieldlist_field,
                     subFieldList_substitute=config.subfieldlist_substitute.split(","),
                     subFieldList_replacement=config.subfieldlist_replacement,
-                    subFieldRegex_fields=config.subfieldregex_fields.split(","),
+                    subFieldRegex_field=config.subfieldregex_field,
                     subFieldRegex_regex=config.subfieldregex_regex,
                     subFieldRegex_replacement=config.subfieldregex_replacement,
-                    created_at= config.created_at
-                ) for config in configs
+                    created_at= config.created_at,
+                    deleted_at=config.deleted_at
+                ) for config in configs if not config.deleted_at
             ]
             return result
 
@@ -107,26 +108,27 @@ class ConfigGeneratorStore:
             }).mappings().fetchall()
 
             result = [
-                ConfigGenerator(
+               ConfigGenerator(
                     id=config.id,
                     userid=userid,
                     tenantid=config.tenantid,
                     questionnaireid=config.questionnaireid,
-                    hasScrambleField=config.hasScrambleField,
-                    hasDateShift=config.hasDateShift,
-                    hassubFieldList=config.hassubFieldList,
-                    hassubFieldRegex=config.hassubFieldRegex,
-                    scrambleField_fields=config.scrambleField_fields.split(","),
-                    dateShift_lowrange=config.dateShift_lowrange,
-                    dateShift_highrange=config.dateShift_highrange,
-                    subFieldList_fields=config.subFieldList_fields.split(","),
-                    subFieldList_substitute=config.subFieldList_substitute.split(","),
-                    subFieldList_replacement=config.subFieldList_replacement,
-                    suFieldRegex_fields=config.subFieldRegex_fields.split(","),
-                    subFieldRegex_regex=config.subFieldRegex_regex,
-                    subFieldRegex_replacement=config.subFieldRegex_replacement,
-                    created_at= config.created_at
-                ) for config in configs
+                    hasScrambleField=config.hasscramblefield,
+                    hasDateShift=config.hasdateshift,
+                    hassubFieldList=config.hassubfieldlist,
+                    hassubFieldRegex=config.hassubfieldregex,
+                    scrambleField_fields=config.scramblefield_fields.split(","),
+                    dateShift_lowrange=config.dateshift_lowrange,
+                    dateShift_highrange=config.dateshift_highrange,
+                    subFieldList_field=config.subfieldlist_field,
+                    subFieldList_substitute=config.subfieldlist_substitute.split(","),
+                    subFieldList_replacement=config.subfieldlist_replacement,
+                    subFieldRegex_field=config.subfieldregex_field,
+                    subFieldRegex_regex=config.subfieldregex_regex,
+                    subFieldRegex_replacement=config.subfieldregex_replacement,
+                    created_at= config.created_at,
+                    deleted_at=config.deleted_at
+                ) for config in configs if not config.deleted_at
             ]
 
             return result
@@ -144,24 +146,50 @@ class ConfigGeneratorStore:
                 print("No config found")
                 return None
 
-            result = ConfigGenerator(
+            if config.deleted_at:
+                    print("deleted")
+                    return #TODO
+
+            result =ConfigGenerator(
                     id=config.id,
                     userid=userid,
                     tenantid=config.tenantid,
                     questionnaireid=config.questionnaireid,
-                    hasScrambleField=config.hasScrambleField,
-                    hasDateShift=config.hasDateShift,
-                    hassubFieldList=config.hassubFieldList,
-                    hassubFieldRegex=config.hassubFieldRegex,
-                    scrambleField_fields=config.scrambleField_fields.split(","),
-                    dateShift_lowrange=config.dateShift_lowrange,
-                    dateShift_highrange=config.dateShift_highrange,
-                    subFieldList_fields=config.subFieldList_fields.split(","),
-                    subFieldList_substitute=config.subFieldList_substitute.split(","),
-                    subFieldList_replacement=config.subFieldList_replacement,
-                    suFieldRegex_fields=config.subFieldRegex_fields.split(","),
-                    subFieldRegex_regex=config.subFieldRegex_regex,
-                    subFieldRegex_replacement=config.subFieldRegex_replacement,
-                    created_at= config.created_at
+                    hasScrambleField=config.hasscramblefield,
+                    hasDateShift=config.hasdateshift,
+                    hassubFieldList=config.hassubfieldlist,
+                    hassubFieldRegex=config.hassubfieldregex,
+                    scrambleField_fields=config.scramblefield_fields.split(","),
+                    dateShift_lowrange=config.dateshift_lowrange,
+                    dateShift_highrange=config.dateshift_highrange,
+                    subFieldList_field=config.subfieldlist_field,
+                    subFieldList_substitute=config.subfieldlist_substitute.split(","),
+                    subFieldList_replacement=config.subfieldlist_replacement,
+                    subFieldRegex_field=config.subfieldregex_field,
+                    subFieldRegex_regex=config.subfieldregex_regex,
+                    subFieldRegex_replacement=config.subfieldregex_replacement,
+                    created_at= config.created_at,
+                    deleted_at=config.deleted_at
                 )
             return result
+
+
+    def delete_config(self,user,config_id:int):
+        query = """UPDATE config_generator
+                SET deleted_at = NOW()
+                WHERE id = :id AND userid = :userid AND tenantid = :tenantid
+                """
+        with self.session_scope() as session:
+            try:
+                session.execute(text(query), {
+                    'id': config_id,
+                    'userid': user.id,
+                    'tenantid': user.tenantid,
+                })
+
+
+            except Exception as e:
+                print(f"Error deleting configuration: {e}")
+                return False
+
+        return True

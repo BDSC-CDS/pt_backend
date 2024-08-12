@@ -37,7 +37,8 @@ class TemplatebackendMetadata(BaseModel):
     column_id: Optional[StrictInt] = Field(default=None, alias="columnId")
     column_name: Optional[StrictStr] = Field(default=None, alias="columnName")
     type: Optional[StrictStr] = None
-    __properties: ClassVar[List[str]] = ["userid", "tenantid", "datasetId", "columnId", "columnName", "type"]
+    identifier: Optional[StrictStr] = None
+    __properties: ClassVar[List[str]] = ["userid", "tenantid", "datasetId", "columnId", "columnName", "type", "identifier"]
 
     model_config = {
         "populate_by_name": True,
@@ -93,7 +94,8 @@ class TemplatebackendMetadata(BaseModel):
             "datasetId": obj.get("datasetId"),
             "columnId": obj.get("columnId"),
             "columnName": obj.get("columnName"),
-            "type": obj.get("type")
+            "type": obj.get("type"),
+            "identifier": obj.get("identifier")
         })
         return _obj
 

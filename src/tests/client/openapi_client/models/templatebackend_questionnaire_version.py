@@ -20,7 +20,7 @@ import json
 
 from datetime import datetime
 from typing import Any, ClassVar, Dict, List, Optional
-from pydantic import BaseModel, StrictInt, StrictStr
+from pydantic import BaseModel, StrictBool, StrictInt, StrictStr
 from pydantic import Field
 from openapi_client.models.templatebackend_questionnaire_question import TemplatebackendQuestionnaireQuestion
 try:
@@ -35,9 +35,10 @@ class TemplatebackendQuestionnaireVersion(BaseModel):
     id: Optional[StrictInt] = None
     version: Optional[StrictStr] = None
     questions: Optional[List[TemplatebackendQuestionnaireQuestion]] = None
+    published: Optional[StrictBool] = None
     created_at: Optional[datetime] = Field(default=None, alias="createdAt")
     updated_at: Optional[datetime] = Field(default=None, alias="updatedAt")
-    __properties: ClassVar[List[str]] = ["id", "version", "questions", "createdAt", "updatedAt"]
+    __properties: ClassVar[List[str]] = ["id", "version", "questions", "published", "createdAt", "updatedAt"]
 
     model_config = {
         "populate_by_name": True,
@@ -98,6 +99,7 @@ class TemplatebackendQuestionnaireVersion(BaseModel):
             "id": obj.get("id"),
             "version": obj.get("version"),
             "questions": [TemplatebackendQuestionnaireQuestion.from_dict(_item) for _item in obj.get("questions")] if obj.get("questions") is not None else None,
+            "published": obj.get("published"),
             "createdAt": obj.get("createdAt"),
             "updatedAt": obj.get("updatedAt")
         })

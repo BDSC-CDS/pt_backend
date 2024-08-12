@@ -16,13 +16,14 @@ Name | Type | Description | Notes
 **scramble_field_fields** | **List[str]** |  | [optional] 
 **date_shift_lowrange** | **int** |  | [optional] 
 **date_shift_highrange** | **int** |  | [optional] 
-**sub_field_list_fields** | **List[str]** |  | [optional] 
+**sub_field_list_field** | **str** |  | [optional] 
 **sub_field_list_substitute** | **List[str]** |  | [optional] 
 **sub_field_list_replacement** | **str** |  | [optional] 
-**sub_field_regex_fields** | **List[str]** |  | [optional] 
+**sub_field_regex_field** | **str** |  | [optional] 
 **sub_field_regex_regex** | **str** |  | [optional] 
 **sub_field_regex_replacement** | **str** |  | [optional] 
 **created_at** | **datetime** |  | [optional] 
+**deleted_at** | **datetime** |  | [optional] 
 
 ## Example
 

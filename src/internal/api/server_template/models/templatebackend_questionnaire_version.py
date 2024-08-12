@@ -16,7 +16,7 @@ class TemplatebackendQuestionnaireVersion(Model):
     Do not edit the class manually.
     """
 
-    def __init__(self, id=None, version=None, questions=None, created_at=None, updated_at=None):
+    def __init__(self, id=None, version=None, questions=None, published=None, created_at=None, updated_at=None):
         """TemplatebackendQuestionnaireVersion - a model defined in OpenAPI
 
         :param id: The id of this TemplatebackendQuestionnaireVersion.
@@ -25,6 +25,8 @@ class TemplatebackendQuestionnaireVersion(Model):
         :type version: str
         :param questions: The questions of this TemplatebackendQuestionnaireVersion.
         :type questions: List[TemplatebackendQuestionnaireQuestion]
+        :param published: The published of this TemplatebackendQuestionnaireVersion.
+        :type published: bool
         :param created_at: The created_at of this TemplatebackendQuestionnaireVersion.
         :type created_at: datetime
         :param updated_at: The updated_at of this TemplatebackendQuestionnaireVersion.
@@ -34,6 +36,7 @@ class TemplatebackendQuestionnaireVersion(Model):
             'id': int,
             'version': str,
             'questions': List[TemplatebackendQuestionnaireQuestion],
+            'published': bool,
             'created_at': datetime,
             'updated_at': datetime
         }
@@ -42,6 +45,7 @@ class TemplatebackendQuestionnaireVersion(Model):
             'id': 'id',
             'version': 'version',
             'questions': 'questions',
+            'published': 'published',
             'created_at': 'createdAt',
             'updated_at': 'updatedAt'
         }
@@ -49,6 +53,7 @@ class TemplatebackendQuestionnaireVersion(Model):
         self._id = id
         self._version = version
         self._questions = questions
+        self._published = published
         self._created_at = created_at
         self._updated_at = updated_at
 
@@ -125,6 +130,27 @@ class TemplatebackendQuestionnaireVersion(Model):
         """
 
         self._questions = questions
+
+    @property
+    def published(self) -> bool:
+        """Gets the published of this TemplatebackendQuestionnaireVersion.
+
+
+        :return: The published of this TemplatebackendQuestionnaireVersion.
+        :rtype: bool
+        """
+        return self._published
+
+    @published.setter
+    def published(self, published: bool):
+        """Sets the published of this TemplatebackendQuestionnaireVersion.
+
+
+        :param published: The published of this TemplatebackendQuestionnaireVersion.
+        :type published: bool
+        """
+
+        self._published = published
 
     @property
     def created_at(self) -> datetime:

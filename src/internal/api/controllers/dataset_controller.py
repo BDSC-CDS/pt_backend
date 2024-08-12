@@ -15,6 +15,8 @@ from server_template.models import TemplatebackendDeleteDatasetResult
 from server_template.models import TemplatebackendTransformDatasetResult
 from server_template.models import TemplatebackendTransformDatasetReply
 from server_template.models import TemplatebackendTransformDatasetRequest
+from server_template.models import TemplatebackendRevertDatasetReply
+from server_template.models import TemplatebackendRevertDatasetRequest
 
 import src.internal.api.controllers.converter.dataset as dataset_converter
 
@@ -25,8 +27,7 @@ class DatasetController:
     def dataset_service_store_dataset(self, user, body: TemplatebackendStoreDatasetRequest):
         # name, csv = dataset_converter.csv_to_business(body)
         try:
-            # TODO metadata types
-            dataset_id = self.dataset_service.store_dataset(user.id,user.tenantid, body.dataset_name, body.dataset, body.types)
+            dataset_id = self.dataset_service.store_dataset(user.id,user.tenantid, body.dataset_name, body.dataset, body.types, body.identifiers)
             print("Dataset controller Id", dataset_id)
             return TemplatebackendStoreDatasetReply(TemplatebackendStoreDatasetResult(id=dataset_id))
 
@@ -87,9 +88,18 @@ class DatasetController:
 
     def dataset_service_transform_dataset(self, user, body:TemplatebackendTransformDatasetRequest):
         try:
-            new_dataset : List[List[str]] = self.dataset_service.transform_dataset(user.id,user.tenantid,body.dataset_id,body.config_id)
+            new_dataset_id = self.dataset_service.transform_dataset(user.id,user.tenantid,body.dataset_id,body.config_id)
         except Exception as e:
             print("error", e)
             traceback.print_exception(e)
             return str(e), 500
-        return TemplatebackendTransformDatasetReply(TemplatebackendTransformDatasetResult(columns=new_dataset))
+        return TemplatebackendTransformDatasetReply(TemplatebackendTransformDatasetResult(id=new_dataset_id))
+
+    def dataset_service_revert_dataset(self, user, body:TemplatebackendRevertDatasetRequest):
+        try:
+            new_dataset_id = self.dataset_service.revert_dataset(user.id,user.tenantid,body.id)
+        except Exception as e:
+            print("error", e)
+            traceback.print_exception(e)
+            return str(e), 500
+        return TemplatebackendRevertDatasetReply(id=new_dataset_id)

@@ -72,6 +72,8 @@ RETURNING id;
             query += " ORDER BY created_at"
 
         query += " OFFSET :offset LIMIT :limit;"
+
+        print("query", query, offset, limit, filters)
         
         with self.session_scope() as session:
             logs = session.execute(text(query), {**filters, 'offset': offset, 'limit': limit}).mappings().fetchall()

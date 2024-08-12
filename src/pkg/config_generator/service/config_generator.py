@@ -15,13 +15,13 @@ class ConfigGeneratorService:
                                                         "high_range":config.dateShift_highrange}}
         if config.hassubFieldList: #TODO list
             result["substituteFieldList"] = {"subIDlist": {
-                "applies_to_field":config.subFieldList_fields,
+                "applies_to_field":config.subFieldList_field,
                 "substitution_list":config.subFieldList_substitute,
                 "replacement": config.subFieldList_replacement
             }}
         if config.hassubFieldRegex: #TODO list
             result["substituteFieldRegex"] = {"substituteFieldRegex" : {
-                "applies_to_field": config.subFieldRegex_fields,
+                "applies_to_field": config.subFieldRegex_field,
                 "regex": config.subFieldRegex_regex,
                 "replacement": config.subFieldRegex_replacement
             }}
@@ -43,3 +43,7 @@ class ConfigGeneratorService:
         # result = [self.format_json_config(config) for config in configs]
         # return result
         return configs
+
+    def delete_config(self,user,config_id:int):
+        success = self.config_generator_store.delete_config(user,config_id)
+        return success

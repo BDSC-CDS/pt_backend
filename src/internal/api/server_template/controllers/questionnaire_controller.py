@@ -10,6 +10,10 @@ from inspect import getmembers, isfunction, ismethod
 from server_template.models.rpc_status import RpcStatus
 from server_template.models.templatebackend_create_questionnaire_reply import TemplatebackendCreateQuestionnaireReply
 from server_template.models.templatebackend_create_questionnaire_request import TemplatebackendCreateQuestionnaireRequest
+from server_template.models.templatebackend_create_questionnaire_version_reply import TemplatebackendCreateQuestionnaireVersionReply
+from server_template.models.templatebackend_create_questionnaire_version_request import TemplatebackendCreateQuestionnaireVersionRequest
+from server_template.models.templatebackend_create_reply_reply import TemplatebackendCreateReplyReply
+from server_template.models.templatebackend_create_reply_request import TemplatebackendCreateReplyRequest
 from server_template.models.templatebackend_delete_questionnaire_reply import TemplatebackendDeleteQuestionnaireReply
 from server_template.models.templatebackend_get_questionnaire_reply import TemplatebackendGetQuestionnaireReply
 from server_template.models.templatebackend_get_reply_reply import TemplatebackendGetReplyReply
@@ -20,7 +24,7 @@ from server_template import util
 
 #from src.internal.api.controllers import questionnaire_controller
 #controller_functions =  [func_tupple[0] for func_tupple in getmembers(questionnaire_controller, isfunction)]
-#needed_functions = ["questionnaire_service_create_questionnaire", "questionnaire_service_delete_questionnaire", "questionnaire_service_get_questionnaire", "questionnaire_service_get_reply", "questionnaire_service_list_questionnaire", "questionnaire_service_list_replies"]
+#needed_functions = ["questionnaire_service_create_questionnaire", "questionnaire_service_create_questionnaire_version", "questionnaire_service_create_reply", "questionnaire_service_delete_questionnaire", "questionnaire_service_get_questionnaire", "questionnaire_service_get_reply", "questionnaire_service_list_questionnaire", "questionnaire_service_list_replies"]
 #for op in needed_functions:
 #    if op not in controller_functions:
 #        raise NotImplementedError("operation " + op + " is not implemented by src.internal.api.controllers.questionnaire_controller")
@@ -28,7 +32,7 @@ from server_template import util
 class QuestionnaireController:
     def __init__(self, controller):
         #controller_functions =  [func_tupple[0] for func_tupple in getmembers(controller, ismethod)]
-        #needed_functions = ["questionnaire_service_create_questionnaire", "questionnaire_service_delete_questionnaire", "questionnaire_service_get_questionnaire", "questionnaire_service_get_reply", "questionnaire_service_list_questionnaire", "questionnaire_service_list_replies"]
+        #needed_functions = ["questionnaire_service_create_questionnaire", "questionnaire_service_create_questionnaire_version", "questionnaire_service_create_reply", "questionnaire_service_delete_questionnaire", "questionnaire_service_get_questionnaire", "questionnaire_service_get_reply", "questionnaire_service_list_questionnaire", "questionnaire_service_list_replies"]
         #for op in needed_functions:
         #    if op not in controller_functions:
         #        raise NotImplementedError("operation " + op + " is not implemented by provided controller")
@@ -51,6 +55,38 @@ class QuestionnaireController:
             body = TemplatebackendCreateQuestionnaireRequest.from_dict(connexion.request.get_json())
 
         return self.controller.questionnaire_service_create_questionnaire(user, body)
+
+
+    def questionnaire_service_create_questionnaire_version(self, user, body: TemplatebackendCreateQuestionnaireVersionRequest):
+        """Create a questionnaire version
+
+        This endpoint creates a questionnaire version
+
+        :param body: 
+        :type body: dict | bytes
+
+        :rtype: Union[TemplatebackendCreateQuestionnaireVersionReply, Tuple[TemplatebackendCreateQuestionnaireVersionReply, int], Tuple[TemplatebackendCreateQuestionnaireVersionReply, int, Dict[str, str]]
+        """
+        if connexion.request.is_json:
+            body = TemplatebackendCreateQuestionnaireVersionRequest.from_dict(connexion.request.get_json())
+
+        return self.controller.questionnaire_service_create_questionnaire_version(user, body)
+
+
+    def questionnaire_service_create_reply(self, user, body: TemplatebackendCreateReplyRequest):
+        """Create questionnaires reply
+
+        This endpoint allows ceating a user&#39;s questionnaires reply
+
+        :param body: 
+        :type body: dict | bytes
+
+        :rtype: Union[TemplatebackendCreateReplyReply, Tuple[TemplatebackendCreateReplyReply, int], Tuple[TemplatebackendCreateReplyReply, int, Dict[str, str]]
+        """
+        if connexion.request.is_json:
+            body = TemplatebackendCreateReplyRequest.from_dict(connexion.request.get_json())
+
+        return self.controller.questionnaire_service_create_reply(user, body)
 
 
     def questionnaire_service_delete_questionnaire(self, user, id: str):
@@ -81,20 +117,18 @@ class QuestionnaireController:
         return self.controller.questionnaire_service_get_questionnaire(user, id)
 
 
-    def questionnaire_service_get_reply(self, user, questionnaire_version_id: int, reply_id: int):
+    def questionnaire_service_get_reply(self, user, id: int):
         """Get a questionnaires reply
 
         This endpoint allows getting a user&#39;s questionnaires reply
 
-        :param questionnaire_version_id: 
-        :type questionnaire_version_id: int
-        :param reply_id: 
-        :type reply_id: int
+        :param id: uint32 questionnaire_version_id &#x3D; 1;
+        :type id: int
 
         :rtype: Union[TemplatebackendGetReplyReply, Tuple[TemplatebackendGetReplyReply, int], Tuple[TemplatebackendGetReplyReply, int, Dict[str, str]]
         """
 
-        return self.controller.questionnaire_service_get_reply(user, questionnaire_version_id, reply_id)
+        return self.controller.questionnaire_service_get_reply(user, id)
 
 
     def questionnaire_service_list_questionnaire(self, user, offset: int=None, limit: int=None):
@@ -113,14 +147,12 @@ class QuestionnaireController:
         return self.controller.questionnaire_service_list_questionnaire(user, offset, limit)
 
 
-    def questionnaire_service_list_replies(self, user, questionnaire_version_id: int, offset: int=None, limit: int=None):
+    def questionnaire_service_list_replies(self, user, offset: int=None, limit: int=None):
         """List questionnaires replies
 
         This endpoint allows listing a user&#39;s questionnaires replies
 
-        :param questionnaire_version_id: 
-        :type questionnaire_version_id: int
-        :param offset: 
+        :param offset: uint32 questionnaire_version_id &#x3D; 1;
         :type offset: int
         :param limit: 
         :type limit: int
@@ -128,4 +160,4 @@ class QuestionnaireController:
         :rtype: Union[TemplatebackendListRepliesReply, Tuple[TemplatebackendListRepliesReply, int], Tuple[TemplatebackendListRepliesReply, int, Dict[str, str]]
         """
 
-        return self.controller.questionnaire_service_list_replies(user, questionnaire_version_id, offset, limit)
+        return self.controller.questionnaire_service_list_replies(user, offset, limit)

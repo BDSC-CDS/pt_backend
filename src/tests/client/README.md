@@ -103,21 +103,25 @@ Class | Method | HTTP request | Description
 *AuditLogApi* | [**audit_log_service_get_logs_for_user**](docs/AuditLogApi.md#audit_log_service_get_logs_for_user) | **GET** /api/v1/audit/users/{userid}/logs | Get logs for a user
 *AuthenticationApi* | [**authentication_service_authenticate**](docs/AuthenticationApi.md#authentication_service_authenticate) | **POST** /api/rest/v1/authentication/login | Authenticate
 *ConfigurationApi* | [**config_service_create_config**](docs/ConfigurationApi.md#config_service_create_config) | **POST** /api/rest/v1/configs | Create a configuration
+*ConfigurationApi* | [**config_service_delete_config**](docs/ConfigurationApi.md#config_service_delete_config) | **DELETE** /api/v1/config/{id} | Deletes a config
 *ConfigurationApi* | [**config_service_get_configs**](docs/ConfigurationApi.md#config_service_get_configs) | **GET** /api/rest/v1/configs | Get configuration files
 *DatasetApi* | [**dataset_service_delete_dataset**](docs/DatasetApi.md#dataset_service_delete_dataset) | **DELETE** /api/v1/dataset/{id} | Deletes a dataset
 *DatasetApi* | [**dataset_service_get_dataset_content**](docs/DatasetApi.md#dataset_service_get_dataset_content) | **GET** /api/v1/dataset/content/{id} | Get Dataset Content
 *DatasetApi* | [**dataset_service_get_dataset_metadata**](docs/DatasetApi.md#dataset_service_get_dataset_metadata) | **GET** /api/v1/dataset/metadata/{id} | Get Dataset Metadata
 *DatasetApi* | [**dataset_service_list_datasets**](docs/DatasetApi.md#dataset_service_list_datasets) | **GET** /api/v1/dataset | List datasets
+*DatasetApi* | [**dataset_service_revert_dataset**](docs/DatasetApi.md#dataset_service_revert_dataset) | **POST** /api/v1/dataset/revert | Revert a dataset
 *DatasetApi* | [**dataset_service_store_dataset**](docs/DatasetApi.md#dataset_service_store_dataset) | **POST** /api/v1/dataset | Store a dataset
 *DatasetApi* | [**dataset_service_transform_dataset**](docs/DatasetApi.md#dataset_service_transform_dataset) | **POST** /api/v1/dataset/transform | Transform a dataset
 *IndexApi* | [**index_service_create_hello**](docs/IndexApi.md#index_service_create_hello) | **POST** /api/v1/hello/{identifier} | Get a hello
 *IndexApi* | [**index_service_get_hello**](docs/IndexApi.md#index_service_get_hello) | **GET** /api/v1/hello | Get a hello
 *QuestionnaireApi* | [**questionnaire_service_create_questionnaire**](docs/QuestionnaireApi.md#questionnaire_service_create_questionnaire) | **POST** /api/v1/questionnaire | Create a questionnaire
+*QuestionnaireApi* | [**questionnaire_service_create_questionnaire_version**](docs/QuestionnaireApi.md#questionnaire_service_create_questionnaire_version) | **POST** /api/v1/questionnaire/version | Create a questionnaire version
+*QuestionnaireApi* | [**questionnaire_service_create_reply**](docs/QuestionnaireApi.md#questionnaire_service_create_reply) | **POST** /api/v1/questionnaire/replies | Create questionnaires reply
 *QuestionnaireApi* | [**questionnaire_service_delete_questionnaire**](docs/QuestionnaireApi.md#questionnaire_service_delete_questionnaire) | **DELETE** /api/v1/questionnaire/{id} | Create a questionnaire
 *QuestionnaireApi* | [**questionnaire_service_get_questionnaire**](docs/QuestionnaireApi.md#questionnaire_service_get_questionnaire) | **GET** /api/v1/questionnaire/{id} | Get questionnaires
-*QuestionnaireApi* | [**questionnaire_service_get_reply**](docs/QuestionnaireApi.md#questionnaire_service_get_reply) | **GET** /api/v1/questionnaire/{questionnaireVersionId}/replies/{replyId} | Get a questionnaires reply
+*QuestionnaireApi* | [**questionnaire_service_get_reply**](docs/QuestionnaireApi.md#questionnaire_service_get_reply) | **GET** /api/v1/questionnaire/replies/{id} | Get a questionnaires reply
 *QuestionnaireApi* | [**questionnaire_service_list_questionnaire**](docs/QuestionnaireApi.md#questionnaire_service_list_questionnaire) | **GET** /api/v1/questionnaire | List questionnaires
-*QuestionnaireApi* | [**questionnaire_service_list_replies**](docs/QuestionnaireApi.md#questionnaire_service_list_replies) | **GET** /api/v1/questionnaire/{questionnaireVersionId}/replies | List questionnaires replies
+*QuestionnaireApi* | [**questionnaire_service_list_replies**](docs/QuestionnaireApi.md#questionnaire_service_list_replies) | **GET** /api/v1/questionnaire/replies | List questionnaires replies
 *UsersApi* | [**user_service_create_user**](docs/UsersApi.md#user_service_create_user) | **POST** /api/rest/v1/users | Create a user
 *UsersApi* | [**user_service_delete_user**](docs/UsersApi.md#user_service_delete_user) | **DELETE** /api/rest/v1/users/{id} | Delete a user
 *UsersApi* | [**user_service_get_user**](docs/UsersApi.md#user_service_get_user) | **GET** /api/rest/v1/users/{id} | Get a user
@@ -142,10 +146,18 @@ Class | Method | HTTP request | Description
  - [TemplatebackendCreateQuestionnaireReply](docs/TemplatebackendCreateQuestionnaireReply.md)
  - [TemplatebackendCreateQuestionnaireRequest](docs/TemplatebackendCreateQuestionnaireRequest.md)
  - [TemplatebackendCreateQuestionnaireResult](docs/TemplatebackendCreateQuestionnaireResult.md)
+ - [TemplatebackendCreateQuestionnaireVersionReply](docs/TemplatebackendCreateQuestionnaireVersionReply.md)
+ - [TemplatebackendCreateQuestionnaireVersionRequest](docs/TemplatebackendCreateQuestionnaireVersionRequest.md)
+ - [TemplatebackendCreateQuestionnaireVersionResult](docs/TemplatebackendCreateQuestionnaireVersionResult.md)
+ - [TemplatebackendCreateReplyReply](docs/TemplatebackendCreateReplyReply.md)
+ - [TemplatebackendCreateReplyRequest](docs/TemplatebackendCreateReplyRequest.md)
+ - [TemplatebackendCreateReplyResult](docs/TemplatebackendCreateReplyResult.md)
  - [TemplatebackendCreateUserReply](docs/TemplatebackendCreateUserReply.md)
  - [TemplatebackendCreateUserResult](docs/TemplatebackendCreateUserResult.md)
  - [TemplatebackendCredentials](docs/TemplatebackendCredentials.md)
  - [TemplatebackendDataset](docs/TemplatebackendDataset.md)
+ - [TemplatebackendDeleteConfigReply](docs/TemplatebackendDeleteConfigReply.md)
+ - [TemplatebackendDeleteConfigResult](docs/TemplatebackendDeleteConfigResult.md)
  - [TemplatebackendDeleteDatasetReply](docs/TemplatebackendDeleteDatasetReply.md)
  - [TemplatebackendDeleteDatasetResult](docs/TemplatebackendDeleteDatasetResult.md)
  - [TemplatebackendDeleteQuestionnaireReply](docs/TemplatebackendDeleteQuestionnaireReply.md)
@@ -182,6 +194,8 @@ Class | Method | HTTP request | Description
  - [TemplatebackendQuestionnaireReply](docs/TemplatebackendQuestionnaireReply.md)
  - [TemplatebackendQuestionnaireVersion](docs/TemplatebackendQuestionnaireVersion.md)
  - [TemplatebackendResetPasswordReply](docs/TemplatebackendResetPasswordReply.md)
+ - [TemplatebackendRevertDatasetReply](docs/TemplatebackendRevertDatasetReply.md)
+ - [TemplatebackendRevertDatasetRequest](docs/TemplatebackendRevertDatasetRequest.md)
  - [TemplatebackendStoreDatasetReply](docs/TemplatebackendStoreDatasetReply.md)
  - [TemplatebackendStoreDatasetRequest](docs/TemplatebackendStoreDatasetRequest.md)
  - [TemplatebackendStoreDatasetResult](docs/TemplatebackendStoreDatasetResult.md)

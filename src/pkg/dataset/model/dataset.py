@@ -23,6 +23,7 @@ class Metadata:
     column_id:int = None
     column_name:str = ""
     type_:str = ""
+    identifier:str = ""
 
     def to_dict(self):
         return asdict(self)

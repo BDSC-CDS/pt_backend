@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **id** | **int** |  | [optional] 
 **version** | **str** |  | [optional] 
 **questions** | [**List[TemplatebackendQuestionnaireQuestion]**](TemplatebackendQuestionnaireQuestion.md) |  | [optional] 
+**published** | **bool** |  | [optional] 
 **created_at** | **datetime** |  | [optional] 
 **updated_at** | **datetime** |  | [optional] 
 

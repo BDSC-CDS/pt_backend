@@ -18,12 +18,14 @@ message QuestionnaireQuestionReply {
 message QuestionnaireReply {
     uint32 id = 1;
 
-    uint32 questionnaire_question_id = 2;
+    uint32 questionnaire_version_id = 2;
 
-    repeated QuestionnaireQuestionReply replies = 3;
+    string project_name = 3;
 
-    google.protobuf.Timestamp createdAt = 4;
-    google.protobuf.Timestamp updatedAt = 5;
+    repeated QuestionnaireQuestionReply replies = 4;
+
+    google.protobuf.Timestamp createdAt = 5;
+    google.protobuf.Timestamp updatedAt = 6;
     // google.protobuf.Timestamp deletedAt = 11;
 }
 
@@ -73,11 +75,11 @@ message QuestionnaireVersion {
     uint32 id = 1;
 
     string version = 2;
-
     repeated QuestionnaireQuestion questions = 3;
+    bool published = 4;
 
-    google.protobuf.Timestamp createdAt = 4;
-    google.protobuf.Timestamp updatedAt = 5;
+    google.protobuf.Timestamp createdAt = 5;
+    google.protobuf.Timestamp updatedAt = 6;
     // google.protobuf.Timestamp deletedAt = 6;
 }
 

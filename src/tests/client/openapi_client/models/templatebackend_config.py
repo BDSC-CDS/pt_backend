@@ -42,14 +42,15 @@ class TemplatebackendConfig(BaseModel):
     scramble_field_fields: Optional[List[StrictStr]] = Field(default=None, alias="scrambleFieldFields")
     date_shift_lowrange: Optional[StrictInt] = Field(default=None, alias="dateShiftLowrange")
     date_shift_highrange: Optional[StrictInt] = Field(default=None, alias="dateShiftHighrange")
-    sub_field_list_fields: Optional[List[StrictStr]] = Field(default=None, alias="subFieldListFields")
+    sub_field_list_field: Optional[StrictStr] = Field(default=None, alias="subFieldListField")
     sub_field_list_substitute: Optional[List[StrictStr]] = Field(default=None, alias="subFieldListSubstitute")
     sub_field_list_replacement: Optional[StrictStr] = Field(default=None, alias="subFieldListReplacement")
-    sub_field_regex_fields: Optional[List[StrictStr]] = Field(default=None, alias="subFieldRegexFields")
+    sub_field_regex_field: Optional[StrictStr] = Field(default=None, alias="subFieldRegexField")
     sub_field_regex_regex: Optional[StrictStr] = Field(default=None, alias="subFieldRegexRegex")
     sub_field_regex_replacement: Optional[StrictStr] = Field(default=None, alias="subFieldRegexReplacement")
     created_at: Optional[datetime] = Field(default=None, alias="createdAt")
-    __properties: ClassVar[List[str]] = ["id", "userid", "tenantid", "questionnaireid", "hasScrambleField", "hasDateShift", "hassubFieldList", "hassubFieldRegex", "scrambleFieldFields", "dateShiftLowrange", "dateShiftHighrange", "subFieldListFields", "subFieldListSubstitute", "subFieldListReplacement", "subFieldRegexFields", "subFieldRegexRegex", "subFieldRegexReplacement", "createdAt"]
+    deleted_at: Optional[datetime] = Field(default=None, alias="deletedAt")
+    __properties: ClassVar[List[str]] = ["id", "userid", "tenantid", "questionnaireid", "hasScrambleField", "hasDateShift", "hassubFieldList", "hassubFieldRegex", "scrambleFieldFields", "dateShiftLowrange", "dateShiftHighrange", "subFieldListField", "subFieldListSubstitute", "subFieldListReplacement", "subFieldRegexField", "subFieldRegexRegex", "subFieldRegexReplacement", "createdAt", "deletedAt"]
 
     model_config = {
         "populate_by_name": True,
@@ -111,13 +112,14 @@ class TemplatebackendConfig(BaseModel):
             "scrambleFieldFields": obj.get("scrambleFieldFields"),
             "dateShiftLowrange": obj.get("dateShiftLowrange"),
             "dateShiftHighrange": obj.get("dateShiftHighrange"),
-            "subFieldListFields": obj.get("subFieldListFields"),
+            "subFieldListField": obj.get("subFieldListField"),
             "subFieldListSubstitute": obj.get("subFieldListSubstitute"),
             "subFieldListReplacement": obj.get("subFieldListReplacement"),
-            "subFieldRegexFields": obj.get("subFieldRegexFields"),
+            "subFieldRegexField": obj.get("subFieldRegexField"),
             "subFieldRegexRegex": obj.get("subFieldRegexRegex"),
             "subFieldRegexReplacement": obj.get("subFieldRegexReplacement"),
-            "createdAt": obj.get("createdAt")
+            "createdAt": obj.get("createdAt"),
+            "deletedAt": obj.get("deletedAt")
         })
         return _obj
 

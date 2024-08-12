@@ -5,8 +5,8 @@ class DatasetService:
         self.dataset_store = dataset_store
 
     # store new dataset (store in metadata, dataset,values)
-    def store_dataset(self, userid:int,tenantid:int, dataset_name:str,dataset: str,types:str):
-        dataset_id = self.dataset_store.store_dataset(userid,tenantid,dataset_name,dataset,types)
+    def store_dataset(self, userid:int,tenantid:int, dataset_name:str,dataset: str,types:str, identifiers:str):
+        dataset_id = self.dataset_store.store_dataset(userid,tenantid,dataset_name,dataset,types,identifiers)
         return dataset_id
 
     # get names of datasets related to this user (if not deleted)
@@ -29,6 +29,12 @@ class DatasetService:
         deleted = self.dataset_store.delete_dataset(id=id,userid=userid,tenantid=tenantid)
         return deleted
 
+    # transform a dataset based on a configuration
     def transform_dataset(self,userid:int,tenantid:int,dataset_id:int,config_id:int):
         new_dataset = self.dataset_store.transform_dataset(userid,tenantid,dataset_id,config_id)
+        return new_dataset
+
+    # revert a dataset to its state before transforming
+    def revert_dataset(self,userid:int,tenantid:int,dataset_id:int):
+        new_dataset = self.dataset_store.revert_dataset(userid,tenantid,dataset_id)
         return new_dataset

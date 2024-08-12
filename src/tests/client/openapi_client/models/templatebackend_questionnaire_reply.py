@@ -20,7 +20,7 @@ import json
 
 from datetime import datetime
 from typing import Any, ClassVar, Dict, List, Optional
-from pydantic import BaseModel, StrictInt
+from pydantic import BaseModel, StrictInt, StrictStr
 from pydantic import Field
 from openapi_client.models.templatebackend_questionnaire_question_reply import TemplatebackendQuestionnaireQuestionReply
 try:
@@ -33,11 +33,12 @@ class TemplatebackendQuestionnaireReply(BaseModel):
     TemplatebackendQuestionnaireReply
     """ # noqa: E501
     id: Optional[StrictInt] = None
-    questionnaire_question_id: Optional[StrictInt] = Field(default=None, alias="questionnaireQuestionId")
+    questionnaire_version_id: Optional[StrictInt] = Field(default=None, alias="questionnaireVersionId")
+    project_name: Optional[StrictStr] = Field(default=None, alias="projectName")
     replies: Optional[List[TemplatebackendQuestionnaireQuestionReply]] = None
     created_at: Optional[datetime] = Field(default=None, alias="createdAt")
     updated_at: Optional[datetime] = Field(default=None, alias="updatedAt")
-    __properties: ClassVar[List[str]] = ["id", "questionnaireQuestionId", "replies", "createdAt", "updatedAt"]
+    __properties: ClassVar[List[str]] = ["id", "questionnaireVersionId", "projectName", "replies", "createdAt", "updatedAt"]
 
     model_config = {
         "populate_by_name": True,
@@ -96,7 +97,8 @@ class TemplatebackendQuestionnaireReply(BaseModel):
 
         _obj = cls.model_validate({
             "id": obj.get("id"),
-            "questionnaireQuestionId": obj.get("questionnaireQuestionId"),
+            "questionnaireVersionId": obj.get("questionnaireVersionId"),
+            "projectName": obj.get("projectName"),
             "replies": [TemplatebackendQuestionnaireQuestionReply.from_dict(_item) for _item in obj.get("replies")] if obj.get("replies") is not None else None,
             "createdAt": obj.get("createdAt"),
             "updatedAt": obj.get("updatedAt")

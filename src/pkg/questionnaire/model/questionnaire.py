@@ -67,6 +67,7 @@ class QuestionnaireVersion:
     version: str = ""
 
     questions: list[QuestionnaireQuestion] = None
+    published: bool = False
 
     createdat: datetime.datetime = None
     updatedat: datetime.datetime = None
@@ -89,6 +90,47 @@ class Questionnaire:
     versions: list[QuestionnaireVersion] = None
     last_version: str = ""
 
+    createdat: datetime.datetime = None
+    updatedat: datetime.datetime = None
+    deletedat: datetime.datetime = None
+
+    def __post_init__(self):
+        for field in fields(self):
+            if not isinstance(field.default, _MISSING_TYPE) and getattr(self, field.name) is None:
+                setattr(self, field.name, field.default)
+
+@dataclass
+class QuestionReply:
+    id: int = None
+
+    userid: int = 0
+    tenantid: int = 0
+
+    questionnaire_question_id: int = 0
+
+    answer: str = ""
+    
+    createdat: datetime.datetime = None
+    updatedat: datetime.datetime = None
+    deletedat: datetime.datetime = None
+
+    def __post_init__(self):
+        for field in fields(self):
+            if not isinstance(field.default, _MISSING_TYPE) and getattr(self, field.name) is None:
+                setattr(self, field.name, field.default)
+
+@dataclass
+class Reply:
+    id: int = None
+
+    userid: int = 0
+    tenantid: int = 0
+
+    project_name: str = ''
+    questionnaire_version_id: int = 0
+
+    replies: list[QuestionReply] = None
+    
     createdat: datetime.datetime = None
     updatedat: datetime.datetime = None
     deletedat: datetime.datetime = None

@@ -50,6 +50,7 @@ message StoreDatasetRequest {
     string dataset_name = 1;
     string dataset = 2;
     string types = 3;
+    string identifiers = 4;
 }
 
 message StoreDatasetReply {
@@ -120,7 +121,15 @@ message TransformDatasetReply {
     TransformDatasetResult result = 1;
 }
 message TransformDatasetResult {
-    repeated Column columns = 1;
+    uint32 id = 1;
+}
+
+message RevertDatasetRequest {
+    uint32 id = 1;
+}
+
+message RevertDatasetReply {
+    uint32 id = 1;
 }
 
 service DatasetService {
@@ -213,6 +222,23 @@ service DatasetService {
         option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
             summary: "Transform a dataset";
             description: "This endpoint transforms a dataset";
+            tags: "Dataset";
+            extensions: {
+                key: "x-openapi-router-controller";
+                value {string_value: "dataset_controller"};
+            };
+        };
+    };
+
+     // Revert a dataset to its state before transforming
+    rpc RevertDataset(RevertDatasetRequest) returns (RevertDatasetReply) {
+        option (google.api.http) = {
+            post: "/api/v1/dataset/revert"
+            body: "*"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            summary: "Revert a dataset";
+            description: "This endpoint reverts a dataset";
             tags: "Dataset";
             extensions: {
                 key: "x-openapi-router-controller";

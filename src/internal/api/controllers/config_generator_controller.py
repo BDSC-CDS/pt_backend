@@ -7,6 +7,10 @@ from server_template.models import TemplatebackendGetConfigsReply
 from server_template.models import TemplatebackendGetConfigsResult
 from server_template.models import TemplatebackendCreateConfigReply
 from server_template.models import TemplatebackendCreateConfigResult
+from server_template.models import TemplatebackendDeleteConfigReply
+from server_template.models import TemplatebackendDeleteConfigResult
+
+
 from server_template.models import TemplatebackendConfig
 import src.internal.api.controllers.converter.config_generator as config_converter
 
@@ -31,6 +35,16 @@ class ConfigGeneratorController():
             response = self.config_generator_service.create_config(user,config)
             return TemplatebackendCreateConfigReply(TemplatebackendCreateConfigResult(id=response))
 
+        except Exception as e:
+            print("error", e)
+            traceback.print_exception(e)
+            return str(e), 500
+
+
+    def config_service_delete_config(self,user,id):
+        try:
+            response = self.config_generator_service.delete_config(user,id)
+            return TemplatebackendDeleteConfigReply(TemplatebackendDeleteConfigResult(success=response))
         except Exception as e:
             print("error", e)
             traceback.print_exception(e)

@@ -39,7 +39,8 @@ class TestTemplatebackendStoreDatasetRequest(unittest.TestCase):
             return TemplatebackendStoreDatasetRequest(
                 dataset_name = '',
                 dataset = '',
-                types = ''
+                types = '',
+                identifiers = ''
             )
         else:
             return TemplatebackendStoreDatasetRequest(

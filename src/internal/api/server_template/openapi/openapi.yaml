@@ -349,6 +349,34 @@ paths:
       tags:
       - AuditLog
       x-openapi-router-controller: audit_log_controller
+  /api/v1/config/{id}:
+    delete:
+      description: This endpoint deletes a config
+      operationId: config_service_delete_config
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/templatebackendDeleteConfigReply'
+          description: A successful response.
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+          description: An unexpected error response.
+      summary: Deletes a config
+      tags:
+      - Configuration
+      x-openapi-router-controller: config_generator_controller
   /api/v1/dataset:
     get:
       description: This endpoint allows listing a user's datasets
@@ -474,6 +502,34 @@ paths:
       tags:
       - Dataset
       x-openapi-router-controller: dataset_controller
+  /api/v1/dataset/revert:
+    post:
+      description: This endpoint reverts a dataset
+      operationId: dataset_service_revert_dataset
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/templatebackendRevertDatasetRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/templatebackendRevertDatasetReply'
+          description: A successful response.
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+          description: An unexpected error response.
+      summary: Revert a dataset
+      tags:
+      - Dataset
+      x-openapi-router-controller: dataset_controller
+      x-codegen-request-body-name: body
   /api/v1/dataset/transform:
     post:
       description: This endpoint transforms a dataset
@@ -645,6 +701,123 @@ paths:
       - Questionnaire
       x-openapi-router-controller: questionnaire_controller
       x-codegen-request-body-name: body
+  /api/v1/questionnaire/replies:
+    get:
+      description: This endpoint allows listing a user's questionnaires replies
+      operationId: questionnaire_service_list_replies
+      parameters:
+      - description: uint32 questionnaire_version_id = 1;
+        in: query
+        name: offset
+        schema:
+          format: int64
+          type: integer
+      - in: query
+        name: limit
+        schema:
+          format: int64
+          type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/templatebackendListRepliesReply'
+          description: A successful response.
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+          description: An unexpected error response.
+      summary: List questionnaires replies
+      tags:
+      - Questionnaire
+      x-openapi-router-controller: questionnaire_controller
+    post:
+      description: This endpoint allows ceating a user's questionnaires reply
+      operationId: questionnaire_service_create_reply
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/templatebackendCreateReplyRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/templatebackendCreateReplyReply'
+          description: A successful response.
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+          description: An unexpected error response.
+      summary: Create questionnaires reply
+      tags:
+      - Questionnaire
+      x-openapi-router-controller: questionnaire_controller
+      x-codegen-request-body-name: body
+  /api/v1/questionnaire/replies/{id}:
+    get:
+      description: This endpoint allows getting a user's questionnaires reply
+      operationId: questionnaire_service_get_reply
+      parameters:
+      - description: uint32 questionnaire_version_id = 1;
+        in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/templatebackendGetReplyReply'
+          description: A successful response.
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+          description: An unexpected error response.
+      summary: Get a questionnaires reply
+      tags:
+      - Questionnaire
+      x-openapi-router-controller: questionnaire_controller
+  /api/v1/questionnaire/version:
+    post:
+      description: This endpoint creates a questionnaire version
+      operationId: questionnaire_service_create_questionnaire_version
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/templatebackendCreateQuestionnaireVersionRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/templatebackendCreateQuestionnaireVersionReply'
+          description: A successful response.
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+          description: An unexpected error response.
+      summary: Create a questionnaire version
+      tags:
+      - Questionnaire
+      x-openapi-router-controller: questionnaire_controller
+      x-codegen-request-body-name: body
   /api/v1/questionnaire/{id}:
     delete:
       description: This endpoint creates a questionnaire
@@ -696,78 +869,6 @@ paths:
                 $ref: '#/components/schemas/rpcStatus'
           description: An unexpected error response.
       summary: Get questionnaires
-      tags:
-      - Questionnaire
-      x-openapi-router-controller: questionnaire_controller
-  /api/v1/questionnaire/{questionnaireVersionId}/replies:
-    get:
-      description: This endpoint allows listing a user's questionnaires replies
-      operationId: questionnaire_service_list_replies
-      parameters:
-      - in: path
-        name: questionnaireVersionId
-        required: true
-        schema:
-          format: int64
-          type: integer
-      - in: query
-        name: offset
-        schema:
-          format: int64
-          type: integer
-      - in: query
-        name: limit
-        schema:
-          format: int64
-          type: integer
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/templatebackendListRepliesReply'
-          description: A successful response.
-        default:
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/rpcStatus'
-          description: An unexpected error response.
-      summary: List questionnaires replies
-      tags:
-      - Questionnaire
-      x-openapi-router-controller: questionnaire_controller
-  /api/v1/questionnaire/{questionnaireVersionId}/replies/{replyId}:
-    get:
-      description: This endpoint allows getting a user's questionnaires reply
-      operationId: questionnaire_service_get_reply
-      parameters:
-      - in: path
-        name: questionnaireVersionId
-        required: true
-        schema:
-          format: int64
-          type: integer
-      - in: path
-        name: replyId
-        required: true
-        schema:
-          format: int64
-          type: integer
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/templatebackendGetReplyReply'
-          description: A successful response.
-        default:
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/rpcStatus'
-          description: An unexpected error response.
-      summary: Get a questionnaires reply
       tags:
       - Questionnaire
       x-openapi-router-controller: questionnaire_controller
@@ -890,9 +991,6 @@ components:
       example:
         hassubFieldList: true
         subFieldListReplacement: subFieldListReplacement
-        subFieldListFields:
-        - subFieldListFields
-        - subFieldListFields
         subFieldRegexRegex: subFieldRegexRegex
         hasDateShift: true
         hassubFieldRegex: true
@@ -903,16 +1001,16 @@ components:
         dateShiftLowrange: 5
         userid: 6
         hasScrambleField: true
+        subFieldListField: subFieldListField
         createdAt: 2000-01-23T04:56:07.000+00:00
+        deletedAt: 2000-01-23T04:56:07.000+00:00
         dateShiftHighrange: 2
         tenantid: 1
+        subFieldRegexField: subFieldRegexField
         id: 0
         subFieldListSubstitute:
         - subFieldListSubstitute
         - subFieldListSubstitute
-        subFieldRegexFields:
-        - subFieldRegexFields
-        - subFieldRegexFields
         subFieldRegexReplacement: subFieldRegexReplacement
       properties:
         id:
@@ -956,11 +1054,9 @@ components:
           format: int32
           title: dateShiftHighrange
           type: integer
-        subFieldListFields:
-          items:
-            type: string
-          title: subFieldListFields
-          type: array
+        subFieldListField:
+          title: subFieldListField
+          type: string
         subFieldListSubstitute:
           items:
             type: string
@@ -969,11 +1065,9 @@ components:
         subFieldListReplacement:
           title: subFieldListReplacement
           type: string
-        subFieldRegexFields:
-          items:
-            type: string
-          title: subFieldRegexFields
-          type: array
+        subFieldRegexField:
+          title: subFieldRegexField
+          type: string
         subFieldRegexRegex:
           title: subFieldRegexRegex
           type: string
@@ -983,6 +1077,10 @@ components:
         createdAt:
           format: date-time
           title: createdAt
+          type: string
+        deletedAt:
+          format: date-time
+          title: deletedAt
           type: string
       title: templatebackendConfig
       type: object
@@ -1047,6 +1145,60 @@ components:
           title: id
           type: integer
       title: templatebackendCreateQuestionnaireResult
+      type: object
+    templatebackendCreateQuestionnaireVersionReply:
+      example:
+        result:
+          id: 0
+      properties:
+        result:
+          $ref: '#/components/schemas/templatebackendCreateQuestionnaireVersionResult'
+      title: templatebackendCreateQuestionnaireVersionReply
+      type: object
+    templatebackendCreateQuestionnaireVersionRequest:
+      properties:
+        id:
+          format: int64
+          title: id
+          type: integer
+        version:
+          $ref: '#/components/schemas/templatebackendQuestionnaireVersion'
+      title: Message definitions for requests and responses
+      type: object
+    templatebackendCreateQuestionnaireVersionResult:
+      example:
+        id: 0
+      properties:
+        id:
+          format: int64
+          title: id
+          type: integer
+      title: templatebackendCreateQuestionnaireVersionResult
+      type: object
+    templatebackendCreateReplyReply:
+      example:
+        result:
+          id: 0
+      properties:
+        result:
+          $ref: '#/components/schemas/templatebackendCreateReplyResult'
+      title: templatebackendCreateReplyReply
+      type: object
+    templatebackendCreateReplyRequest:
+      properties:
+        reply:
+          $ref: '#/components/schemas/templatebackendQuestionnaireReply'
+      title: templatebackendCreateReplyRequest
+      type: object
+    templatebackendCreateReplyResult:
+      example:
+        id: 0
+      properties:
+        id:
+          format: int64
+          title: id
+          type: integer
+      title: templatebackendCreateReplyResult
       type: object
     templatebackendCreateUserReply:
       example:
@@ -1114,6 +1266,24 @@ components:
           type: string
       title: templatebackendDataset
       type: object
+    templatebackendDeleteConfigReply:
+      example:
+        result:
+          success: true
+      properties:
+        result:
+          $ref: '#/components/schemas/templatebackendDeleteConfigResult'
+      title: templatebackendDeleteConfigReply
+      type: object
+    templatebackendDeleteConfigResult:
+      example:
+        success: true
+      properties:
+        success:
+          title: success
+          type: boolean
+      title: templatebackendDeleteConfigResult
+      type: object
     templatebackendDeleteDatasetReply:
       example:
         result:
@@ -1168,9 +1338,6 @@ components:
           config:
           - hassubFieldList: true
             subFieldListReplacement: subFieldListReplacement
-            subFieldListFields:
-            - subFieldListFields
-            - subFieldListFields
             subFieldRegexRegex: subFieldRegexRegex
             hasDateShift: true
             hassubFieldRegex: true
@@ -1181,22 +1348,19 @@ components:
             dateShiftLowrange: 5
             userid: 6
             hasScrambleField: true
+            subFieldListField: subFieldListField
             createdAt: 2000-01-23T04:56:07.000+00:00
+            deletedAt: 2000-01-23T04:56:07.000+00:00
             dateShiftHighrange: 2
             tenantid: 1
+            subFieldRegexField: subFieldRegexField
             id: 0
             subFieldListSubstitute:
             - subFieldListSubstitute
             - subFieldListSubstitute
-            subFieldRegexFields:
-            - subFieldRegexFields
-            - subFieldRegexFields
             subFieldRegexReplacement: subFieldRegexReplacement
           - hassubFieldList: true
             subFieldListReplacement: subFieldListReplacement
-            subFieldListFields:
-            - subFieldListFields
-            - subFieldListFields
             subFieldRegexRegex: subFieldRegexRegex
             hasDateShift: true
             hassubFieldRegex: true
@@ -1207,16 +1371,16 @@ components:
             dateShiftLowrange: 5
             userid: 6
             hasScrambleField: true
+            subFieldListField: subFieldListField
             createdAt: 2000-01-23T04:56:07.000+00:00
+            deletedAt: 2000-01-23T04:56:07.000+00:00
             dateShiftHighrange: 2
             tenantid: 1
+            subFieldRegexField: subFieldRegexField
             id: 0
             subFieldListSubstitute:
             - subFieldListSubstitute
             - subFieldListSubstitute
-            subFieldRegexFields:
-            - subFieldRegexFields
-            - subFieldRegexFields
             subFieldRegexReplacement: subFieldRegexReplacement
       properties:
         result:
@@ -1228,9 +1392,6 @@ components:
         config:
         - hassubFieldList: true
           subFieldListReplacement: subFieldListReplacement
-          subFieldListFields:
-          - subFieldListFields
-          - subFieldListFields
           subFieldRegexRegex: subFieldRegexRegex
           hasDateShift: true
           hassubFieldRegex: true
@@ -1241,22 +1402,19 @@ components:
           dateShiftLowrange: 5
           userid: 6
           hasScrambleField: true
+          subFieldListField: subFieldListField
           createdAt: 2000-01-23T04:56:07.000+00:00
+          deletedAt: 2000-01-23T04:56:07.000+00:00
           dateShiftHighrange: 2
           tenantid: 1
+          subFieldRegexField: subFieldRegexField
           id: 0
           subFieldListSubstitute:
           - subFieldListSubstitute
           - subFieldListSubstitute
-          subFieldRegexFields:
-          - subFieldRegexFields
-          - subFieldRegexFields
           subFieldRegexReplacement: subFieldRegexReplacement
         - hassubFieldList: true
           subFieldListReplacement: subFieldListReplacement
-          subFieldListFields:
-          - subFieldListFields
-          - subFieldListFields
           subFieldRegexRegex: subFieldRegexRegex
           hasDateShift: true
           hassubFieldRegex: true
@@ -1267,16 +1425,16 @@ components:
           dateShiftLowrange: 5
           userid: 6
           hasScrambleField: true
+          subFieldListField: subFieldListField
           createdAt: 2000-01-23T04:56:07.000+00:00
+          deletedAt: 2000-01-23T04:56:07.000+00:00
           dateShiftHighrange: 2
           tenantid: 1
+          subFieldRegexField: subFieldRegexField
           id: 0
           subFieldListSubstitute:
           - subFieldListSubstitute
           - subFieldListSubstitute
-          subFieldRegexFields:
-          - subFieldRegexFields
-          - subFieldRegexFields
           subFieldRegexReplacement: subFieldRegexReplacement
       properties:
         config:
@@ -1322,13 +1480,15 @@ components:
       example:
         metadata:
           metadata:
-          - columnId: 5
+          - identifier: identifier
+            columnId: 5
             tenantid: 6
             datasetId: 1
             type: type
             userid: 0
             columnName: columnName
-          - columnId: 5
+          - identifier: identifier
+            columnId: 5
             tenantid: 6
             datasetId: 1
             type: type
@@ -1342,13 +1502,15 @@ components:
     templatebackendGetDatasetMetadataResult:
       example:
         metadata:
-        - columnId: 5
+        - identifier: identifier
+          columnId: 5
           tenantid: 6
           datasetId: 1
           type: type
           userid: 0
           columnName: columnName
-        - columnId: 5
+        - identifier: identifier
+          columnId: 5
           tenantid: 6
           datasetId: 1
           type: type
@@ -1533,6 +1695,7 @@ components:
                 id: 1
                 updatedAt: 2000-01-23T04:56:07.000+00:00
               id: 6
+              published: true
               version: version
               updatedAt: 2000-01-23T04:56:07.000+00:00
             - createdAt: 2000-01-23T04:56:07.000+00:00
@@ -1630,6 +1793,7 @@ components:
                 id: 1
                 updatedAt: 2000-01-23T04:56:07.000+00:00
               id: 6
+              published: true
               version: version
               updatedAt: 2000-01-23T04:56:07.000+00:00
             name: name
@@ -1742,6 +1906,7 @@ components:
               id: 1
               updatedAt: 2000-01-23T04:56:07.000+00:00
             id: 6
+            published: true
             version: version
             updatedAt: 2000-01-23T04:56:07.000+00:00
           - createdAt: 2000-01-23T04:56:07.000+00:00
@@ -1839,6 +2004,7 @@ components:
               id: 1
               updatedAt: 2000-01-23T04:56:07.000+00:00
             id: 6
+            published: true
             version: version
             updatedAt: 2000-01-23T04:56:07.000+00:00
           name: name
@@ -1854,7 +2020,7 @@ components:
         result:
           reply:
             createdAt: 2000-01-23T04:56:07.000+00:00
-            questionnaireQuestionId: 6
+            questionnaireVersionId: 6
             replies:
             - createdAt: 2000-01-23T04:56:07.000+00:00
               questionnaireQuestionId: 5
@@ -1867,6 +2033,7 @@ components:
               id: 1
               updatedAt: 2000-01-23T04:56:07.000+00:00
             id: 0
+            projectName: projectName
             updatedAt: 2000-01-23T04:56:07.000+00:00
       properties:
         result:
@@ -1877,7 +2044,7 @@ components:
       example:
         reply:
           createdAt: 2000-01-23T04:56:07.000+00:00
-          questionnaireQuestionId: 6
+          questionnaireVersionId: 6
           replies:
           - createdAt: 2000-01-23T04:56:07.000+00:00
             questionnaireQuestionId: 5
@@ -1890,6 +2057,7 @@ components:
             id: 1
             updatedAt: 2000-01-23T04:56:07.000+00:00
           id: 0
+          projectName: projectName
           updatedAt: 2000-01-23T04:56:07.000+00:00
       properties:
         reply:
@@ -2137,6 +2305,7 @@ components:
                 id: 1
                 updatedAt: 2000-01-23T04:56:07.000+00:00
               id: 6
+              published: true
               version: version
               updatedAt: 2000-01-23T04:56:07.000+00:00
             - createdAt: 2000-01-23T04:56:07.000+00:00
@@ -2234,6 +2403,7 @@ components:
                 id: 1
                 updatedAt: 2000-01-23T04:56:07.000+00:00
               id: 6
+              published: true
               version: version
               updatedAt: 2000-01-23T04:56:07.000+00:00
             name: name
@@ -2338,6 +2508,7 @@ components:
                 id: 1
                 updatedAt: 2000-01-23T04:56:07.000+00:00
               id: 6
+              published: true
               version: version
               updatedAt: 2000-01-23T04:56:07.000+00:00
             - createdAt: 2000-01-23T04:56:07.000+00:00
@@ -2435,6 +2606,7 @@ components:
                 id: 1
                 updatedAt: 2000-01-23T04:56:07.000+00:00
               id: 6
+              published: true
               version: version
               updatedAt: 2000-01-23T04:56:07.000+00:00
             name: name
@@ -2547,6 +2719,7 @@ components:
               id: 1
               updatedAt: 2000-01-23T04:56:07.000+00:00
             id: 6
+            published: true
             version: version
             updatedAt: 2000-01-23T04:56:07.000+00:00
           - createdAt: 2000-01-23T04:56:07.000+00:00
@@ -2644,6 +2817,7 @@ components:
               id: 1
               updatedAt: 2000-01-23T04:56:07.000+00:00
             id: 6
+            published: true
             version: version
             updatedAt: 2000-01-23T04:56:07.000+00:00
           name: name
@@ -2748,6 +2922,7 @@ components:
               id: 1
               updatedAt: 2000-01-23T04:56:07.000+00:00
             id: 6
+            published: true
             version: version
             updatedAt: 2000-01-23T04:56:07.000+00:00
           - createdAt: 2000-01-23T04:56:07.000+00:00
@@ -2845,6 +3020,7 @@ components:
               id: 1
               updatedAt: 2000-01-23T04:56:07.000+00:00
             id: 6
+            published: true
             version: version
             updatedAt: 2000-01-23T04:56:07.000+00:00
           name: name
@@ -2863,7 +3039,7 @@ components:
         result:
           replies:
           - createdAt: 2000-01-23T04:56:07.000+00:00
-            questionnaireQuestionId: 6
+            questionnaireVersionId: 6
             replies:
             - createdAt: 2000-01-23T04:56:07.000+00:00
               questionnaireQuestionId: 5
@@ -2876,9 +3052,10 @@ components:
               id: 1
               updatedAt: 2000-01-23T04:56:07.000+00:00
             id: 0
+            projectName: projectName
             updatedAt: 2000-01-23T04:56:07.000+00:00
           - createdAt: 2000-01-23T04:56:07.000+00:00
-            questionnaireQuestionId: 6
+            questionnaireVersionId: 6
             replies:
             - createdAt: 2000-01-23T04:56:07.000+00:00
               questionnaireQuestionId: 5
@@ -2891,6 +3068,7 @@ components:
               id: 1
               updatedAt: 2000-01-23T04:56:07.000+00:00
             id: 0
+            projectName: projectName
             updatedAt: 2000-01-23T04:56:07.000+00:00
       properties:
         result:
@@ -2901,7 +3079,7 @@ components:
       example:
         replies:
         - createdAt: 2000-01-23T04:56:07.000+00:00
-          questionnaireQuestionId: 6
+          questionnaireVersionId: 6
           replies:
           - createdAt: 2000-01-23T04:56:07.000+00:00
             questionnaireQuestionId: 5
@@ -2914,9 +3092,10 @@ components:
             id: 1
             updatedAt: 2000-01-23T04:56:07.000+00:00
           id: 0
+          projectName: projectName
           updatedAt: 2000-01-23T04:56:07.000+00:00
         - createdAt: 2000-01-23T04:56:07.000+00:00
-          questionnaireQuestionId: 6
+          questionnaireVersionId: 6
           replies:
           - createdAt: 2000-01-23T04:56:07.000+00:00
             questionnaireQuestionId: 5
@@ -2929,6 +3108,7 @@ components:
             id: 1
             updatedAt: 2000-01-23T04:56:07.000+00:00
           id: 0
+          projectName: projectName
           updatedAt: 2000-01-23T04:56:07.000+00:00
       properties:
         replies:
@@ -2940,6 +3120,7 @@ components:
       type: object
     templatebackendMetadata:
       example:
+        identifier: identifier
         columnId: 5
         tenantid: 6
         datasetId: 1
@@ -2968,6 +3149,9 @@ components:
           type: string
         type:
           title: type
+          type: string
+        identifier:
+          title: identifier
           type: string
       title: templatebackendMetadata
       type: object
@@ -3072,6 +3256,7 @@ components:
             id: 1
             updatedAt: 2000-01-23T04:56:07.000+00:00
           id: 6
+          published: true
           version: version
           updatedAt: 2000-01-23T04:56:07.000+00:00
         - createdAt: 2000-01-23T04:56:07.000+00:00
@@ -3169,6 +3354,7 @@ components:
             id: 1
             updatedAt: 2000-01-23T04:56:07.000+00:00
           id: 6
+          published: true
           version: version
           updatedAt: 2000-01-23T04:56:07.000+00:00
         name: name
@@ -3403,7 +3589,7 @@ components:
     templatebackendQuestionnaireReply:
       example:
         createdAt: 2000-01-23T04:56:07.000+00:00
-        questionnaireQuestionId: 6
+        questionnaireVersionId: 6
         replies:
         - createdAt: 2000-01-23T04:56:07.000+00:00
           questionnaireQuestionId: 5
@@ -3416,16 +3602,20 @@ components:
           id: 1
           updatedAt: 2000-01-23T04:56:07.000+00:00
         id: 0
+        projectName: projectName
         updatedAt: 2000-01-23T04:56:07.000+00:00
       properties:
         id:
           format: int64
           title: id
           type: integer
-        questionnaireQuestionId:
+        questionnaireVersionId:
           format: int64
-          title: questionnaireQuestionId
+          title: questionnaireVersionId
           type: integer
+        projectName:
+          title: projectName
+          type: string
         replies:
           items:
             $ref: '#/components/schemas/templatebackendQuestionnaireQuestionReply'
@@ -3538,6 +3728,7 @@ components:
           id: 1
           updatedAt: 2000-01-23T04:56:07.000+00:00
         id: 6
+        published: true
         version: version
         updatedAt: 2000-01-23T04:56:07.000+00:00
       properties:
@@ -3553,6 +3744,9 @@ components:
             $ref: '#/components/schemas/templatebackendQuestionnaireQuestion'
           title: questions
           type: array
+        published:
+          title: published
+          type: boolean
         createdAt:
           format: date-time
           title: createdAt
@@ -3575,6 +3769,24 @@ components:
     templatebackendResetPasswordResult:
       title: result
       type: object
+    templatebackendRevertDatasetReply:
+      example:
+        id: 0
+      properties:
+        id:
+          format: int64
+          title: id
+          type: integer
+      title: templatebackendRevertDatasetReply
+      type: object
+    templatebackendRevertDatasetRequest:
+      properties:
+        id:
+          format: int64
+          title: id
+          type: integer
+      title: templatebackendRevertDatasetRequest
+      type: object
     templatebackendStoreDatasetReply:
       example:
         result:
@@ -3595,6 +3807,9 @@ components:
         types:
           title: types
           type: string
+        identifiers:
+          title: identifiers
+          type: string
       title: Create a Dataset
       type: object
     templatebackendStoreDatasetResult:
@@ -3610,13 +3825,7 @@ components:
     templatebackendTransformDatasetReply:
       example:
         result:
-          columns:
-          - value:
-            - value
-            - value
-          - value:
-            - value
-            - value
+          id: 0
       properties:
         result:
           $ref: '#/components/schemas/templatebackendTransformDatasetResult'
@@ -3636,19 +3845,12 @@ components:
       type: object
     templatebackendTransformDatasetResult:
       example:
-        columns:
-        - value:
-          - value
-          - value
-        - value:
-          - value
-          - value
+        id: 0
       properties:
-        columns:
-          items:
-            $ref: '#/components/schemas/templatebackendColumn'
-          title: columns
-          type: array
+        id:
+          format: int64
+          title: id
+          type: integer
       title: templatebackendTransformDatasetResult
       type: object
     templatebackendUpdatePasswordReply:
