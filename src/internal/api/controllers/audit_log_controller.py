@@ -22,6 +22,7 @@ class AuditLogController:
         return TemplatebackendGetLogsResponse(logs)
 
     def audit_log_service_get_logs_for_user(self, user, userid: int, offset: int = None, limit: int = None, filters: str = None, sort_by: str = None):
+        filters_dict = json.loads(filters) if filters else {}
         logs = self.audit_log_service.get_logs_for_user(userid, offset, limit, filters, sort_by)
         logs = audit_log_converter.audit_logs_from_business(logs)
         return TemplatebackendGetLogsResponse(logs)
