@@ -9,7 +9,7 @@ Method | HTTP request | Description
 
 
 # **audit_log_service_get_logs**
-> TemplatebackendGetLogsResponse audit_log_service_get_logs(offset=offset, limit=limit)
+> TemplatebackendGetLogsResponse audit_log_service_get_logs(offset=offset, limit=limit, filters=filters, sort_by=sort_by)
 
 Get logs
 
@@ -50,10 +50,12 @@ with openapi_client.ApiClient(configuration) as api_client:
     api_instance = openapi_client.AuditLogApi(api_client)
     offset = 56 # int |  (optional)
     limit = 56 # int |  (optional)
+    filters = 'filters_example' # str |  (optional)
+    sort_by = 'sort_by_example' # str |  (optional)
 
     try:
         # Get logs
-        api_response = api_instance.audit_log_service_get_logs(offset=offset, limit=limit)
+        api_response = api_instance.audit_log_service_get_logs(offset=offset, limit=limit, filters=filters, sort_by=sort_by)
         print("The response of AuditLogApi->audit_log_service_get_logs:\n")
         pprint(api_response)
     except Exception as e:
@@ -69,6 +71,8 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **offset** | **int**|  | [optional] 
  **limit** | **int**|  | [optional] 
+ **filters** | **str**|  | [optional] 
+ **sort_by** | **str**|  | [optional] 
 
 ### Return type
 
@@ -93,7 +97,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **audit_log_service_get_logs_for_user**
-> TemplatebackendGetLogsResponse audit_log_service_get_logs_for_user(userid, offset=offset, limit=limit)
+> TemplatebackendGetLogsResponse audit_log_service_get_logs_for_user(userid, offset=offset, limit=limit, filters=filters, sort_by=sort_by)
 
 Get logs for a user
 
@@ -135,10 +139,12 @@ with openapi_client.ApiClient(configuration) as api_client:
     userid = 56 # int | 
     offset = 56 # int |  (optional)
     limit = 56 # int |  (optional)
+    filters = 'filters_example' # str |  (optional)
+    sort_by = 'sort_by_example' # str |  (optional)
 
     try:
         # Get logs for a user
-        api_response = api_instance.audit_log_service_get_logs_for_user(userid, offset=offset, limit=limit)
+        api_response = api_instance.audit_log_service_get_logs_for_user(userid, offset=offset, limit=limit, filters=filters, sort_by=sort_by)
         print("The response of AuditLogApi->audit_log_service_get_logs_for_user:\n")
         pprint(api_response)
     except Exception as e:
@@ -155,6 +161,8 @@ Name | Type | Description  | Notes
  **userid** | **int**|  | 
  **offset** | **int**|  | [optional] 
  **limit** | **int**|  | [optional] 
+ **filters** | **str**|  | [optional] 
+ **sort_by** | **str**|  | [optional] 
 
 ### Return type
 

@@ -1,7 +1,5 @@
-from src.internal.api.controllers import security_controller
-import src.internal.api.controllers.audit_log_controller as internal_audit_log_controller
-import src.internal.api.server_template.controllers.audit_log_controller as connexion_audit_log_controller
-import src.internal.api.controllers.middleware.audit_log_authorization as audit_log_controller_authorization
+from src.internal.api.controllers.audit_log_controller import AuditLogController
+from src.internal.api.controllers.middleware.audit_log_authorization import AuditLogControllerAuthentication
 from src.pkg.audit_log.service.audit_log import AuditLogService
 from .config import provide_config
 from src.pkg.audit_log.store.postgres import AuditLogStore as PostgresAuditStore
@@ -17,9 +15,9 @@ def provide_audit_log_controller():
     if audit_log_controller is not None:
         return audit_log_controller
 
-    controller = internal_audit_log_controller.AuditLogController(provide_config(), provide_audit_log_service())
-    controller = audit_log_controller_authorization.AuditLogControllerAuthentication(controller)
-    audit_log_controller = connexion_audit_log_controller.AuditLogController(controller)
+    controller = AuditLogController(provide_config(), provide_audit_log_service())
+    controller = AuditLogControllerAuthentication(controller)
+    audit_log_controller = controller
 
     return audit_log_controller
 
@@ -45,6 +43,5 @@ def provide_audit_log_store():
         audit_log_store = PostgresAuditStore(provide_db())
     else:
         raise NotImplementedError("datastore type " + tpe + " is not implemented")
-
 
     return audit_log_store

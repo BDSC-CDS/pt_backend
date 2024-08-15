@@ -18,7 +18,9 @@ class TestAuditLogController(BaseTestCase):
         Get logs
         """
         query_string = [('offset', 56),
-                        ('limit', 56)]
+                        ('limit', 56),
+                        ('filters', 'filters_example'),
+                        ('sortBy', 'sort_by_example')]
         headers = { 
             'Accept': 'application/json',
             'Bearer': 'special-key',
@@ -37,7 +39,9 @@ class TestAuditLogController(BaseTestCase):
         Get logs for a user
         """
         query_string = [('offset', 56),
-                        ('limit', 56)]
+                        ('limit', 56),
+                        ('filters', 'filters_example'),
+                        ('sortBy', 'sort_by_example')]
         headers = { 
             'Accept': 'application/json',
             'Bearer': 'special-key',

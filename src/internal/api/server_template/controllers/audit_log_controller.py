@@ -31,7 +31,7 @@ class AuditLogController:
         self.controller=controller
 
 
-    def audit_log_service_get_logs(self, user, offset: int=None, limit: int=None):
+    def audit_log_service_get_logs(self, user, offset: int=None, limit: int=None, filters: str=None, sort_by: str=None):
         """Get logs
 
         Gets a list of logs.
@@ -40,14 +40,18 @@ class AuditLogController:
         :type offset: int
         :param limit: 
         :type limit: int
+        :param filters: 
+        :type filters: str
+        :param sort_by: 
+        :type sort_by: str
 
         :rtype: Union[TemplatebackendGetLogsResponse, Tuple[TemplatebackendGetLogsResponse, int], Tuple[TemplatebackendGetLogsResponse, int, Dict[str, str]]
         """
 
-        return self.controller.audit_log_service_get_logs(user, offset, limit)
+        return self.controller.audit_log_service_get_logs(user, offset, limit, filters, sort_by)
 
 
-    def audit_log_service_get_logs_for_user(self, user, userid: int, offset: int=None, limit: int=None):
+    def audit_log_service_get_logs_for_user(self, user, userid: int, offset: int=None, limit: int=None, filters: str=None, sort_by: str=None):
         """Get logs for a user
 
         Gets logs for a specific user.
@@ -58,8 +62,12 @@ class AuditLogController:
         :type offset: int
         :param limit: 
         :type limit: int
+        :param filters: 
+        :type filters: str
+        :param sort_by: 
+        :type sort_by: str
 
         :rtype: Union[TemplatebackendGetLogsResponse, Tuple[TemplatebackendGetLogsResponse, int], Tuple[TemplatebackendGetLogsResponse, int, Dict[str, str]]
         """
 
-        return self.controller.audit_log_service_get_logs_for_user(user, userid, offset, limit)
+        return self.controller.audit_log_service_get_logs_for_user(user, userid, offset, limit, filters, sort_by)

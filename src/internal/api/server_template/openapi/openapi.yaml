@@ -278,6 +278,14 @@ paths:
         schema:
           format: int32
           type: integer
+      - in: query
+        name: filters
+        schema:
+          type: string
+      - in: query
+        name: sortBy
+        schema:
+          type: string
       responses:
         "200":
           content:
@@ -316,6 +324,14 @@ paths:
         schema:
           format: int32
           type: integer
+      - in: query
+        name: filters
+        schema:
+          type: string
+      - in: query
+        name: sortBy
+        schema:
+          type: string
       responses:
         "200":
           content:

@@ -49,7 +49,7 @@ RETURNING id;
 
             return AuditLog(id=audit_id)
 
-    def get_logs(self,offset:int,limit:int) -> list[AuditLog]:
+    def get_logs(self, offset: int, limit: int, filters: dict = {}, sort_by: str = None) -> list[AuditLog]:
         query = """
             SELECT
                 a.id, a.userid, a.service, 
@@ -60,13 +60,45 @@ RETURNING id;
                 u.lastname as lastname 
             FROM audit_log a
             LEFT JOIN users u ON a.userid = u.id
-            ORDER BY created_at OFFSET :offset LIMIT :limit;
         """
+        
+        filter_conditions = []
+        query_params = {'offset': offset, 'limit': limit}
+
+        if 'userid' in filters:
+            filter_conditions.append("a.userid = :userid")
+            query_params['userid'] = filters['userid']
+        if 'service' in filters:
+            filter_conditions.append("a.service = :service")
+            query_params['service'] = filters['service']
+        if 'action' in filters:
+            filter_conditions.append("a.action = :action")
+            query_params['action'] = filters['action']
+        if 'body' in filters:
+            filter_conditions.append("a.body = :body")
+            query_params['body'] = filters['body']
+        if 'response' in filters:
+            filter_conditions.append("a.response = :response")
+            query_params['response'] = filters['response']
+        if 'error' in filters:
+            filter_conditions.append("a.error = :error")
+            query_params['error'] = filters['error']
+        if 'created_at' in filters:
+            filter_conditions.append("a.created_at = :created_at")
+            query_params['created_at'] = filters['created_at']
+
+        if filter_conditions:
+            query += " WHERE " + " AND ".join(filter_conditions)
+
+        if sort_by:
+            query += f" ORDER BY {sort_by}"
+        else:
+            query += " ORDER BY a.created_at"
+
+        query += " OFFSET :offset LIMIT :limit;"
+
         with self.session_scope() as session:
-            logs = session.execute(text(query),{
-                'offset': offset,
-                'limit': limit,
-            }).mappings().fetchall()
+            logs = session.execute(text(query), query_params).mappings().fetchall()
 
             result = [
                 AuditLog(
@@ -86,9 +118,11 @@ RETURNING id;
                     )
                 ) for log in logs
             ]
-            return result
 
-    def get_logs_for_user(self, id:int, offset:int, limit:int) -> list[AuditLog]:
+            return result
+        
+
+    def get_logs_for_user(self, id: int, offset: int, limit: int, filters: dict = None, sort_by: str = None) -> list[AuditLog]:
         query = """
             SELECT
                 a.id, a.userid, a.service, 
@@ -99,16 +133,43 @@ RETURNING id;
                 u.lastname as lastname 
             FROM audit_log a
             LEFT JOIN users u ON a.userid = u.id
-            WHERE userid = :userid
-            ORDER BY created_at OFFSET :offset LIMIT :limit;
+            WHERE a.userid = :userid
         """
-        query = "SELECT * FROM audit_log WHERE userid = :userid ORDER BY createdat OFFSET :offset LIMIT :limit;"
+        
+        filter_conditions = ["a.userid = :userid"]
+        query_params = {'userid': id, 'offset': offset, 'limit': limit}
+
+        if 'service' in filters:
+            filter_conditions.append("a.service = :service")
+            query_params['service'] = filters['service']
+        if 'action' in filters:
+            filter_conditions.append("a.action = :action")
+            query_params['action'] = filters['action']
+        if 'body' in filters:
+            filter_conditions.append("a.body = :body")
+            query_params['body'] = filters['body']
+        if 'response' in filters:
+            filter_conditions.append("a.response = :response")
+            query_params['response'] = filters['response']
+        if 'error' in filters:
+            filter_conditions.append("a.error = :error")
+            query_params['error'] = filters['error']
+        if 'created_at' in filters:
+            filter_conditions.append("a.created_at = :created_at")
+            query_params['created_at'] = filters['created_at']
+
+        if filter_conditions:
+            query += " AND " + " AND ".join(filter_conditions)
+
+        if sort_by:
+            query += f" ORDER BY {sort_by}"
+        else:
+            query += " ORDER BY a.created_at"
+
+        query += " OFFSET :offset LIMIT :limit;"
+        
         with self.session_scope() as session:
-            logs = session.execute(text(query), {
-                'userid': id,
-                'offset':offset,
-                'limit':limit
-            }).mappings().fetchall()
+            logs = session.execute(text(query), query_params).mappings().fetchall()
 
             result = [
                 AuditLog(
