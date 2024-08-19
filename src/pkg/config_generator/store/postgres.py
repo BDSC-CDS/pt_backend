@@ -26,12 +26,12 @@ class ConfigGeneratorStore:
     def create_config(self, user,config_generator: ConfigGenerator):
         config_query = """
             INSERT INTO config_generator
-                (userid, tenantid, questionnaireid, hasScrambleField, hasDateShift, hassubFieldList, hassubFieldRegex,
+                (userid, tenantid, config_name, questionnaireid, hasScrambleField, hasDateShift, hassubFieldList, hassubFieldRegex,
                 scrambleField_fields, dateShift_lowrange, dateShift_highrange, subFieldList_field,
                 subFieldList_substitute, subFieldList_replacement, subFieldRegex_field,
                 subFieldRegex_regex,subFieldRegex_replacement, created_at)
             VALUES
-                (:userid, :tenantid, :questionnaireid, :hasScrambleField, :hasDateShift, :hassubFieldList, :hassubFieldRegex,
+                (:userid, :tenantid, :config_name, :questionnaireid, :hasScrambleField, :hasDateShift, :hassubFieldList, :hassubFieldRegex,
                 :scrambleField_fields, :dateShift_lowrange, :dateShift_highrange, :subFieldList_field,
                 :subFieldList_substitute, :subFieldList_replacement, :subFieldRegex_field,
                 :subFieldRegex_regex, :subFieldRegex_replacement, NOW())
@@ -43,6 +43,7 @@ class ConfigGeneratorStore:
                 result = session.execute(text(config_query), {
                     'userid': user.id,
                     'tenantid': user.tenantid,
+                    'config_name': config_generator.config_name,
                     'questionnaireid': config_generator.questionnaireid,
                     'hasScrambleField': config_generator.hasScrambleField,
                     'hasDateShift': config_generator.hasDateShift,
@@ -79,6 +80,7 @@ class ConfigGeneratorStore:
                     id=config.id,
                     userid=userid,
                     tenantid=config.tenantid,
+                    config_name=config.config_name,
                     questionnaireid=config.questionnaireid,
                     hasScrambleField=config.hasscramblefield,
                     hasDateShift=config.hasdateshift,
@@ -112,6 +114,7 @@ class ConfigGeneratorStore:
                     id=config.id,
                     userid=userid,
                     tenantid=config.tenantid,
+                    config_name=config.config_name,
                     questionnaireid=config.questionnaireid,
                     hasScrambleField=config.hasscramblefield,
                     hasDateShift=config.hasdateshift,
@@ -154,6 +157,7 @@ class ConfigGeneratorStore:
                     id=config.id,
                     userid=userid,
                     tenantid=config.tenantid,
+                    config_name=config.config_name,
                     questionnaireid=config.questionnaireid,
                     hasScrambleField=config.hasscramblefield,
                     hasDateShift=config.hasdateshift,

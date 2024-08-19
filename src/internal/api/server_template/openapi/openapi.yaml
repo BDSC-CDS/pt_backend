@@ -989,6 +989,7 @@ components:
       type: object
     templatebackendConfig:
       example:
+        configName: configName
         hassubFieldList: true
         subFieldListReplacement: subFieldListReplacement
         subFieldRegexRegex: subFieldRegexRegex
@@ -1025,6 +1026,9 @@ components:
           format: int64
           title: tenantid
           type: integer
+        configName:
+          title: configName
+          type: string
         questionnaireid:
           format: int64
           title: questionnaireid
@@ -1336,7 +1340,8 @@ components:
       example:
         result:
           config:
-          - hassubFieldList: true
+          - configName: configName
+            hassubFieldList: true
             subFieldListReplacement: subFieldListReplacement
             subFieldRegexRegex: subFieldRegexRegex
             hasDateShift: true
@@ -1359,7 +1364,8 @@ components:
             - subFieldListSubstitute
             - subFieldListSubstitute
             subFieldRegexReplacement: subFieldRegexReplacement
-          - hassubFieldList: true
+          - configName: configName
+            hassubFieldList: true
             subFieldListReplacement: subFieldListReplacement
             subFieldRegexRegex: subFieldRegexRegex
             hasDateShift: true
@@ -1390,7 +1396,8 @@ components:
     templatebackendGetConfigsResult:
       example:
         config:
-        - hassubFieldList: true
+        - configName: configName
+          hassubFieldList: true
           subFieldListReplacement: subFieldListReplacement
           subFieldRegexRegex: subFieldRegexRegex
           hasDateShift: true
@@ -1413,7 +1420,8 @@ components:
           - subFieldListSubstitute
           - subFieldListSubstitute
           subFieldRegexReplacement: subFieldRegexReplacement
-        - hassubFieldList: true
+        - configName: configName
+          hassubFieldList: true
           subFieldListReplacement: subFieldListReplacement
           subFieldRegexRegex: subFieldRegexRegex
           hasDateShift: true

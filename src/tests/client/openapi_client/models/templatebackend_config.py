@@ -34,6 +34,7 @@ class TemplatebackendConfig(BaseModel):
     id: Optional[StrictInt] = None
     userid: Optional[StrictInt] = None
     tenantid: Optional[StrictInt] = None
+    config_name: Optional[StrictStr] = Field(default=None, alias="configName")
     questionnaireid: Optional[StrictInt] = None
     has_scramble_field: Optional[StrictBool] = Field(default=None, alias="hasScrambleField")
     has_date_shift: Optional[StrictBool] = Field(default=None, alias="hasDateShift")
@@ -50,7 +51,7 @@ class TemplatebackendConfig(BaseModel):
     sub_field_regex_replacement: Optional[StrictStr] = Field(default=None, alias="subFieldRegexReplacement")
     created_at: Optional[datetime] = Field(default=None, alias="createdAt")
     deleted_at: Optional[datetime] = Field(default=None, alias="deletedAt")
-    __properties: ClassVar[List[str]] = ["id", "userid", "tenantid", "questionnaireid", "hasScrambleField", "hasDateShift", "hassubFieldList", "hassubFieldRegex", "scrambleFieldFields", "dateShiftLowrange", "dateShiftHighrange", "subFieldListField", "subFieldListSubstitute", "subFieldListReplacement", "subFieldRegexField", "subFieldRegexRegex", "subFieldRegexReplacement", "createdAt", "deletedAt"]
+    __properties: ClassVar[List[str]] = ["id", "userid", "tenantid", "configName", "questionnaireid", "hasScrambleField", "hasDateShift", "hassubFieldList", "hassubFieldRegex", "scrambleFieldFields", "dateShiftLowrange", "dateShiftHighrange", "subFieldListField", "subFieldListSubstitute", "subFieldListReplacement", "subFieldRegexField", "subFieldRegexRegex", "subFieldRegexReplacement", "createdAt", "deletedAt"]
 
     model_config = {
         "populate_by_name": True,
@@ -104,6 +105,7 @@ class TemplatebackendConfig(BaseModel):
             "id": obj.get("id"),
             "userid": obj.get("userid"),
             "tenantid": obj.get("tenantid"),
+            "configName": obj.get("configName"),
             "questionnaireid": obj.get("questionnaireid"),
             "hasScrambleField": obj.get("hasScrambleField"),
             "hasDateShift": obj.get("hasDateShift"),
