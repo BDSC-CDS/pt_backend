@@ -6,6 +6,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **columns** | [**List[TemplatebackendColumn]**](TemplatebackendColumn.md) |  | [optional] 
+**n_rows** | **int** |  | [optional] 
 
 ## Example
 

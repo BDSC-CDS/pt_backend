@@ -205,6 +205,7 @@ class DatasetStore:
             AND userid = :userid
             AND tenantid = :tenantid
         """
+        query3 = "SELECT COUNT(DISTINCT line_id) as totalRows FROM dataset_content WHERE dataset_id = :dataset_id AND userid = :userid AND tenantid = :tenantid;"
 
         # Parameters for the query
         params = {
@@ -235,26 +236,24 @@ class DatasetStore:
                 if not dataset or dataset.deleted_at:
                     print("Error: Dataset not found (might have been deleted).")
                     return None # if the dataset was deleted we don't return anything (TODO)
+
+                total_rows_result = session.execute(text(query3), params).mappings().fetchone()
+                total_rows = total_rows_result['totalrows'] if total_rows_result else 0
+
                 rows = session.execute(text(query2), params).mappings().fetchall() # get all values corresponding to dataset name and user id
 
-                # rows = session.execute(text(query2), {
-                #     'dataset_id': id,
-                #     'userid': userid,
-                #     'tenantid': tenantid,
-                #     'offset':offset,
-                #     'limit':limit
-                # }).mappings().fetchall() # get all values corresponding to dataset name and user id
-
-                print("ROWS: ", rows)
                 if not rows:
                     print("Error: No data found in the dataset.")
                     return None
 
                 columns = defaultdict(list)
+
                 for row in rows:
                     columns[row.column_id].append(row.val) # it is already sorted
+
                 columns_as_lists = list(columns.values())
-                return columns_as_lists
+
+                return columns_as_lists, total_rows
 
             except Exception as e:
                 print(f"Error fetching dataset: {e}")

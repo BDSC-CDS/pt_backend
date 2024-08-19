@@ -16,21 +16,26 @@ class TemplatebackendGetDatasetContentResult(Model):
     Do not edit the class manually.
     """
 
-    def __init__(self, columns=None):
+    def __init__(self, columns=None, n_rows=None):
         """TemplatebackendGetDatasetContentResult - a model defined in OpenAPI
 
         :param columns: The columns of this TemplatebackendGetDatasetContentResult.
         :type columns: List[TemplatebackendColumn]
+        :param n_rows: The n_rows of this TemplatebackendGetDatasetContentResult.
+        :type n_rows: int
         """
         self.openapi_types = {
-            'columns': List[TemplatebackendColumn]
+            'columns': List[TemplatebackendColumn],
+            'n_rows': int
         }
 
         self.attribute_map = {
-            'columns': 'columns'
+            'columns': 'columns',
+            'n_rows': 'nRows'
         }
 
         self._columns = columns
+        self._n_rows = n_rows
 
     @classmethod
     def from_dict(cls, dikt) -> 'TemplatebackendGetDatasetContentResult':
@@ -63,3 +68,24 @@ class TemplatebackendGetDatasetContentResult(Model):
         """
 
         self._columns = columns
+
+    @property
+    def n_rows(self) -> int:
+        """Gets the n_rows of this TemplatebackendGetDatasetContentResult.
+
+
+        :return: The n_rows of this TemplatebackendGetDatasetContentResult.
+        :rtype: int
+        """
+        return self._n_rows
+
+    @n_rows.setter
+    def n_rows(self, n_rows: int):
+        """Sets the n_rows of this TemplatebackendGetDatasetContentResult.
+
+
+        :param n_rows: The n_rows of this TemplatebackendGetDatasetContentResult.
+        :type n_rows: int
+        """
+
+        self._n_rows = n_rows

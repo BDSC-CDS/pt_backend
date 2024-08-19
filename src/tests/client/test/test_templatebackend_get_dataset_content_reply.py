@@ -43,7 +43,8 @@ class TestTemplatebackendGetDatasetContentReply(unittest.TestCase):
                             value = [
                                 ''
                                 ], )
-                        ], )
+                        ], 
+                    n_rows = 56, )
             )
         else:
             return TemplatebackendGetDatasetContentReply(

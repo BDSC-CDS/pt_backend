@@ -42,7 +42,8 @@ class TestTemplatebackendGetDatasetContentResult(unittest.TestCase):
                         value = [
                             ''
                             ], )
-                    ]
+                    ],
+                n_rows = 56
             )
         else:
             return TemplatebackendGetDatasetContentResult(
