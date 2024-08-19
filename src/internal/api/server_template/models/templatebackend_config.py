@@ -14,7 +14,7 @@ class TemplatebackendConfig(Model):
     Do not edit the class manually.
     """
 
-    def __init__(self, id=None, userid=None, tenantid=None, questionnaireid=None, has_scramble_field=None, has_date_shift=None, hassub_field_list=None, hassub_field_regex=None, scramble_field_fields=None, date_shift_lowrange=None, date_shift_highrange=None, sub_field_list_field=None, sub_field_list_substitute=None, sub_field_list_replacement=None, sub_field_regex_field=None, sub_field_regex_regex=None, sub_field_regex_replacement=None, created_at=None, deleted_at=None):
+    def __init__(self, id=None, userid=None, tenantid=None, config_name=None, questionnaireid=None, has_scramble_field=None, has_date_shift=None, hassub_field_list=None, hassub_field_regex=None, scramble_field_fields=None, date_shift_lowrange=None, date_shift_highrange=None, sub_field_list_field=None, sub_field_list_substitute=None, sub_field_list_replacement=None, sub_field_regex_field=None, sub_field_regex_regex=None, sub_field_regex_replacement=None, created_at=None, deleted_at=None):
         """TemplatebackendConfig - a model defined in OpenAPI
 
         :param id: The id of this TemplatebackendConfig.
@@ -23,6 +23,8 @@ class TemplatebackendConfig(Model):
         :type userid: int
         :param tenantid: The tenantid of this TemplatebackendConfig.
         :type tenantid: int
+        :param config_name: The config_name of this TemplatebackendConfig.
+        :type config_name: str
         :param questionnaireid: The questionnaireid of this TemplatebackendConfig.
         :type questionnaireid: int
         :param has_scramble_field: The has_scramble_field of this TemplatebackendConfig.
@@ -60,6 +62,7 @@ class TemplatebackendConfig(Model):
             'id': int,
             'userid': int,
             'tenantid': int,
+            'config_name': str,
             'questionnaireid': int,
             'has_scramble_field': bool,
             'has_date_shift': bool,
@@ -82,6 +85,7 @@ class TemplatebackendConfig(Model):
             'id': 'id',
             'userid': 'userid',
             'tenantid': 'tenantid',
+            'config_name': 'configName',
             'questionnaireid': 'questionnaireid',
             'has_scramble_field': 'hasScrambleField',
             'has_date_shift': 'hasDateShift',
@@ -103,6 +107,7 @@ class TemplatebackendConfig(Model):
         self._id = id
         self._userid = userid
         self._tenantid = tenantid
+        self._config_name = config_name
         self._questionnaireid = questionnaireid
         self._has_scramble_field = has_scramble_field
         self._has_date_shift = has_date_shift
@@ -193,6 +198,27 @@ class TemplatebackendConfig(Model):
         """
 
         self._tenantid = tenantid
+
+    @property
+    def config_name(self) -> str:
+        """Gets the config_name of this TemplatebackendConfig.
+
+
+        :return: The config_name of this TemplatebackendConfig.
+        :rtype: str
+        """
+        return self._config_name
+
+    @config_name.setter
+    def config_name(self, config_name: str):
+        """Sets the config_name of this TemplatebackendConfig.
+
+
+        :param config_name: The config_name of this TemplatebackendConfig.
+        :type config_name: str
+        """
+
+        self._config_name = config_name
 
     @property
     def questionnaireid(self) -> int:

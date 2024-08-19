@@ -43,6 +43,7 @@ class TestTemplatebackendGetConfigsReply(unittest.TestCase):
                             id = 56, 
                             userid = 56, 
                             tenantid = 56, 
+                            config_name = '', 
                             questionnaireid = 56, 
                             has_scramble_field = True, 
                             has_date_shift = True, 

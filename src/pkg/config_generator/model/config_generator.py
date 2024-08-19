@@ -6,6 +6,7 @@ class ConfigGenerator:
     id: int = None
     userid:int = None
     tenantid:int = None
+    config_name:str = ""
     questionnaireid:int = None
     hasScrambleField: bool = False # useful? if boolean but not list
     hasDateShift: bool = False
