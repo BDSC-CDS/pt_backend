@@ -20,7 +20,8 @@ import json
 
 
 from typing import Any, ClassVar, Dict, List, Optional
-from pydantic import BaseModel
+from pydantic import BaseModel, StrictInt
+from pydantic import Field
 from openapi_client.models.templatebackend_column import TemplatebackendColumn
 try:
     from typing import Self
@@ -32,7 +33,8 @@ class TemplatebackendGetDatasetContentResult(BaseModel):
     TemplatebackendGetDatasetContentResult
     """ # noqa: E501
     columns: Optional[List[TemplatebackendColumn]] = None
-    __properties: ClassVar[List[str]] = ["columns"]
+    n_rows: Optional[StrictInt] = Field(default=None, alias="nRows")
+    __properties: ClassVar[List[str]] = ["columns", "nRows"]
 
     model_config = {
         "populate_by_name": True,
@@ -90,7 +92,8 @@ class TemplatebackendGetDatasetContentResult(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "columns": [TemplatebackendColumn.from_dict(_item) for _item in obj.get("columns")] if obj.get("columns") is not None else None
+            "columns": [TemplatebackendColumn.from_dict(_item) for _item in obj.get("columns")] if obj.get("columns") is not None else None,
+            "nRows": obj.get("nRows")
         })
         return _obj
 

@@ -95,6 +95,7 @@ message GetDatasetContentReply {
 
 message GetDatasetContentResult {
     repeated Column columns = 1;
+    uint32 n_rows = 2;
 }
 
 message Column {
