@@ -200,7 +200,30 @@ class DatasetStore:
     def get_dataset_content(self,id:int, userid:int, tenantid:int, offset:int=None,limit:int=None) -> List[List[str]]: # TODO pagination
         # we order by column and line number
         query1 = "SELECT * FROM datasets WHERE id=:id AND userid = :userid AND tenantid = :tenantid;"
-        query2 = "SELECT * FROM dataset_content WHERE dataset_id = :dataset_id AND userid = :userid AND tenantid = :tenantid ORDER BY column_id,line_id OFFSET :offset LIMIT :limit;"
+        query2 = """SELECT * FROM dataset_content
+            WHERE dataset_id = :dataset_id
+            AND userid = :userid
+            AND tenantid = :tenantid
+        """
+
+        # Parameters for the query
+        params = {
+            'dataset_id': id,
+            'userid': userid,
+            'tenantid': tenantid
+        }
+
+        # Add LIMIT and OFFSET if they are provided
+        if limit is not None:
+            query2 += """
+            AND line_id BETWEEN :offset AND (:offset + :limit - 1)
+            """
+            params['offset'] = offset if offset is not None else 0  # Default to 0 if no OFFSET
+            params['limit'] = limit
+
+        query2 += """
+            ORDER BY line_id, column_id;
+        """
         with self.session_scope() as session:
             try:
                 dataset = session.execute(text(query1), {
@@ -212,15 +235,17 @@ class DatasetStore:
                 if not dataset or dataset.deleted_at:
                     print("Error: Dataset not found (might have been deleted).")
                     return None # if the dataset was deleted we don't return anything (TODO)
+                rows = session.execute(text(query2), params).mappings().fetchall() # get all values corresponding to dataset name and user id
 
-                rows = session.execute(text(query2), {
-                    'dataset_id': id,
-                    'userid': userid,
-                    'tenantid': tenantid,
-                    'offset':offset,
-                    'limit':limit
-                }).mappings().fetchall() # get all values corresponding to dataset name and user id
+                # rows = session.execute(text(query2), {
+                #     'dataset_id': id,
+                #     'userid': userid,
+                #     'tenantid': tenantid,
+                #     'offset':offset,
+                #     'limit':limit
+                # }).mappings().fetchall() # get all values corresponding to dataset name and user id
 
+                print("ROWS: ", rows)
                 if not rows:
                     print("Error: No data found in the dataset.")
                     return None
