@@ -413,7 +413,7 @@ class DatasetStore:
                 new_dataset = dataset
                 metadata_list : List[Metadata] = self.get_dataset_metadata(dataset_id,userid,tenantid)
                 if config.hasScrambleField:
-                        new_dataset = self.revert_scramble_field(new_dataset, metadata_list, transformation.scramble_fields_cols)
+                        new_dataset = self.revert_scramble_field(new_dataset, metadata_list, transformation.scramble_fields_cols, config.scrambleField_fields)
                 if config.hasDateShift:
                     new_dataset = self.revert_date_shift(new_dataset, metadata_list, transformation.date_shift)
                 if config.hassubFieldList:
@@ -496,9 +496,19 @@ class DatasetStore:
         # Replace each specified field's value with a unique identifier
         scramble_field_cols = {}
         for col_name, col_index in column_indices.items():
-            scramble_field_cols[col_name] = new_dataset[col_index].copy()
+            # scramble_field_cols[col_name] = new_dataset[col_index].copy()
             for i in range(len(new_dataset[col_index])):
-                new_dataset[col_index][i] = self.generate_random_identifier()
+                old_value = new_dataset[col_index][i]
+
+                 # Check if the old_value has already been mapped
+                if old_value in scramble_field_cols:
+                    new_value = scramble_field_cols[old_value]
+                else:
+                    new_value = self.generate_random_identifier()
+                    scramble_field_cols[old_value] = new_value
+
+                # Update the dataset with the new_value
+                new_dataset[col_index][i] = new_value
 
         # update the metadata types to string for these columns
         try:
@@ -551,16 +561,20 @@ class DatasetStore:
         return new_dataset, original_column
 
 
-    def revert_scramble_field(self, new_dataset: List[List[str]], metadata_list:List[Metadata], scramble_fields_cols:str):
+    def revert_scramble_field(self, new_dataset: List[List[str]], metadata_list:List[Metadata], scramble_fields_cols:str, scramble_cols:List[str]):
         cols_dict = json.loads(scramble_fields_cols)
+        # Reverse the dictionary
+        reversed_dict = {v: k for k, v in cols_dict.items()}
+
         column_mapping = {meta.column_name: meta.column_id for meta in metadata_list}
          # Iterate over the dictionary to replace corresponding columns in the dataset
-        for col_name, old_values in cols_dict.items():
-            if col_name in column_mapping:
-                col_id = column_mapping[col_name]
-                # Replace the entire column with the old values
-                new_dataset[col_id] = old_values
-
+        for col_name, col_id in column_mapping.items():
+            if col_name in scramble_cols:
+                # iterate over all values in the column and replace with original value
+                for i in range(len(new_dataset[col_id])):
+                    scrambled_value = new_dataset[col_id][i]
+                    original_value = reversed_dict.get(scrambled_value)
+                    new_dataset[col_id][i] = original_value
         return new_dataset
 
     def revert_date_shift(self,new_dataset: List[List[str]], metadata_list: List[Metadata], date_shift : int) :
