@@ -342,12 +342,10 @@ class DatasetStore:
                 if not config.scrambleField_fields:
                     raise Exception("No fields given to scramble.")
                 new_dataset, scramble_field_cols = self.scramble_fields(new_dataset, metadata_list, dataset_id, config.scrambleField_fields)
-                print("SCRAMBLED")
             if (config.hasDateShift):
                 if not config.dateShift_lowrange or not config.dateShift_highrange:
                     raise Exception("Please provide both ranges.")
                 new_dataset,date_shift = self.shift_dates(new_dataset, metadata_list,config.dateShift_lowrange, config.dateShift_highrange)
-                print("DATE SHIFTED")
             if (config.hassubFieldList):
                 if not config.subFieldList_field or not config.subFieldList_substitute or not config.subFieldList_replacement:
                     raise Exception("Missing parameters for the substitution.")
@@ -494,14 +492,11 @@ class DatasetStore:
         column_indices = {meta.column_name: meta.column_id for meta in metadata_list if meta.column_name in scramble_fields}
         # Replace each specified field's value with a unique identifier
         scramble_field_cols = {}
-        print("WHOLE DATASET : ",new_dataset)
 
         for col_name, col_index in column_indices.items():
             # scramble_field_cols[col_name] = new_dataset[col_index].copy()
-            print("WHOLE COLUMN : ",new_dataset[col_index] )
             for i in range(len(new_dataset[col_index])):
                 old_value = new_dataset[col_index][i]
-                print("OLD VALUE ",i,": ", old_value)
 
                  # Check if the old_value has already been mapped
                 if old_value in scramble_field_cols:
@@ -509,7 +504,6 @@ class DatasetStore:
                 else:
                     new_value = self.generate_random_identifier()
                     scramble_field_cols[old_value] = new_value
-                print("Ok until here")
                 # Update the dataset with the new_value
                 new_dataset[col_index][i] = new_value
 
@@ -592,18 +586,13 @@ class DatasetStore:
     def revert_substitute(self, new_dataset: List[List[str]], metadata_list: List[Metadata], field: str, sub_col:str):
         # get the array of old values corresponding to the old column
         old_column = json.loads(sub_col)
-        print("REVERT PARAMETERS: ")
-        print("metadata: ", metadata_list)
-        print("field: ",field)
-        print("sub_col", sub_col)
         # find the column id to replace
         column_id = None
+
         for meta in metadata_list:
-            print("meta: ", meta.column_name)
-            print("is equal to field? ", meta.column_name == field)
             if meta.column_name == field:
                 column_id = meta.column_id
-                print("equal to field so now column id is ", column_id)
+
         if column_id is None:
             raise Exception("This column does not exist.")
 
