@@ -310,7 +310,7 @@ class DatasetStore:
 
     def transform_dataset(self,userid:int,tenantid:int,dataset_id:int,config_id:int) -> str:
         try:
-            dataset =  self.get_dataset_content(dataset_id, userid, tenantid)
+            dataset, n_rows =  self.get_dataset_content(dataset_id, userid, tenantid)
             # get the configuration
             config_store = ConfigGeneratorStore(self.db)
             config : ConfigGenerator = config_store.get_config(userid,tenantid,config_id)
@@ -342,12 +342,12 @@ class DatasetStore:
                 if not config.scrambleField_fields:
                     raise Exception("No fields given to scramble.")
                 new_dataset, scramble_field_cols = self.scramble_fields(new_dataset, metadata_list, dataset_id, config.scrambleField_fields)
-
+                print("SCRAMBLED")
             if (config.hasDateShift):
                 if not config.dateShift_lowrange or not config.dateShift_highrange:
                     raise Exception("Please provide both ranges.")
                 new_dataset,date_shift = self.shift_dates(new_dataset, metadata_list,config.dateShift_lowrange, config.dateShift_highrange)
-
+                print("DATE SHIFTED")
             if (config.hassubFieldList):
                 if not config.subFieldList_field or not config.subFieldList_substitute or not config.subFieldList_replacement:
                     raise Exception("Missing parameters for the substitution.")
@@ -398,7 +398,7 @@ class DatasetStore:
 
                 config_store = ConfigGeneratorStore(self.db)
                 config : ConfigGenerator = config_store.get_config(userid,tenantid,transformation.config_id)
-                dataset =  self.get_dataset_content(dataset_id, userid, tenantid)
+                dataset, n_rows =  self.get_dataset_content(dataset_id, userid, tenantid)
 
                 # check dataset
                 if (not dataset):
@@ -494,10 +494,14 @@ class DatasetStore:
         column_indices = {meta.column_name: meta.column_id for meta in metadata_list if meta.column_name in scramble_fields}
         # Replace each specified field's value with a unique identifier
         scramble_field_cols = {}
+        print("WHOLE DATASET : ",new_dataset)
+
         for col_name, col_index in column_indices.items():
             # scramble_field_cols[col_name] = new_dataset[col_index].copy()
+            print("WHOLE COLUMN : ",new_dataset[col_index] )
             for i in range(len(new_dataset[col_index])):
                 old_value = new_dataset[col_index][i]
+                print("OLD VALUE ",i,": ", old_value)
 
                  # Check if the old_value has already been mapped
                 if old_value in scramble_field_cols:
@@ -505,7 +509,7 @@ class DatasetStore:
                 else:
                     new_value = self.generate_random_identifier()
                     scramble_field_cols[old_value] = new_value
-
+                print("Ok until here")
                 # Update the dataset with the new_value
                 new_dataset[col_index][i] = new_value
 
