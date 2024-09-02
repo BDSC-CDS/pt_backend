@@ -41,6 +41,13 @@ class TestDatasetApi(unittest.TestCase):
         """
         pass
 
+    def test_dataset_service_get_dataset_identifier(self) -> None:
+        """Test case for dataset_service_get_dataset_identifier
+
+        Get Dataset Content filtered by identifying and quasi identifying columns
+        """
+        pass
+
     def test_dataset_service_get_dataset_metadata(self) -> None:
         """Test case for dataset_service_get_dataset_metadata
 

@@ -262,7 +262,31 @@ class DatasetStore:
                 print(f"Error fetching dataset: {e}")
                 return None
 
+    def get_identifiers_and_quasi_dataset(self, id: int, userid: int, tenantid: int,offset:int=None,limit:int=None) -> List[List[str]]:
+        """
+        Get the dataset with only the columns that are marked as 'identifier' or 'quasi-identifier'.
+        """
+        # Fetch the metadata
+        metadata_list = self.get_dataset_metadata(id, userid, tenantid)
+        if not metadata_list:
+            raise Exception("No metadata found for this dataset")
 
+        # Identify columns that are 'identifier' or 'quasi-identifier'
+        identifier_columns = [
+            metadata.column_id for metadata in metadata_list
+            if metadata.identifier in ('identifier', 'quasi-identifier')
+        ]
+
+        if not identifier_columns:
+            raise Exception("No identifier or quasi-identifier columns found in the dataset")
+
+        # Fetch the content of the dataset
+        dataset_content, n_rows = self.get_dataset_content(id, userid, tenantid,offset,limit)
+
+        # Filter the dataset to include only the relevant columns
+        filtered_dataset = [dataset_content[col_id] for col_id in identifier_columns]
+
+        return filtered_dataset,n_rows
 
     def delete_dataset(self,id:int,userid:int, tenantid:int) -> bool:
         query = """UPDATE datasets

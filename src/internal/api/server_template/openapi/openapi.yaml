@@ -474,6 +474,45 @@ paths:
       tags:
       - Dataset
       x-openapi-router-controller: dataset_controller
+  /api/v1/dataset/identifier/{id}:
+    get:
+      description: This endpoint allow getting a specific user's Dataset Content filtered
+        by identifying and quasi identifying columns
+      operationId: dataset_service_get_dataset_identifier
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      - in: query
+        name: offset
+        schema:
+          format: int32
+          type: integer
+      - in: query
+        name: limit
+        schema:
+          format: int32
+          type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/templatebackendGetDatasetContentReply'
+          description: A successful response.
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+          description: An unexpected error response.
+      summary: Get Dataset Content filtered by identifying and quasi identifying columns
+      tags:
+      - Dataset
+      x-openapi-router-controller: dataset_controller
   /api/v1/dataset/metadata/{id}:
     get:
       description: This endpoint allow getting a specific user's Dataset Metadata
