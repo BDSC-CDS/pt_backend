@@ -14,7 +14,7 @@ class TemplatebackendMetadata(Model):
     Do not edit the class manually.
     """
 
-    def __init__(self, userid=None, tenantid=None, dataset_id=None, column_id=None, column_name=None, type=None, identifier=None):
+    def __init__(self, userid=None, tenantid=None, dataset_id=None, column_id=None, column_name=None, type=None, identifier=None, is_id=None):
         """TemplatebackendMetadata - a model defined in OpenAPI
 
         :param userid: The userid of this TemplatebackendMetadata.
@@ -31,6 +31,8 @@ class TemplatebackendMetadata(Model):
         :type type: str
         :param identifier: The identifier of this TemplatebackendMetadata.
         :type identifier: str
+        :param is_id: The is_id of this TemplatebackendMetadata.
+        :type is_id: bool
         """
         self.openapi_types = {
             'userid': int,
@@ -39,7 +41,8 @@ class TemplatebackendMetadata(Model):
             'column_id': int,
             'column_name': str,
             'type': str,
-            'identifier': str
+            'identifier': str,
+            'is_id': bool
         }
 
         self.attribute_map = {
@@ -49,7 +52,8 @@ class TemplatebackendMetadata(Model):
             'column_id': 'columnId',
             'column_name': 'columnName',
             'type': 'type',
-            'identifier': 'identifier'
+            'identifier': 'identifier',
+            'is_id': 'isId'
         }
 
         self._userid = userid
@@ -59,6 +63,7 @@ class TemplatebackendMetadata(Model):
         self._column_name = column_name
         self._type = type
         self._identifier = identifier
+        self._is_id = is_id
 
     @classmethod
     def from_dict(cls, dikt) -> 'TemplatebackendMetadata':
@@ -217,3 +222,24 @@ class TemplatebackendMetadata(Model):
         """
 
         self._identifier = identifier
+
+    @property
+    def is_id(self) -> bool:
+        """Gets the is_id of this TemplatebackendMetadata.
+
+
+        :return: The is_id of this TemplatebackendMetadata.
+        :rtype: bool
+        """
+        return self._is_id
+
+    @is_id.setter
+    def is_id(self, is_id: bool):
+        """Sets the is_id of this TemplatebackendMetadata.
+
+
+        :param is_id: The is_id of this TemplatebackendMetadata.
+        :type is_id: bool
+        """
+
+        self._is_id = is_id

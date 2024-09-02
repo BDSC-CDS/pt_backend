@@ -51,6 +51,7 @@ message StoreDatasetRequest {
     string dataset = 2;
     string types = 3;
     string identifiers = 4;
+    string is_id = 5;
 }
 
 message StoreDatasetReply {

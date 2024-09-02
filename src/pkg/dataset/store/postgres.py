@@ -39,7 +39,7 @@ class DatasetStore:
         finally:
             session.close()
 
-    def store_dataset(self, userid:int,tenantid:int, dataset_name:str,dataset: str,types:str,identifiers:str) -> int:
+    def store_dataset(self, userid:int,tenantid:int, dataset_name:str,dataset: str,types:str,identifiers:str, is_id:str) -> int:
         # Insert dataset entry and get the generated dataset_id
         dataset_query = """
             INSERT INTO datasets
@@ -82,10 +82,11 @@ class DatasetStore:
                     column_type = column_types[header]
                     column_identifier = column_identifiers[header]
                     column_name = header
-                    metadata_to_insert.append((int(userid), int(tenantid), int(dataset_id), int(column_id), str(column_name), str(column_type), str(column_identifier)))
+                    is_id_bool = True if is_id == str(column_name) else False
+                    metadata_to_insert.append((int(userid), int(tenantid), int(dataset_id), int(column_id), str(column_name), str(column_type), str(column_identifier), is_id_bool))
                 query = """
-                    INSERT INTO metadata (userid, tenantid, dataset_id, column_id, column_name, type_, identifier)
-                    VALUES (:userid, :tenantid, :dataset_id, :column_id, :column_name, :type_, :identifier);
+                    INSERT INTO metadata (userid, tenantid, dataset_id, column_id, column_name, type_, identifier, is_id)
+                    VALUES (:userid, :tenantid, :dataset_id, :column_id, :column_name, :type_, :identifier, :is_id);
                 """
                 with self.session_scope() as session:
                     try:
@@ -99,6 +100,7 @@ class DatasetStore:
                                 'column_name': record[4],
                                 'type_': record[5],
                                 'identifier':record[6],
+                                'is_id': record[7],
                             })
                     except SQLAlchemyError as e:
                         raise e
@@ -187,7 +189,8 @@ class DatasetStore:
                         column_id= metadata.column_id,
                         column_name=metadata.column_name,
                         type_= metadata.type_,
-                        identifier=metadata.identifier
+                        identifier=metadata.identifier,
+                        is_id=metadata.is_id,
                     ) for metadata in metadatas ]
 
                 return result
@@ -294,13 +297,10 @@ class DatasetStore:
             'old_dataset_id': new_dataset_id,
             'config_id': config_id,
             'scramble_fields_cols': json.dumps(scramble_field_cols) if scramble_field_cols is not None else None,
-            'date_shift': date_shift,
+            'date_shift': json.dumps(date_shift) if date_shift is not None else None,
             'sub_list_col': json.dumps(sub_list_col) if sub_list_col is not None else None,
             'sub_regex_col': json.dumps(sub_regex_col) if sub_regex_col is not None else None
         }
-
-        # # Optional: Remove None values from the dictionary
-        # params = {k: v for k, v in params.items() if v is not None}
 
         with self.session_scope() as session:
             try:
@@ -337,15 +337,19 @@ class DatasetStore:
             date_shift = None
             sub_list_col = None
             sub_regex_col = None
+            print("what is going on")
+
+            if (config.hasDateShift):
+                print("DOING DATE SHIFT")
+                if not config.dateShift_lowrange or not config.dateShift_highrange:
+                    raise Exception("Please provide both ranges.")
+                new_dataset,date_shift = self.shift_dates(new_dataset, metadata_list,config.dateShift_lowrange, config.dateShift_highrange)
 
             if (config.hasScrambleField):
                 if not config.scrambleField_fields:
                     raise Exception("No fields given to scramble.")
                 new_dataset, scramble_field_cols = self.scramble_fields(new_dataset, metadata_list, dataset_id, config.scrambleField_fields)
-            if (config.hasDateShift):
-                if not config.dateShift_lowrange or not config.dateShift_highrange:
-                    raise Exception("Please provide both ranges.")
-                new_dataset,date_shift = self.shift_dates(new_dataset, metadata_list,config.dateShift_lowrange, config.dateShift_highrange)
+
             if (config.hassubFieldList):
                 if not config.subFieldList_field or not config.subFieldList_substitute or not config.subFieldList_replacement:
                     raise Exception("Missing parameters for the substitution.")
@@ -367,7 +371,9 @@ class DatasetStore:
             types = json.dumps(types_dict)
             identifiers_dict = {meta.column_name: meta.identifier for meta in metadata_list}
             identifiers = json.dumps(identifiers_dict)
-            new_dataset_id = self.store_dataset(userid,tenantid,"dataset "+str(dataset_id)+ " transformed",csv_string,types,identifiers)
+            is_id = next((meta.column_name for meta in metadata_list if meta.is_id), None)
+            print("IS ID TRANSFORM: ", is_id)
+            new_dataset_id = self.store_dataset(userid,tenantid,"dataset "+str(dataset_id)+ " transformed",csv_string,types,identifiers,is_id)
 
             # Create transformation entry
             self.insert_transformation_entry(userid, tenantid, new_dataset_id, config_id, scramble_field_cols, date_shift, sub_list_col, sub_regex_col)
@@ -376,7 +382,7 @@ class DatasetStore:
         except Exception as e:
                 print(f"Error transforming dataset: {e}")
                 return False
-
+        print("what")
         return new_dataset_id
 
 
@@ -409,6 +415,7 @@ class DatasetStore:
 
                 new_dataset = dataset
                 metadata_list : List[Metadata] = self.get_dataset_metadata(dataset_id,userid,tenantid)
+
                 if config.hasScrambleField:
                         new_dataset = self.revert_scramble_field(new_dataset, metadata_list, transformation.scramble_fields_cols, config.scrambleField_fields)
                 if config.hasDateShift:
@@ -419,7 +426,6 @@ class DatasetStore:
                     new_dataset = self.revert_substitute(new_dataset, metadata_list, config.subFieldRegex_field, transformation.sub_regex_col)
 
                 # store the new dataset
-                # Generate headers from metadata
                 headers = ','.join(f'"{m.column_name}"' for m in metadata_list)
                 data_rows = list(zip(*new_dataset))
                 csv_rows = [headers] + [','.join(f'"{item}"' for item in row) for row in data_rows]
@@ -428,7 +434,9 @@ class DatasetStore:
                 types = json.dumps(types_dict)
                 identifiers_dict = {meta.column_name: meta.identifier for meta in metadata_list}
                 identifiers = json.dumps(identifiers_dict)
-                new_dataset_id = self.store_dataset(userid,tenantid,"dataset "+str(dataset_id)+ " reverted",csv_string,types,identifiers)
+                is_id_dict = {meta.column_name: meta.is_id for meta in metadata_list}
+                is_id = json.dumps(is_id_dict)
+                new_dataset_id = self.store_dataset(userid,tenantid,"dataset "+str(dataset_id)+ " reverted",csv_string,types,identifiers,is_id)
 
             except Exception as e:
                 print(f"Error reverting dataset: {e}")
@@ -454,14 +462,37 @@ class DatasetStore:
             raise ValueError("Both range limits are zero; a non-zero shift cannot be generated.")
 
         date_column_ids = [metadata.column_id for metadata in metadata_list if metadata.type_ == "date"]
-        random_shift = random.randint(lowrange, highrange)
-        while random_shift == 0:
+        print("shift date metadata: ",metadata_list)
+        iden_col_id = next((metadata.column_id for metadata in metadata_list if metadata.is_id), None)
+
+        if iden_col_id is None:
+            raise ValueError("No ID column found in metadata.")
+
+        id_col = new_dataset[iden_col_id]
+        print("ID COL: ", iden_col_id)
+        unique_ids = set(id_col)
+        id_to_shift = {}
+
+         # Generate a unique random shift for each unique ID
+        for unique_id in unique_ids:
             random_shift = random.randint(lowrange, highrange)
+            while random_shift == 0:
+                random_shift = random.randint(lowrange, highrange)
+            id_to_shift[unique_id] = random_shift
 
+        print("ID TO DATE SHIFT DICT: ", id_to_shift)
+
+        # Apply the shifts to the date columns
         for col_id in date_column_ids:
-            new_dataset[col_id] = self.shift_date_col(new_dataset[col_id], random_shift)
+            for i in range(len(new_dataset[col_id])):
+                patient_id = id_col[i]
+                print("PATIENT ID: ", patient_id)
+                shift_value = id_to_shift[patient_id]
+                print("SHIFT VALUE: ", shift_value)
+                shifted_date = self.shift_date_col([new_dataset[col_id][i]], shift_value)[0]
+                new_dataset[col_id][i] = shifted_date
 
-        return new_dataset, random_shift
+        return new_dataset, id_to_shift
 
     def update_metadata_type(self,dataset_id:int, new_type:str, columns:List[str]):
         query = "UPDATE metadata SET type_ = :new_type WHERE dataset_id = :dataset_id AND column_name = ANY (:fields);"
@@ -574,12 +605,23 @@ class DatasetStore:
                     new_dataset[col_id][i] = original_value
         return new_dataset
 
-    def revert_date_shift(self,new_dataset: List[List[str]], metadata_list: List[Metadata], date_shift : int) :
+    def revert_date_shift(self,new_dataset: List[List[str]], metadata_list: List[Metadata], date_shift : str) :
+        date_shift_dict = json.loads(date_shift)
         # get the columns that are dates
         date_column_ids = [metadata.column_id for metadata in metadata_list if metadata.type_ == "date"]
+        iden_col_id = next((metadata.column_id for metadata in metadata_list if metadata.is_id), None)
+
+        if iden_col_id is None:
+                    raise ValueError("No ID column found in metadata.")
+
+        id_col = new_dataset[iden_col_id]
         # shift back to the old dates
         for col_id in date_column_ids:
-            new_dataset[col_id] = self.shift_date_col(new_dataset[col_id], -date_shift)
+            for i in range(len(new_dataset[col_id])):
+                patient_id = id_col[i]
+                shift_value = date_shift_dict.get(patient_id, 0)  # Get the shift value from the dict
+                shifted_date = self.shift_date_col([new_dataset[col_id][i]], -shift_value)[0]  # Reverse the shift
+                new_dataset[col_id][i] = shifted_date
 
         return new_dataset
 

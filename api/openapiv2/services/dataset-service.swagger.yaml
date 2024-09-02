@@ -310,6 +310,8 @@ definitions:
         type: string
       identifier:
         type: string
+      isId:
+        type: boolean
   templatebackendRevertDatasetReply:
     type: object
     properties:
@@ -337,6 +339,8 @@ definitions:
       types:
         type: string
       identifiers:
+        type: string
+      isId:
         type: string
     title: Create a Dataset
   templatebackendStoreDatasetResult:

@@ -46,7 +46,8 @@ class TestTemplatebackendGetDatasetMetadataReply(unittest.TestCase):
                             column_id = 56, 
                             column_name = '', 
                             type = '', 
-                            identifier = '', )
+                            identifier = '', 
+                            is_id = True, )
                         ], )
             )
         else:

@@ -1,0 +1,6 @@
+ALTER TABLE transformations
+ALTER COLUMN date_shift
+SET DATA TYPE TEXT;
+
+ALTER TABLE metadata
+ADD COLUMN is_id BOOLEAN;
