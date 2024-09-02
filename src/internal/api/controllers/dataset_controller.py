@@ -27,7 +27,7 @@ class DatasetController:
     def dataset_service_store_dataset(self, user, body: TemplatebackendStoreDatasetRequest):
         # name, csv = dataset_converter.csv_to_business(body)
         try:
-            dataset_id = self.dataset_service.store_dataset(user.id,user.tenantid, body.dataset_name, body.dataset, body.types, body.identifiers)
+            dataset_id = self.dataset_service.store_dataset(user.id,user.tenantid, body.dataset_name, body.dataset, body.types, body.identifiers, body.is_id)
             print("Dataset controller Id", dataset_id)
             return TemplatebackendStoreDatasetReply(TemplatebackendStoreDatasetResult(id=dataset_id))
 

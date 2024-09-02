@@ -24,4 +24,5 @@ message Metadata {
     string column_name = 5;
     string type_ = 6;
     string identifier = 7;
+    bool is_id = 8;
 }

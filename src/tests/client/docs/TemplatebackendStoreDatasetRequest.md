@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **dataset** | **str** |  | [optional] 
 **types** | **str** |  | [optional] 
 **identifiers** | **str** |  | [optional] 
+**is_id** | **str** |  | [optional] 
 
 ## Example
 

@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **column_name** | **str** |  | [optional] 
 **type** | **str** |  | [optional] 
 **identifier** | **str** |  | [optional] 
+**is_id** | **bool** |  | [optional] 
 
 ## Example
 

@@ -1495,6 +1495,7 @@ components:
         metadata:
           metadata:
           - identifier: identifier
+            isId: true
             columnId: 5
             tenantid: 6
             datasetId: 1
@@ -1502,6 +1503,7 @@ components:
             userid: 0
             columnName: columnName
           - identifier: identifier
+            isId: true
             columnId: 5
             tenantid: 6
             datasetId: 1
@@ -1517,6 +1519,7 @@ components:
       example:
         metadata:
         - identifier: identifier
+          isId: true
           columnId: 5
           tenantid: 6
           datasetId: 1
@@ -1524,6 +1527,7 @@ components:
           userid: 0
           columnName: columnName
         - identifier: identifier
+          isId: true
           columnId: 5
           tenantid: 6
           datasetId: 1
@@ -3135,6 +3139,7 @@ components:
     templatebackendMetadata:
       example:
         identifier: identifier
+        isId: true
         columnId: 5
         tenantid: 6
         datasetId: 1
@@ -3167,6 +3172,9 @@ components:
         identifier:
           title: identifier
           type: string
+        isId:
+          title: isId
+          type: boolean
       title: templatebackendMetadata
       type: object
     templatebackendQuestionnaire:
@@ -3823,6 +3831,9 @@ components:
           type: string
         identifiers:
           title: identifiers
+          type: string
+        isId:
+          title: isId
           type: string
       title: Create a Dataset
       type: object

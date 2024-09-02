@@ -20,7 +20,7 @@ import json
 
 
 from typing import Any, ClassVar, Dict, List, Optional
-from pydantic import BaseModel, StrictInt, StrictStr
+from pydantic import BaseModel, StrictBool, StrictInt, StrictStr
 from pydantic import Field
 try:
     from typing import Self
@@ -38,7 +38,8 @@ class TemplatebackendMetadata(BaseModel):
     column_name: Optional[StrictStr] = Field(default=None, alias="columnName")
     type: Optional[StrictStr] = None
     identifier: Optional[StrictStr] = None
-    __properties: ClassVar[List[str]] = ["userid", "tenantid", "datasetId", "columnId", "columnName", "type", "identifier"]
+    is_id: Optional[StrictBool] = Field(default=None, alias="isId")
+    __properties: ClassVar[List[str]] = ["userid", "tenantid", "datasetId", "columnId", "columnName", "type", "identifier", "isId"]
 
     model_config = {
         "populate_by_name": True,
@@ -95,7 +96,8 @@ class TemplatebackendMetadata(BaseModel):
             "columnId": obj.get("columnId"),
             "columnName": obj.get("columnName"),
             "type": obj.get("type"),
-            "identifier": obj.get("identifier")
+            "identifier": obj.get("identifier"),
+            "isId": obj.get("isId")
         })
         return _obj
 

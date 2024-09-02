@@ -40,7 +40,8 @@ class TestTemplatebackendStoreDatasetRequest(unittest.TestCase):
                 dataset_name = '',
                 dataset = '',
                 types = '',
-                identifiers = ''
+                identifiers = '',
+                is_id = ''
             )
         else:
             return TemplatebackendStoreDatasetRequest(

@@ -14,7 +14,7 @@ class TemplatebackendStoreDatasetRequest(Model):
     Do not edit the class manually.
     """
 
-    def __init__(self, dataset_name=None, dataset=None, types=None, identifiers=None):
+    def __init__(self, dataset_name=None, dataset=None, types=None, identifiers=None, is_id=None):
         """TemplatebackendStoreDatasetRequest - a model defined in OpenAPI
 
         :param dataset_name: The dataset_name of this TemplatebackendStoreDatasetRequest.
@@ -25,25 +25,30 @@ class TemplatebackendStoreDatasetRequest(Model):
         :type types: str
         :param identifiers: The identifiers of this TemplatebackendStoreDatasetRequest.
         :type identifiers: str
+        :param is_id: The is_id of this TemplatebackendStoreDatasetRequest.
+        :type is_id: str
         """
         self.openapi_types = {
             'dataset_name': str,
             'dataset': str,
             'types': str,
-            'identifiers': str
+            'identifiers': str,
+            'is_id': str
         }
 
         self.attribute_map = {
             'dataset_name': 'datasetName',
             'dataset': 'dataset',
             'types': 'types',
-            'identifiers': 'identifiers'
+            'identifiers': 'identifiers',
+            'is_id': 'isId'
         }
 
         self._dataset_name = dataset_name
         self._dataset = dataset
         self._types = types
         self._identifiers = identifiers
+        self._is_id = is_id
 
     @classmethod
     def from_dict(cls, dikt) -> 'TemplatebackendStoreDatasetRequest':
@@ -139,3 +144,24 @@ class TemplatebackendStoreDatasetRequest(Model):
         """
 
         self._identifiers = identifiers
+
+    @property
+    def is_id(self) -> str:
+        """Gets the is_id of this TemplatebackendStoreDatasetRequest.
+
+
+        :return: The is_id of this TemplatebackendStoreDatasetRequest.
+        :rtype: str
+        """
+        return self._is_id
+
+    @is_id.setter
+    def is_id(self, is_id: str):
+        """Sets the is_id of this TemplatebackendStoreDatasetRequest.
+
+
+        :param is_id: The is_id of this TemplatebackendStoreDatasetRequest.
+        :type is_id: str
+        """
+
+        self._is_id = is_id

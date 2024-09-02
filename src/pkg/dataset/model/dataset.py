@@ -24,6 +24,7 @@ class Metadata:
     column_name:str = ""
     type_:str = ""
     identifier:str = ""
+    is_id:bool = False
 
     def to_dict(self):
         return asdict(self)
