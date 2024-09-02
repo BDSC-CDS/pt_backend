@@ -24,6 +24,11 @@ class DatasetService:
         dataset,n_rows = self.dataset_store.get_dataset_content(id=id,userid=userid,tenantid=tenantid, offset=offset,limit=limit)
         return dataset, n_rows
 
+    # get only identifying and quasi-identifying columns of dataset
+    def get_identifiers_and_quasi_dataset(self,id:int, userid:int, tenantid:int, offset:int,limit:int):
+        dataset,n_rows = self.dataset_store.get_identifiers_and_quasi_dataset(id=id,userid=userid,tenantid=tenantid, offset=offset,limit=limit)
+        return dataset, n_rows
+
     # delete dataset (just update deleted_at, don't actually delete it)
     def delete_dataset(self,id:int,userid:int, tenantid:int):
         deleted = self.dataset_store.delete_dataset(id=id,userid=userid,tenantid=tenantid)

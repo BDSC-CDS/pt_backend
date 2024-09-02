@@ -70,6 +70,19 @@ class DatasetController:
         dataset_content = dataset_converter.content_from_business(dataset_content)
         return TemplatebackendGetDatasetContentReply(TemplatebackendGetDatasetContentResult(columns=dataset_content, n_rows=n_rows))
 
+
+    def dataset_service_get_dataset_identifier(self, user, id: int,offset: int=None, limit: int=None):
+        try:
+            dataset_content, n_rows = self.dataset_service.get_identifiers_and_quasi_dataset(id,user.id,user.tenantid,offset,limit)
+        except Exception as e:
+            print("error", e)
+            traceback.print_exception(e)
+            return str(e), 500
+        if dataset_content is None:
+            return TemplatebackendGetDatasetContentReply(TemplatebackendGetDatasetContentResult(columns=None, n_rows=0))
+        dataset_content = dataset_converter.content_from_business(dataset_content)
+        return TemplatebackendGetDatasetContentReply(TemplatebackendGetDatasetContentResult(columns=dataset_content, n_rows=n_rows))
+
     def dataset_service_list_datasets(self, user, offset: int=None, limit: int=None):
         try:
             datasets = self.dataset_service.get_list_datasets(user.id,user.tenantid,offset,limit)

@@ -107,6 +107,7 @@ Class | Method | HTTP request | Description
 *ConfigurationApi* | [**config_service_get_configs**](docs/ConfigurationApi.md#config_service_get_configs) | **GET** /api/rest/v1/configs | Get configuration files
 *DatasetApi* | [**dataset_service_delete_dataset**](docs/DatasetApi.md#dataset_service_delete_dataset) | **DELETE** /api/v1/dataset/{id} | Deletes a dataset
 *DatasetApi* | [**dataset_service_get_dataset_content**](docs/DatasetApi.md#dataset_service_get_dataset_content) | **GET** /api/v1/dataset/content/{id} | Get Dataset Content
+*DatasetApi* | [**dataset_service_get_dataset_identifier**](docs/DatasetApi.md#dataset_service_get_dataset_identifier) | **GET** /api/v1/dataset/identifier/{id} | Get Dataset Content filtered by identifying and quasi identifying columns
 *DatasetApi* | [**dataset_service_get_dataset_metadata**](docs/DatasetApi.md#dataset_service_get_dataset_metadata) | **GET** /api/v1/dataset/metadata/{id} | Get Dataset Metadata
 *DatasetApi* | [**dataset_service_list_datasets**](docs/DatasetApi.md#dataset_service_list_datasets) | **GET** /api/v1/dataset | List datasets
 *DatasetApi* | [**dataset_service_revert_dataset**](docs/DatasetApi.md#dataset_service_revert_dataset) | **POST** /api/v1/dataset/revert | Revert a dataset

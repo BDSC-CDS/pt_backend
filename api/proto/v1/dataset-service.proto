@@ -99,6 +99,13 @@ message GetDatasetContentResult {
     uint32 n_rows = 2;
 }
 
+// Get datasetfiltered
+message GetDatasetIdentifierRequest {
+    uint32 id = 1;
+    int32 offset = 2;
+    int32 limit = 3;
+}
+
 message Column {
     repeated string value = 1;
 }
@@ -198,6 +205,21 @@ service DatasetService {
         };
     };
 
+    // Get a dataset's filtered content
+    rpc GetDatasetIdentifier(GetDatasetIdentifierRequest) returns (GetDatasetContentReply) {
+        option (google.api.http) = {
+            get: "/api/v1/dataset/identifier/{id}"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            summary: "Get Dataset Content filtered by identifying and quasi identifying columns";
+            description: "This endpoint allow getting a specific user's Dataset Content filtered by identifying and quasi identifying columns";
+            tags: "Dataset";
+            extensions: {
+                key: "x-openapi-router-controller";
+                value: {string_value: "dataset_controller"};
+            };
+        };
+    };
 
     // Delete a dataset entry
     rpc DeleteDataset(DeleteDatasetRequest) returns (DeleteDatasetReply) {

@@ -72,6 +72,17 @@ class DatasetControllerAudit():
             self.auditLogService.log_event(AuditLog(service="dataset", userid=user.id,action="Error accessing content of dataset "+ str(id), response=e, error=True))
             raise e
 
+    def dataset_service_get_dataset_identifier(self, user, id: int, offset: int=None, limit: int=None):
+        try:
+            response : TemplatebackendGetDatasetContentReply =  self.next.dataset_service_get_dataset_identifier(user, id,offset,limit)
+            response_serialized = f"columns: {response.result.columns or ''}"
+
+            self.auditLogService.log_event(AuditLog(service="dataset", userid=user.id,action="accessed filtered content of dataset "+ str(id), response=response_serialized))
+            return response
+        except  Exception as e:
+            self.auditLogService.log_event(AuditLog(service="dataset", userid=user.id,action="Error accessing filtered content of dataset "+ str(id), response=e, error=True))
+            raise e
+
     def dataset_service_list_datasets(self, user, offset: int=None, limit: int=None):
         try:
             response : TemplatebackendListDatasetsReply =  self.next.dataset_service_list_datasets(user,offset,limit)
