@@ -16,6 +16,8 @@ docs/RpcStatus.md
 docs/TemplatebackendAuditLog.md
 docs/TemplatebackendAuthenticationReply.md
 docs/TemplatebackendAuthenticationResult.md
+docs/TemplatebackendChangeTypesDatasetReply.md
+docs/TemplatebackendChangeTypesDatasetRequest.md
 docs/TemplatebackendColumn.md
 docs/TemplatebackendConfig.md
 docs/TemplatebackendCreateConfigReply.md
@@ -105,6 +107,8 @@ openapi_client/models/rpc_status.py
 openapi_client/models/templatebackend_audit_log.py
 openapi_client/models/templatebackend_authentication_reply.py
 openapi_client/models/templatebackend_authentication_result.py
+openapi_client/models/templatebackend_change_types_dataset_reply.py
+openapi_client/models/templatebackend_change_types_dataset_request.py
 openapi_client/models/templatebackend_column.py
 openapi_client/models/templatebackend_config.py
 openapi_client/models/templatebackend_create_config_reply.py
@@ -192,6 +196,8 @@ test/test_rpc_status.py
 test/test_templatebackend_audit_log.py
 test/test_templatebackend_authentication_reply.py
 test/test_templatebackend_authentication_result.py
+test/test_templatebackend_change_types_dataset_reply.py
+test/test_templatebackend_change_types_dataset_request.py
 test/test_templatebackend_column.py
 test/test_templatebackend_config.py
 test/test_templatebackend_create_config_reply.py

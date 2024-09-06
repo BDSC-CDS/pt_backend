@@ -141,6 +141,15 @@ message RevertDatasetReply {
     uint32 id = 1;
 }
 
+message ChangeTypesDatasetRequest {
+    uint32 dataset_id = 1;
+    repeated Metadata metadata = 2;
+}
+
+message ChangeTypesDatasetReply {
+    uint32 id = 1;
+}
+
 service DatasetService {
     // Create a dataset
     rpc StoreDataset(StoreDatasetRequest) returns (StoreDatasetReply) {
@@ -263,6 +272,23 @@ service DatasetService {
         option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
             summary: "Revert a dataset";
             description: "This endpoint reverts a dataset";
+            tags: "Dataset";
+            extensions: {
+                key: "x-openapi-router-controller";
+                value {string_value: "dataset_controller"};
+            };
+        };
+    };
+
+    //Change the types of a new dataset
+    rpc ChangeTypesDataset(ChangeTypesDatasetRequest) returns (ChangeTypesDatasetReply) {
+        option (google.api.http) = {
+            post: "/api/v1/dataset/types"
+            body: "*"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            summary: "Change the types of a dataset";
+            description: "This endpoint changes the types of a dataset";
             tags: "Dataset";
             extensions: {
                 key: "x-openapi-router-controller";

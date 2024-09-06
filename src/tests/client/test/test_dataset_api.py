@@ -27,6 +27,13 @@ class TestDatasetApi(unittest.TestCase):
     def tearDown(self) -> None:
         pass
 
+    def test_dataset_service_change_types_dataset(self) -> None:
+        """Test case for dataset_service_change_types_dataset
+
+        Change the types of a dataset
+        """
+        pass
+
     def test_dataset_service_delete_dataset(self) -> None:
         """Test case for dataset_service_delete_dataset
 

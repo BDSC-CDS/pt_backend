@@ -105,6 +105,7 @@ Class | Method | HTTP request | Description
 *ConfigurationApi* | [**config_service_create_config**](docs/ConfigurationApi.md#config_service_create_config) | **POST** /api/rest/v1/configs | Create a configuration
 *ConfigurationApi* | [**config_service_delete_config**](docs/ConfigurationApi.md#config_service_delete_config) | **DELETE** /api/v1/config/{id} | Deletes a config
 *ConfigurationApi* | [**config_service_get_configs**](docs/ConfigurationApi.md#config_service_get_configs) | **GET** /api/rest/v1/configs | Get configuration files
+*DatasetApi* | [**dataset_service_change_types_dataset**](docs/DatasetApi.md#dataset_service_change_types_dataset) | **POST** /api/v1/dataset/types | Change the types of a dataset
 *DatasetApi* | [**dataset_service_delete_dataset**](docs/DatasetApi.md#dataset_service_delete_dataset) | **DELETE** /api/v1/dataset/{id} | Deletes a dataset
 *DatasetApi* | [**dataset_service_get_dataset_content**](docs/DatasetApi.md#dataset_service_get_dataset_content) | **GET** /api/v1/dataset/content/{id} | Get Dataset Content
 *DatasetApi* | [**dataset_service_get_dataset_identifier**](docs/DatasetApi.md#dataset_service_get_dataset_identifier) | **GET** /api/v1/dataset/identifier/{id} | Get Dataset Content filtered by identifying and quasi identifying columns
@@ -139,6 +140,8 @@ Class | Method | HTTP request | Description
  - [TemplatebackendAuditLog](docs/TemplatebackendAuditLog.md)
  - [TemplatebackendAuthenticationReply](docs/TemplatebackendAuthenticationReply.md)
  - [TemplatebackendAuthenticationResult](docs/TemplatebackendAuthenticationResult.md)
+ - [TemplatebackendChangeTypesDatasetReply](docs/TemplatebackendChangeTypesDatasetReply.md)
+ - [TemplatebackendChangeTypesDatasetRequest](docs/TemplatebackendChangeTypesDatasetRequest.md)
  - [TemplatebackendColumn](docs/TemplatebackendColumn.md)
  - [TemplatebackendConfig](docs/TemplatebackendConfig.md)
  - [TemplatebackendCreateConfigReply](docs/TemplatebackendCreateConfigReply.md)

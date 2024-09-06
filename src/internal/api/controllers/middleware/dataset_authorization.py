@@ -2,6 +2,7 @@ from server_template.models import TemplatebackendDataset
 from server_template.models import TemplatebackendStoreDatasetRequest
 from server_template.models import TemplatebackendTransformDatasetRequest
 from server_template.models import TemplatebackendRevertDatasetRequest
+from server_template.models import TemplatebackendChangeTypesDatasetRequest
 from src.internal.api.controllers.dataset_controller import DatasetController
 from src.internal.util.interface.implements import implements_interface
 from .authorization import *
@@ -53,3 +54,8 @@ class DatasetControllerAuthentication():
         if not is_authenticated(user):
             return None, 403
         return self.next.dataset_service_revert_dataset(user, body)
+
+    def dataset_service_change_types_dataset(self, user, body:TemplatebackendChangeTypesDatasetRequest):
+        if not is_authenticated(user):
+            return None, 403
+        return self.next.dataset_service_change_types_dataset(user, body)

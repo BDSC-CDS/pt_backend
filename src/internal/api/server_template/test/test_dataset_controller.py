@@ -5,6 +5,8 @@ import unittest
 from flask import json
 
 from server_template.models.rpc_status import RpcStatus
+from server_template.models.templatebackend_change_types_dataset_reply import TemplatebackendChangeTypesDatasetReply
+from server_template.models.templatebackend_change_types_dataset_request import TemplatebackendChangeTypesDatasetRequest
 from server_template.models.templatebackend_delete_dataset_reply import TemplatebackendDeleteDatasetReply
 from server_template.models.templatebackend_get_dataset_content_reply import TemplatebackendGetDatasetContentReply
 from server_template.models.templatebackend_get_dataset_metadata_reply import TemplatebackendGetDatasetMetadataReply
@@ -20,6 +22,26 @@ from server_template.test import BaseTestCase
 
 class TestDatasetController(BaseTestCase):
     """DatasetController integration test stubs"""
+
+    def test_dataset_service_change_types_dataset(self):
+        """Test case for dataset_service_change_types_dataset
+
+        Change the types of a dataset
+        """
+        body = server_template.TemplatebackendChangeTypesDatasetRequest()
+        headers = { 
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Bearer': 'special-key',
+        }
+        response = self.client.open(
+            '/api/v1/dataset/types',
+            method='POST',
+            headers=headers,
+            data=json.dumps(body),
+            content_type='application/json')
+        self.assert200(response,
+                       'Response body is : ' + response.data.decode('utf-8'))
 
     def test_dataset_service_delete_dataset(self):
         """Test case for dataset_service_delete_dataset

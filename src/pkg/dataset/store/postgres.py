@@ -406,7 +406,6 @@ class DatasetStore:
         except Exception as e:
                 print(f"Error transforming dataset: {e}")
                 return False
-        print("what")
         return new_dataset_id
 
 
@@ -465,6 +464,33 @@ class DatasetStore:
             except Exception as e:
                 print(f"Error reverting dataset: {e}")
                 return None
+
+        return new_dataset_id
+
+    def change_types_dataset(self,userid:int, tenantid:int,dataset_id:int,new_metadata: List[Metadata]):
+        try:
+            dataset, n_rows =  self.get_dataset_content(dataset_id, userid, tenantid)
+
+            # check dataset
+            if (not dataset ):
+                raise Exception("Error: Dataset not found.")
+
+            # store the new dataset
+            # Generate headers from metadata
+            headers = ','.join(f'"{m.column_name}"' for m in new_metadata)
+            data_rows = list(zip(*dataset))
+            csv_rows = [headers] + [','.join(f'"{item}"' for item in row) for row in data_rows]
+            csv_string = '\n'.join(csv_rows)
+            types_dict = {meta.column_name: meta.type_ for meta in new_metadata}
+            types = json.dumps(types_dict)
+            identifiers_dict = {meta.column_name: meta.identifier for meta in new_metadata}
+            identifiers = json.dumps(identifiers_dict)
+            is_id = next((meta.column_name for meta in new_metadata if meta.is_id), None)
+            new_dataset_id = self.store_dataset(userid,tenantid,"dataset "+str(dataset_id)+ " with changed types",csv_string,types,identifiers,is_id)
+
+        except Exception as e:
+                print(f"Error changing the types of the dataset: {e}")
+                return False
 
         return new_dataset_id
 

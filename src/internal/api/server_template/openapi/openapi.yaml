@@ -597,6 +597,34 @@ paths:
       - Dataset
       x-openapi-router-controller: dataset_controller
       x-codegen-request-body-name: body
+  /api/v1/dataset/types:
+    post:
+      description: This endpoint changes the types of a dataset
+      operationId: dataset_service_change_types_dataset
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/templatebackendChangeTypesDatasetRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/templatebackendChangeTypesDatasetReply'
+          description: A successful response.
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+          description: An unexpected error response.
+      summary: Change the types of a dataset
+      tags:
+      - Dataset
+      x-openapi-router-controller: dataset_controller
+      x-codegen-request-body-name: body
   /api/v1/dataset/{id}:
     delete:
       description: This endpoint deletes a dataset
@@ -1012,6 +1040,29 @@ components:
           title: token
           type: string
       title: templatebackendAuthenticationResult
+      type: object
+    templatebackendChangeTypesDatasetReply:
+      example:
+        id: 0
+      properties:
+        id:
+          format: int64
+          title: id
+          type: integer
+      title: templatebackendChangeTypesDatasetReply
+      type: object
+    templatebackendChangeTypesDatasetRequest:
+      properties:
+        datasetId:
+          format: int64
+          title: datasetId
+          type: integer
+        metadata:
+          items:
+            $ref: '#/components/schemas/templatebackendMetadata'
+          title: metadata
+          type: array
+      title: templatebackendChangeTypesDatasetRequest
       type: object
     templatebackendColumn:
       example:
