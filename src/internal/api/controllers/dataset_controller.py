@@ -17,6 +17,8 @@ from server_template.models import TemplatebackendTransformDatasetReply
 from server_template.models import TemplatebackendTransformDatasetRequest
 from server_template.models import TemplatebackendRevertDatasetReply
 from server_template.models import TemplatebackendRevertDatasetRequest
+from server_template.models import TemplatebackendChangeTypesDatasetRequest
+from server_template.models import TemplatebackendChangeTypesDatasetReply
 
 import src.internal.api.controllers.converter.dataset as dataset_converter
 
@@ -116,3 +118,13 @@ class DatasetController:
             traceback.print_exception(e)
             return str(e), 500
         return TemplatebackendRevertDatasetReply(id=new_dataset_id)
+
+    def dataset_service_change_types_dataset(self, user, body:TemplatebackendChangeTypesDatasetRequest):
+        try:
+            metadata = dataset_converter.metadata_to_business(body.metadata)
+            new_dataset_id = self.dataset_service.change_types_dataset(user.id,user.tenantid,body.dataset_id, metadata)
+        except Exception as e:
+            print("error", e)
+            traceback.print_exception(e)
+            return str(e), 500
+        return TemplatebackendChangeTypesDatasetReply(id=new_dataset_id)

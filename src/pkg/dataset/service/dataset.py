@@ -1,4 +1,5 @@
-from src.pkg.dataset.model.dataset import Dataset
+from typing import List
+from src.pkg.dataset.model.dataset import Dataset, Metadata
 
 class DatasetService:
     def __init__(self, dataset_store):
@@ -42,4 +43,9 @@ class DatasetService:
     # revert a dataset to its state before transforming
     def revert_dataset(self,userid:int,tenantid:int,dataset_id:int):
         new_dataset = self.dataset_store.revert_dataset(userid,tenantid,dataset_id)
+        return new_dataset
+
+    # change the types of dataset to a new dataset
+    def change_types_dataset(self,userid:int, tenantid:int,dataset_id:int,new_metadata: List[Metadata]):
+        new_dataset = self.dataset_store.change_types_dataset(userid,tenantid, dataset_id, new_metadata)
         return new_dataset

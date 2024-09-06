@@ -10,6 +10,8 @@ from  server_template.models import TemplatebackendTransformDatasetReply
 from  server_template.models import TemplatebackendTransformDatasetRequest
 from server_template.models import TemplatebackendRevertDatasetReply
 from server_template.models import TemplatebackendRevertDatasetRequest
+from server_template.models import TemplatebackendChangeTypesDatasetRequest
+from server_template.models import TemplatebackendChangeTypesDatasetReply
 from src.internal.api.controllers.dataset_controller import DatasetController
 from src.internal.util.interface.implements import implements_interface
 from src.pkg.audit_log.model.audit_log import AuditLog
@@ -113,4 +115,14 @@ class DatasetControllerAudit():
             return response
         except  Exception as e:
             self.auditLogService.log_event(AuditLog(service="dataset", userid=user.id,action="Error reverting dataset "+ str(body.id), response=e, error=True))
+            raise e
+
+    def dataset_service_change_types_dataset(self, user, body:TemplatebackendChangeTypesDatasetRequest):
+        try:
+            response : TemplatebackendChangeTypesDatasetReply =  self.next.dataset_service_change_types_dataset(user,body)
+            response_serialized = response.id or ''
+            self.auditLogService.log_event(AuditLog(service="dataset", userid=user.id,action="changed type of dataset "+ str(body.dataset_id), response=response_serialized))
+            return response
+        except  Exception as e:
+            self.auditLogService.log_event(AuditLog(service="dataset", userid=user.id,action="Error changing type of dataset "+ str(body.dataset_id), response=e, error=True))
             raise e

@@ -20,6 +20,21 @@ def dataset_from_business(dataset: Dataset) -> TemplatebackendDataset:
 
     return d
 
+def metadata_to_business(metadata: List[TemplatebackendMetadata] ) -> List[Metadata]:
+    m = [
+        Metadata(
+            userid=met.userid,
+            tenantid=met.tenantid,
+            dataset_id=met.dataset_id,
+            column_id=met.column_id,
+            column_name=met.column_name,
+            type_=met.type,
+            identifier=met.identifier,
+            is_id=met.is_id,
+        ) for met in metadata
+    ]
+    return m
+
 def metadata_from_business(metadata: List[Metadata]) -> List[TemplatebackendMetadata]:
     print(metadata)
     m = [
