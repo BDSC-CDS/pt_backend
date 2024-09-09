@@ -4,6 +4,7 @@ from typing import List
 from server_template.models import TemplatebackendStoreDatasetReply
 from server_template.models import TemplatebackendStoreDatasetResult
 from server_template.models import TemplatebackendStoreDatasetRequest
+from server_template.models import TemplatebackendGetDatasetInfoReply
 from server_template.models import TemplatebackendGetDatasetMetadataReply
 from server_template.models import TemplatebackendGetDatasetMetadataResult
 from server_template.models import TemplatebackendListDatasetsReply
@@ -46,6 +47,19 @@ class DatasetController:
             traceback.print_exception(e)
             return str(e), 500
         return TemplatebackendDeleteDatasetReply(TemplatebackendDeleteDatasetResult(success=result))
+
+    def dataset_service_get_dataset_info(self, user, id: int):
+        try:
+            dataset = self.dataset_service.get_dataset_info(id,user.id,user.tenantid)
+        except Exception as e:
+            print("error", e)
+            traceback.print_exception(e)
+            return str(e), 500
+
+        if dataset is None:
+            return TemplatebackendGetDatasetInfoReply(dataset=None), 404
+        dataset = dataset_converter.dataset_from_business(dataset)
+        return TemplatebackendGetDatasetInfoReply(dataset=dataset)
 
     def dataset_service_get_dataset_metadata(self, user, id: int):
         try:

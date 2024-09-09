@@ -73,6 +73,16 @@ message ListDatasetsReply {
 message ListDatasetsResult {
     repeated Dataset Datasets = 1;
 }
+
+//Get dataset info
+message GetDatasetInfoRequest {
+    uint32 id = 1;
+}
+
+message GetDatasetInfoReply {
+    Dataset dataset = 1;
+}
+
 // get metadata
 message GetDatasetMetadataRequest {
     uint32 id = 1;
@@ -182,6 +192,24 @@ service DatasetService {
             };
         };
     };
+
+    // Get a dataset's info
+    rpc GetDatasetInfo(GetDatasetInfoRequest) returns (GetDatasetInfoReply) {
+        option (google.api.http) = {
+            get: "/api/v1/dataset/info/{id}"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            summary: "Get Dataset Info";
+            description: "This endpoint allow getting a specific user's Dataset info";
+            tags: "Dataset";
+            extensions: {
+                key: "x-openapi-router-controller";
+                value: {string_value: "dataset_controller"};
+            };
+        };
+    };
+
+
     // Get a dataset's metadata
     rpc GetDatasetMetadata(GetDatasetMetadataRequest) returns (GetDatasetMetadataReply) {
         option (google.api.http) = {

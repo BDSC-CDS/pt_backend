@@ -15,6 +15,11 @@ class DatasetService:
         datasets = self.dataset_store.get_list_datasets(userid=userid, tenantid=tenantid,offset=offset,limit=limit)
         return datasets
 
+    # get the info of a dataset
+    def get_dataset_info(self,id:int, userid:int, tenantid:int):
+        dataset = self.dataset_store.get_dataset_info(id=id,userid=userid,tenantid=tenantid)
+        return dataset
+
     # get metadata for a dataset (if not deleted)
     def get_dataset_metadata(self,id:int, userid:int, tenantid:int):
         dataset = self.dataset_store.get_dataset_metadata(id=id,userid=userid,tenantid=tenantid)

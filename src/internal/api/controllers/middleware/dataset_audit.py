@@ -12,6 +12,7 @@ from server_template.models import TemplatebackendRevertDatasetReply
 from server_template.models import TemplatebackendRevertDatasetRequest
 from server_template.models import TemplatebackendChangeTypesDatasetRequest
 from server_template.models import TemplatebackendChangeTypesDatasetReply
+from server_template.models import TemplatebackendGetDatasetInfoReply
 from src.internal.api.controllers.dataset_controller import DatasetController
 from src.internal.util.interface.implements import implements_interface
 from src.pkg.audit_log.model.audit_log import AuditLog
@@ -45,11 +46,21 @@ class DatasetControllerAudit():
             self.auditLogService.log_event(AuditLog(service="dataset", userid=user.id,action="Error deleting dataset "+ str(id), response=e, error=True))
             raise e
 
+    def dataset_service_get_dataset_info(self, user, id: int):
+        try:
+            response : TemplatebackendGetDatasetInfoReply =  self.next.dataset_service_get_dataset_info(user, id)
+
+            response_serialized =  f"dataset id: {response.dataset.id or ''}"
+
+            self.auditLogService.log_event(AuditLog(service="dataset", userid=user.id,action="accessed info of dataset "+ str(id), response=response_serialized))
+            return response
+        except  Exception as e:
+            self.auditLogService.log_event(AuditLog(service="dataset", userid=user.id,action="Error accessing info of dataset "+ str(id), response=e, error=True))
+            raise e
 
     def dataset_service_get_dataset_metadata(self, user, id: int):
         try:
             response : TemplatebackendGetDatasetMetadataReply =  self.next.dataset_service_get_dataset_metadata(user, id)
-            print("RESPONE: ",response)
             if type(response) is tuple and response[1] == 404:
                 final_response = []
             else:

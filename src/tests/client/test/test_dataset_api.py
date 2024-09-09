@@ -55,6 +55,13 @@ class TestDatasetApi(unittest.TestCase):
         """
         pass
 
+    def test_dataset_service_get_dataset_info(self) -> None:
+        """Test case for dataset_service_get_dataset_info
+
+        Get Dataset Info
+        """
+        pass
+
     def test_dataset_service_get_dataset_metadata(self) -> None:
         """Test case for dataset_service_get_dataset_metadata
 

@@ -25,6 +25,11 @@ class DatasetControllerAuthentication():
             return None, 403
         return self.next.dataset_service_delete_dataset(user, id)
 
+    def dataset_service_get_dataset_info(self, user, id: int):
+        if not is_authenticated(user):
+            return None, 403
+        return self.next.dataset_service_get_dataset_info(user, id)
+
     def dataset_service_get_dataset_metadata(self, user, id: int):
         if not is_authenticated(user):
             return None, 403

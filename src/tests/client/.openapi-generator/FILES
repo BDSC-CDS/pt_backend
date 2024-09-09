@@ -47,6 +47,7 @@ docs/TemplatebackendGetConfigsReply.md
 docs/TemplatebackendGetConfigsResult.md
 docs/TemplatebackendGetDatasetContentReply.md
 docs/TemplatebackendGetDatasetContentResult.md
+docs/TemplatebackendGetDatasetInfoReply.md
 docs/TemplatebackendGetDatasetMetadataReply.md
 docs/TemplatebackendGetDatasetMetadataResult.md
 docs/TemplatebackendGetHelloReply.md
@@ -138,6 +139,7 @@ openapi_client/models/templatebackend_get_configs_reply.py
 openapi_client/models/templatebackend_get_configs_result.py
 openapi_client/models/templatebackend_get_dataset_content_reply.py
 openapi_client/models/templatebackend_get_dataset_content_result.py
+openapi_client/models/templatebackend_get_dataset_info_reply.py
 openapi_client/models/templatebackend_get_dataset_metadata_reply.py
 openapi_client/models/templatebackend_get_dataset_metadata_result.py
 openapi_client/models/templatebackend_get_hello_reply.py
@@ -227,6 +229,7 @@ test/test_templatebackend_get_configs_reply.py
 test/test_templatebackend_get_configs_result.py
 test/test_templatebackend_get_dataset_content_reply.py
 test/test_templatebackend_get_dataset_content_result.py
+test/test_templatebackend_get_dataset_info_reply.py
 test/test_templatebackend_get_dataset_metadata_reply.py
 test/test_templatebackend_get_dataset_metadata_result.py
 test/test_templatebackend_get_hello_reply.py
