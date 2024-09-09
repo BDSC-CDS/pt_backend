@@ -162,6 +162,35 @@ class DatasetStore:
                 print(f"Error fetching datasets: {e}")
                 return None
 
+    def get_dataset_info(self,id:int, userid:int, tenantid:int) -> Dataset:
+        query = "SELECT * FROM datasets WHERE id=:id AND userid = :userid AND tenantid = :tenantid;"
+        with self.session_scope() as session:
+            try:
+                dataset = session.execute(text(query), {
+                    'id':id,
+                    'userid': userid,
+                    'tenantid': tenantid,
+                }).mappings().fetchone()
+
+                if dataset.deleted_at:
+                    raise Exception("Dataset is deleted")
+
+                result = Dataset(
+                    userid=userid,
+                    tenantid=tenantid,
+                    dataset_name=dataset.dataset_name,
+                    id=dataset.id,
+                    created_at=dataset.created_at,
+                )
+
+                return result
+
+            except Exception as e:
+                print(f"Error fetching info: {e}")
+                return None
+
+
+
     def get_dataset_metadata(self,id:int, userid:int, tenantid:int) -> List[Metadata]:
         query1 = "SELECT * FROM datasets WHERE id=:id AND userid = :userid AND tenantid = :tenantid;"
         query2 = "SELECT * FROM metadata WHERE dataset_id = :dataset_id AND userid = :userid AND tenantid = :tenantid ORDER BY column_id;"

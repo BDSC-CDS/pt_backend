@@ -109,6 +109,7 @@ Class | Method | HTTP request | Description
 *DatasetApi* | [**dataset_service_delete_dataset**](docs/DatasetApi.md#dataset_service_delete_dataset) | **DELETE** /api/v1/dataset/{id} | Deletes a dataset
 *DatasetApi* | [**dataset_service_get_dataset_content**](docs/DatasetApi.md#dataset_service_get_dataset_content) | **GET** /api/v1/dataset/content/{id} | Get Dataset Content
 *DatasetApi* | [**dataset_service_get_dataset_identifier**](docs/DatasetApi.md#dataset_service_get_dataset_identifier) | **GET** /api/v1/dataset/identifier/{id} | Get Dataset Content filtered by identifying and quasi identifying columns
+*DatasetApi* | [**dataset_service_get_dataset_info**](docs/DatasetApi.md#dataset_service_get_dataset_info) | **GET** /api/v1/dataset/info/{id} | Get Dataset Info
 *DatasetApi* | [**dataset_service_get_dataset_metadata**](docs/DatasetApi.md#dataset_service_get_dataset_metadata) | **GET** /api/v1/dataset/metadata/{id} | Get Dataset Metadata
 *DatasetApi* | [**dataset_service_list_datasets**](docs/DatasetApi.md#dataset_service_list_datasets) | **GET** /api/v1/dataset | List datasets
 *DatasetApi* | [**dataset_service_revert_dataset**](docs/DatasetApi.md#dataset_service_revert_dataset) | **POST** /api/v1/dataset/revert | Revert a dataset
@@ -171,6 +172,7 @@ Class | Method | HTTP request | Description
  - [TemplatebackendGetConfigsResult](docs/TemplatebackendGetConfigsResult.md)
  - [TemplatebackendGetDatasetContentReply](docs/TemplatebackendGetDatasetContentReply.md)
  - [TemplatebackendGetDatasetContentResult](docs/TemplatebackendGetDatasetContentResult.md)
+ - [TemplatebackendGetDatasetInfoReply](docs/TemplatebackendGetDatasetInfoReply.md)
  - [TemplatebackendGetDatasetMetadataReply](docs/TemplatebackendGetDatasetMetadataReply.md)
  - [TemplatebackendGetDatasetMetadataResult](docs/TemplatebackendGetDatasetMetadataResult.md)
  - [TemplatebackendGetHelloReply](docs/TemplatebackendGetHelloReply.md)

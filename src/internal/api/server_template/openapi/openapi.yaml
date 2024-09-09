@@ -513,6 +513,34 @@ paths:
       tags:
       - Dataset
       x-openapi-router-controller: dataset_controller
+  /api/v1/dataset/info/{id}:
+    get:
+      description: This endpoint allow getting a specific user's Dataset info
+      operationId: dataset_service_get_dataset_info
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/templatebackendGetDatasetInfoReply'
+          description: A successful response.
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+          description: An unexpected error response.
+      summary: Get Dataset Info
+      tags:
+      - Dataset
+      x-openapi-router-controller: dataset_controller
   /api/v1/dataset/metadata/{id}:
     get:
       description: This endpoint allow getting a specific user's Dataset Metadata
@@ -1579,6 +1607,20 @@ components:
           title: nRows
           type: integer
       title: templatebackendGetDatasetContentResult
+      type: object
+    templatebackendGetDatasetInfoReply:
+      example:
+        dataset:
+          createdAt: 2000-01-23T04:56:07.000+00:00
+          deletedAt: 2000-01-23T04:56:07.000+00:00
+          tenantid: 1
+          datasetName: datasetName
+          id: 0
+          userid: 6
+      properties:
+        dataset:
+          $ref: '#/components/schemas/templatebackendDataset'
+      title: templatebackendGetDatasetInfoReply
       type: object
     templatebackendGetDatasetMetadataReply:
       example:
