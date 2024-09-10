@@ -8,6 +8,7 @@ from server_template.models.rpc_status import RpcStatus
 from server_template.models.templatebackend_config import TemplatebackendConfig
 from server_template.models.templatebackend_create_config_reply import TemplatebackendCreateConfigReply
 from server_template.models.templatebackend_delete_config_reply import TemplatebackendDeleteConfigReply
+from server_template.models.templatebackend_export_config_reply import TemplatebackendExportConfigReply
 from server_template.models.templatebackend_get_configs_reply import TemplatebackendGetConfigsReply
 from server_template.test import BaseTestCase
 
@@ -47,6 +48,22 @@ class TestConfigurationController(BaseTestCase):
         response = self.client.open(
             '/api/v1/config/{id}'.format(id=56),
             method='DELETE',
+            headers=headers)
+        self.assert200(response,
+                       'Response body is : ' + response.data.decode('utf-8'))
+
+    def test_config_service_export_config(self):
+        """Test case for config_service_export_config
+
+        Export a configuration as json (SPHN Connector format)
+        """
+        headers = { 
+            'Accept': 'application/json',
+            'Bearer': 'special-key',
+        }
+        response = self.client.open(
+            '/api/rest/v1/config/export/{id}'.format(id=56),
+            method='GET',
             headers=headers)
         self.assert200(response,
                        'Response body is : ' + response.data.decode('utf-8'))

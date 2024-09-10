@@ -4,6 +4,7 @@ from sqlalchemy.orm import sessionmaker
 from sqlalchemy.sql import text
 from contextlib import contextmanager
 from src.pkg.config_generator.model.config_generator import ConfigGenerator
+import json
 
 class ConfigGeneratorStore:
     def __init__(self, db: Engine):
@@ -197,3 +198,52 @@ class ConfigGeneratorStore:
                 return False
 
         return True
+
+
+    def export_config(self,userid,tenantid,id: int):
+        config : ConfigGenerator = self.get_config(userid,tenantid,id)
+        result = {}
+
+        # Handle scrambleField rule
+        if config.hasScrambleField:
+            scramble_field_rule = {
+                "defaultScrambling": {
+                    "applies_to_fields": config.scrambleField_fields
+                }
+            }
+            result["scrambleField"] = scramble_field_rule
+
+        # Handle dateShift rule
+        if config.hasDateShift:
+            date_shift_rule = {
+                "defaultDateShift": {
+                    "low_range": config.dateShift_lowrange,
+                    "high_range": config.dateShift_highrange
+                }
+            }
+            result["dateShift"] = date_shift_rule
+
+        # Handle substituteFieldList rule
+        if config.hassubFieldList:
+            substitute_field_list_rule = {
+                "subIDlist": {
+                    "applies_to_field": config.subFieldList_field,
+                    "substitution_list": config.subFieldList_substitute,
+                    "replacement": config.subFieldList_replacement
+                }
+            }
+            result["substituteFieldList"] = substitute_field_list_rule
+
+        # Handle substituteFieldRegex rule
+        if config.hassubFieldRegex:
+            substitute_field_regex_rule = {
+                "substituteFieldRegex": {
+                    "applies_to_field": config.subFieldRegex_field,
+                    "regex": config.subFieldRegex_regex,
+                    "replacement": config.subFieldRegex_replacement
+                }
+            }
+            result["substituteFieldRegex"] = substitute_field_regex_rule
+
+        # Return the final JSON output
+        return json.dumps(result, indent=4)

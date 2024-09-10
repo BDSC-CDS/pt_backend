@@ -41,6 +41,13 @@ class TestConfigurationApi(unittest.TestCase):
         """
         pass
 
+    def test_config_service_export_config(self) -> None:
+        """Test case for config_service_export_config
+
+        Export a configuration as json (SPHN Connector format)
+        """
+        pass
+
     def test_config_service_get_configs(self) -> None:
         """Test case for config_service_get_configs
 

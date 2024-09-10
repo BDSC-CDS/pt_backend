@@ -104,6 +104,7 @@ Class | Method | HTTP request | Description
 *AuthenticationApi* | [**authentication_service_authenticate**](docs/AuthenticationApi.md#authentication_service_authenticate) | **POST** /api/rest/v1/authentication/login | Authenticate
 *ConfigurationApi* | [**config_service_create_config**](docs/ConfigurationApi.md#config_service_create_config) | **POST** /api/rest/v1/configs | Create a configuration
 *ConfigurationApi* | [**config_service_delete_config**](docs/ConfigurationApi.md#config_service_delete_config) | **DELETE** /api/v1/config/{id} | Deletes a config
+*ConfigurationApi* | [**config_service_export_config**](docs/ConfigurationApi.md#config_service_export_config) | **GET** /api/rest/v1/config/export/{id} | Export a configuration as json (SPHN Connector format)
 *ConfigurationApi* | [**config_service_get_configs**](docs/ConfigurationApi.md#config_service_get_configs) | **GET** /api/rest/v1/configs | Get configuration files
 *DatasetApi* | [**dataset_service_change_types_dataset**](docs/DatasetApi.md#dataset_service_change_types_dataset) | **POST** /api/v1/dataset/types | Change the types of a dataset
 *DatasetApi* | [**dataset_service_delete_dataset**](docs/DatasetApi.md#dataset_service_delete_dataset) | **DELETE** /api/v1/dataset/{id} | Deletes a dataset
@@ -168,6 +169,7 @@ Class | Method | HTTP request | Description
  - [TemplatebackendDeleteQuestionnaireReply](docs/TemplatebackendDeleteQuestionnaireReply.md)
  - [TemplatebackendDeleteQuestionnaireResult](docs/TemplatebackendDeleteQuestionnaireResult.md)
  - [TemplatebackendDeleteUserReply](docs/TemplatebackendDeleteUserReply.md)
+ - [TemplatebackendExportConfigReply](docs/TemplatebackendExportConfigReply.md)
  - [TemplatebackendGetConfigsReply](docs/TemplatebackendGetConfigsReply.md)
  - [TemplatebackendGetConfigsResult](docs/TemplatebackendGetConfigsResult.md)
  - [TemplatebackendGetDatasetContentReply](docs/TemplatebackendGetDatasetContentReply.md)
