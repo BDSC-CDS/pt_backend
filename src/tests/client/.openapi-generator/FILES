@@ -43,6 +43,7 @@ docs/TemplatebackendDeleteDatasetResult.md
 docs/TemplatebackendDeleteQuestionnaireReply.md
 docs/TemplatebackendDeleteQuestionnaireResult.md
 docs/TemplatebackendDeleteUserReply.md
+docs/TemplatebackendExportConfigReply.md
 docs/TemplatebackendGetConfigsReply.md
 docs/TemplatebackendGetConfigsResult.md
 docs/TemplatebackendGetDatasetContentReply.md
@@ -135,6 +136,7 @@ openapi_client/models/templatebackend_delete_dataset_result.py
 openapi_client/models/templatebackend_delete_questionnaire_reply.py
 openapi_client/models/templatebackend_delete_questionnaire_result.py
 openapi_client/models/templatebackend_delete_user_reply.py
+openapi_client/models/templatebackend_export_config_reply.py
 openapi_client/models/templatebackend_get_configs_reply.py
 openapi_client/models/templatebackend_get_configs_result.py
 openapi_client/models/templatebackend_get_dataset_content_reply.py
@@ -225,6 +227,7 @@ test/test_templatebackend_delete_dataset_result.py
 test/test_templatebackend_delete_questionnaire_reply.py
 test/test_templatebackend_delete_questionnaire_result.py
 test/test_templatebackend_delete_user_reply.py
+test/test_templatebackend_export_config_reply.py
 test/test_templatebackend_get_configs_reply.py
 test/test_templatebackend_get_configs_result.py
 test/test_templatebackend_get_dataset_content_reply.py

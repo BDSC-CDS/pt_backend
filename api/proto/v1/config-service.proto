@@ -72,6 +72,14 @@ message DeleteConfigResult {
     bool success = 1;
 }
 
+message ExportConfigRequest {
+    uint32 id = 1;
+}
+
+message ExportConfigReply {
+    string config = 1;
+}
+
 service ConfigService {
     rpc GetConfigs(google.protobuf.Empty) returns (GetConfigsReply) {
         option (google.api.http) = {
@@ -115,6 +123,21 @@ service ConfigService {
             extensions: {
                 key: "x-openapi-router-controller";
                 value: {string_value: "config_generator_controller"};
+            };
+        };
+    };
+
+     rpc ExportConfig(ExportConfigRequest) returns (ExportConfigReply) {
+        option (google.api.http) = {
+            get: "/api/rest/v1/config/export/{id}"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            summary: "Export a configuration as json (SPHN Connector format)";
+            description: "This endpoint returns the JSON of a configuration";
+            tags: "Configuration";
+            extensions: {
+                key: "x-openapi-router-controller";
+                value {string_value: "config_generator_controller"};
             };
         };
     };

@@ -11,13 +11,14 @@ from server_template.models.rpc_status import RpcStatus
 from server_template.models.templatebackend_config import TemplatebackendConfig
 from server_template.models.templatebackend_create_config_reply import TemplatebackendCreateConfigReply
 from server_template.models.templatebackend_delete_config_reply import TemplatebackendDeleteConfigReply
+from server_template.models.templatebackend_export_config_reply import TemplatebackendExportConfigReply
 from server_template.models.templatebackend_get_configs_reply import TemplatebackendGetConfigsReply
 from server_template import util
 
 
 #from src.internal.api.controllers import configuration_controller
 #controller_functions =  [func_tupple[0] for func_tupple in getmembers(configuration_controller, isfunction)]
-#needed_functions = ["config_service_create_config", "config_service_delete_config", "config_service_get_configs"]
+#needed_functions = ["config_service_create_config", "config_service_delete_config", "config_service_export_config", "config_service_get_configs"]
 #for op in needed_functions:
 #    if op not in controller_functions:
 #        raise NotImplementedError("operation " + op + " is not implemented by src.internal.api.controllers.configuration_controller")
@@ -25,7 +26,7 @@ from server_template import util
 class ConfigurationController:
     def __init__(self, controller):
         #controller_functions =  [func_tupple[0] for func_tupple in getmembers(controller, ismethod)]
-        #needed_functions = ["config_service_create_config", "config_service_delete_config", "config_service_get_configs"]
+        #needed_functions = ["config_service_create_config", "config_service_delete_config", "config_service_export_config", "config_service_get_configs"]
         #for op in needed_functions:
         #    if op not in controller_functions:
         #        raise NotImplementedError("operation " + op + " is not implemented by provided controller")
@@ -62,6 +63,20 @@ class ConfigurationController:
         """
 
         return self.controller.config_service_delete_config(user, id)
+
+
+    def config_service_export_config(self, user, id: int):
+        """Export a configuration as json (SPHN Connector format)
+
+        This endpoint returns the JSON of a configuration
+
+        :param id: 
+        :type id: int
+
+        :rtype: Union[TemplatebackendExportConfigReply, Tuple[TemplatebackendExportConfigReply, int], Tuple[TemplatebackendExportConfigReply, int, Dict[str, str]]
+        """
+
+        return self.controller.config_service_export_config(user, id)
 
 
     def config_service_get_configs(self, user):

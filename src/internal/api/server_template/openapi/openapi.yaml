@@ -48,6 +48,34 @@ paths:
       - Authentication
       x-openapi-router-controller: authentication_controller
       x-codegen-request-body-name: body
+  /api/rest/v1/config/export/{id}:
+    get:
+      description: This endpoint returns the JSON of a configuration
+      operationId: config_service_export_config
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/templatebackendExportConfigReply'
+          description: A successful response.
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+          description: An unexpected error response.
+      summary: Export a configuration as json (SPHN Connector format)
+      tags:
+      - Configuration
+      x-openapi-router-controller: config_generator_controller
   /api/rest/v1/configs:
     get:
       description: This endpoint returns the configuration files for a given user
@@ -1453,6 +1481,15 @@ components:
       type: object
     templatebackendDeleteUserResult:
       title: result
+      type: object
+    templatebackendExportConfigReply:
+      example:
+        config: config
+      properties:
+        config:
+          title: config
+          type: string
+      title: templatebackendExportConfigReply
       type: object
     templatebackendGetConfigsReply:
       example:

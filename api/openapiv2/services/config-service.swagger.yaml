@@ -15,6 +15,29 @@ consumes:
 produces:
   - application/json
 paths:
+  /api/rest/v1/config/export/{id}:
+    get:
+      summary: Export a configuration as json (SPHN Connector format)
+      description: This endpoint returns the JSON of a configuration
+      operationId: ConfigService_ExportConfig
+      responses:
+        "200":
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/templatebackendExportConfigReply'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/rpcStatus'
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: integer
+          format: int64
+      tags:
+        - Configuration
+      x-openapi-router-controller: config_generator_controller
   /api/rest/v1/configs:
     get:
       summary: Get configuration files
@@ -173,6 +196,11 @@ definitions:
     properties:
       success:
         type: boolean
+  templatebackendExportConfigReply:
+    type: object
+    properties:
+      config:
+        type: string
   templatebackendGetConfigsReply:
     type: object
     properties:
