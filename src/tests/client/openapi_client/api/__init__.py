@@ -7,5 +7,6 @@ from openapi_client.api.configuration_api import ConfigurationApi
 from openapi_client.api.dataset_api import DatasetApi
 from openapi_client.api.index_api import IndexApi
 from openapi_client.api.questionnaire_api import QuestionnaireApi
+from openapi_client.api.risk_assessment_api import RiskAssessmentApi
 from openapi_client.api.users_api import UsersApi
 

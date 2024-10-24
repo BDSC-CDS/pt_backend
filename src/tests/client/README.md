@@ -126,6 +126,7 @@ Class | Method | HTTP request | Description
 *QuestionnaireApi* | [**questionnaire_service_get_reply**](docs/QuestionnaireApi.md#questionnaire_service_get_reply) | **GET** /api/v1/questionnaire/replies/{id} | Get a questionnaires reply
 *QuestionnaireApi* | [**questionnaire_service_list_questionnaire**](docs/QuestionnaireApi.md#questionnaire_service_list_questionnaire) | **GET** /api/v1/questionnaire | List questionnaires
 *QuestionnaireApi* | [**questionnaire_service_list_replies**](docs/QuestionnaireApi.md#questionnaire_service_list_replies) | **GET** /api/v1/questionnaire/replies | List questionnaires replies
+*RiskAssessmentApi* | [**risk_assessment_service_get_risk_assessment**](docs/RiskAssessmentApi.md#risk_assessment_service_get_risk_assessment) | **GET** /api/v1/riskassessment | Get risk assessment
 *UsersApi* | [**user_service_create_user**](docs/UsersApi.md#user_service_create_user) | **POST** /api/rest/v1/users | Create a user
 *UsersApi* | [**user_service_delete_user**](docs/UsersApi.md#user_service_delete_user) | **DELETE** /api/rest/v1/users/{id} | Delete a user
 *UsersApi* | [**user_service_get_user**](docs/UsersApi.md#user_service_get_user) | **GET** /api/rest/v1/users/{id} | Get a user
@@ -183,6 +184,8 @@ Class | Method | HTTP request | Description
  - [TemplatebackendGetQuestionnaireResult](docs/TemplatebackendGetQuestionnaireResult.md)
  - [TemplatebackendGetReplyReply](docs/TemplatebackendGetReplyReply.md)
  - [TemplatebackendGetReplyResult](docs/TemplatebackendGetReplyResult.md)
+ - [TemplatebackendGetRiskAssessmentReply](docs/TemplatebackendGetRiskAssessmentReply.md)
+ - [TemplatebackendGetRiskAssessmentResult](docs/TemplatebackendGetRiskAssessmentResult.md)
  - [TemplatebackendGetUserMeReply](docs/TemplatebackendGetUserMeReply.md)
  - [TemplatebackendGetUserMeResult](docs/TemplatebackendGetUserMeResult.md)
  - [TemplatebackendGetUserReply](docs/TemplatebackendGetUserReply.md)

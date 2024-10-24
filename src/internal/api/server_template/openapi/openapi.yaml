@@ -18,6 +18,7 @@ tags:
 - name: DatasetService
 - name: IndexService
 - name: QuestionnaireService
+- name: RiskAssessmentService
 - name: UserService
 paths:
   /api/rest/v1/authentication/login:
@@ -995,6 +996,27 @@ paths:
       tags:
       - Questionnaire
       x-openapi-router-controller: questionnaire_controller
+  /api/v1/riskassessment:
+    get:
+      description: This endpoint allow getting a single user's risk assessment
+      operationId: risk_assessment_service_get_risk_assessment
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/templatebackendGetRiskAssessmentReply'
+          description: A successful response.
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+          description: An unexpected error response.
+      summary: Get risk assessment
+      tags:
+      - RiskAssessment
+      x-openapi-router-controller: risk_assessment_controller
 components:
   schemas:
     protobufAny:
@@ -2250,6 +2272,30 @@ components:
         reply:
           $ref: '#/components/schemas/templatebackendQuestionnaireReply'
       title: templatebackendGetReplyResult
+      type: object
+    templatebackendGetRiskAssessmentReply:
+      example:
+        result:
+          riskAssessment:
+          - riskAssessment
+          - riskAssessment
+      properties:
+        result:
+          $ref: '#/components/schemas/templatebackendGetRiskAssessmentResult'
+      title: templatebackendGetRiskAssessmentReply
+      type: object
+    templatebackendGetRiskAssessmentResult:
+      example:
+        riskAssessment:
+        - riskAssessment
+        - riskAssessment
+      properties:
+        riskAssessment:
+          items:
+            type: string
+          title: riskAssessment
+          type: array
+      title: templatebackendGetRiskAssessmentResult
       type: object
     templatebackendGetUserMeReply:
       example:
