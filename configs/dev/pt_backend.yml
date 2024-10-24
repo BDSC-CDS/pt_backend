@@ -34,6 +34,10 @@ storage:
         certificate_file: /pt_backend/postgres-certs/client.crt
         key_file: /pt_backend/postgres-certs/client.key
 
+clients:
+  arx:
+    host: "http://localhost:8080/"
+
 services:
   index_service:
     key: value

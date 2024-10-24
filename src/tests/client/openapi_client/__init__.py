@@ -24,6 +24,7 @@ from openapi_client.api.configuration_api import ConfigurationApi
 from openapi_client.api.dataset_api import DatasetApi
 from openapi_client.api.index_api import IndexApi
 from openapi_client.api.questionnaire_api import QuestionnaireApi
+from openapi_client.api.risk_assessment_api import RiskAssessmentApi
 from openapi_client.api.users_api import UsersApi
 
 # import ApiClient
@@ -85,6 +86,8 @@ from openapi_client.models.templatebackend_get_questionnaire_reply import Templa
 from openapi_client.models.templatebackend_get_questionnaire_result import TemplatebackendGetQuestionnaireResult
 from openapi_client.models.templatebackend_get_reply_reply import TemplatebackendGetReplyReply
 from openapi_client.models.templatebackend_get_reply_result import TemplatebackendGetReplyResult
+from openapi_client.models.templatebackend_get_risk_assessment_reply import TemplatebackendGetRiskAssessmentReply
+from openapi_client.models.templatebackend_get_risk_assessment_result import TemplatebackendGetRiskAssessmentResult
 from openapi_client.models.templatebackend_get_user_me_reply import TemplatebackendGetUserMeReply
 from openapi_client.models.templatebackend_get_user_me_result import TemplatebackendGetUserMeResult
 from openapi_client.models.templatebackend_get_user_reply import TemplatebackendGetUserReply

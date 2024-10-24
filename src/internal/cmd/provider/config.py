@@ -84,6 +84,8 @@ class Config:
         self._set_default("daemon.jwt.expiration_time", 72 * 60 * 60)
         self._set_default("daemon.jwt.max_renewal_amount", 24)
 
+        self._set_default("clients.arx.host", "http://localhost:8080/")
+
         self._set_default("storage.description", "Type can be 'postgres'")
         self._set_default("storage.datastores.pt_backend.type", "postgres")
         self._set_default("storage.datastores.pt_backend.driver", "psycopg2")

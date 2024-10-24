@@ -109,26 +109,46 @@ class DatasetStore:
                 csvfile.seek(0)
                 csv_reader = csv.reader(csvfile)
                 next(csv_reader)  # Skip the header row
+                
+                batch_size = 1000  # Define batch size
+                values_batch = []  # List to accumulate batch data
+
                 for line_number, row in enumerate(csv_reader):
                     for column_id, value in enumerate(row):
-                        # Batch insert every 1000 rows TODO
-                        query = """
-                            INSERT INTO dataset_content (userid, tenantid, dataset_id, column_id, line_id, val)
-                            VALUES (:userid, :tenantid, :dataset_id, :column_id, :line_id, :val);
-                        """
-                        with self.session_scope() as session:
-                            try:
+                        # Append each row data to the batch list
+                        values_batch.append({
+                            'userid': userid,
+                            'tenantid': tenantid,
+                            'dataset_id': dataset_id,
+                            'column_id': column_id,
+                            'line_id': line_number,
+                            'val': value
+                        })
+                        
+                        # Perform batch insert when batch size is reached
+                        if len(values_batch) == batch_size:
+                            query = """
+                                INSERT INTO dataset_content (userid, tenantid, dataset_id, column_id, line_id, val)
+                                VALUES (:userid, :tenantid, :dataset_id, :column_id, :line_id, :val);
+                            """
+                            with self.session_scope() as session:
+                                try:
+                                    session.execute(text(query), values_batch)
+                                    values_batch = []  # Clear the batch after inserting
+                                except SQLAlchemyError as e:
+                                    raise e
 
-                                    session.execute(text(query), {
-                                        'userid': userid,
-                                        'tenantid': tenantid,
-                                        'dataset_id': dataset_id,
-                                        'column_id': column_id,
-                                        'line_id': line_number,
-                                        'val': value
-                                    })
-                            except SQLAlchemyError as e:
-                                raise e
+                # Insert any remaining rows that are less than the batch size
+                if values_batch:
+                    query = """
+                        INSERT INTO dataset_content (userid, tenantid, dataset_id, column_id, line_id, val)
+                        VALUES (:userid, :tenantid, :dataset_id, :column_id, :line_id, :val);
+                    """
+                    with self.session_scope() as session:
+                        try:
+                            session.execute(text(query), values_batch)
+                        except SQLAlchemyError as e:
+                            raise e
 
         except Exception as e:
                 print(f"Error storing dataset: {e}")

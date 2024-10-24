@@ -1,0 +1,76 @@
+syntax = "proto3";
+package templatebackend;
+option go_package = ".;templatebackend";
+
+// import "google/protobuf/empty.proto";
+import "google/api/annotations.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
+
+// import "riskAssessment.proto";
+
+option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
+    info: {
+        title: "template backend";
+        version: "1.0";
+        contact: {
+            name: "template backend risk assessment service";
+            url: "https://gitlab.itrcs3-app.intranet.chuv/datascience/ds-template-backend";
+            email: "dev@chuv.ch";
+        };
+    };
+
+    schemes: HTTP;
+    consumes: "application/json";
+    produces: "application/json";
+
+    security_definitions: {
+        security: {
+            key: "Bearer";
+            value: {
+                type: TYPE_API_KEY;
+                in: IN_HEADER;
+                name: "Authorization";
+            }
+        }
+    }
+
+    security: {
+        security_requirement: {
+            key: "Bearer";
+            value: {};
+        }
+    }
+    security: {}
+};
+
+message GetRiskAssessmentRequest {
+    // uint32 id = 1;
+}
+message GetRiskAssessmentReply {
+    GetRiskAssessmentResult result = 1;
+}
+message GetRiskAssessmentResult {
+    repeated string riskAssessment = 1;
+}
+
+
+// Service definition
+service RiskAssessmentService {
+   
+    // Retrieve riskAssessment entries for a user
+    rpc GetRiskAssessment(GetRiskAssessmentRequest) returns (GetRiskAssessmentReply) {
+        option (google.api.http) = {
+            get: "/api/v1/riskassessment"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            summary: "Get risk assessment";
+            description: "This endpoint allow getting a single user's risk assessment";
+            tags: "RiskAssessment";
+            extensions: {
+                key: "x-openapi-router-controller";
+                value: {string_value: "risk_assessment_controller"};
+            };
+        };
+    };
+
+}

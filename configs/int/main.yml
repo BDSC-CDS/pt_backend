@@ -15,6 +15,10 @@ daemon:
   private_key_file: ./configs/dev/files/keys/pt_backend_privkey.pem
   public_key_file: ./configs/dev/files/keys/pt_backend_pubkey.pem
 
+clients:
+  arx:
+    host: "http://arx-service.arx:8080/"
+
 storage:
   datastores:
     pt_backend:

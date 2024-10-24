@@ -1,0 +1,928 @@
+swagger: '2.0'
+info:
+  description: Api Documentation
+  version: '1.0'
+  title: Api Documentation
+  termsOfService: urn:tos
+  contact: {}
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0
+host: localhost:8080
+basePath: /
+tags:
+  - name: assessment-api
+    description: Assessment Api
+  - name: data-api
+    description: Data Api
+  - name: deidentification-api
+    description: Deidentification Api
+  - name: records-api
+    description: Records Api
+  - name: resources-api
+    description: Resources Api
+paths:
+  /assessment:
+    post:
+      tags:
+        - assessment-api
+      summary: assess
+      operationId: assessUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - in: body
+          name: body
+          description: body
+          required: true
+          schema:
+            type: object
+            additionalProperties:
+              type: object
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/JobResults'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /data/load:
+    post:
+      tags:
+        - data-api
+      summary: loadFromOracle
+      operationId: loadFromOracleUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - in: body
+          name: body
+          description: body
+          required: true
+          schema:
+            type: object
+            additionalProperties:
+              type: object
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/LinkedHashMap'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /data/save:
+    post:
+      tags:
+        - data-api
+      summary: saveToOracle
+      operationId: saveToOracleUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - in: body
+          name: body
+          description: body
+          required: true
+          schema:
+            type: object
+            additionalProperties:
+              type: object
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: boolean
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /deidentification/code:
+    post:
+      tags:
+        - deidentification-api
+      summary: code
+      operationId: codeUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - in: body
+          name: body
+          description: body
+          required: true
+          schema:
+            type: object
+            additionalProperties:
+              type: object
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/JobResults'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /deidentification/decode:
+    post:
+      tags:
+        - deidentification-api
+      summary: decode
+      operationId: decodeUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - in: body
+          name: body
+          description: body
+          required: true
+          schema:
+            type: object
+            additionalProperties:
+              type: object
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/JobResults'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /deidentification/expert/average-prosecutor-risk-level:
+    post:
+      tags:
+        - deidentification-api
+      summary: applyExpertByAverageProsecutorRiskLevel
+      operationId: applyExpertByAverageProsecutorRiskLevelUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - in: body
+          name: body
+          description: body
+          required: true
+          schema:
+            type: object
+            additionalProperties:
+              type: object
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/JobResults'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /deidentification/expert/highest-prosecutor-risk-level:
+    post:
+      tags:
+        - deidentification-api
+      summary: applyExpertByHighestProsecutorRiskLevel
+      operationId: applyExpertByHighestProsecutorRiskLevelUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - in: body
+          name: body
+          description: body
+          required: true
+          schema:
+            type: object
+            additionalProperties:
+              type: object
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/JobResults'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /deidentification/expert/internal-chuv:
+    post:
+      tags:
+        - deidentification-api
+      summary: applyExpertInternalCHUVContext
+      operationId: applyExpertInternalCHUVContextUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - in: body
+          name: body
+          description: body
+          required: true
+          schema:
+            type: object
+            additionalProperties:
+              type: object
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/JobResults'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /deidentification/expert/marketer-risk-level:
+    post:
+      tags:
+        - deidentification-api
+      summary: applyExpertByMarketerRiskLevel
+      operationId: applyExpertByMarketerRiskLevelUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - in: body
+          name: body
+          description: body
+          required: true
+          schema:
+            type: object
+            additionalProperties:
+              type: object
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/JobResults'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /deidentification/expert/multicentric:
+    post:
+      tags:
+        - deidentification-api
+      summary: applyExpertMulticentricContext
+      operationId: applyExpertMulticentricContextUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - in: body
+          name: body
+          description: body
+          required: true
+          schema:
+            type: object
+            additionalProperties:
+              type: object
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/JobResults'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /deidentification/expert/privacy-models:
+    post:
+      tags:
+        - deidentification-api
+      summary: applyExpertByPrivacyModels
+      operationId: applyExpertByPrivacyModelsUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - in: body
+          name: body
+          description: body
+          required: true
+          schema:
+            type: object
+            additionalProperties:
+              type: object
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/JobResults'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /deidentification/expert/publication:
+    post:
+      tags:
+        - deidentification-api
+      summary: applyExpertPublicationContext
+      operationId: applyExpertPublicationContextUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - in: body
+          name: body
+          description: body
+          required: true
+          schema:
+            type: object
+            additionalProperties:
+              type: object
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/JobResults'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /deidentification/safe-harbor:
+    post:
+      tags:
+        - deidentification-api
+      summary: applySafeHarbor
+      operationId: applySafeHarborUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - in: body
+          name: body
+          description: body
+          required: true
+          schema:
+            type: object
+            additionalProperties:
+              type: object
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/JobResults'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /records/all:
+    get:
+      tags:
+        - records-api
+      summary: getAllRecords
+      operationId: getAllRecordsUsingGET
+      produces:
+        - '*/*'
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Record'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /records/period-username/{beginDate}/{endDate}/{username}:
+    get:
+      tags:
+        - records-api
+      summary: getRecordsByPeriodAndUsername
+      operationId: getRecordsByPeriodAndUsernameUsingGET
+      produces:
+        - '*/*'
+      parameters:
+        - name: beginDate
+          in: path
+          description: beginDate
+          required: true
+          type: string
+          format: date-time
+        - name: endDate
+          in: path
+          description: endDate
+          required: true
+          type: string
+          format: date-time
+        - name: username
+          in: path
+          description: username
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              type: object
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /records/period/{beginDate}/{endDate}:
+    get:
+      tags:
+        - records-api
+      summary: getRecordsByPeriod
+      operationId: getRecordsByPeriodUsingGET
+      produces:
+        - '*/*'
+      parameters:
+        - name: beginDate
+          in: path
+          description: beginDate
+          required: true
+          type: string
+          format: date-time
+        - name: endDate
+          in: path
+          description: endDate
+          required: true
+          type: string
+          format: date-time
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Record'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /records/username/{username}:
+    get:
+      tags:
+        - records-api
+      summary: getRecordsByUsername
+      operationId: getRecordsByUsernameUsingGET
+      produces:
+        - '*/*'
+      parameters:
+        - name: username
+          in: path
+          description: username
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              type: object
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /resources/expert-attributes:
+    get:
+      tags:
+        - resources-api
+      summary: getExpertAttributes
+      operationId: getExpertAttributesUsingGET
+      produces:
+        - '*/*'
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Attribute'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /resources/expert-default-values:
+    get:
+      tags:
+        - resources-api
+      summary: getExpertDefaultValues
+      operationId: getExpertDefaultValuesUsingGET
+      produces:
+        - '*/*'
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+            additionalProperties:
+              type: object
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /resources/hierarchies:
+    get:
+      tags:
+        - resources-api
+      summary: getHierarchies
+      operationId: getHierarchiesUsingGET
+      produces:
+        - '*/*'
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+            additionalProperties:
+              type: object
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /resources/hierarchies/{attributeName}:
+    get:
+      tags:
+        - resources-api
+      summary: getHierarchy
+      operationId: getHierarchyUsingGET
+      produces:
+        - '*/*'
+      parameters:
+        - name: attributeName
+          in: path
+          description: attributeName
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+            additionalProperties:
+              type: object
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /resources/ipp-name:
+    get:
+      tags:
+        - resources-api
+      summary: getIppName
+      operationId: getIppNameUsingGET
+      produces:
+        - '*/*'
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              type: string
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /resources/numero-sejour-name:
+    get:
+      tags:
+        - resources-api
+      summary: getNumeroSejourName
+      operationId: getNumeroSejourNameUsingGET
+      produces:
+        - '*/*'
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              type: string
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /resources/privacy-models:
+    get:
+      tags:
+        - resources-api
+      summary: getPrivacyModels
+      operationId: getPrivacyModelsUsingGET
+      produces:
+        - '*/*'
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/PrivacyModel'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /resources/safe-harbor-categories:
+    get:
+      tags:
+        - resources-api
+      summary: getSafeHarborCategories
+      operationId: getSafeHarborCategoriesUsingGET
+      produces:
+        - '*/*'
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              type: string
+              enum:
+                - IPP
+                - NUMERO_SEJOUR
+                - A_Names
+                - B_GeographyExceptZIPCode
+                - B_ZIPCode
+                - C_Dates
+                - C_Ages
+                - D_Telephone
+                - E_Fax
+                - F_Email
+                - G_SocialSecurityNumbers
+                - H_MedicalRecordNumbers
+                - I_HealthPlanBeneficiaryNumber
+                - J_AccountNumbers
+                - K_CertificateLicenceNumbers
+                - L_VehicleIdentifiers
+                - M_DeviceIdentifiers
+                - N_URLs
+                - O_IP
+                - P_Biometric
+                - Q_Images
+                - R_Other
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+definitions:
+  Attribute:
+    type: object
+    properties:
+      arxName:
+        type: string
+      attributeType:
+        type: string
+        enum:
+          - QUASI_IDENTIFYING_ATTRIBUTE
+          - SENSITIVE_ATTRIBUTE
+          - INSENSITIVE_ATTRIBUTE
+          - IDENTIFYING_ATTRIBUTE
+      datasetName:
+        type: string
+      date:
+        type: boolean
+      hierarchy:
+        type: array
+        items:
+          type: array
+          items:
+            type: string
+      identifying:
+        type: boolean
+      ipporNumeroSejour:
+        type: boolean
+      quasiIdentifying:
+        type: boolean
+      sensitive:
+        type: boolean
+      weight:
+        type: number
+        format: double
+    title: Attribute
+  AttributeTypes:
+    type: object
+    properties:
+      quasiIdentifying:
+        type: array
+        items:
+          type: string
+      sensitive:
+        type: array
+        items:
+          type: string
+    title: AttributeTypes
+  JobResults:
+    type: object
+    properties:
+      resultsMetadata:
+        type: object
+        additionalProperties:
+          $ref: '#/definitions/ResultMetadata'
+    title: JobResults
+  LinkedHashMap:
+    type: object
+    title: LinkedHashMap
+    additionalProperties:
+      type: object
+  Param:
+    type: object
+    properties:
+      name:
+        type: string
+      value:
+        type: number
+        format: double
+    title: Param
+  PrivacyModel:
+    type: object
+    properties:
+      involvedAttribute:
+        type: string
+      name:
+        type: string
+        enum:
+          - k_anonymity
+          - l_diversity
+          - t_closeness
+      params:
+        type: array
+        items:
+          $ref: '#/definitions/Param'
+    title: PrivacyModel
+  Record:
+    type: object
+    properties:
+      attributeTypes:
+        $ref: '#/definitions/AttributeTypes'
+      id:
+        type: integer
+        format: int32
+      jobDate:
+        type: string
+      jobType:
+        type: string
+      nbColumns:
+        type: integer
+        format: int32
+      nbRows:
+        type: integer
+        format: int32
+      risks:
+        $ref: '#/definitions/Risks'
+      statistics:
+        $ref: '#/definitions/Statistics'
+    title: Record
+  ResultMetadata:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int32
+    title: ResultMetadata
+  Risks:
+    type: object
+    properties:
+      expectedAverageProsecutor:
+        type: number
+        format: double
+      expectedHighestProsecutor:
+        type: number
+        format: double
+      expectedMarketer:
+        type: number
+        format: double
+      initialAverageProsecutor:
+        type: number
+        format: double
+      initialHighestProsecutor:
+        type: number
+        format: double
+      initialMarketer:
+        type: number
+        format: double
+      residualAverageProsecutor:
+        type: number
+        format: double
+      residualHighestProsecutor:
+        type: number
+        format: double
+      residualMarketer:
+        type: number
+        format: double
+    title: Risks
+  Statistics:
+    type: object
+    properties:
+      aecsQuality:
+        type: number
+        format: double
+      discernibilityQuality:
+        type: number
+        format: double
+      levels:
+        type: array
+        items:
+          type: integer
+          format: int32
+      privacyModels:
+        type: array
+        items:
+          type: string
+      suppressedRows:
+        type: number
+        format: double
+    title: Statistics

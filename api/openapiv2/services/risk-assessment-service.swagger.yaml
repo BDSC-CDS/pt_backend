@@ -1,0 +1,74 @@
+swagger: "2.0"
+info:
+  title: template backend
+  version: "1.0"
+  contact:
+    name: template backend risk assessment service
+    url: https://gitlab.itrcs3-app.intranet.chuv/datascience/ds-template-backend
+    email: dev@chuv.ch
+tags:
+  - name: RiskAssessmentService
+schemes:
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /api/v1/riskassessment:
+    get:
+      summary: Get risk assessment
+      description: This endpoint allow getting a single user's risk assessment
+      operationId: RiskAssessmentService_GetRiskAssessment
+      responses:
+        "200":
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/templatebackendGetRiskAssessmentReply'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/rpcStatus'
+      tags:
+        - RiskAssessment
+      x-openapi-router-controller: risk_assessment_controller
+definitions:
+  protobufAny:
+    type: object
+    properties:
+      '@type':
+        type: string
+    additionalProperties: {}
+  rpcStatus:
+    type: object
+    properties:
+      code:
+        type: integer
+        format: int32
+      message:
+        type: string
+      details:
+        type: array
+        items:
+          type: object
+          $ref: '#/definitions/protobufAny'
+  templatebackendGetRiskAssessmentReply:
+    type: object
+    properties:
+      result:
+        $ref: '#/definitions/templatebackendGetRiskAssessmentResult'
+  templatebackendGetRiskAssessmentResult:
+    type: object
+    properties:
+      riskAssessment:
+        type: array
+        items:
+          type: string
+securityDefinitions:
+  Bearer:
+    type: apiKey
+    name: Authorization
+    in: header
+security:
+  - Bearer: []
+  - {}
