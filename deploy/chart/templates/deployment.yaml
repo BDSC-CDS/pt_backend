@@ -27,7 +27,7 @@ spec:
         command: ["python3"]
         args: ["-m", "src.cmd.start", "--config", "/pt_backend/conf/config.yaml"]
       - name: postgres
-        image: postgres
+        image: postgres:16
         ports:
         - containerPort: 5432
 {{- if .Values.deployment.hostPath }}
