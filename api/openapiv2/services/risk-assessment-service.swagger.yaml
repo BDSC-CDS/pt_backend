@@ -29,6 +29,12 @@ paths:
           description: An unexpected error response.
           schema:
             $ref: '#/definitions/rpcStatus'
+      parameters:
+        - name: id
+          in: query
+          required: false
+          type: integer
+          format: int64
       tags:
         - RiskAssessment
       x-openapi-router-controller: risk_assessment_controller
@@ -60,7 +66,7 @@ definitions:
   templatebackendGetRiskAssessmentResult:
     type: object
     properties:
-      riskAssessment:
+      RiskAssessment:
         type: array
         items:
           type: string
