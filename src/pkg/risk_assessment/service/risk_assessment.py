@@ -1,80 +1,132 @@
 import pandas as pd
-from client.configuration_client import (
+from python_arx_deidentifier.client.assessment_client import apply_assessment
+from python_arx_deidentifier.client.configuration_client import (
     build_basic_configuration,
     set_data_as_csv,
     set_nb_solutions,
     set_suppression_limit,
     set_is_used_population_model,
     configure_attribute,
-    add_hierarchy,
-    set_highest_prosecutor_risk,
 )
+from src.pkg.dataset.store.postgres import get_dataset_content
 from src.pkg.risk_assessment.model.risk_assessment import RiskAssessment
 
 
 class RiskAssessmentService:
-    def __init__(self, arx_client, dataset_path, gender_hierarchy_path):
+    """
+    Service to manage risk assessment using ARX de-identification client.
+    
+    This class handles the configuration of ARX risk assessment based on user-provided
+    settings and performs risk analysis on a specified dataset.
+    """
+
+    # TODO what do I do with the arx_client here? it's supposed to be the domain
+    # TODO 
+    def __init__(self, arx_client: str, dataset_id: int, tenantid: int, userid: int, risk_assessment_store):
+        """
+        Initializes the RiskAssessmentService.
+
+        Args:
+            arx_client: The ARX de-identification client instance.
+            dataset_id (int): ID of the dataset to be analyzed.
+            tenantid (int): ID of the tenant for multitenancy support.
+            userid (int): ID of the user initiating the analysis.
+        """
         self.arx_client = arx_client
-        self.dataset_path = dataset_path
-        self.gender_hierarchy_path = gender_hierarchy_path
+        self.dataset_id = dataset_id
+        self.tenantid = tenantid
+        self.userid = userid
+        self.risk_assessment_store = risk_assessment_store
+        
+# TODO add store and list
 
-    def get_risk_assessment(self, tenantid: int, userid: int) -> RiskAssessment:
-        # Step 1: Fetch all records
-        records = self.arx_client.get_all_records()
 
-        # Step 2: Perform risk assessment based on the provided logic
-        risk_assessment_result = self.perform_risk_analysis(records)
+    @staticmethod
+    def populate_config_from_dict(json_config: dict):
+        """
+        Builds and populates the ARX configuration object from a JSON-like dictionary.
 
-        # Step 3: Return the RiskAssessment object
+        Args:
+            json_config (dict): Configuration data including general settings and attribute details.
+                Expected format:
+                {
+                    "nb_solutions": int,
+                    "suppression_limit": float,
+                    "is_used_population_model": bool,
+                    "attributes": [
+                        {
+                            "key": str,
+                            "source": str or None,
+                            "type": str,
+                            "weight": float or None
+                        },
+                        ...
+                    ]
+                }
+
+        Returns:
+            arx_config: Configured ARX configuration object.
+        """
+        arx_config = build_basic_configuration()
+
+        # Set general configurations
+        arx_config = set_nb_solutions(arx_config, json_config["nb_solutions"])
+        arx_config = set_suppression_limit(arx_config, json_config["suppression_limit"])
+        arx_config = set_is_used_population_model(arx_config, json_config["is_used_population_model"])
+
+        # Configure individual attributes
+        for attr in json_config["attributes"]:
+            arx_config = configure_attribute(
+                arx_config,
+                attr["key"],
+                attr.get("source"),
+                attr["type"],
+                attr.get("weight"),
+            )
+
+        return arx_config
+
+    def get_risk_assessment(self, json_config: dict) -> RiskAssessment:
+        """
+        Retrieves the risk assessment results for the dataset using provided configurations.
+
+        Args:
+            json_config (dict): Configuration data for risk assessment.
+
+        Returns:
+            RiskAssessment: A RiskAssessment object containing the results of the analysis.
+        """
+        # Fetch dataset content
+        dataset = get_dataset_content(self.dataset_id, self.userid, self.tenantid)
+
+        # Perform risk analysis
+        risk_assessment_result = self.perform_risk_analysis(dataset, json_config)
+
         return risk_assessment_result
 
-    def perform_risk_analysis(self, records):
+    def perform_risk_analysis(self, dataset: pd.DataFrame, json_config: dict) -> RiskAssessment:
         """
-        Perform risk analysis using the provided logic.
+        Executes the risk analysis process for a given dataset and configuration.
+
+        Args:
+            dataset (pd.DataFrame): The dataset to be analyzed.
+            json_config (dict): Configuration data for risk assessment.
+
+        Returns:
+            RiskAssessment: A RiskAssessment object encapsulating the results.
         """
-        # Step 1: Build the basic configuration
-        config = build_basic_configuration()
+        # Build the ARX configuration
+        arx_config = self.populate_config_from_dict(json_config)
 
-        # Step 2: Load the dataset and set it in the configuration
-        dataset = pd.read_csv(self.dataset_path, header=0, sep=";")
-        dataset = dataset.astype(str)
-        config = set_data_as_csv(config, dataset)
+        # Link dataset to the configuration
+        arx_config = set_data_as_csv(arx_config, dataset)
 
-        # Step 3: Configure the job parameters
-        config = set_nb_solutions(config, 2)
-        config = set_suppression_limit(config, 0.5)
-        config = set_is_used_population_model(config, False)
+        # Apply the risk assessment
+        risk_assessment_result = apply_assessment(self.arx_client, arx_config)
 
-        # Step 4: Configure attributes
-        config = configure_attribute(
-            config, "IPP_MASTER", "IPP_MASTER", "IDENTIFYING_ATTRIBUTE", None
+        return RiskAssessment(
+            userid=self.userid,
+            dataset_id=self.dataset_id,
+            tenantid=self.tenantid,
+            risk_assessment=risk_assessment_result
         )
-        config = configure_attribute(
-            config, "NUMERO_SEJOUR", "NUMERO_SEJOUR", "IDENTIFYING_ATTRIBUTE", None
-        )
-        config = configure_attribute(
-            config, "DATE_ENTREE_SEJOUR", "DATE_ENTREE_SEJOUR", "INSENSITIVE_ATTRIBUTE", None
-        )
-        config = configure_attribute(config, "NOM", None, "IDENTIFYING_ATTRIBUTE", None)
-        config = configure_attribute(config, "PRENOM", None, "IDENTIFYING_ATTRIBUTE", None)
-        config = configure_attribute(
-            config, "DATE NAISSANCE", "DATE_NAISSANCE", "INSENSITIVE_ATTRIBUTE", None
-        )
-        config = configure_attribute(config, "SEXE", "SEXE", "QUASI_IDENTIFYING_ATTRIBUTE", 0.5)
-        config = configure_attribute(
-            config, "NATIONALITE", "NATIONALITE", "INSENSITIVE_ATTRIBUTE", 0.5
-        )
-        config = configure_attribute(
-            config, "DATE DECES CHUV", "DATE_DECES_CHUV", "INSENSITIVE_ATTRIBUTE", 0.5
-        )
-
-        # Step 5: Add hierarchies for attributes
-        hierarchy_data = pd.read_csv(self.gender_hierarchy_path, header=None, sep=";")
-        config = add_hierarchy(config, "SEXE", hierarchy_data)
-
-        # Step 6: Set the highest prosecutor risk
-        config = set_highest_prosecutor_risk(config, 0.5)
-
-        # Step 7: Return the processed configuration as a mock RiskAssessment
-        # Here we assume a transformation of `config` into `RiskAssessment` is needed.
-        return RiskAssessment(config)
