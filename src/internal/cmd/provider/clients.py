@@ -2,9 +2,6 @@ from python_arx_deidentifier.client.assessment_client import apply_assessment
 from python_arx_deidentifier.client.configuration_client import (
     build_basic_configuration,
     set_data_as_csv,
-    set_nb_solutions,
-    set_suppression_limit,
-    set_is_used_population_model,
     configure_attribute,
 )
 from src.internal.clients.arx import client
