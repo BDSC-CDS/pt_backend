@@ -12,10 +12,13 @@ class RiskAssessmentService:
 
     def get_risk_assessment(self, json_config: dict) -> RiskAssessment:
         dataset = get_dataset_content(self.dataset_id, self.userid, self.tenantid)
-        risk_assessment_result = perform_risk_analysis(dataset, json_config, self.arx_client)
+        initial_highest_prosecutor, initial_average_prosecutor, quasi_identifiers, risk_assessment_server_answer = perform_risk_analysis(dataset, json_config, self.arx_client)
         return RiskAssessment(
             userid=self.userid,
             dataset_id=self.dataset_id,
             tenantid=self.tenantid,
-            risk_assessment=risk_assessment_result
+            average_prosecutor_risk = initial_average_prosecutor,
+            maximum_prosecutor_risk = initial_highest_prosecutor,
+            quasi_identifiers = quasi_identifiers,   
+            risk_assessment=risk_assessment_server_answer
         )

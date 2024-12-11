@@ -1,4 +1,4 @@
-from python_arx_deidentifier.client.assessment_client import apply_assessment
+from python_arx_deidentifier.client.assessment_client import apply_assessment, parse_risk_assessment
 from python_arx_deidentifier.client.configuration_client import (
     build_basic_configuration,
     set_data_as_csv,
@@ -54,4 +54,6 @@ def perform_risk_analysis(dataset: pd.DataFrame, json_config: dict, arx_client):
     """
     arx_config = build_config_from_dict(json_config)
     arx_config = set_data_as_csv(arx_config, dataset)
-    return apply_assessment(arx_client, arx_config)
+    risk_assessment_server_answer = apply_assessment(arx_client, arx_config)
+    initial_highest_prosecutor, initial_average_prosecutor, quasi_identifiers = parse_risk_assessment(risk_assessment_server_answer)
+    return initial_highest_prosecutor, initial_average_prosecutor, quasi_identifiers, risk_assessment_server_answer
