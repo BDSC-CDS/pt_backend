@@ -1,3 +1,0 @@
-[submodule "python-arx-deidentifier"]
-	path = python-arx-deidentifier
-	url = ssh://git@gitlab.itrcs3-app.intranet.chuv:2222/bkaabachi/python-arx-deidentifier.git
