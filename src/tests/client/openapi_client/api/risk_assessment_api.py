@@ -51,7 +51,7 @@ class RiskAssessmentApi:
     @validate_call
     def risk_assessment_service_get_risk_assessment(
         self,
-        id: Optional[StrictInt] = None,
+        dataset_id: Optional[StrictInt] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -69,8 +69,8 @@ class RiskAssessmentApi:
 
         This endpoint allow getting a single user's risk assessment
 
-        :param id:
-        :type id: int
+        :param dataset_id:
+        :type dataset_id: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -94,7 +94,7 @@ class RiskAssessmentApi:
         """ # noqa: E501
 
         _param = self._risk_assessment_service_get_risk_assessment_serialize(
-            id=id,
+            dataset_id=dataset_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -118,7 +118,7 @@ class RiskAssessmentApi:
     @validate_call
     def risk_assessment_service_get_risk_assessment_with_http_info(
         self,
-        id: Optional[StrictInt] = None,
+        dataset_id: Optional[StrictInt] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -136,8 +136,8 @@ class RiskAssessmentApi:
 
         This endpoint allow getting a single user's risk assessment
 
-        :param id:
-        :type id: int
+        :param dataset_id:
+        :type dataset_id: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -161,7 +161,7 @@ class RiskAssessmentApi:
         """ # noqa: E501
 
         _param = self._risk_assessment_service_get_risk_assessment_serialize(
-            id=id,
+            dataset_id=dataset_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -185,7 +185,7 @@ class RiskAssessmentApi:
     @validate_call
     def risk_assessment_service_get_risk_assessment_without_preload_content(
         self,
-        id: Optional[StrictInt] = None,
+        dataset_id: Optional[StrictInt] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -203,8 +203,8 @@ class RiskAssessmentApi:
 
         This endpoint allow getting a single user's risk assessment
 
-        :param id:
-        :type id: int
+        :param dataset_id:
+        :type dataset_id: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -228,7 +228,7 @@ class RiskAssessmentApi:
         """ # noqa: E501
 
         _param = self._risk_assessment_service_get_risk_assessment_serialize(
-            id=id,
+            dataset_id=dataset_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -247,7 +247,7 @@ class RiskAssessmentApi:
 
     def _risk_assessment_service_get_risk_assessment_serialize(
         self,
-        id,
+        dataset_id,
         _request_auth,
         _content_type,
         _headers,
@@ -268,9 +268,9 @@ class RiskAssessmentApi:
 
         # process the path parameters
         # process the query parameters
-        if id is not None:
+        if dataset_id is not None:
             
-            _query_params.append(('id', id))
+            _query_params.append(('datasetId', dataset_id))
             
         # process the header parameters
         # process the form parameters

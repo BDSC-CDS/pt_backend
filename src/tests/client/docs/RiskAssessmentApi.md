@@ -8,7 +8,7 @@ Method | HTTP request | Description
 
 
 # **risk_assessment_service_get_risk_assessment**
-> TemplatebackendGetRiskAssessmentReply risk_assessment_service_get_risk_assessment(id=id)
+> TemplatebackendGetRiskAssessmentReply risk_assessment_service_get_risk_assessment(dataset_id=dataset_id)
 
 Get risk assessment
 
@@ -47,11 +47,11 @@ configuration.api_key['Bearer'] = os.environ["API_KEY"]
 with openapi_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = openapi_client.RiskAssessmentApi(api_client)
-    id = 56 # int |  (optional)
+    dataset_id = 56 # int |  (optional)
 
     try:
         # Get risk assessment
-        api_response = api_instance.risk_assessment_service_get_risk_assessment(id=id)
+        api_response = api_instance.risk_assessment_service_get_risk_assessment(dataset_id=dataset_id)
         print("The response of RiskAssessmentApi->risk_assessment_service_get_risk_assessment:\n")
         pprint(api_response)
     except Exception as e:
@@ -65,7 +65,7 @@ with openapi_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **int**|  | [optional] 
+ **dataset_id** | **int**|  | [optional] 
 
 ### Return type
 

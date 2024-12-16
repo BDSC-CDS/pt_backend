@@ -17,7 +17,7 @@ class TestRiskAssessmentController(BaseTestCase):
 
         Get risk assessment
         """
-        query_string = [('id', 56)]
+        query_string = [('datasetId', 56)]
         headers = { 
             'Accept': 'application/json',
             'Bearer': 'special-key',

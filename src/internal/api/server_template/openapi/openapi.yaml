@@ -1002,7 +1002,7 @@ paths:
       operationId: risk_assessment_service_get_risk_assessment
       parameters:
       - in: query
-        name: id
+        name: datasetId
         schema:
           format: int64
           type: integer
