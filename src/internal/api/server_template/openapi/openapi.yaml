@@ -1000,6 +1000,12 @@ paths:
     get:
       description: This endpoint allow getting a single user's risk assessment
       operationId: risk_assessment_service_get_risk_assessment
+      parameters:
+      - in: query
+        name: id
+        schema:
+          format: int64
+          type: integer
       responses:
         "200":
           content:
@@ -2276,9 +2282,9 @@ components:
     templatebackendGetRiskAssessmentReply:
       example:
         result:
-          riskAssessment:
-          - riskAssessment
-          - riskAssessment
+          RiskAssessment:
+          - RiskAssessment
+          - RiskAssessment
       properties:
         result:
           $ref: '#/components/schemas/templatebackendGetRiskAssessmentResult'
@@ -2286,14 +2292,14 @@ components:
       type: object
     templatebackendGetRiskAssessmentResult:
       example:
-        riskAssessment:
-        - riskAssessment
-        - riskAssessment
+        RiskAssessment:
+        - RiskAssessment
+        - RiskAssessment
       properties:
-        riskAssessment:
+        RiskAssessment:
           items:
             type: string
-          title: riskAssessment
+          title: RiskAssessment
           type: array
       title: templatebackendGetRiskAssessmentResult
       type: object

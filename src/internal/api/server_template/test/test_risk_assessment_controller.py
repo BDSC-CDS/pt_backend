@@ -17,6 +17,7 @@ class TestRiskAssessmentController(BaseTestCase):
 
         Get risk assessment
         """
+        query_string = [('id', 56)]
         headers = { 
             'Accept': 'application/json',
             'Bearer': 'special-key',
@@ -24,7 +25,8 @@ class TestRiskAssessmentController(BaseTestCase):
         response = self.client.open(
             '/api/v1/riskassessment',
             method='GET',
-            headers=headers)
+            headers=headers,
+            query_string=query_string)
         self.assert200(response,
                        'Response body is : ' + response.data.decode('utf-8'))
 

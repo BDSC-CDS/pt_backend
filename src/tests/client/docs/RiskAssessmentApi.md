@@ -8,7 +8,7 @@ Method | HTTP request | Description
 
 
 # **risk_assessment_service_get_risk_assessment**
-> TemplatebackendGetRiskAssessmentReply risk_assessment_service_get_risk_assessment()
+> TemplatebackendGetRiskAssessmentReply risk_assessment_service_get_risk_assessment(id=id)
 
 Get risk assessment
 
@@ -47,10 +47,11 @@ configuration.api_key['Bearer'] = os.environ["API_KEY"]
 with openapi_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = openapi_client.RiskAssessmentApi(api_client)
+    id = 56 # int |  (optional)
 
     try:
         # Get risk assessment
-        api_response = api_instance.risk_assessment_service_get_risk_assessment()
+        api_response = api_instance.risk_assessment_service_get_risk_assessment(id=id)
         print("The response of RiskAssessmentApi->risk_assessment_service_get_risk_assessment:\n")
         pprint(api_response)
     except Exception as e:
@@ -61,7 +62,10 @@ with openapi_client.ApiClient(configuration) as api_client:
 
 ### Parameters
 
-This endpoint does not need any parameter.
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **int**|  | [optional] 
 
 ### Return type
 

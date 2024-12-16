@@ -31,8 +31,8 @@ class TemplatebackendGetRiskAssessmentResult(BaseModel):
     """
     TemplatebackendGetRiskAssessmentResult
     """ # noqa: E501
-    risk_assessment: Optional[List[StrictStr]] = Field(default=None, alias="riskAssessment")
-    __properties: ClassVar[List[str]] = ["riskAssessment"]
+    risk_assessment: Optional[List[StrictStr]] = Field(default=None, alias="RiskAssessment")
+    __properties: ClassVar[List[str]] = ["RiskAssessment"]
 
     model_config = {
         "populate_by_name": True,
@@ -83,7 +83,7 @@ class TemplatebackendGetRiskAssessmentResult(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "riskAssessment": obj.get("riskAssessment")
+            "RiskAssessment": obj.get("RiskAssessment")
         })
         return _obj
 
