@@ -17,7 +17,7 @@ daemon:
 
 clients:
   arx:
-    host: "http://arx-service.arx:8080/"
+    domain_and_host: "http://arx-service.arx:8080/"
 
 storage:
   datastores:

@@ -10,7 +10,7 @@ def provide_arx_client():
     if arx_client is not None:
         return arx_client
 
-    arx_client = client.ArxClient(provide_config().clients.arx)
+    arx_client = client.ArxClient(provide_config().clients.arx.domain_and_host)
     return arx_client
 
 
