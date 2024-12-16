@@ -2,10 +2,9 @@ import src.internal.api.server_template.controllers.risk_assessment_controller a
 import src.internal.api.controllers.risk_assessment_controller as internal_risk_assessment_controller
 import src.internal.api.controllers.middleware.risk_assessment_authorization as risk_assessment_controller_authorization
 from src.pkg.risk_assessment.service.risk_assessment import RiskAssessmentService
-from src.pkg.risk_assessment.store.postgres import RiskAssessmentStore as PostgresRiskAssessmentStore
 from .config import provide_config
 from .clients import provide_arx_client
-
+from .dataset import provide_dataset_service
 risk_assessment_controller = None
 risk_assessment_service = None
 risk_assessment_store = None
@@ -29,7 +28,7 @@ def provide_risk_assessment_service():
         return risk_assessment_service
 
     # risk_assessment_service = RiskAssessmentService(provide_risk_assessment_store())
-    risk_assessment_service = RiskAssessmentService(provide_arx_client())
+    risk_assessment_service = RiskAssessmentService(provide_arx_client(), provide_dataset_service)
 
     return risk_assessment_service
 

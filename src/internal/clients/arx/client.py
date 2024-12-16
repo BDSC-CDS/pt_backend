@@ -1,18 +1,54 @@
 import openapi_client
 from pprint import pprint
+from python_arx_deidentifier.client.assessment_client import apply_assessment, parse_risk_assessment
+from python_arx_deidentifier.client.configuration_client import (
+    build_basic_configuration,
+    set_data_as_csv,
+    configure_attribute,
+)
+import pandas as pd 
 
 class ArxClient:
-    def __init__(self, arx_client_config):
-        configuration = openapi_client.Configuration(
-            host = arx_client_config.host
-        )
-        self.api_client = openapi_client.ApiClient(configuration)
+    def __init__(self, domain_and_host):
+        self.domain_and_host = domain_and_host
 
-    def get_all_records(self):
-        records_api_instance = openapi_client.RecordsApiApi(self.api_client)
-        api_response = records_api_instance.get_all_records_using_get()
 
-        print("The response of get_all_records:")
-        pprint(api_response)
-        
-        return api_response
+    def build_config_from_dict(self, json_config: dict):
+        """
+        Builds an ARX configuration object from a dictionary.
+
+        Args:
+            json_config (dict): Configuration data for ARX.
+
+        Returns:
+            Configured ARX configuration object.
+        """
+        arx_config = build_basic_configuration()
+
+        for attr in json_config["attributes"]:
+            arx_config = configure_attribute(
+                arx_config,
+                attr["key"],
+                attr.get("source"),
+                attr["type"],
+                attr.get("weight"),
+            )
+        return arx_config
+
+    def perform_risk_analysis(self, dataset: pd.DataFrame, json_config: dict):
+        """
+        Performs risk analysis on the dataset.
+
+        Args:
+            dataset (pd.DataFrame): Dataset to analyze.
+            json_config (dict): Configuration for ARX.
+            arx_client: ARX client instance.
+
+        Returns:
+            The result of the risk analysis.
+        """
+        arx_config = self.build_config_from_dict(json_config)
+        arx_config = set_data_as_csv(arx_config, dataset)
+        risk_assessment_server_answer = apply_assessment(self.domain_and_host, arx_config)
+        initial_highest_prosecutor, initial_average_prosecutor, quasi_identifiers = parse_risk_assessment(risk_assessment_server_answer)
+        return initial_highest_prosecutor, initial_average_prosecutor, quasi_identifiers, risk_assessment_server_answer
