@@ -7,8 +7,8 @@ class RiskAssessmentControllerAuthentication():
         self.next = next
         implements_interface(RiskAssessmentControllerAuthentication, RiskAssessmentController)
 
-    def risk_assessment_service_get_risk_assessment(self, user):
+    def risk_assessment_service_get_risk_assessment(self, user, dataset_id:int):
         if not is_authenticated(user):
             return None, 403
         
-        return self.next.risk_assessment_service_get_risk_assessment(user)
+        return self.next.risk_assessment_service_get_risk_assessment(user, dataset_id)
