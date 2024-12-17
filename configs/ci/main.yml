@@ -18,6 +18,9 @@ daemon:
 clients:
   arx:
     host: "http://localhost:8080/"
+  jupyterhub:
+    host: "http://localhost:8000/"
+    # token: "{{ .jupyterhub_token }}"
 
 storage:
   datastores:

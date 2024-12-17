@@ -4,6 +4,7 @@ import unittest
 
 from flask import json
 
+from server_template.models.api_http_body import ApiHttpBody
 from server_template.models.rpc_status import RpcStatus
 from server_template.models.templatebackend_change_types_dataset_reply import TemplatebackendChangeTypesDatasetReply
 from server_template.models.templatebackend_change_types_dataset_request import TemplatebackendChangeTypesDatasetRequest
@@ -73,6 +74,25 @@ class TestDatasetController(BaseTestCase):
         }
         response = self.client.open(
             '/api/v1/dataset/content/{id}'.format(id=56),
+            method='GET',
+            headers=headers,
+            query_string=query_string)
+        self.assert200(response,
+                       'Response body is : ' + response.data.decode('utf-8'))
+
+    def test_dataset_service_get_dataset_dataframe(self):
+        """Test case for dataset_service_get_dataset_dataframe
+
+        Get Dataset Dataframe
+        """
+        query_string = [('offset', 56),
+                        ('limit', 56)]
+        headers = { 
+            'Accept': 'application/json',
+            'Bearer': 'special-key',
+        }
+        response = self.client.open(
+            '/api/v1/dataset/dataframe/{id}'.format(id=56),
             method='GET',
             headers=headers,
             query_string=query_string)

@@ -18,6 +18,9 @@ daemon:
 clients:
   arx:
     host: "http://arx-service.arx:8080/"
+  jupyterhub:
+    host: "https://jupyterhub.rdeid.unil.ch/"
+    token: "{{ .jupyterhub_token }}"
 
 storage:
   datastores:

@@ -12,3 +12,7 @@ bcrypt
 pydantic
 python-dateutil
 Flask-Testing
+pandas
+fastparquet
+jinja2
+jupytext

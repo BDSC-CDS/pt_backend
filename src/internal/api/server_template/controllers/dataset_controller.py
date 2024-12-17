@@ -7,6 +7,7 @@ from typing import Union
 from inspect import getmembers, isfunction, ismethod
 
 
+from server_template.models.api_http_body import ApiHttpBody
 from server_template.models.rpc_status import RpcStatus
 from server_template.models.templatebackend_change_types_dataset_reply import TemplatebackendChangeTypesDatasetReply
 from server_template.models.templatebackend_change_types_dataset_request import TemplatebackendChangeTypesDatasetRequest
@@ -26,7 +27,7 @@ from server_template import util
 
 #from src.internal.api.controllers import dataset_controller
 #controller_functions =  [func_tupple[0] for func_tupple in getmembers(dataset_controller, isfunction)]
-#needed_functions = ["dataset_service_change_types_dataset", "dataset_service_delete_dataset", "dataset_service_get_dataset_content", "dataset_service_get_dataset_identifier", "dataset_service_get_dataset_info", "dataset_service_get_dataset_metadata", "dataset_service_list_datasets", "dataset_service_revert_dataset", "dataset_service_store_dataset", "dataset_service_transform_dataset"]
+#needed_functions = ["dataset_service_change_types_dataset", "dataset_service_delete_dataset", "dataset_service_get_dataset_content", "dataset_service_get_dataset_dataframe", "dataset_service_get_dataset_identifier", "dataset_service_get_dataset_info", "dataset_service_get_dataset_metadata", "dataset_service_list_datasets", "dataset_service_revert_dataset", "dataset_service_store_dataset", "dataset_service_transform_dataset"]
 #for op in needed_functions:
 #    if op not in controller_functions:
 #        raise NotImplementedError("operation " + op + " is not implemented by src.internal.api.controllers.dataset_controller")
@@ -34,7 +35,7 @@ from server_template import util
 class DatasetController:
     def __init__(self, controller):
         #controller_functions =  [func_tupple[0] for func_tupple in getmembers(controller, ismethod)]
-        #needed_functions = ["dataset_service_change_types_dataset", "dataset_service_delete_dataset", "dataset_service_get_dataset_content", "dataset_service_get_dataset_identifier", "dataset_service_get_dataset_info", "dataset_service_get_dataset_metadata", "dataset_service_list_datasets", "dataset_service_revert_dataset", "dataset_service_store_dataset", "dataset_service_transform_dataset"]
+        #needed_functions = ["dataset_service_change_types_dataset", "dataset_service_delete_dataset", "dataset_service_get_dataset_content", "dataset_service_get_dataset_dataframe", "dataset_service_get_dataset_identifier", "dataset_service_get_dataset_info", "dataset_service_get_dataset_metadata", "dataset_service_list_datasets", "dataset_service_revert_dataset", "dataset_service_store_dataset", "dataset_service_transform_dataset"]
         #for op in needed_functions:
         #    if op not in controller_functions:
         #        raise NotImplementedError("operation " + op + " is not implemented by provided controller")
@@ -89,6 +90,24 @@ class DatasetController:
         """
 
         return self.controller.dataset_service_get_dataset_content(user, id, offset, limit)
+
+
+    def dataset_service_get_dataset_dataframe(self, user, id: int, offset: int=None, limit: int=None):
+        """Get Dataset Dataframe
+
+        This endpoint allow getting a specific user&#39;s Dataset as a Pandas Dataframe in Parquet format
+
+        :param id: 
+        :type id: int
+        :param offset: 
+        :type offset: int
+        :param limit: 
+        :type limit: int
+
+        :rtype: Union[ApiHttpBody, Tuple[ApiHttpBody, int], Tuple[ApiHttpBody, int, Dict[str, str]]
+        """
+
+        return self.controller.dataset_service_get_dataset_dataframe(user, id, offset, limit)
 
 
     def dataset_service_get_dataset_identifier(self, user, id: int, offset: int=None, limit: int=None):

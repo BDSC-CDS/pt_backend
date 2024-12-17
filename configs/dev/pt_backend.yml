@@ -37,6 +37,9 @@ storage:
 clients:
   arx:
     host: "http://localhost:8080/"
+  jupyterhub:
+    host: "https://jupyterhub.rdeid.unil.ch/"
+    token: "{{ .jupyterhub_token }}"
 
 services:
   index_service:

@@ -6,6 +6,7 @@ from src.internal.cmd.provider.audit_log import provide_audit_log_service
 from src.pkg.dataset.service.dataset import DatasetService
 from src.pkg.dataset.store.postgres import DatasetStore as PostgresDatasetStore
 from .db import provide_db_type, provide_db
+from .authentication import provide_authentication_service
 
 dataset_controller = None
 dataset_service = None
@@ -30,7 +31,7 @@ def provide_dataset_service():
     if dataset_service is not None:
         return dataset_service
 
-    dataset_service = DatasetService(provide_dataset_store())
+    dataset_service = DatasetService(provide_dataset_store(), provide_authentication_service())
 
     return dataset_service
 

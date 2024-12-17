@@ -39,6 +39,7 @@ from openapi_client.exceptions import ApiAttributeError
 from openapi_client.exceptions import ApiException
 
 # import models into sdk package
+from openapi_client.models.api_http_body import ApiHttpBody
 from openapi_client.models.index_service_create_hello_request import IndexServiceCreateHelloRequest
 from openapi_client.models.protobuf_any import ProtobufAny
 from openapi_client.models.rpc_status import RpcStatus

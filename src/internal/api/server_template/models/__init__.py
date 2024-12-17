@@ -2,6 +2,7 @@
 
 # flake8: noqa
 # import models into model package
+from server_template.models.api_http_body import ApiHttpBody
 from server_template.models.index_service_create_hello_request import IndexServiceCreateHelloRequest
 from server_template.models.protobuf_any import ProtobufAny
 from server_template.models.rpc_status import RpcStatus
