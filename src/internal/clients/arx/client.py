@@ -1,17 +1,18 @@
-import openapi_client
-from pprint import pprint
-from python_arx_deidentifier.client.assessment_client import apply_assessment, parse_risk_assessment
+from python_arx_deidentifier.client.assessment_client import (
+    apply_assessment,
+    parse_risk_assessment,
+)
 from python_arx_deidentifier.client.configuration_client import (
     build_basic_configuration,
     set_data_as_csv,
     configure_attribute,
 )
-import pandas as pd 
+import pandas as pd
+
 
 class ArxClient:
     def __init__(self, domain_and_host):
         self.domain_and_host = domain_and_host
-
 
     def build_config_from_dict(self, json_config: dict):
         """
@@ -29,7 +30,7 @@ class ArxClient:
             arx_config = configure_attribute(
                 arx_config,
                 attr["key"],
-                attr.get("source"),
+                attr["key"],
                 attr["type"],
                 attr.get("weight"),
             )
@@ -49,6 +50,15 @@ class ArxClient:
         """
         arx_config = self.build_config_from_dict(json_config)
         arx_config = set_data_as_csv(arx_config, dataset)
-        risk_assessment_server_answer = apply_assessment(self.domain_and_host, arx_config)
-        initial_highest_prosecutor, initial_average_prosecutor, quasi_identifiers = parse_risk_assessment(risk_assessment_server_answer)
-        return initial_highest_prosecutor, initial_average_prosecutor, quasi_identifiers, risk_assessment_server_answer
+        risk_assessment_server_answer = apply_assessment(
+            self.domain_and_host, arx_config
+        )
+        initial_highest_prosecutor, initial_average_prosecutor, quasi_identifiers = (
+            parse_risk_assessment(risk_assessment_server_answer)
+        )
+        return (
+            initial_highest_prosecutor,
+            initial_average_prosecutor,
+            quasi_identifiers,
+            risk_assessment_server_answer,
+        )
