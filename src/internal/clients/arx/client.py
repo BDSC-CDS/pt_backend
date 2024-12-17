@@ -36,29 +36,68 @@ class ArxClient:
             )
         return arx_config
 
-    def perform_risk_analysis(self, dataset: pd.DataFrame, json_config: dict):
-        """
-        Performs risk analysis on the dataset.
+def perform_risk_analysis(self, dataset: pd.DataFrame, json_config: dict):
+    """
+    Performs risk analysis on the dataset.
 
-        Args:
-            dataset (pd.DataFrame): Dataset to analyze.
-            json_config (dict): Configuration for ARX.
-            arx_client: ARX client instance.
+    Args:
+        dataset (pd.DataFrame): Dataset to analyze.
+        json_config (dict): Configuration for ARX.
 
-        Returns:
-            The result of the risk analysis.
-        """
-        arx_config = self.build_config_from_dict(json_config)
+    Returns:
+        tuple: The result of the risk analysis including:
+            - initial_highest_prosecutor
+            - initial_average_prosecutor
+            - quasi_identifiers
+            - risk_assessment_server_answer
+
+    Raises:
+        ValueError: If the input dataset or JSON configuration is invalid.
+        RuntimeError: If any step in the risk analysis process fails.
+    """
+    try:
+        # Validate inputs
+        if not isinstance(dataset, pd.DataFrame):
+            raise ValueError("The dataset must be a pandas DataFrame.")
+        if not isinstance(json_config, dict):
+            raise ValueError("The configuration must be a dictionary.")
+
+        # Build configuration
+        try:
+            arx_config = self.build_config_from_dict(json_config)
+        except Exception as e:
+            raise RuntimeError(f"Failed to build ARX configuration: {e}")
+
+        # Set dataset as CSV
         arx_config = set_data_as_csv(arx_config, dataset)
-        risk_assessment_server_answer = apply_assessment(
-            self.domain_and_host, arx_config
-        )
-        initial_highest_prosecutor, initial_average_prosecutor, quasi_identifiers = (
-            parse_risk_assessment(risk_assessment_server_answer)
-        )
+
+
+        # Apply risk assessment
+        try:
+            risk_assessment_server_answer = apply_assessment(
+                self.domain_and_host, arx_config
+            )
+        except Exception as e:
+            raise RuntimeError(f"Risk assessment failed: {e}")
+
+        # Parse risk assessment
+        try:
+            (
+                initial_highest_prosecutor,
+                initial_average_prosecutor,
+                quasi_identifiers,
+            ) = parse_risk_assessment(risk_assessment_server_answer)
+        except Exception as e:
+            raise RuntimeError(f"Failed to parse risk assessment: {e}")
+
+        # Return results
         return (
             initial_highest_prosecutor,
             initial_average_prosecutor,
             quasi_identifiers,
             risk_assessment_server_answer,
         )
+
+    except Exception as e:
+        # Log or re-raise for debugging
+        raise RuntimeError(f"Risk analysis process encountered an error: {e}")
