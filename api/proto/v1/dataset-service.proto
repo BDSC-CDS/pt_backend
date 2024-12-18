@@ -110,6 +110,16 @@ message GetDatasetContentResult {
     uint32 n_rows = 2;
 }
 
+message GetDatasetJupyterhubRequest {
+    uint32 id = 1;
+}
+message GetDatasetJupyterhubReply {
+    GetDatasetJupyterhubResult result = 1;
+}
+message GetDatasetJupyterhubResult {
+    string url = 1;
+}
+
 // Get datasetfiltered
 message GetDatasetIdentifierRequest {
     uint32 id = 1;
@@ -251,6 +261,21 @@ service DatasetService {
         option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
             summary: "Get Dataset Dataframe";
             description: "This endpoint allow getting a specific user's Dataset as a Pandas Dataframe in Parquet format";
+            tags: "Dataset";
+            extensions: {
+                key: "x-openapi-router-controller";
+                value: {string_value: "dataset_controller"};
+            };
+        };
+    };
+
+    rpc GetDatasetJupyterhub(GetDatasetJupyterhubRequest) returns (GetDatasetJupyterhubReply) {
+        option (google.api.http) = {
+            get: "/api/v1/dataset/jupyterhub/{id}"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            summary: "Get Dataset Jupyterhub";
+            description: "This endpoint allow getting a specific user's Dataset as a Jupyterhub link";
             tags: "Dataset";
             extensions: {
                 key: "x-openapi-router-controller";

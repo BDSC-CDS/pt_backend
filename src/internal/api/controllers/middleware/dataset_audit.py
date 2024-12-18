@@ -94,6 +94,16 @@ class DatasetControllerAudit():
         except  Exception as e:
             self.auditLogService.log_event(AuditLog(service="dataset", userid=user.id,action="Error accessing content of dataset "+ str(id), response=e, error=True))
             raise e
+    
+    def dataset_service_get_dataset_jupyterhub(self, user, id: int):
+        try:
+            response =  self.next.dataset_service_get_dataset_jupyterhub(user, id)
+
+            self.auditLogService.log_event(AuditLog(service="dataset", userid=user.id,action="accessed jupyterhub of dataset "+ str(id), response=""))
+            return response
+        except  Exception as e:
+            self.auditLogService.log_event(AuditLog(service="dataset", userid=user.id,action="Error accessing content of dataset "+ str(id), response=str(e), error=True))
+            raise e
 
     def dataset_service_get_dataset_identifier(self, user, id: int, offset: int=None, limit: int=None):
         try:

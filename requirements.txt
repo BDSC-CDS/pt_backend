@@ -16,3 +16,4 @@ pandas
 fastparquet
 jinja2
 jupytext
+cryptography

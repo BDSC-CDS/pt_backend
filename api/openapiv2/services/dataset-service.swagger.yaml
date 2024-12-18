@@ -187,6 +187,29 @@ paths:
       tags:
         - Dataset
       x-openapi-router-controller: dataset_controller
+  /api/v1/dataset/jupyterhub/{id}:
+    get:
+      summary: Get Dataset Jupyterhub
+      description: This endpoint allow getting a specific user's Dataset as a Jupyterhub link
+      operationId: DatasetService_GetDatasetJupyterhub
+      responses:
+        "200":
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/templatebackendGetDatasetJupyterhubReply'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/rpcStatus'
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: integer
+          format: int64
+      tags:
+        - Dataset
+      x-openapi-router-controller: dataset_controller
   /api/v1/dataset/metadata/{id}:
     get:
       summary: Get Dataset Metadata
@@ -557,6 +580,16 @@ definitions:
     properties:
       dataset:
         $ref: '#/definitions/templatebackendDataset'
+  templatebackendGetDatasetJupyterhubReply:
+    type: object
+    properties:
+      result:
+        $ref: '#/definitions/templatebackendGetDatasetJupyterhubResult'
+  templatebackendGetDatasetJupyterhubResult:
+    type: object
+    properties:
+      url:
+        type: string
   templatebackendGetDatasetMetadataReply:
     type: object
     properties:

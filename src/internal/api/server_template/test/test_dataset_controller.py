@@ -11,6 +11,7 @@ from server_template.models.templatebackend_change_types_dataset_request import 
 from server_template.models.templatebackend_delete_dataset_reply import TemplatebackendDeleteDatasetReply
 from server_template.models.templatebackend_get_dataset_content_reply import TemplatebackendGetDatasetContentReply
 from server_template.models.templatebackend_get_dataset_info_reply import TemplatebackendGetDatasetInfoReply
+from server_template.models.templatebackend_get_dataset_jupyterhub_reply import TemplatebackendGetDatasetJupyterhubReply
 from server_template.models.templatebackend_get_dataset_metadata_reply import TemplatebackendGetDatasetMetadataReply
 from server_template.models.templatebackend_list_datasets_reply import TemplatebackendListDatasetsReply
 from server_template.models.templatebackend_revert_dataset_reply import TemplatebackendRevertDatasetReply
@@ -129,6 +130,22 @@ class TestDatasetController(BaseTestCase):
         }
         response = self.client.open(
             '/api/v1/dataset/info/{id}'.format(id=56),
+            method='GET',
+            headers=headers)
+        self.assert200(response,
+                       'Response body is : ' + response.data.decode('utf-8'))
+
+    def test_dataset_service_get_dataset_jupyterhub(self):
+        """Test case for dataset_service_get_dataset_jupyterhub
+
+        Get Dataset Jupyterhub
+        """
+        headers = { 
+            'Accept': 'application/json',
+            'Bearer': 'special-key',
+        }
+        response = self.client.open(
+            '/api/v1/dataset/jupyterhub/{id}'.format(id=56),
             method='GET',
             headers=headers)
         self.assert200(response,

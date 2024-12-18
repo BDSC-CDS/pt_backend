@@ -10,6 +10,7 @@ class DatasetService:
     def __init__(self, dataset_store, authentication_service, jupyterhub_client):
         self.dataset_store = dataset_store
         self.authentication_service = authentication_service
+        self.jupyterhub_client = jupyterhub_client
 
     # store new dataset (store in metadata, dataset,values)
     def store_dataset(self, userid:int,tenantid:int, dataset_name:str,dataset: str,types:str, identifiers:str, is_id:str):
@@ -91,11 +92,11 @@ class DatasetService:
 
         # text to buffer
         fp = io.StringIO(text)
-        juyptext.read(fp)
+        notebook = jupytext.read(fp)
 
-        buffer = io.BytesIO()
-        bytes_ = buffer.getvalue()
-        jupytext.write(fp, buffer)
+        buffer = io.StringIO()
+        jupytext.write(notebook, buffer, fmt="ipynb")
+        bytes_ = buffer.getvalue().encode("utf-8")
 
         self.jupyterhub_client.create_user(user.username)
         namedserver_uuid = str(uuid.uuid4())

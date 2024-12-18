@@ -22,6 +22,8 @@ from server_template.models import TemplatebackendRevertDatasetReply
 from server_template.models import TemplatebackendRevertDatasetRequest
 from server_template.models import TemplatebackendChangeTypesDatasetRequest
 from server_template.models import TemplatebackendChangeTypesDatasetReply
+from server_template.models import TemplatebackendGetDatasetJupyterhubReply
+from server_template.models import TemplatebackendGetDatasetJupyterhubResult
 from server_template.models import ApiHttpBody
 
 import src.internal.api.controllers.converter.dataset as dataset_converter
@@ -111,6 +113,12 @@ class DatasetController:
         resp = flask.Response(bytes, headers=headers)
         
         return resp, 200, headers
+
+    def dataset_service_get_dataset_jupyterhub(self, user, id: int):
+        url = self.dataset_service.open_jupyterhub_deidentification(user.id, id)
+
+        return TemplatebackendGetDatasetJupyterhubReply(TemplatebackendGetDatasetJupyterhubResult(url=url))
+
 
 
     def dataset_service_get_dataset_identifier(self, user, id: int,offset: int=None, limit: int=None):

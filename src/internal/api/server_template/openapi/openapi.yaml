@@ -528,7 +528,7 @@ paths:
       responses:
         "200":
           content:
-            multipart/form-data:
+            application/json:
               schema:
                 $ref: '#/components/schemas/apiHttpBody'
           description: A successful response.
@@ -606,6 +606,35 @@ paths:
                 $ref: '#/components/schemas/rpcStatus'
           description: An unexpected error response.
       summary: Get Dataset Info
+      tags:
+      - Dataset
+      x-openapi-router-controller: dataset_controller
+  /api/v1/dataset/jupyterhub/{id}:
+    get:
+      description: This endpoint allow getting a specific user's Dataset as a Jupyterhub
+        link
+      operationId: dataset_service_get_dataset_jupyterhub
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/templatebackendGetDatasetJupyterhubReply'
+          description: A successful response.
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+          description: An unexpected error response.
+      summary: Get Dataset Jupyterhub
       tags:
       - Dataset
       x-openapi-router-controller: dataset_controller
@@ -1892,6 +1921,24 @@ components:
         dataset:
           $ref: '#/components/schemas/templatebackendDataset'
       title: templatebackendGetDatasetInfoReply
+      type: object
+    templatebackendGetDatasetJupyterhubReply:
+      example:
+        result:
+          url: url
+      properties:
+        result:
+          $ref: '#/components/schemas/templatebackendGetDatasetJupyterhubResult'
+      title: templatebackendGetDatasetJupyterhubReply
+      type: object
+    templatebackendGetDatasetJupyterhubResult:
+      example:
+        url: url
+      properties:
+        url:
+          title: url
+          type: string
+      title: templatebackendGetDatasetJupyterhubResult
       type: object
     templatebackendGetDatasetMetadataReply:
       example:

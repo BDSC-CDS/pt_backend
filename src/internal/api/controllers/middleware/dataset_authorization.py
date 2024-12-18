@@ -44,6 +44,11 @@ class DatasetControllerAuthentication():
         if not is_authenticated(user):
             return None, 403
         return self.next.dataset_service_get_dataset_dataframe(user, id, offset, limit)
+    
+    def dataset_service_get_dataset_jupyterhub(self, user, id: int):
+        if not is_authenticated(user):
+            return None, 403
+        return self.next.dataset_service_get_dataset_jupyterhub(user, id)
 
     def dataset_service_get_dataset_identifier(self, user, id: int,offset: int=None, limit: int=None):
         if not is_authenticated(user):
