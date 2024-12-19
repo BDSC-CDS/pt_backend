@@ -402,6 +402,8 @@ definitions:
       riskLevel:
         type: integer
         format: int64
+      highRisk:
+        type: boolean
       rulePrefills:
         type: array
         items:
@@ -413,7 +415,7 @@ definitions:
       updatedAt:
         type: string
         format: date-time
-        title: google.protobuf.Timestamp deletedAt = 7;
+        title: google.protobuf.Timestamp deletedAt = 8;
   templatebackendQuestionnaireQuestionAnswerRulePrefill:
     type: object
     properties:

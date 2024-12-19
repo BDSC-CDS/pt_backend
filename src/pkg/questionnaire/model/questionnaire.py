@@ -25,6 +25,7 @@ class QuestionnaireQuestionAnswer:
 
     text: str = ""
     risk_level: int = 0
+    high_risk: bool = False
 
     rule_prefills: list[QuestionnaireQuestionAnswerRulePrefill] = None
 
