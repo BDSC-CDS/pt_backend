@@ -4,11 +4,11 @@ All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**risk_assessment_service_get_risk_assessment**](RiskAssessmentApi.md#risk_assessment_service_get_risk_assessment) | **GET** /api/v1/riskassessment | Get risk assessment
+[**risk_assessment_service_get_risk_assessment**](RiskAssessmentApi.md#risk_assessment_service_get_risk_assessment) | **GET** /api/v1/riskassessment/{datasetid} | Get risk assessment
 
 
 # **risk_assessment_service_get_risk_assessment**
-> TemplatebackendGetRiskAssessmentReply risk_assessment_service_get_risk_assessment(dataset_id=dataset_id)
+> TemplatebackendGetRiskAssessmentReply risk_assessment_service_get_risk_assessment(datasetid)
 
 Get risk assessment
 
@@ -47,11 +47,11 @@ configuration.api_key['Bearer'] = os.environ["API_KEY"]
 with openapi_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = openapi_client.RiskAssessmentApi(api_client)
-    dataset_id = 56 # int |  (optional)
+    datasetid = 56 # int | 
 
     try:
         # Get risk assessment
-        api_response = api_instance.risk_assessment_service_get_risk_assessment(dataset_id=dataset_id)
+        api_response = api_instance.risk_assessment_service_get_risk_assessment(datasetid)
         print("The response of RiskAssessmentApi->risk_assessment_service_get_risk_assessment:\n")
         pprint(api_response)
     except Exception as e:
@@ -65,7 +65,7 @@ with openapi_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **dataset_id** | **int**|  | [optional] 
+ **datasetid** | **int**|  | 
 
 ### Return type
 

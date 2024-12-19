@@ -31,15 +31,15 @@ class RiskAssessmentController:
         self.controller=controller
 
 
-    def risk_assessment_service_get_risk_assessment(self, user, dataset_id: int=None):
+    def risk_assessment_service_get_risk_assessment(self, user, datasetid: int):
         """Get risk assessment
 
         This endpoint allow getting a single user&#39;s risk assessment
 
-        :param dataset_id: 
-        :type dataset_id: int
+        :param datasetid: 
+        :type datasetid: int
 
         :rtype: Union[TemplatebackendGetRiskAssessmentReply, Tuple[TemplatebackendGetRiskAssessmentReply, int], Tuple[TemplatebackendGetRiskAssessmentReply, int, Dict[str, str]]
         """
 
-        return self.controller.risk_assessment_service_get_risk_assessment(user, dataset_id)
+        return self.controller.risk_assessment_service_get_risk_assessment(user, datasetid)

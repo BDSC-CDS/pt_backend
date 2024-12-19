@@ -56,7 +56,6 @@ class RiskAssessmentService:
     def get_risk_assessment(
         self, tenantid: int, userid: int, dataset_id: int
     ) -> RiskAssessment:
-        dataset_id = 1
         columns_as_lists, _ = self.dataset_service.get_dataset_content(
             dataset_id, userid, tenantid, offset=0, limit=1000,
         )

@@ -17,16 +17,14 @@ class TestRiskAssessmentController(BaseTestCase):
 
         Get risk assessment
         """
-        query_string = [('datasetId', 56)]
         headers = { 
             'Accept': 'application/json',
             'Bearer': 'special-key',
         }
         response = self.client.open(
-            '/api/v1/riskassessment',
+            '/api/v1/riskassessment/{datasetid}'.format(datasetid=56),
             method='GET',
-            headers=headers,
-            query_string=query_string)
+            headers=headers)
         self.assert200(response,
                        'Response body is : ' + response.data.decode('utf-8'))
 

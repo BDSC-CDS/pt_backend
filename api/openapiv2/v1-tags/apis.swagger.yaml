@@ -839,7 +839,7 @@ paths:
       tags:
         - Questionnaire
       x-openapi-router-controller: questionnaire_controller
-  /api/v1/riskassessment:
+  /api/v1/riskassessment/{datasetid}:
     get:
       summary: Get risk assessment
       description: This endpoint allow getting a single user's risk assessment
@@ -854,9 +854,9 @@ paths:
           schema:
             $ref: '#/definitions/rpcStatus'
       parameters:
-        - name: datasetId
-          in: query
-          required: false
+        - name: datasetid
+          in: path
+          required: true
           type: integer
           format: int64
       tags:
