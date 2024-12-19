@@ -82,7 +82,7 @@ def set_data_as_oracle_params(
 
 
 def configure_attribute(config, dataset_name, arx_name, attribute_type, weight):
-    config.ATTRIBUTES = config.ATTRIBUTES.append(
+    config.ATTRIBUTES = config.ATTRIBUTES._append(
         {
             "datasetName": dataset_name,
             "arxName": arx_name,
