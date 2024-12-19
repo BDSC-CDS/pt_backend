@@ -56,15 +56,20 @@ class RiskAssessmentService:
     def get_risk_assessment(
         self, tenantid: int, userid: int, dataset_id: int
     ) -> RiskAssessment:
+        
+        # TODO fix hardcoded limit
         columns_as_lists, _ = self.dataset_service.get_dataset_content(
             dataset_id, userid, tenantid, offset=0, limit=1000,
         )
+
+        # TODO fix metadata being fetched twice, here and in build dict from config
         metadata = self.dataset_service.get_dataset_metadata(
             dataset_id, userid, tenantid, 
         )
 
         column_names = []
         for item in metadata:
+            # TODO flatten not needed, need to test before removing
             flattened_name = ''.join([str(level) for level in item.column_name])
             column_names.append(flattened_name)
 
