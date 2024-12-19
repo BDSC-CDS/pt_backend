@@ -11,18 +11,24 @@ class RiskAssessmentService:
         self, tenantid: int, userid: int, dataset_id: int
     ):
         """
-        Transforms input JSON metadata to fit the configuration function format.
+        Transforms input metadata to fit the configuration function format.
         Maps identifier types to ARX-compatible attribute types.
 
         Args:
-            input_json (dict): Input JSON metadata with columns and attributes.
+            tenantid (int): Tenant ID.
+            userid (int): User ID.
+            dataset_id (int): Dataset ID.
 
         Returns:
             dict: Transformed configuration as a dictionary.
         """
-        metadata = self.dataset_service.get_dataset_metadata(
+        # Fetch the metadata
+        metadata_items = self.dataset_service.get_dataset_metadata(
             dataset_id, userid, tenantid
         )
+
+        if metadata_items is None:
+            raise ValueError("No metadata found for the specified dataset.")
 
         # Define the mapping for identifier types
         identifier_mapping = {
@@ -33,16 +39,13 @@ class RiskAssessmentService:
 
         transformed_config = {"attributes": []}
 
-        # Extract the list of metadata items
-        metadata_items = metadata.get("metadata", {}).get("metadata", [])
-
         # Transform each metadata entry into the required format
         for item in metadata_items:
             transformed_config["attributes"].append(
                 {
-                    "key": item["columnName"],  # The column name becomes the key
+                    "key": item.column_name,  # Use the column_name attribute
                     "type": identifier_mapping.get(
-                        item["identifier"], "INSENSITIVE_ATTRIBUTE"
+                        item.identifier, "INSENSITIVE_ATTRIBUTE"
                     ),  # Map identifier type
                     "weight": None,  # Weight is always set to None
                 }
@@ -53,13 +56,23 @@ class RiskAssessmentService:
     def get_risk_assessment(
         self, tenantid: int, userid: int, dataset_id: int
     ) -> RiskAssessment:
-        columns_as_lists, total_rows = self.dataset_service.get_dataset_content(
-            dataset_id, userid, tenantid
+        dataset_id = 1
+        columns_as_lists, _ = self.dataset_service.get_dataset_content(
+            dataset_id, userid, tenantid, offset=0, limit=1000,
         )
+        metadata = self.dataset_service.get_dataset_metadata(
+            dataset_id, userid, tenantid, 
+        )
+
+        column_names = []
+        for item in metadata:
+            flattened_name = ''.join([str(level) for level in item.column_name])
+            column_names.append(flattened_name)
 
         # transform dataset into dataframe
         dataset = pd.DataFrame(columns_as_lists).transpose()
-        dataset.columns = [f"Column_{i}" for i in range(dataset.shape[1])]
+        dataset.columns = column_names
+
 
         json_config = self.create_arx_config_from_metadata(tenantid, userid, dataset_id)
 
@@ -69,10 +82,11 @@ class RiskAssessmentService:
             quasi_identifiers,
             risk_assessment_server_answer,
         ) = self.arx_client.perform_risk_analysis(dataset, json_config)
+
         return RiskAssessment(
-            userid=self.userid,
-            tenantid=self.tenantid,
-            dataset_id=self.dataset_id,
+            userid=userid,
+            tenantid=tenantid,
+            dataset_id=dataset_id,
             average_prosecutor_risk=initial_average_prosecutor,
             maximum_prosecutor_risk=initial_highest_prosecutor,
             quasi_identifiers=quasi_identifiers,
