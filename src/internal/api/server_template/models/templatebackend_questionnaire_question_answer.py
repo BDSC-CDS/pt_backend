@@ -16,7 +16,7 @@ class TemplatebackendQuestionnaireQuestionAnswer(Model):
     Do not edit the class manually.
     """
 
-    def __init__(self, id=None, text=None, risk_level=None, rule_prefills=None, created_at=None, updated_at=None):
+    def __init__(self, id=None, text=None, risk_level=None, high_risk=None, rule_prefills=None, created_at=None, updated_at=None):
         """TemplatebackendQuestionnaireQuestionAnswer - a model defined in OpenAPI
 
         :param id: The id of this TemplatebackendQuestionnaireQuestionAnswer.
@@ -25,6 +25,8 @@ class TemplatebackendQuestionnaireQuestionAnswer(Model):
         :type text: str
         :param risk_level: The risk_level of this TemplatebackendQuestionnaireQuestionAnswer.
         :type risk_level: int
+        :param high_risk: The high_risk of this TemplatebackendQuestionnaireQuestionAnswer.
+        :type high_risk: bool
         :param rule_prefills: The rule_prefills of this TemplatebackendQuestionnaireQuestionAnswer.
         :type rule_prefills: List[TemplatebackendQuestionnaireQuestionAnswerRulePrefill]
         :param created_at: The created_at of this TemplatebackendQuestionnaireQuestionAnswer.
@@ -36,6 +38,7 @@ class TemplatebackendQuestionnaireQuestionAnswer(Model):
             'id': int,
             'text': str,
             'risk_level': int,
+            'high_risk': bool,
             'rule_prefills': List[TemplatebackendQuestionnaireQuestionAnswerRulePrefill],
             'created_at': datetime,
             'updated_at': datetime
@@ -45,6 +48,7 @@ class TemplatebackendQuestionnaireQuestionAnswer(Model):
             'id': 'id',
             'text': 'text',
             'risk_level': 'riskLevel',
+            'high_risk': 'highRisk',
             'rule_prefills': 'rulePrefills',
             'created_at': 'createdAt',
             'updated_at': 'updatedAt'
@@ -53,6 +57,7 @@ class TemplatebackendQuestionnaireQuestionAnswer(Model):
         self._id = id
         self._text = text
         self._risk_level = risk_level
+        self._high_risk = high_risk
         self._rule_prefills = rule_prefills
         self._created_at = created_at
         self._updated_at = updated_at
@@ -130,6 +135,27 @@ class TemplatebackendQuestionnaireQuestionAnswer(Model):
         """
 
         self._risk_level = risk_level
+
+    @property
+    def high_risk(self) -> bool:
+        """Gets the high_risk of this TemplatebackendQuestionnaireQuestionAnswer.
+
+
+        :return: The high_risk of this TemplatebackendQuestionnaireQuestionAnswer.
+        :rtype: bool
+        """
+        return self._high_risk
+
+    @high_risk.setter
+    def high_risk(self, high_risk: bool):
+        """Sets the high_risk of this TemplatebackendQuestionnaireQuestionAnswer.
+
+
+        :param high_risk: The high_risk of this TemplatebackendQuestionnaireQuestionAnswer.
+        :type high_risk: bool
+        """
+
+        self._high_risk = high_risk
 
     @property
     def rule_prefills(self) -> List[TemplatebackendQuestionnaireQuestionAnswerRulePrefill]:
