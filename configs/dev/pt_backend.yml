@@ -6,6 +6,7 @@ daemon:
     headers:
       access_control_allow_origin: "*"
       access_control_max_age: "600"
+  public_url: "http://localhost:5000"
   jwt:
     secret: eREH6oV#&6bX&zadL%
     expiration_time: 259200 # 72h
@@ -36,7 +37,12 @@ storage:
 
 clients:
   arx:
-    domain_and_host: "http://localhost:8080/"
+    host: "http://localhost:8080/"
+  jupyterhub:
+    host: "https://jupyterhub.rdeid.unil.ch/"
+    admin_token: "{{ .jupyterhub_token }}"
+    key: "{{ .jupyterhub_key }}"
+    debug: true
 
 services:
   index_service:

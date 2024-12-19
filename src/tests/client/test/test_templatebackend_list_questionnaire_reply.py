@@ -62,6 +62,7 @@ class TestTemplatebackendListQuestionnaireReply(unittest.TestCase):
                                                     id = 56, 
                                                     text = '', 
                                                     risk_level = 56, 
+                                                    high_risk = True, 
                                                     rule_prefills = [
                                                         openapi_client.models.templatebackend_questionnaire_question_answer_rule_prefill.templatebackendQuestionnaireQuestionAnswerRulePrefill(
                                                             id = 56, 

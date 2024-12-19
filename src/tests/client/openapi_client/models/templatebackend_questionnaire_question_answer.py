@@ -20,7 +20,7 @@ import json
 
 from datetime import datetime
 from typing import Any, ClassVar, Dict, List, Optional
-from pydantic import BaseModel, StrictInt, StrictStr
+from pydantic import BaseModel, StrictBool, StrictInt, StrictStr
 from pydantic import Field
 from openapi_client.models.templatebackend_questionnaire_question_answer_rule_prefill import TemplatebackendQuestionnaireQuestionAnswerRulePrefill
 try:
@@ -35,10 +35,11 @@ class TemplatebackendQuestionnaireQuestionAnswer(BaseModel):
     id: Optional[StrictInt] = None
     text: Optional[StrictStr] = None
     risk_level: Optional[StrictInt] = Field(default=None, alias="riskLevel")
+    high_risk: Optional[StrictBool] = Field(default=None, alias="highRisk")
     rule_prefills: Optional[List[TemplatebackendQuestionnaireQuestionAnswerRulePrefill]] = Field(default=None, alias="rulePrefills")
     created_at: Optional[datetime] = Field(default=None, alias="createdAt")
     updated_at: Optional[datetime] = Field(default=None, alias="updatedAt")
-    __properties: ClassVar[List[str]] = ["id", "text", "riskLevel", "rulePrefills", "createdAt", "updatedAt"]
+    __properties: ClassVar[List[str]] = ["id", "text", "riskLevel", "highRisk", "rulePrefills", "createdAt", "updatedAt"]
 
     model_config = {
         "populate_by_name": True,
@@ -99,6 +100,7 @@ class TemplatebackendQuestionnaireQuestionAnswer(BaseModel):
             "id": obj.get("id"),
             "text": obj.get("text"),
             "riskLevel": obj.get("riskLevel"),
+            "highRisk": obj.get("highRisk"),
             "rulePrefills": [TemplatebackendQuestionnaireQuestionAnswerRulePrefill.from_dict(_item) for _item in obj.get("rulePrefills")] if obj.get("rulePrefills") is not None else None,
             "createdAt": obj.get("createdAt"),
             "updatedAt": obj.get("updatedAt")

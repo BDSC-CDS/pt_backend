@@ -11,8 +11,8 @@ import pandas as pd
 
 
 class ArxClient:
-    def __init__(self, domain_and_host):
-        self.domain_and_host = domain_and_host
+    def __init__(self, config):
+        self.host = config.host
 
     def build_config_from_dict(self, json_config: dict, dataset):
         """
@@ -76,7 +76,7 @@ class ArxClient:
             print("applying asessment")
             try:
                 risk_assessment_server_answer = apply_assessment(
-                    self.domain_and_host, arx_config
+                    self.host, arx_config
                 )
             except Exception as e:
                 raise RuntimeError(f"Risk assessment failed: {e}")

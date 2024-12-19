@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **id** | **int** |  | [optional] 
 **text** | **str** |  | [optional] 
 **risk_level** | **int** |  | [optional] 
+**high_risk** | **bool** |  | [optional] 
 **rule_prefills** | [**List[TemplatebackendQuestionnaireQuestionAnswerRulePrefill]**](TemplatebackendQuestionnaireQuestionAnswerRulePrefill.md) |  | [optional] 
 **created_at** | **datetime** |  | [optional] 
 **updated_at** | **datetime** |  | [optional] 
