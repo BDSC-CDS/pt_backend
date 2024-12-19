@@ -21,7 +21,7 @@ clients:
     host: "http://arx-service.arx:8080/"
   jupyterhub:
     host: "https://jupyterhub.rdeid.unil.ch/"
-    token: "{{ .jupyterhub_token }}"
+    admin_token: "{{ .jupyterhub_token }}"
     key: "{{ .jupyterhub_key }}"
 
 storage:
