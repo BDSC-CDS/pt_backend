@@ -10,8 +10,8 @@ class RiskAssessmentController:
         self.config = config
         self.risk_assessment_service = risk_assessment_service
 
-    def risk_assessment_service_get_risk_assessment(self, user):
-        records = self.risk_assessment_service.get_risk_assessment(user.tenantid, user.id)
+    def risk_assessment_service_get_risk_assessment(self, user, datasetid: int):
+        records = self.risk_assessment_service.get_risk_assessment(user.tenantid, user.id, datasetid)
 
         
         return TemplatebackendGetRiskAssessmentReply(TemplatebackendGetRiskAssessmentResult(records))

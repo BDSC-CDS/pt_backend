@@ -2,11 +2,9 @@ syntax = "proto3";
 package templatebackend;
 option go_package = ".;templatebackend";
 
-// import "google/protobuf/empty.proto";
 import "google/api/annotations.proto";
 import "protoc-gen-openapiv2/options/annotations.proto";
-
-// import "riskAssessment.proto";
+import "risk-assessment.proto";
 
 option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
     info: {
@@ -44,13 +42,13 @@ option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
 };
 
 message GetRiskAssessmentRequest {
-    // uint32 id = 1;
+    uint32 datasetid = 1;
 }
 message GetRiskAssessmentReply {
     GetRiskAssessmentResult result = 1;
 }
 message GetRiskAssessmentResult {
-    repeated string riskAssessment = 1;
+    repeated string RiskAssessment = 1;
 }
 
 
@@ -60,9 +58,10 @@ service RiskAssessmentService {
     // Retrieve riskAssessment entries for a user
     rpc GetRiskAssessment(GetRiskAssessmentRequest) returns (GetRiskAssessmentReply) {
         option (google.api.http) = {
-            get: "/api/v1/riskassessment"
+            get: "/api/v1/riskassessment/{datasetid}"
         };
         option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+
             summary: "Get risk assessment";
             description: "This endpoint allow getting a single user's risk assessment";
             tags: "RiskAssessment";

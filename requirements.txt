@@ -13,6 +13,7 @@ pydantic
 python-dateutil
 Flask-Testing
 pandas
+requests
 fastparquet
 jinja2
 jupytext

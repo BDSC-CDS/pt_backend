@@ -22,7 +22,7 @@ class TestRiskAssessmentController(BaseTestCase):
             'Bearer': 'special-key',
         }
         response = self.client.open(
-            '/api/v1/riskassessment',
+            '/api/v1/riskassessment/{datasetid}'.format(datasetid=56),
             method='GET',
             headers=headers)
         self.assert200(response,

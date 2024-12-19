@@ -25,7 +25,7 @@ class TemplatebackendGetRiskAssessmentResult(Model):
         }
 
         self.attribute_map = {
-            'risk_assessment': 'riskAssessment'
+            'risk_assessment': 'RiskAssessment'
         }
 
         self._risk_assessment = risk_assessment
