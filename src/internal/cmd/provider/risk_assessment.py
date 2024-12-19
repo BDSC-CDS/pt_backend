@@ -28,7 +28,7 @@ def provide_risk_assessment_service():
         return risk_assessment_service
 
     # risk_assessment_service = RiskAssessmentService(provide_risk_assessment_store())
-    risk_assessment_service = RiskAssessmentService(provide_arx_client(), provide_dataset_service)
+    risk_assessment_service = RiskAssessmentService(provide_arx_client(), provide_dataset_service())
 
     return risk_assessment_service
 
