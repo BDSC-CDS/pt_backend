@@ -4,6 +4,7 @@
 .openapi-generator-ignore
 .travis.yml
 README.md
+docs/ApiHttpBody.md
 docs/AuditLogApi.md
 docs/AuthenticationApi.md
 docs/ConfigurationApi.md
@@ -50,6 +51,8 @@ docs/TemplatebackendGetConfigsResult.md
 docs/TemplatebackendGetDatasetContentReply.md
 docs/TemplatebackendGetDatasetContentResult.md
 docs/TemplatebackendGetDatasetInfoReply.md
+docs/TemplatebackendGetDatasetJupyterhubReply.md
+docs/TemplatebackendGetDatasetJupyterhubResult.md
 docs/TemplatebackendGetDatasetMetadataReply.md
 docs/TemplatebackendGetDatasetMetadataResult.md
 docs/TemplatebackendGetHelloReply.md
@@ -107,6 +110,7 @@ openapi_client/api_response.py
 openapi_client/configuration.py
 openapi_client/exceptions.py
 openapi_client/models/__init__.py
+openapi_client/models/api_http_body.py
 openapi_client/models/index_service_create_hello_request.py
 openapi_client/models/protobuf_any.py
 openapi_client/models/rpc_status.py
@@ -146,6 +150,8 @@ openapi_client/models/templatebackend_get_configs_result.py
 openapi_client/models/templatebackend_get_dataset_content_reply.py
 openapi_client/models/templatebackend_get_dataset_content_result.py
 openapi_client/models/templatebackend_get_dataset_info_reply.py
+openapi_client/models/templatebackend_get_dataset_jupyterhub_reply.py
+openapi_client/models/templatebackend_get_dataset_jupyterhub_result.py
 openapi_client/models/templatebackend_get_dataset_metadata_reply.py
 openapi_client/models/templatebackend_get_dataset_metadata_result.py
 openapi_client/models/templatebackend_get_hello_reply.py
@@ -194,6 +200,7 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
+test/test_api_http_body.py
 test/test_audit_log_api.py
 test/test_authentication_api.py
 test/test_configuration_api.py
@@ -240,6 +247,8 @@ test/test_templatebackend_get_configs_result.py
 test/test_templatebackend_get_dataset_content_reply.py
 test/test_templatebackend_get_dataset_content_result.py
 test/test_templatebackend_get_dataset_info_reply.py
+test/test_templatebackend_get_dataset_jupyterhub_reply.py
+test/test_templatebackend_get_dataset_jupyterhub_result.py
 test/test_templatebackend_get_dataset_metadata_reply.py
 test/test_templatebackend_get_dataset_metadata_result.py
 test/test_templatebackend_get_hello_reply.py

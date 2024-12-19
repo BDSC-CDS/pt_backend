@@ -39,6 +39,16 @@ class AuthenticationService:
         if not correct:
             return ""
 
+        return self.user_to_token(user)
+    
+    def userid_to_token(self, userid: int) -> str:
+        user = self.user_service.get_user(by="id", identifier=userid, keep_sensitive_filelds=True)
+        if user is None:
+            return ""
+        
+        return self.user_to_token(user)
+    
+    def user_to_token(self, user: User) -> str:
         expiration_time = self.config.daemon.jwt.expiration_time
         secret = self.config.daemon.jwt.secret
         token = user_to_token(user, expiration_time, secret)
@@ -47,7 +57,6 @@ class AuthenticationService:
     
     def token_to_user(self, api_key):
         token = jwt.decode(api_key, self.config.daemon.jwt.secret, algorithms=["HS256"])
-
 
         user_id = token['sub']
         user = None

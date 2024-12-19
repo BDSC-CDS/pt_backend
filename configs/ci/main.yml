@@ -6,6 +6,7 @@ daemon:
     headers:
       access_control_allow_origin: "*"
       access_control_max_age: "600"
+  public_url: "http://localhost:5000"
   jwt:
     secret: "{{ .jwt_secret }}"
     expiration_time: 259200 # 72h
@@ -18,6 +19,10 @@ daemon:
 clients:
   arx:
     host: "http://localhost:8080/"
+  jupyterhub:
+    host: "http://localhost:8000/"
+    admin_token: "{{ .jupyterhub_token }}"
+    key: "{{ .jupyterhub_key }}"
 
 storage:
   datastores:

@@ -1,5 +1,7 @@
 import traceback
 from typing import List
+import io
+import flask
 
 from server_template.models import TemplatebackendStoreDatasetReply
 from server_template.models import TemplatebackendStoreDatasetResult
@@ -20,6 +22,9 @@ from server_template.models import TemplatebackendRevertDatasetReply
 from server_template.models import TemplatebackendRevertDatasetRequest
 from server_template.models import TemplatebackendChangeTypesDatasetRequest
 from server_template.models import TemplatebackendChangeTypesDatasetReply
+from server_template.models import TemplatebackendGetDatasetJupyterhubReply
+from server_template.models import TemplatebackendGetDatasetJupyterhubResult
+from server_template.models import ApiHttpBody
 
 import src.internal.api.controllers.converter.dataset as dataset_converter
 
@@ -85,6 +90,35 @@ class DatasetController:
             return TemplatebackendGetDatasetContentReply(TemplatebackendGetDatasetContentResult(columns=None, n_rows=0))
         dataset_content = dataset_converter.content_from_business(dataset_content)
         return TemplatebackendGetDatasetContentReply(TemplatebackendGetDatasetContentResult(columns=dataset_content, n_rows=n_rows))
+    
+    def dataset_service_get_dataset_dataframe(self, user, id: int, offset: int=None, limit: int=None):
+        try:
+            df = self.dataset_service.get_dataset_as_dataframe(id,user.id,user.tenantid)
+        except Exception as e:
+            print("error", e)
+            traceback.print_exception(e)
+            return str(e), 500
+
+        if df is None:
+            return None, 404
+
+        buffer = io.BytesIO()
+        df.to_parquet(buffer)
+        bytes = buffer.getvalue()
+
+        headers = {
+            "Content-Type": "application/vnd.apache.parquet",
+        }
+
+        resp = flask.Response(bytes, headers=headers)
+        
+        return resp, 200, headers
+
+    def dataset_service_get_dataset_jupyterhub(self, user, id: int):
+        url = self.dataset_service.open_jupyterhub_deidentification(user.id, id)
+
+        return TemplatebackendGetDatasetJupyterhubReply(TemplatebackendGetDatasetJupyterhubResult(url=url))
+
 
 
     def dataset_service_get_dataset_identifier(self, user, id: int,offset: int=None, limit: int=None):
