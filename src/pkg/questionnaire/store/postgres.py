@@ -97,9 +97,9 @@ class QuestionnaireStore:
 
         questionnaire_answer_query = """
         INSERT INTO questionnaire_question_answers 
-            (userid, tenantid, questionnaire_questionid, text, risk_level, createdat, updatedat) 
+            (userid, tenantid, questionnaire_questionid, text, risk_level, high_risk, createdat, updatedat) 
         VALUES 
-            (:userid, :tenantid, :questionnaire_questionid, :text, :risk_level, now(), now()) 
+            (:userid, :tenantid, :questionnaire_questionid, :text, :risk_level, :high_risk, now(), now()) 
         RETURNING id;
         """
 
@@ -150,7 +150,8 @@ class QuestionnaireStore:
                     'tenantid': tenantid,
                     'questionnaire_questionid': question_id,
                     'text': answer.text,
-                    'risk_level': answer.risk_level
+                    'risk_level': answer.risk_level,
+                    'high_risk': answer.high_risk
                 }).fetchone()
                 answer_id = result[0]
 
@@ -319,7 +320,7 @@ class QuestionnaireStore:
         """
 
         questionnaire_answer_query = """
-        SELECT id, text, risk_level, createdat, updatedat, deletedat
+        SELECT id, text, risk_level, high_risk, createdat, updatedat, deletedat
         FROM questionnaire_question_answers
         WHERE questionnaire_questionid = :question_id;
         """
@@ -386,6 +387,7 @@ class QuestionnaireStore:
                                 id=answer_row['id'],
                                 text=answer_row['text'],
                                 risk_level=answer_row['risk_level'],
+                                high_risk=answer_row['high_risk'],
                                 createdat=answer_row['createdat'],
                                 updatedat=answer_row['updatedat'],
                                 deletedat=answer_row['deletedat'],
