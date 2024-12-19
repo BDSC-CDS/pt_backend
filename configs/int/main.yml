@@ -6,6 +6,7 @@ daemon:
     headers:
       access_control_allow_origin: "*"
       access_control_max_age: "600"
+  public_url: "https://pt-backend.rdeid.unil.ch"
   jwt:
     secret: "{{ .jwt_secret }}"
     expiration_time: 259200 # 72h
@@ -21,6 +22,7 @@ clients:
   jupyterhub:
     host: "https://jupyterhub.rdeid.unil.ch/"
     token: "{{ .jupyterhub_token }}"
+    key: "{{ .jupyterhub_key }}"
 
 storage:
   datastores:

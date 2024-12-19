@@ -1,4 +1,5 @@
 import io
+import os
 import uuid
 from typing import List
 from jinja2 import Template
@@ -7,10 +8,14 @@ import pandas as pd
 import jupytext
 
 class DatasetService:
-    def __init__(self, dataset_store, authentication_service, jupyterhub_client):
+    def __init__(self, config, dataset_store, authentication_service, jupyterhub_client):
+        self.config = config
         self.dataset_store = dataset_store
         self.authentication_service = authentication_service
         self.jupyterhub_client = jupyterhub_client
+        
+        with open(os.path.join(os.path.dirname(__file__), "notebook_template.py"), "r") as f:
+            self.template = f.read()
 
     # store new dataset (store in metadata, dataset,values)
     def store_dataset(self, userid:int,tenantid:int, dataset_name:str,dataset: str,types:str, identifiers:str, is_id:str):
@@ -62,47 +67,34 @@ class DatasetService:
     
         token = self.authentication_service.userid_to_token(userid)
         user = self.authentication_service.token_to_user(token)
-        
-        template = """
-            # %% [markdown]
-            # This is a markdown cell
-
-            # %% 
-            # imports
-            import pandas as pd
-            
-            # %%
-            # parameters
-            token = "{{token}}"
-
-            # %%
-            # get the dataset
-            df = pd.read_parquet(
-                "http://localhost:5000/api/v1/dataset/dataframe/{{datasetid}}", 
-                storage_options={"Authorization":"Bearer " + token}
-            )
-        """
     
-        template = Template(template)
+        template = Template(self.template)
         context = {
             "datasetid": datasetid,
             "token": token,
+            "username": user.username,
+            "backend_public_url": self.config.daemon.public_url,
+            "arx_service_url": self.config.clients.arx.host,
         }
         text = template.render(context)
 
         # text to buffer
         fp = io.StringIO(text)
-        notebook = jupytext.read(fp)
+        notebook = jupytext.read(fp, fmt = "py:percent")
 
         buffer = io.StringIO()
         jupytext.write(notebook, buffer, fmt="ipynb")
-        bytes_ = buffer.getvalue().encode("utf-8")
+        notebook_bytes = buffer.getvalue().encode("utf-8")
 
         self.jupyterhub_client.create_user(user.username)
         namedserver_uuid = str(uuid.uuid4())
         self.jupyterhub_client.launch_named_server(user.username, namedserver_uuid)
+
+        if self.config.clients.jupyterhub.debug: 
+            with open(os.path.join(os.path.dirname(__file__), "debug_notebook.ipynb"), "wb") as f:
+                f.write(notebook_bytes)
         
-        url = self.jupyterhub_client.get_authenticate_user_url(token, bytes_, f"/user/{user.username}/{namedserver_uuid}/lab")
+        url = self.jupyterhub_client.get_authenticate_user_url(user.username, token, notebook_bytes, namedserver_uuid)
         return url
 
     # get only identifying and quasi-identifying columns of dataset
