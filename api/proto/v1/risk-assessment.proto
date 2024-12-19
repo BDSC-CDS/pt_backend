@@ -5,15 +5,11 @@ option go_package = ".;templatebackend";
 import "google/protobuf/timestamp.proto";
 
 message RiskAssessment {
-
     uint32 id = 1;
     uint32 tenantid = 2;
     uint32 userid = 3;
     uint32 dataset_id = 4;
     string risk_assessment = 5;
-
-
-
 }
 
 

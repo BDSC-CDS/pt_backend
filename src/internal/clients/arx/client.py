@@ -1,8 +1,8 @@
-from python_arx_deidentifier.client.assessment_client import (
+from src.internal.python_arx_deidentifier.client.assessment_client import (
     apply_assessment,
     parse_risk_assessment,
 )
-from python_arx_deidentifier.client.configuration_client import (
+from src.internal.python_arx_deidentifier.client.configuration_client import (
     build_basic_configuration,
     set_data_as_csv,
     configure_attribute,
