@@ -85,6 +85,13 @@ class DatasetService:
         fp = io.StringIO(text)
         notebook = jupytext.read(fp, fmt = "py:percent")
 
+        # set notebook kernel to Python 3 (ipykernel)
+        notebook.metadata.kernelspec = {
+            "display_name": "Python 3",
+            "language": "python",
+            "name": "python3"
+        }
+
         buffer = io.StringIO()
         jupytext.write(notebook, buffer, fmt="ipynb")
         notebook_bytes = buffer.getvalue().encode("utf-8")
