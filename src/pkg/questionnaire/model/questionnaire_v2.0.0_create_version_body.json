@@ -24,7 +24,8 @@
               },
               {
                 "text": "In a country that does not provide an adequate level of protection and without adequate safeguards according to Swiss law",
-                "riskLevel": 0
+                "riskLevel": 0,
+                "highRisk": true
               }
             ]
           },
@@ -144,7 +145,8 @@
               },
               {
                 "text": "Yes",
-                "riskLevel": 0
+                "riskLevel": 0,
+                "highRisk": true
               }
             ]
           },
@@ -164,7 +166,8 @@
               },
               {
                 "text": "Original values of one or more direct identifiers are kept (*if this rules is selected the data set is not considered de-identified)",
-                "riskLevel": 0
+                "riskLevel": 0,
+                "highRisk": true
               }
             ]
           },
@@ -184,7 +187,8 @@
               },
               {
                 "text": "Original values are kept (hospital internal patient identifier) (*if this rules is selected the data set is not considered de-identified)",
-                "riskLevel": 0
+                "riskLevel": 0,
+                "highRisk": true
               }
             ]
           },
@@ -204,7 +208,8 @@
               },
               {
                 "text": "Original values are kept (hospital internal sample identifier)",
-                "riskLevel": 0
+                "riskLevel": 0,
+                "highRisk": true
               }
             ]
           },
@@ -224,7 +229,8 @@
               },
               {
                 "text": "Original values are kept (hospital internal case identifier)",
-                "riskLevel": 0
+                "riskLevel": 0,
+                "highRisk": true
               }
             ]
           },
@@ -244,7 +250,8 @@
               },
               {
                 "text": "Original values are kept (hospital internal sample identifier)",
-                "riskLevel": 0
+                "riskLevel": 0,
+                "highRisk": true
               }
             ]
           },
@@ -404,7 +411,8 @@
               },
               {
                 "text": "The original locations are kept",
-                "riskLevel": 0
+                "riskLevel": 0,
+                "highRisk": true
               }
             ]
           },
@@ -460,7 +468,8 @@
               },
               {
                 "text": "Patient voice is kept in audio files",
-                "riskLevel": 0
+                "riskLevel": 0,
+                "highRisk": true
               },
               {
                 "text": "Patient voice blurring/noise algorithm (default)",
@@ -480,7 +489,8 @@
               },
               {
                 "text": "Original image or video files are kept",
-                "riskLevel": 0
+                "riskLevel": 0,
+                "highRisk": true
               },
               {
                 "text": "Blurring of identifying parts ",
@@ -632,7 +642,8 @@
               },
               {
                 "text": "Original individual-level values are released",
-                "riskLevel": 0
+                "riskLevel": 0,
+                "highRisk": true
               }
             ]
           },
@@ -668,7 +679,8 @@
               },
               {
                 "text": "No",
-                "riskLevel": 0
+                "riskLevel": 0,
+                "highRisk": true
               }
             ]
           },
@@ -788,11 +800,13 @@
               },
               {
                 "text": "On an external IT infrastructure that DOES NOT comply with BioMedIT Information Security Policy or similar policies (e.g., public cloud)",
-                "riskLevel": 0
+                "riskLevel": 0,
+                "highRisk": true
               },
               {
                 "text": "On PRIVATE computer (e.g., desktop, laptop, etc.)",
-                "riskLevel": 0
+                "riskLevel": 0,
+                "highRisk": true
               }
             ]
           },
