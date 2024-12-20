@@ -24,7 +24,8 @@
               },
               {
                 "text": "In a country that does not provide an adequate level of protection and without adequate safeguards according to Swiss law",
-                "riskLevel": 0
+                "riskLevel": 0,
+                "high_risk": true
               }
             ]
           },
@@ -144,7 +145,8 @@
               },
               {
                 "text": "Yes",
-                "riskLevel": 0
+                "riskLevel": 0,
+                "high_risk": true
               }
             ]
           },
@@ -164,7 +166,8 @@
               },
               {
                 "text": "Original values of one or more direct identifiers are kept (*if this rules is selected the data set is not considered de-identified)",
-                "riskLevel": 0
+                "riskLevel": 0,
+                "high_risk": true
               }
             ]
           },
@@ -184,7 +187,8 @@
               },
               {
                 "text": "Original values are kept (hospital internal patient identifier) (*if this rules is selected the data set is not considered de-identified)",
-                "riskLevel": 0
+                "riskLevel": 0,
+                "high_risk": true
               }
             ]
           },
@@ -204,7 +208,8 @@
               },
               {
                 "text": "Original values are kept (hospital internal sample identifier)",
-                "riskLevel": 0
+                "riskLevel": 0,
+                "high_risk": true
               }
             ]
           },
@@ -224,7 +229,8 @@
               },
               {
                 "text": "Original values are kept (hospital internal case identifier)",
-                "riskLevel": 0
+                "riskLevel": 0,
+                "high_risk": true
               }
             ]
           },
@@ -244,7 +250,8 @@
               },
               {
                 "text": "Original values are kept (hospital internal sample identifier)",
-                "riskLevel": 0
+                "riskLevel": 0,
+                "high_risk": true
               }
             ]
           },
