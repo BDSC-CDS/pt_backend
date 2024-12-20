@@ -91,6 +91,8 @@ class DatasetService:
             "language": "python",
             "name": "python3"
         }
+        # set notebook to trusted
+        notebook.metadata.trusted = True
 
         buffer = io.StringIO()
         jupytext.write(notebook, buffer, fmt="ipynb")
