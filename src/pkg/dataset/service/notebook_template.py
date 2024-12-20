@@ -48,7 +48,7 @@ dataset = dataset.astype(str)
 dataset
 
 # %% [markdown]
-# ### configuration
+# ### Configuration
 
 # %%
 ############### Build the basic configuration ################

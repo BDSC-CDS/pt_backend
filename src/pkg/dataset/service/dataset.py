@@ -63,7 +63,7 @@ class DatasetService:
                 try:
                     df[meta.column_name] = df[meta.column_name].astype(type_mapping[meta.type_])
                 except Exception as e:
-                    print("Error swapping type " + meta.type + " for column " + meta.column_name + " of dataset " + dataset_id, e)
+                    print("Error swapping type " + meta.type_ + " for column " + meta.column_name + " of dataset " + dataset_id, e)
         return df
 
     def open_jupyterhub_deidentification(self, userid: int, datasetid: int):
