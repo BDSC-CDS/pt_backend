@@ -59,8 +59,11 @@ class DatasetService:
         type_mapping = {"string": str, "int": int, "float": float, "bool": bool}
         for meta in metadata:
             if meta.type_ in type_mapping:
-                df[meta.column_name] = df[meta.column_name].astype(type_mapping[meta.type_])
-
+                # TODO centralize and improve type serialization
+                try:
+                    df[meta.column_name] = df[meta.column_name].astype(type_mapping[meta.type_])
+                except Exception as e:
+                    print("Error swapping type " + meta.type + " for column " + meta.column_name + " of dataset " + dataset_id, e)
         return df
 
     def open_jupyterhub_deidentification(self, userid: int, datasetid: int):
