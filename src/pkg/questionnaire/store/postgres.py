@@ -49,13 +49,14 @@ class QuestionnaireStore:
                     'reply_editable': questionnaire.reply_editable
                 }).fetchone()
                 questionnaire_id = result[0]
-
-                for version in questionnaire.versions:
-                    self.create_questionnaire_version_inner(
-                        tenantid=questionnaire.tenantid, userid=questionnaire.userid, 
-                        questionnaire_id=questionnaire_id, version=version, 
-                        session=session
-                    )
+                
+                if questionnaire.versions is not None:
+                    for version in questionnaire.versions:
+                        self.create_questionnaire_version_inner(
+                            tenantid=questionnaire.tenantid, userid=questionnaire.userid, 
+                            questionnaire_id=questionnaire_id, version=version, 
+                            session=session
+                        )
 
             except SQLAlchemyError as e:
                 raise e
