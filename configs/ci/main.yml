@@ -65,3 +65,10 @@ log:
     stdout_business:
       level: debug
 
+steward:
+  enabled: true
+  user:
+    username: admin
+    password: astrongpassword
+  questionnaire:
+    name: Test Jfrei - Questionnaire
