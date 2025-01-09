@@ -32,7 +32,7 @@ class Steward:
             # Check if admin user already exists
             existing_user = self.user_service.get_user(by="username", identifier=self.config.user.username)
             if existing_user:
-                print("Admin user already exists: ", existing_user)
+                print("Admin user already exists.")
                 return existing_user
 
             # Create admin user & set role
@@ -41,7 +41,7 @@ class Steward:
                 password=self.config.user.password,
             ))
             self.user_service.set_admin(userid=u.id)
-            print("Admin user created: ", u)
+            print("Admin user created.")
             return u
         except Exception as e:
             raise Exception(f"Failed to create admin user: {e}")
@@ -65,16 +65,14 @@ class Steward:
                     Questionnaire(
                         userid=self.admin_user.id, 
                         tenantid=self.admin_user.tenantid, 
-                        name='Questionnaire V2', 
+                        name=self.config.questionnaire.name, 
                         versions=[questionnaire_v2],
                     )
                 )
-                print("Initial questionnaire created: ", q)
+                print("Initial questionnaire created.")
                 return q
             else:
-                print("Initial questionnaire already exists: ", existing_questionnaire[0])
+                print("Initial questionnaire already exists.")
                 return existing_questionnaire[0]
         except Exception as e:
             raise Exception(f"Failed to create initial questionnaire: {e}")
-
-        
