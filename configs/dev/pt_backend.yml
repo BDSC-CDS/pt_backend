@@ -67,9 +67,10 @@ log:
       level: debug
 
 steward:
-  enabled: true
   user:
+    enabled: true
     username: admin
     password: astrongpassword
   questionnaire:
+    enabled: true
     name: Test Jfrei - Questionnaire

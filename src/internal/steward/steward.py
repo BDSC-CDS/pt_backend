@@ -11,13 +11,19 @@ class Steward:
         self.user_service = user_service
         self.questionnaire_service = questionnaire_service
 
+        # Internal objects
+        self.admin_user = None
+        self.questionnaire = None
+
         # Seed database
         self.seed_database()
 
     def seed_database(self):
         """Seed initial data into the database."""
-        if self.config.enabled:
-            self._create_admin_user()
+        if self.config.user.enabled:
+            self.admin_user = self._create_admin_user()
+
+        if self.config.questionnaire.enabled:
             self._create_questionnaire()
 
     def _create_admin_user(self):
@@ -26,32 +32,36 @@ class Steward:
             # Check if admin user already exists
             existing_user = self.user_service.get_user(by="username", identifier=self.config.user.username)
             if existing_user:
-                self.admin_user = existing_user
-                print("Admin user already exists.")
-                print(self.admin_user)
-
-                return
+                print("Admin user already exists: ", existing_user)
+                return existing_user
 
             # Create admin user & set role
-            self.admin_user = self.user_service.create_user(user=User(
+            u = self.user_service.create_user(user=User(
                 username=self.config.user.username,
                 password=self.config.user.password,
             ))
-            self.user_service.set_admin(userid=self.admin_user.id)
-            print("Admin user created.")
-            print(self.admin_user)
-
+            self.user_service.set_admin(userid=u.id)
+            print("Admin user created: ", u)
+            return u
         except Exception as e:
-            print(f"Failed to create admin user: {e}")
+            raise Exception(f"Failed to create admin user: {e}")
 
     def _create_questionnaire(self):
         """Add initial questionnaire to the admin user."""
         try:
+            # Check if admin user exists
+            if self.admin_user is None:
+                existing_user = self.user_service.get_user(by="username", identifier=self.config.user.username)
+                if existing_user is None:
+                    raise Exception("Cannot create a questionnaire without an admin user. Please update the steward config.")
+                else:
+                    self.admin_user = existing_user
+
             # Check if questionnaire already exists
             existing_questionnaire = self.questionnaire_service.list_questionnaires(tenantid=self.admin_user.tenantid, userid=self.admin_user.id)
             if existing_questionnaire is None:
                 # Create questionnaire
-                self.questionnaire = self.questionnaire_service.create_questionnaire(
+                q = self.questionnaire_service.create_questionnaire(
                     Questionnaire(
                         userid=self.admin_user.id, 
                         tenantid=self.admin_user.tenantid, 
@@ -59,12 +69,12 @@ class Steward:
                         versions=[questionnaire_v2],
                     )
                 )
-                print("Initial questionnaire created.")
+                print("Initial questionnaire created: ", q)
+                return q
             else:
-                self.questionnaire = existing_questionnaire[0]
-                print("Initial questionnaire already exists.")
-
+                print("Initial questionnaire already exists: ", existing_questionnaire[0])
+                return existing_questionnaire[0]
         except Exception as e:
-            print(f"Failed to create initial questionnaire: {e}")
+            raise Exception(f"Failed to create initial questionnaire: {e}")
 
         
