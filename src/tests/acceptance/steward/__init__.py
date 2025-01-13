@@ -1,7 +1,7 @@
 import os
 import sys
 
-TODO check if can be deduplicated by putting above (in user as well)
+# TODO check if can be deduplicated by putting above (in user as well)
 ### Allow dynamic import resolution from generated pt backend
 # Get the absolute path to src/internal/api/
 module_path = os.path.abspath(os.path.join('src', 'tests', 'client'))
