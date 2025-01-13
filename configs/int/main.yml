@@ -72,4 +72,4 @@ steward:
     password: astrongpassword
   questionnaire:
     enabled: true
-    name: Test Jfrei - Questionnaire
+    name: "Use case assesment and risk evaluation"
