@@ -69,7 +69,7 @@ steward:
   user:
     enabled: true
     username: admin
-    password: astrongpassword
+    password: "{{ .admin_password }}"
   questionnaire:
     enabled: true
     name: "Use case assesment and risk evaluation"
