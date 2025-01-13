@@ -19,9 +19,8 @@ class QuestionnaireService:
         return self.questionnaire_store.create_questionnaire_version(user.tenantid, user.id, questionnaire_id, version)
         # return self.questionnaire_store.create_questionnaire(questionnaire_id, version)
     
-    def list_questionnaires(self, tenantid: int, userid: int, offset: int, limit: int) -> Questionnaire:
+    def list_questionnaires(self, tenantid: int, userid: int, offset: int = 0, limit: int = None) -> Questionnaire:
         questionnaires = self.questionnaire_store.list_questionnaires(tenantid, userid, offset, limit)
-
         return questionnaires
     
     def create_reply(self, user:User, reply: Reply) -> Reply:

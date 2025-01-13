@@ -12,6 +12,7 @@ from ..internal.cmd.provider import controllers
 from ..internal.cmd.provider import db
 from ..internal.api.server_template import encoder
 from ..internal.connexion import connexion as connexion_utils
+from ..internal.cmd.provider import orphans
 
 def main():    
     run_server()
@@ -35,6 +36,9 @@ def run_server():
                 resolver=connexion_utils.Resolver(controllers=controllers.provide_controllers()))
     
     CORS(app.app)
+
+    # Run orphans
+    orphans.provide_orphans()
 
     app.run(port=conf.daemon.http.port)
 

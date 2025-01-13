@@ -65,3 +65,11 @@ log:
     stdout_business:
       level: debug
 
+steward:
+  user:
+    enabled: true
+    username: admin
+    password: astrongpassword
+  questionnaire:
+    enabled: true
+    name: "Use case assesment and risk evaluation"

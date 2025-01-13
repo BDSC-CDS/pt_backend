@@ -21,3 +21,7 @@ class UserService:
             user.drop_sensitive_fields()
 
         return user
+    
+    def set_admin(self, userid: int):
+        """Set admin role to given userid."""
+        return self.user_store.set_admin(userid)
