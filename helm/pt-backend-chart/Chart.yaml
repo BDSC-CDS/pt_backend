@@ -27,3 +27,10 @@ dependencies:
 - name: postgresql
   version: "15.x.x"
   repository: "https://charts.bitnami.com/bitnami"
+- name: jupyterhub-chart
+  alias: jupyterhub
+  version: "0.1.0"
+  condition: jupyterhub.enabled
+  tags:
+    - jupyterhub
+    - back-end
