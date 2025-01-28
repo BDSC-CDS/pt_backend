@@ -1,0 +1,143 @@
+####################################
+# pt-backend chart configuration
+####################################
+
+# This is to override the chart name.
+nameOverride: "pt-backend"
+fullnameOverride: ""
+
+# This will set the replicaset count more information can be found here: https://kubernetes.io/docs/concepts/workloads/controllers/replicaset/
+replicaCount: 1
+
+# This sets the container image more information can be found here: https://kubernetes.io/docs/concepts/containers/images/
+image:
+  repository: registry.rdeid.unil.ch/pt-backend
+  # This sets the pull policy for images.
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: "latest"
+
+# This defines the commands which will be executed when the container starts.
+command:
+  - python3
+  - -m 
+  - src.cmd.start
+  - --config
+  - "/pt_backend/conf/config.yaml"
+
+# This is for the secrets for pulling an image from a private repository more information can be found here: https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/
+imagePullSecrets:
+  - name: registry-auth
+
+# This is for setting Kubernetes Annotations to a Pod.
+podAnnotations: {}
+# This is for setting Kubernetes Labels to a Pod.
+podLabels: {}
+
+podSecurityContext: {}
+  # fsGroup: 2000
+
+securityContext: {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+# This is for setting up a service more information can be found here: https://kubernetes.io/docs/concepts/services-networking/service/
+service:
+  # This sets the service type more information can be found here: https://kubernetes.io/docs/concepts/services-networking/service/#publishing-services-service-types
+  type: ClusterIP
+  # This sets the ports more information can be found here: https://kubernetes.io/docs/concepts/services-networking/service/#field-spec-ports
+  port: 16080
+  # This sets the target port 
+  targetPort: 5000
+
+# This block is for setting up the ingress for more information can be found here: https://kubernetes.io/docs/concepts/services-networking/ingress/
+ingress:
+  enabled: true
+  className: public
+  annotations: 
+    kubernetes.io/tls-acme: "true"
+    nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
+  hosts:
+    - host: "pt-backend-test.rdeid.unil.ch"
+      paths:
+        - path: /
+          pathType: Prefix
+  tls: []
+  #  - secretName: chart-example-tls
+  #    hosts:
+  #      - chart-example.local
+
+resources: {}
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
+
+# This is to setup the liveness and readiness probes more information can be found here: https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/
+# livenessProbe:
+#   httpGet:
+#     path: /api/v1/hello
+#     port: http
+# readinessProbe:
+#   httpGet:
+#     path: /api/v1/hello
+#     port: http
+
+# Additional volumes on the output Deployment definition.
+volumes: 
+  - name: pt-backend-data
+    persistentVolumeClaim:
+      claimName: pt-backend-pvc
+  - name: backend-config
+    secret:
+      secretName: backend-config-secret
+      items:
+      - key: config.yaml
+        path: config.yaml
+
+# Additional volumeMounts on the output Deployment definition.
+volumeMounts: 
+  - name: pt-backend-data
+    mountPath: "/data/pt_backend"
+  - name: backend-config
+    mountPath: "/pt_backend/conf"
+
+# Persistent volume claim config for the pt-backend data.
+persistentVolumeClaim:
+  enabled: true
+  name: pt-backend-pvc
+  accessMode: ReadWriteOnce
+  size: 5Gi
+  storageClass: microk8s-hostpath
+
+
+####################################
+# PostgreSQL subchart configuration
+####################################
+postgresql:
+  fullnameOverride: postgresql
+  # This defines the authentication parameters
+  auth:
+    enablePostgresUser: true # Creates a user "postgres" with admin rights.
+    postgresPassword: password
+    database: pt_backend
+
+  primary:
+    persistence:
+      enabled: true
+  
+
+
+####################################
+# jupyterhub subchart configuration
+####################################
