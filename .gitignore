@@ -163,4 +163,4 @@ cython_debug/
 
 debug_notebook.ipynb
 helm/pt-backend-chart/Chart.lock
-helm/pt-backend-chart/charts/postgresql-15.5.38.tgz
+helm/pt-backend-chart/charts/*.tgz
