@@ -49,7 +49,7 @@ Create chart name and version as used by the chart label.
 Common labels
 */}}
 {{- define "pt-backend.labels" -}}
-helm.sh/chart: {{ include "pt-backend.chart" . }}
+chart: {{ include "pt-backend.chart" . }}
 {{ include "pt-backend.selectorLabels" . }}
 {{- if .Chart.AppVersion }}
 appVersion: {{ .Chart.AppVersion | quote }}
