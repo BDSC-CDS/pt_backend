@@ -2,10 +2,8 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ include "pt-backend.name" . }}-deployment
+  namespace: {{ .Release.Namespace }}
   labels:
-    app: {{ include "pt-backend.name" . }}-deployment
-    nameid: {{ include "pt-backend.nameid" . }}
-    version: {{ .Values.version }}
     {{- include "pt-backend.labels" . | nindent 4 }}
 spec:
   replicas: {{ .Values.replicaCount }}

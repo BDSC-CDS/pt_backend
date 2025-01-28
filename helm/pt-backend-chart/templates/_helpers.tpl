@@ -2,15 +2,8 @@
 Expand the name of the chart.
 */}}
 {{- define "pt-backend.name" -}}
-{{- default .Chart.Name .Values.nameOverride | trunc 63 | trimSuffix "-" }}
-{{- end }}
-
-
-{{/*
-Expand the nameid of the chart.
-*/}}
-{{- define "pt-backend.nameid" -}}
-{{- printf "%s-%s" (include "pt-backend.name" .) .Chart.Version }}
+{{- $name := .Values.nameOverride | default .Chart.Name -}}
+{{- $name | trunc 63 | trimSuffix "-" -}}
 {{- end }}
 
 {{/*
@@ -59,26 +52,14 @@ Common labels
 helm.sh/chart: {{ include "pt-backend.chart" . }}
 {{ include "pt-backend.selectorLabels" . }}
 {{- if .Chart.AppVersion }}
-app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
+appVersion: {{ .Chart.AppVersion | quote }}
 {{- end }}
-app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{- end }}
 
 {{/*
 Selector labels
 */}}
 {{- define "pt-backend.selectorLabels" -}}
-app.kubernetes.io/name: {{ include "pt-backend.name" . }}
-app.kubernetes.io/instance: {{ .Release.Name }}
-{{- end }}
-
-{{/*
-Create the name of the service account to use
-*/}}
-{{- define "pt-backend.serviceAccountName" -}}
-{{- if .Values.serviceAccount.create }}
-{{- default (include "pt-backend.fullname" .) .Values.serviceAccount.name }}
-{{- else }}
-{{- default "default" .Values.serviceAccount.name }}
-{{- end }}
+app: {{ include "pt-backend.name" . }}
+release: {{ .Release.Name }}
 {{- end }}

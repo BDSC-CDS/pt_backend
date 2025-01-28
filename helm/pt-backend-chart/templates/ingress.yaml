@@ -3,9 +3,8 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: {{ include "pt-backend.name" . }}-ingress
+  namespace: {{ .Release.Namespace }}
   labels:
-    nameid: {{ include "pt-backend.nameid" . }}
-    version: {{ .Values.version }}
     {{- include "pt-backend.labels" . | nindent 4 }}
   {{- with .Values.ingress.annotations }}
   annotations:
