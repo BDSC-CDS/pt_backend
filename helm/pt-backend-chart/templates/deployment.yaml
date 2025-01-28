@@ -8,9 +8,7 @@ metadata:
     version: {{ .Values.version }}
     {{- include "pt-backend.labels" . | nindent 4 }}
 spec:
-  {{- if not .Values.autoscaling.enabled }}
   replicas: {{ .Values.replicaCount }}
-  {{- end }}
   selector:
     matchLabels:
       {{- include "pt-backend.selectorLabels" . | nindent 6 }}
