@@ -57,7 +57,7 @@ pipeline {
           VERSION=v$MAJOR.$MINOR.$BUILD_ID
           VERSION_SEMVER="$VERSION"
           VERSION=$(echo "$VERSION" | awk '{print tolower($0)}')
-          VERSION=$(echo -n ${VERSION//[\\/_]/-})
+          VERSION=$(echo -n ${VERSION//[\\/_\\.]/-})
           RELEASE_NAME="${componentName}-$VERSION"
           RELEASE_NAME=$(echo -n ${RELEASE_NAME//[\\/_\\.]/-})
           RELEASE_NAME=$(echo "$RELEASE_NAME" | awk '{print tolower($0)}')
