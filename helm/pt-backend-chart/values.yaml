@@ -55,9 +55,12 @@ resources: {}
   #   cpu: 100m
   #   memory: 128Mi
 
-configOverride: {}
-  # daemon:
-  #   title: "TEST"
+configOverride:
+  daemon:
+    public_url: "https://pt-backend-test.rdeid.unil.ch"
+  clients:
+    jupyterhub:
+      host: "https://jupyterhub-test.rdeid.unil.ch/"
 
 config: |
     daemon:
