@@ -85,10 +85,11 @@ class Config:
             v.read_in_config()
 
             self._config = v.all_settings()
-        # Replace env variables in the config values
-        self._config = replace_env_variables(self._config)
         # Provide default values to empty config
         self._provide_defaults()
+        
+        # Replace env variables in the config values
+        self._config = replace_env_variables(self._config)
 
         dump_config(dict_to_class(self._config))
 
