@@ -41,6 +41,22 @@ spec:
             - name: {{ .Release.Name }}-data
               mountPath: "/data/pt_backend"
             {{- end }}
+          env:
+            - name: JWT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: pt-backend-secrets
+                  key: jwt-secret
+            - name: ADMIN_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: pt-backend-secrets
+                  key: admin-token
+            - name: SYMMETRIC_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: pt-backend-secrets
+                  key: symmetric-encryption-key
           command:
             - python3
             - -m 
