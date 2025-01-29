@@ -13,7 +13,6 @@ replicaCount: 1
 image:
   repository: registry.rdeid.unil.ch/pt-backend
   pullPolicy: IfNotPresent
-  tag: "v0.0.4"
   pullSecrets:
   - name: registry-auth
 
