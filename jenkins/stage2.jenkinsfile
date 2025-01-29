@@ -85,6 +85,7 @@ pipeline {
             checkout scm
             sh '''
               cd docker
+              echo "$IMAGE_TAG"
               ./build-stage2.sh
             '''
           }
