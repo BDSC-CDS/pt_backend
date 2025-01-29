@@ -128,7 +128,7 @@ pipeline {
             stage('test') {
               agent {
                 docker {
-                  image "registry.rdeid.unil.ch/pt-backend:${IMAGE_TAG}"
+                  image "registry.rdeid.unil.ch/pt-backend:${env.IMAGE_TAG}"
                   registryUrl 'https://registry.rdeid.unil.ch'
                   registryCredentialsId 'pt_registry'
                   alwaysPull true
