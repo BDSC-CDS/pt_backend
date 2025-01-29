@@ -207,7 +207,8 @@ pipeline {
                   # Package the Helm chart
                   helm package helm/pt-backend-chart \
                     --destination . \
-                    --version "$HELM_CHART_VERSION" 
+                    --version "$HELM_CHART_VERSION" \
+                    --app-version "$VERSION_SEMVER"
 
                   # Login to Helm registry (replace with actual credentials or use a secure method)
                   # helm registry login "$HELM_REPO_URL" --username "your-username" --password "your-password"
