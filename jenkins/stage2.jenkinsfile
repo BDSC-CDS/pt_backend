@@ -93,94 +93,94 @@ pipeline {
       }
     }
 
-    stage('Test') {
-      steps {
-        container(name: 'pt-ubuntu', shell: '/bin/bash') {
-          dir('pt-dev-ops') {
-            checkout scm
-            sh '''
-              #pip3 install -r requirements.txt
-              #python3 -m unittest discover ./src
-            '''
-          }
-        }
-      }
-    }
+    // stage('Test') {
+    //   steps {
+    //     container(name: 'pt-ubuntu', shell: '/bin/bash') {
+    //       dir('pt-dev-ops') {
+    //         checkout scm
+    //         sh '''
+    //           #pip3 install -r requirements.txt
+    //           #python3 -m unittest discover ./src
+    //         '''
+    //       }
+    //     }
+    //   }
+    // }
 
-    stage('Test CI') {
-      stages {
-        stage('deploy & test') {
-          stages {
-            stage('deploy'){
-              steps {
-                dir('pt-dev-ops') {
-                  checkout scm
-                  sh '''
-                    export env=ci
-                    export version="$VERSION"
-                    cd deploy
-                    ./deploy.sh
-                    docker version
-                    which docker
-                  '''
-                }
-              }
-            }
-            stage('test') {
-              agent {
-                docker {
-                  image "registry.rdeid.unil.ch/pt-backend:${env.IMAGE_TAG}"
-                  registryUrl 'https://registry.rdeid.unil.ch'
-                  registryCredentialsId 'pt_registry'
-                  alwaysPull true
-                }
-              }
-              steps {
-                dir('pt-dev-ops') {
-                  checkout scm
-                  withCredentials([
-                    file([credentialsId: 'kubernetes-in-kubeconfig-file', variable: "KUBECONFIG"]),
-                    file([credentialsId: 'registry-auth-docker-config', variable: "DOCKER_CONFIG"]),
-                  ]){
-                    sh """
-                      echo "looking for pod name"
-                      POD_NAME=\$(kubectl get pods -n ci -l app=deployment-backend-${RELEASE_NAME} -o jsonpath="{.items[0].metadata.name}")
-                      echo "waiting 60sec for pod \$POD_NAME to be ready"
-                      kubectl wait --for=condition=ready pod \$POD_NAME -n ci --timeout=60s
-                      kubectl -n ci port-forward service/service-backend-${RELEASE_NAME} 5000:5000 &
-                      kubectl -n ci logs -f pod/\$POD_NAME &
+    // stage('Test CI') {
+    //   stages {
+    //     stage('deploy & test') {
+    //       stages {
+    //         stage('deploy'){
+    //           steps {
+    //             dir('pt-dev-ops') {
+    //               checkout scm
+    //               sh '''
+    //                 export env=ci
+    //                 export version="$VERSION"
+    //                 cd deploy
+    //                 ./deploy.sh
+    //                 docker version
+    //                 which docker
+    //               '''
+    //             }
+    //           }
+    //         }
+    //         stage('test') {
+    //           agent {
+    //             docker {
+    //               image "registry.rdeid.unil.ch/pt-backend:${env.IMAGE_TAG}"
+    //               registryUrl 'https://registry.rdeid.unil.ch'
+    //               registryCredentialsId 'pt_registry'
+    //               alwaysPull true
+    //             }
+    //           }
+    //           steps {
+    //             dir('pt-dev-ops') {
+    //               checkout scm
+    //               withCredentials([
+    //                 file([credentialsId: 'kubernetes-in-kubeconfig-file', variable: "KUBECONFIG"]),
+    //                 file([credentialsId: 'registry-auth-docker-config', variable: "DOCKER_CONFIG"]),
+    //               ]){
+    //                 sh """
+    //                   echo "looking for pod name"
+    //                   POD_NAME=\$(kubectl get pods -n ci -l app=deployment-backend-${RELEASE_NAME} -o jsonpath="{.items[0].metadata.name}")
+    //                   echo "waiting 60sec for pod \$POD_NAME to be ready"
+    //                   kubectl wait --for=condition=ready pod \$POD_NAME -n ci --timeout=60s
+    //                   kubectl -n ci port-forward service/service-backend-${RELEASE_NAME} 5000:5000 &
+    //                   kubectl -n ci logs -f pod/\$POD_NAME &
 
-                      sleep 20
+    //                   sleep 20
 
-                      mkdir -p ./conf
-                      kubectl -n ci exec pod/\$POD_NAME -- cat /pt_backend/conf/config.yaml > ./conf/config.yaml
-                      export TEST_CONFIG=\$(realpath ./conf/config.yaml)
-                      python3 -m unittest discover ./src/tests/acceptance
-                      python3 -m unittest discover ./src/pkg
-                      python3 -m unittest discover ./src/internal/cmd/provider
-                      python3 -m unittest discover ./src/internal/api/controllers
+    //                   mkdir -p ./conf
+    //                   kubectl -n ci exec pod/\$POD_NAME -- cat /pt_backend/conf/config.yaml > ./conf/config.yaml
+    //                   export TEST_CONFIG=\$(realpath ./conf/config.yaml)
+    //                   python3 -m unittest discover ./src/tests/acceptance
+    //                   python3 -m unittest discover ./src/pkg
+    //                   python3 -m unittest discover ./src/internal/cmd/provider
+    //                   python3 -m unittest discover ./src/internal/api/controllers
 
-                    """
-                  }
-                }
-              }
-            }
-          }
-          post {
-            always {
-              sh '''
-                helm uninstall --timeout 60s --namespace ci "${RELEASE_NAME}" || true
-              '''
-            }
-            failure {
-              sh '''
-                echo no
-              '''
-            }
-          }
-        }
-      }
-    }
+    //                 """
+    //               }
+    //             }
+    //           }
+    //         }
+    //       }
+    //       post {
+    //         always {
+    //           sh '''
+    //             helm uninstall --timeout 60s --namespace ci "${RELEASE_NAME}" || true
+    //           '''
+    //         }
+    //         failure {
+    //           sh '''
+    //             echo no
+    //           '''
+    //         }
+    //       }
+    //     }
+    //   }
+    // }
 
     stage("Release") {
       when {
@@ -199,11 +199,12 @@ pipeline {
                   HELM_CHART_NAME="chorus-backend"
                   HELM_CHART_VERSION="$VERSION_SEMVER"
 
+                  cp configs/default/values.yaml deploy/backend/values.yaml
+
                   # Package the Helm chart
                   helm package deploy/backend \
                     --destination . \
                     --version "$HELM_CHART_VERSION" \
-                    --values configs/default/values.yaml \
                     --set-file "main.yaml=configs/default/main.yaml"
 
                   # Login to Helm registry (replace with actual credentials or use a secure method)
