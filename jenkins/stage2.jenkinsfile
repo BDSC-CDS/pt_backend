@@ -53,10 +53,14 @@ pipeline {
           MAJOR=$(echo $stripped | cut -d'.' -f1)
           MINOR=$(echo $stripped | cut -d'.' -f2)
           VERSION=v$MAJOR.$MINOR.$BUILD_ID
+          VERSION_SEMVER="$VERSION"
+          VERSION=$(echo "$VERSION" | awk '{print tolower($0)}')
           RELEASE_NAME="${componentName}-$VERSION"
-          RELEASE_NAME=$(echo -n ${RELEASE_NAME//[\\/_]/-})
-
+          RELEASE_NAME=$(echo -n ${RELEASE_NAME//[\\/_\\.]/-})
+          RELEASE_NAME=$(echo "$RELEASE_NAME" | awk '{print tolower($0)}')
+          
           echo $VERSION > $WORKSPACE/version
+          echo $VERSION_SEMVER > $WORKSPACE/version_semver
           echo ${VERSION//\\//-} > $WORKSPACE/image_tag
           echo -n $RELEASE_NAME > $WORKSPACE/release_name
 
@@ -64,7 +68,9 @@ pipeline {
         '''
         script {
           env.VERSION = readFile("$WORKSPACE/version")
+          env.VERSION_SEMVER = readFile("$WORKSPACE/version_semver")
           env.IMAGE_TAG = readFile("$WORKSPACE/image_tag")
+          env.RELEASE_NAME = readFile("$WORKSPACE/release_name")
         }
       }
     }
@@ -167,6 +173,41 @@ pipeline {
                 echo no
               '''
             }
+          }
+        }
+      }
+    }
+
+    stage("Helm package release") {
+      when {
+        branch 'release/v*'
+      }
+      steps {
+        container(name: 'pt-ubuntu', shell: '/bin/bash') {
+          dir('pt-dev-ops') {
+            checkout scm
+            sh '''
+              HELM_REPO_NAME="charts"
+              HELM_REPO_URL="registry.rdeid.unil.ch"
+              #HELM_REPO_URL="ghcr.io/bdsc-cds"
+              HELM_CHART_NAME="chorus-backend"
+              HELM_CHART_VERSION="$VERSION_SEMVER"
+
+              # Package the Helm chart
+              helm package deploy/backend \
+                --destination . \
+                --version "$HELM_CHART_VERSION" \
+                --values configs/default/values.yaml \
+                --set-file "main.yaml=configs/default/main.yaml"
+
+              # Login to Helm registry (replace with actual credentials or use a secure method)
+              # helm registry login "$HELM_REPO_URL" --username "your-username" --password "your-password"
+
+              export HELM_REGISTRY_CONFIG=/pt/pt-deployer/.docker/config.json
+
+              # Push the Helm chart to the registry
+              helm push "$HELM_CHART_NAME-$HELM_CHART_VERSION.tgz" "oci://$HELM_REPO_URL/$HELM_REPO_NAME"
+            '''
           }
         }
       }
