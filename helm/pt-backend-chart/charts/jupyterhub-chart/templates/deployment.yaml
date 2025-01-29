@@ -47,17 +47,17 @@ spec:
             - name: BACKEND_JWT_SECRET
               valueFrom:
                 secretKeyRef:
-                  name: pt-backend-secrets
+                  name: {{ .Release.Name }}-secrets
                   key: jwt-secret
             - name: ADMIN_TOKEN
               valueFrom:
                 secretKeyRef:
-                  name: pt-backend-secrets
+                  name: {{ .Release.Name }}-secrets
                   key: admin-token
             - name: SYMMETRIC_ENCRYPTION_KEY
               valueFrom:
                 secretKeyRef:
-                  name: pt-backend-secrets
+                  name: {{ .Release.Name }}-secrets
                   key: symmetric-encryption-key
           {{- with .Values.livenessProbe }}
           livenessProbe:
