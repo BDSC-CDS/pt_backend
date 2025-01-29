@@ -199,10 +199,10 @@ pipeline {
                   HELM_CHART_NAME="chorus-backend"
                   HELM_CHART_VERSION="$VERSION_SEMVER"
 
-                  cp configs/default/values.yaml deploy/backend/values.yaml
+                  cp configs/default/values.yaml helm/pt-backend-chart/values.yaml
 
                   # Package the Helm chart
-                  helm package deploy/backend \
+                  helm package helm/pt-backend-chart \
                     --destination . \
                     --version "$HELM_CHART_VERSION" \
                     --set-file "main.yaml=configs/default/main.yaml"
