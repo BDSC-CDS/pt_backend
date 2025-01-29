@@ -7,7 +7,7 @@ grpcio-tools
 vyper-config
 sqlalchemy
 psycopg2
-PyJWT
+PyJWT~=2.8.0
 bcrypt
 pydantic
 python-dateutil

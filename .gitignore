@@ -164,3 +164,5 @@ cython_debug/
 debug_notebook.ipynb
 helm/pt-backend-chart/Chart.lock
 helm/pt-backend-chart/charts/*.tgz
+helm/pt-backend-chart/main.yaml
+helm/pt-backend-chart/values.yaml
