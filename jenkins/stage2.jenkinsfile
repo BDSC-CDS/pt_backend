@@ -200,12 +200,12 @@ pipeline {
                   HELM_CHART_VERSION="$VERSION_SEMVER"
 
                   cp configs/default/values.yaml helm/pt-backend-chart/values.yaml
+                  cp configs/default/main.yaml helm/pt-backend-chart/main.yaml
 
                   # Package the Helm chart
                   helm package helm/pt-backend-chart \
                     --destination . \
-                    --version "$HELM_CHART_VERSION" \
-                    --set-file "main.yaml=configs/default/main.yaml"
+                    --version "$HELM_CHART_VERSION" 
 
                   # Login to Helm registry (replace with actual credentials or use a secure method)
                   # helm registry login "$HELM_REPO_URL" --username "your-username" --password "your-password"
