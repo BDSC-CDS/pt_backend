@@ -7,4 +7,4 @@ metadata:
     {{- include "pt-backend.labels" . | nindent 4 }}
 data:
   config.yaml: | 
-    {{- toYaml (mergeOverwrite .Values.config .Values.configOverride) | nindent 4  }}
+    {{- toYaml (mergeOverwrite (fromYaml (.Files.Get "files/main.yaml")) .Values.configOverride) | nindent 4  }}

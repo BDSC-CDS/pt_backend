@@ -21,6 +21,7 @@ pipeline {
       steps {
         sh '''#!/bin/bash -xe
           VERSION=$BRANCH_NAME-$BUILD_ID
+          VERSION=$(echo "$VERSION" | awk '{print tolower($0)}')
           IMAGE_TAG=$(echo -n ${VERSION//[\\/_]/-})
           RELEASE_NAME="${componentName}-$VERSION"
           RELEASE_NAME=$(echo -n ${RELEASE_NAME//[\\/_]/-})
@@ -52,19 +53,27 @@ pipeline {
           stripped=${BRANCH_NAME#release/v}
           MAJOR=$(echo $stripped | cut -d'.' -f1)
           MINOR=$(echo $stripped | cut -d'.' -f2)
+          IMAGE_TAG="v$MAJOR.$MINOR.$BUILD_ID"
           VERSION=v$MAJOR.$MINOR.$BUILD_ID
+          VERSION_SEMVER="$VERSION"
+          VERSION=$(echo -n "$VERSION" | awk '{print tolower($0)}')
+          VERSION=$(echo -n ${VERSION//[\\/_\\.]/-})
           RELEASE_NAME="${componentName}-$VERSION"
-          RELEASE_NAME=$(echo -n ${RELEASE_NAME//[\\/_]/-})
-
-          echo $VERSION > $WORKSPACE/version
-          echo ${VERSION//\\//-} > $WORKSPACE/image_tag
+          RELEASE_NAME=$(echo -n ${RELEASE_NAME//[\\/_\\.]/-})
+          RELEASE_NAME=$(echo "$RELEASE_NAME" | awk '{print tolower($0)}')
+          
+          echo -n $VERSION > $WORKSPACE/version
+          echo -n $VERSION_SEMVER > $WORKSPACE/version_semver
+          echo -n $IMAGE_TAG > $WORKSPACE/image_tag
           echo -n $RELEASE_NAME > $WORKSPACE/release_name
 
           echo $VERSION
         '''
         script {
           env.VERSION = readFile("$WORKSPACE/version")
+          env.VERSION_SEMVER = readFile("$WORKSPACE/version_semver")
           env.IMAGE_TAG = readFile("$WORKSPACE/image_tag")
+          env.RELEASE_NAME = readFile("$WORKSPACE/release_name")
         }
       }
     }
@@ -76,7 +85,7 @@ pipeline {
             checkout scm
             sh '''
               cd docker
-              echo "$IMAGE_TAG"
+              echo "'""$IMAGE_TAG""'"
               ./build-stage2.sh
             '''
           }
@@ -108,7 +117,7 @@ pipeline {
                   checkout scm
                   sh '''
                     export env=ci
-                    export version="$IMAGE_TAG"
+                    export version="$VERSION"
                     cd deploy
                     ./deploy.sh
                     docker version
@@ -120,7 +129,7 @@ pipeline {
             stage('test') {
               agent {
                 docker {
-                  image "registry.rdeid.unil.ch/pt-backend:${IMAGE_TAG}"
+                  image "registry.rdeid.unil.ch/pt-backend:${env.IMAGE_TAG}"
                   registryUrl 'https://registry.rdeid.unil.ch'
                   registryCredentialsId 'pt_registry'
                   alwaysPull true
@@ -167,6 +176,50 @@ pipeline {
               sh '''
                 echo no
               '''
+            }
+          }
+        }
+      }
+    }
+
+    stage("Release") {
+      when {
+        branch 'release/v*'
+      }
+      stages {
+        stage('Package') {
+          steps {
+            container(name: 'pt-ubuntu', shell: '/bin/bash') {
+              dir('pt-dev-ops') {
+                checkout scm
+                sh '''
+                  HELM_REPO_NAME="charts"
+                  HELM_REPO_URL="registry.rdeid.unil.ch"
+                  HELM_REPO_GIHUB_URL="ghcr.io/bdsc-cds"
+                  HELM_CHART_NAME="pt-backend-chart"
+                  HELM_CHART_VERSION="$VERSION_SEMVER"
+
+                  cp configs/default/values.yaml helm/pt-backend-chart/values.yaml
+                  cp configs/default/main.yaml helm/pt-backend-chart/main.yaml
+
+                  helm dependency update helm/pt-backend-chart/
+
+                  # Package the Helm chart
+                  helm package helm/pt-backend-chart \
+                    --destination . \
+                    --version "$HELM_CHART_VERSION" \
+                    --app-version "$VERSION_SEMVER"
+
+                  # Login to Helm registry (replace with actual credentials or use a secure method)
+                  # helm registry login "$HELM_REPO_URL" --username "your-username" --password "your-password"
+
+                  export HELM_REGISTRY_CONFIG=/pt/pt-deployer/.docker/config.json
+
+                  # Push the Helm chart to the registry
+                  helm push "$HELM_CHART_NAME-$HELM_CHART_VERSION.tgz" "oci://$HELM_REPO_URL/$HELM_REPO_NAME"
+                  helm push "$HELM_CHART_NAME-$HELM_CHART_VERSION.tgz" "oci://$HELM_REPO_GITHUB_URL/$HELM_REPO_NAME"
+                '''
+              }
             }
           }
         }

@@ -1,0 +1,93 @@
+####################################
+# pt-backend chart configuration
+####################################
+
+# This is to override the chart name.
+nameOverride: "pt-backend"
+fullnameOverride: ""
+
+# This will set the replicaset count.
+replicaCount: 1
+
+# This sets the container image.
+image:
+  repository: registry.rdeid.unil.ch/pt-backend
+  pullPolicy: IfNotPresent
+  pullSecrets:
+  - name: registry-auth
+
+# This is for setting up a service for the pt-backend deployment.
+service:
+  enabled: true
+  type: ClusterIP
+  port: 16080
+  targetPort: 5000
+
+# This block is for setting up the ingress for the pt-backend.
+ingress:
+  enabled: true
+  host: "pt-backend-test.rdeid.unil.ch"
+  tls: false # Secret name should match: {{ .Chart.Name }}-tls
+  className: public
+  annotations: 
+    kubernetes.io/tls-acme: "true"
+    nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
+  
+# This defines the persistence options, allowing to mount a PVC.
+persistence:
+  enabled: true
+  size: 2Gi
+  accessMode: ReadWriteOnce
+  storageClass: microk8s-hostpath
+
+# Deployment specific options
+podAnnotations: {}
+podLabels: {}
+affinity: {}
+tolerations: []
+nodeSelector: {}
+resources: {}
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
+
+configOverride:
+  daemon:
+    public_url: "https://pt-backend-test.rdeid.unil.ch"
+  clients:
+    jupyterhub:
+      host: "https://jupyterhub-test.rdeid.unil.ch/"
+
+####################################
+# PostgreSQL subchart configuration
+####################################
+postgresql:
+  fullnameOverride: postgresql
+  # This defines the authentication parameters
+  auth:
+    enablePostgresUser: true # Creates a user "postgres" with admin rights.
+    postgresPassword: password
+    database: pt_backend
+
+  primary:
+    persistence:
+      enabled: true
+
+
+####################################
+# jupyterhub subchart configuration
+####################################
+jupyterhub:
+  enabled: true
+
+  service:
+    enabled: true
+    type: ClusterIP
+    port: 8000
+
+  ingress:
+    enabled: true
+    host: jupyterhub-test.rdeid.unil.ch
