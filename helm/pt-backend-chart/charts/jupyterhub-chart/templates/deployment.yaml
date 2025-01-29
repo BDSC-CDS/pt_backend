@@ -2,10 +2,8 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ .Release.Name }}-{{ .Chart.Name }}-deployment
+  namespace: {{ .Release.Namespace }} 
   labels:
-    app: {{ .Release.Name }}-{{ .Chart.Name }}-deployment
-    nameid: {{ include "jupyterhub.nameid" . }}
-    version: {{ .Values.version }}
     {{- include "jupyterhub.labels" . | nindent 4 }}
 spec:
   replicas: {{ .Values.replicaCount }}
@@ -24,7 +22,7 @@ spec:
         {{- toYaml . | nindent 8 }}
         {{- end }}
     spec:
-      {{- with .Values.imagePullSecrets }}
+      {{- with .Values.image.pullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
       {{- end }}
@@ -45,9 +43,23 @@ spec:
               containerPort: {{ .Values.service.port }}
               protocol: TCP
           {{- with .Values.env }}
+          # This defines the env variables used within the container.
           env:
-            {{- toYaml . | nindent 12 }}
-          {{- end }}
+            - name: BACKEND_JWT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: pt-backend-secrets
+                  key: jwt-secret
+            - name: ADMIN_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: pt-backend-secrets
+                  key: admin-token
+            - name: SYMMETRIC_ENCRYPTION_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: pt-backend-secrets
+                  key: symmetric-encryption-key
           {{- with .Values.livenessProbe }}
           livenessProbe:
             {{- toYaml . | nindent 12 }}
