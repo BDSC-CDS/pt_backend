@@ -154,7 +154,6 @@ pipeline {
 
                       mkdir -p ./conf
                       kubectl -n ci exec pod/\$POD_NAME -- cat /pt_backend/conf/config.yaml > ./conf/config.yaml
-                      cat ./conf/config.yaml
                       export TEST_CONFIG=\$(realpath ./conf/config.yaml)
                       python3 -m unittest discover ./src/tests/acceptance
                       python3 -m unittest discover ./src/pkg
