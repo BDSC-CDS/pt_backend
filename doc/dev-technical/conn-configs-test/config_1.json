@@ -1,0 +1,27 @@
+{
+    "scrambleField": {
+        "defaultScrambling": {
+            "applies_to_fields": [
+                "IPP_MASTER",
+                "NOM",
+                "PRENOM",
+                "NUMERO_SEJOUR"
+            ]
+        }
+    },
+    "dateShift": {
+        "defaultDateShift": {
+            "low_range": -30,
+            "high_range": 30
+        }
+    },
+    "substituteFieldList": {
+        "subIDlist": {
+            "applies_to_field": "TYPE_SEJOUR",
+            "substitution_list": [
+                "Ambulatoire"
+            ],
+            "replacement": "A"
+        }
+    }
+}

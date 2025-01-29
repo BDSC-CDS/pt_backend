@@ -1,0 +1,28 @@
+{
+    "scrambleField": {
+        "defaultScrambling": {
+            "applies_to_fields": [
+                "sphn:SubjectPseudoIdentifier/id",
+"sphn:SubjectPseudoIdentifier/sphn:hasIdentifier", "sphn:AdministrativeCase/id",
+"sphn:AdministrativeCase/sphn:hasIdentifier", "sphn:Sample/id",
+"sphn:Sample/sphn:hasIdentifier", "sphn:hasSample/id",
+"sphn:hasSample/sphn:hasIdentifier"
+            ]
+        }
+    },
+    "dateShift": {
+        "defaultDateShift": {
+            "low_range": -30,
+            "high_range": 30
+        }
+    },
+    "substituteFieldList": {
+        "subIDlist": {
+            "applies_to_field": "sphn:Allergy/id",
+            "substitution_list": [
+                "Ambulatoire"
+            ],
+            "replacement": "A"
+        }
+    }
+}
