@@ -162,3 +162,5 @@ cython_debug/
 #.idea/
 
 debug_notebook.ipynb
+helm/pt-backend-chart/Chart.lock
+helm/pt-backend-chart/charts/*.tgz

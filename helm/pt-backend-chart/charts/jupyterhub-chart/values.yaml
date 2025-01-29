@@ -1,0 +1,52 @@
+####################################
+# jupyterhub chart configuration
+####################################
+
+# This is to override the chart name.
+nameOverride: "jupyterhub"
+fullnameOverride: ""
+
+# This will set the replicaset count.
+replicaCount: 1
+
+# This sets the container image.
+image:
+  repository: registry.rdeid.unil.ch/jupyterhub
+  pullPolicy: IfNotPresent
+  tag: "latest"
+  pullSecrets:
+    - name: registry-auth
+
+# This is for setting up a service.
+service:
+  enabled: true
+  type: ClusterIP
+  port: 8000
+
+# This block is for setting up the ingress.
+ingress:
+  enabled: true
+  host: jupyterhub-test.rdeid.unil.ch
+  tls: true # Secret name should match: {{ .Chart.Name }}-tls
+  className: public
+  annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/configuration-snippet: |
+      more_clear_headers "Content-Security-Policy";
+      add_header content-security-policy "frame-ancestors 'self' https://pt-frontend-test.rdeid.unil.ch" always;
+      add_header Access-Control-Allow-Origin "https://pt-frontend-test.rdeid.unil.ch";
+
+# Deployment specific options
+podAnnotations: {}
+podLabels: {}
+affinity: {}
+tolerations: []
+nodeSelector: {}
+resources: {}
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi

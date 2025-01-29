@@ -1,6 +1,7 @@
 import copy
 from vyper import v
-import json
+import os
+import re
 
 conf = None
 
@@ -50,6 +51,28 @@ def dump_config(obj, level=0):
                 else:
                     print(" " * level + "{}: {}".format(key, value))
 
+def replace_env_variables(d):
+    """
+    Recursively replace the placeholders in the format ${ENV_VARIABLE} with 
+    their corresponding values from the environment variables.
+    
+    Args:
+        d (dict or str): The input dictionary or string that may contain placeholders.
+    
+    Returns:
+        dict or str: The dictionary or string with replaced environment variables.
+    """
+    if isinstance(d, dict):
+        for key, value in d.items():
+            d[key] = replace_env_variables(value)
+    elif isinstance(d, list):
+        for i in range(len(d)):
+            d[i] = replace_env_variables(d[i])
+    elif isinstance(d, str):
+        # Replace ${ENV_VARIABLE} with the value of the environment variable
+        d = re.sub(r'\${([A-Z_]+)}', lambda match: os.getenv(match.group(1), None) or match.group(0), d)
+    
+    return d
 
 class Config:
     def __init__(self, config_path: str = "./configs/dev/pt_backend.yml"):
@@ -62,7 +85,11 @@ class Config:
             v.read_in_config()
 
             self._config = v.all_settings()
+        # Provide default values to empty config
         self._provide_defaults()
+        
+        # Replace env variables in the config values
+        self._config = replace_env_variables(self._config)
 
         dump_config(dict_to_class(self._config))
 
@@ -104,5 +131,3 @@ class Config:
 
     def config(self):
         return dict_to_class(copy.deepcopy(self._config))
-
-
