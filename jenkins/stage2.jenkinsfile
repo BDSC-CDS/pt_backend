@@ -197,7 +197,7 @@ pipeline {
                   HELM_REPO_URL="registry.rdeid.unil.ch"
                   HELM_REPO_GIHUB_URL="ghcr.io/bdsc-cds"
                   HELM_CHART_NAME="pt-backend-chart"
-                  HELM_CHART_VERSION="$VERSION_SEMVER"
+                  HELM_CHART_VERSION="\$VERSION_SEMVER"
 
                   cp configs/default/values.yaml helm/pt-backend-chart/values.yaml
                   cp configs/default/main.yaml helm/pt-backend-chart/main.yaml
@@ -207,17 +207,17 @@ pipeline {
                   # Package the Helm chart
                   helm package helm/pt-backend-chart \
                     --destination . \
-                    --version "$HELM_CHART_VERSION" \
-                    --app-version "$VERSION_SEMVER"
+                    --version "\$HELM_CHART_VERSION" \
+                    --app-version "\$VERSION_SEMVER"
 
                   # Login to Helm registry (replace with actual credentials or use a secure method)
-                  # helm registry login "$HELM_REPO_URL" --username "your-username" --password "your-password"
+                  # helm registry login "\$HELM_REPO_URL" --username "your-username" --password "your-password"
 
                   export HELM_REGISTRY_CONFIG=/pt/pt-deployer/.docker/config.json
 
                   # Push the Helm chart to the registry
-                  helm push "$HELM_CHART_NAME-$HELM_CHART_VERSION.tgz" "oci://$HELM_REPO_URL/$HELM_REPO_NAME"
-                  helm push "$HELM_CHART_NAME-$HELM_CHART_VERSION.tgz" "oci://$HELM_REPO_GITHUB_URL/$HELM_REPO_NAME"
+                  helm push "\$HELM_CHART_NAME-\$HELM_CHART_VERSION.tgz" "oci://\$HELM_REPO_URL/\$HELM_REPO_NAME"
+                  helm push "\$HELM_CHART_NAME-\$HELM_CHART_VERSION.tgz" "oci://\$HELM_REPO_GITHUB_URL/\$HELM_REPO_NAME"
                 '''
               }
             }
