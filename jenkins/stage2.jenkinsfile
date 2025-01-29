@@ -202,6 +202,8 @@ pipeline {
                   cp configs/default/values.yaml helm/pt-backend-chart/values.yaml
                   cp configs/default/main.yaml helm/pt-backend-chart/main.yaml
 
+                  helm dependency update helm/pt-backend-chart/
+
                   # Package the Helm chart
                   helm package helm/pt-backend-chart \
                     --destination . \
