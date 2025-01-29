@@ -1,7 +1,8 @@
+{{- if .Values.service.enabled -}}
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ include "pt-backend.name" . }}-service
+  name: {{ .Release.Name }}-service
   namespace: {{ .Release.Namespace }}
   labels:
     {{- include "pt-backend.labels" . | nindent 4 }}
@@ -14,3 +15,4 @@ spec:
       name: http
   selector:
     {{- include "pt-backend.selectorLabels" . | nindent 4 }}
+{{- end }}

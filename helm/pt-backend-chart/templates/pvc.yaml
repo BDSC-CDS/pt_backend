@@ -1,16 +1,18 @@
+{{- if .Values.persistence.enabled -}}
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: {{ include "pt-backend.name" . }}-pvc
+  name: {{ .Release.Name }}-pvc
   namespace: {{ .Release.Namespace }}
   labels:
     {{- include "pt-backend.labels" . | nindent 4 }}
 spec:
   accessModes:
-    - {{ .Values.persistentVolumeClaim.accessMode | default "ReadWriteOnce" }}
+    - {{ .Values.persistence.accessMode | default "ReadWriteOnce" }}
   resources:
     requests:
-      storage: {{ .Values.persistentVolumeClaim.size | default "5Gi" }}
-  {{- if .Values.persistentVolumeClaim.storageClass }}
-  storageClassName: {{ .Values.persistentVolumeClaim.storageClass | default "microk8s-hostpath"}}
+      storage: {{ .Values.persistence.size | default "2Gi" }}
+  {{- if .Values.persistence.storageClass }}
+  storageClassName: {{ .Values.persistence.storageClass | default "microk8s-hostpath"}}
   {{- end }}
+{{- end }}
