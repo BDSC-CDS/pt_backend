@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Release.Name }}-deployment
+  name: {{ .Release.Name }}-{{ .Chart.Name }}-deployment
   namespace: {{ .Release.Namespace }}
   labels:
     {{- include "pt-backend.labels" . | nindent 4 }}
@@ -35,10 +35,10 @@ spec:
               containerPort: {{ .Values.service.port | default 5000 }}
               protocol: TCP
           volumeMounts:
-            - name: {{ .Release.Name }}-config-volume
+            - name: {{ .Release.Name }}-{{ .Chart.Name }}-config-volume
               mountPath: "/pt_backend/conf"
             {{- if .Values.persistence.enabled }}
-            - name: {{ .Release.Name }}-data
+            - name: {{ .Release.Name }}-{{ .Chart.Name }}-data
               mountPath: "/data/pt_backend"
             {{- end }}
           env:
@@ -81,13 +81,13 @@ spec:
             {{- toYaml . | nindent 12 }}
           {{- end }}
       volumes:
-        - name: {{ .Release.Name }}-config-volume
+        - name: {{ .Release.Name }}-{{ .Chart.Name }}-config-volume
           configMap:
-            name: {{ .Release.Name }}-configmap
+            name: {{ .Release.Name }}-{{ .Chart.Name }}-configmap
         {{- if .Values.persistence.enabled }}
-        - name: {{ .Release.Name }}-data
+        - name: {{ .Release.Name }}-{{ .Chart.Name }}-data
           persistentVolumeClaim:
-            claimName: {{ .Release.Name }}-pvc
+            claimName:{{ .Release.Name }}-{{ .Chart.Name }}-pvc
         {{- end }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
