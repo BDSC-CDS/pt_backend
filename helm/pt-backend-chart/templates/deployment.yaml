@@ -87,7 +87,7 @@ spec:
         {{- if .Values.persistence.enabled }}
         - name: {{ .Release.Name }}-{{ .Chart.Name }}-data
           persistentVolumeClaim:
-            claimName:{{ .Release.Name }}-{{ .Chart.Name }}-pvc
+            claimName: {{ .Release.Name }}-{{ .Chart.Name }}-pvc
         {{- end }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
