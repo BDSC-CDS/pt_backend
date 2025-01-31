@@ -69,7 +69,7 @@ postgresql:
   # This defines the authentication parameters
   auth:
     enablePostgresUser: true # Creates a user "postgres" with admin rights.
-    postgresPassword: password
+    existingSecret: psql-secret # Secret should contain the key postgres-password
     database: pt_backend
 
   primary:

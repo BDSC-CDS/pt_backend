@@ -33,7 +33,7 @@ storage:
       host: postgresql
       port: 5432
       username: postgres
-      password: password
+      password: ${PSQL_PASSWORD}
       database: pt_backend
       max_connections: 10
       max_lifetime: 10s
