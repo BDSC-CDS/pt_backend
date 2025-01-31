@@ -32,11 +32,12 @@ ingress:
   annotations:
     cert-manager.io/cluster-issuer: "letsencrypt-prod"
     nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
-    nginx.ingress.kubernetes.io/configuration-snippet: |
-      more_clear_headers "Content-Security-Policy";
-      add_header content-security-policy "frame-ancestors 'self' http://localhost:3000 https://pt-frontend-test.rdeid.unil.ch" always;
-      add_header Access-Control-Allow-Origin "http://localhost:3000 https://pt-frontend-test.rdeid.unil.ch";
 
+# Specific env variable for the container.
+env:
+  # Allowed domains within jupyterhub iFrame
+  allowedFrameDomains: "https://pt-frontend-test.rdeid.unil.ch" # Space separated list
+  
 # Deployment specific options
 podAnnotations: {}
 podLabels: {}

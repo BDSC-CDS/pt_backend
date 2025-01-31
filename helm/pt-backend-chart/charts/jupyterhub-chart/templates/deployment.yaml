@@ -59,6 +59,8 @@ spec:
                 secretKeyRef:
                   name: {{ .Release.Name }}-secrets
                   key: symmetric-encryption-key
+            - name: ALLOWED_FRAME_DOMAINS
+              value: {{ .Values.env.allowedFrameDomains }}
           {{- with .Values.livenessProbe }}
           livenessProbe:
             {{- toYaml . | nindent 12 }}
