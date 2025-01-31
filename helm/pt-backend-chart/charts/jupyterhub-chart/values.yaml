@@ -32,6 +32,11 @@ ingress:
   annotations:
     cert-manager.io/cluster-issuer: "letsencrypt-prod"
     nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+
+# Specific env variable for the container.
+env:
+  # Allowed domains within jupyterhub iFrame
+  allowedFrameDomains: "https://pt-frontend-test.rdeid.unil.ch" # Space separated list
   
 # Deployment specific options
 podAnnotations: {}
