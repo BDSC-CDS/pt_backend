@@ -47,17 +47,17 @@ spec:
             - name: BACKEND_JWT_SECRET
               valueFrom:
                 secretKeyRef:
-                  name: {{ .Release.Name }}-secrets
+                  name: pt-backend-secret
                   key: jwt-secret
             - name: ADMIN_TOKEN
               valueFrom:
                 secretKeyRef:
-                  name: {{ .Release.Name }}-secrets
+                  name: pt-backend-secret
                   key: admin-token
             - name: SYMMETRIC_ENCRYPTION_KEY
               valueFrom:
                 secretKeyRef:
-                  name: {{ .Release.Name }}-secrets
+                  name: pt-backend-secret
                   key: symmetric-encryption-key
             - name: ALLOWED_FRAME_DOMAINS
               value: {{ .Values.env.allowedFrameDomains }}
