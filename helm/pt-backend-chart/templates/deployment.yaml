@@ -45,22 +45,22 @@ spec:
             - name: JWT_SECRET
               valueFrom:
                 secretKeyRef:
-                  name: {{ .Release.Name }}-secrets
+                  name: pt-backend-secret
                   key: jwt-secret
             - name: ADMIN_TOKEN
               valueFrom:
                 secretKeyRef:
-                  name: {{ .Release.Name }}-secrets
+                  name: pt-backend-secret
                   key: admin-token
             - name: SYMMETRIC_KEY
               valueFrom:
                 secretKeyRef:
-                  name: {{ .Release.Name }}-secrets
+                  name: pt-backend-secret
                   key: symmetric-encryption-key
             - name: PT_ADMIN_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: {{ .Release.Name }}-secrets
+                  name: pt-backend-secret
                   key: pt-admin-password
             - name: PSQL_PASSWORD
               valueFrom:
