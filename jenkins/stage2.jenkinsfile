@@ -117,7 +117,7 @@ pipeline {
                   checkout scm
                   sh '''
                     export env=ci
-                    export version="$VERSION"
+                    export version="$RELEASE_NAME"
                     cd deploy
                     ./deploy.sh
                     docker version
