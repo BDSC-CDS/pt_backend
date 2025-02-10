@@ -108,6 +108,17 @@ message CreateReplyResult {
     uint32 id = 1;
 }
 
+message ShareReplyRequest {
+    uint32 id = 1;
+    uint32 sharewith_userid = 2;
+}
+message ShareReplyReply {
+    ShareReplyResult result = 1;
+}
+message ShareReplyResult {
+    bool success = 1;
+}
+
 message ListRepliesRequest {
     // uint32 questionnaire_version_id = 1;
     uint32 offset = 2;
@@ -221,6 +232,22 @@ service QuestionnaireService {
         option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
             summary: "Create questionnaires reply";
             description: "This endpoint allows ceating a user's questionnaires reply";
+            tags: "QuestionnaireService";
+            extensions: {
+                key: "x-openapi-router-controller";
+                value: {string_value: "questionnaire_controller"};
+            };
+        };
+    };
+    
+    rpc ShareReply(ShareReplyRequest) returns (ShareReplyReply) {
+        option (google.api.http) = {
+            post: "/api/v1/questionnaire/replies/{id}/share"
+            body: "*"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            summary: "Share questionnaires reply";
+            description: "This endpoint allows sharing a user's questionnaires reply";
             tags: "QuestionnaireService";
             extensions: {
                 key: "x-openapi-router-controller";

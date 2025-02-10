@@ -307,11 +307,40 @@ class QuestionnaireStore:
 
             return reply
     
+    def create_share(self, tenantid: int, userid: int, reply_id: int, sharedwith_userid: int) -> bool:
+        share_query = """
+        INSERT INTO questionnaire_reply_share 
+            (questionnairereplyid, sharedwith_userid, userid, tenantid, createdat, updatedat) 
+        VALUES 
+            (:questionnairereplyid, :sharedwith_userid, :userid, :tenantid, now(), now());
+        """
+
+        with self.session_scope() as session:
+            try:
+                session.execute(text(share_query), {
+                    'questionnairereplyid': reply_id,
+                    'sharedwith_userid': sharedwith_userid,
+                    'userid': userid,
+                    'tenantid': tenantid
+                })
+
+            except SQLAlchemyError as e:
+                raise e
+
+            return True
+    
     def list_replies(self, tenantid: int, userid: int, offset: int, limit: int) -> list[Reply]:
         reply_query = """
         SELECT id, userid, tenantid, project_name, questionnaire_versionid, createdat, updatedat, deletedat
         FROM questionnaire_replies
-        WHERE userid = :userid and deletedat is null
+        WHERE (
+            userid = :userid OR
+            id IN (
+                SELECT questionnairereplyid FROM questionnaire_reply_share 
+                WHERE sharedwith_userid = :userid and tenantid = :tenantid and deletedat is null 
+            )
+        ) 
+        and tenantid = :tenantid and deletedat is null
         OFFSET :offset
         LIMIT :limit;
         """
@@ -320,6 +349,7 @@ class QuestionnaireStore:
             try:
                 results = session.execute(text(reply_query), {
                     'userid': userid,
+                    'tenantid': tenantid,
                     'offset': offset,
                     'limit': limit,
                 }).mappings().fetchall()
