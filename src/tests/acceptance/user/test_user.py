@@ -15,8 +15,8 @@ class TestUser(unittest.TestCase):
                 firstName="hello",
                 lastName="moto"
             )
-            api_response = api_instance.user_service_create_user(body)
-            print("The response of UsersServiceApi->user_service_create_user:\n")
+            api_response = api_instance.users_service_create_user(body)
+            print("The response of UsersServiceApi->users_service_create_user:\n")
             pprint(api_response)
 
             self.assertIsNotNone(api_response)
@@ -26,8 +26,8 @@ class TestUser(unittest.TestCase):
 
             # test getting user with an admin account to check for correct creation
             admin_api_instance = openapi_client.UsersServiceApi(api_admin_client)
-            api_response = admin_api_instance.user_service_get_user(id=id)
-            print("The response of UsersServiceApi->user_service_get_user:\n")
+            api_response = admin_api_instance.users_service_get_user(id=id)
+            print("The response of UsersServiceApi->users_service_get_user:\n")
             pprint(api_response)
             self.assertIsNotNone(api_response)
             self.assertIsNotNone(api_response.result)

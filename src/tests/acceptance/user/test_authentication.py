@@ -18,7 +18,7 @@ class TestAuthenticate(unittest.TestCase):
                 firstName="Jean",
                 lastName="Marc"
             )
-            api_response = user_api.user_service_create_user(body)
+            api_response = user_api.users_service_create_user(body)
             self.assertIsNotNone(api_response)
             self.assertIsInstance(api_response.result.id, int)
             
