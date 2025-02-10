@@ -153,7 +153,7 @@ message ResetPasswordReply {
     ResetPasswordResult result = 1;
 }
 
-service UserService {
+service UsersService {
     rpc UpdatePassword(UpdatePasswordRequest) returns (UpdatePasswordReply) {
         option (google.api.http) = {
             put: "/api/rest/v1/users/me/password"
@@ -162,7 +162,7 @@ service UserService {
         option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
             summary: "Update password";
             description: "This endpoint updates the password of the authenticated user";
-            tags: "Users";
+            tags: "UsersService";
             extensions: {
                 key: "x-openapi-router-controller";
                 value: {string_value: "user_controller"};
@@ -178,7 +178,7 @@ service UserService {
     //     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
     //    //         summary: "Enable TOTP";
     //         description: "This endpoint enables the TOTP of the authenticated user";
-    //         tags: "Users";
+    //         tags: "UsersService";
     //         extensions: {
     //             key: "x-openapi-router-controller";
     //             value: {string_value: "user_controller"};
@@ -194,7 +194,7 @@ service UserService {
     //     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
     //    //         summary: "Reset TOTP";
     //         description: "This endpoint resets the TOTP of the authenticated user";
-    //         tags: "Users";
+    //         tags: "UsersService";
     //         extensions: {
     //             key: "x-openapi-router-controller";
     //             value: {string_value: "user_controller"};
@@ -209,7 +209,7 @@ service UserService {
         option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
             summary: "Get my own user";
             description: "This endpoint returns the details of the authenticated user";
-            tags: "Users";
+            tags: "UsersService";
             extensions: {
                 key: "x-openapi-router-controller";
                 value: {string_value: "user_controller"};
@@ -224,7 +224,7 @@ service UserService {
     //     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
     //    //         summary: "List users";
     //         description: "This endpoint returns a list of users";
-    //         tags: "Users";
+    //         tags: "UsersService";
     //         extensions: {
     //             key: "x-openapi-router-controller";
     //             value: {string_value: "user_controller"};
@@ -240,7 +240,7 @@ service UserService {
     //     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
     //    //         summary: "Update a user";
     //         description: "This endpoint updates a user";
-    //         tags: "Users";
+    //         tags: "UsersService";
     //         extensions: {
     //             key: "x-openapi-router-controller";
     //             value: {string_value: "user_controller"};
@@ -256,7 +256,7 @@ service UserService {
         option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
             summary: "Reset password";
             description: "This endpoint resets a user's password";
-            tags: "Users";
+            tags: "UsersService";
             extensions: {
                 key: "x-openapi-router-controller";
                 value: {string_value: "user_controller"};
@@ -271,7 +271,7 @@ service UserService {
         option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
             summary: "Get a user";
             description: "This endpoint returns a user";
-            tags: "Users";
+            tags: "UsersService";
             extensions: {
                 key: "x-openapi-router-controller";
                 value: {string_value: "user_controller"};
@@ -286,7 +286,7 @@ service UserService {
         option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
             summary: "Delete a user";
             description: "This endpoint deletes a user";
-            tags: "Users";
+            tags: "UsersService";
             extensions: {
                 key: "x-openapi-router-controller";
                 value: {string_value: "user_controller"};
@@ -302,7 +302,7 @@ service UserService {
         option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
             summary: "Create a user";
             description: "This endpoint creates a user";
-            tags: "Users";
+            tags: "UsersService";
             extensions: {
                 key: "x-openapi-router-controller";
                 value: {string_value: "user_controller"};

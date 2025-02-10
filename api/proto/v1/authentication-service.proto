@@ -64,7 +64,7 @@ service AuthenticationService {
         option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
             summary: "Authenticate";
             description: "This endpoint authenticates a user";
-            tags: "Authentication";
+            tags: "AuthenticationService";
             extensions: {
                 key: "x-openapi-router-controller";
                 value: {string_value: "authentication_controller"};

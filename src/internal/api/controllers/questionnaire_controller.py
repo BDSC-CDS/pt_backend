@@ -21,7 +21,7 @@ from server_template.models import TemplatebackendListQuestionnaireResult
 import src.internal.api.controllers.converter.questionnaire as questionnaire_converter
 
 
-class QuestionnaireController:
+class QuestionnaireServiceController:
     def __init__(self, config, questionnaire_service):
         self.config = config
         self.questionnaire_service = questionnaire_service

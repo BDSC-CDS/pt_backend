@@ -12,14 +12,14 @@ from server_template.models import TemplatebackendUpdatePasswordRequest
 import src.internal.api.controllers.converter.user as user_converter
 from src.pkg.user.service.user import UserService
 
-class UsersController():
-    def __init__(self, user_service: UserService):
-        self.user_service = user_service
+class UsersServiceController():
+    def __init__(self, users_service: UserService):
+        self.users_service = users_service
 
-    def user_service_create_user(self, user, body: TemplatebackendUser):
+    def users_service_create_user(self, user, body: TemplatebackendUser):
         u = user_converter.user_to_business(body)
         try:
-            user = self.user_service.create_user(u)
+            user = self.users_service.create_user(u)
         except Exception as e:
             print("error", e)
             traceback.print_exception(e)
@@ -27,13 +27,13 @@ class UsersController():
 
         return TemplatebackendCreateUserReply(TemplatebackendCreateUserResult(id=user.id))
 
-    def user_service_delete_user(self, user, id: int):
+    def users_service_delete_user(self, user, id: int):
         return "Not implemented", 501
 
 
-    def user_service_get_user(self, user, id: int):
+    def users_service_get_user(self, user, id: int):
         try:
-            user = self.user_service.get_user(by='id', identifier=id)
+            user = self.users_service.get_user(by='id', identifier=id)
         except Exception as e:
             print("error", e)
             traceback.print_exception(e)
@@ -47,9 +47,9 @@ class UsersController():
         return TemplatebackendGetUserReply(TemplatebackendGetUserResult(user=user))
 
 
-    def user_service_get_user_me(self, user):
+    def users_service_get_user_me(self, user):
         try:
-            user = self.user_service.get_user(by='id', identifier=user.id)
+            user = self.users_service.get_user(by='id', identifier=user.id)
         except Exception as e:
             print("error", e)
             traceback.print_exception(e)
@@ -63,9 +63,9 @@ class UsersController():
         return TemplatebackendGetUserMeReply(TemplatebackendGetUserMeResult(me=user))
 
 
-    def user_service_reset_password(self, user, id: int, body: object):
+    def users_service_reset_password(self, user, id: int, body: object):
         return "Not implemented", 501
 
 
-    def user_service_update_password(self, user, body: TemplatebackendUpdatePasswordRequest):
+    def users_service_update_password(self, user, body: TemplatebackendUpdatePasswordRequest):
         return "Not implemented", 501

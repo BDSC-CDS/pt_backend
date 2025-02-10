@@ -18,14 +18,14 @@
 __version__ = "1.0.0"
 
 # import apis into sdk package
-from openapi_client.api.audit_log_api import AuditLogApi
-from openapi_client.api.authentication_api import AuthenticationApi
-from openapi_client.api.configuration_api import ConfigurationApi
-from openapi_client.api.dataset_api import DatasetApi
-from openapi_client.api.index_api import IndexApi
-from openapi_client.api.questionnaire_api import QuestionnaireApi
-from openapi_client.api.risk_assessment_api import RiskAssessmentApi
-from openapi_client.api.users_api import UsersApi
+from openapi_client.api.audit_log_service_api import AuditLogServiceApi
+from openapi_client.api.authentication_service_api import AuthenticationServiceApi
+from openapi_client.api.configuration_service_api import ConfigurationServiceApi
+from openapi_client.api.dataset_service_api import DatasetServiceApi
+from openapi_client.api.index_service_api import IndexServiceApi
+from openapi_client.api.questionnaire_service_api import QuestionnaireServiceApi
+from openapi_client.api.risk_assessment_service_api import RiskAssessmentServiceApi
+from openapi_client.api.users_service_api import UsersServiceApi
 
 # import ApiClient
 from openapi_client.api_response import ApiResponse

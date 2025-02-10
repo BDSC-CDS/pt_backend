@@ -41,7 +41,7 @@ paths:
           type: integer
           format: int64
       tags:
-        - Dataset
+        - DatasetService
       x-openapi-router-controller: dataset_controller
     post:
       summary: Store a dataset
@@ -63,7 +63,7 @@ paths:
           schema:
             $ref: '#/definitions/templatebackendStoreDatasetRequest'
       tags:
-        - Dataset
+        - DatasetService
       x-openapi-router-controller: dataset_controller
   /api/v1/dataset/content/{id}:
     get:
@@ -96,7 +96,7 @@ paths:
           type: integer
           format: int32
       tags:
-        - Dataset
+        - DatasetService
       x-openapi-router-controller: dataset_controller
   /api/v1/dataset/dataframe/{id}:
     get:
@@ -129,7 +129,7 @@ paths:
           type: integer
           format: int32
       tags:
-        - Dataset
+        - DatasetService
       x-openapi-router-controller: dataset_controller
   /api/v1/dataset/identifier/{id}:
     get:
@@ -162,7 +162,7 @@ paths:
           type: integer
           format: int32
       tags:
-        - Dataset
+        - DatasetService
       x-openapi-router-controller: dataset_controller
   /api/v1/dataset/info/{id}:
     get:
@@ -185,7 +185,7 @@ paths:
           type: integer
           format: int64
       tags:
-        - Dataset
+        - DatasetService
       x-openapi-router-controller: dataset_controller
   /api/v1/dataset/jupyterhub/{id}:
     get:
@@ -208,7 +208,7 @@ paths:
           type: integer
           format: int64
       tags:
-        - Dataset
+        - DatasetService
       x-openapi-router-controller: dataset_controller
   /api/v1/dataset/metadata/{id}:
     get:
@@ -231,7 +231,7 @@ paths:
           type: integer
           format: int64
       tags:
-        - Dataset
+        - DatasetService
       x-openapi-router-controller: dataset_controller
   /api/v1/dataset/revert:
     post:
@@ -254,7 +254,7 @@ paths:
           schema:
             $ref: '#/definitions/templatebackendRevertDatasetRequest'
       tags:
-        - Dataset
+        - DatasetService
       x-openapi-router-controller: dataset_controller
   /api/v1/dataset/transform:
     post:
@@ -277,7 +277,7 @@ paths:
           schema:
             $ref: '#/definitions/templatebackendTransformDatasetRequest'
       tags:
-        - Dataset
+        - DatasetService
       x-openapi-router-controller: dataset_controller
   /api/v1/dataset/types:
     post:
@@ -300,7 +300,7 @@ paths:
           schema:
             $ref: '#/definitions/templatebackendChangeTypesDatasetRequest'
       tags:
-        - Dataset
+        - DatasetService
       x-openapi-router-controller: dataset_controller
   /api/v1/dataset/{id}:
     delete:
@@ -323,7 +323,7 @@ paths:
           type: integer
           format: int64
       tags:
-        - Dataset
+        - DatasetService
       x-openapi-router-controller: dataset_controller
 definitions:
   apiHttpBody:

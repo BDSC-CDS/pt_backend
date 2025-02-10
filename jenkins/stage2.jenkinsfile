@@ -23,7 +23,8 @@ pipeline {
           VERSION=$BRANCH_NAME-$BUILD_ID
           VERSION=$(echo "$VERSION" | awk '{print tolower($0)}')
           IMAGE_TAG=$(echo -n ${VERSION//[\\/_]/-})
-          RELEASE_NAME="${componentName}-$VERSION"
+          #RELEASE_NAME="${componentName}-$VERSION"
+          RELEASE_NAME="$VERSION"
           RELEASE_NAME=$(echo -n ${RELEASE_NAME//[\\/_]/-})
 
           echo -n $RELEASE_NAME > $WORKSPACE/release_name
@@ -61,7 +62,8 @@ pipeline {
           RELEASE_NAME="${componentName}-$VERSION"
           RELEASE_NAME=$(echo -n ${RELEASE_NAME//[\\/_\\.]/-})
           RELEASE_NAME=$(echo "$RELEASE_NAME" | awk '{print tolower($0)}')
-          
+          RELEASE_NAME=$(echo -n $RELEASE_NAME | cut -c 1-63)
+
           echo -n $VERSION > $WORKSPACE/version
           echo -n $VERSION_SEMVER > $WORKSPACE/version_semver
           echo -n $IMAGE_TAG > $WORKSPACE/image_tag
@@ -117,7 +119,7 @@ pipeline {
                   checkout scm
                   sh '''
                     export env=ci
-                    export version="$VERSION"
+                    export version="$RELEASE_NAME"
                     cd deploy
                     ./deploy.sh
                     docker version
@@ -144,10 +146,10 @@ pipeline {
                   ]){
                     sh """
                       echo "looking for pod name"
-                      POD_NAME=\$(kubectl get pods -n ci -l app=deployment-backend-${RELEASE_NAME} -o jsonpath="{.items[0].metadata.name}")
+                      POD_NAME=\$(kubectl get pods -n ci -l app=deployment-backend-pt-backend-${RELEASE_NAME} -o jsonpath="{.items[0].metadata.name}")
                       echo "waiting 60sec for pod \$POD_NAME to be ready"
                       kubectl wait --for=condition=ready pod \$POD_NAME -n ci --timeout=60s
-                      kubectl -n ci port-forward service/service-backend-${RELEASE_NAME} 5000:5000 &
+                      kubectl -n ci port-forward service/service-backend-pt-backend-${RELEASE_NAME} 5000:5000 &
                       kubectl -n ci logs -f pod/\$POD_NAME &
 
                       sleep 20

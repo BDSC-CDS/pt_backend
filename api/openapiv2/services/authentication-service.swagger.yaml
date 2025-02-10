@@ -36,7 +36,7 @@ paths:
           schema:
             $ref: '#/definitions/templatebackendCredentials'
       tags:
-        - Authentication
+        - AuthenticationService
       x-openapi-router-controller: authentication_controller
 definitions:
   protobufAny:

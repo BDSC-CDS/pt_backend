@@ -77,7 +77,7 @@ configuration.api_key['Bearer'] = os.environ["API_KEY"]
 # Enter a context with an instance of the API client
 with openapi_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.AuditLogApi(api_client)
+    api_instance = openapi_client.AuditLogServiceApi(api_client)
     offset = 56 # int |  (optional)
     limit = 56 # int |  (optional)
     filters = 'filters_example' # str |  (optional)
@@ -86,10 +86,10 @@ with openapi_client.ApiClient(configuration) as api_client:
     try:
         # Get logs
         api_response = api_instance.audit_log_service_get_logs(offset=offset, limit=limit, filters=filters, sort_by=sort_by)
-        print("The response of AuditLogApi->audit_log_service_get_logs:\n")
+        print("The response of AuditLogServiceApi->audit_log_service_get_logs:\n")
         pprint(api_response)
     except ApiException as e:
-        print("Exception when calling AuditLogApi->audit_log_service_get_logs: %s\n" % e)
+        print("Exception when calling AuditLogServiceApi->audit_log_service_get_logs: %s\n" % e)
 
 ```
 
@@ -99,42 +99,42 @@ All URIs are relative to *http://localhost*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*AuditLogApi* | [**audit_log_service_get_logs**](docs/AuditLogApi.md#audit_log_service_get_logs) | **GET** /api/v1/audit/logs | Get logs
-*AuditLogApi* | [**audit_log_service_get_logs_for_user**](docs/AuditLogApi.md#audit_log_service_get_logs_for_user) | **GET** /api/v1/audit/users/{userid}/logs | Get logs for a user
-*AuthenticationApi* | [**authentication_service_authenticate**](docs/AuthenticationApi.md#authentication_service_authenticate) | **POST** /api/rest/v1/authentication/login | Authenticate
-*ConfigurationApi* | [**config_service_create_config**](docs/ConfigurationApi.md#config_service_create_config) | **POST** /api/rest/v1/configs | Create a configuration
-*ConfigurationApi* | [**config_service_delete_config**](docs/ConfigurationApi.md#config_service_delete_config) | **DELETE** /api/v1/config/{id} | Deletes a config
-*ConfigurationApi* | [**config_service_export_config**](docs/ConfigurationApi.md#config_service_export_config) | **GET** /api/rest/v1/config/export/{id} | Export a configuration as json (SPHN Connector format)
-*ConfigurationApi* | [**config_service_get_configs**](docs/ConfigurationApi.md#config_service_get_configs) | **GET** /api/rest/v1/configs | Get configuration files
-*DatasetApi* | [**dataset_service_change_types_dataset**](docs/DatasetApi.md#dataset_service_change_types_dataset) | **POST** /api/v1/dataset/types | Change the types of a dataset
-*DatasetApi* | [**dataset_service_delete_dataset**](docs/DatasetApi.md#dataset_service_delete_dataset) | **DELETE** /api/v1/dataset/{id} | Deletes a dataset
-*DatasetApi* | [**dataset_service_get_dataset_content**](docs/DatasetApi.md#dataset_service_get_dataset_content) | **GET** /api/v1/dataset/content/{id} | Get Dataset Content
-*DatasetApi* | [**dataset_service_get_dataset_dataframe**](docs/DatasetApi.md#dataset_service_get_dataset_dataframe) | **GET** /api/v1/dataset/dataframe/{id} | Get Dataset Dataframe
-*DatasetApi* | [**dataset_service_get_dataset_identifier**](docs/DatasetApi.md#dataset_service_get_dataset_identifier) | **GET** /api/v1/dataset/identifier/{id} | Get Dataset Content filtered by identifying and quasi identifying columns
-*DatasetApi* | [**dataset_service_get_dataset_info**](docs/DatasetApi.md#dataset_service_get_dataset_info) | **GET** /api/v1/dataset/info/{id} | Get Dataset Info
-*DatasetApi* | [**dataset_service_get_dataset_jupyterhub**](docs/DatasetApi.md#dataset_service_get_dataset_jupyterhub) | **GET** /api/v1/dataset/jupyterhub/{id} | Get Dataset Jupyterhub
-*DatasetApi* | [**dataset_service_get_dataset_metadata**](docs/DatasetApi.md#dataset_service_get_dataset_metadata) | **GET** /api/v1/dataset/metadata/{id} | Get Dataset Metadata
-*DatasetApi* | [**dataset_service_list_datasets**](docs/DatasetApi.md#dataset_service_list_datasets) | **GET** /api/v1/dataset | List datasets
-*DatasetApi* | [**dataset_service_revert_dataset**](docs/DatasetApi.md#dataset_service_revert_dataset) | **POST** /api/v1/dataset/revert | Revert a dataset
-*DatasetApi* | [**dataset_service_store_dataset**](docs/DatasetApi.md#dataset_service_store_dataset) | **POST** /api/v1/dataset | Store a dataset
-*DatasetApi* | [**dataset_service_transform_dataset**](docs/DatasetApi.md#dataset_service_transform_dataset) | **POST** /api/v1/dataset/transform | Transform a dataset
-*IndexApi* | [**index_service_create_hello**](docs/IndexApi.md#index_service_create_hello) | **POST** /api/v1/hello/{identifier} | Get a hello
-*IndexApi* | [**index_service_get_hello**](docs/IndexApi.md#index_service_get_hello) | **GET** /api/v1/hello | Get a hello
-*QuestionnaireApi* | [**questionnaire_service_create_questionnaire**](docs/QuestionnaireApi.md#questionnaire_service_create_questionnaire) | **POST** /api/v1/questionnaire | Create a questionnaire
-*QuestionnaireApi* | [**questionnaire_service_create_questionnaire_version**](docs/QuestionnaireApi.md#questionnaire_service_create_questionnaire_version) | **POST** /api/v1/questionnaire/version | Create a questionnaire version
-*QuestionnaireApi* | [**questionnaire_service_create_reply**](docs/QuestionnaireApi.md#questionnaire_service_create_reply) | **POST** /api/v1/questionnaire/replies | Create questionnaires reply
-*QuestionnaireApi* | [**questionnaire_service_delete_questionnaire**](docs/QuestionnaireApi.md#questionnaire_service_delete_questionnaire) | **DELETE** /api/v1/questionnaire/{id} | Create a questionnaire
-*QuestionnaireApi* | [**questionnaire_service_get_questionnaire**](docs/QuestionnaireApi.md#questionnaire_service_get_questionnaire) | **GET** /api/v1/questionnaire/{id} | Get questionnaires
-*QuestionnaireApi* | [**questionnaire_service_get_reply**](docs/QuestionnaireApi.md#questionnaire_service_get_reply) | **GET** /api/v1/questionnaire/replies/{id} | Get a questionnaires reply
-*QuestionnaireApi* | [**questionnaire_service_list_questionnaire**](docs/QuestionnaireApi.md#questionnaire_service_list_questionnaire) | **GET** /api/v1/questionnaire | List questionnaires
-*QuestionnaireApi* | [**questionnaire_service_list_replies**](docs/QuestionnaireApi.md#questionnaire_service_list_replies) | **GET** /api/v1/questionnaire/replies | List questionnaires replies
-*RiskAssessmentApi* | [**risk_assessment_service_get_risk_assessment**](docs/RiskAssessmentApi.md#risk_assessment_service_get_risk_assessment) | **GET** /api/v1/riskassessment/{datasetid} | Get risk assessment
-*UsersApi* | [**user_service_create_user**](docs/UsersApi.md#user_service_create_user) | **POST** /api/rest/v1/users | Create a user
-*UsersApi* | [**user_service_delete_user**](docs/UsersApi.md#user_service_delete_user) | **DELETE** /api/rest/v1/users/{id} | Delete a user
-*UsersApi* | [**user_service_get_user**](docs/UsersApi.md#user_service_get_user) | **GET** /api/rest/v1/users/{id} | Get a user
-*UsersApi* | [**user_service_get_user_me**](docs/UsersApi.md#user_service_get_user_me) | **GET** /api/rest/v1/users/me | Get my own user
-*UsersApi* | [**user_service_reset_password**](docs/UsersApi.md#user_service_reset_password) | **POST** /api/rest/v1/users/{id}/password/reset | Reset password
-*UsersApi* | [**user_service_update_password**](docs/UsersApi.md#user_service_update_password) | **PUT** /api/rest/v1/users/me/password | Update password
+*AuditLogServiceApi* | [**audit_log_service_get_logs**](docs/AuditLogServiceApi.md#audit_log_service_get_logs) | **GET** /api/v1/audit/logs | Get logs
+*AuditLogServiceApi* | [**audit_log_service_get_logs_for_user**](docs/AuditLogServiceApi.md#audit_log_service_get_logs_for_user) | **GET** /api/v1/audit/users/{userid}/logs | Get logs for a user
+*AuthenticationServiceApi* | [**authentication_service_authenticate**](docs/AuthenticationServiceApi.md#authentication_service_authenticate) | **POST** /api/rest/v1/authentication/login | Authenticate
+*ConfigurationServiceApi* | [**configuration_service_create_config**](docs/ConfigurationServiceApi.md#configuration_service_create_config) | **POST** /api/rest/v1/configs | Create a configuration
+*ConfigurationServiceApi* | [**configuration_service_delete_config**](docs/ConfigurationServiceApi.md#configuration_service_delete_config) | **DELETE** /api/v1/config/{id} | Deletes a config
+*ConfigurationServiceApi* | [**configuration_service_export_config**](docs/ConfigurationServiceApi.md#configuration_service_export_config) | **GET** /api/rest/v1/config/export/{id} | Export a configuration as json (SPHN Connector format)
+*ConfigurationServiceApi* | [**configuration_service_get_configs**](docs/ConfigurationServiceApi.md#configuration_service_get_configs) | **GET** /api/rest/v1/configs | Get configuration files
+*DatasetServiceApi* | [**dataset_service_change_types_dataset**](docs/DatasetServiceApi.md#dataset_service_change_types_dataset) | **POST** /api/v1/dataset/types | Change the types of a dataset
+*DatasetServiceApi* | [**dataset_service_delete_dataset**](docs/DatasetServiceApi.md#dataset_service_delete_dataset) | **DELETE** /api/v1/dataset/{id} | Deletes a dataset
+*DatasetServiceApi* | [**dataset_service_get_dataset_content**](docs/DatasetServiceApi.md#dataset_service_get_dataset_content) | **GET** /api/v1/dataset/content/{id} | Get Dataset Content
+*DatasetServiceApi* | [**dataset_service_get_dataset_dataframe**](docs/DatasetServiceApi.md#dataset_service_get_dataset_dataframe) | **GET** /api/v1/dataset/dataframe/{id} | Get Dataset Dataframe
+*DatasetServiceApi* | [**dataset_service_get_dataset_identifier**](docs/DatasetServiceApi.md#dataset_service_get_dataset_identifier) | **GET** /api/v1/dataset/identifier/{id} | Get Dataset Content filtered by identifying and quasi identifying columns
+*DatasetServiceApi* | [**dataset_service_get_dataset_info**](docs/DatasetServiceApi.md#dataset_service_get_dataset_info) | **GET** /api/v1/dataset/info/{id} | Get Dataset Info
+*DatasetServiceApi* | [**dataset_service_get_dataset_jupyterhub**](docs/DatasetServiceApi.md#dataset_service_get_dataset_jupyterhub) | **GET** /api/v1/dataset/jupyterhub/{id} | Get Dataset Jupyterhub
+*DatasetServiceApi* | [**dataset_service_get_dataset_metadata**](docs/DatasetServiceApi.md#dataset_service_get_dataset_metadata) | **GET** /api/v1/dataset/metadata/{id} | Get Dataset Metadata
+*DatasetServiceApi* | [**dataset_service_list_datasets**](docs/DatasetServiceApi.md#dataset_service_list_datasets) | **GET** /api/v1/dataset | List datasets
+*DatasetServiceApi* | [**dataset_service_revert_dataset**](docs/DatasetServiceApi.md#dataset_service_revert_dataset) | **POST** /api/v1/dataset/revert | Revert a dataset
+*DatasetServiceApi* | [**dataset_service_store_dataset**](docs/DatasetServiceApi.md#dataset_service_store_dataset) | **POST** /api/v1/dataset | Store a dataset
+*DatasetServiceApi* | [**dataset_service_transform_dataset**](docs/DatasetServiceApi.md#dataset_service_transform_dataset) | **POST** /api/v1/dataset/transform | Transform a dataset
+*IndexServiceApi* | [**index_service_create_hello**](docs/IndexServiceApi.md#index_service_create_hello) | **POST** /api/v1/hello/{identifier} | Get a hello
+*IndexServiceApi* | [**index_service_get_hello**](docs/IndexServiceApi.md#index_service_get_hello) | **GET** /api/v1/hello | Get a hello
+*QuestionnaireServiceApi* | [**questionnaire_service_create_questionnaire**](docs/QuestionnaireServiceApi.md#questionnaire_service_create_questionnaire) | **POST** /api/v1/questionnaire | Create a questionnaire
+*QuestionnaireServiceApi* | [**questionnaire_service_create_questionnaire_version**](docs/QuestionnaireServiceApi.md#questionnaire_service_create_questionnaire_version) | **POST** /api/v1/questionnaire/version | Create a questionnaire version
+*QuestionnaireServiceApi* | [**questionnaire_service_create_reply**](docs/QuestionnaireServiceApi.md#questionnaire_service_create_reply) | **POST** /api/v1/questionnaire/replies | Create questionnaires reply
+*QuestionnaireServiceApi* | [**questionnaire_service_delete_questionnaire**](docs/QuestionnaireServiceApi.md#questionnaire_service_delete_questionnaire) | **DELETE** /api/v1/questionnaire/{id} | Create a questionnaire
+*QuestionnaireServiceApi* | [**questionnaire_service_get_questionnaire**](docs/QuestionnaireServiceApi.md#questionnaire_service_get_questionnaire) | **GET** /api/v1/questionnaire/{id} | Get questionnaires
+*QuestionnaireServiceApi* | [**questionnaire_service_get_reply**](docs/QuestionnaireServiceApi.md#questionnaire_service_get_reply) | **GET** /api/v1/questionnaire/replies/{id} | Get a questionnaires reply
+*QuestionnaireServiceApi* | [**questionnaire_service_list_questionnaire**](docs/QuestionnaireServiceApi.md#questionnaire_service_list_questionnaire) | **GET** /api/v1/questionnaire | List questionnaires
+*QuestionnaireServiceApi* | [**questionnaire_service_list_replies**](docs/QuestionnaireServiceApi.md#questionnaire_service_list_replies) | **GET** /api/v1/questionnaire/replies | List questionnaires replies
+*RiskAssessmentServiceApi* | [**risk_assessment_service_get_risk_assessment**](docs/RiskAssessmentServiceApi.md#risk_assessment_service_get_risk_assessment) | **GET** /api/v1/riskassessment/{datasetid} | Get risk assessment
+*UsersServiceApi* | [**users_service_create_user**](docs/UsersServiceApi.md#users_service_create_user) | **POST** /api/rest/v1/users | Create a user
+*UsersServiceApi* | [**users_service_delete_user**](docs/UsersServiceApi.md#users_service_delete_user) | **DELETE** /api/rest/v1/users/{id} | Delete a user
+*UsersServiceApi* | [**users_service_get_user**](docs/UsersServiceApi.md#users_service_get_user) | **GET** /api/rest/v1/users/{id} | Get a user
+*UsersServiceApi* | [**users_service_get_user_me**](docs/UsersServiceApi.md#users_service_get_user_me) | **GET** /api/rest/v1/users/me | Get my own user
+*UsersServiceApi* | [**users_service_reset_password**](docs/UsersServiceApi.md#users_service_reset_password) | **POST** /api/rest/v1/users/{id}/password/reset | Reset password
+*UsersServiceApi* | [**users_service_update_password**](docs/UsersServiceApi.md#users_service_update_password) | **PUT** /api/rest/v1/users/me/password | Update password
 
 
 ## Documentation For Models

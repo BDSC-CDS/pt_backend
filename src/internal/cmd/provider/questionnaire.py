@@ -1,4 +1,4 @@
-import src.internal.api.server_template.controllers.questionnaire_controller as connexion_questionnaire_controller
+import src.internal.api.server_template.controllers.questionnaire_service_controller as connexion_questionnaire_controller
 import src.internal.api.controllers.questionnaire_controller as internal_questionnaire_controller
 import src.internal.api.controllers.middleware.questionnaire_authorization as questionnaire_controller_authorization
 from src.pkg.questionnaire.service.questionnaire import QuestionnaireService
@@ -16,9 +16,9 @@ def provide_questionnaire_controller():
     if questionnaire_controller is not None:
         return questionnaire_controller
 
-    controller = internal_questionnaire_controller.QuestionnaireController(provide_config(), provide_questionnaire_service())
-    controller = questionnaire_controller_authorization.QuestionnaireControllerAuthentication(controller)
-    questionnaire_controller = connexion_questionnaire_controller.QuestionnaireController(controller)
+    controller = internal_questionnaire_controller.QuestionnaireServiceController(provide_config(), provide_questionnaire_service())
+    controller = questionnaire_controller_authorization.QuestionnaireServiceControllerAuthentication(controller)
+    questionnaire_controller = connexion_questionnaire_controller.QuestionnaireServiceController(controller)
 
     return questionnaire_controller
 

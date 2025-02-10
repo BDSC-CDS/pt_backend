@@ -64,7 +64,7 @@ service RiskAssessmentService {
 
             summary: "Get risk assessment";
             description: "This endpoint allow getting a single user's risk assessment";
-            tags: "RiskAssessment";
+            tags: "RiskAssessmentService";
             extensions: {
                 key: "x-openapi-router-controller";
                 value: {string_value: "risk_assessment_controller"};

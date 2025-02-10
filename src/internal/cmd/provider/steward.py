@@ -7,9 +7,9 @@ def provide_steward():
     global steward_instance
     if steward_instance is None:
         conf = config.provide_config()
-        user_service = user.provide_user_service()
+        users_service = user.provide_users_service()
         questionnaire_service = questionnaire.provide_questionnaire_service()
 
-        steward_instance = steward.Steward(conf.steward, user_service, questionnaire_service)
+        steward_instance = steward.Steward(conf.steward, users_service, questionnaire_service)
         
     return steward_instance

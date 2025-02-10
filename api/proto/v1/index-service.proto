@@ -69,7 +69,7 @@ service IndexService {
         option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
             summary: "Get a hello";
             description: "This endpoint returns a hello";
-            tags: "Index";
+            tags: "IndexService";
             extensions: {
                 key: "x-openapi-router-controller";
                 value: {string_value: "index_controller"};
@@ -84,7 +84,7 @@ service IndexService {
         option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
             summary: "Get a hello";
             description: "This endpoint returns a hello";
-            tags: "Index";
+            tags: "IndexService";
             extensions: {
                 key: "x-openapi-router-controller";
                 value: {string_value: "index_controller"};

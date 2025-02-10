@@ -1,4 +1,4 @@
-import src.internal.api.server_template.controllers.configuration_controller as connexion_config_controller
+import src.internal.api.server_template.controllers.configuration_service_controller as connexion_config_controller
 import src.internal.api.controllers.config_generator_controller as internal_config_controller
 import src.internal.api.controllers.middleware.config_generator_authorization as config_controller_authorization
 import src.internal.api.controllers.middleware.config_generator_audit as config_controller_audit
@@ -17,10 +17,10 @@ def provide_config_generator_controller():
     if config_generator_controller is not None:
         return config_generator_controller
 
-    controller = internal_config_controller.ConfigGeneratorController(provide_config_generator_service())
-    controller = config_controller_audit.ConfigGeneratorControllerAudit(controller,provide_audit_log_service())
-    controller = config_controller_authorization.ConfigGeneratorControllerAuthentication(controller)
-    config_generator_controller = connexion_config_controller.ConfigurationController(controller)
+    controller = internal_config_controller.ConfigGeneratorServiceController(provide_config_generator_service())
+    controller = config_controller_audit.ConfigGeneratorServiceControllerAudit(controller,provide_audit_log_service())
+    controller = config_controller_authorization.ConfigGeneratorServiceControllerAuthentication(controller)
+    config_generator_controller = connexion_config_controller.ConfigurationServiceController(controller)
 
     return config_generator_controller
 
