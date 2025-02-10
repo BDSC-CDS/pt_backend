@@ -61,7 +61,8 @@ pipeline {
           RELEASE_NAME="${componentName}-$VERSION"
           RELEASE_NAME=$(echo -n ${RELEASE_NAME//[\\/_\\.]/-})
           RELEASE_NAME=$(echo "$RELEASE_NAME" | awk '{print tolower($0)}')
-          
+          RELEASE_NAME=$(echo -n $RELEASE_NAME | cut -c 1-63)
+
           echo -n $VERSION > $WORKSPACE/version
           echo -n $VERSION_SEMVER > $WORKSPACE/version_semver
           echo -n $IMAGE_TAG > $WORKSPACE/image_tag
