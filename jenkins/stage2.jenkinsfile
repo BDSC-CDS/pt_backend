@@ -24,6 +24,7 @@ pipeline {
           VERSION=$(echo "$VERSION" | awk '{print tolower($0)}')
           IMAGE_TAG=$(echo -n ${VERSION//[\\/_]/-})
           #RELEASE_NAME="${componentName}-$VERSION"
+          RELEASE_NAME="$VERSION"
           RELEASE_NAME=$(echo -n ${RELEASE_NAME//[\\/_]/-})
 
           echo -n $RELEASE_NAME > $WORKSPACE/release_name
