@@ -4,16 +4,16 @@ All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**user_service_create_user**](UsersServiceApi.md#user_service_create_user) | **POST** /api/rest/v1/users | Create a user
-[**user_service_delete_user**](UsersServiceApi.md#user_service_delete_user) | **DELETE** /api/rest/v1/users/{id} | Delete a user
-[**user_service_get_user**](UsersServiceApi.md#user_service_get_user) | **GET** /api/rest/v1/users/{id} | Get a user
-[**user_service_get_user_me**](UsersServiceApi.md#user_service_get_user_me) | **GET** /api/rest/v1/users/me | Get my own user
-[**user_service_reset_password**](UsersServiceApi.md#user_service_reset_password) | **POST** /api/rest/v1/users/{id}/password/reset | Reset password
-[**user_service_update_password**](UsersServiceApi.md#user_service_update_password) | **PUT** /api/rest/v1/users/me/password | Update password
+[**users_service_create_user**](UsersServiceApi.md#users_service_create_user) | **POST** /api/rest/v1/users | Create a user
+[**users_service_delete_user**](UsersServiceApi.md#users_service_delete_user) | **DELETE** /api/rest/v1/users/{id} | Delete a user
+[**users_service_get_user**](UsersServiceApi.md#users_service_get_user) | **GET** /api/rest/v1/users/{id} | Get a user
+[**users_service_get_user_me**](UsersServiceApi.md#users_service_get_user_me) | **GET** /api/rest/v1/users/me | Get my own user
+[**users_service_reset_password**](UsersServiceApi.md#users_service_reset_password) | **POST** /api/rest/v1/users/{id}/password/reset | Reset password
+[**users_service_update_password**](UsersServiceApi.md#users_service_update_password) | **PUT** /api/rest/v1/users/me/password | Update password
 
 
-# **user_service_create_user**
-> TemplatebackendCreateUserReply user_service_create_user(body)
+# **users_service_create_user**
+> TemplatebackendCreateUserReply users_service_create_user(body)
 
 Create a user
 
@@ -57,11 +57,11 @@ with openapi_client.ApiClient(configuration) as api_client:
 
     try:
         # Create a user
-        api_response = api_instance.user_service_create_user(body)
-        print("The response of UsersServiceApi->user_service_create_user:\n")
+        api_response = api_instance.users_service_create_user(body)
+        print("The response of UsersServiceApi->users_service_create_user:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling UsersServiceApi->user_service_create_user: %s\n" % e)
+        print("Exception when calling UsersServiceApi->users_service_create_user: %s\n" % e)
 ```
 
 
@@ -95,8 +95,8 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **user_service_delete_user**
-> TemplatebackendDeleteUserReply user_service_delete_user(id)
+# **users_service_delete_user**
+> TemplatebackendDeleteUserReply users_service_delete_user(id)
 
 Delete a user
 
@@ -139,11 +139,11 @@ with openapi_client.ApiClient(configuration) as api_client:
 
     try:
         # Delete a user
-        api_response = api_instance.user_service_delete_user(id)
-        print("The response of UsersServiceApi->user_service_delete_user:\n")
+        api_response = api_instance.users_service_delete_user(id)
+        print("The response of UsersServiceApi->users_service_delete_user:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling UsersServiceApi->user_service_delete_user: %s\n" % e)
+        print("Exception when calling UsersServiceApi->users_service_delete_user: %s\n" % e)
 ```
 
 
@@ -177,8 +177,8 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **user_service_get_user**
-> TemplatebackendGetUserReply user_service_get_user(id)
+# **users_service_get_user**
+> TemplatebackendGetUserReply users_service_get_user(id)
 
 Get a user
 
@@ -221,11 +221,11 @@ with openapi_client.ApiClient(configuration) as api_client:
 
     try:
         # Get a user
-        api_response = api_instance.user_service_get_user(id)
-        print("The response of UsersServiceApi->user_service_get_user:\n")
+        api_response = api_instance.users_service_get_user(id)
+        print("The response of UsersServiceApi->users_service_get_user:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling UsersServiceApi->user_service_get_user: %s\n" % e)
+        print("Exception when calling UsersServiceApi->users_service_get_user: %s\n" % e)
 ```
 
 
@@ -259,8 +259,8 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **user_service_get_user_me**
-> TemplatebackendGetUserMeReply user_service_get_user_me()
+# **users_service_get_user_me**
+> TemplatebackendGetUserMeReply users_service_get_user_me()
 
 Get my own user
 
@@ -302,11 +302,11 @@ with openapi_client.ApiClient(configuration) as api_client:
 
     try:
         # Get my own user
-        api_response = api_instance.user_service_get_user_me()
-        print("The response of UsersServiceApi->user_service_get_user_me:\n")
+        api_response = api_instance.users_service_get_user_me()
+        print("The response of UsersServiceApi->users_service_get_user_me:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling UsersServiceApi->user_service_get_user_me: %s\n" % e)
+        print("Exception when calling UsersServiceApi->users_service_get_user_me: %s\n" % e)
 ```
 
 
@@ -337,8 +337,8 @@ This endpoint does not need any parameter.
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **user_service_reset_password**
-> TemplatebackendResetPasswordReply user_service_reset_password(id, body)
+# **users_service_reset_password**
+> TemplatebackendResetPasswordReply users_service_reset_password(id, body)
 
 Reset password
 
@@ -382,11 +382,11 @@ with openapi_client.ApiClient(configuration) as api_client:
 
     try:
         # Reset password
-        api_response = api_instance.user_service_reset_password(id, body)
-        print("The response of UsersServiceApi->user_service_reset_password:\n")
+        api_response = api_instance.users_service_reset_password(id, body)
+        print("The response of UsersServiceApi->users_service_reset_password:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling UsersServiceApi->user_service_reset_password: %s\n" % e)
+        print("Exception when calling UsersServiceApi->users_service_reset_password: %s\n" % e)
 ```
 
 
@@ -421,8 +421,8 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **user_service_update_password**
-> TemplatebackendUpdatePasswordReply user_service_update_password(body)
+# **users_service_update_password**
+> TemplatebackendUpdatePasswordReply users_service_update_password(body)
 
 Update password
 
@@ -466,11 +466,11 @@ with openapi_client.ApiClient(configuration) as api_client:
 
     try:
         # Update password
-        api_response = api_instance.user_service_update_password(body)
-        print("The response of UsersServiceApi->user_service_update_password:\n")
+        api_response = api_instance.users_service_update_password(body)
+        print("The response of UsersServiceApi->users_service_update_password:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling UsersServiceApi->user_service_update_password: %s\n" % e)
+        print("Exception when calling UsersServiceApi->users_service_update_password: %s\n" % e)
 ```
 
 

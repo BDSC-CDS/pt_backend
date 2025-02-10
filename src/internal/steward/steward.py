@@ -3,12 +3,12 @@ from src.pkg.questionnaire.model.questionnaire import Questionnaire
 from src.pkg.questionnaire.model.questionnaire_v2 import questionnaire_v2
 
 class Steward:
-    def __init__(self, steward_config, user_service, questionnaire_service):
+    def __init__(self, steward_config, users_service, questionnaire_service):
         # Save config
         self.config = steward_config
 
         # Services and stores
-        self.user_service = user_service
+        self.users_service = users_service
         self.questionnaire_service = questionnaire_service
 
         # Internal objects
@@ -30,17 +30,17 @@ class Steward:
         """Add admin user to the database."""
         try:
             # Check if admin user already exists
-            existing_user = self.user_service.get_user(by="username", identifier=self.config.user.username)
+            existing_user = self.users_service.get_user(by="username", identifier=self.config.user.username)
             if existing_user:
                 print("Admin user already exists.")
                 return existing_user
 
             # Create admin user & set role
-            u = self.user_service.create_user(user=User(
+            u = self.users_service.create_user(user=User(
                 username=self.config.user.username,
                 password=self.config.user.password,
             ))
-            self.user_service.set_admin(userid=u.id)
+            self.users_service.set_admin(userid=u.id)
             print("Admin user created.")
             return u
         except Exception as e:
@@ -51,7 +51,7 @@ class Steward:
         try:
             # Check if admin user exists
             if self.admin_user is None:
-                existing_user = self.user_service.get_user(by="username", identifier=self.config.user.username)
+                existing_user = self.users_service.get_user(by="username", identifier=self.config.user.username)
                 if existing_user is None:
                     raise Exception("Cannot create a questionnaire without an admin user. Please update the steward config.")
                 else:

@@ -13,16 +13,16 @@ from server_template.models import TemplatebackendRevertDatasetRequest
 from server_template.models import TemplatebackendChangeTypesDatasetRequest
 from server_template.models import TemplatebackendChangeTypesDatasetReply
 from server_template.models import TemplatebackendGetDatasetInfoReply
-from src.internal.api.controllers.dataset_controller import DatasetController
+from src.internal.api.controllers.dataset_controller import DatasetServiceController
 from src.internal.util.interface.implements import implements_interface
 from src.pkg.audit_log.model.audit_log import AuditLog
 from src.pkg.audit_log.service.audit_log import AuditLogService
 
-class DatasetControllerAudit():
-    def __init__(self, next: DatasetController,auditLogService: AuditLogService):
+class DatasetServiceControllerAudit():
+    def __init__(self, next: DatasetServiceController,auditLogService: AuditLogService):
         self.next = next
         self.auditLogService = auditLogService
-        implements_interface(DatasetController, DatasetControllerAudit)
+        implements_interface(DatasetServiceController, DatasetServiceControllerAudit)
 
     def dataset_service_store_dataset(self, user, body:TemplatebackendStoreDatasetRequest): #TODO what is in user?
         body_serialized = f"user id: {user.id or ''}, dataset_name: {body.dataset_name or ''}"

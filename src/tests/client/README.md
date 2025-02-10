@@ -102,10 +102,10 @@ Class | Method | HTTP request | Description
 *AuditLogServiceApi* | [**audit_log_service_get_logs**](docs/AuditLogServiceApi.md#audit_log_service_get_logs) | **GET** /api/v1/audit/logs | Get logs
 *AuditLogServiceApi* | [**audit_log_service_get_logs_for_user**](docs/AuditLogServiceApi.md#audit_log_service_get_logs_for_user) | **GET** /api/v1/audit/users/{userid}/logs | Get logs for a user
 *AuthenticationServiceApi* | [**authentication_service_authenticate**](docs/AuthenticationServiceApi.md#authentication_service_authenticate) | **POST** /api/rest/v1/authentication/login | Authenticate
-*ConfigurationServiceApi* | [**config_service_create_config**](docs/ConfigurationServiceApi.md#config_service_create_config) | **POST** /api/rest/v1/configs | Create a configuration
-*ConfigurationServiceApi* | [**config_service_delete_config**](docs/ConfigurationServiceApi.md#config_service_delete_config) | **DELETE** /api/v1/config/{id} | Deletes a config
-*ConfigurationServiceApi* | [**config_service_export_config**](docs/ConfigurationServiceApi.md#config_service_export_config) | **GET** /api/rest/v1/config/export/{id} | Export a configuration as json (SPHN Connector format)
-*ConfigurationServiceApi* | [**config_service_get_configs**](docs/ConfigurationServiceApi.md#config_service_get_configs) | **GET** /api/rest/v1/configs | Get configuration files
+*ConfigurationServiceApi* | [**configuration_service_create_config**](docs/ConfigurationServiceApi.md#configuration_service_create_config) | **POST** /api/rest/v1/configs | Create a configuration
+*ConfigurationServiceApi* | [**configuration_service_delete_config**](docs/ConfigurationServiceApi.md#configuration_service_delete_config) | **DELETE** /api/v1/config/{id} | Deletes a config
+*ConfigurationServiceApi* | [**configuration_service_export_config**](docs/ConfigurationServiceApi.md#configuration_service_export_config) | **GET** /api/rest/v1/config/export/{id} | Export a configuration as json (SPHN Connector format)
+*ConfigurationServiceApi* | [**configuration_service_get_configs**](docs/ConfigurationServiceApi.md#configuration_service_get_configs) | **GET** /api/rest/v1/configs | Get configuration files
 *DatasetServiceApi* | [**dataset_service_change_types_dataset**](docs/DatasetServiceApi.md#dataset_service_change_types_dataset) | **POST** /api/v1/dataset/types | Change the types of a dataset
 *DatasetServiceApi* | [**dataset_service_delete_dataset**](docs/DatasetServiceApi.md#dataset_service_delete_dataset) | **DELETE** /api/v1/dataset/{id} | Deletes a dataset
 *DatasetServiceApi* | [**dataset_service_get_dataset_content**](docs/DatasetServiceApi.md#dataset_service_get_dataset_content) | **GET** /api/v1/dataset/content/{id} | Get Dataset Content
@@ -129,12 +129,12 @@ Class | Method | HTTP request | Description
 *QuestionnaireServiceApi* | [**questionnaire_service_list_questionnaire**](docs/QuestionnaireServiceApi.md#questionnaire_service_list_questionnaire) | **GET** /api/v1/questionnaire | List questionnaires
 *QuestionnaireServiceApi* | [**questionnaire_service_list_replies**](docs/QuestionnaireServiceApi.md#questionnaire_service_list_replies) | **GET** /api/v1/questionnaire/replies | List questionnaires replies
 *RiskAssessmentServiceApi* | [**risk_assessment_service_get_risk_assessment**](docs/RiskAssessmentServiceApi.md#risk_assessment_service_get_risk_assessment) | **GET** /api/v1/riskassessment/{datasetid} | Get risk assessment
-*UsersServiceApi* | [**user_service_create_user**](docs/UsersServiceApi.md#user_service_create_user) | **POST** /api/rest/v1/users | Create a user
-*UsersServiceApi* | [**user_service_delete_user**](docs/UsersServiceApi.md#user_service_delete_user) | **DELETE** /api/rest/v1/users/{id} | Delete a user
-*UsersServiceApi* | [**user_service_get_user**](docs/UsersServiceApi.md#user_service_get_user) | **GET** /api/rest/v1/users/{id} | Get a user
-*UsersServiceApi* | [**user_service_get_user_me**](docs/UsersServiceApi.md#user_service_get_user_me) | **GET** /api/rest/v1/users/me | Get my own user
-*UsersServiceApi* | [**user_service_reset_password**](docs/UsersServiceApi.md#user_service_reset_password) | **POST** /api/rest/v1/users/{id}/password/reset | Reset password
-*UsersServiceApi* | [**user_service_update_password**](docs/UsersServiceApi.md#user_service_update_password) | **PUT** /api/rest/v1/users/me/password | Update password
+*UsersServiceApi* | [**users_service_create_user**](docs/UsersServiceApi.md#users_service_create_user) | **POST** /api/rest/v1/users | Create a user
+*UsersServiceApi* | [**users_service_delete_user**](docs/UsersServiceApi.md#users_service_delete_user) | **DELETE** /api/rest/v1/users/{id} | Delete a user
+*UsersServiceApi* | [**users_service_get_user**](docs/UsersServiceApi.md#users_service_get_user) | **GET** /api/rest/v1/users/{id} | Get a user
+*UsersServiceApi* | [**users_service_get_user_me**](docs/UsersServiceApi.md#users_service_get_user_me) | **GET** /api/rest/v1/users/me | Get my own user
+*UsersServiceApi* | [**users_service_reset_password**](docs/UsersServiceApi.md#users_service_reset_password) | **POST** /api/rest/v1/users/{id}/password/reset | Reset password
+*UsersServiceApi* | [**users_service_update_password**](docs/UsersServiceApi.md#users_service_update_password) | **PUT** /api/rest/v1/users/me/password | Update password
 
 
 ## Documentation For Models

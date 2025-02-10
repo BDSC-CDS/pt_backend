@@ -16,8 +16,8 @@ from server_template.test import BaseTestCase
 class TestConfigurationServiceController(BaseTestCase):
     """ConfigurationServiceController integration test stubs"""
 
-    def test_config_service_create_config(self):
-        """Test case for config_service_create_config
+    def test_configuration_service_create_config(self):
+        """Test case for configuration_service_create_config
 
         Create a configuration
         """
@@ -36,8 +36,8 @@ class TestConfigurationServiceController(BaseTestCase):
         self.assert200(response,
                        'Response body is : ' + response.data.decode('utf-8'))
 
-    def test_config_service_delete_config(self):
-        """Test case for config_service_delete_config
+    def test_configuration_service_delete_config(self):
+        """Test case for configuration_service_delete_config
 
         Deletes a config
         """
@@ -52,8 +52,8 @@ class TestConfigurationServiceController(BaseTestCase):
         self.assert200(response,
                        'Response body is : ' + response.data.decode('utf-8'))
 
-    def test_config_service_export_config(self):
-        """Test case for config_service_export_config
+    def test_configuration_service_export_config(self):
+        """Test case for configuration_service_export_config
 
         Export a configuration as json (SPHN Connector format)
         """
@@ -68,8 +68,8 @@ class TestConfigurationServiceController(BaseTestCase):
         self.assert200(response,
                        'Response body is : ' + response.data.decode('utf-8'))
 
-    def test_config_service_get_configs(self):
-        """Test case for config_service_get_configs
+    def test_configuration_service_get_configs(self):
+        """Test case for configuration_service_get_configs
 
         Get configuration files
         """

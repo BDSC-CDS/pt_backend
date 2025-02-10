@@ -27,29 +27,29 @@ class TestConfigurationServiceApi(unittest.TestCase):
     def tearDown(self) -> None:
         pass
 
-    def test_config_service_create_config(self) -> None:
-        """Test case for config_service_create_config
+    def test_configuration_service_create_config(self) -> None:
+        """Test case for configuration_service_create_config
 
         Create a configuration
         """
         pass
 
-    def test_config_service_delete_config(self) -> None:
-        """Test case for config_service_delete_config
+    def test_configuration_service_delete_config(self) -> None:
+        """Test case for configuration_service_delete_config
 
         Deletes a config
         """
         pass
 
-    def test_config_service_export_config(self) -> None:
-        """Test case for config_service_export_config
+    def test_configuration_service_export_config(self) -> None:
+        """Test case for configuration_service_export_config
 
         Export a configuration as json (SPHN Connector format)
         """
         pass
 
-    def test_config_service_get_configs(self) -> None:
-        """Test case for config_service_get_configs
+    def test_configuration_service_get_configs(self) -> None:
+        """Test case for configuration_service_get_configs
 
         Get configuration files
         """

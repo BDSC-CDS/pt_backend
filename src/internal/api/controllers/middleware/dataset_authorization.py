@@ -3,14 +3,14 @@ from server_template.models import TemplatebackendStoreDatasetRequest
 from server_template.models import TemplatebackendTransformDatasetRequest
 from server_template.models import TemplatebackendRevertDatasetRequest
 from server_template.models import TemplatebackendChangeTypesDatasetRequest
-from src.internal.api.controllers.dataset_controller import DatasetController
+from src.internal.api.controllers.dataset_controller import DatasetServiceController
 from src.internal.util.interface.implements import implements_interface
 from .authorization import *
 
-class DatasetControllerAuthentication():
-    def __init__(self, next: DatasetController):
+class DatasetServiceControllerAuthentication():
+    def __init__(self, next: DatasetServiceController):
         self.next = next
-        implements_interface(DatasetController, DatasetControllerAuthentication)
+        implements_interface(DatasetServiceController, DatasetServiceControllerAuthentication)
 
     def dataset_service_store_dataset(self, user, body: TemplatebackendStoreDatasetRequest):
         if not is_authenticated(user): # TODO is_self ? comment on vérifie que qu'il accède a son propre dataset ?

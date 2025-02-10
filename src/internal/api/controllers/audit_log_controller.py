@@ -2,7 +2,7 @@ from server_template.models.templatebackend_get_logs_response import Templatebac
 import src.internal.api.controllers.converter.audit_log as audit_log_converter
 import json
 
-class AuditLogController:
+class AuditLogServiceController:
     def __init__(self, config, audit_log_service):
         self.config = config
         self.audit_log_service = audit_log_service

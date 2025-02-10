@@ -19,8 +19,8 @@ from server_template.test import BaseTestCase
 class TestUsersServiceController(BaseTestCase):
     """UsersServiceController integration test stubs"""
 
-    def test_user_service_create_user(self):
-        """Test case for user_service_create_user
+    def test_users_service_create_user(self):
+        """Test case for users_service_create_user
 
         Create a user
         """
@@ -39,8 +39,8 @@ class TestUsersServiceController(BaseTestCase):
         self.assert200(response,
                        'Response body is : ' + response.data.decode('utf-8'))
 
-    def test_user_service_delete_user(self):
-        """Test case for user_service_delete_user
+    def test_users_service_delete_user(self):
+        """Test case for users_service_delete_user
 
         Delete a user
         """
@@ -55,8 +55,8 @@ class TestUsersServiceController(BaseTestCase):
         self.assert200(response,
                        'Response body is : ' + response.data.decode('utf-8'))
 
-    def test_user_service_get_user(self):
-        """Test case for user_service_get_user
+    def test_users_service_get_user(self):
+        """Test case for users_service_get_user
 
         Get a user
         """
@@ -71,8 +71,8 @@ class TestUsersServiceController(BaseTestCase):
         self.assert200(response,
                        'Response body is : ' + response.data.decode('utf-8'))
 
-    def test_user_service_get_user_me(self):
-        """Test case for user_service_get_user_me
+    def test_users_service_get_user_me(self):
+        """Test case for users_service_get_user_me
 
         Get my own user
         """
@@ -87,8 +87,8 @@ class TestUsersServiceController(BaseTestCase):
         self.assert200(response,
                        'Response body is : ' + response.data.decode('utf-8'))
 
-    def test_user_service_reset_password(self):
-        """Test case for user_service_reset_password
+    def test_users_service_reset_password(self):
+        """Test case for users_service_reset_password
 
         Reset password
         """
@@ -107,8 +107,8 @@ class TestUsersServiceController(BaseTestCase):
         self.assert200(response,
                        'Response body is : ' + response.data.decode('utf-8'))
 
-    def test_user_service_update_password(self):
-        """Test case for user_service_update_password
+    def test_users_service_update_password(self):
+        """Test case for users_service_update_password
 
         Update password
         """

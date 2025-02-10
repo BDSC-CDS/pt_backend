@@ -14,12 +14,12 @@ security:
 tags:
 - name: AuditLogService
 - name: AuthenticationService
-- name: ConfigService
+- name: ConfigurationService
 - name: DatasetService
 - name: IndexService
 - name: QuestionnaireService
 - name: RiskAssessmentService
-- name: UserService
+- name: UsersService
 paths:
   /api/rest/v1/authentication/login:
     post:
@@ -52,7 +52,7 @@ paths:
   /api/rest/v1/config/export/{id}:
     get:
       description: This endpoint returns the JSON of a configuration
-      operationId: config_service_export_config
+      operationId: configuration_service_export_config
       parameters:
       - in: path
         name: id
@@ -80,7 +80,7 @@ paths:
   /api/rest/v1/configs:
     get:
       description: This endpoint returns the configuration files for a given user
-      operationId: config_service_get_configs
+      operationId: configuration_service_get_configs
       responses:
         "200":
           content:
@@ -100,7 +100,7 @@ paths:
       x-openapi-router-controller: config_generator_controller
     post:
       description: This endpoint creates a usconfigurationer
-      operationId: config_service_create_config
+      operationId: configuration_service_create_config
       requestBody:
         content:
           application/json:
@@ -128,7 +128,7 @@ paths:
   /api/rest/v1/users:
     post:
       description: This endpoint creates a user
-      operationId: user_service_create_user
+      operationId: users_service_create_user
       requestBody:
         content:
           application/json:
@@ -156,7 +156,7 @@ paths:
   /api/rest/v1/users/me:
     get:
       description: This endpoint returns the details of the authenticated user
-      operationId: user_service_get_user_me
+      operationId: users_service_get_user_me
       responses:
         "200":
           content:
@@ -177,7 +177,7 @@ paths:
   /api/rest/v1/users/me/password:
     put:
       description: This endpoint updates the password of the authenticated user
-      operationId: user_service_update_password
+      operationId: users_service_update_password
       requestBody:
         content:
           application/json:
@@ -205,7 +205,7 @@ paths:
   /api/rest/v1/users/{id}:
     delete:
       description: This endpoint deletes a user
-      operationId: user_service_delete_user
+      operationId: users_service_delete_user
       parameters:
       - in: path
         name: id
@@ -232,7 +232,7 @@ paths:
       x-openapi-router-controller: user_controller
     get:
       description: This endpoint returns a user
-      operationId: user_service_get_user
+      operationId: users_service_get_user
       parameters:
       - in: path
         name: id
@@ -260,7 +260,7 @@ paths:
   /api/rest/v1/users/{id}/password/reset:
     post:
       description: This endpoint resets a user's password
-      operationId: user_service_reset_password
+      operationId: users_service_reset_password
       parameters:
       - in: path
         name: id
@@ -381,7 +381,7 @@ paths:
   /api/v1/config/{id}:
     delete:
       description: This endpoint deletes a config
-      operationId: config_service_delete_config
+      operationId: configuration_service_delete_config
       parameters:
       - in: path
         name: id

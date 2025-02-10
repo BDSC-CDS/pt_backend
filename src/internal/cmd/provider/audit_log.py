@@ -1,5 +1,5 @@
-from src.internal.api.controllers.audit_log_controller import AuditLogController
-from src.internal.api.controllers.middleware.audit_log_authorization import AuditLogControllerAuthentication
+from src.internal.api.controllers.audit_log_controller import AuditLogServiceController
+from src.internal.api.controllers.middleware.audit_log_authorization import AuditLogServiceControllerAuthentication
 from src.pkg.audit_log.service.audit_log import AuditLogService
 from .config import provide_config
 from src.pkg.audit_log.store.postgres import AuditLogStore as PostgresAuditStore
@@ -15,8 +15,8 @@ def provide_audit_log_controller():
     if audit_log_controller is not None:
         return audit_log_controller
 
-    controller = AuditLogController(provide_config(), provide_audit_log_service())
-    controller = AuditLogControllerAuthentication(controller)
+    controller = AuditLogServiceController(provide_config(), provide_audit_log_service())
+    controller = AuditLogServiceControllerAuthentication(controller)
     audit_log_controller = controller
 
     return audit_log_controller

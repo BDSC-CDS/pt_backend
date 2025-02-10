@@ -56,7 +56,7 @@ class UsersServiceApi:
 
 
     @validate_call
-    def user_service_create_user(
+    def users_service_create_user(
         self,
         body: TemplatebackendUser,
         _request_timeout: Union[
@@ -100,7 +100,7 @@ class UsersServiceApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._user_service_create_user_serialize(
+        _param = self._users_service_create_user_serialize(
             body=body,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -123,7 +123,7 @@ class UsersServiceApi:
 
 
     @validate_call
-    def user_service_create_user_with_http_info(
+    def users_service_create_user_with_http_info(
         self,
         body: TemplatebackendUser,
         _request_timeout: Union[
@@ -167,7 +167,7 @@ class UsersServiceApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._user_service_create_user_serialize(
+        _param = self._users_service_create_user_serialize(
             body=body,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -190,7 +190,7 @@ class UsersServiceApi:
 
 
     @validate_call
-    def user_service_create_user_without_preload_content(
+    def users_service_create_user_without_preload_content(
         self,
         body: TemplatebackendUser,
         _request_timeout: Union[
@@ -234,7 +234,7 @@ class UsersServiceApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._user_service_create_user_serialize(
+        _param = self._users_service_create_user_serialize(
             body=body,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -252,7 +252,7 @@ class UsersServiceApi:
         return response_data.response
 
 
-    def _user_service_create_user_serialize(
+    def _users_service_create_user_serialize(
         self,
         body,
         _request_auth,
@@ -327,7 +327,7 @@ class UsersServiceApi:
 
 
     @validate_call
-    def user_service_delete_user(
+    def users_service_delete_user(
         self,
         id: StrictInt,
         _request_timeout: Union[
@@ -371,7 +371,7 @@ class UsersServiceApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._user_service_delete_user_serialize(
+        _param = self._users_service_delete_user_serialize(
             id=id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -394,7 +394,7 @@ class UsersServiceApi:
 
 
     @validate_call
-    def user_service_delete_user_with_http_info(
+    def users_service_delete_user_with_http_info(
         self,
         id: StrictInt,
         _request_timeout: Union[
@@ -438,7 +438,7 @@ class UsersServiceApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._user_service_delete_user_serialize(
+        _param = self._users_service_delete_user_serialize(
             id=id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -461,7 +461,7 @@ class UsersServiceApi:
 
 
     @validate_call
-    def user_service_delete_user_without_preload_content(
+    def users_service_delete_user_without_preload_content(
         self,
         id: StrictInt,
         _request_timeout: Union[
@@ -505,7 +505,7 @@ class UsersServiceApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._user_service_delete_user_serialize(
+        _param = self._users_service_delete_user_serialize(
             id=id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -523,7 +523,7 @@ class UsersServiceApi:
         return response_data.response
 
 
-    def _user_service_delete_user_serialize(
+    def _users_service_delete_user_serialize(
         self,
         id,
         _request_auth,
@@ -585,7 +585,7 @@ class UsersServiceApi:
 
 
     @validate_call
-    def user_service_get_user(
+    def users_service_get_user(
         self,
         id: StrictInt,
         _request_timeout: Union[
@@ -629,7 +629,7 @@ class UsersServiceApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._user_service_get_user_serialize(
+        _param = self._users_service_get_user_serialize(
             id=id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -652,7 +652,7 @@ class UsersServiceApi:
 
 
     @validate_call
-    def user_service_get_user_with_http_info(
+    def users_service_get_user_with_http_info(
         self,
         id: StrictInt,
         _request_timeout: Union[
@@ -696,7 +696,7 @@ class UsersServiceApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._user_service_get_user_serialize(
+        _param = self._users_service_get_user_serialize(
             id=id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -719,7 +719,7 @@ class UsersServiceApi:
 
 
     @validate_call
-    def user_service_get_user_without_preload_content(
+    def users_service_get_user_without_preload_content(
         self,
         id: StrictInt,
         _request_timeout: Union[
@@ -763,7 +763,7 @@ class UsersServiceApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._user_service_get_user_serialize(
+        _param = self._users_service_get_user_serialize(
             id=id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -781,7 +781,7 @@ class UsersServiceApi:
         return response_data.response
 
 
-    def _user_service_get_user_serialize(
+    def _users_service_get_user_serialize(
         self,
         id,
         _request_auth,
@@ -843,7 +843,7 @@ class UsersServiceApi:
 
 
     @validate_call
-    def user_service_get_user_me(
+    def users_service_get_user_me(
         self,
         _request_timeout: Union[
             None,
@@ -884,7 +884,7 @@ class UsersServiceApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._user_service_get_user_me_serialize(
+        _param = self._users_service_get_user_me_serialize(
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -906,7 +906,7 @@ class UsersServiceApi:
 
 
     @validate_call
-    def user_service_get_user_me_with_http_info(
+    def users_service_get_user_me_with_http_info(
         self,
         _request_timeout: Union[
             None,
@@ -947,7 +947,7 @@ class UsersServiceApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._user_service_get_user_me_serialize(
+        _param = self._users_service_get_user_me_serialize(
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -969,7 +969,7 @@ class UsersServiceApi:
 
 
     @validate_call
-    def user_service_get_user_me_without_preload_content(
+    def users_service_get_user_me_without_preload_content(
         self,
         _request_timeout: Union[
             None,
@@ -1010,7 +1010,7 @@ class UsersServiceApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._user_service_get_user_me_serialize(
+        _param = self._users_service_get_user_me_serialize(
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1027,7 +1027,7 @@ class UsersServiceApi:
         return response_data.response
 
 
-    def _user_service_get_user_me_serialize(
+    def _users_service_get_user_me_serialize(
         self,
         _request_auth,
         _content_type,
@@ -1086,7 +1086,7 @@ class UsersServiceApi:
 
 
     @validate_call
-    def user_service_reset_password(
+    def users_service_reset_password(
         self,
         id: StrictInt,
         body: Dict[str, Any],
@@ -1133,7 +1133,7 @@ class UsersServiceApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._user_service_reset_password_serialize(
+        _param = self._users_service_reset_password_serialize(
             id=id,
             body=body,
             _request_auth=_request_auth,
@@ -1157,7 +1157,7 @@ class UsersServiceApi:
 
 
     @validate_call
-    def user_service_reset_password_with_http_info(
+    def users_service_reset_password_with_http_info(
         self,
         id: StrictInt,
         body: Dict[str, Any],
@@ -1204,7 +1204,7 @@ class UsersServiceApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._user_service_reset_password_serialize(
+        _param = self._users_service_reset_password_serialize(
             id=id,
             body=body,
             _request_auth=_request_auth,
@@ -1228,7 +1228,7 @@ class UsersServiceApi:
 
 
     @validate_call
-    def user_service_reset_password_without_preload_content(
+    def users_service_reset_password_without_preload_content(
         self,
         id: StrictInt,
         body: Dict[str, Any],
@@ -1275,7 +1275,7 @@ class UsersServiceApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._user_service_reset_password_serialize(
+        _param = self._users_service_reset_password_serialize(
             id=id,
             body=body,
             _request_auth=_request_auth,
@@ -1294,7 +1294,7 @@ class UsersServiceApi:
         return response_data.response
 
 
-    def _user_service_reset_password_serialize(
+    def _users_service_reset_password_serialize(
         self,
         id,
         body,
@@ -1372,7 +1372,7 @@ class UsersServiceApi:
 
 
     @validate_call
-    def user_service_update_password(
+    def users_service_update_password(
         self,
         body: TemplatebackendUpdatePasswordRequest,
         _request_timeout: Union[
@@ -1416,7 +1416,7 @@ class UsersServiceApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._user_service_update_password_serialize(
+        _param = self._users_service_update_password_serialize(
             body=body,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1439,7 +1439,7 @@ class UsersServiceApi:
 
 
     @validate_call
-    def user_service_update_password_with_http_info(
+    def users_service_update_password_with_http_info(
         self,
         body: TemplatebackendUpdatePasswordRequest,
         _request_timeout: Union[
@@ -1483,7 +1483,7 @@ class UsersServiceApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._user_service_update_password_serialize(
+        _param = self._users_service_update_password_serialize(
             body=body,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1506,7 +1506,7 @@ class UsersServiceApi:
 
 
     @validate_call
-    def user_service_update_password_without_preload_content(
+    def users_service_update_password_without_preload_content(
         self,
         body: TemplatebackendUpdatePasswordRequest,
         _request_timeout: Union[
@@ -1550,7 +1550,7 @@ class UsersServiceApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._user_service_update_password_serialize(
+        _param = self._users_service_update_password_serialize(
             body=body,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1568,7 +1568,7 @@ class UsersServiceApi:
         return response_data.response
 
 
-    def _user_service_update_password_serialize(
+    def _users_service_update_password_serialize(
         self,
         body,
         _request_auth,

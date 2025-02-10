@@ -28,7 +28,7 @@ from server_template.models import ApiHttpBody
 
 import src.internal.api.controllers.converter.dataset as dataset_converter
 
-class DatasetController:
+class DatasetServiceController:
     def __init__(self, dataset_service):
         self.dataset_service = dataset_service
 

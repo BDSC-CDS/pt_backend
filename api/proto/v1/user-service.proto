@@ -153,7 +153,7 @@ message ResetPasswordReply {
     ResetPasswordResult result = 1;
 }
 
-service UserService {
+service UsersService {
     rpc UpdatePassword(UpdatePasswordRequest) returns (UpdatePasswordReply) {
         option (google.api.http) = {
             put: "/api/rest/v1/users/me/password"

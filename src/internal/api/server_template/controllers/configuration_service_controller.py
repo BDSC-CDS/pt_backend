@@ -18,7 +18,7 @@ from server_template import util
 
 #from src.internal.api.controllers import configuration_service_controller
 #controller_functions =  [func_tupple[0] for func_tupple in getmembers(configuration_service_controller, isfunction)]
-#needed_functions = ["config_service_create_config", "config_service_delete_config", "config_service_export_config", "config_service_get_configs"]
+#needed_functions = ["configuration_service_create_config", "configuration_service_delete_config", "configuration_service_export_config", "configuration_service_get_configs"]
 #for op in needed_functions:
 #    if op not in controller_functions:
 #        raise NotImplementedError("operation " + op + " is not implemented by src.internal.api.controllers.configuration_service_controller")
@@ -26,7 +26,7 @@ from server_template import util
 class ConfigurationServiceController:
     def __init__(self, controller):
         #controller_functions =  [func_tupple[0] for func_tupple in getmembers(controller, ismethod)]
-        #needed_functions = ["config_service_create_config", "config_service_delete_config", "config_service_export_config", "config_service_get_configs"]
+        #needed_functions = ["configuration_service_create_config", "configuration_service_delete_config", "configuration_service_export_config", "configuration_service_get_configs"]
         #for op in needed_functions:
         #    if op not in controller_functions:
         #        raise NotImplementedError("operation " + op + " is not implemented by provided controller")
@@ -35,7 +35,7 @@ class ConfigurationServiceController:
         self.controller=controller
 
 
-    def config_service_create_config(self, user, body: TemplatebackendConfig):
+    def configuration_service_create_config(self, user, body: TemplatebackendConfig):
         """Create a configuration
 
         This endpoint creates a usconfigurationer
@@ -48,10 +48,10 @@ class ConfigurationServiceController:
         if connexion.request.is_json:
             body = TemplatebackendConfig.from_dict(connexion.request.get_json())
 
-        return self.controller.config_service_create_config(user, body)
+        return self.controller.configuration_service_create_config(user, body)
 
 
-    def config_service_delete_config(self, user, id: int):
+    def configuration_service_delete_config(self, user, id: int):
         """Deletes a config
 
         This endpoint deletes a config
@@ -62,10 +62,10 @@ class ConfigurationServiceController:
         :rtype: Union[TemplatebackendDeleteConfigReply, Tuple[TemplatebackendDeleteConfigReply, int], Tuple[TemplatebackendDeleteConfigReply, int, Dict[str, str]]
         """
 
-        return self.controller.config_service_delete_config(user, id)
+        return self.controller.configuration_service_delete_config(user, id)
 
 
-    def config_service_export_config(self, user, id: int):
+    def configuration_service_export_config(self, user, id: int):
         """Export a configuration as json (SPHN Connector format)
 
         This endpoint returns the JSON of a configuration
@@ -76,10 +76,10 @@ class ConfigurationServiceController:
         :rtype: Union[TemplatebackendExportConfigReply, Tuple[TemplatebackendExportConfigReply, int], Tuple[TemplatebackendExportConfigReply, int, Dict[str, str]]
         """
 
-        return self.controller.config_service_export_config(user, id)
+        return self.controller.configuration_service_export_config(user, id)
 
 
-    def config_service_get_configs(self, user):
+    def configuration_service_get_configs(self, user):
         """Get configuration files
 
         This endpoint returns the configuration files for a given user
@@ -88,4 +88,4 @@ class ConfigurationServiceController:
         :rtype: Union[TemplatebackendGetConfigsReply, Tuple[TemplatebackendGetConfigsReply, int], Tuple[TemplatebackendGetConfigsReply, int, Dict[str, str]]
         """
 
-        return self.controller.config_service_get_configs(user, )
+        return self.controller.configuration_service_get_configs(user, )

@@ -20,10 +20,10 @@ def provide_dataset_controller():
     if dataset_controller is not None:
         return dataset_controller
 
-    controller = internal_dataset_controller.DatasetController(provide_dataset_service())
-    controller = dataset_controller_audit.DatasetControllerAudit(controller,provide_audit_log_service()) # TODO here ?
-    controller = dataset_controller_authorization.DatasetControllerAuthentication(controller)
-    dataset_controller = connexion_dataset_controller.DatasetController(controller)
+    controller = internal_dataset_controller.DatasetServiceController(provide_dataset_service())
+    controller = dataset_controller_audit.DatasetServiceControllerAudit(controller,provide_audit_log_service()) # TODO here ?
+    controller = dataset_controller_authorization.DatasetServiceControllerAuthentication(controller)
+    dataset_controller = connexion_dataset_controller.DatasetServiceController(controller)
 
     return dataset_controller
 

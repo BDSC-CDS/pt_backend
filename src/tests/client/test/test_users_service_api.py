@@ -27,43 +27,43 @@ class TestUsersServiceApi(unittest.TestCase):
     def tearDown(self) -> None:
         pass
 
-    def test_user_service_create_user(self) -> None:
-        """Test case for user_service_create_user
+    def test_users_service_create_user(self) -> None:
+        """Test case for users_service_create_user
 
         Create a user
         """
         pass
 
-    def test_user_service_delete_user(self) -> None:
-        """Test case for user_service_delete_user
+    def test_users_service_delete_user(self) -> None:
+        """Test case for users_service_delete_user
 
         Delete a user
         """
         pass
 
-    def test_user_service_get_user(self) -> None:
-        """Test case for user_service_get_user
+    def test_users_service_get_user(self) -> None:
+        """Test case for users_service_get_user
 
         Get a user
         """
         pass
 
-    def test_user_service_get_user_me(self) -> None:
-        """Test case for user_service_get_user_me
+    def test_users_service_get_user_me(self) -> None:
+        """Test case for users_service_get_user_me
 
         Get my own user
         """
         pass
 
-    def test_user_service_reset_password(self) -> None:
-        """Test case for user_service_reset_password
+    def test_users_service_reset_password(self) -> None:
+        """Test case for users_service_reset_password
 
         Reset password
         """
         pass
 
-    def test_user_service_update_password(self) -> None:
-        """Test case for user_service_update_password
+    def test_users_service_update_password(self) -> None:
+        """Test case for users_service_update_password
 
         Update password
         """

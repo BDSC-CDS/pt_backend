@@ -51,7 +51,7 @@ class ConfigurationServiceApi:
 
 
     @validate_call
-    def config_service_create_config(
+    def configuration_service_create_config(
         self,
         body: TemplatebackendConfig,
         _request_timeout: Union[
@@ -95,7 +95,7 @@ class ConfigurationServiceApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._config_service_create_config_serialize(
+        _param = self._configuration_service_create_config_serialize(
             body=body,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -118,7 +118,7 @@ class ConfigurationServiceApi:
 
 
     @validate_call
-    def config_service_create_config_with_http_info(
+    def configuration_service_create_config_with_http_info(
         self,
         body: TemplatebackendConfig,
         _request_timeout: Union[
@@ -162,7 +162,7 @@ class ConfigurationServiceApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._config_service_create_config_serialize(
+        _param = self._configuration_service_create_config_serialize(
             body=body,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -185,7 +185,7 @@ class ConfigurationServiceApi:
 
 
     @validate_call
-    def config_service_create_config_without_preload_content(
+    def configuration_service_create_config_without_preload_content(
         self,
         body: TemplatebackendConfig,
         _request_timeout: Union[
@@ -229,7 +229,7 @@ class ConfigurationServiceApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._config_service_create_config_serialize(
+        _param = self._configuration_service_create_config_serialize(
             body=body,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -247,7 +247,7 @@ class ConfigurationServiceApi:
         return response_data.response
 
 
-    def _config_service_create_config_serialize(
+    def _configuration_service_create_config_serialize(
         self,
         body,
         _request_auth,
@@ -322,7 +322,7 @@ class ConfigurationServiceApi:
 
 
     @validate_call
-    def config_service_delete_config(
+    def configuration_service_delete_config(
         self,
         id: StrictInt,
         _request_timeout: Union[
@@ -366,7 +366,7 @@ class ConfigurationServiceApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._config_service_delete_config_serialize(
+        _param = self._configuration_service_delete_config_serialize(
             id=id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -389,7 +389,7 @@ class ConfigurationServiceApi:
 
 
     @validate_call
-    def config_service_delete_config_with_http_info(
+    def configuration_service_delete_config_with_http_info(
         self,
         id: StrictInt,
         _request_timeout: Union[
@@ -433,7 +433,7 @@ class ConfigurationServiceApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._config_service_delete_config_serialize(
+        _param = self._configuration_service_delete_config_serialize(
             id=id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -456,7 +456,7 @@ class ConfigurationServiceApi:
 
 
     @validate_call
-    def config_service_delete_config_without_preload_content(
+    def configuration_service_delete_config_without_preload_content(
         self,
         id: StrictInt,
         _request_timeout: Union[
@@ -500,7 +500,7 @@ class ConfigurationServiceApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._config_service_delete_config_serialize(
+        _param = self._configuration_service_delete_config_serialize(
             id=id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -518,7 +518,7 @@ class ConfigurationServiceApi:
         return response_data.response
 
 
-    def _config_service_delete_config_serialize(
+    def _configuration_service_delete_config_serialize(
         self,
         id,
         _request_auth,
@@ -580,7 +580,7 @@ class ConfigurationServiceApi:
 
 
     @validate_call
-    def config_service_export_config(
+    def configuration_service_export_config(
         self,
         id: StrictInt,
         _request_timeout: Union[
@@ -624,7 +624,7 @@ class ConfigurationServiceApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._config_service_export_config_serialize(
+        _param = self._configuration_service_export_config_serialize(
             id=id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -647,7 +647,7 @@ class ConfigurationServiceApi:
 
 
     @validate_call
-    def config_service_export_config_with_http_info(
+    def configuration_service_export_config_with_http_info(
         self,
         id: StrictInt,
         _request_timeout: Union[
@@ -691,7 +691,7 @@ class ConfigurationServiceApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._config_service_export_config_serialize(
+        _param = self._configuration_service_export_config_serialize(
             id=id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -714,7 +714,7 @@ class ConfigurationServiceApi:
 
 
     @validate_call
-    def config_service_export_config_without_preload_content(
+    def configuration_service_export_config_without_preload_content(
         self,
         id: StrictInt,
         _request_timeout: Union[
@@ -758,7 +758,7 @@ class ConfigurationServiceApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._config_service_export_config_serialize(
+        _param = self._configuration_service_export_config_serialize(
             id=id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -776,7 +776,7 @@ class ConfigurationServiceApi:
         return response_data.response
 
 
-    def _config_service_export_config_serialize(
+    def _configuration_service_export_config_serialize(
         self,
         id,
         _request_auth,
@@ -838,7 +838,7 @@ class ConfigurationServiceApi:
 
 
     @validate_call
-    def config_service_get_configs(
+    def configuration_service_get_configs(
         self,
         _request_timeout: Union[
             None,
@@ -879,7 +879,7 @@ class ConfigurationServiceApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._config_service_get_configs_serialize(
+        _param = self._configuration_service_get_configs_serialize(
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -901,7 +901,7 @@ class ConfigurationServiceApi:
 
 
     @validate_call
-    def config_service_get_configs_with_http_info(
+    def configuration_service_get_configs_with_http_info(
         self,
         _request_timeout: Union[
             None,
@@ -942,7 +942,7 @@ class ConfigurationServiceApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._config_service_get_configs_serialize(
+        _param = self._configuration_service_get_configs_serialize(
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -964,7 +964,7 @@ class ConfigurationServiceApi:
 
 
     @validate_call
-    def config_service_get_configs_without_preload_content(
+    def configuration_service_get_configs_without_preload_content(
         self,
         _request_timeout: Union[
             None,
@@ -1005,7 +1005,7 @@ class ConfigurationServiceApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._config_service_get_configs_serialize(
+        _param = self._configuration_service_get_configs_serialize(
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1022,7 +1022,7 @@ class ConfigurationServiceApi:
         return response_data.response
 
 
-    def _config_service_get_configs_serialize(
+    def _configuration_service_get_configs_serialize(
         self,
         _request_auth,
         _content_type,

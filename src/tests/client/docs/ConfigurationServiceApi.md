@@ -4,14 +4,14 @@ All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**config_service_create_config**](ConfigurationServiceApi.md#config_service_create_config) | **POST** /api/rest/v1/configs | Create a configuration
-[**config_service_delete_config**](ConfigurationServiceApi.md#config_service_delete_config) | **DELETE** /api/v1/config/{id} | Deletes a config
-[**config_service_export_config**](ConfigurationServiceApi.md#config_service_export_config) | **GET** /api/rest/v1/config/export/{id} | Export a configuration as json (SPHN Connector format)
-[**config_service_get_configs**](ConfigurationServiceApi.md#config_service_get_configs) | **GET** /api/rest/v1/configs | Get configuration files
+[**configuration_service_create_config**](ConfigurationServiceApi.md#configuration_service_create_config) | **POST** /api/rest/v1/configs | Create a configuration
+[**configuration_service_delete_config**](ConfigurationServiceApi.md#configuration_service_delete_config) | **DELETE** /api/v1/config/{id} | Deletes a config
+[**configuration_service_export_config**](ConfigurationServiceApi.md#configuration_service_export_config) | **GET** /api/rest/v1/config/export/{id} | Export a configuration as json (SPHN Connector format)
+[**configuration_service_get_configs**](ConfigurationServiceApi.md#configuration_service_get_configs) | **GET** /api/rest/v1/configs | Get configuration files
 
 
-# **config_service_create_config**
-> TemplatebackendCreateConfigReply config_service_create_config(body)
+# **configuration_service_create_config**
+> TemplatebackendCreateConfigReply configuration_service_create_config(body)
 
 Create a configuration
 
@@ -55,11 +55,11 @@ with openapi_client.ApiClient(configuration) as api_client:
 
     try:
         # Create a configuration
-        api_response = api_instance.config_service_create_config(body)
-        print("The response of ConfigurationServiceApi->config_service_create_config:\n")
+        api_response = api_instance.configuration_service_create_config(body)
+        print("The response of ConfigurationServiceApi->configuration_service_create_config:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling ConfigurationServiceApi->config_service_create_config: %s\n" % e)
+        print("Exception when calling ConfigurationServiceApi->configuration_service_create_config: %s\n" % e)
 ```
 
 
@@ -93,8 +93,8 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **config_service_delete_config**
-> TemplatebackendDeleteConfigReply config_service_delete_config(id)
+# **configuration_service_delete_config**
+> TemplatebackendDeleteConfigReply configuration_service_delete_config(id)
 
 Deletes a config
 
@@ -137,11 +137,11 @@ with openapi_client.ApiClient(configuration) as api_client:
 
     try:
         # Deletes a config
-        api_response = api_instance.config_service_delete_config(id)
-        print("The response of ConfigurationServiceApi->config_service_delete_config:\n")
+        api_response = api_instance.configuration_service_delete_config(id)
+        print("The response of ConfigurationServiceApi->configuration_service_delete_config:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling ConfigurationServiceApi->config_service_delete_config: %s\n" % e)
+        print("Exception when calling ConfigurationServiceApi->configuration_service_delete_config: %s\n" % e)
 ```
 
 
@@ -175,8 +175,8 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **config_service_export_config**
-> TemplatebackendExportConfigReply config_service_export_config(id)
+# **configuration_service_export_config**
+> TemplatebackendExportConfigReply configuration_service_export_config(id)
 
 Export a configuration as json (SPHN Connector format)
 
@@ -219,11 +219,11 @@ with openapi_client.ApiClient(configuration) as api_client:
 
     try:
         # Export a configuration as json (SPHN Connector format)
-        api_response = api_instance.config_service_export_config(id)
-        print("The response of ConfigurationServiceApi->config_service_export_config:\n")
+        api_response = api_instance.configuration_service_export_config(id)
+        print("The response of ConfigurationServiceApi->configuration_service_export_config:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling ConfigurationServiceApi->config_service_export_config: %s\n" % e)
+        print("Exception when calling ConfigurationServiceApi->configuration_service_export_config: %s\n" % e)
 ```
 
 
@@ -257,8 +257,8 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **config_service_get_configs**
-> TemplatebackendGetConfigsReply config_service_get_configs()
+# **configuration_service_get_configs**
+> TemplatebackendGetConfigsReply configuration_service_get_configs()
 
 Get configuration files
 
@@ -300,11 +300,11 @@ with openapi_client.ApiClient(configuration) as api_client:
 
     try:
         # Get configuration files
-        api_response = api_instance.config_service_get_configs()
-        print("The response of ConfigurationServiceApi->config_service_get_configs:\n")
+        api_response = api_instance.configuration_service_get_configs()
+        print("The response of ConfigurationServiceApi->configuration_service_get_configs:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling ConfigurationServiceApi->config_service_get_configs: %s\n" % e)
+        print("Exception when calling ConfigurationServiceApi->configuration_service_get_configs: %s\n" % e)
 ```
 
 

@@ -7,7 +7,7 @@ info:
     url: https://pt-backend.rdeid.unil.ch
     email: development.bdsc@chuv.ch
 tags:
-  - name: ConfigService
+  - name: ConfigurationService
 schemes:
   - http
 consumes:
@@ -19,7 +19,7 @@ paths:
     get:
       summary: Export a configuration as json (SPHN Connector format)
       description: This endpoint returns the JSON of a configuration
-      operationId: ConfigService_ExportConfig
+      operationId: ConfigurationService_ExportConfig
       responses:
         "200":
           description: A successful response.
@@ -42,7 +42,7 @@ paths:
     get:
       summary: Get configuration files
       description: This endpoint returns the configuration files for a given user
-      operationId: ConfigService_GetConfigs
+      operationId: ConfigurationService_GetConfigs
       responses:
         "200":
           description: A successful response.
@@ -58,7 +58,7 @@ paths:
     post:
       summary: Create a configuration
       description: This endpoint creates a usconfigurationer
-      operationId: ConfigService_CreateConfig
+      operationId: ConfigurationService_CreateConfig
       responses:
         "200":
           description: A successful response.
@@ -81,7 +81,7 @@ paths:
     delete:
       summary: Deletes a config
       description: This endpoint deletes a config
-      operationId: ConfigService_DeleteConfig
+      operationId: ConfigurationService_DeleteConfig
       responses:
         "200":
           description: A successful response.

@@ -7,7 +7,7 @@ info:
     url: https://pt-backend.rdeid.unil.ch
     email: development.bdsc@chuv.ch
 tags:
-  - name: UserService
+  - name: UsersService
 schemes:
   - http
 consumes:
@@ -19,7 +19,7 @@ paths:
     post:
       summary: Create a user
       description: This endpoint creates a user
-      operationId: UserService_CreateUser
+      operationId: UsersService_CreateUser
       responses:
         "200":
           description: A successful response.
@@ -42,7 +42,7 @@ paths:
     get:
       summary: Get my own user
       description: This endpoint returns the details of the authenticated user
-      operationId: UserService_GetUserMe
+      operationId: UsersService_GetUserMe
       responses:
         "200":
           description: A successful response.
@@ -59,7 +59,7 @@ paths:
     put:
       summary: Update password
       description: This endpoint updates the password of the authenticated user
-      operationId: UserService_UpdatePassword
+      operationId: UsersService_UpdatePassword
       responses:
         "200":
           description: A successful response.
@@ -82,7 +82,7 @@ paths:
     get:
       summary: Get a user
       description: This endpoint returns a user
-      operationId: UserService_GetUser
+      operationId: UsersService_GetUser
       responses:
         "200":
           description: A successful response.
@@ -104,7 +104,7 @@ paths:
     delete:
       summary: Delete a user
       description: This endpoint deletes a user
-      operationId: UserService_DeleteUser
+      operationId: UsersService_DeleteUser
       responses:
         "200":
           description: A successful response.
@@ -127,7 +127,7 @@ paths:
     post:
       summary: Reset password
       description: This endpoint resets a user's password
-      operationId: UserService_ResetPassword
+      operationId: UsersService_ResetPassword
       responses:
         "200":
           description: A successful response.

@@ -15,11 +15,11 @@ from server_template.models import TemplatebackendExportConfigReply
 from server_template.models import TemplatebackendConfig
 import src.internal.api.controllers.converter.config_generator as config_converter
 
-class ConfigGeneratorController():
+class ConfigGeneratorServiceController():
     def __init__(self,  config_generator_service):
         self.config_generator_service = config_generator_service
 
-    def config_service_get_configs(self,user):
+    def configuration_service_get_configs(self,user):
         try:
             configs_backend: List[ConfigGenerator] = self.config_generator_service.get_configs(user.id,user.tenantid)
             configs_frontend : List[TemplatebackendConfig] = [config_converter.config_from_business(c) for c in configs_backend]
@@ -30,7 +30,7 @@ class ConfigGeneratorController():
             traceback.print_exception(e)
             return str(e), 500
 
-    def config_service_create_config(self,user,body: TemplatebackendConfig):
+    def configuration_service_create_config(self,user,body: TemplatebackendConfig):
         config : ConfigGenerator =  config_converter.config_to_business(body)
         try:
             response = self.config_generator_service.create_config(user,config)
@@ -42,7 +42,7 @@ class ConfigGeneratorController():
             return str(e), 500
 
 
-    def config_service_delete_config(self,user,id:int):
+    def configuration_service_delete_config(self,user,id:int):
         try:
             response = self.config_generator_service.delete_config(user,id)
             return TemplatebackendDeleteConfigReply(TemplatebackendDeleteConfigResult(success=response))
@@ -51,7 +51,7 @@ class ConfigGeneratorController():
             traceback.print_exception(e)
             return str(e), 500
 
-    def config_service_export_config(self,user,id:int):
+    def configuration_service_export_config(self,user,id:int):
         try:
             response = self.config_generator_service.export_config(user,id)
             return TemplatebackendExportConfigReply(config=response)
