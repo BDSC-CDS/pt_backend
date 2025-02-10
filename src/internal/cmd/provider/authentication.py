@@ -1,6 +1,6 @@
 from src.internal.api.controllers import security_controller
 import src.internal.api.controllers.authentication_controller as internal_authentication_controller
-import src.internal.api.server_template.controllers.authentication_controller as connexion_authentication_controller
+import src.internal.api.server_template.controllers.authentication_service_controller as connexion_authentication_controller
 from src.pkg.authentication.service.authentication import AuthenticationService
 from .user import provide_user_service
 from .config import provide_config

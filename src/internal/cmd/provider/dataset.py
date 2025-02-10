@@ -1,4 +1,4 @@
-import src.internal.api.server_template.controllers.dataset_controller as connexion_dataset_controller
+import src.internal.api.server_template.controllers.dataset_service_controller as connexion_dataset_controller
 import src.internal.api.controllers.dataset_controller as internal_dataset_controller
 import src.internal.api.controllers.middleware.dataset_authorization as dataset_controller_authorization
 import src.internal.api.controllers.middleware.dataset_audit as dataset_controller_audit

@@ -1,4 +1,4 @@
-import src.internal.api.server_template.controllers.index_controller as connexion_index_controller
+import src.internal.api.server_template.controllers.index_service_controller as connexion_index_controller
 import src.internal.api.controllers.index_controller as internal_index_controller
 
 index_controller = None

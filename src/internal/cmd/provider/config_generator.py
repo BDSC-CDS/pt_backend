@@ -1,4 +1,4 @@
-import src.internal.api.server_template.controllers.configuration_controller as connexion_config_controller
+import src.internal.api.server_template.controllers.configuration_service_controller as connexion_config_controller
 import src.internal.api.controllers.config_generator_controller as internal_config_controller
 import src.internal.api.controllers.middleware.config_generator_authorization as config_controller_authorization
 import src.internal.api.controllers.middleware.config_generator_audit as config_controller_audit

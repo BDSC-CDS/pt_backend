@@ -36,7 +36,7 @@ paths:
           schema:
             $ref: '#/definitions/templatebackendUser'
       tags:
-        - Users
+        - UsersService
       x-openapi-router-controller: user_controller
   /api/rest/v1/users/me:
     get:
@@ -53,7 +53,7 @@ paths:
           schema:
             $ref: '#/definitions/rpcStatus'
       tags:
-        - Users
+        - UsersService
       x-openapi-router-controller: user_controller
   /api/rest/v1/users/me/password:
     put:
@@ -76,7 +76,7 @@ paths:
           schema:
             $ref: '#/definitions/templatebackendUpdatePasswordRequest'
       tags:
-        - Users
+        - UsersService
       x-openapi-router-controller: user_controller
   /api/rest/v1/users/{id}:
     get:
@@ -99,7 +99,7 @@ paths:
           type: integer
           format: int64
       tags:
-        - Users
+        - UsersService
       x-openapi-router-controller: user_controller
     delete:
       summary: Delete a user
@@ -121,7 +121,7 @@ paths:
           type: integer
           format: int64
       tags:
-        - Users
+        - UsersService
       x-openapi-router-controller: user_controller
   /api/rest/v1/users/{id}/password/reset:
     post:
@@ -149,7 +149,7 @@ paths:
           schema:
             type: object
       tags:
-        - Users
+        - UsersService
       x-openapi-router-controller: user_controller
 definitions:
   protobufAny:

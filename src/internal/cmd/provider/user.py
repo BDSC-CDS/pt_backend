@@ -1,4 +1,4 @@
-import src.internal.api.server_template.controllers.users_controller as connexion_user_controller
+import src.internal.api.server_template.controllers.users_service_controller as connexion_user_controller
 import src.internal.api.controllers.user_controller as internal_user_controller
 import src.internal.api.controllers.middleware.user_authorization as user_controller_authorization
 import src.internal.api.controllers.middleware.user_audit as user_controller_audit

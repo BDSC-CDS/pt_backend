@@ -1,4 +1,4 @@
-import src.internal.api.server_template.controllers.risk_assessment_controller as connexion_risk_assessment_controller
+import src.internal.api.server_template.controllers.risk_assessment_service_controller as connexion_risk_assessment_controller
 import src.internal.api.controllers.risk_assessment_controller as internal_risk_assessment_controller
 import src.internal.api.controllers.middleware.risk_assessment_authorization as risk_assessment_controller_authorization
 from src.pkg.risk_assessment.service.risk_assessment import RiskAssessmentService

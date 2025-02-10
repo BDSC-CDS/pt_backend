@@ -46,7 +46,7 @@ paths:
           description: An unexpected error response.
       summary: Authenticate
       tags:
-      - Authentication
+      - AuthenticationService
       x-openapi-router-controller: authentication_controller
       x-codegen-request-body-name: body
   /api/rest/v1/config/export/{id}:
@@ -75,7 +75,7 @@ paths:
           description: An unexpected error response.
       summary: Export a configuration as json (SPHN Connector format)
       tags:
-      - Configuration
+      - ConfigurationService
       x-openapi-router-controller: config_generator_controller
   /api/rest/v1/configs:
     get:
@@ -96,7 +96,7 @@ paths:
           description: An unexpected error response.
       summary: Get configuration files
       tags:
-      - Configuration
+      - ConfigurationService
       x-openapi-router-controller: config_generator_controller
     post:
       description: This endpoint creates a usconfigurationer
@@ -122,7 +122,7 @@ paths:
           description: An unexpected error response.
       summary: Create a configuration
       tags:
-      - Configuration
+      - ConfigurationService
       x-openapi-router-controller: config_generator_controller
       x-codegen-request-body-name: body
   /api/rest/v1/users:
@@ -150,7 +150,7 @@ paths:
           description: An unexpected error response.
       summary: Create a user
       tags:
-      - Users
+      - UsersService
       x-openapi-router-controller: user_controller
       x-codegen-request-body-name: body
   /api/rest/v1/users/me:
@@ -172,7 +172,7 @@ paths:
           description: An unexpected error response.
       summary: Get my own user
       tags:
-      - Users
+      - UsersService
       x-openapi-router-controller: user_controller
   /api/rest/v1/users/me/password:
     put:
@@ -199,7 +199,7 @@ paths:
           description: An unexpected error response.
       summary: Update password
       tags:
-      - Users
+      - UsersService
       x-openapi-router-controller: user_controller
       x-codegen-request-body-name: body
   /api/rest/v1/users/{id}:
@@ -228,7 +228,7 @@ paths:
           description: An unexpected error response.
       summary: Delete a user
       tags:
-      - Users
+      - UsersService
       x-openapi-router-controller: user_controller
     get:
       description: This endpoint returns a user
@@ -255,7 +255,7 @@ paths:
           description: An unexpected error response.
       summary: Get a user
       tags:
-      - Users
+      - UsersService
       x-openapi-router-controller: user_controller
   /api/rest/v1/users/{id}/password/reset:
     post:
@@ -289,7 +289,7 @@ paths:
           description: An unexpected error response.
       summary: Reset password
       tags:
-      - Users
+      - UsersService
       x-openapi-router-controller: user_controller
       x-codegen-request-body-name: body
   /api/v1/audit/logs:
@@ -330,7 +330,7 @@ paths:
           description: An unexpected error response.
       summary: Get logs
       tags:
-      - AuditLog
+      - AuditLogService
       x-openapi-router-controller: audit_log_controller
   /api/v1/audit/users/{userid}/logs:
     get:
@@ -376,7 +376,7 @@ paths:
           description: An unexpected error response.
       summary: Get logs for a user
       tags:
-      - AuditLog
+      - AuditLogService
       x-openapi-router-controller: audit_log_controller
   /api/v1/config/{id}:
     delete:
@@ -404,7 +404,7 @@ paths:
           description: An unexpected error response.
       summary: Deletes a config
       tags:
-      - Configuration
+      - ConfigurationService
       x-openapi-router-controller: config_generator_controller
   /api/v1/dataset:
     get:
@@ -436,7 +436,7 @@ paths:
           description: An unexpected error response.
       summary: List datasets
       tags:
-      - Dataset
+      - DatasetService
       x-openapi-router-controller: dataset_controller
     post:
       description: This endpoint stores a dataset
@@ -462,7 +462,7 @@ paths:
           description: An unexpected error response.
       summary: Store a dataset
       tags:
-      - Dataset
+      - DatasetService
       x-openapi-router-controller: dataset_controller
       x-codegen-request-body-name: body
   /api/v1/dataset/content/{id}:
@@ -501,7 +501,7 @@ paths:
           description: An unexpected error response.
       summary: Get Dataset Content
       tags:
-      - Dataset
+      - DatasetService
       x-openapi-router-controller: dataset_controller
   /api/v1/dataset/dataframe/{id}:
     get:
@@ -540,7 +540,7 @@ paths:
           description: An unexpected error response.
       summary: Get Dataset Dataframe
       tags:
-      - Dataset
+      - DatasetService
       x-openapi-router-controller: dataset_controller
   /api/v1/dataset/identifier/{id}:
     get:
@@ -579,7 +579,7 @@ paths:
           description: An unexpected error response.
       summary: Get Dataset Content filtered by identifying and quasi identifying columns
       tags:
-      - Dataset
+      - DatasetService
       x-openapi-router-controller: dataset_controller
   /api/v1/dataset/info/{id}:
     get:
@@ -607,7 +607,7 @@ paths:
           description: An unexpected error response.
       summary: Get Dataset Info
       tags:
-      - Dataset
+      - DatasetService
       x-openapi-router-controller: dataset_controller
   /api/v1/dataset/jupyterhub/{id}:
     get:
@@ -636,7 +636,7 @@ paths:
           description: An unexpected error response.
       summary: Get Dataset Jupyterhub
       tags:
-      - Dataset
+      - DatasetService
       x-openapi-router-controller: dataset_controller
   /api/v1/dataset/metadata/{id}:
     get:
@@ -664,7 +664,7 @@ paths:
           description: An unexpected error response.
       summary: Get Dataset Metadata
       tags:
-      - Dataset
+      - DatasetService
       x-openapi-router-controller: dataset_controller
   /api/v1/dataset/revert:
     post:
@@ -691,7 +691,7 @@ paths:
           description: An unexpected error response.
       summary: Revert a dataset
       tags:
-      - Dataset
+      - DatasetService
       x-openapi-router-controller: dataset_controller
       x-codegen-request-body-name: body
   /api/v1/dataset/transform:
@@ -719,7 +719,7 @@ paths:
           description: An unexpected error response.
       summary: Transform a dataset
       tags:
-      - Dataset
+      - DatasetService
       x-openapi-router-controller: dataset_controller
       x-codegen-request-body-name: body
   /api/v1/dataset/types:
@@ -747,7 +747,7 @@ paths:
           description: An unexpected error response.
       summary: Change the types of a dataset
       tags:
-      - Dataset
+      - DatasetService
       x-openapi-router-controller: dataset_controller
       x-codegen-request-body-name: body
   /api/v1/dataset/{id}:
@@ -776,7 +776,7 @@ paths:
           description: An unexpected error response.
       summary: Deletes a dataset
       tags:
-      - Dataset
+      - DatasetService
       x-openapi-router-controller: dataset_controller
   /api/v1/hello:
     get:
@@ -797,7 +797,7 @@ paths:
           description: An unexpected error response.
       summary: Get a hello
       tags:
-      - Index
+      - IndexService
       x-openapi-router-controller: index_controller
   /api/v1/hello/{identifier}:
     post:
@@ -831,7 +831,7 @@ paths:
           description: An unexpected error response.
       summary: Get a hello
       tags:
-      - Index
+      - IndexService
       x-openapi-router-controller: index_controller
       x-codegen-request-body-name: body
   /api/v1/questionnaire:
@@ -864,7 +864,7 @@ paths:
           description: An unexpected error response.
       summary: List questionnaires
       tags:
-      - Questionnaire
+      - QuestionnaireService
       x-openapi-router-controller: questionnaire_controller
     post:
       description: This endpoint creates a questionnaire
@@ -890,7 +890,7 @@ paths:
           description: An unexpected error response.
       summary: Create a questionnaire
       tags:
-      - Questionnaire
+      - QuestionnaireService
       x-openapi-router-controller: questionnaire_controller
       x-codegen-request-body-name: body
   /api/v1/questionnaire/replies:
@@ -924,7 +924,7 @@ paths:
           description: An unexpected error response.
       summary: List questionnaires replies
       tags:
-      - Questionnaire
+      - QuestionnaireService
       x-openapi-router-controller: questionnaire_controller
     post:
       description: This endpoint allows ceating a user's questionnaires reply
@@ -950,7 +950,7 @@ paths:
           description: An unexpected error response.
       summary: Create questionnaires reply
       tags:
-      - Questionnaire
+      - QuestionnaireService
       x-openapi-router-controller: questionnaire_controller
       x-codegen-request-body-name: body
   /api/v1/questionnaire/replies/{id}:
@@ -980,7 +980,7 @@ paths:
           description: An unexpected error response.
       summary: Get a questionnaires reply
       tags:
-      - Questionnaire
+      - QuestionnaireService
       x-openapi-router-controller: questionnaire_controller
   /api/v1/questionnaire/version:
     post:
@@ -1007,7 +1007,7 @@ paths:
           description: An unexpected error response.
       summary: Create a questionnaire version
       tags:
-      - Questionnaire
+      - QuestionnaireService
       x-openapi-router-controller: questionnaire_controller
       x-codegen-request-body-name: body
   /api/v1/questionnaire/{id}:
@@ -1035,7 +1035,7 @@ paths:
           description: An unexpected error response.
       summary: Create a questionnaire
       tags:
-      - Questionnaire
+      - QuestionnaireService
       x-openapi-router-controller: questionnaire_controller
     get:
       description: This endpoint allow getting a single user's questionnaire
@@ -1062,7 +1062,7 @@ paths:
           description: An unexpected error response.
       summary: Get questionnaires
       tags:
-      - Questionnaire
+      - QuestionnaireService
       x-openapi-router-controller: questionnaire_controller
   /api/v1/riskassessment/{datasetid}:
     get:
@@ -1090,7 +1090,7 @@ paths:
           description: An unexpected error response.
       summary: Get risk assessment
       tags:
-      - RiskAssessment
+      - RiskAssessmentService
       x-openapi-router-controller: risk_assessment_controller
 components:
   schemas:

@@ -36,7 +36,7 @@ paths:
           type: integer
           format: int64
       tags:
-        - Configuration
+        - ConfigurationService
       x-openapi-router-controller: config_generator_controller
   /api/rest/v1/configs:
     get:
@@ -53,7 +53,7 @@ paths:
           schema:
             $ref: '#/definitions/rpcStatus'
       tags:
-        - Configuration
+        - ConfigurationService
       x-openapi-router-controller: config_generator_controller
     post:
       summary: Create a configuration
@@ -75,7 +75,7 @@ paths:
           schema:
             $ref: '#/definitions/templatebackendConfig'
       tags:
-        - Configuration
+        - ConfigurationService
       x-openapi-router-controller: config_generator_controller
   /api/v1/config/{id}:
     delete:
@@ -98,7 +98,7 @@ paths:
           type: integer
           format: int64
       tags:
-        - Configuration
+        - ConfigurationService
       x-openapi-router-controller: config_generator_controller
 definitions:
   protobufAny:

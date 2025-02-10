@@ -1,4 +1,4 @@
-import src.internal.api.server_template.controllers.questionnaire_controller as connexion_questionnaire_controller
+import src.internal.api.server_template.controllers.questionnaire_service_controller as connexion_questionnaire_controller
 import src.internal.api.controllers.questionnaire_controller as internal_questionnaire_controller
 import src.internal.api.controllers.middleware.questionnaire_authorization as questionnaire_controller_authorization
 from src.pkg.questionnaire.service.questionnaire import QuestionnaireService
