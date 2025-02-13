@@ -170,11 +170,32 @@ class QuestionnaireStore:
         return QuestionnaireVersion(id=version_id)
         
     def create_reply(self, tenantid: int, userid: int, reply: Reply) -> Reply:
+        questionnaire_reply_select_query = """
+        SELECT id
+        FROM questionnaire_replies
+        WHERE
+            project_name = :project_name and
+            userid = :userid and
+            tenantid = :tenantid and
+            questionnaire_versionid = :questionnaire_versionid and
+            deletedat is null
+        ORDER BY createdat DESC
+        LIMIT 1;
+        """
+
         questionnaire_reply_query = """
         INSERT INTO questionnaire_replies 
-            (project_name, userid, tenantid, questionnaire_versionid, questionnaireid, createdat, updatedat) 
-        VALUES 
+            (project_name, userid, tenantid, questionnaire_versionid, questionnaireid, createdat, updatedat)
+        VALUES
             (:project_name, :userid, :tenantid, :questionnaire_versionid, (select questionnaireid from questionnaire_versions where id = :questionnaire_versionid), now(), now()) 
+        RETURNING id;
+        """
+
+        questionnaire_reply_version_query = """
+        INSERT INTO questionnaire_reply_versions
+            (questionnairereplyid, userid, tenantid, createdat, updatedat)
+        VALUES
+            (:questionnairereplyid, :userid, :tenantid, now(), now())
         RETURNING id;
         """
 
@@ -188,17 +209,33 @@ class QuestionnaireStore:
 
         with self.session_scope() as session:
             try:
-                result = session.execute(text(questionnaire_reply_query), {
+                result_existing_project = session.execute(text(questionnaire_reply_select_query), {
                     'project_name': reply.project_name,
                     'userid': userid,
                     'tenantid': tenantid,
                     'questionnaire_versionid': reply.questionnaire_version_id
                 }).fetchone()
-                reply_id = result[0]
+                if result_existing_project:
+                    reply_id = result_existing_project[0]
+                else:
+                    result = session.execute(text(questionnaire_reply_query), {
+                        'project_name': reply.project_name,
+                        'userid': userid,
+                        'tenantid': tenantid,
+                        'questionnaire_versionid': reply.questionnaire_version_id
+                    }).fetchone()
+                    reply_id = result[0]
+
+                result_version = session.execute(text(questionnaire_reply_version_query), {
+                    'questionnairereplyid': reply_id,
+                    'userid': userid,
+                    'tenantid': tenantid
+                }).fetchone()
+                reply_version_id = result_version[0]
 
                 for question_reply in reply.replies:
                     session.execute(text(questionnaire_question_reply_query), {
-                        'replyid': reply_id,
+                        'replyid': reply_version_id,
                         'userid': userid,
                         'tenantid': tenantid,
                         'questionnaire_versionid': reply.questionnaire_version_id,
@@ -223,7 +260,14 @@ class QuestionnaireStore:
         question_reply_query = """
         SELECT id, userid, tenantid, questionnaire_questionid, answer, createdat, updatedat, deletedat
         FROM questionnaire_question_reply
-        WHERE replyid = :reply_id;
+        WHERE
+            replyid = (
+                SELECT id from questionnaire_reply_versions
+                WHERE questionnairereplyid = :reply_id
+                ORDER BY createdat DESC
+                LIMIT 1
+            ) and
+            deletedat is null;
         """
 
         with self.session_scope() as session:
@@ -263,11 +307,40 @@ class QuestionnaireStore:
 
             return reply
     
+    def create_share(self, tenantid: int, userid: int, reply_id: int, sharedwith_userid: int) -> bool:
+        share_query = """
+        INSERT INTO questionnaire_reply_share 
+            (questionnairereplyid, sharedwith_userid, share_type, userid, tenantid, createdat, updatedat) 
+        VALUES 
+            (:questionnairereplyid, :sharedwith_userid, 'read', :userid, :tenantid, now(), now());
+        """
+
+        with self.session_scope() as session:
+            try:
+                session.execute(text(share_query), {
+                    'questionnairereplyid': reply_id,
+                    'sharedwith_userid': sharedwith_userid,
+                    'userid': userid,
+                    'tenantid': tenantid
+                })
+
+            except SQLAlchemyError as e:
+                raise e
+
+            return True
+    
     def list_replies(self, tenantid: int, userid: int, offset: int, limit: int) -> list[Reply]:
         reply_query = """
         SELECT id, userid, tenantid, project_name, questionnaire_versionid, createdat, updatedat, deletedat
         FROM questionnaire_replies
-        WHERE userid = :userid and deletedat is null
+        WHERE (
+            userid = :userid OR
+            id IN (
+                SELECT questionnairereplyid FROM questionnaire_reply_share 
+                WHERE sharedwith_userid = :userid and tenantid = :tenantid and deletedat is null 
+            )
+        ) 
+        and tenantid = :tenantid and deletedat is null
         OFFSET :offset
         LIMIT :limit;
         """
@@ -276,6 +349,7 @@ class QuestionnaireStore:
             try:
                 results = session.execute(text(reply_query), {
                     'userid': userid,
+                    'tenantid': tenantid,
                     'offset': offset,
                     'limit': limit,
                 }).mappings().fetchall()

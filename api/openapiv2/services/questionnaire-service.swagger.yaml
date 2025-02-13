@@ -140,6 +140,38 @@ paths:
       tags:
         - QuestionnaireService
       x-openapi-router-controller: questionnaire_controller
+  /api/v1/questionnaire/replies/{id}/share:
+    post:
+      summary: Share questionnaires reply
+      description: This endpoint allows sharing a user's questionnaires reply
+      operationId: QuestionnaireService_ShareReply
+      responses:
+        "200":
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/templatebackendShareReplyReply'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/rpcStatus'
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: integer
+          format: int64
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              sharedwithUserid:
+                type: integer
+                format: int64
+      tags:
+        - QuestionnaireService
+      x-openapi-router-controller: questionnaire_controller
   /api/v1/questionnaire/version:
     post:
       summary: Create a questionnaire version
@@ -500,6 +532,16 @@ definitions:
         type: string
         format: date-time
         title: google.protobuf.Timestamp deletedAt = 6;
+  templatebackendShareReplyReply:
+    type: object
+    properties:
+      result:
+        $ref: '#/definitions/templatebackendShareReplyResult'
+  templatebackendShareReplyResult:
+    type: object
+    properties:
+      success:
+        type: boolean
 securityDefinitions:
   Bearer:
     type: apiKey

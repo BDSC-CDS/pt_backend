@@ -4,6 +4,7 @@ import unittest
 
 from flask import json
 
+from server_template.models.questionnaire_service_share_reply_request import QuestionnaireServiceShareReplyRequest
 from server_template.models.rpc_status import RpcStatus
 from server_template.models.templatebackend_create_questionnaire_reply import TemplatebackendCreateQuestionnaireReply
 from server_template.models.templatebackend_create_questionnaire_request import TemplatebackendCreateQuestionnaireRequest
@@ -16,6 +17,7 @@ from server_template.models.templatebackend_get_questionnaire_reply import Templ
 from server_template.models.templatebackend_get_reply_reply import TemplatebackendGetReplyReply
 from server_template.models.templatebackend_list_questionnaire_reply import TemplatebackendListQuestionnaireReply
 from server_template.models.templatebackend_list_replies_reply import TemplatebackendListRepliesReply
+from server_template.models.templatebackend_share_reply_reply import TemplatebackendShareReplyReply
 from server_template.test import BaseTestCase
 
 
@@ -165,6 +167,26 @@ class TestQuestionnaireServiceController(BaseTestCase):
             method='GET',
             headers=headers,
             query_string=query_string)
+        self.assert200(response,
+                       'Response body is : ' + response.data.decode('utf-8'))
+
+    def test_questionnaire_service_share_reply(self):
+        """Test case for questionnaire_service_share_reply
+
+        Share questionnaires reply
+        """
+        body = server_template.QuestionnaireServiceShareReplyRequest()
+        headers = { 
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Bearer': 'special-key',
+        }
+        response = self.client.open(
+            '/api/v1/questionnaire/replies/{id}/share'.format(id=56),
+            method='POST',
+            headers=headers,
+            data=json.dumps(body),
+            content_type='application/json')
         self.assert200(response,
                        'Response body is : ' + response.data.decode('utf-8'))
 

@@ -1,5 +1,6 @@
 from server_template.models import TemplatebackendUser
 from server_template.models import TemplatebackendUpdatePasswordRequest
+from server_template.models import TemplatebackendSearchUsersRequest
 from src.internal.api.controllers.user_controller import UsersServiceController
 from src.internal.util.interface.implements import implements_interface
 from .authorization import *
@@ -40,3 +41,9 @@ class UsersServiceControllerAuthentication():
             return None, 403
         
         return self.next.users_service_update_password(user, body)
+    
+    def users_service_search_users(self, user, body: TemplatebackendSearchUsersRequest):
+        if not is_authenticated(user):
+            return None, 403
+
+        return self.next.users_service_search_users(user, body)

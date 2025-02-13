@@ -62,6 +62,13 @@ class TestUsersServiceApi(unittest.TestCase):
         """
         pass
 
+    def test_users_service_search_users(self) -> None:
+        """Test case for users_service_search_users
+
+        Search users
+        """
+        pass
+
     def test_users_service_update_password(self) -> None:
         """Test case for users_service_update_password
 

@@ -170,6 +170,29 @@ paths:
       tags:
         - UsersService
       x-openapi-router-controller: user_controller
+  /api/rest/v1/users/search:
+    post:
+      summary: Search users
+      description: This endpoint searches for users
+      operationId: UsersService_SearchUsers
+      responses:
+        "200":
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/templatebackendSearchUsersReply'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/rpcStatus'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/templatebackendSearchUsersRequest'
+      tags:
+        - UsersService
+      x-openapi-router-controller: user_controller
   /api/rest/v1/users/{id}:
     get:
       summary: Get a user
@@ -825,6 +848,38 @@ paths:
           required: true
           type: integer
           format: int64
+      tags:
+        - QuestionnaireService
+      x-openapi-router-controller: questionnaire_controller
+  /api/v1/questionnaire/replies/{id}/share:
+    post:
+      summary: Share questionnaires reply
+      description: This endpoint allows sharing a user's questionnaires reply
+      operationId: QuestionnaireService_ShareReply
+      responses:
+        "200":
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/templatebackendShareReplyReply'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/rpcStatus'
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: integer
+          format: int64
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              sharedwithUserid:
+                type: integer
+                format: int64
       tags:
         - QuestionnaireService
       x-openapi-router-controller: questionnaire_controller
@@ -1736,6 +1791,29 @@ definitions:
       id:
         type: integer
         format: int64
+  templatebackendSearchUsersReply:
+    type: object
+    properties:
+      result:
+        type: array
+        items:
+          type: object
+          $ref: '#/definitions/templatebackendUserEmail'
+  templatebackendSearchUsersRequest:
+    type: object
+    properties:
+      emailLike:
+        type: string
+  templatebackendShareReplyReply:
+    type: object
+    properties:
+      result:
+        $ref: '#/definitions/templatebackendShareReplyResult'
+  templatebackendShareReplyResult:
+    type: object
+    properties:
+      success:
+        type: boolean
   templatebackendStoreDatasetReply:
     type: object
     properties:
@@ -1831,6 +1909,14 @@ definitions:
         format: date-time
       passwordChanged:
         type: boolean
+  templatebackendUserEmail:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+      email:
+        type: string
 securityDefinitions:
   Bearer:
     type: apiKey

@@ -10,6 +10,8 @@ from server_template.models.templatebackend_delete_user_reply import Templatebac
 from server_template.models.templatebackend_get_user_me_reply import TemplatebackendGetUserMeReply
 from server_template.models.templatebackend_get_user_reply import TemplatebackendGetUserReply
 from server_template.models.templatebackend_reset_password_reply import TemplatebackendResetPasswordReply
+from server_template.models.templatebackend_search_users_reply import TemplatebackendSearchUsersReply
+from server_template.models.templatebackend_search_users_request import TemplatebackendSearchUsersRequest
 from server_template.models.templatebackend_update_password_reply import TemplatebackendUpdatePasswordReply
 from server_template.models.templatebackend_update_password_request import TemplatebackendUpdatePasswordRequest
 from server_template.models.templatebackend_user import TemplatebackendUser
@@ -100,6 +102,26 @@ class TestUsersServiceController(BaseTestCase):
         }
         response = self.client.open(
             '/api/rest/v1/users/{id}/password/reset'.format(id=56),
+            method='POST',
+            headers=headers,
+            data=json.dumps(body),
+            content_type='application/json')
+        self.assert200(response,
+                       'Response body is : ' + response.data.decode('utf-8'))
+
+    def test_users_service_search_users(self):
+        """Test case for users_service_search_users
+
+        Search users
+        """
+        body = server_template.TemplatebackendSearchUsersRequest()
+        headers = { 
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Bearer': 'special-key',
+        }
+        response = self.client.open(
+            '/api/rest/v1/users/search',
             method='POST',
             headers=headers,
             data=json.dumps(body),

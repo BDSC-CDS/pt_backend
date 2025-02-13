@@ -1,3 +1,4 @@
+from server_template.models import QuestionnaireServiceShareReplyRequest
 from server_template.models import TemplatebackendCreateReplyReply
 from server_template.models import TemplatebackendCreateReplyRequest
 from server_template.models import TemplatebackendCreateReplyResult
@@ -17,6 +18,8 @@ from server_template.models import TemplatebackendGetQuestionnaireReply
 from server_template.models import TemplatebackendGetQuestionnaireResult
 from server_template.models import TemplatebackendListQuestionnaireReply
 from server_template.models import TemplatebackendListQuestionnaireResult
+from server_template.models import TemplatebackendShareReplyReply
+from server_template.models import TemplatebackendShareReplyResult
 
 import src.internal.api.controllers.converter.questionnaire as questionnaire_converter
 
@@ -75,4 +78,6 @@ class QuestionnaireServiceController:
         ms = [questionnaire_converter.questionnaire_from_business(m) for m in questionnaires]
         return TemplatebackendListQuestionnaireReply(TemplatebackendListQuestionnaireResult(ms))
     
-
+    def questionnaire_service_share_reply(self, user, id: int, body: QuestionnaireServiceShareReplyRequest):
+        success = self.questionnaire_service.create_share(user, id, body.sharedwith_userid)
+        return TemplatebackendShareReplyReply(TemplatebackendShareReplyResult(success))

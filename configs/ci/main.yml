@@ -48,6 +48,8 @@ services:
     key: value
   authentication_service:
     enabled: true
+  users_service:
+    allow_searching_user_by_mail: true  # required to allow user sharing questionnaires
   mailer:
     smtp:
       user: smtpUser

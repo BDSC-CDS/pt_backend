@@ -13,6 +13,8 @@ from server_template.models.templatebackend_delete_user_reply import Templatebac
 from server_template.models.templatebackend_get_user_me_reply import TemplatebackendGetUserMeReply
 from server_template.models.templatebackend_get_user_reply import TemplatebackendGetUserReply
 from server_template.models.templatebackend_reset_password_reply import TemplatebackendResetPasswordReply
+from server_template.models.templatebackend_search_users_reply import TemplatebackendSearchUsersReply
+from server_template.models.templatebackend_search_users_request import TemplatebackendSearchUsersRequest
 from server_template.models.templatebackend_update_password_reply import TemplatebackendUpdatePasswordReply
 from server_template.models.templatebackend_update_password_request import TemplatebackendUpdatePasswordRequest
 from server_template.models.templatebackend_user import TemplatebackendUser
@@ -21,7 +23,7 @@ from server_template import util
 
 #from src.internal.api.controllers import users_service_controller
 #controller_functions =  [func_tupple[0] for func_tupple in getmembers(users_service_controller, isfunction)]
-#needed_functions = ["users_service_create_user", "users_service_delete_user", "users_service_get_user", "users_service_get_user_me", "users_service_reset_password", "users_service_update_password"]
+#needed_functions = ["users_service_create_user", "users_service_delete_user", "users_service_get_user", "users_service_get_user_me", "users_service_reset_password", "users_service_search_users", "users_service_update_password"]
 #for op in needed_functions:
 #    if op not in controller_functions:
 #        raise NotImplementedError("operation " + op + " is not implemented by src.internal.api.controllers.users_service_controller")
@@ -29,7 +31,7 @@ from server_template import util
 class UsersServiceController:
     def __init__(self, controller):
         #controller_functions =  [func_tupple[0] for func_tupple in getmembers(controller, ismethod)]
-        #needed_functions = ["users_service_create_user", "users_service_delete_user", "users_service_get_user", "users_service_get_user_me", "users_service_reset_password", "users_service_update_password"]
+        #needed_functions = ["users_service_create_user", "users_service_delete_user", "users_service_get_user", "users_service_get_user_me", "users_service_reset_password", "users_service_search_users", "users_service_update_password"]
         #for op in needed_functions:
         #    if op not in controller_functions:
         #        raise NotImplementedError("operation " + op + " is not implemented by provided controller")
@@ -108,6 +110,22 @@ class UsersServiceController:
         """
 
         return self.controller.users_service_reset_password(user, id, body)
+
+
+    def users_service_search_users(self, user, body: TemplatebackendSearchUsersRequest):
+        """Search users
+
+        This endpoint searches for users
+
+        :param body: 
+        :type body: dict | bytes
+
+        :rtype: Union[TemplatebackendSearchUsersReply, Tuple[TemplatebackendSearchUsersReply, int], Tuple[TemplatebackendSearchUsersReply, int, Dict[str, str]]
+        """
+        if connexion.request.is_json:
+            body = TemplatebackendSearchUsersRequest.from_dict(connexion.request.get_json())
+
+        return self.controller.users_service_search_users(user, body)
 
 
     def users_service_update_password(self, user, body: TemplatebackendUpdatePasswordRequest):

@@ -83,6 +83,13 @@ class TestQuestionnaireServiceApi(unittest.TestCase):
         """
         pass
 
+    def test_questionnaire_service_share_reply(self) -> None:
+        """Test case for questionnaire_service_share_reply
+
+        Share questionnaires reply
+        """
+        pass
+
 
 if __name__ == '__main__':
     unittest.main()

@@ -91,22 +91,21 @@ class DatasetService:
             "language": "python",
             "name": "python3"
         }
-        # set notebook to trusted
         notebook.metadata.trusted = True
 
         buffer = io.StringIO()
         jupytext.write(notebook, buffer, fmt="ipynb")
         notebook_bytes = buffer.getvalue().encode("utf-8")
 
-        self.jupyterhub_client.create_user(user.username)
+        self.jupyterhub_client.create_user(str(user.id))
         namedserver_uuid = str(uuid.uuid4())
-        self.jupyterhub_client.launch_named_server(user.username, namedserver_uuid)
+        self.jupyterhub_client.launch_named_server(str(user.id), namedserver_uuid)
 
         if self.config.clients.jupyterhub.debug: 
             with open(os.path.join(os.path.dirname(__file__), "debug_notebook.ipynb"), "wb") as f:
                 f.write(notebook_bytes)
         
-        url = self.jupyterhub_client.get_authenticate_user_url(user.username, token, notebook_bytes, namedserver_uuid)
+        url = self.jupyterhub_client.get_authenticate_user_url(str(user.id), token, notebook_bytes, namedserver_uuid)
         return url
 
     # get only identifying and quasi-identifying columns of dataset

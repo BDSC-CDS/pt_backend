@@ -1,7 +1,8 @@
 from server_template.models import TemplatebackendUser
 from server_template.models import TemplatebackendCreateUserReply
 from server_template.models import TemplatebackendUpdatePasswordRequest
-from  server_template.models import TemplatebackendGetUserReply
+from server_template.models import TemplatebackendGetUserReply
+from server_template.models import TemplatebackendSearchUsersRequest
 from src.internal.api.controllers.user_controller import UsersServiceController
 from src.internal.util.interface.implements import implements_interface
 from src.pkg.audit_log.model.audit_log import AuditLog
@@ -80,4 +81,13 @@ class UsersServiceControllerAudit():
             return response
         except Exception as e:
             self.auditLogService.log_event(AuditLog(service="user", userid=user.id,action="Error updating password",error=True))
+            raise e
+
+    def users_service_search_users(self, user, body: TemplatebackendSearchUsersRequest):
+        try:
+            response = self.next.users_service_search_users(user, body)
+            self.auditLogService.log_event(AuditLog(service="user", userid=user.id,action="searched users"))
+            return response
+        except Exception as e:
+            self.auditLogService.log_event(AuditLog(service="user", userid=user.id,action="Error searching users",error=True))
             raise e
