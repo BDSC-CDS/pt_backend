@@ -63,4 +63,4 @@ class QuestionnaireServiceControllerAuthentication():
         if not is_authenticated(user):
             return None, 403
         
-        return self.next.questionnaire_service_list_questionnaire(user, id, body)
+        return self.next.questionnaire_service_share_reply(user, id, body)

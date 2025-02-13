@@ -310,9 +310,9 @@ class QuestionnaireStore:
     def create_share(self, tenantid: int, userid: int, reply_id: int, sharedwith_userid: int) -> bool:
         share_query = """
         INSERT INTO questionnaire_reply_share 
-            (questionnairereplyid, sharedwith_userid, userid, tenantid, createdat, updatedat) 
+            (questionnairereplyid, sharedwith_userid, share_type, userid, tenantid, createdat, updatedat) 
         VALUES 
-            (:questionnairereplyid, :sharedwith_userid, :userid, :tenantid, now(), now());
+            (:questionnairereplyid, :sharedwith_userid, 'read', :userid, :tenantid, now(), now());
         """
 
         with self.session_scope() as session:

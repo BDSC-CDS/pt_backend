@@ -79,5 +79,5 @@ class QuestionnaireServiceController:
         return TemplatebackendListQuestionnaireReply(TemplatebackendListQuestionnaireResult(ms))
     
     def questionnaire_service_share_reply(self, user, id: int, body: QuestionnaireServiceShareReplyRequest):
-        success = self.questionnaire_service.create_share(user.tenantid, user.id, id, body.sharedwith_userid)
+        success = self.questionnaire_service.create_share(user, id, body.sharedwith_userid)
         return TemplatebackendShareReplyReply(TemplatebackendShareReplyResult(success))
