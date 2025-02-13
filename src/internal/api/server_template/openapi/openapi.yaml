@@ -202,6 +202,34 @@ paths:
       - UsersService
       x-openapi-router-controller: user_controller
       x-codegen-request-body-name: body
+  /api/rest/v1/users/search:
+    post:
+      description: This endpoint searches for users
+      operationId: users_service_search_users
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/templatebackendSearchUsersRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/templatebackendSearchUsersReply'
+          description: A successful response.
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+          description: An unexpected error response.
+      summary: Search users
+      tags:
+      - UsersService
+      x-openapi-router-controller: user_controller
+      x-codegen-request-body-name: body
   /api/rest/v1/users/{id}:
     delete:
       description: This endpoint deletes a user
@@ -982,6 +1010,41 @@ paths:
       tags:
       - QuestionnaireService
       x-openapi-router-controller: questionnaire_controller
+  /api/v1/questionnaire/replies/{id}/share:
+    post:
+      description: This endpoint allows sharing a user's questionnaires reply
+      operationId: questionnaire_service_share_reply
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/QuestionnaireService_ShareReply_request'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/templatebackendShareReplyReply'
+          description: A successful response.
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+          description: An unexpected error response.
+      summary: Share questionnaires reply
+      tags:
+      - QuestionnaireService
+      x-openapi-router-controller: questionnaire_controller
+      x-codegen-request-body-name: body
   /api/v1/questionnaire/version:
     post:
       description: This endpoint creates a questionnaire version
@@ -4356,6 +4419,46 @@ components:
           type: integer
       title: templatebackendRevertDatasetRequest
       type: object
+    templatebackendSearchUsersReply:
+      example:
+        result:
+        - id: 0
+          email: email
+        - id: 0
+          email: email
+      properties:
+        result:
+          items:
+            $ref: '#/components/schemas/templatebackendUserEmail'
+          title: result
+          type: array
+      title: templatebackendSearchUsersReply
+      type: object
+    templatebackendSearchUsersRequest:
+      properties:
+        emailLike:
+          title: emailLike
+          type: string
+      title: templatebackendSearchUsersRequest
+      type: object
+    templatebackendShareReplyReply:
+      example:
+        result:
+          success: true
+      properties:
+        result:
+          $ref: '#/components/schemas/templatebackendShareReplyResult'
+      title: templatebackendShareReplyReply
+      type: object
+    templatebackendShareReplyResult:
+      example:
+        success: true
+      properties:
+        success:
+          title: success
+          type: boolean
+      title: templatebackendShareReplyResult
+      type: object
     templatebackendStoreDatasetReply:
       example:
         result:
@@ -4512,6 +4615,20 @@ components:
           type: boolean
       title: templatebackendUser
       type: object
+    templatebackendUserEmail:
+      example:
+        id: 0
+        email: email
+      properties:
+        id:
+          format: int64
+          title: id
+          type: integer
+        email:
+          title: email
+          type: string
+      title: templatebackendUserEmail
+      type: object
     IndexService_CreateHello_request:
       properties:
         title:
@@ -4521,6 +4638,14 @@ components:
           title: content
           type: string
       title: IndexService_CreateHello_request
+      type: object
+    QuestionnaireService_ShareReply_request:
+      properties:
+        sharedwithUserid:
+          format: int64
+          title: sharedwithUserid
+          type: integer
+      title: QuestionnaireService_ShareReply_request
       type: object
   securitySchemes:
     Bearer:

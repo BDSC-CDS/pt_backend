@@ -23,3 +23,8 @@ message User {
 
     bool passwordChanged = 13;
 }
+
+message UserEmail {
+    uint32 id = 1;
+    string email = 2;
+}

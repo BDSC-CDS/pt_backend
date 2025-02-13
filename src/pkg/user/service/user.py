@@ -25,3 +25,6 @@ class UserService:
     def set_admin(self, userid: int):
         """Set admin role to given userid."""
         return self.user_store.set_admin(userid)
+
+    def search_users(self, tenantid: int, email_like: str):
+        return self.user_store.search_users(tenantid, email_like)

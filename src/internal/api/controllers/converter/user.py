@@ -2,6 +2,7 @@ from datetime import datetime
 
 from src.pkg.user.model.user import User, Status, Source
 from server_template.models import TemplatebackendUser
+from server_template.models import TemplatebackendUserEmail
 
 
 def user_to_business(user: TemplatebackendUser) -> User:
@@ -33,6 +34,16 @@ def user_from_business(user: User) -> TemplatebackendUser:
         totp_enabled=(user.totpsecret != ""),
         created_at=user.createdat,
         updated_at=user.updatedat,
+    )
+
+    return u
+
+def user_email_from_business(user: User) -> TemplatebackendUserEmail:
+    print(user)
+    u = TemplatebackendUserEmail(
+        id=user.id,
+        email = user.email,
+    
     )
 
     return u

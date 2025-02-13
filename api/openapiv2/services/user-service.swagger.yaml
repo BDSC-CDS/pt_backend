@@ -78,6 +78,29 @@ paths:
       tags:
         - UsersService
       x-openapi-router-controller: user_controller
+  /api/rest/v1/users/search:
+    post:
+      summary: Search users
+      description: This endpoint searches for users
+      operationId: UsersService_SearchUsers
+      responses:
+        "200":
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/templatebackendSearchUsersReply'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/rpcStatus'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/templatebackendSearchUsersRequest'
+      tags:
+        - UsersService
+      x-openapi-router-controller: user_controller
   /api/rest/v1/users/{id}:
     get:
       summary: Get a user
@@ -218,6 +241,19 @@ definitions:
         $ref: '#/definitions/templatebackendResetPasswordResult'
   templatebackendResetPasswordResult:
     type: object
+  templatebackendSearchUsersReply:
+    type: object
+    properties:
+      result:
+        type: array
+        items:
+          type: object
+          $ref: '#/definitions/templatebackendUserEmail'
+  templatebackendSearchUsersRequest:
+    type: object
+    properties:
+      emailLike:
+        type: string
   templatebackendUpdatePasswordReply:
     type: object
     properties:
@@ -268,6 +304,14 @@ definitions:
         format: date-time
       passwordChanged:
         type: boolean
+  templatebackendUserEmail:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+      email:
+        type: string
 securityDefinitions:
   Bearer:
     type: apiKey

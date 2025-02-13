@@ -6,6 +6,7 @@ from src.internal.cmd.provider.audit_log import provide_audit_log_service
 from src.pkg.user.service.user import UserService
 from src.pkg.user.store.postgres import UserStore as PostgresUserStore
 from .db import provide_db_type, provide_db
+from .config import provide_config
 
 user_controller = None
 users_service = None
@@ -17,7 +18,7 @@ def provide_user_controller():
     if user_controller is not None:
         return user_controller
 
-    controller = internal_user_controller.UsersServiceController(provide_users_service())
+    controller = internal_user_controller.UsersServiceController(provide_config(), provide_users_service())
     controller = user_controller_audit.UsersServiceControllerAudit(controller,provide_audit_log_service()) # TODO here ?
     controller = user_controller_authorization.UsersServiceControllerAuthentication(controller)
     user_controller = connexion_user_controller.UsersServiceController(controller)

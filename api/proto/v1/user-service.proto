@@ -153,6 +153,13 @@ message ResetPasswordReply {
     ResetPasswordResult result = 1;
 }
 
+message SearchUsersRequest {
+    string emailLike = 1;
+}
+message SearchUsersReply {
+    repeated UserEmail result = 1;
+}
+
 service UsersService {
     rpc UpdatePassword(UpdatePasswordRequest) returns (UpdatePasswordReply) {
         option (google.api.http) = {
@@ -302,6 +309,22 @@ service UsersService {
         option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
             summary: "Create a user";
             description: "This endpoint creates a user";
+            tags: "UsersService";
+            extensions: {
+                key: "x-openapi-router-controller";
+                value: {string_value: "user_controller"};
+            };
+        };
+    };
+
+    rpc SearchUsers(SearchUsersRequest) returns (SearchUsersReply) {
+        option (google.api.http) = {
+            post: "/api/rest/v1/users/search"
+            body: "*"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            summary: "Search users";
+            description: "This endpoint searches for users";
             tags: "UsersService";
             extensions: {
                 key: "x-openapi-router-controller";

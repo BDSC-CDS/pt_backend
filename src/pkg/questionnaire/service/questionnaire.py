@@ -33,3 +33,9 @@ class QuestionnaireService:
     def list_replies(self, user, offset: int=None, limit: int=None) -> list[Reply]:
         return self.questionnaire_store.list_replies(user.tenantid, user.id, offset, limit)
     
+    def create_share(self, user, reply_id: int, sharedwith_userid: int):
+        questionnaire_reply = self.questionnaire_store.get_reply(user.tenantid, user.userid,reply_id)
+        if questionnaire_reply is None or questionnaire_reply.userid != user.id:
+            return False
+        
+        return self.questionnaire_store.create_share(user.tenantid, user.id, reply_id, sharedwith_userid)

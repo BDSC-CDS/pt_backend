@@ -110,7 +110,7 @@ message CreateReplyResult {
 
 message ShareReplyRequest {
     uint32 id = 1;
-    uint32 sharewith_userid = 2;
+    uint32 sharedwith_userid = 2;
 }
 message ShareReplyReply {
     ShareReplyResult result = 1;
@@ -239,22 +239,6 @@ service QuestionnaireService {
             };
         };
     };
-    
-    rpc ShareReply(ShareReplyRequest) returns (ShareReplyReply) {
-        option (google.api.http) = {
-            post: "/api/v1/questionnaire/replies/{id}/share"
-            body: "*"
-        };
-        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-            summary: "Share questionnaires reply";
-            description: "This endpoint allows sharing a user's questionnaires reply";
-            tags: "QuestionnaireService";
-            extensions: {
-                key: "x-openapi-router-controller";
-                value: {string_value: "questionnaire_controller"};
-            };
-        };
-    };
 
     rpc ListReplies(ListRepliesRequest) returns (ListRepliesReply) {
         option (google.api.http) = {
@@ -278,6 +262,22 @@ service QuestionnaireService {
         option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
             summary: "Get a questionnaires reply";
             description: "This endpoint allows getting a user's questionnaires reply";
+            tags: "QuestionnaireService";
+            extensions: {
+                key: "x-openapi-router-controller";
+                value: {string_value: "questionnaire_controller"};
+            };
+        };
+    };
+
+    rpc ShareReply(ShareReplyRequest) returns (ShareReplyReply) {
+        option (google.api.http) = {
+            post: "/api/v1/questionnaire/replies/{id}/share"
+            body: "*"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            summary: "Share questionnaires reply";
+            description: "This endpoint allows sharing a user's questionnaires reply";
             tags: "QuestionnaireService";
             extensions: {
                 key: "x-openapi-router-controller";

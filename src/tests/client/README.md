@@ -128,12 +128,14 @@ Class | Method | HTTP request | Description
 *QuestionnaireServiceApi* | [**questionnaire_service_get_reply**](docs/QuestionnaireServiceApi.md#questionnaire_service_get_reply) | **GET** /api/v1/questionnaire/replies/{id} | Get a questionnaires reply
 *QuestionnaireServiceApi* | [**questionnaire_service_list_questionnaire**](docs/QuestionnaireServiceApi.md#questionnaire_service_list_questionnaire) | **GET** /api/v1/questionnaire | List questionnaires
 *QuestionnaireServiceApi* | [**questionnaire_service_list_replies**](docs/QuestionnaireServiceApi.md#questionnaire_service_list_replies) | **GET** /api/v1/questionnaire/replies | List questionnaires replies
+*QuestionnaireServiceApi* | [**questionnaire_service_share_reply**](docs/QuestionnaireServiceApi.md#questionnaire_service_share_reply) | **POST** /api/v1/questionnaire/replies/{id}/share | Share questionnaires reply
 *RiskAssessmentServiceApi* | [**risk_assessment_service_get_risk_assessment**](docs/RiskAssessmentServiceApi.md#risk_assessment_service_get_risk_assessment) | **GET** /api/v1/riskassessment/{datasetid} | Get risk assessment
 *UsersServiceApi* | [**users_service_create_user**](docs/UsersServiceApi.md#users_service_create_user) | **POST** /api/rest/v1/users | Create a user
 *UsersServiceApi* | [**users_service_delete_user**](docs/UsersServiceApi.md#users_service_delete_user) | **DELETE** /api/rest/v1/users/{id} | Delete a user
 *UsersServiceApi* | [**users_service_get_user**](docs/UsersServiceApi.md#users_service_get_user) | **GET** /api/rest/v1/users/{id} | Get a user
 *UsersServiceApi* | [**users_service_get_user_me**](docs/UsersServiceApi.md#users_service_get_user_me) | **GET** /api/rest/v1/users/me | Get my own user
 *UsersServiceApi* | [**users_service_reset_password**](docs/UsersServiceApi.md#users_service_reset_password) | **POST** /api/rest/v1/users/{id}/password/reset | Reset password
+*UsersServiceApi* | [**users_service_search_users**](docs/UsersServiceApi.md#users_service_search_users) | **POST** /api/rest/v1/users/search | Search users
 *UsersServiceApi* | [**users_service_update_password**](docs/UsersServiceApi.md#users_service_update_password) | **PUT** /api/rest/v1/users/me/password | Update password
 
 
@@ -142,6 +144,7 @@ Class | Method | HTTP request | Description
  - [ApiHttpBody](docs/ApiHttpBody.md)
  - [IndexServiceCreateHelloRequest](docs/IndexServiceCreateHelloRequest.md)
  - [ProtobufAny](docs/ProtobufAny.md)
+ - [QuestionnaireServiceShareReplyRequest](docs/QuestionnaireServiceShareReplyRequest.md)
  - [RpcStatus](docs/RpcStatus.md)
  - [TemplatebackendAuditLog](docs/TemplatebackendAuditLog.md)
  - [TemplatebackendAuthenticationReply](docs/TemplatebackendAuthenticationReply.md)
@@ -212,6 +215,10 @@ Class | Method | HTTP request | Description
  - [TemplatebackendResetPasswordReply](docs/TemplatebackendResetPasswordReply.md)
  - [TemplatebackendRevertDatasetReply](docs/TemplatebackendRevertDatasetReply.md)
  - [TemplatebackendRevertDatasetRequest](docs/TemplatebackendRevertDatasetRequest.md)
+ - [TemplatebackendSearchUsersReply](docs/TemplatebackendSearchUsersReply.md)
+ - [TemplatebackendSearchUsersRequest](docs/TemplatebackendSearchUsersRequest.md)
+ - [TemplatebackendShareReplyReply](docs/TemplatebackendShareReplyReply.md)
+ - [TemplatebackendShareReplyResult](docs/TemplatebackendShareReplyResult.md)
  - [TemplatebackendStoreDatasetReply](docs/TemplatebackendStoreDatasetReply.md)
  - [TemplatebackendStoreDatasetRequest](docs/TemplatebackendStoreDatasetRequest.md)
  - [TemplatebackendStoreDatasetResult](docs/TemplatebackendStoreDatasetResult.md)
@@ -221,6 +228,7 @@ Class | Method | HTTP request | Description
  - [TemplatebackendUpdatePasswordReply](docs/TemplatebackendUpdatePasswordReply.md)
  - [TemplatebackendUpdatePasswordRequest](docs/TemplatebackendUpdatePasswordRequest.md)
  - [TemplatebackendUser](docs/TemplatebackendUser.md)
+ - [TemplatebackendUserEmail](docs/TemplatebackendUserEmail.md)
 
 
 <a id="documentation-for-authorization"></a>

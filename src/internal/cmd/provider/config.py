@@ -114,6 +114,8 @@ class Config:
 
         self._set_default("clients.arx.host", "http://localhost:8080/")
         self._set_default("clients.jupyterhub.debug", False)
+        
+        self._set_default("services.users_service.allow_searching_user_by_mail", True)
 
         self._set_default("storage.description", "Type can be 'postgres'")
         self._set_default("storage.datastores.pt_backend.type", "postgres")

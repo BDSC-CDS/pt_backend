@@ -7,6 +7,7 @@ from typing import Union
 from inspect import getmembers, isfunction, ismethod
 
 
+from server_template.models.questionnaire_service_share_reply_request import QuestionnaireServiceShareReplyRequest
 from server_template.models.rpc_status import RpcStatus
 from server_template.models.templatebackend_create_questionnaire_reply import TemplatebackendCreateQuestionnaireReply
 from server_template.models.templatebackend_create_questionnaire_request import TemplatebackendCreateQuestionnaireRequest
@@ -19,12 +20,13 @@ from server_template.models.templatebackend_get_questionnaire_reply import Templ
 from server_template.models.templatebackend_get_reply_reply import TemplatebackendGetReplyReply
 from server_template.models.templatebackend_list_questionnaire_reply import TemplatebackendListQuestionnaireReply
 from server_template.models.templatebackend_list_replies_reply import TemplatebackendListRepliesReply
+from server_template.models.templatebackend_share_reply_reply import TemplatebackendShareReplyReply
 from server_template import util
 
 
 #from src.internal.api.controllers import questionnaire_service_controller
 #controller_functions =  [func_tupple[0] for func_tupple in getmembers(questionnaire_service_controller, isfunction)]
-#needed_functions = ["questionnaire_service_create_questionnaire", "questionnaire_service_create_questionnaire_version", "questionnaire_service_create_reply", "questionnaire_service_delete_questionnaire", "questionnaire_service_get_questionnaire", "questionnaire_service_get_reply", "questionnaire_service_list_questionnaire", "questionnaire_service_list_replies"]
+#needed_functions = ["questionnaire_service_create_questionnaire", "questionnaire_service_create_questionnaire_version", "questionnaire_service_create_reply", "questionnaire_service_delete_questionnaire", "questionnaire_service_get_questionnaire", "questionnaire_service_get_reply", "questionnaire_service_list_questionnaire", "questionnaire_service_list_replies", "questionnaire_service_share_reply"]
 #for op in needed_functions:
 #    if op not in controller_functions:
 #        raise NotImplementedError("operation " + op + " is not implemented by src.internal.api.controllers.questionnaire_service_controller")
@@ -32,7 +34,7 @@ from server_template import util
 class QuestionnaireServiceController:
     def __init__(self, controller):
         #controller_functions =  [func_tupple[0] for func_tupple in getmembers(controller, ismethod)]
-        #needed_functions = ["questionnaire_service_create_questionnaire", "questionnaire_service_create_questionnaire_version", "questionnaire_service_create_reply", "questionnaire_service_delete_questionnaire", "questionnaire_service_get_questionnaire", "questionnaire_service_get_reply", "questionnaire_service_list_questionnaire", "questionnaire_service_list_replies"]
+        #needed_functions = ["questionnaire_service_create_questionnaire", "questionnaire_service_create_questionnaire_version", "questionnaire_service_create_reply", "questionnaire_service_delete_questionnaire", "questionnaire_service_get_questionnaire", "questionnaire_service_get_reply", "questionnaire_service_list_questionnaire", "questionnaire_service_list_replies", "questionnaire_service_share_reply"]
         #for op in needed_functions:
         #    if op not in controller_functions:
         #        raise NotImplementedError("operation " + op + " is not implemented by provided controller")
@@ -161,3 +163,21 @@ class QuestionnaireServiceController:
         """
 
         return self.controller.questionnaire_service_list_replies(user, offset, limit)
+
+
+    def questionnaire_service_share_reply(self, user, id: int, body: QuestionnaireServiceShareReplyRequest):
+        """Share questionnaires reply
+
+        This endpoint allows sharing a user&#39;s questionnaires reply
+
+        :param id: 
+        :type id: int
+        :param body: 
+        :type body: dict | bytes
+
+        :rtype: Union[TemplatebackendShareReplyReply, Tuple[TemplatebackendShareReplyReply, int], Tuple[TemplatebackendShareReplyReply, int, Dict[str, str]]
+        """
+        if connexion.request.is_json:
+            body = QuestionnaireServiceShareReplyRequest.from_dict(connexion.request.get_json())
+
+        return self.controller.questionnaire_service_share_reply(user, id, body)

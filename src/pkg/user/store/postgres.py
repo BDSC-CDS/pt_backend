@@ -118,6 +118,28 @@ INSERT INTO user_role (userid, roleid) VALUES (:userid, :roleid);
             u.roles = roles
 
             return u
+        
+    def search_users(self, tenantid, email_like):
+        query = "SELECT id, email FROM users WHERE tenantid = :tenantid AND email LIKE :email_like LIMIT 20;"
+        with self.session_scope() as session:
+            users = session.execute(text(query), {
+                'tenantid': tenantid,
+                'email_like': "%" + email_like + "%",
+            }).mappings().fetchall()
+
+            return [User(
+                id=user.id,
+                email=user.email,
+                # tenantid=user.tenantid,
+                # username=user.username,
+                # password=user.password,
+                # firstname=user.firstname,
+                # lastname=user.lastname,
+                # status=user.status,
+                # source=user.source,
+                # createdat=user.createdat,
+                # updatedat=user.updatedat
+            ) for user in users]
     
     def set_admin(self, userid):
         return self.set_role(userid, 'admin')
