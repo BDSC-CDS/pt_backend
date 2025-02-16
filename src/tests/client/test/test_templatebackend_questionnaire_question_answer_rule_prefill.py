@@ -41,6 +41,8 @@ class TestTemplatebackendQuestionnaireQuestionAnswerRulePrefill(unittest.TestCas
                 question_id = 56,
                 answer_id = 56,
                 answer_text = '',
+                tmp_question_uuid = '',
+                tmp_answer_uuid = '',
                 created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
                 updated_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f')
             )

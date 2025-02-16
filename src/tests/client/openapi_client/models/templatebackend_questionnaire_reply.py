@@ -36,9 +36,10 @@ class TemplatebackendQuestionnaireReply(BaseModel):
     questionnaire_version_id: Optional[StrictInt] = Field(default=None, alias="questionnaireVersionId")
     project_name: Optional[StrictStr] = Field(default=None, alias="projectName")
     replies: Optional[List[TemplatebackendQuestionnaireQuestionReply]] = None
+    user_id: Optional[StrictInt] = Field(default=None, alias="userId")
     created_at: Optional[datetime] = Field(default=None, alias="createdAt")
     updated_at: Optional[datetime] = Field(default=None, alias="updatedAt")
-    __properties: ClassVar[List[str]] = ["id", "questionnaireVersionId", "projectName", "replies", "createdAt", "updatedAt"]
+    __properties: ClassVar[List[str]] = ["id", "questionnaireVersionId", "projectName", "replies", "userId", "createdAt", "updatedAt"]
 
     model_config = {
         "populate_by_name": True,
@@ -100,6 +101,7 @@ class TemplatebackendQuestionnaireReply(BaseModel):
             "questionnaireVersionId": obj.get("questionnaireVersionId"),
             "projectName": obj.get("projectName"),
             "replies": [TemplatebackendQuestionnaireQuestionReply.from_dict(_item) for _item in obj.get("replies")] if obj.get("replies") is not None else None,
+            "userId": obj.get("userId"),
             "createdAt": obj.get("createdAt"),
             "updatedAt": obj.get("updatedAt")
         })

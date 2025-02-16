@@ -14,7 +14,7 @@ class TemplatebackendQuestionnaireQuestionAnswerRulePrefill(Model):
     Do not edit the class manually.
     """
 
-    def __init__(self, id=None, question_id=None, answer_id=None, answer_text=None, created_at=None, updated_at=None):
+    def __init__(self, id=None, question_id=None, answer_id=None, answer_text=None, tmp_question_uuid=None, tmp_answer_uuid=None, created_at=None, updated_at=None):
         """TemplatebackendQuestionnaireQuestionAnswerRulePrefill - a model defined in OpenAPI
 
         :param id: The id of this TemplatebackendQuestionnaireQuestionAnswerRulePrefill.
@@ -25,6 +25,10 @@ class TemplatebackendQuestionnaireQuestionAnswerRulePrefill(Model):
         :type answer_id: int
         :param answer_text: The answer_text of this TemplatebackendQuestionnaireQuestionAnswerRulePrefill.
         :type answer_text: str
+        :param tmp_question_uuid: The tmp_question_uuid of this TemplatebackendQuestionnaireQuestionAnswerRulePrefill.
+        :type tmp_question_uuid: str
+        :param tmp_answer_uuid: The tmp_answer_uuid of this TemplatebackendQuestionnaireQuestionAnswerRulePrefill.
+        :type tmp_answer_uuid: str
         :param created_at: The created_at of this TemplatebackendQuestionnaireQuestionAnswerRulePrefill.
         :type created_at: datetime
         :param updated_at: The updated_at of this TemplatebackendQuestionnaireQuestionAnswerRulePrefill.
@@ -35,6 +39,8 @@ class TemplatebackendQuestionnaireQuestionAnswerRulePrefill(Model):
             'question_id': int,
             'answer_id': int,
             'answer_text': str,
+            'tmp_question_uuid': str,
+            'tmp_answer_uuid': str,
             'created_at': datetime,
             'updated_at': datetime
         }
@@ -44,6 +50,8 @@ class TemplatebackendQuestionnaireQuestionAnswerRulePrefill(Model):
             'question_id': 'questionId',
             'answer_id': 'answerId',
             'answer_text': 'answerText',
+            'tmp_question_uuid': 'tmpQuestionUUID',
+            'tmp_answer_uuid': 'tmpAnswerUUID',
             'created_at': 'createdAt',
             'updated_at': 'updatedAt'
         }
@@ -52,6 +60,8 @@ class TemplatebackendQuestionnaireQuestionAnswerRulePrefill(Model):
         self._question_id = question_id
         self._answer_id = answer_id
         self._answer_text = answer_text
+        self._tmp_question_uuid = tmp_question_uuid
+        self._tmp_answer_uuid = tmp_answer_uuid
         self._created_at = created_at
         self._updated_at = updated_at
 
@@ -149,6 +159,48 @@ class TemplatebackendQuestionnaireQuestionAnswerRulePrefill(Model):
         """
 
         self._answer_text = answer_text
+
+    @property
+    def tmp_question_uuid(self) -> str:
+        """Gets the tmp_question_uuid of this TemplatebackendQuestionnaireQuestionAnswerRulePrefill.
+
+
+        :return: The tmp_question_uuid of this TemplatebackendQuestionnaireQuestionAnswerRulePrefill.
+        :rtype: str
+        """
+        return self._tmp_question_uuid
+
+    @tmp_question_uuid.setter
+    def tmp_question_uuid(self, tmp_question_uuid: str):
+        """Sets the tmp_question_uuid of this TemplatebackendQuestionnaireQuestionAnswerRulePrefill.
+
+
+        :param tmp_question_uuid: The tmp_question_uuid of this TemplatebackendQuestionnaireQuestionAnswerRulePrefill.
+        :type tmp_question_uuid: str
+        """
+
+        self._tmp_question_uuid = tmp_question_uuid
+
+    @property
+    def tmp_answer_uuid(self) -> str:
+        """Gets the tmp_answer_uuid of this TemplatebackendQuestionnaireQuestionAnswerRulePrefill.
+
+
+        :return: The tmp_answer_uuid of this TemplatebackendQuestionnaireQuestionAnswerRulePrefill.
+        :rtype: str
+        """
+        return self._tmp_answer_uuid
+
+    @tmp_answer_uuid.setter
+    def tmp_answer_uuid(self, tmp_answer_uuid: str):
+        """Sets the tmp_answer_uuid of this TemplatebackendQuestionnaireQuestionAnswerRulePrefill.
+
+
+        :param tmp_answer_uuid: The tmp_answer_uuid of this TemplatebackendQuestionnaireQuestionAnswerRulePrefill.
+        :type tmp_answer_uuid: str
+        """
+
+        self._tmp_answer_uuid = tmp_answer_uuid
 
     @property
     def created_at(self) -> datetime:

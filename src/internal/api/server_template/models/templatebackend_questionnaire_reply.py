@@ -16,7 +16,7 @@ class TemplatebackendQuestionnaireReply(Model):
     Do not edit the class manually.
     """
 
-    def __init__(self, id=None, questionnaire_version_id=None, project_name=None, replies=None, created_at=None, updated_at=None):
+    def __init__(self, id=None, questionnaire_version_id=None, project_name=None, replies=None, user_id=None, created_at=None, updated_at=None):
         """TemplatebackendQuestionnaireReply - a model defined in OpenAPI
 
         :param id: The id of this TemplatebackendQuestionnaireReply.
@@ -27,6 +27,8 @@ class TemplatebackendQuestionnaireReply(Model):
         :type project_name: str
         :param replies: The replies of this TemplatebackendQuestionnaireReply.
         :type replies: List[TemplatebackendQuestionnaireQuestionReply]
+        :param user_id: The user_id of this TemplatebackendQuestionnaireReply.
+        :type user_id: int
         :param created_at: The created_at of this TemplatebackendQuestionnaireReply.
         :type created_at: datetime
         :param updated_at: The updated_at of this TemplatebackendQuestionnaireReply.
@@ -37,6 +39,7 @@ class TemplatebackendQuestionnaireReply(Model):
             'questionnaire_version_id': int,
             'project_name': str,
             'replies': List[TemplatebackendQuestionnaireQuestionReply],
+            'user_id': int,
             'created_at': datetime,
             'updated_at': datetime
         }
@@ -46,6 +49,7 @@ class TemplatebackendQuestionnaireReply(Model):
             'questionnaire_version_id': 'questionnaireVersionId',
             'project_name': 'projectName',
             'replies': 'replies',
+            'user_id': 'userId',
             'created_at': 'createdAt',
             'updated_at': 'updatedAt'
         }
@@ -54,6 +58,7 @@ class TemplatebackendQuestionnaireReply(Model):
         self._questionnaire_version_id = questionnaire_version_id
         self._project_name = project_name
         self._replies = replies
+        self._user_id = user_id
         self._created_at = created_at
         self._updated_at = updated_at
 
@@ -151,6 +156,27 @@ class TemplatebackendQuestionnaireReply(Model):
         """
 
         self._replies = replies
+
+    @property
+    def user_id(self) -> int:
+        """Gets the user_id of this TemplatebackendQuestionnaireReply.
+
+
+        :return: The user_id of this TemplatebackendQuestionnaireReply.
+        :rtype: int
+        """
+        return self._user_id
+
+    @user_id.setter
+    def user_id(self, user_id: int):
+        """Sets the user_id of this TemplatebackendQuestionnaireReply.
+
+
+        :param user_id: The user_id of this TemplatebackendQuestionnaireReply.
+        :type user_id: int
+        """
+
+        self._user_id = user_id
 
     @property
     def created_at(self) -> datetime:

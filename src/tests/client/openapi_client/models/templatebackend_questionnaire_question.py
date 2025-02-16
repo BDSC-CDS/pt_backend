@@ -39,10 +39,11 @@ class TemplatebackendQuestionnaireQuestion(BaseModel):
     answer_type: Optional[StrictStr] = Field(default=None, alias="answerType")
     flag: Optional[StrictStr] = None
     tooltip: Optional[StrictStr] = None
+    tmp_uuid: Optional[StrictStr] = Field(default=None, alias="tmpUUID")
     answers: Optional[List[TemplatebackendQuestionnaireQuestionAnswer]] = None
     created_at: Optional[datetime] = Field(default=None, alias="createdAt")
     updated_at: Optional[datetime] = Field(default=None, alias="updatedAt")
-    __properties: ClassVar[List[str]] = ["id", "tab", "question", "riskWeight", "answerType", "flag", "tooltip", "answers", "createdAt", "updatedAt"]
+    __properties: ClassVar[List[str]] = ["id", "tab", "question", "riskWeight", "answerType", "flag", "tooltip", "tmpUUID", "answers", "createdAt", "updatedAt"]
 
     model_config = {
         "populate_by_name": True,
@@ -107,6 +108,7 @@ class TemplatebackendQuestionnaireQuestion(BaseModel):
             "answerType": obj.get("answerType"),
             "flag": obj.get("flag"),
             "tooltip": obj.get("tooltip"),
+            "tmpUUID": obj.get("tmpUUID"),
             "answers": [TemplatebackendQuestionnaireQuestionAnswer.from_dict(_item) for _item in obj.get("answers")] if obj.get("answers") is not None else None,
             "createdAt": obj.get("createdAt"),
             "updatedAt": obj.get("updatedAt")

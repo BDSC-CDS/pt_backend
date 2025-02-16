@@ -9,6 +9,8 @@ Name | Type | Description | Notes
 **text** | **str** |  | [optional] 
 **risk_level** | **int** |  | [optional] 
 **high_risk** | **bool** |  | [optional] 
+**tmp_uuid** | **str** |  | [optional] 
+**json_configuration** | **str** |  | [optional] 
 **rule_prefills** | [**List[TemplatebackendQuestionnaireQuestionAnswerRulePrefill]**](TemplatebackendQuestionnaireQuestionAnswerRulePrefill.md) |  | [optional] 
 **created_at** | **datetime** |  | [optional] 
 **updated_at** | **datetime** |  | [optional] 
