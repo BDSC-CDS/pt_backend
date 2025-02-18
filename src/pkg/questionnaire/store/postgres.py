@@ -98,9 +98,9 @@ class QuestionnaireStore:
 
         questionnaire_answer_query = """
         INSERT INTO questionnaire_question_answers 
-            (userid, tenantid, questionnaire_questionid, text, risk_level, high_risk, createdat, updatedat) 
+            (userid, tenantid, questionnaire_questionid, text, risk_level, json_configuration, high_risk, createdat, updatedat) 
         VALUES 
-            (:userid, :tenantid, :questionnaire_questionid, :text, :risk_level, :high_risk, now(), now()) 
+            (:userid, :tenantid, :questionnaire_questionid, :text, :risk_level, :json_configuration, :high_risk, now(), now()) 
         RETURNING id;
         """
 
@@ -143,6 +143,7 @@ class QuestionnaireStore:
                 'tooltip': question.tooltip
             }).fetchone()
             question_id = result[0]
+            question.id = question_id
 
             for answer in question.answers:
                 # Insert questionnaire question answer
@@ -152,16 +153,32 @@ class QuestionnaireStore:
                     'questionnaire_questionid': question_id,
                     'text': answer.text,
                     'risk_level': answer.risk_level,
-                    'high_risk': answer.high_risk
+                    'high_risk': answer.high_risk,
+                    'json_configuration': answer.json_configuration,
                 }).fetchone()
                 answer_id = result[0]
+                answer.id = answer_id
 
+        # separate loop for rule prefills to find and map ids and uuids
+        for question in version.questions:
+            for answer in question.answers:
+                print("answer", answer, question.id)
                 for rule_prefill in answer.rule_prefills:
-                    # Insert questionnaire question answer rule prefill
+                    print("rule_prefill", rule_prefill)
+                    for question_ in version.questions:
+                        for answer_ in question_.answers:
+                            if rule_prefill.answer_uuid == answer_.tmp_uuid:
+                                rule_prefill.answerid = answer_.id
+                                rule_prefill.answer_text = answer_.text
+                                break
+                        if rule_prefill.question_uuid == question_.tmp_uuid:
+                            rule_prefill.questionid = question_.id
+                            break
+                    print("rule_prefill after", rule_prefill)
                     session.execute(text(questionnaire_rule_prefill_query), {
                         'userid': userid,
                         'tenantid': tenantid,
-                        'questionnaire_question_answerid': answer_id,
+                        'questionnaire_question_answerid': answer.id,
                         'questionid': rule_prefill.questionid,
                         'answerid': rule_prefill.answerid,
                         'answer_text': rule_prefill.answer_text
@@ -395,7 +412,7 @@ class QuestionnaireStore:
         """
 
         questionnaire_answer_query = """
-        SELECT id, text, risk_level, high_risk, createdat, updatedat, deletedat
+        SELECT id, text, risk_level, high_risk, json_configuration, createdat, updatedat, deletedat
         FROM questionnaire_question_answers
         WHERE questionnaire_questionid = :question_id;
         """
@@ -463,6 +480,7 @@ class QuestionnaireStore:
                                 text=answer_row['text'],
                                 risk_level=answer_row['risk_level'],
                                 high_risk=answer_row['high_risk'],
+                                json_configuration=answer_row['json_configuration'],
                                 createdat=answer_row['createdat'],
                                 updatedat=answer_row['updatedat'],
                                 deletedat=answer_row['deletedat'],
@@ -587,6 +605,7 @@ class QuestionnaireStore:
                 #                 id=answer_row['id'],
                 #                 text=answer_row['text'],
                 #                 risk_level=answer_row['risk_level'],
+                #                 json_configuration=answer_row['json_configuration'],
                 #                 createdat=answer_row['createdat'],
                 #                 updatedat=answer_row['updatedat'],
                 #                 deletedat=answer_row['deletedat'],

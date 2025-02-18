@@ -16,7 +16,7 @@ class TemplatebackendQuestionnaireQuestion(Model):
     Do not edit the class manually.
     """
 
-    def __init__(self, id=None, tab=None, question=None, risk_weight=None, answer_type=None, flag=None, tooltip=None, answers=None, created_at=None, updated_at=None):
+    def __init__(self, id=None, tab=None, question=None, risk_weight=None, answer_type=None, flag=None, tooltip=None, tmp_uuid=None, answers=None, created_at=None, updated_at=None):
         """TemplatebackendQuestionnaireQuestion - a model defined in OpenAPI
 
         :param id: The id of this TemplatebackendQuestionnaireQuestion.
@@ -33,6 +33,8 @@ class TemplatebackendQuestionnaireQuestion(Model):
         :type flag: str
         :param tooltip: The tooltip of this TemplatebackendQuestionnaireQuestion.
         :type tooltip: str
+        :param tmp_uuid: The tmp_uuid of this TemplatebackendQuestionnaireQuestion.
+        :type tmp_uuid: str
         :param answers: The answers of this TemplatebackendQuestionnaireQuestion.
         :type answers: List[TemplatebackendQuestionnaireQuestionAnswer]
         :param created_at: The created_at of this TemplatebackendQuestionnaireQuestion.
@@ -48,6 +50,7 @@ class TemplatebackendQuestionnaireQuestion(Model):
             'answer_type': str,
             'flag': str,
             'tooltip': str,
+            'tmp_uuid': str,
             'answers': List[TemplatebackendQuestionnaireQuestionAnswer],
             'created_at': datetime,
             'updated_at': datetime
@@ -61,6 +64,7 @@ class TemplatebackendQuestionnaireQuestion(Model):
             'answer_type': 'answerType',
             'flag': 'flag',
             'tooltip': 'tooltip',
+            'tmp_uuid': 'tmpUUID',
             'answers': 'answers',
             'created_at': 'createdAt',
             'updated_at': 'updatedAt'
@@ -73,6 +77,7 @@ class TemplatebackendQuestionnaireQuestion(Model):
         self._answer_type = answer_type
         self._flag = flag
         self._tooltip = tooltip
+        self._tmp_uuid = tmp_uuid
         self._answers = answers
         self._created_at = created_at
         self._updated_at = updated_at
@@ -234,6 +239,27 @@ class TemplatebackendQuestionnaireQuestion(Model):
         """
 
         self._tooltip = tooltip
+
+    @property
+    def tmp_uuid(self) -> str:
+        """Gets the tmp_uuid of this TemplatebackendQuestionnaireQuestion.
+
+
+        :return: The tmp_uuid of this TemplatebackendQuestionnaireQuestion.
+        :rtype: str
+        """
+        return self._tmp_uuid
+
+    @tmp_uuid.setter
+    def tmp_uuid(self, tmp_uuid: str):
+        """Sets the tmp_uuid of this TemplatebackendQuestionnaireQuestion.
+
+
+        :param tmp_uuid: The tmp_uuid of this TemplatebackendQuestionnaireQuestion.
+        :type tmp_uuid: str
+        """
+
+        self._tmp_uuid = tmp_uuid
 
     @property
     def answers(self) -> List[TemplatebackendQuestionnaireQuestionAnswer]:

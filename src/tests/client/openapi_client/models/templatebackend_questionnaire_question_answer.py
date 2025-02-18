@@ -36,10 +36,12 @@ class TemplatebackendQuestionnaireQuestionAnswer(BaseModel):
     text: Optional[StrictStr] = None
     risk_level: Optional[StrictInt] = Field(default=None, alias="riskLevel")
     high_risk: Optional[StrictBool] = Field(default=None, alias="highRisk")
+    tmp_uuid: Optional[StrictStr] = Field(default=None, alias="tmpUUID")
+    json_configuration: Optional[StrictStr] = Field(default=None, alias="JSONConfiguration")
     rule_prefills: Optional[List[TemplatebackendQuestionnaireQuestionAnswerRulePrefill]] = Field(default=None, alias="rulePrefills")
     created_at: Optional[datetime] = Field(default=None, alias="createdAt")
     updated_at: Optional[datetime] = Field(default=None, alias="updatedAt")
-    __properties: ClassVar[List[str]] = ["id", "text", "riskLevel", "highRisk", "rulePrefills", "createdAt", "updatedAt"]
+    __properties: ClassVar[List[str]] = ["id", "text", "riskLevel", "highRisk", "tmpUUID", "JSONConfiguration", "rulePrefills", "createdAt", "updatedAt"]
 
     model_config = {
         "populate_by_name": True,
@@ -101,6 +103,8 @@ class TemplatebackendQuestionnaireQuestionAnswer(BaseModel):
             "text": obj.get("text"),
             "riskLevel": obj.get("riskLevel"),
             "highRisk": obj.get("highRisk"),
+            "tmpUUID": obj.get("tmpUUID"),
+            "JSONConfiguration": obj.get("JSONConfiguration"),
             "rulePrefills": [TemplatebackendQuestionnaireQuestionAnswerRulePrefill.from_dict(_item) for _item in obj.get("rulePrefills")] if obj.get("rulePrefills") is not None else None,
             "createdAt": obj.get("createdAt"),
             "updatedAt": obj.get("updatedAt")

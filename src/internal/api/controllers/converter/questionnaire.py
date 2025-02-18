@@ -54,6 +54,7 @@ def questionnaire_version_from_business(version: QuestionnaireVersion) -> Templa
 def questionnaire_question_from_business(question: QuestionnaireQuestion) -> TemplatebackendQuestionnaireQuestion:
     return TemplatebackendQuestionnaireQuestion(
         id=question.id,
+        tmp_uuid=question.tmp_uuid,
         tab=question.tab,
         question=question.question,
         risk_weight=question.risk_weight,
@@ -69,8 +70,10 @@ def questionnaire_question_from_business(question: QuestionnaireQuestion) -> Tem
 def questionnaire_question_answer_from_business(answer: QuestionnaireQuestionAnswer) -> TemplatebackendQuestionnaireQuestionAnswer:
     return TemplatebackendQuestionnaireQuestionAnswer(
         id=answer.id,
+        tmp_uuid=answer.tmp_uuid,
         text=answer.text,
         risk_level=answer.risk_level,
+        json_configuration=answer.json_configuration,
         high_risk=answer.high_risk,
         rule_prefills=[questionnaire_question_answer_rule_prefill_from_business(rule) for rule in answer.rule_prefills] if answer.rule_prefills else [],
         created_at=answer.createdat,
@@ -81,8 +84,10 @@ def questionnaire_question_answer_from_business(answer: QuestionnaireQuestionAns
 def questionnaire_question_answer_rule_prefill_from_business(rule: QuestionnaireQuestionAnswerRulePrefill) -> TemplatebackendQuestionnaireQuestionAnswerRulePrefill:
     return TemplatebackendQuestionnaireQuestionAnswerRulePrefill(
         id=rule.id,
-        questionid=rule.questionid,
-        answerid=rule.answerid,
+        question_id=rule.questionid,
+        tmp_question_uuid=rule.question_uuid,
+        answer_id=rule.answerid,
+        tmp_answer_uuid=rule.answer_uuid,
         answer_text=rule.answer_text,
         created_at=rule.createdat,
         updated_at=rule.updatedat,
@@ -111,6 +116,7 @@ def questionnaire_version_to_business(version: TemplatebackendQuestionnaireVersi
 def questionnaire_question_to_business(question: TemplatebackendQuestionnaireQuestion) -> QuestionnaireQuestion:
     return QuestionnaireQuestion(
         id=question.id,
+        tmp_uuid=question.tmp_uuid,
         tab=question.tab,
         question=question.question,
         risk_weight=question.risk_weight,
@@ -125,8 +131,10 @@ def questionnaire_question_to_business(question: TemplatebackendQuestionnaireQue
 def questionnaire_question_answer_to_business(answer: TemplatebackendQuestionnaireQuestionAnswer) -> QuestionnaireQuestionAnswer:
     return QuestionnaireQuestionAnswer(
         id=answer.id,
+        tmp_uuid=answer.tmp_uuid,
         text=answer.text,
         risk_level=answer.risk_level,
+        json_configuration=answer.json_configuration,
         high_risk=answer.high_risk,
         rule_prefills=[questionnaire_question_answer_rule_prefill_to_business(rule) for rule in answer.rule_prefills] if answer.rule_prefills else [],
         createdat=answer.created_at,
@@ -136,8 +144,10 @@ def questionnaire_question_answer_to_business(answer: TemplatebackendQuestionnai
 def questionnaire_question_answer_rule_prefill_to_business(rule: TemplatebackendQuestionnaireQuestionAnswerRulePrefill) -> QuestionnaireQuestionAnswerRulePrefill:
     return QuestionnaireQuestionAnswerRulePrefill(
         id=rule.id,
-        questionid=rule.questionid,
-        answerid=rule.answerid,
+        questionid=rule.question_id,
+        question_uuid=rule.tmp_question_uuid,
+        answerid=rule.answer_id,
+        answer_uuid=rule.tmp_answer_uuid,
         answer_text=rule.answer_text,
         createdat=rule.created_at,
         updatedat=rule.updated_at,
@@ -160,6 +170,7 @@ def reply_to_business(reply: TemplatebackendQuestionnaireReply) -> Reply:
         project_name=reply.project_name,
         questionnaire_version_id=reply.questionnaire_version_id,
         replies=[question_reply_to_business(qr) for qr in reply.replies],
+        userid=reply.user_id,
         createdat=reply.created_at,
         updatedat=reply.updated_at,
     )
@@ -179,6 +190,7 @@ def reply_from_business(reply: Reply) -> TemplatebackendQuestionnaireReply:
         project_name=reply.project_name,
         questionnaire_version_id=reply.questionnaire_version_id,
         replies=[question_reply_from_business(qr) for qr in reply.replies],
+        user_id=reply.userid,
         created_at=reply.createdat,
         updated_at=reply.updatedat,
     )

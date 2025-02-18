@@ -9,6 +9,8 @@ Name | Type | Description | Notes
 **question_id** | **int** |  | [optional] 
 **answer_id** | **int** |  | [optional] 
 **answer_text** | **str** |  | [optional] 
+**tmp_question_uuid** | **str** |  | [optional] 
+**tmp_answer_uuid** | **str** |  | [optional] 
 **created_at** | **datetime** |  | [optional] 
 **updated_at** | **datetime** |  | [optional] 
 

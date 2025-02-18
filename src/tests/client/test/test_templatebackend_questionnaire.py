@@ -54,18 +54,23 @@ class TestTemplatebackendQuestionnaire(unittest.TestCase):
                                 answer_type = '', 
                                 flag = '', 
                                 tooltip = '', 
+                                tmp_uuid = '', 
                                 answers = [
                                     openapi_client.models.templatebackend_questionnaire_question_answer.templatebackendQuestionnaireQuestionAnswer(
                                         id = 56, 
                                         text = '', 
                                         risk_level = 56, 
                                         high_risk = True, 
+                                        tmp_uuid = '', 
+                                        json_configuration = '', 
                                         rule_prefills = [
                                             openapi_client.models.templatebackend_questionnaire_question_answer_rule_prefill.templatebackendQuestionnaireQuestionAnswerRulePrefill(
                                                 id = 56, 
                                                 question_id = 56, 
                                                 answer_id = 56, 
                                                 answer_text = '', 
+                                                tmp_question_uuid = '', 
+                                                tmp_answer_uuid = '', 
                                                 created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
                                                 updated_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), )
                                             ], 
