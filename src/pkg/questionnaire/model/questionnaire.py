@@ -131,6 +131,7 @@ class Reply:
     id: int = None
 
     userid: int = 0
+    username: str = ""
     tenantid: int = 0
 
     project_name: str = ''

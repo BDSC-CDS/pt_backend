@@ -348,16 +348,20 @@ class QuestionnaireStore:
     
     def list_replies(self, tenantid: int, userid: int, offset: int, limit: int) -> list[Reply]:
         reply_query = """
-        SELECT id, userid, tenantid, project_name, questionnaire_versionid, createdat, updatedat, deletedat
-        FROM questionnaire_replies
+        SELECT r.id, r.userid, subq.username, r.tenantid, r.project_name, r.questionnaire_versionid, r.createdat, r.updatedat, r.deletedat
+        FROM questionnaire_replies r
+        LEFT JOIN (
+            SELECT id, username 
+            FROM users
+        ) subq ON r.userid = subq.id
         WHERE (
-            userid = :userid OR
-            id IN (
+            r.userid = :userid OR
+            r.id IN (
                 SELECT questionnairereplyid FROM questionnaire_reply_share 
                 WHERE sharedwith_userid = :userid and tenantid = :tenantid and deletedat is null 
             )
         ) 
-        and tenantid = :tenantid and deletedat is null
+        and r.tenantid = :tenantid and r.deletedat is null
         OFFSET :offset
         LIMIT :limit;
         """
@@ -375,6 +379,7 @@ class QuestionnaireStore:
                     Reply(
                         id=result['id'],
                         userid=result['userid'],
+                        username=result['username'],
                         tenantid=result['tenantid'],
                         project_name=result['project_name'],
                         questionnaire_version_id=result['questionnaire_versionid'],
