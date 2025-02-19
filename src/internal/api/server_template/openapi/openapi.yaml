@@ -2692,6 +2692,7 @@ components:
               updatedAt: 2000-01-23T04:56:07.000+00:00
             id: 0
             projectName: projectName
+            userName: userName
             userId: 5
             updatedAt: 2000-01-23T04:56:07.000+00:00
       properties:
@@ -2717,6 +2718,7 @@ components:
             updatedAt: 2000-01-23T04:56:07.000+00:00
           id: 0
           projectName: projectName
+          userName: userName
           userId: 5
           updatedAt: 2000-01-23T04:56:07.000+00:00
       properties:
@@ -3977,6 +3979,7 @@ components:
               updatedAt: 2000-01-23T04:56:07.000+00:00
             id: 0
             projectName: projectName
+            userName: userName
             userId: 5
             updatedAt: 2000-01-23T04:56:07.000+00:00
           - createdAt: 2000-01-23T04:56:07.000+00:00
@@ -3994,6 +3997,7 @@ components:
               updatedAt: 2000-01-23T04:56:07.000+00:00
             id: 0
             projectName: projectName
+            userName: userName
             userId: 5
             updatedAt: 2000-01-23T04:56:07.000+00:00
       properties:
@@ -4019,6 +4023,7 @@ components:
             updatedAt: 2000-01-23T04:56:07.000+00:00
           id: 0
           projectName: projectName
+          userName: userName
           userId: 5
           updatedAt: 2000-01-23T04:56:07.000+00:00
         - createdAt: 2000-01-23T04:56:07.000+00:00
@@ -4036,6 +4041,7 @@ components:
             updatedAt: 2000-01-23T04:56:07.000+00:00
           id: 0
           projectName: projectName
+          userName: userName
           userId: 5
           updatedAt: 2000-01-23T04:56:07.000+00:00
       properties:
@@ -4645,6 +4651,7 @@ components:
           updatedAt: 2000-01-23T04:56:07.000+00:00
         id: 0
         projectName: projectName
+        userName: userName
         userId: 5
         updatedAt: 2000-01-23T04:56:07.000+00:00
       properties:
@@ -4668,6 +4675,9 @@ components:
           format: int64
           title: userId
           type: integer
+        userName:
+          title: userName
+          type: string
         createdAt:
           format: date-time
           title: createdAt

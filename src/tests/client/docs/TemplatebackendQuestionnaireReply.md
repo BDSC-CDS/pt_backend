@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **project_name** | **str** |  | [optional] 
 **replies** | [**List[TemplatebackendQuestionnaireQuestionReply]**](TemplatebackendQuestionnaireQuestionReply.md) |  | [optional] 
 **user_id** | **int** |  | [optional] 
+**user_name** | **str** |  | [optional] 
 **created_at** | **datetime** |  | [optional] 
 **updated_at** | **datetime** |  | [optional] 
 

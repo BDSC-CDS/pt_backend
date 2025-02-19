@@ -171,6 +171,7 @@ def reply_to_business(reply: TemplatebackendQuestionnaireReply) -> Reply:
         questionnaire_version_id=reply.questionnaire_version_id,
         replies=[question_reply_to_business(qr) for qr in reply.replies],
         userid=reply.user_id,
+        username=reply.user_name,
         createdat=reply.created_at,
         updatedat=reply.updated_at,
     )
@@ -191,6 +192,7 @@ def reply_from_business(reply: Reply) -> TemplatebackendQuestionnaireReply:
         questionnaire_version_id=reply.questionnaire_version_id,
         replies=[question_reply_from_business(qr) for qr in reply.replies],
         user_id=reply.userid,
+        user_name=reply.username,
         created_at=reply.createdat,
         updated_at=reply.updatedat,
     )
