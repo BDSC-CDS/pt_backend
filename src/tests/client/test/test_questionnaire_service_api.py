@@ -51,7 +51,14 @@ class TestQuestionnaireServiceApi(unittest.TestCase):
     def test_questionnaire_service_delete_questionnaire(self) -> None:
         """Test case for questionnaire_service_delete_questionnaire
 
-        Create a questionnaire
+        Delete a questionnaire
+        """
+        pass
+
+    def test_questionnaire_service_delete_reply(self) -> None:
+        """Test case for questionnaire_service_delete_reply
+
+        Delete a questionnaires reply
         """
         pass
 

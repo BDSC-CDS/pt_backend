@@ -982,6 +982,33 @@ paths:
       x-openapi-router-controller: questionnaire_controller
       x-codegen-request-body-name: body
   /api/v1/questionnaire/replies/{id}:
+    delete:
+      description: This endpoint allows to delete a questionnaire reply
+      operationId: questionnaire_service_delete_reply
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/templatebackendDeleteReplyReply'
+          description: A successful response.
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+          description: An unexpected error response.
+      summary: Delete a questionnaires reply
+      tags:
+      - QuestionnaireService
+      x-openapi-router-controller: questionnaire_controller
     get:
       description: This endpoint allows getting a user's questionnaires reply
       operationId: questionnaire_service_get_reply
@@ -1075,7 +1102,7 @@ paths:
       x-codegen-request-body-name: body
   /api/v1/questionnaire/{id}:
     delete:
-      description: This endpoint creates a questionnaire
+      description: This endpoint allows to delete a questionnaire
       operationId: questionnaire_service_delete_questionnaire
       parameters:
       - in: path
@@ -1096,7 +1123,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/rpcStatus'
           description: An unexpected error response.
-      summary: Create a questionnaire
+      summary: Delete a questionnaire
       tags:
       - QuestionnaireService
       x-openapi-router-controller: questionnaire_controller
@@ -1802,6 +1829,24 @@ components:
           title: success
           type: boolean
       title: templatebackendDeleteQuestionnaireResult
+      type: object
+    templatebackendDeleteReplyReply:
+      example:
+        result:
+          success: true
+      properties:
+        result:
+          $ref: '#/components/schemas/templatebackendDeleteReplyResult'
+      title: templatebackendDeleteReplyReply
+      type: object
+    templatebackendDeleteReplyResult:
+      example:
+        success: true
+      properties:
+        success:
+          title: success
+          type: boolean
+      title: templatebackendDeleteReplyResult
       type: object
     templatebackendDeleteUserReply:
       example:

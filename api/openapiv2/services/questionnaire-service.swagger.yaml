@@ -140,6 +140,28 @@ paths:
       tags:
         - QuestionnaireService
       x-openapi-router-controller: questionnaire_controller
+    delete:
+      summary: Delete a questionnaires reply
+      description: This endpoint allows to delete a questionnaire reply
+      operationId: QuestionnaireService_DeleteReply
+      responses:
+        "200":
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/templatebackendDeleteReplyReply'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/rpcStatus'
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: integer
+          format: int64
+      tags:
+        - QuestionnaireService
+      x-openapi-router-controller: questionnaire_controller
   /api/v1/questionnaire/replies/{id}/share:
     post:
       summary: Share questionnaires reply
@@ -219,8 +241,8 @@ paths:
         - QuestionnaireService
       x-openapi-router-controller: questionnaire_controller
     delete:
-      summary: Create a questionnaire
-      description: This endpoint creates a questionnaire
+      summary: Delete a questionnaire
+      description: This endpoint allows to delete a questionnaire
       operationId: QuestionnaireService_DeleteQuestionnaire
       responses:
         "200":
@@ -318,6 +340,16 @@ definitions:
       result:
         $ref: '#/definitions/templatebackendDeleteQuestionnaireResult'
   templatebackendDeleteQuestionnaireResult:
+    type: object
+    properties:
+      success:
+        type: boolean
+  templatebackendDeleteReplyReply:
+    type: object
+    properties:
+      result:
+        $ref: '#/definitions/templatebackendDeleteReplyResult'
+  templatebackendDeleteReplyResult:
     type: object
     properties:
       success:

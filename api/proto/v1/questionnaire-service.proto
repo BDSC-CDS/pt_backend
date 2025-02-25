@@ -108,6 +108,16 @@ message CreateReplyResult {
     uint32 id = 1;
 }
 
+message DeleteReplyRequest {
+    uint32 id = 1;
+}
+message DeleteReplyReply {
+    DeleteReplyResult result = 1;
+}
+message DeleteReplyResult {
+    bool success = 1;
+}
+
 message ShareReplyRequest {
     uint32 id = 1;
     uint32 sharedwith_userid = 2;
@@ -214,8 +224,8 @@ service QuestionnaireService {
             delete: "/api/v1/questionnaire/{id}"
         };
         option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-            summary: "Create a questionnaire";
-            description: "This endpoint creates a questionnaire";
+            summary: "Delete a questionnaire";
+            description: "This endpoint allows to delete a questionnaire";
             tags: "QuestionnaireService";
             extensions: {
                 key: "x-openapi-router-controller";
@@ -270,6 +280,21 @@ service QuestionnaireService {
         };
     };
 
+    rpc DeleteReply(DeleteReplyRequest) returns (DeleteReplyReply) {
+        option (google.api.http) = {
+            delete: "/api/v1/questionnaire/replies/{id}"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            summary: "Delete a questionnaires reply";
+            description: "This endpoint allows to delete a questionnaire reply";
+            tags: "QuestionnaireService";
+            extensions: {
+                key: "x-openapi-router-controller";
+                value: {string_value: "questionnaire_controller"};
+            };
+        };
+    };
+
     rpc ShareReply(ShareReplyRequest) returns (ShareReplyReply) {
         option (google.api.http) = {
             post: "/api/v1/questionnaire/replies/{id}/share"
@@ -285,4 +310,6 @@ service QuestionnaireService {
             };
         };
     };
+
+    
 }
