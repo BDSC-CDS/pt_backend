@@ -228,6 +228,10 @@ class QuestionnaireStore:
         with self.session_scope() as session:
             try:
                 session.execute(text(questionnaire_query), {'questionnaire_id': questionnaire_id})
+                session.execute(text(questionnaire_version_query), {'questionnaire_id': questionnaire_id})
+                session.execute(text(questionnaire_question_query), {'questionnaire_id': questionnaire_id})
+                session.execute(text(questionnaire_answer_query), {'questionnaire_id': questionnaire_id})
+                session.execute(text(questionnaire_rule_prefill_query), {'questionnaire_id': questionnaire_id})
             except SQLAlchemyError as e:
                 raise e
 
