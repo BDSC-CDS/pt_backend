@@ -193,6 +193,38 @@ class QuestionnaireStore:
         WHERE id = :questionnaire_id;
         """
 
+        questionnaire_version_query = """
+        UPDATE questionnaire_versions
+        SET deletedat = now()
+        WHERE questionnaireid = :questionnaire_id;
+        """
+
+        questionnaire_question_query = """
+        UPDATE questionnaire_questions
+        SET deletedat = now()
+        WHERE questionnaireid = :questionnaire_id;
+        """
+
+        questionnaire_answer_query = """
+        UPDATE questionnaire_question_answers
+        SET deletedat = now()
+        WHERE questionnaire_questionid IN (
+            SELECT id
+            FROM questionnaire_questions
+            WHERE questionnaireid = :questionnaire_id
+        );
+        """
+
+        questionnaire_rule_prefill_query = """
+        UPDATE questionnaire_question_answer_rule_prefills
+        SET deletedat = now()
+        WHERE questionnaire_id IN (
+            SELECT id
+            FROM questionnaire_question_answers
+            WHERE questionnaire_id = :questionnaire_id
+        );
+        """
+
         with self.session_scope() as session:
             try:
                 session.execute(text(questionnaire_query), {'questionnaire_id': questionnaire_id})
@@ -346,9 +378,16 @@ class QuestionnaireStore:
         WHERE id = :reply_id;
         """
 
+        question_reply_query = """
+        UPDATE questionnaire_question_reply
+        SET deletedat = now()
+        WHERE replyid = :reply_id;
+        """
+
         with self.session_scope() as session:
             try:
                 session.execute(text(reply_query), {'reply_id': reply_id})
+                session.execute(text(question_reply_query), {'reply_id': reply_id})
             except SQLAlchemyError as e:
                 raise e
             
