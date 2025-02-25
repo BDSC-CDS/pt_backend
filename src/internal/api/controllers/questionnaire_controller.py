@@ -64,7 +64,8 @@ class QuestionnaireServiceController:
         return TemplatebackendCreateQuestionnaireReply(TemplatebackendCreateQuestionnaireResult(m.id))
 
     def questionnaire_service_delete_questionnaire(self, user, id: str):
-        return TemplatebackendDeleteQuestionnaireReply(TemplatebackendDeleteQuestionnaireResult())
+        success = self.questionnaire_service.delete_questionnaire(user.tenantid, user.id, id)
+        return TemplatebackendDeleteQuestionnaireReply(TemplatebackendDeleteQuestionnaireResult(success))
 
     def questionnaire_service_get_questionnaire(self, user, id: int):
         questionnaire = self.questionnaire_service.get_questionnaire(user.tenantid, user, id)
@@ -78,6 +79,10 @@ class QuestionnaireServiceController:
         ms = [questionnaire_converter.questionnaire_from_business(m) for m in questionnaires]
         return TemplatebackendListQuestionnaireReply(TemplatebackendListQuestionnaireResult(ms))
     
+    def questionnaire_service_delete_reply(self, user, id: int):
+        success = self.questionnaire_service.delete_reply(user, id)
+        return TemplatebackendDeleteQuestionnaireReply(TemplatebackendDeleteQuestionnaireResult(success))
+
     def questionnaire_service_share_reply(self, user, id: int, body: QuestionnaireServiceShareReplyRequest):
         success = self.questionnaire_service.create_share(user, id, body.sharedwith_userid)
         return TemplatebackendShareReplyReply(TemplatebackendShareReplyResult(success))

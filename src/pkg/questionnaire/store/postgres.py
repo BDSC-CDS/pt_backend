@@ -185,6 +185,21 @@ class QuestionnaireStore:
                     })
 
         return QuestionnaireVersion(id=version_id)
+    
+    def delete_questionnaire(self, tenantid: int, userid: int, questionnaire_id: int) -> bool:
+        questionnaire_query = """
+        UPDATE questionnaires
+        SET deletedat = now()
+        WHERE id = :questionnaire_id;
+        """
+
+        with self.session_scope() as session:
+            try:
+                session.execute(text(questionnaire_query), {'questionnaire_id': questionnaire_id})
+            except SQLAlchemyError as e:
+                raise e
+
+            return True
         
     def create_reply(self, tenantid: int, userid: int, reply: Reply) -> Reply:
         questionnaire_reply_select_query = """
@@ -323,6 +338,21 @@ class QuestionnaireStore:
                 raise e
 
             return reply
+        
+    def delete_reply(self, tenantid: int, userid: int, reply_id: int) -> bool:
+        reply_query = """
+        UPDATE questionnaire_replies
+        SET deletedat = now()
+        WHERE id = :reply_id;
+        """
+
+        with self.session_scope() as session:
+            try:
+                session.execute(text(reply_query), {'reply_id': reply_id})
+            except SQLAlchemyError as e:
+                raise e
+            
+            return True
     
     def create_share(self, tenantid: int, userid: int, reply_id: int, sharedwith_userid: int) -> bool:
         share_query = """
