@@ -16,8 +16,10 @@ class QuestionnaireService:
         return self.questionnaire_store.create_questionnaire(questionnaire)
     
     def create_questionnaire_version(self, user: User, questionnaire_id:int, version: QuestionnaireVersion) -> QuestionnaireVersion:
+        # Used for the Steward to convert JSON version to Python QuestionnaireVersion object
+        # with open("questionnaire_version.py", "w") as f:
+        #     f.write(str(version))
         return self.questionnaire_store.create_questionnaire_version(user.tenantid, user.id, questionnaire_id, version)
-        # return self.questionnaire_store.create_questionnaire(questionnaire_id, version)
     
     def list_questionnaires(self, tenantid: int, userid: int, offset: int = 0, limit: int = None) -> Questionnaire:
         questionnaires = self.questionnaire_store.list_questionnaires(tenantid, userid, offset, limit)
