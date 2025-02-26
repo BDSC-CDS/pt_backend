@@ -13,8 +13,6 @@ daemon:
   jobs:
     job_status_gc:
       enabled: true
-  private_key_file: ./configs/dev/files/keys/pt_backend_privkey.pem
-  public_key_file: ./configs/dev/files/keys/pt_backend_pubkey.pem
 
 storage:
   datastores:
@@ -51,13 +49,6 @@ services:
     enabled: true
   users_service:
     allow_searching_user_by_mail: true  # required to allow user sharing questionnaires
-  mailer:
-    smtp:
-      user: smtpUser
-      password: smtpPassword
-      host: smtp-relay.sendinblue.com
-      port: 587
-      authentication: plain
 
 log:
   loggers:
