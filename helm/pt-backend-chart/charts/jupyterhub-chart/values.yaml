@@ -14,8 +14,6 @@ image:
   repository: registry.rdeid.unil.ch/jupyterhub
   pullPolicy: IfNotPresent
   tag: "latest"
-  pullSecrets:
-    - name: registry-auth
 
 # This is for setting up a service.
 service:
