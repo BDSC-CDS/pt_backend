@@ -130,45 +130,6 @@
             "JSONConfiguration": "",
             "highRisk": false,
             "riskLevel": 0,
-            "rulePrefills": [
-              {
-                "answerText": "Yes",
-                "tmpAnswerUUID": "929463ce-ad02-484c-8eaf-558b70329f60",
-                "tmpQuestionUUID": "4fb8d54c-8057-4a4b-b22c-ca7ceabcce7e"
-              },
-              {
-                "answerText": "Yes",
-                "tmpAnswerUUID": "929463ce-ad02-484c-8eaf-558b70329f60",
-                "tmpQuestionUUID": "4fb8d54c-8057-4a4b-b22c-ca7ceabcce7e"
-              },
-              {
-                "answerText": "Yes",
-                "tmpAnswerUUID": "929463ce-ad02-484c-8eaf-558b70329f60",
-                "tmpQuestionUUID": "4fb8d54c-8057-4a4b-b22c-ca7ceabcce7e"
-              },
-              {
-                "answerText": "Yes",
-                "tmpAnswerUUID": "929463ce-ad02-484c-8eaf-558b70329f60",
-                "tmpQuestionUUID": "4fb8d54c-8057-4a4b-b22c-ca7ceabcce7e"
-              },
-              {
-                "answerText": "Yes",
-                "tmpAnswerUUID": "929463ce-ad02-484c-8eaf-558b70329f60",
-                "tmpQuestionUUID": "4fb8d54c-8057-4a4b-b22c-ca7ceabcce7e"
-              },
-              {
-                "answerText": "Yes",
-                "tmpAnswerUUID": "929463ce-ad02-484c-8eaf-558b70329f60",
-                "tmpQuestionUUID": "4fb8d54c-8057-4a4b-b22c-ca7ceabcce7e"
-              }
-            ],
-            "text": "Multicentric SPHN project",
-            "tmpUUID": "cbcfaafa-05ae-4fec-a82f-8187935d4590"
-          },
-          {
-            "JSONConfiguration": "",
-            "highRisk": false,
-            "riskLevel": 0,
             "rulePrefills": [],
             "text": "None of the above",
             "tmpUUID": "4b02844a-980d-4dcd-b889-b0ec5e59b832"
