@@ -11,8 +11,8 @@ replicaCount: 1
 
 # This sets the container image.
 image:
-  repository: registry.rdeid.unil.ch/jupyterhub
-  pullPolicy: IfNotPresent
+  repository: ghcr.io/bdsc-cds/pt-jupyterhub
+  pullPolicy: Always
   tag: "latest"
 
 # This is for setting up a service.
