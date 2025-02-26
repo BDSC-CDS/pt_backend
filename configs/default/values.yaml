@@ -14,6 +14,16 @@ image:
   repository: ghcr.io/bdsc-cds/pt-backend
   pullPolicy: IfNotPresent
 
+# Sets the secrets for the pt-backend.
+# If this is empty, values are automatically generated at the release installation.
+# Otherwise, the specified value will be used in the secret pt-backend-secret.
+# During Helm upgrades, changes on the secrets will be reflected in the release.
+secrets: {}
+  # ptAdminPassword: example-password
+  # jwtSecret: # 60 chars
+  # adminToken: # 16 chars
+  # symmetricEncryptionKey: # 32 chars 
+
 # This is for setting up a service for the pt-backend deployment.
 service:
   enabled: true
@@ -62,10 +72,14 @@ postgresql:
     enablePostgresUser: true # Creates a user "postgres" with admin rights.
     existingSecret: psql-secret # Secret should contain the key postgres-password
     database: pt_backend
+  
+  secrets: {}
+      # postgresPassword: example-password # PostgreSQL won't use this value if the chart was already deployed.
 
   primary:
     persistence:
       enabled: true
+      size: 100Gi
 
 
 ####################################
