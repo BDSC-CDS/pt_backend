@@ -6,12 +6,13 @@ from .questionnaire import (
 )
 
 
-questionnaire_v3 = QuestionnaireVersion(
-    version="3.0.0",
+questionnaire_v2_1 = QuestionnaireVersion(
+    id=None,
+    version="2.1.0",
     questions=[
         QuestionnaireQuestion(
             id=None,
-            tmp_uuid="2076",
+            tmp_uuid="a04fba19-6821-4a36-a644-17449b2b0229",
             tab="Project Type",
             question="Please specify the type of your project",
             risk_weight=0,
@@ -21,7 +22,7 @@ questionnaire_v3 = QuestionnaireVersion(
             answers=[
                 QuestionnaireQuestionAnswer(
                     id=None,
-                    tmp_uuid="6431",
+                    tmp_uuid="e1005d8c-9575-46fb-8f3f-ee90c7987b1f",
                     text="CHUV internal project",
                     risk_level=0,
                     high_risk=False,
@@ -32,8 +33,8 @@ questionnaire_v3 = QuestionnaireVersion(
                             questionid=0,
                             answerid=None,
                             answer_text="In Switzerland",
-                            question_uuid="2108",
-                            answer_uuid="6543",
+                            question_uuid="2b8091c5-1a5c-4c16-b778-59036dbe390e",
+                            answer_uuid="019e78b2-8cbd-42b0-b339-221351ca0ddb",
                             createdat=None,
                             updatedat=None,
                             deletedat=None,
@@ -43,8 +44,8 @@ questionnaire_v3 = QuestionnaireVersion(
                             questionid=0,
                             answerid=None,
                             answer_text="Yes (default)",
-                            question_uuid="2109",
-                            answer_uuid="6547",
+                            question_uuid="8fef3ba1-17f6-4cac-9c79-470bbab6d6e7",
+                            answer_uuid="9c6ca691-7b18-4e94-9323-771ff9b35703",
                             createdat=None,
                             updatedat=None,
                             deletedat=None,
@@ -54,8 +55,8 @@ questionnaire_v3 = QuestionnaireVersion(
                             questionid=0,
                             answerid=None,
                             answer_text="Yes (default)",
-                            question_uuid="2110",
-                            answer_uuid="6549",
+                            question_uuid="da2163b9-5111-44d3-a971-5164a37047a8",
+                            answer_uuid="eaeeb493-1077-47a6-b9eb-b1c645cd1f4e",
                             createdat=None,
                             updatedat=None,
                             deletedat=None,
@@ -65,8 +66,8 @@ questionnaire_v3 = QuestionnaireVersion(
                             questionid=0,
                             answerid=None,
                             answer_text="Yes",
-                            question_uuid="2111",
-                            answer_uuid="6551",
+                            question_uuid="64bce343-64bc-4d15-bd23-c55c7f536db2",
+                            answer_uuid="88bf2b37-d985-455c-a8b2-5cde78e0fbe7",
                             createdat=None,
                             updatedat=None,
                             deletedat=None,
@@ -76,8 +77,8 @@ questionnaire_v3 = QuestionnaireVersion(
                             questionid=0,
                             answerid=None,
                             answer_text="Yes",
-                            question_uuid="2112",
-                            answer_uuid="6553",
+                            question_uuid="dbfe9aba-4154-44ea-af0e-44ade38df448",
+                            answer_uuid="9e104d76-4e2b-4a33-85da-d67d4dcba711",
                             createdat=None,
                             updatedat=None,
                             deletedat=None,
@@ -87,8 +88,8 @@ questionnaire_v3 = QuestionnaireVersion(
                             questionid=0,
                             answerid=None,
                             answer_text="Yes",
-                            question_uuid="2113",
-                            answer_uuid="6555",
+                            question_uuid="82ba13f3-acfb-435f-a9b7-6b139509958b",
+                            answer_uuid="8e9d485f-19b9-441c-aab7-f1d891143bf1",
                             createdat=None,
                             updatedat=None,
                             deletedat=None,
@@ -98,8 +99,8 @@ questionnaire_v3 = QuestionnaireVersion(
                             questionid=0,
                             answerid=None,
                             answer_text="Yes ",
-                            question_uuid="2114",
-                            answer_uuid="6557",
+                            question_uuid="21ab8e99-7066-4dc8-84ca-46b39cb8ef54",
+                            answer_uuid="7251a40f-82da-4110-8eed-bec747c6feae",
                             createdat=None,
                             updatedat=None,
                             deletedat=None,
@@ -109,8 +110,8 @@ questionnaire_v3 = QuestionnaireVersion(
                             questionid=0,
                             answerid=None,
                             answer_text="On the hospital IT infrastructure of the data recipient ",
-                            question_uuid="2115",
-                            answer_uuid="6560",
+                            question_uuid="fe0302ea-484c-46a6-9e0f-a29ee7fb5e9f",
+                            answer_uuid="6bf3bf8c-f3f9-4250-b363-b55f49440e33",
                             createdat=None,
                             updatedat=None,
                             deletedat=None,
@@ -120,8 +121,8 @@ questionnaire_v3 = QuestionnaireVersion(
                             questionid=0,
                             answerid=None,
                             answer_text="Yes",
-                            question_uuid="2116",
-                            answer_uuid="6565",
+                            question_uuid="7747db6a-54d0-409f-a57f-e7f998f49f03",
+                            answer_uuid="da220396-bb32-460c-b151-f1397d6adfd1",
                             createdat=None,
                             updatedat=None,
                             deletedat=None,
@@ -131,8 +132,8 @@ questionnaire_v3 = QuestionnaireVersion(
                             questionid=0,
                             answerid=None,
                             answer_text="Yes (default)",
-                            question_uuid="2117",
-                            answer_uuid="6566",
+                            question_uuid="230fd6f3-e3b2-4fee-85d0-63902a44f352",
+                            answer_uuid="a7d81cf2-323a-4ff3-a9a9-cfc3ba3ddf14",
                             createdat=None,
                             updatedat=None,
                             deletedat=None,
@@ -144,7 +145,7 @@ questionnaire_v3 = QuestionnaireVersion(
                 ),
                 QuestionnaireQuestionAnswer(
                     id=None,
-                    tmp_uuid="6432",
+                    tmp_uuid="446b9d83-8fcb-40c9-8590-d552e1ab1a16",
                     text="USZ internal project",
                     risk_level=0,
                     high_risk=False,
@@ -155,8 +156,8 @@ questionnaire_v3 = QuestionnaireVersion(
                             questionid=0,
                             answerid=None,
                             answer_text="In Switzerland",
-                            question_uuid="2108",
-                            answer_uuid="6543",
+                            question_uuid="2b8091c5-1a5c-4c16-b778-59036dbe390e",
+                            answer_uuid="019e78b2-8cbd-42b0-b339-221351ca0ddb",
                             createdat=None,
                             updatedat=None,
                             deletedat=None,
@@ -166,8 +167,8 @@ questionnaire_v3 = QuestionnaireVersion(
                             questionid=0,
                             answerid=None,
                             answer_text="Yes (default)",
-                            question_uuid="2109",
-                            answer_uuid="6547",
+                            question_uuid="8fef3ba1-17f6-4cac-9c79-470bbab6d6e7",
+                            answer_uuid="9c6ca691-7b18-4e94-9323-771ff9b35703",
                             createdat=None,
                             updatedat=None,
                             deletedat=None,
@@ -177,8 +178,8 @@ questionnaire_v3 = QuestionnaireVersion(
                             questionid=0,
                             answerid=None,
                             answer_text="Yes (default)",
-                            question_uuid="2110",
-                            answer_uuid="6549",
+                            question_uuid="da2163b9-5111-44d3-a971-5164a37047a8",
+                            answer_uuid="eaeeb493-1077-47a6-b9eb-b1c645cd1f4e",
                             createdat=None,
                             updatedat=None,
                             deletedat=None,
@@ -188,8 +189,8 @@ questionnaire_v3 = QuestionnaireVersion(
                             questionid=0,
                             answerid=None,
                             answer_text="Yes",
-                            question_uuid="2111",
-                            answer_uuid="6551",
+                            question_uuid="64bce343-64bc-4d15-bd23-c55c7f536db2",
+                            answer_uuid="88bf2b37-d985-455c-a8b2-5cde78e0fbe7",
                             createdat=None,
                             updatedat=None,
                             deletedat=None,
@@ -199,8 +200,8 @@ questionnaire_v3 = QuestionnaireVersion(
                             questionid=0,
                             answerid=None,
                             answer_text="Yes",
-                            question_uuid="2112",
-                            answer_uuid="6553",
+                            question_uuid="dbfe9aba-4154-44ea-af0e-44ade38df448",
+                            answer_uuid="9e104d76-4e2b-4a33-85da-d67d4dcba711",
                             createdat=None,
                             updatedat=None,
                             deletedat=None,
@@ -210,8 +211,8 @@ questionnaire_v3 = QuestionnaireVersion(
                             questionid=0,
                             answerid=None,
                             answer_text="Yes ",
-                            question_uuid="2114",
-                            answer_uuid="6557",
+                            question_uuid="21ab8e99-7066-4dc8-84ca-46b39cb8ef54",
+                            answer_uuid="7251a40f-82da-4110-8eed-bec747c6feae",
                             createdat=None,
                             updatedat=None,
                             deletedat=None,
@@ -221,8 +222,8 @@ questionnaire_v3 = QuestionnaireVersion(
                             questionid=0,
                             answerid=None,
                             answer_text="On  computer(s) controlled by the hospital IT department of the data recipient",
-                            question_uuid="2115",
-                            answer_uuid="6559",
+                            question_uuid="fe0302ea-484c-46a6-9e0f-a29ee7fb5e9f",
+                            answer_uuid="a73076ae-3c66-4e75-909c-59c301ee6eb9",
                             createdat=None,
                             updatedat=None,
                             deletedat=None,
@@ -232,8 +233,8 @@ questionnaire_v3 = QuestionnaireVersion(
                             questionid=0,
                             answerid=None,
                             answer_text="Yes",
-                            question_uuid="2116",
-                            answer_uuid="6565",
+                            question_uuid="7747db6a-54d0-409f-a57f-e7f998f49f03",
+                            answer_uuid="da220396-bb32-460c-b151-f1397d6adfd1",
                             createdat=None,
                             updatedat=None,
                             deletedat=None,
@@ -243,8 +244,8 @@ questionnaire_v3 = QuestionnaireVersion(
                             questionid=0,
                             answerid=None,
                             answer_text="Yes (default)",
-                            question_uuid="2117",
-                            answer_uuid="6566",
+                            question_uuid="230fd6f3-e3b2-4fee-85d0-63902a44f352",
+                            answer_uuid="a7d81cf2-323a-4ff3-a9a9-cfc3ba3ddf14",
                             createdat=None,
                             updatedat=None,
                             deletedat=None,
@@ -254,8 +255,8 @@ questionnaire_v3 = QuestionnaireVersion(
                             questionid=0,
                             answerid=None,
                             answer_text="Yes",
-                            question_uuid="2113",
-                            answer_uuid="6555",
+                            question_uuid="82ba13f3-acfb-435f-a9b7-6b139509958b",
+                            answer_uuid="8e9d485f-19b9-441c-aab7-f1d891143bf1",
                             createdat=None,
                             updatedat=None,
                             deletedat=None,
@@ -267,7 +268,86 @@ questionnaire_v3 = QuestionnaireVersion(
                 ),
                 QuestionnaireQuestionAnswer(
                     id=None,
-                    tmp_uuid="6434",
+                    tmp_uuid="cbcfaafa-05ae-4fec-a82f-8187935d4590",
+                    text="Multicentric SPHN project",
+                    risk_level=0,
+                    high_risk=False,
+                    json_configuration="",
+                    rule_prefills=[
+                        QuestionnaireQuestionAnswerRulePrefill(
+                            id=None,
+                            questionid=0,
+                            answerid=None,
+                            answer_text="Yes",
+                            question_uuid="4fb8d54c-8057-4a4b-b22c-ca7ceabcce7e",
+                            answer_uuid="929463ce-ad02-484c-8eaf-558b70329f60",
+                            createdat=None,
+                            updatedat=None,
+                            deletedat=None,
+                        ),
+                        QuestionnaireQuestionAnswerRulePrefill(
+                            id=None,
+                            questionid=0,
+                            answerid=None,
+                            answer_text="Yes",
+                            question_uuid="4fb8d54c-8057-4a4b-b22c-ca7ceabcce7e",
+                            answer_uuid="929463ce-ad02-484c-8eaf-558b70329f60",
+                            createdat=None,
+                            updatedat=None,
+                            deletedat=None,
+                        ),
+                        QuestionnaireQuestionAnswerRulePrefill(
+                            id=None,
+                            questionid=0,
+                            answerid=None,
+                            answer_text="Yes",
+                            question_uuid="4fb8d54c-8057-4a4b-b22c-ca7ceabcce7e",
+                            answer_uuid="929463ce-ad02-484c-8eaf-558b70329f60",
+                            createdat=None,
+                            updatedat=None,
+                            deletedat=None,
+                        ),
+                        QuestionnaireQuestionAnswerRulePrefill(
+                            id=None,
+                            questionid=0,
+                            answerid=None,
+                            answer_text="Yes",
+                            question_uuid="4fb8d54c-8057-4a4b-b22c-ca7ceabcce7e",
+                            answer_uuid="929463ce-ad02-484c-8eaf-558b70329f60",
+                            createdat=None,
+                            updatedat=None,
+                            deletedat=None,
+                        ),
+                        QuestionnaireQuestionAnswerRulePrefill(
+                            id=None,
+                            questionid=0,
+                            answerid=None,
+                            answer_text="Yes",
+                            question_uuid="4fb8d54c-8057-4a4b-b22c-ca7ceabcce7e",
+                            answer_uuid="929463ce-ad02-484c-8eaf-558b70329f60",
+                            createdat=None,
+                            updatedat=None,
+                            deletedat=None,
+                        ),
+                        QuestionnaireQuestionAnswerRulePrefill(
+                            id=None,
+                            questionid=0,
+                            answerid=None,
+                            answer_text="Yes",
+                            question_uuid="4fb8d54c-8057-4a4b-b22c-ca7ceabcce7e",
+                            answer_uuid="929463ce-ad02-484c-8eaf-558b70329f60",
+                            createdat=None,
+                            updatedat=None,
+                            deletedat=None,
+                        ),
+                    ],
+                    createdat=None,
+                    updatedat=None,
+                    deletedat=None,
+                ),
+                QuestionnaireQuestionAnswer(
+                    id=None,
+                    tmp_uuid="4b02844a-980d-4dcd-b889-b0ec5e59b832",
                     text="None of the above",
                     risk_level=0,
                     high_risk=False,
@@ -284,7 +364,7 @@ questionnaire_v3 = QuestionnaireVersion(
         ),
         QuestionnaireQuestion(
             id=None,
-            tmp_uuid="2077",
+            tmp_uuid="4fb8d54c-8057-4a4b-b22c-ca7ceabcce7e",
             tab="Project Overview",
             question="Does your project contain omics data?",
             risk_weight=0,
@@ -294,7 +374,7 @@ questionnaire_v3 = QuestionnaireVersion(
             answers=[
                 QuestionnaireQuestionAnswer(
                     id=None,
-                    tmp_uuid="6435",
+                    tmp_uuid="929463ce-ad02-484c-8eaf-558b70329f60",
                     text="Yes",
                     risk_level=0,
                     high_risk=False,
@@ -306,7 +386,7 @@ questionnaire_v3 = QuestionnaireVersion(
                 ),
                 QuestionnaireQuestionAnswer(
                     id=None,
-                    tmp_uuid="6436",
+                    tmp_uuid="4624d40c-c5fd-4fcd-9998-23f34f4757a2",
                     text="No",
                     risk_level=0,
                     high_risk=False,
@@ -317,8 +397,8 @@ questionnaire_v3 = QuestionnaireVersion(
                             questionid=0,
                             answerid=None,
                             answer_text="No genomic sequences are used in the project ",
-                            question_uuid="2103",
-                            answer_uuid="6526",
+                            question_uuid="a23c522b-5f01-43ad-8094-0694c33a9ffc",
+                            answer_uuid="c05a8385-0ab3-4898-ba79-c3b11ce23c3c",
                             createdat=None,
                             updatedat=None,
                             deletedat=None,
@@ -335,7 +415,7 @@ questionnaire_v3 = QuestionnaireVersion(
         ),
         QuestionnaireQuestion(
             id=None,
-            tmp_uuid="2078",
+            tmp_uuid="8a64c1a8-13f9-48e0-bde6-0bb4d370bbce",
             tab="Project Overview",
             question="Does your project contain multimedia data?",
             risk_weight=0,
@@ -345,7 +425,7 @@ questionnaire_v3 = QuestionnaireVersion(
             answers=[
                 QuestionnaireQuestionAnswer(
                     id=None,
-                    tmp_uuid="6437",
+                    tmp_uuid="e326568b-c779-465f-b83d-439f303886e3",
                     text="Yes",
                     risk_level=0,
                     high_risk=False,
@@ -357,7 +437,7 @@ questionnaire_v3 = QuestionnaireVersion(
                 ),
                 QuestionnaireQuestionAnswer(
                     id=None,
-                    tmp_uuid="6438",
+                    tmp_uuid="b6382f54-48e5-4eb5-84c7-f51b00909823",
                     text="No",
                     risk_level=0,
                     high_risk=False,
@@ -368,8 +448,8 @@ questionnaire_v3 = QuestionnaireVersion(
                             questionid=0,
                             answerid=None,
                             answer_text="No audio data is used in the project",
-                            question_uuid="2096",
-                            answer_uuid="6499",
+                            question_uuid="a9b14ea8-18fa-44b8-af46-604233ea56e8",
+                            answer_uuid="904cac9f-933f-4a9b-adb9-65e336f33e1c",
                             createdat=None,
                             updatedat=None,
                             deletedat=None,
@@ -379,8 +459,8 @@ questionnaire_v3 = QuestionnaireVersion(
                             questionid=0,
                             answerid=None,
                             answer_text="No images are used in the project",
-                            question_uuid="2097",
-                            answer_uuid="6502",
+                            question_uuid="b17cf5a4-73bd-47c8-b59c-61543d33ef0c",
+                            answer_uuid="ca70a9dc-31af-4027-9dc9-6e5710550cb5",
                             createdat=None,
                             updatedat=None,
                             deletedat=None,
@@ -390,8 +470,8 @@ questionnaire_v3 = QuestionnaireVersion(
                             questionid=0,
                             answerid=None,
                             answer_text="No DICOM data is used in this project",
-                            question_uuid="2098",
-                            answer_uuid="6509",
+                            question_uuid="aab29277-33ba-42a0-91e4-4973c8674ad1",
+                            answer_uuid="eb001c37-6965-46ac-a36b-f42ed6e61efa",
                             createdat=None,
                             updatedat=None,
                             deletedat=None,
@@ -401,8 +481,8 @@ questionnaire_v3 = QuestionnaireVersion(
                             questionid=0,
                             answerid=None,
                             answer_text="No DICOM data is used in this project",
-                            question_uuid="2099",
-                            answer_uuid="6513",
+                            question_uuid="1c790f71-7553-4b17-809f-43839d027f23",
+                            answer_uuid="a317ba24-2ecb-419d-8a7b-df81b20b9949",
                             createdat=None,
                             updatedat=None,
                             deletedat=None,
@@ -412,8 +492,8 @@ questionnaire_v3 = QuestionnaireVersion(
                             questionid=0,
                             answerid=None,
                             answer_text="No DICOM data is used in this project",
-                            question_uuid="2100",
-                            answer_uuid="6517",
+                            question_uuid="2abc1d05-2a83-4717-b8fd-198a8910b39e",
+                            answer_uuid="2f62fde1-c8a3-453b-bbff-4405806d2219",
                             createdat=None,
                             updatedat=None,
                             deletedat=None,
@@ -423,8 +503,8 @@ questionnaire_v3 = QuestionnaireVersion(
                             questionid=0,
                             answerid=None,
                             answer_text="No DICOM data is used in this project",
-                            question_uuid="2101",
-                            answer_uuid="6521",
+                            question_uuid="d847255d-19aa-4c89-b66c-fad4efedc03f",
+                            answer_uuid="ccce9148-9bae-45ce-a35d-e108b6dc1ff2",
                             createdat=None,
                             updatedat=None,
                             deletedat=None,
@@ -434,8 +514,8 @@ questionnaire_v3 = QuestionnaireVersion(
                             questionid=0,
                             answerid=None,
                             answer_text="No DICOM data is used in this project",
-                            question_uuid="2102",
-                            answer_uuid="6525",
+                            question_uuid="ab793dd0-fc66-465a-8fbf-7088f0dfbb89",
+                            answer_uuid="00c306fe-27cc-4240-9360-b96251b38e2e",
                             createdat=None,
                             updatedat=None,
                             deletedat=None,
@@ -452,7 +532,7 @@ questionnaire_v3 = QuestionnaireVersion(
         ),
         QuestionnaireQuestion(
             id=None,
-            tmp_uuid="2079",
+            tmp_uuid="d3c84569-5e99-4d0f-a0f7-0222f497a518",
             tab="Project Overview",
             question="Does your project contain demographic and administrative variables?",
             risk_weight=0,
@@ -462,7 +542,7 @@ questionnaire_v3 = QuestionnaireVersion(
             answers=[
                 QuestionnaireQuestionAnswer(
                     id=None,
-                    tmp_uuid="6439",
+                    tmp_uuid="42c7771b-d436-4427-beac-1cfc15033890",
                     text="Yes",
                     risk_level=0,
                     high_risk=False,
@@ -474,7 +554,7 @@ questionnaire_v3 = QuestionnaireVersion(
                 ),
                 QuestionnaireQuestionAnswer(
                     id=None,
-                    tmp_uuid="6440",
+                    tmp_uuid="f11d0e14-9c64-40fe-8b12-1add760b8071",
                     text="No",
                     risk_level=0,
                     high_risk=False,
@@ -491,7 +571,7 @@ questionnaire_v3 = QuestionnaireVersion(
         ),
         QuestionnaireQuestion(
             id=None,
-            tmp_uuid="2080",
+            tmp_uuid="7ac8ddac-33b3-4608-b0b4-897ffae548d3",
             tab="Project Overview",
             question="Does your project contain unstructured data/reports?",
             risk_weight=0,
@@ -501,7 +581,7 @@ questionnaire_v3 = QuestionnaireVersion(
             answers=[
                 QuestionnaireQuestionAnswer(
                     id=None,
-                    tmp_uuid="6441",
+                    tmp_uuid="59a5c809-42cb-4d2b-9a62-65c97280476e",
                     text="Yes",
                     risk_level=0,
                     high_risk=False,
@@ -513,7 +593,7 @@ questionnaire_v3 = QuestionnaireVersion(
                 ),
                 QuestionnaireQuestionAnswer(
                     id=None,
-                    tmp_uuid="6442",
+                    tmp_uuid="d373999a-8dd4-4363-b9ce-93b9f245375c",
                     text="No",
                     risk_level=0,
                     high_risk=False,
@@ -530,7 +610,7 @@ questionnaire_v3 = QuestionnaireVersion(
         ),
         QuestionnaireQuestion(
             id=None,
-            tmp_uuid="2081",
+            tmp_uuid="30a740db-0585-4fb0-98f9-8fe3f438ed6f",
             tab="Data Risk - Structured Data",
             question="Administrative case identifier",
             risk_weight=1,
@@ -540,7 +620,7 @@ questionnaire_v3 = QuestionnaireVersion(
             answers=[
                 QuestionnaireQuestionAnswer(
                     id=None,
-                    tmp_uuid="6443",
+                    tmp_uuid="4c765e47-5aa2-47c9-a3bd-5256f61ef3a3",
                     text="Administrative case identifier is not used in the project",
                     risk_level=0,
                     high_risk=False,
@@ -552,7 +632,7 @@ questionnaire_v3 = QuestionnaireVersion(
                 ),
                 QuestionnaireQuestionAnswer(
                     id=None,
-                    tmp_uuid="6444",
+                    tmp_uuid="75abbd0f-29c3-4193-8a47-126fa24ae4a4",
                     text="Identifiers are replaced by pseudonym (project specific identifier) and the mapping table is securely stored by the data provider and not accessible by the research team (default)",
                     risk_level=1,
                     high_risk=False,
@@ -564,7 +644,7 @@ questionnaire_v3 = QuestionnaireVersion(
                 ),
                 QuestionnaireQuestionAnswer(
                     id=None,
-                    tmp_uuid="6445",
+                    tmp_uuid="b60ebe37-f966-4329-ab14-8ac50923aa8e",
                     text="Original values are kept (hospital internal case identifier)",
                     risk_level=0,
                     high_risk=False,
@@ -581,7 +661,7 @@ questionnaire_v3 = QuestionnaireVersion(
         ),
         QuestionnaireQuestion(
             id=None,
-            tmp_uuid="2082",
+            tmp_uuid="3d520978-e58e-48dc-9113-9f29cdc391e7",
             tab="Data Risk - Structured Data",
             question="Organizational Units (data provider organizational unit excluded)",
             risk_weight=2,
@@ -591,7 +671,7 @@ questionnaire_v3 = QuestionnaireVersion(
             answers=[
                 QuestionnaireQuestionAnswer(
                     id=None,
-                    tmp_uuid="6446",
+                    tmp_uuid="5c4a8f04-360d-4c96-b8f5-2ded05c35f56",
                     text="Organizational unit is not used in the project (default)",
                     risk_level=0,
                     high_risk=False,
@@ -603,7 +683,7 @@ questionnaire_v3 = QuestionnaireVersion(
                 ),
                 QuestionnaireQuestionAnswer(
                     id=None,
-                    tmp_uuid="6447",
+                    tmp_uuid="117e626b-4d85-413c-890e-5ea7d17bda42",
                     text="Organizational unit is generalized to the division level (e.g., Neurology, Radiology, Urology, etc.) ",
                     risk_level=1,
                     high_risk=False,
@@ -615,7 +695,7 @@ questionnaire_v3 = QuestionnaireVersion(
                 ),
                 QuestionnaireQuestionAnswer(
                     id=None,
-                    tmp_uuid="6448",
+                    tmp_uuid="bd379cb5-347a-4da6-8046-8c4908023b05",
                     text="Organizational unit is kept (e.g.,328 Kardiologie ME) ",
                     risk_level=2,
                     high_risk=False,
@@ -632,7 +712,7 @@ questionnaire_v3 = QuestionnaireVersion(
         ),
         QuestionnaireQuestion(
             id=None,
-            tmp_uuid="2083",
+            tmp_uuid="72c95363-b35f-4706-af72-cb2c6869d409",
             tab="Data Risk - Structured Data",
             question="Lab report identifier",
             risk_weight=2,
@@ -642,7 +722,7 @@ questionnaire_v3 = QuestionnaireVersion(
             answers=[
                 QuestionnaireQuestionAnswer(
                     id=None,
-                    tmp_uuid="6449",
+                    tmp_uuid="ee7b84d9-9492-4d38-8a38-5b7c54f29c69",
                     text="Lab report identifier and Lab order identifier is not used in the project (default)  ",
                     risk_level=0,
                     high_risk=False,
@@ -654,7 +734,7 @@ questionnaire_v3 = QuestionnaireVersion(
                 ),
                 QuestionnaireQuestionAnswer(
                     id=None,
-                    tmp_uuid="6450",
+                    tmp_uuid="8a3faa3c-7ac9-4082-aeb1-5fdc18b6ce07",
                     text="Identifiers are replaced by pseudonym (project specific identifier) ",
                     risk_level=1,
                     high_risk=False,
@@ -666,7 +746,7 @@ questionnaire_v3 = QuestionnaireVersion(
                 ),
                 QuestionnaireQuestionAnswer(
                     id=None,
-                    tmp_uuid="6451",
+                    tmp_uuid="c7e4500f-b3bf-4ff4-9ffa-9032a028bb5d",
                     text="Original values are kept (hospital internal sample identifier)",
                     risk_level=0,
                     high_risk=False,
@@ -683,7 +763,7 @@ questionnaire_v3 = QuestionnaireVersion(
         ),
         QuestionnaireQuestion(
             id=None,
-            tmp_uuid="2084",
+            tmp_uuid="0adc5b8c-78f9-4912-8e24-35699a6158fb",
             tab="Data Risk - Structured Data",
             question="Date of death",
             risk_weight=6,
@@ -693,7 +773,7 @@ questionnaire_v3 = QuestionnaireVersion(
             answers=[
                 QuestionnaireQuestionAnswer(
                     id=None,
-                    tmp_uuid="6452",
+                    tmp_uuid="e28645dc-760c-4b44-b723-cca8d63583ba",
                     text="Only the year and month of the original date of death are kept or the date is shifted by a random number of days between +/- 30 days",
                     risk_level=3,
                     high_risk=False,
@@ -705,7 +785,7 @@ questionnaire_v3 = QuestionnaireVersion(
                 ),
                 QuestionnaireQuestionAnswer(
                     id=None,
-                    tmp_uuid="6453",
+                    tmp_uuid="d186cf1f-1093-4385-9f2d-801a7eb519b4",
                     text="Date of death concept is suppressed or not used in the project",
                     risk_level=0,
                     high_risk=False,
@@ -717,7 +797,7 @@ questionnaire_v3 = QuestionnaireVersion(
                 ),
                 QuestionnaireQuestionAnswer(
                     id=None,
-                    tmp_uuid="6454",
+                    tmp_uuid="4a159921-0896-4b22-85d0-547e51079e36",
                     text="Only the year of the original date of death is kept or the date is shifted by a random number of days within +/- 365 days",
                     risk_level=1,
                     high_risk=False,
@@ -729,7 +809,7 @@ questionnaire_v3 = QuestionnaireVersion(
                 ),
                 QuestionnaireQuestionAnswer(
                     id=None,
-                    tmp_uuid="6455",
+                    tmp_uuid="3528f46e-1aab-44fe-b834-2f4c82905b70",
                     text="Date of death is shifted by a random number of days within +/- 90 days (one quarter offset to preserve seasonality) (default)",
                     risk_level=2,
                     high_risk=False,
@@ -741,7 +821,7 @@ questionnaire_v3 = QuestionnaireVersion(
                 ),
                 QuestionnaireQuestionAnswer(
                     id=None,
-                    tmp_uuid="6456",
+                    tmp_uuid="64af3421-1ea2-460e-978a-e73a443d867b",
                     text="Full original date of death is kept (dd/mm/yyyy)",
                     risk_level=4,
                     high_risk=False,
@@ -758,7 +838,7 @@ questionnaire_v3 = QuestionnaireVersion(
         ),
         QuestionnaireQuestion(
             id=None,
-            tmp_uuid="2085",
+            tmp_uuid="22c8fc02-aebf-456b-9340-467e2527a3d4",
             tab="Data Risk - Structured Data",
             question="Age",
             risk_weight=4,
@@ -768,7 +848,7 @@ questionnaire_v3 = QuestionnaireVersion(
             answers=[
                 QuestionnaireQuestionAnswer(
                     id=None,
-                    tmp_uuid="6457",
+                    tmp_uuid="8d1f3341-d592-4194-bc1a-692194bb6280",
                     text="The age concept is not used in the project",
                     risk_level=0,
                     high_risk=False,
@@ -780,7 +860,7 @@ questionnaire_v3 = QuestionnaireVersion(
                 ),
                 QuestionnaireQuestionAnswer(
                     id=None,
-                    tmp_uuid="6458",
+                    tmp_uuid="1bd64ac7-b095-4206-a6ff-b551e4f56de9",
                     text="Age in generalized in groups of 5 or more years",
                     risk_level=1,
                     high_risk=False,
@@ -792,7 +872,7 @@ questionnaire_v3 = QuestionnaireVersion(
                 ),
                 QuestionnaireQuestionAnswer(
                     id=None,
-                    tmp_uuid="6459",
+                    tmp_uuid="8993880c-c0e2-4179-8f9e-8c0358c098ed",
                     text='Original age is kept except for people with more than 89y old who are put in the age class "90y+" (default)',
                     risk_level=2,
                     high_risk=False,
@@ -804,7 +884,7 @@ questionnaire_v3 = QuestionnaireVersion(
                 ),
                 QuestionnaireQuestionAnswer(
                     id=None,
-                    tmp_uuid="6460",
+                    tmp_uuid="017322ce-b0e0-4e93-8246-2a605246eab1",
                     text="Original age is kept",
                     risk_level=3,
                     high_risk=False,
@@ -821,7 +901,7 @@ questionnaire_v3 = QuestionnaireVersion(
         ),
         QuestionnaireQuestion(
             id=None,
-            tmp_uuid="2086",
+            tmp_uuid="a7b10d28-d34d-4c0b-9478-d442993ce3e1",
             tab="Data Risk - Structured Data",
             question="Dates in the patient record (dates of birth and death excluded)",
             risk_weight=3,
@@ -831,7 +911,7 @@ questionnaire_v3 = QuestionnaireVersion(
             answers=[
                 QuestionnaireQuestionAnswer(
                     id=None,
-                    tmp_uuid="6461",
+                    tmp_uuid="2fc32d77-4055-48b4-9cf1-2dc5582f40ef",
                     text="Dates are suppressed or replaced with a surrogate date or not used in the project",
                     risk_level=0,
                     high_risk=False,
@@ -843,7 +923,7 @@ questionnaire_v3 = QuestionnaireVersion(
                 ),
                 QuestionnaireQuestionAnswer(
                     id=None,
-                    tmp_uuid="6462",
+                    tmp_uuid="4c1dc459-9417-4a68-80e7-52d88f783ef0",
                     text="Dates are shifted by a random number of days within +/- 365 days",
                     risk_level=1,
                     high_risk=False,
@@ -855,7 +935,7 @@ questionnaire_v3 = QuestionnaireVersion(
                 ),
                 QuestionnaireQuestionAnswer(
                     id=None,
-                    tmp_uuid="6463",
+                    tmp_uuid="bbc30ccf-df2c-4ee7-a77c-208addb94e7c",
                     text="Dates are shifted by a random number of days within +/- 90 days (one quarter offset to preserve seasonality) (default)",
                     risk_level=2,
                     high_risk=False,
@@ -867,7 +947,7 @@ questionnaire_v3 = QuestionnaireVersion(
                 ),
                 QuestionnaireQuestionAnswer(
                     id=None,
-                    tmp_uuid="6464",
+                    tmp_uuid="7a4faa8b-fa4e-4edd-8831-0fd4c6b1e7af",
                     text="Dates are shifted by a random number of days within +/- 30 days (one month offset to preserve seasonality) ",
                     risk_level=3,
                     high_risk=False,
@@ -879,7 +959,7 @@ questionnaire_v3 = QuestionnaireVersion(
                 ),
                 QuestionnaireQuestionAnswer(
                     id=None,
-                    tmp_uuid="6465",
+                    tmp_uuid="fe4b4580-b309-4855-9859-fcb8bc9e3f1c",
                     text="Dates are shifted by a random number of days within +/- 7 days (one week offset) ",
                     risk_level=4,
                     high_risk=False,
@@ -891,7 +971,7 @@ questionnaire_v3 = QuestionnaireVersion(
                 ),
                 QuestionnaireQuestionAnswer(
                     id=None,
-                    tmp_uuid="6466",
+                    tmp_uuid="06aaa294-e14b-44bf-8380-b16a1b8033c6",
                     text="Original dates are kept",
                     risk_level=5,
                     high_risk=False,
@@ -908,7 +988,7 @@ questionnaire_v3 = QuestionnaireVersion(
         ),
         QuestionnaireQuestion(
             id=None,
-            tmp_uuid="2087",
+            tmp_uuid="3d9058c0-8601-42fd-b0fb-205e567337d8",
             tab="Data Risk - Structured Data",
             question="Date of birth",
             risk_weight=6,
@@ -918,7 +998,7 @@ questionnaire_v3 = QuestionnaireVersion(
             answers=[
                 QuestionnaireQuestionAnswer(
                     id=None,
-                    tmp_uuid="6467",
+                    tmp_uuid="62c72715-4dbe-41f6-8658-d5df6e8cc883",
                     text="Date of birth concept is suppressed or not used in the project ",
                     risk_level=0,
                     high_risk=False,
@@ -930,7 +1010,7 @@ questionnaire_v3 = QuestionnaireVersion(
                 ),
                 QuestionnaireQuestionAnswer(
                     id=None,
-                    tmp_uuid="6468",
+                    tmp_uuid="ca28e1e7-a30e-435d-874b-b43ba9492954",
                     text="Only the year of the original birth date is kept or the date is shifted by a random number of days within +/- 365 days",
                     risk_level=1,
                     high_risk=False,
@@ -942,7 +1022,7 @@ questionnaire_v3 = QuestionnaireVersion(
                 ),
                 QuestionnaireQuestionAnswer(
                     id=None,
-                    tmp_uuid="6469",
+                    tmp_uuid="ed14335d-6b77-41dd-8ad7-551b7d073e84",
                     text="Date of birth is shifted by a random number of days within +/- 90 days (one quarter offset to preserve seasonality) (default)",
                     risk_level=2,
                     high_risk=False,
@@ -954,7 +1034,7 @@ questionnaire_v3 = QuestionnaireVersion(
                 ),
                 QuestionnaireQuestionAnswer(
                     id=None,
-                    tmp_uuid="6470",
+                    tmp_uuid="e3d9f5da-7a99-445d-b0a7-2b093ed5929b",
                     text="Only the year and month of the original birth date are kept or the date is shifted by a random number of days between +/- 30 days",
                     risk_level=3,
                     high_risk=False,
@@ -966,7 +1046,7 @@ questionnaire_v3 = QuestionnaireVersion(
                 ),
                 QuestionnaireQuestionAnswer(
                     id=None,
-                    tmp_uuid="6471",
+                    tmp_uuid="8ef9fae1-a952-46e4-8c00-469ad9e1b643",
                     text="Full original date of birth is kept (dd/mm/yyyy)",
                     risk_level=4,
                     high_risk=False,
@@ -983,7 +1063,7 @@ questionnaire_v3 = QuestionnaireVersion(
         ),
         QuestionnaireQuestion(
             id=None,
-            tmp_uuid="2088",
+            tmp_uuid="68fd24fb-9f00-46c4-a86f-b87be260b012",
             tab="Data Risk - Structured Data",
             question="Direct identifiers (e.g. name, phone number social security number, email address, medical record number, license number)",
             risk_weight=2,
@@ -993,7 +1073,7 @@ questionnaire_v3 = QuestionnaireVersion(
             answers=[
                 QuestionnaireQuestionAnswer(
                     id=None,
-                    tmp_uuid="6472",
+                    tmp_uuid="34db1285-cf39-4638-8922-9fa04e7cbcee",
                     text="Identifiers are not used in the project (default)",
                     risk_level=0,
                     high_risk=False,
@@ -1005,7 +1085,7 @@ questionnaire_v3 = QuestionnaireVersion(
                 ),
                 QuestionnaireQuestionAnswer(
                     id=None,
-                    tmp_uuid="6473",
+                    tmp_uuid="e2f17523-a5be-49e7-80e6-3514f7887215",
                     text="Identifiers are replaced by plausible surrogates (e.g., in text reports) ",
                     risk_level=1,
                     high_risk=False,
@@ -1017,7 +1097,7 @@ questionnaire_v3 = QuestionnaireVersion(
                 ),
                 QuestionnaireQuestionAnswer(
                     id=None,
-                    tmp_uuid="6474",
+                    tmp_uuid="91ec79b3-2c03-4dfc-b21b-f27667e1c8cf",
                     text="Original values of one or more direct identifiers are kept (*if this rules is selected the data set is not considered de-identified)",
                     risk_level=0,
                     high_risk=False,
@@ -1034,7 +1114,7 @@ questionnaire_v3 = QuestionnaireVersion(
         ),
         QuestionnaireQuestion(
             id=None,
-            tmp_uuid="2089",
+            tmp_uuid="d3530d37-9aca-42f0-9292-e0e547f3b1ae",
             tab="Data Risk - Structured Data",
             question="Patient identifier",
             risk_weight=1,
@@ -1044,7 +1124,7 @@ questionnaire_v3 = QuestionnaireVersion(
             answers=[
                 QuestionnaireQuestionAnswer(
                     id=None,
-                    tmp_uuid="6475",
+                    tmp_uuid="0092558b-cf08-4602-a985-3450ee58639b",
                     text="Identifiers are replaced by pseudonyms (project specific patient identifier) and no mapping table is kept",
                     risk_level=0,
                     high_risk=False,
@@ -1056,7 +1136,7 @@ questionnaire_v3 = QuestionnaireVersion(
                 ),
                 QuestionnaireQuestionAnswer(
                     id=None,
-                    tmp_uuid="6476",
+                    tmp_uuid="2515a948-d107-49f7-bab3-2503106c617e",
                     text="Identifiers are replaced by pseudonyms (project specific patient identifier) and the mapping table is securely stored by the data provider and not accessible by the research team (default) ",
                     risk_level=1,
                     high_risk=False,
@@ -1068,7 +1148,7 @@ questionnaire_v3 = QuestionnaireVersion(
                 ),
                 QuestionnaireQuestionAnswer(
                     id=None,
-                    tmp_uuid="6477",
+                    tmp_uuid="41b84a54-673a-4f6e-b5c7-537e6efc02e2",
                     text="Original values are kept (hospital internal patient identifier) (*if this rules is selected the data set is not considered de-identified)",
                     risk_level=0,
                     high_risk=False,
@@ -1085,7 +1165,7 @@ questionnaire_v3 = QuestionnaireVersion(
         ),
         QuestionnaireQuestion(
             id=None,
-            tmp_uuid="2090",
+            tmp_uuid="bcc2ffbc-69ae-475f-b6d7-f958720afd0a",
             tab="Data Risk - Structured Data",
             question="Sample identifier",
             risk_weight=1,
@@ -1095,7 +1175,7 @@ questionnaire_v3 = QuestionnaireVersion(
             answers=[
                 QuestionnaireQuestionAnswer(
                     id=None,
-                    tmp_uuid="6478",
+                    tmp_uuid="89623ac5-76ef-403f-becd-38e71b227e63",
                     text="Sample identifiers are not use in the project",
                     risk_level=0,
                     high_risk=False,
@@ -1107,7 +1187,7 @@ questionnaire_v3 = QuestionnaireVersion(
                 ),
                 QuestionnaireQuestionAnswer(
                     id=None,
-                    tmp_uuid="6479",
+                    tmp_uuid="d49e50ae-650b-4ceb-9001-55158f3a5d26",
                     text="Sample identifiers are replaced by pseudonyms (project specific sample identifier) and the mapping table is securely stored by the data provider and not accessible by the research team (default)  ",
                     risk_level=1,
                     high_risk=False,
@@ -1119,7 +1199,7 @@ questionnaire_v3 = QuestionnaireVersion(
                 ),
                 QuestionnaireQuestionAnswer(
                     id=None,
-                    tmp_uuid="6480",
+                    tmp_uuid="1f343023-cc07-47d7-bea7-707a4002b4c9",
                     text="Original values are kept (hospital internal sample identifier)",
                     risk_level=0,
                     high_risk=False,
@@ -1136,7 +1216,7 @@ questionnaire_v3 = QuestionnaireVersion(
         ),
         QuestionnaireQuestion(
             id=None,
-            tmp_uuid="2091",
+            tmp_uuid="9889a944-d785-4aaa-9445-9f19850ced1b",
             tab="Data Risk - Structured Data",
             question="Profession",
             risk_weight=2,
@@ -1146,7 +1226,7 @@ questionnaire_v3 = QuestionnaireVersion(
             answers=[
                 QuestionnaireQuestionAnswer(
                     id=None,
-                    tmp_uuid="6481",
+                    tmp_uuid="9bcbf421-4328-4cec-8848-3ac14e87170a",
                     text="Profession is not used in the project (default)",
                     risk_level=0,
                     high_risk=False,
@@ -1158,7 +1238,7 @@ questionnaire_v3 = QuestionnaireVersion(
                 ),
                 QuestionnaireQuestionAnswer(
                     id=None,
-                    tmp_uuid="6482",
+                    tmp_uuid="20887db9-cbfe-4ca0-9f08-5e3af0eb7c78",
                     text="Original profession is kept, but replaced by a random profession for identifying ones",
                     risk_level=1,
                     high_risk=False,
@@ -1175,7 +1255,7 @@ questionnaire_v3 = QuestionnaireVersion(
         ),
         QuestionnaireQuestion(
             id=None,
-            tmp_uuid="2092",
+            tmp_uuid="4f5afff3-1552-4cbe-b164-2bf214101e19",
             tab="Data Risk - Structured Data",
             question="Location  (street, zip code, city, region, country)",
             risk_weight=3,
@@ -1185,7 +1265,7 @@ questionnaire_v3 = QuestionnaireVersion(
             answers=[
                 QuestionnaireQuestionAnswer(
                     id=None,
-                    tmp_uuid="6483",
+                    tmp_uuid="735da8cd-9488-4e78-8293-802d6743f856",
                     text="Location is not used in the project (default)",
                     risk_level=0,
                     high_risk=False,
@@ -1197,7 +1277,7 @@ questionnaire_v3 = QuestionnaireVersion(
                 ),
                 QuestionnaireQuestionAnswer(
                     id=None,
-                    tmp_uuid="6484",
+                    tmp_uuid="12a0c1d5-81d5-47cb-9a19-f6163fd464e1",
                     text="Location is generalized to the country level",
                     risk_level=1,
                     high_risk=False,
@@ -1209,7 +1289,7 @@ questionnaire_v3 = QuestionnaireVersion(
                 ),
                 QuestionnaireQuestionAnswer(
                     id=None,
-                    tmp_uuid="6485",
+                    tmp_uuid="7fc395be-1101-457b-8c40-37c41e6891da",
                     text="Location is generalized to the region level",
                     risk_level=2,
                     high_risk=False,
@@ -1221,7 +1301,7 @@ questionnaire_v3 = QuestionnaireVersion(
                 ),
                 QuestionnaireQuestionAnswer(
                     id=None,
-                    tmp_uuid="6486",
+                    tmp_uuid="6b9eb441-a83d-4a58-9839-36e71a554786",
                     text="Location is generalized to the city level. If cities have less than 20.000 inhabitants, cities are replaced by the corresponding region",
                     risk_level=3,
                     high_risk=False,
@@ -1233,7 +1313,7 @@ questionnaire_v3 = QuestionnaireVersion(
                 ),
                 QuestionnaireQuestionAnswer(
                     id=None,
-                    tmp_uuid="6487",
+                    tmp_uuid="3531d50f-63f9-462c-af08-2fba9dd36f25",
                     text="Location is generalized to the zip level. If zip codes refer to areas with less than 20.000 inhabitants, the last 2 numbers of the zip codes are suppressed",
                     risk_level=4,
                     high_risk=False,
@@ -1245,7 +1325,7 @@ questionnaire_v3 = QuestionnaireVersion(
                 ),
                 QuestionnaireQuestionAnswer(
                     id=None,
-                    tmp_uuid="6488",
+                    tmp_uuid="39e936f4-74a0-4fa2-be09-b753fa9a3dfc",
                     text="The original locations are kept",
                     risk_level=0,
                     high_risk=False,
@@ -1262,7 +1342,7 @@ questionnaire_v3 = QuestionnaireVersion(
         ),
         QuestionnaireQuestion(
             id=None,
-            tmp_uuid="2093",
+            tmp_uuid="e1897616-cabc-4ca7-9bc9-4cc0683d3aa8",
             tab="Data Risk - Structured Data",
             question="Organizations (data provider organization excluded)",
             risk_weight=2,
@@ -1272,7 +1352,7 @@ questionnaire_v3 = QuestionnaireVersion(
             answers=[
                 QuestionnaireQuestionAnswer(
                     id=None,
-                    tmp_uuid="6489",
+                    tmp_uuid="dc3edb2b-622c-4e16-a4a2-f7a9a7d228dd",
                     text="Organization name is not used in the project (default)",
                     risk_level=0,
                     high_risk=False,
@@ -1284,7 +1364,7 @@ questionnaire_v3 = QuestionnaireVersion(
                 ),
                 QuestionnaireQuestionAnswer(
                     id=None,
-                    tmp_uuid="6490",
+                    tmp_uuid="5ab60324-22a4-46a6-b660-a1328293e4a5",
                     text="Organization type is kept (e.g., hospital, clinic, etc.) ",
                     risk_level=1,
                     high_risk=False,
@@ -1296,7 +1376,7 @@ questionnaire_v3 = QuestionnaireVersion(
                 ),
                 QuestionnaireQuestionAnswer(
                     id=None,
-                    tmp_uuid="6491",
+                    tmp_uuid="6682e281-dbc1-4f99-9c2f-db965733d219",
                     text="Organization name is kept (e.g., University Hospital Basel) ",
                     risk_level=2,
                     high_risk=False,
@@ -1313,7 +1393,7 @@ questionnaire_v3 = QuestionnaireVersion(
         ),
         QuestionnaireQuestion(
             id=None,
-            tmp_uuid="2094",
+            tmp_uuid="e814ae8e-6237-41c6-af26-4a96a0611048",
             tab="Data Risk - Structured Data",
             question="Additional project specific quasi-identifiers that can be used for linkage by the data recipient (e.g., clinical variables) ",
             risk_weight=5,
@@ -1323,7 +1403,7 @@ questionnaire_v3 = QuestionnaireVersion(
             answers=[
                 QuestionnaireQuestionAnswer(
                     id=None,
-                    tmp_uuid="6492",
+                    tmp_uuid="8cc88e9d-59e0-43b3-9b66-5b71d2ec7029",
                     text=" No other quasi-identifiers used in the project ",
                     risk_level=0,
                     high_risk=False,
@@ -1335,7 +1415,7 @@ questionnaire_v3 = QuestionnaireVersion(
                 ),
                 QuestionnaireQuestionAnswer(
                     id=None,
-                    tmp_uuid="6493",
+                    tmp_uuid="519f897f-1a13-4d40-a488-2e9906d3350f",
                     text="Additional quasi-identifiers exist and have been modified to reduce risks (e.g. generalization)",
                     risk_level=1,
                     high_risk=False,
@@ -1347,7 +1427,7 @@ questionnaire_v3 = QuestionnaireVersion(
                 ),
                 QuestionnaireQuestionAnswer(
                     id=None,
-                    tmp_uuid="6494",
+                    tmp_uuid="09867776-d8a8-4fbc-b6a1-ffd16b8f617a",
                     text="Additional quasi-identifiers exist and original values are kept",
                     risk_level=2,
                     high_risk=False,
@@ -1364,7 +1444,7 @@ questionnaire_v3 = QuestionnaireVersion(
         ),
         QuestionnaireQuestion(
             id=None,
-            tmp_uuid="2095",
+            tmp_uuid="febf7c28-48c3-496f-876c-6816a45e7076",
             tab="Data Risk - Multimedia Data",
             question="DICOM - Derivation Description",
             risk_weight=1,
@@ -1374,7 +1454,7 @@ questionnaire_v3 = QuestionnaireVersion(
             answers=[
                 QuestionnaireQuestionAnswer(
                     id=None,
-                    tmp_uuid="6495",
+                    tmp_uuid="219d6ba1-7790-45fa-958b-06e07c2f0e35",
                     text="Original value is suppressed",
                     risk_level=0,
                     high_risk=False,
@@ -1386,7 +1466,7 @@ questionnaire_v3 = QuestionnaireVersion(
                 ),
                 QuestionnaireQuestionAnswer(
                     id=None,
-                    tmp_uuid="6496",
+                    tmp_uuid="1972f820-c7e9-4f33-8218-578052208ca2",
                     text="Original value is replaced by pseudonym (default)",
                     risk_level=1,
                     high_risk=False,
@@ -1398,7 +1478,7 @@ questionnaire_v3 = QuestionnaireVersion(
                 ),
                 QuestionnaireQuestionAnswer(
                     id=None,
-                    tmp_uuid="6497",
+                    tmp_uuid="ffda7302-b3be-4a54-a99e-63b08e533173",
                     text="Original values are kept",
                     risk_level=2,
                     high_risk=False,
@@ -1410,7 +1490,7 @@ questionnaire_v3 = QuestionnaireVersion(
                 ),
                 QuestionnaireQuestionAnswer(
                     id=None,
-                    tmp_uuid="6498",
+                    tmp_uuid="5069f1a6-6711-4a50-9d7d-e11adc5e49fd",
                     text="No DICOM data is used in this project",
                     risk_level=0,
                     high_risk=False,
@@ -1427,7 +1507,7 @@ questionnaire_v3 = QuestionnaireVersion(
         ),
         QuestionnaireQuestion(
             id=None,
-            tmp_uuid="2096",
+            tmp_uuid="a9b14ea8-18fa-44b8-af46-604233ea56e8",
             tab="Data Risk - Multimedia Data",
             question="Audio Data",
             risk_weight=5,
@@ -1437,7 +1517,7 @@ questionnaire_v3 = QuestionnaireVersion(
             answers=[
                 QuestionnaireQuestionAnswer(
                     id=None,
-                    tmp_uuid="6499",
+                    tmp_uuid="904cac9f-933f-4a9b-adb9-65e336f33e1c",
                     text="No audio data is used in the project",
                     risk_level=0,
                     high_risk=False,
@@ -1449,7 +1529,7 @@ questionnaire_v3 = QuestionnaireVersion(
                 ),
                 QuestionnaireQuestionAnswer(
                     id=None,
-                    tmp_uuid="6500",
+                    tmp_uuid="d6b451c9-d27b-4d3e-8a8c-30200d577e2e",
                     text="Patient voice is kept in audio files",
                     risk_level=0,
                     high_risk=False,
@@ -1461,7 +1541,7 @@ questionnaire_v3 = QuestionnaireVersion(
                 ),
                 QuestionnaireQuestionAnswer(
                     id=None,
-                    tmp_uuid="6501",
+                    tmp_uuid="4aa230ca-d847-457e-98e4-cd9462e2dd74",
                     text="Patient voice blurring/noise algorithm (default)",
                     risk_level=1,
                     high_risk=False,
@@ -1478,7 +1558,7 @@ questionnaire_v3 = QuestionnaireVersion(
         ),
         QuestionnaireQuestion(
             id=None,
-            tmp_uuid="2097",
+            tmp_uuid="b17cf5a4-73bd-47c8-b59c-61543d33ef0c",
             tab="Data Risk - Multimedia Data",
             question="Images (including photos) & Videos with patient face or identifying body parts (e.g., tattoos, malformations)",
             risk_weight=5,
@@ -1488,7 +1568,7 @@ questionnaire_v3 = QuestionnaireVersion(
             answers=[
                 QuestionnaireQuestionAnswer(
                     id=None,
-                    tmp_uuid="6502",
+                    tmp_uuid="ca70a9dc-31af-4027-9dc9-6e5710550cb5",
                     text="No images are used in the project",
                     risk_level=0,
                     high_risk=False,
@@ -1500,7 +1580,7 @@ questionnaire_v3 = QuestionnaireVersion(
                 ),
                 QuestionnaireQuestionAnswer(
                     id=None,
-                    tmp_uuid="6503",
+                    tmp_uuid="60843839-708d-43d6-af9b-4cea460f2c76",
                     text="Original image or video files are kept",
                     risk_level=0,
                     high_risk=False,
@@ -1512,7 +1592,7 @@ questionnaire_v3 = QuestionnaireVersion(
                 ),
                 QuestionnaireQuestionAnswer(
                     id=None,
-                    tmp_uuid="6504",
+                    tmp_uuid="031a32b5-2d91-4c79-98ec-89ac96c88656",
                     text="Blurring of identifying parts ",
                     risk_level=2,
                     high_risk=False,
@@ -1524,7 +1604,7 @@ questionnaire_v3 = QuestionnaireVersion(
                 ),
                 QuestionnaireQuestionAnswer(
                     id=None,
-                    tmp_uuid="6505",
+                    tmp_uuid="831fc2f8-bbc1-46b4-933a-785aa8e235ec",
                     text="Removing of identifying face or identifying patient body parts (e.g., by defacing algorithms) (default)",
                     risk_level=1,
                     high_risk=False,
@@ -1541,7 +1621,7 @@ questionnaire_v3 = QuestionnaireVersion(
         ),
         QuestionnaireQuestion(
             id=None,
-            tmp_uuid="2098",
+            tmp_uuid="aab29277-33ba-42a0-91e4-4973c8674ad1",
             tab="Data Risk - Multimedia Data",
             question="DICOM - Hardware Identifying Attributes",
             risk_weight=1,
@@ -1551,7 +1631,7 @@ questionnaire_v3 = QuestionnaireVersion(
             answers=[
                 QuestionnaireQuestionAnswer(
                     id=None,
-                    tmp_uuid="6506",
+                    tmp_uuid="c1229fb9-e45c-4f1a-aebd-df999e8361fa",
                     text="Original value is suppressed",
                     risk_level=0,
                     high_risk=False,
@@ -1563,7 +1643,7 @@ questionnaire_v3 = QuestionnaireVersion(
                 ),
                 QuestionnaireQuestionAnswer(
                     id=None,
-                    tmp_uuid="6507",
+                    tmp_uuid="04f4f44e-02c0-44e4-8689-a4bea63b4775",
                     text="Original value is replaced by pseudonym (default)",
                     risk_level=1,
                     high_risk=False,
@@ -1575,7 +1655,7 @@ questionnaire_v3 = QuestionnaireVersion(
                 ),
                 QuestionnaireQuestionAnswer(
                     id=None,
-                    tmp_uuid="6508",
+                    tmp_uuid="949761e5-9889-4880-9b43-ddbf11f75efc",
                     text="Original values are kept",
                     risk_level=2,
                     high_risk=False,
@@ -1587,7 +1667,7 @@ questionnaire_v3 = QuestionnaireVersion(
                 ),
                 QuestionnaireQuestionAnswer(
                     id=None,
-                    tmp_uuid="6509",
+                    tmp_uuid="eb001c37-6965-46ac-a36b-f42ed6e61efa",
                     text="No DICOM data is used in this project",
                     risk_level=0,
                     high_risk=False,
@@ -1604,7 +1684,7 @@ questionnaire_v3 = QuestionnaireVersion(
         ),
         QuestionnaireQuestion(
             id=None,
-            tmp_uuid="2099",
+            tmp_uuid="1c790f71-7553-4b17-809f-43839d027f23",
             tab="Data Risk - Multimedia Data",
             question="DICOM - Study Description",
             risk_weight=1,
@@ -1614,7 +1694,7 @@ questionnaire_v3 = QuestionnaireVersion(
             answers=[
                 QuestionnaireQuestionAnswer(
                     id=None,
-                    tmp_uuid="6510",
+                    tmp_uuid="6b9cec09-d7c6-4fc4-b1bc-977ef4afed13",
                     text="Original value is suppressed",
                     risk_level=0,
                     high_risk=False,
@@ -1626,7 +1706,7 @@ questionnaire_v3 = QuestionnaireVersion(
                 ),
                 QuestionnaireQuestionAnswer(
                     id=None,
-                    tmp_uuid="6511",
+                    tmp_uuid="54263da0-673a-408c-801d-c2fa899f5bdb",
                     text="Original value is replaced by pseudonym (default)",
                     risk_level=1,
                     high_risk=False,
@@ -1638,7 +1718,7 @@ questionnaire_v3 = QuestionnaireVersion(
                 ),
                 QuestionnaireQuestionAnswer(
                     id=None,
-                    tmp_uuid="6512",
+                    tmp_uuid="b2a315ea-11c0-4092-92c9-557ef4042ad2",
                     text="Original values are kept",
                     risk_level=2,
                     high_risk=False,
@@ -1650,7 +1730,7 @@ questionnaire_v3 = QuestionnaireVersion(
                 ),
                 QuestionnaireQuestionAnswer(
                     id=None,
-                    tmp_uuid="6513",
+                    tmp_uuid="a317ba24-2ecb-419d-8a7b-df81b20b9949",
                     text="No DICOM data is used in this project",
                     risk_level=0,
                     high_risk=False,
@@ -1667,7 +1747,7 @@ questionnaire_v3 = QuestionnaireVersion(
         ),
         QuestionnaireQuestion(
             id=None,
-            tmp_uuid="2100",
+            tmp_uuid="2abc1d05-2a83-4717-b8fd-198a8910b39e",
             tab="Data Risk - Multimedia Data",
             question="DICOM - Series Description",
             risk_weight=1,
@@ -1677,7 +1757,7 @@ questionnaire_v3 = QuestionnaireVersion(
             answers=[
                 QuestionnaireQuestionAnswer(
                     id=None,
-                    tmp_uuid="6514",
+                    tmp_uuid="b6e576f8-0746-455c-9189-d302fe3c2c15",
                     text="Original value is suppressed",
                     risk_level=0,
                     high_risk=False,
@@ -1689,7 +1769,7 @@ questionnaire_v3 = QuestionnaireVersion(
                 ),
                 QuestionnaireQuestionAnswer(
                     id=None,
-                    tmp_uuid="6515",
+                    tmp_uuid="ffbd4798-3d72-4db6-90d5-cc7f5f4415f4",
                     text="Original value is replaced by pseudonym (default)",
                     risk_level=1,
                     high_risk=False,
@@ -1701,7 +1781,7 @@ questionnaire_v3 = QuestionnaireVersion(
                 ),
                 QuestionnaireQuestionAnswer(
                     id=None,
-                    tmp_uuid="6516",
+                    tmp_uuid="a39fae13-cd76-4162-91bd-25e6611b6ff5",
                     text="Original values are kept",
                     risk_level=2,
                     high_risk=False,
@@ -1713,7 +1793,7 @@ questionnaire_v3 = QuestionnaireVersion(
                 ),
                 QuestionnaireQuestionAnswer(
                     id=None,
-                    tmp_uuid="6517",
+                    tmp_uuid="2f62fde1-c8a3-453b-bbff-4405806d2219",
                     text="No DICOM data is used in this project",
                     risk_level=0,
                     high_risk=False,
@@ -1730,7 +1810,7 @@ questionnaire_v3 = QuestionnaireVersion(
         ),
         QuestionnaireQuestion(
             id=None,
-            tmp_uuid="2101",
+            tmp_uuid="d847255d-19aa-4c89-b66c-fad4efedc03f",
             tab="Data Risk - Multimedia Data",
             question="DICOM - Contrast Bolus Agent",
             risk_weight=1,
@@ -1740,7 +1820,7 @@ questionnaire_v3 = QuestionnaireVersion(
             answers=[
                 QuestionnaireQuestionAnswer(
                     id=None,
-                    tmp_uuid="6518",
+                    tmp_uuid="4131b5aa-8b90-400f-984f-940546e09ae4",
                     text="Original value is suppressed",
                     risk_level=0,
                     high_risk=False,
@@ -1752,7 +1832,7 @@ questionnaire_v3 = QuestionnaireVersion(
                 ),
                 QuestionnaireQuestionAnswer(
                     id=None,
-                    tmp_uuid="6519",
+                    tmp_uuid="3e3ac0bf-09b6-45a3-a40b-b63b15510e8b",
                     text="Original value is replaced by pseudonym (default)",
                     risk_level=1,
                     high_risk=False,
@@ -1764,7 +1844,7 @@ questionnaire_v3 = QuestionnaireVersion(
                 ),
                 QuestionnaireQuestionAnswer(
                     id=None,
-                    tmp_uuid="6520",
+                    tmp_uuid="ae617f6b-c9ed-4b20-b064-4e0949aac128",
                     text="Original values are kept",
                     risk_level=2,
                     high_risk=False,
@@ -1776,7 +1856,7 @@ questionnaire_v3 = QuestionnaireVersion(
                 ),
                 QuestionnaireQuestionAnswer(
                     id=None,
-                    tmp_uuid="6521",
+                    tmp_uuid="ccce9148-9bae-45ce-a35d-e108b6dc1ff2",
                     text="No DICOM data is used in this project",
                     risk_level=0,
                     high_risk=False,
@@ -1793,7 +1873,7 @@ questionnaire_v3 = QuestionnaireVersion(
         ),
         QuestionnaireQuestion(
             id=None,
-            tmp_uuid="2102",
+            tmp_uuid="ab793dd0-fc66-465a-8fbf-7088f0dfbb89",
             tab="Data Risk - Multimedia Data",
             question="DICOM - Retain original values of other DICOM attributes that would be removed by default according to the recommendations of nema.org",
             risk_weight=1,
@@ -1803,7 +1883,7 @@ questionnaire_v3 = QuestionnaireVersion(
             answers=[
                 QuestionnaireQuestionAnswer(
                     id=None,
-                    tmp_uuid="6522",
+                    tmp_uuid="741bd732-cdb2-495e-aa75-5410bdcf5fb4",
                     text="Original value is suppressed",
                     risk_level=0,
                     high_risk=False,
@@ -1815,7 +1895,7 @@ questionnaire_v3 = QuestionnaireVersion(
                 ),
                 QuestionnaireQuestionAnswer(
                     id=None,
-                    tmp_uuid="6523",
+                    tmp_uuid="7acada63-be0c-4473-9ec5-17984f397a1c",
                     text="Original value is replaced by pseudonym (default)",
                     risk_level=1,
                     high_risk=False,
@@ -1827,7 +1907,7 @@ questionnaire_v3 = QuestionnaireVersion(
                 ),
                 QuestionnaireQuestionAnswer(
                     id=None,
-                    tmp_uuid="6524",
+                    tmp_uuid="14fb9b05-5ef7-4b17-a2ed-070adfcb0d78",
                     text="Original values are kept",
                     risk_level=2,
                     high_risk=False,
@@ -1839,7 +1919,7 @@ questionnaire_v3 = QuestionnaireVersion(
                 ),
                 QuestionnaireQuestionAnswer(
                     id=None,
-                    tmp_uuid="6525",
+                    tmp_uuid="00c306fe-27cc-4240-9360-b96251b38e2e",
                     text="No DICOM data is used in this project",
                     risk_level=0,
                     high_risk=False,
@@ -1856,7 +1936,7 @@ questionnaire_v3 = QuestionnaireVersion(
         ),
         QuestionnaireQuestion(
             id=None,
-            tmp_uuid="2103",
+            tmp_uuid="a23c522b-5f01-43ad-8094-0694c33a9ffc",
             tab="Data Risk - Genomic Data",
             question="Genomic sequences",
             risk_weight=3,
@@ -1866,7 +1946,7 @@ questionnaire_v3 = QuestionnaireVersion(
             answers=[
                 QuestionnaireQuestionAnswer(
                     id=None,
-                    tmp_uuid="6526",
+                    tmp_uuid="c05a8385-0ab3-4898-ba79-c3b11ce23c3c",
                     text="No genomic sequences are used in the project ",
                     risk_level=0,
                     high_risk=False,
@@ -1878,7 +1958,7 @@ questionnaire_v3 = QuestionnaireVersion(
                 ),
                 QuestionnaireQuestionAnswer(
                     id=None,
-                    tmp_uuid="6527",
+                    tmp_uuid="a199c137-c272-40f6-8dd7-b765140b402f",
                     text="Only blurred summary statistics (e.g., MAF, p-values, ORs) are released",
                     risk_level=1,
                     high_risk=False,
@@ -1890,7 +1970,7 @@ questionnaire_v3 = QuestionnaireVersion(
                 ),
                 QuestionnaireQuestionAnswer(
                     id=None,
-                    tmp_uuid="6528",
+                    tmp_uuid="52bd9583-a668-47c8-9f79-d8347f84dd23",
                     text="Only exact summary statistics (e.g., MAF, p-values, ORs) are released ",
                     risk_level=2,
                     high_risk=False,
@@ -1902,7 +1982,7 @@ questionnaire_v3 = QuestionnaireVersion(
                 ),
                 QuestionnaireQuestionAnswer(
                     id=None,
-                    tmp_uuid="6529",
+                    tmp_uuid="fb9e7a98-7d89-408a-a2fc-ed0fbaae2af0",
                     text="Original individual-level values are released",
                     risk_level=0,
                     high_risk=False,
@@ -1919,7 +1999,7 @@ questionnaire_v3 = QuestionnaireVersion(
         ),
         QuestionnaireQuestion(
             id=None,
-            tmp_uuid="2104",
+            tmp_uuid="7f8b7134-9554-4279-b85d-d3817191f960",
             tab="Basic Info",
             question="Is the project collecting health-related data on rare disease patients?",
             risk_weight=5,
@@ -1929,7 +2009,7 @@ questionnaire_v3 = QuestionnaireVersion(
             answers=[
                 QuestionnaireQuestionAnswer(
                     id=None,
-                    tmp_uuid="6530",
+                    tmp_uuid="8b1354f3-f719-45e7-8509-b8907afbf030",
                     text="No health-related data on rare diseases are included",
                     risk_level=0,
                     high_risk=False,
@@ -1941,7 +2021,7 @@ questionnaire_v3 = QuestionnaireVersion(
                 ),
                 QuestionnaireQuestionAnswer(
                     id=None,
-                    tmp_uuid="6531",
+                    tmp_uuid="15416d7b-7229-48c8-9623-83a5e3ec3495",
                     text="The disease occurs less than one in 80.000 (i.e., max. 100 cases in Switzerland)",
                     risk_level=2,
                     high_risk=False,
@@ -1953,7 +2033,7 @@ questionnaire_v3 = QuestionnaireVersion(
                 ),
                 QuestionnaireQuestionAnswer(
                     id=None,
-                    tmp_uuid="6532",
+                    tmp_uuid="33a20e95-e319-4a6e-9c98-aa41a503f5a9",
                     text="The disease occurs less than one in 2.000 (i.e., max. 4.000 cases in Switzerland)",
                     risk_level=1,
                     high_risk=False,
@@ -1970,7 +2050,7 @@ questionnaire_v3 = QuestionnaireVersion(
         ),
         QuestionnaireQuestion(
             id=None,
-            tmp_uuid="2105",
+            tmp_uuid="8c8026ed-3fa2-4b4a-8a7d-5b9ce5b73e92",
             tab="Basic Info",
             question="What is the number of patients planned to be included in the cohort?",
             risk_weight=2,
@@ -1980,7 +2060,7 @@ questionnaire_v3 = QuestionnaireVersion(
             answers=[
                 QuestionnaireQuestionAnswer(
                     id=None,
-                    tmp_uuid="6533",
+                    tmp_uuid="a08d077c-ea8d-439a-958f-fcf36a4567c9",
                     text="< 100 patients",
                     risk_level=1,
                     high_risk=False,
@@ -1992,7 +2072,7 @@ questionnaire_v3 = QuestionnaireVersion(
                 ),
                 QuestionnaireQuestionAnswer(
                     id=None,
-                    tmp_uuid="6534",
+                    tmp_uuid="1b43b297-77c3-48e6-b078-cd9c7f3f903e",
                     text="100 to 1.000 patients",
                     risk_level=2,
                     high_risk=False,
@@ -2004,7 +2084,7 @@ questionnaire_v3 = QuestionnaireVersion(
                 ),
                 QuestionnaireQuestionAnswer(
                     id=None,
-                    tmp_uuid="6535",
+                    tmp_uuid="812360a5-d349-4581-a3fb-dbf4ebd7a2ce",
                     text="1.000 to 5.000 patients",
                     risk_level=3,
                     high_risk=False,
@@ -2016,7 +2096,7 @@ questionnaire_v3 = QuestionnaireVersion(
                 ),
                 QuestionnaireQuestionAnswer(
                     id=None,
-                    tmp_uuid="6536",
+                    tmp_uuid="923f4354-9a69-4ee4-8d50-657af02b59dd",
                     text="> 5.000 patients",
                     risk_level=4,
                     high_risk=False,
@@ -2033,7 +2113,7 @@ questionnaire_v3 = QuestionnaireVersion(
         ),
         QuestionnaireQuestion(
             id=None,
-            tmp_uuid="2106",
+            tmp_uuid="f40d7d82-cbe9-46c9-bb8e-b204204e53dc",
             tab="Basic Info",
             question="What is the number of the individual datapoints per patient included in the dataset?",
             risk_weight=2,
@@ -2043,7 +2123,7 @@ questionnaire_v3 = QuestionnaireVersion(
             answers=[
                 QuestionnaireQuestionAnswer(
                     id=None,
-                    tmp_uuid="6537",
+                    tmp_uuid="335f04c6-cf5c-4542-bd5d-fe26989a3aef",
                     text="25 to 100 datapoints",
                     risk_level=2,
                     high_risk=False,
@@ -2055,7 +2135,7 @@ questionnaire_v3 = QuestionnaireVersion(
                 ),
                 QuestionnaireQuestionAnswer(
                     id=None,
-                    tmp_uuid="6538",
+                    tmp_uuid="27545c3c-ea17-42b2-993f-3ba3ae1b07c9",
                     text="< 25 datapoints",
                     risk_level=1,
                     high_risk=False,
@@ -2067,7 +2147,7 @@ questionnaire_v3 = QuestionnaireVersion(
                 ),
                 QuestionnaireQuestionAnswer(
                     id=None,
-                    tmp_uuid="6539",
+                    tmp_uuid="bf543010-c5b5-41cc-8045-3de63911d105",
                     text="100 to 1000 datapoints",
                     risk_level=3,
                     high_risk=False,
@@ -2079,7 +2159,7 @@ questionnaire_v3 = QuestionnaireVersion(
                 ),
                 QuestionnaireQuestionAnswer(
                     id=None,
-                    tmp_uuid="6540",
+                    tmp_uuid="d7cf2d23-e062-4464-97e9-9b0ef5ff1dff",
                     text="> 1000 datapoints",
                     risk_level=4,
                     high_risk=False,
@@ -2096,7 +2176,7 @@ questionnaire_v3 = QuestionnaireVersion(
         ),
         QuestionnaireQuestion(
             id=None,
-            tmp_uuid="2107",
+            tmp_uuid="b7fd3f34-95c4-4ceb-a413-257b4e110a22",
             tab="Basic Info",
             question="Is one or more of the following stigmatizing information included in the dataset?\n\n- religious, ideological, political or trade union-related views or activities\n- disease associated with stigma (e.g. HIV status, psycological conditions), the intimate sphere or the racial origin\n- social security measures\n- administrative or criminal proceedings and sanctions",
             risk_weight=5,
@@ -2106,7 +2186,7 @@ questionnaire_v3 = QuestionnaireVersion(
             answers=[
                 QuestionnaireQuestionAnswer(
                     id=None,
-                    tmp_uuid="6541",
+                    tmp_uuid="5c55338a-f19c-4610-8ad9-3df866f5a36b",
                     text="No",
                     risk_level=0,
                     high_risk=False,
@@ -2118,7 +2198,7 @@ questionnaire_v3 = QuestionnaireVersion(
                 ),
                 QuestionnaireQuestionAnswer(
                     id=None,
-                    tmp_uuid="6542",
+                    tmp_uuid="2a0c8e27-ffac-4590-bc1b-8523f9b7bd80",
                     text="Yes",
                     risk_level=1,
                     high_risk=False,
@@ -2135,7 +2215,7 @@ questionnaire_v3 = QuestionnaireVersion(
         ),
         QuestionnaireQuestion(
             id=None,
-            tmp_uuid="2108",
+            tmp_uuid="2b8091c5-1a5c-4c16-b778-59036dbe390e",
             tab="Administrative",
             question="In which jurisdiction the project data is planned to be stored and processed?\n",
             risk_weight=2,
@@ -2145,7 +2225,7 @@ questionnaire_v3 = QuestionnaireVersion(
             answers=[
                 QuestionnaireQuestionAnswer(
                     id=None,
-                    tmp_uuid="6543",
+                    tmp_uuid="019e78b2-8cbd-42b0-b339-221351ca0ddb",
                     text="In Switzerland",
                     risk_level=0,
                     high_risk=False,
@@ -2157,7 +2237,7 @@ questionnaire_v3 = QuestionnaireVersion(
                 ),
                 QuestionnaireQuestionAnswer(
                     id=None,
-                    tmp_uuid="6544",
+                    tmp_uuid="8f83a541-5de4-4657-9b66-74e25d369f97",
                     text="In EU or another country providing an adequate level of protection, recognized as such by the Federal Council",
                     risk_level=1,
                     high_risk=False,
@@ -2169,7 +2249,7 @@ questionnaire_v3 = QuestionnaireVersion(
                 ),
                 QuestionnaireQuestionAnswer(
                     id=None,
-                    tmp_uuid="6545",
+                    tmp_uuid="ab49d77d-76e0-484a-b797-19251e2e0f80",
                     text="In a country that does not provide an adequate level of protection, but with adequate safeguards according to Swiss law",
                     risk_level=2,
                     high_risk=False,
@@ -2181,7 +2261,7 @@ questionnaire_v3 = QuestionnaireVersion(
                 ),
                 QuestionnaireQuestionAnswer(
                     id=None,
-                    tmp_uuid="6546",
+                    tmp_uuid="d6d98f85-b5df-47a0-98a3-aee1b1abce28",
                     text="In a country that does not provide an adequate level of protection and without adequate safeguards according to Swiss law",
                     risk_level=0,
                     high_risk=True,
@@ -2198,7 +2278,7 @@ questionnaire_v3 = QuestionnaireVersion(
         ),
         QuestionnaireQuestion(
             id=None,
-            tmp_uuid="2109",
+            tmp_uuid="8fef3ba1-17f6-4cac-9c79-470bbab6d6e7",
             tab="Administrative",
             question="Is there a legal agreement between the data provider(s) and the data recipient(s) (e.g., a data transfer and use agreement) that regulates  the conditions under which data are disclosed to the data recipient(s)?",
             risk_weight=4,
@@ -2208,7 +2288,7 @@ questionnaire_v3 = QuestionnaireVersion(
             answers=[
                 QuestionnaireQuestionAnswer(
                     id=None,
-                    tmp_uuid="6547",
+                    tmp_uuid="9c6ca691-7b18-4e94-9323-771ff9b35703",
                     text="Yes (default)",
                     risk_level=-1,
                     high_risk=False,
@@ -2220,7 +2300,7 @@ questionnaire_v3 = QuestionnaireVersion(
                 ),
                 QuestionnaireQuestionAnswer(
                     id=None,
-                    tmp_uuid="6548",
+                    tmp_uuid="6044d4d6-f152-4456-ae35-d0707afa2943",
                     text="No",
                     risk_level=0,
                     high_risk=False,
@@ -2237,7 +2317,7 @@ questionnaire_v3 = QuestionnaireVersion(
         ),
         QuestionnaireQuestion(
             id=None,
-            tmp_uuid="2110",
+            tmp_uuid="da2163b9-5111-44d3-a971-5164a37047a8",
             tab="Administrative",
             question="Does the legal agreement between the data provider(s) and the data recipient(s) forbid the recipient(s) from disclosing the data to third parties or only with measures equivalent to those contractually agreed between the data provider and the data recipient?",
             risk_weight=4,
@@ -2247,7 +2327,7 @@ questionnaire_v3 = QuestionnaireVersion(
             answers=[
                 QuestionnaireQuestionAnswer(
                     id=None,
-                    tmp_uuid="6549",
+                    tmp_uuid="eaeeb493-1077-47a6-b9eb-b1c645cd1f4e",
                     text="Yes (default)",
                     risk_level=-1,
                     high_risk=False,
@@ -2259,7 +2339,7 @@ questionnaire_v3 = QuestionnaireVersion(
                 ),
                 QuestionnaireQuestionAnswer(
                     id=None,
-                    tmp_uuid="6550",
+                    tmp_uuid="088d30e6-ad83-493e-b95a-dfad951065dd",
                     text="No",
                     risk_level=0,
                     high_risk=False,
@@ -2276,7 +2356,7 @@ questionnaire_v3 = QuestionnaireVersion(
         ),
         QuestionnaireQuestion(
             id=None,
-            tmp_uuid="2111",
+            tmp_uuid="64bce343-64bc-4d15-bd23-c55c7f536db2",
             tab="Administrative",
             question="Does the legal agreement between the data provider(s) and the data recipient(s) stipulate that external audits of the data management practices of the data recipient may be performed?",
             risk_weight=4,
@@ -2286,7 +2366,7 @@ questionnaire_v3 = QuestionnaireVersion(
             answers=[
                 QuestionnaireQuestionAnswer(
                     id=None,
-                    tmp_uuid="6551",
+                    tmp_uuid="88bf2b37-d985-455c-a8b2-5cde78e0fbe7",
                     text="Yes",
                     risk_level=-1,
                     high_risk=False,
@@ -2298,7 +2378,7 @@ questionnaire_v3 = QuestionnaireVersion(
                 ),
                 QuestionnaireQuestionAnswer(
                     id=None,
-                    tmp_uuid="6552",
+                    tmp_uuid="9e63ee2e-c2eb-4fa2-832c-71d0f222309b",
                     text="No (default)",
                     risk_level=0,
                     high_risk=False,
@@ -2315,7 +2395,7 @@ questionnaire_v3 = QuestionnaireVersion(
         ),
         QuestionnaireQuestion(
             id=None,
-            tmp_uuid="2112",
+            tmp_uuid="dbfe9aba-4154-44ea-af0e-44ade38df448",
             tab="Administrative",
             question="Does the legal agreement between the data provider(s) and the data recipient(s) stipulate that regular external audits of privacy and security practices of the data recipient may be performed?",
             risk_weight=4,
@@ -2325,7 +2405,7 @@ questionnaire_v3 = QuestionnaireVersion(
             answers=[
                 QuestionnaireQuestionAnswer(
                     id=None,
-                    tmp_uuid="6553",
+                    tmp_uuid="9e104d76-4e2b-4a33-85da-d67d4dcba711",
                     text="Yes",
                     risk_level=-1,
                     high_risk=False,
@@ -2337,7 +2417,7 @@ questionnaire_v3 = QuestionnaireVersion(
                 ),
                 QuestionnaireQuestionAnswer(
                     id=None,
-                    tmp_uuid="6554",
+                    tmp_uuid="7a57eb60-08d3-428c-91bf-f0bdd33660b8",
                     text="No (default)",
                     risk_level=0,
                     high_risk=False,
@@ -2354,7 +2434,7 @@ questionnaire_v3 = QuestionnaireVersion(
         ),
         QuestionnaireQuestion(
             id=None,
-            tmp_uuid="2113",
+            tmp_uuid="82ba13f3-acfb-435f-a9b7-6b139509958b",
             tab="Administrative",
             question="Does the legal agreement between the data provider(s) and the data recipient(s) associate penalties in case of health-related data misuse by the recipient?",
             risk_weight=4,
@@ -2364,7 +2444,7 @@ questionnaire_v3 = QuestionnaireVersion(
             answers=[
                 QuestionnaireQuestionAnswer(
                     id=None,
-                    tmp_uuid="6555",
+                    tmp_uuid="8e9d485f-19b9-441c-aab7-f1d891143bf1",
                     text="Yes",
                     risk_level=-1,
                     high_risk=False,
@@ -2376,7 +2456,7 @@ questionnaire_v3 = QuestionnaireVersion(
                 ),
                 QuestionnaireQuestionAnswer(
                     id=None,
-                    tmp_uuid="6556",
+                    tmp_uuid="6faac6ff-24ab-40be-a0a7-fb3036045cfd",
                     text="No (default)",
                     risk_level=0,
                     high_risk=False,
@@ -2393,7 +2473,7 @@ questionnaire_v3 = QuestionnaireVersion(
         ),
         QuestionnaireQuestion(
             id=None,
-            tmp_uuid="2114",
+            tmp_uuid="21ab8e99-7066-4dc8-84ca-46b39cb8ef54",
             tab="Administrative",
             question="Are the recipient's staff members personally bound by a duty of confidentiality (e.g. confidential agreement, access policy imposing a duty of confidentiality, personal legal obligation of confidentiality)? ",
             risk_weight=6,
@@ -2403,7 +2483,7 @@ questionnaire_v3 = QuestionnaireVersion(
             answers=[
                 QuestionnaireQuestionAnswer(
                     id=None,
-                    tmp_uuid="6557",
+                    tmp_uuid="7251a40f-82da-4110-8eed-bec747c6feae",
                     text="Yes ",
                     risk_level=-1,
                     high_risk=False,
@@ -2415,7 +2495,7 @@ questionnaire_v3 = QuestionnaireVersion(
                 ),
                 QuestionnaireQuestionAnswer(
                     id=None,
-                    tmp_uuid="6558",
+                    tmp_uuid="f1e23185-3738-471a-9523-a6639816d946",
                     text="No (default)",
                     risk_level=0,
                     high_risk=False,
@@ -2432,7 +2512,7 @@ questionnaire_v3 = QuestionnaireVersion(
         ),
         QuestionnaireQuestion(
             id=None,
-            tmp_uuid="2115",
+            tmp_uuid="fe0302ea-484c-46a6-9e0f-a29ee7fb5e9f",
             tab="IT",
             question="Where does the project data will be stored and processed (select the worst answer that applies)?",
             risk_weight=10,
@@ -2442,7 +2522,7 @@ questionnaire_v3 = QuestionnaireVersion(
             answers=[
                 QuestionnaireQuestionAnswer(
                     id=None,
-                    tmp_uuid="6559",
+                    tmp_uuid="a73076ae-3c66-4e75-909c-59c301ee6eb9",
                     text="On  computer(s) controlled by the hospital IT department of the data recipient",
                     risk_level=0,
                     high_risk=False,
@@ -2454,7 +2534,7 @@ questionnaire_v3 = QuestionnaireVersion(
                 ),
                 QuestionnaireQuestionAnswer(
                     id=None,
-                    tmp_uuid="6560",
+                    tmp_uuid="6bf3bf8c-f3f9-4250-b363-b55f49440e33",
                     text="On the hospital IT infrastructure of the data recipient ",
                     risk_level=-2,
                     high_risk=False,
@@ -2466,7 +2546,7 @@ questionnaire_v3 = QuestionnaireVersion(
                 ),
                 QuestionnaireQuestionAnswer(
                     id=None,
-                    tmp_uuid="6561",
+                    tmp_uuid="8e1f1cef-5998-4b46-a893-1a33e64ce4b0",
                     text="On an external IT infrastructure that complies with BioMedIT Information Security Policy or similar policies (e.g., BioMedIT network) (default)",
                     risk_level=-1,
                     high_risk=False,
@@ -2478,7 +2558,7 @@ questionnaire_v3 = QuestionnaireVersion(
                 ),
                 QuestionnaireQuestionAnswer(
                     id=None,
-                    tmp_uuid="6562",
+                    tmp_uuid="b4de53f7-d3c6-42ef-8af8-bf032063e3c8",
                     text="On an external IT infrastructure that DOES NOT comply with BioMedIT Information Security Policy or similar policies (e.g., public cloud)",
                     risk_level=0,
                     high_risk=False,
@@ -2490,7 +2570,7 @@ questionnaire_v3 = QuestionnaireVersion(
                 ),
                 QuestionnaireQuestionAnswer(
                     id=None,
-                    tmp_uuid="6563",
+                    tmp_uuid="caa7417b-b74a-4be2-8337-97f41b892ec0",
                     text="On PRIVATE computer (e.g., desktop, laptop, etc.)",
                     risk_level=0,
                     high_risk=False,
@@ -2507,7 +2587,7 @@ questionnaire_v3 = QuestionnaireVersion(
         ),
         QuestionnaireQuestion(
             id=None,
-            tmp_uuid="2116",
+            tmp_uuid="7747db6a-54d0-409f-a57f-e7f998f49f03",
             tab="IT",
             question="If the project data is stored or processed on the IT infrastructure of an external provider, does the Management System of the provider's Information Security has been also audited and certified from an Information Security perspective (e.g., ISO 27001) and from a data protection perspective (Federal data Protection Act, General Data Protection Regulation of the European Union,...)",
             risk_weight=10,
@@ -2517,7 +2597,7 @@ questionnaire_v3 = QuestionnaireVersion(
             answers=[
                 QuestionnaireQuestionAnswer(
                     id=None,
-                    tmp_uuid="6564",
+                    tmp_uuid="ae0f9c39-37a7-41d4-9b7c-c7a0411f20c8",
                     text="No (default)",
                     risk_level=0,
                     high_risk=False,
@@ -2529,7 +2609,7 @@ questionnaire_v3 = QuestionnaireVersion(
                 ),
                 QuestionnaireQuestionAnswer(
                     id=None,
-                    tmp_uuid="6565",
+                    tmp_uuid="da220396-bb32-460c-b151-f1397d6adfd1",
                     text="Yes",
                     risk_level=-1,
                     high_risk=False,
@@ -2546,7 +2626,7 @@ questionnaire_v3 = QuestionnaireVersion(
         ),
         QuestionnaireQuestion(
             id=None,
-            tmp_uuid="2117",
+            tmp_uuid="230fd6f3-e3b2-4fee-85d0-63902a44f352",
             tab="IT",
             question="If the project data is stored or processed on the IT infrastructure of an external provider, is there a legal processing agreement with the external provider of the infrastructure such as the BioMedIT Network (e.g., data processor agreement)?",
             risk_weight=10,
@@ -2556,7 +2636,7 @@ questionnaire_v3 = QuestionnaireVersion(
             answers=[
                 QuestionnaireQuestionAnswer(
                     id=None,
-                    tmp_uuid="6566",
+                    tmp_uuid="a7d81cf2-323a-4ff3-a9a9-cfc3ba3ddf14",
                     text="Yes (default)",
                     risk_level=-1,
                     high_risk=False,
@@ -2568,7 +2648,7 @@ questionnaire_v3 = QuestionnaireVersion(
                 ),
                 QuestionnaireQuestionAnswer(
                     id=None,
-                    tmp_uuid="6567",
+                    tmp_uuid="716dcdfb-8132-482a-a78b-7d6f0bc34dab",
                     text="No",
                     risk_level=0,
                     high_risk=False,
@@ -2585,7 +2665,7 @@ questionnaire_v3 = QuestionnaireVersion(
         ),
         QuestionnaireQuestion(
             id=None,
-            tmp_uuid="2118",
+            tmp_uuid="8de7cb6f-3e85-4ab8-a36a-b529de96057d",
             tab="Contextual",
             question="Does anyone in the data recipient's project team has access to mapping table for patient re-identification (i.e., data subjects)?",
             risk_weight=3,
@@ -2595,7 +2675,7 @@ questionnaire_v3 = QuestionnaireVersion(
             answers=[
                 QuestionnaireQuestionAnswer(
                     id=None,
-                    tmp_uuid="6568",
+                    tmp_uuid="1fd0eb3c-2d86-4d58-a222-24ddb02ce817",
                     text="No",
                     risk_level=0,
                     high_risk=False,
@@ -2607,7 +2687,7 @@ questionnaire_v3 = QuestionnaireVersion(
                 ),
                 QuestionnaireQuestionAnswer(
                     id=None,
-                    tmp_uuid="6569",
+                    tmp_uuid="aa9ac557-b666-45dd-8103-e0a3e2462dd4",
                     text="Yes",
                     risk_level=0,
                     high_risk=False,
@@ -2624,7 +2704,7 @@ questionnaire_v3 = QuestionnaireVersion(
         ),
         QuestionnaireQuestion(
             id=None,
-            tmp_uuid="2119",
+            tmp_uuid="347cb644-d272-4ae2-81eb-be3243887e52",
             tab="Contextual",
             question="Who will have access to health-related data shared during the project?\nMultiple selections possible.",
             risk_weight=3,
@@ -2634,7 +2714,7 @@ questionnaire_v3 = QuestionnaireVersion(
             answers=[
                 QuestionnaireQuestionAnswer(
                     id=None,
-                    tmp_uuid="6570",
+                    tmp_uuid="9135fff9-59f9-4c6a-bbf2-edec2ed41c9b",
                     text="Internal users of the hospital (i.e., the provider) from where the data is coming from, but who DO NOT HAVE access to the Electronic Health Records (EHR) of the hospital or other registries containing data from the same patients",
                     risk_level=2,
                     high_risk=False,
@@ -2646,7 +2726,7 @@ questionnaire_v3 = QuestionnaireVersion(
                 ),
                 QuestionnaireQuestionAnswer(
                     id=None,
-                    tmp_uuid="6571",
+                    tmp_uuid="f4cc26ba-e556-47bd-85bc-1395115fe12a",
                     text="Internal users of the hospital (i.e., the provider) from where the data is coming from and who DO HAVE access to the Electronic Health Records (EHR) of the hospital or other registries containing data from the same patients (this excludes internal Clinical Data Warehouse (CDW) employees)",
                     risk_level=3,
                     high_risk=False,
@@ -2658,7 +2738,7 @@ questionnaire_v3 = QuestionnaireVersion(
                 ),
                 QuestionnaireQuestionAnswer(
                     id=None,
-                    tmp_uuid="6572",
+                    tmp_uuid="8ad5d557-4b61-4c46-9afc-e147e5d770b0",
                     text="External users outside of the hospital",
                     risk_level=1,
                     high_risk=False,

@@ -1,7 +1,8 @@
 {
   "id": 1,
+  "name": "Use case assesment and risk evaluation",
   "version": {
-    "version": "3.0.0",
+    "version": "2.1.0",
     "published": true,
     "questions": [
       {
@@ -14,57 +15,57 @@
             "rulePrefills": [
               {
                 "answerText": "In Switzerland",
-                "tmpAnswerUUID": "6543",
-                "tmpQuestionUUID": "2108"
+                "tmpAnswerUUID": "019e78b2-8cbd-42b0-b339-221351ca0ddb",
+                "tmpQuestionUUID": "2b8091c5-1a5c-4c16-b778-59036dbe390e"
               },
               {
                 "answerText": "Yes (default)",
-                "tmpAnswerUUID": "6547",
-                "tmpQuestionUUID": "2109"
+                "tmpAnswerUUID": "9c6ca691-7b18-4e94-9323-771ff9b35703",
+                "tmpQuestionUUID": "8fef3ba1-17f6-4cac-9c79-470bbab6d6e7"
               },
               {
                 "answerText": "Yes (default)",
-                "tmpAnswerUUID": "6549",
-                "tmpQuestionUUID": "2110"
+                "tmpAnswerUUID": "eaeeb493-1077-47a6-b9eb-b1c645cd1f4e",
+                "tmpQuestionUUID": "da2163b9-5111-44d3-a971-5164a37047a8"
               },
               {
                 "answerText": "Yes",
-                "tmpAnswerUUID": "6551",
-                "tmpQuestionUUID": "2111"
+                "tmpAnswerUUID": "88bf2b37-d985-455c-a8b2-5cde78e0fbe7",
+                "tmpQuestionUUID": "64bce343-64bc-4d15-bd23-c55c7f536db2"
               },
               {
                 "answerText": "Yes",
-                "tmpAnswerUUID": "6553",
-                "tmpQuestionUUID": "2112"
+                "tmpAnswerUUID": "9e104d76-4e2b-4a33-85da-d67d4dcba711",
+                "tmpQuestionUUID": "dbfe9aba-4154-44ea-af0e-44ade38df448"
               },
               {
                 "answerText": "Yes",
-                "tmpAnswerUUID": "6555",
-                "tmpQuestionUUID": "2113"
+                "tmpAnswerUUID": "8e9d485f-19b9-441c-aab7-f1d891143bf1",
+                "tmpQuestionUUID": "82ba13f3-acfb-435f-a9b7-6b139509958b"
               },
               {
                 "answerText": "Yes ",
-                "tmpAnswerUUID": "6557",
-                "tmpQuestionUUID": "2114"
+                "tmpAnswerUUID": "7251a40f-82da-4110-8eed-bec747c6feae",
+                "tmpQuestionUUID": "21ab8e99-7066-4dc8-84ca-46b39cb8ef54"
               },
               {
                 "answerText": "On the hospital IT infrastructure of the data recipient ",
-                "tmpAnswerUUID": "6560",
-                "tmpQuestionUUID": "2115"
+                "tmpAnswerUUID": "6bf3bf8c-f3f9-4250-b363-b55f49440e33",
+                "tmpQuestionUUID": "fe0302ea-484c-46a6-9e0f-a29ee7fb5e9f"
               },
               {
                 "answerText": "Yes",
-                "tmpAnswerUUID": "6565",
-                "tmpQuestionUUID": "2116"
+                "tmpAnswerUUID": "da220396-bb32-460c-b151-f1397d6adfd1",
+                "tmpQuestionUUID": "7747db6a-54d0-409f-a57f-e7f998f49f03"
               },
               {
                 "answerText": "Yes (default)",
-                "tmpAnswerUUID": "6566",
-                "tmpQuestionUUID": "2117"
+                "tmpAnswerUUID": "a7d81cf2-323a-4ff3-a9a9-cfc3ba3ddf14",
+                "tmpQuestionUUID": "230fd6f3-e3b2-4fee-85d0-63902a44f352"
               }
             ],
             "text": "CHUV internal project",
-            "tmpUUID": "6431"
+            "tmpUUID": "e1005d8c-9575-46fb-8f3f-ee90c7987b1f"
           },
           {
             "JSONConfiguration": "",
@@ -73,57 +74,96 @@
             "rulePrefills": [
               {
                 "answerText": "In Switzerland",
-                "tmpAnswerUUID": "6543",
-                "tmpQuestionUUID": "2108"
+                "tmpAnswerUUID": "019e78b2-8cbd-42b0-b339-221351ca0ddb",
+                "tmpQuestionUUID": "2b8091c5-1a5c-4c16-b778-59036dbe390e"
               },
               {
                 "answerText": "Yes (default)",
-                "tmpAnswerUUID": "6547",
-                "tmpQuestionUUID": "2109"
+                "tmpAnswerUUID": "9c6ca691-7b18-4e94-9323-771ff9b35703",
+                "tmpQuestionUUID": "8fef3ba1-17f6-4cac-9c79-470bbab6d6e7"
               },
               {
                 "answerText": "Yes (default)",
-                "tmpAnswerUUID": "6549",
-                "tmpQuestionUUID": "2110"
+                "tmpAnswerUUID": "eaeeb493-1077-47a6-b9eb-b1c645cd1f4e",
+                "tmpQuestionUUID": "da2163b9-5111-44d3-a971-5164a37047a8"
               },
               {
                 "answerText": "Yes",
-                "tmpAnswerUUID": "6551",
-                "tmpQuestionUUID": "2111"
+                "tmpAnswerUUID": "88bf2b37-d985-455c-a8b2-5cde78e0fbe7",
+                "tmpQuestionUUID": "64bce343-64bc-4d15-bd23-c55c7f536db2"
               },
               {
                 "answerText": "Yes",
-                "tmpAnswerUUID": "6553",
-                "tmpQuestionUUID": "2112"
+                "tmpAnswerUUID": "9e104d76-4e2b-4a33-85da-d67d4dcba711",
+                "tmpQuestionUUID": "dbfe9aba-4154-44ea-af0e-44ade38df448"
               },
               {
                 "answerText": "Yes ",
-                "tmpAnswerUUID": "6557",
-                "tmpQuestionUUID": "2114"
+                "tmpAnswerUUID": "7251a40f-82da-4110-8eed-bec747c6feae",
+                "tmpQuestionUUID": "21ab8e99-7066-4dc8-84ca-46b39cb8ef54"
               },
               {
                 "answerText": "On  computer(s) controlled by the hospital IT department of the data recipient",
-                "tmpAnswerUUID": "6559",
-                "tmpQuestionUUID": "2115"
+                "tmpAnswerUUID": "a73076ae-3c66-4e75-909c-59c301ee6eb9",
+                "tmpQuestionUUID": "fe0302ea-484c-46a6-9e0f-a29ee7fb5e9f"
               },
               {
                 "answerText": "Yes",
-                "tmpAnswerUUID": "6565",
-                "tmpQuestionUUID": "2116"
+                "tmpAnswerUUID": "da220396-bb32-460c-b151-f1397d6adfd1",
+                "tmpQuestionUUID": "7747db6a-54d0-409f-a57f-e7f998f49f03"
               },
               {
                 "answerText": "Yes (default)",
-                "tmpAnswerUUID": "6566",
-                "tmpQuestionUUID": "2117"
+                "tmpAnswerUUID": "a7d81cf2-323a-4ff3-a9a9-cfc3ba3ddf14",
+                "tmpQuestionUUID": "230fd6f3-e3b2-4fee-85d0-63902a44f352"
               },
               {
                 "answerText": "Yes",
-                "tmpAnswerUUID": "6555",
-                "tmpQuestionUUID": "2113"
+                "tmpAnswerUUID": "8e9d485f-19b9-441c-aab7-f1d891143bf1",
+                "tmpQuestionUUID": "82ba13f3-acfb-435f-a9b7-6b139509958b"
               }
             ],
             "text": "USZ internal project",
-            "tmpUUID": "6432"
+            "tmpUUID": "446b9d83-8fcb-40c9-8590-d552e1ab1a16"
+          },
+          {
+            "JSONConfiguration": "",
+            "highRisk": false,
+            "riskLevel": 0,
+            "rulePrefills": [
+              {
+                "answerText": "Yes",
+                "tmpAnswerUUID": "929463ce-ad02-484c-8eaf-558b70329f60",
+                "tmpQuestionUUID": "4fb8d54c-8057-4a4b-b22c-ca7ceabcce7e"
+              },
+              {
+                "answerText": "Yes",
+                "tmpAnswerUUID": "929463ce-ad02-484c-8eaf-558b70329f60",
+                "tmpQuestionUUID": "4fb8d54c-8057-4a4b-b22c-ca7ceabcce7e"
+              },
+              {
+                "answerText": "Yes",
+                "tmpAnswerUUID": "929463ce-ad02-484c-8eaf-558b70329f60",
+                "tmpQuestionUUID": "4fb8d54c-8057-4a4b-b22c-ca7ceabcce7e"
+              },
+              {
+                "answerText": "Yes",
+                "tmpAnswerUUID": "929463ce-ad02-484c-8eaf-558b70329f60",
+                "tmpQuestionUUID": "4fb8d54c-8057-4a4b-b22c-ca7ceabcce7e"
+              },
+              {
+                "answerText": "Yes",
+                "tmpAnswerUUID": "929463ce-ad02-484c-8eaf-558b70329f60",
+                "tmpQuestionUUID": "4fb8d54c-8057-4a4b-b22c-ca7ceabcce7e"
+              },
+              {
+                "answerText": "Yes",
+                "tmpAnswerUUID": "929463ce-ad02-484c-8eaf-558b70329f60",
+                "tmpQuestionUUID": "4fb8d54c-8057-4a4b-b22c-ca7ceabcce7e"
+              }
+            ],
+            "text": "Multicentric SPHN project",
+            "tmpUUID": "cbcfaafa-05ae-4fec-a82f-8187935d4590"
           },
           {
             "JSONConfiguration": "",
@@ -131,14 +171,14 @@
             "riskLevel": 0,
             "rulePrefills": [],
             "text": "None of the above",
-            "tmpUUID": "6434"
+            "tmpUUID": "4b02844a-980d-4dcd-b889-b0ec5e59b832"
           }
         ],
         "flag": "",
         "question": "Please specify the type of your project",
         "riskWeight": 0,
         "tab": "Project Type",
-        "tmpUUID": "2076",
+        "tmpUUID": "a04fba19-6821-4a36-a644-17449b2b0229",
         "tooltip": "This assists in pre-filling certain responses based on your institution's guidelines."
       },
       {
@@ -150,7 +190,7 @@
             "riskLevel": 0,
             "rulePrefills": [],
             "text": "Yes",
-            "tmpUUID": "6435"
+            "tmpUUID": "929463ce-ad02-484c-8eaf-558b70329f60"
           },
           {
             "JSONConfiguration": "",
@@ -159,19 +199,19 @@
             "rulePrefills": [
               {
                 "answerText": "No genomic sequences are used in the project ",
-                "tmpAnswerUUID": "6526",
-                "tmpQuestionUUID": "2103"
+                "tmpAnswerUUID": "c05a8385-0ab3-4898-ba79-c3b11ce23c3c",
+                "tmpQuestionUUID": "a23c522b-5f01-43ad-8094-0694c33a9ffc"
               }
             ],
             "text": "No",
-            "tmpUUID": "6436"
+            "tmpUUID": "4624d40c-c5fd-4fcd-9998-23f34f4757a2"
           }
         ],
         "flag": "",
         "question": "Does your project contain omics data?",
         "riskWeight": 0,
         "tab": "Project Overview",
-        "tmpUUID": "2077",
+        "tmpUUID": "4fb8d54c-8057-4a4b-b22c-ca7ceabcce7e",
         "tooltip": ""
       },
       {
@@ -183,7 +223,7 @@
             "riskLevel": 0,
             "rulePrefills": [],
             "text": "Yes",
-            "tmpUUID": "6437"
+            "tmpUUID": "e326568b-c779-465f-b83d-439f303886e3"
           },
           {
             "JSONConfiguration": "",
@@ -192,49 +232,49 @@
             "rulePrefills": [
               {
                 "answerText": "No audio data is used in the project",
-                "tmpAnswerUUID": "6499",
-                "tmpQuestionUUID": "2096"
+                "tmpAnswerUUID": "904cac9f-933f-4a9b-adb9-65e336f33e1c",
+                "tmpQuestionUUID": "a9b14ea8-18fa-44b8-af46-604233ea56e8"
               },
               {
                 "answerText": "No images are used in the project",
-                "tmpAnswerUUID": "6502",
-                "tmpQuestionUUID": "2097"
+                "tmpAnswerUUID": "ca70a9dc-31af-4027-9dc9-6e5710550cb5",
+                "tmpQuestionUUID": "b17cf5a4-73bd-47c8-b59c-61543d33ef0c"
               },
               {
                 "answerText": "No DICOM data is used in this project",
-                "tmpAnswerUUID": "6509",
-                "tmpQuestionUUID": "2098"
+                "tmpAnswerUUID": "eb001c37-6965-46ac-a36b-f42ed6e61efa",
+                "tmpQuestionUUID": "aab29277-33ba-42a0-91e4-4973c8674ad1"
               },
               {
                 "answerText": "No DICOM data is used in this project",
-                "tmpAnswerUUID": "6513",
-                "tmpQuestionUUID": "2099"
+                "tmpAnswerUUID": "a317ba24-2ecb-419d-8a7b-df81b20b9949",
+                "tmpQuestionUUID": "1c790f71-7553-4b17-809f-43839d027f23"
               },
               {
                 "answerText": "No DICOM data is used in this project",
-                "tmpAnswerUUID": "6517",
-                "tmpQuestionUUID": "2100"
+                "tmpAnswerUUID": "2f62fde1-c8a3-453b-bbff-4405806d2219",
+                "tmpQuestionUUID": "2abc1d05-2a83-4717-b8fd-198a8910b39e"
               },
               {
                 "answerText": "No DICOM data is used in this project",
-                "tmpAnswerUUID": "6521",
-                "tmpQuestionUUID": "2101"
+                "tmpAnswerUUID": "ccce9148-9bae-45ce-a35d-e108b6dc1ff2",
+                "tmpQuestionUUID": "d847255d-19aa-4c89-b66c-fad4efedc03f"
               },
               {
                 "answerText": "No DICOM data is used in this project",
-                "tmpAnswerUUID": "6525",
-                "tmpQuestionUUID": "2102"
+                "tmpAnswerUUID": "00c306fe-27cc-4240-9360-b96251b38e2e",
+                "tmpQuestionUUID": "ab793dd0-fc66-465a-8fbf-7088f0dfbb89"
               }
             ],
             "text": "No",
-            "tmpUUID": "6438"
+            "tmpUUID": "b6382f54-48e5-4eb5-84c7-f51b00909823"
           }
         ],
         "flag": "",
         "question": "Does your project contain multimedia data?",
         "riskWeight": 0,
         "tab": "Project Overview",
-        "tmpUUID": "2078",
+        "tmpUUID": "8a64c1a8-13f9-48e0-bde6-0bb4d370bbce",
         "tooltip": ""
       },
       {
@@ -246,7 +286,7 @@
             "riskLevel": 0,
             "rulePrefills": [],
             "text": "Yes",
-            "tmpUUID": "6439"
+            "tmpUUID": "42c7771b-d436-4427-beac-1cfc15033890"
           },
           {
             "JSONConfiguration": "",
@@ -254,14 +294,14 @@
             "riskLevel": 0,
             "rulePrefills": [],
             "text": "No",
-            "tmpUUID": "6440"
+            "tmpUUID": "f11d0e14-9c64-40fe-8b12-1add760b8071"
           }
         ],
         "flag": "",
         "question": "Does your project contain demographic and administrative variables?",
         "riskWeight": 0,
         "tab": "Project Overview",
-        "tmpUUID": "2079",
+        "tmpUUID": "d3c84569-5e99-4d0f-a0f7-0222f497a518",
         "tooltip": ""
       },
       {
@@ -273,7 +313,7 @@
             "riskLevel": 0,
             "rulePrefills": [],
             "text": "Yes",
-            "tmpUUID": "6441"
+            "tmpUUID": "59a5c809-42cb-4d2b-9a62-65c97280476e"
           },
           {
             "JSONConfiguration": "",
@@ -281,14 +321,14 @@
             "riskLevel": 0,
             "rulePrefills": [],
             "text": "No",
-            "tmpUUID": "6442"
+            "tmpUUID": "d373999a-8dd4-4363-b9ce-93b9f245375c"
           }
         ],
         "flag": "",
         "question": "Does your project contain unstructured data/reports?",
         "riskWeight": 0,
         "tab": "Project Overview",
-        "tmpUUID": "2080",
+        "tmpUUID": "7ac8ddac-33b3-4608-b0b4-897ffae548d3",
         "tooltip": ""
       },
       {
@@ -300,7 +340,7 @@
             "riskLevel": 0,
             "rulePrefills": [],
             "text": "Administrative case identifier is not used in the project",
-            "tmpUUID": "6443"
+            "tmpUUID": "4c765e47-5aa2-47c9-a3bd-5256f61ef3a3"
           },
           {
             "JSONConfiguration": "",
@@ -308,7 +348,7 @@
             "riskLevel": 1,
             "rulePrefills": [],
             "text": "Identifiers are replaced by pseudonym (project specific identifier) and the mapping table is securely stored by the data provider and not accessible by the research team (default)",
-            "tmpUUID": "6444"
+            "tmpUUID": "75abbd0f-29c3-4193-8a47-126fa24ae4a4"
           },
           {
             "JSONConfiguration": "",
@@ -316,14 +356,14 @@
             "riskLevel": 0,
             "rulePrefills": [],
             "text": "Original values are kept (hospital internal case identifier)",
-            "tmpUUID": "6445"
+            "tmpUUID": "b60ebe37-f966-4329-ab14-8ac50923aa8e"
           }
         ],
         "flag": "",
         "question": "Administrative case identifier",
         "riskWeight": 1,
         "tab": "Data Risk - Structured Data",
-        "tmpUUID": "2081",
+        "tmpUUID": "30a740db-0585-4fb0-98f9-8fe3f438ed6f",
         "tooltip": ""
       },
       {
@@ -335,7 +375,7 @@
             "riskLevel": 0,
             "rulePrefills": [],
             "text": "Organizational unit is not used in the project (default)",
-            "tmpUUID": "6446"
+            "tmpUUID": "5c4a8f04-360d-4c96-b8f5-2ded05c35f56"
           },
           {
             "JSONConfiguration": "",
@@ -343,7 +383,7 @@
             "riskLevel": 1,
             "rulePrefills": [],
             "text": "Organizational unit is generalized to the division level (e.g., Neurology, Radiology, Urology, etc.) ",
-            "tmpUUID": "6447"
+            "tmpUUID": "117e626b-4d85-413c-890e-5ea7d17bda42"
           },
           {
             "JSONConfiguration": "",
@@ -351,14 +391,14 @@
             "riskLevel": 2,
             "rulePrefills": [],
             "text": "Organizational unit is kept (e.g.,328 Kardiologie ME) ",
-            "tmpUUID": "6448"
+            "tmpUUID": "bd379cb5-347a-4da6-8046-8c4908023b05"
           }
         ],
         "flag": "",
         "question": "Organizational Units (data provider organizational unit excluded)",
         "riskWeight": 2,
         "tab": "Data Risk - Structured Data",
-        "tmpUUID": "2082",
+        "tmpUUID": "3d520978-e58e-48dc-9113-9f29cdc391e7",
         "tooltip": ""
       },
       {
@@ -370,7 +410,7 @@
             "riskLevel": 0,
             "rulePrefills": [],
             "text": "Lab report identifier and Lab order identifier is not used in the project (default)  ",
-            "tmpUUID": "6449"
+            "tmpUUID": "ee7b84d9-9492-4d38-8a38-5b7c54f29c69"
           },
           {
             "JSONConfiguration": "",
@@ -378,7 +418,7 @@
             "riskLevel": 1,
             "rulePrefills": [],
             "text": "Identifiers are replaced by pseudonym (project specific identifier) ",
-            "tmpUUID": "6450"
+            "tmpUUID": "8a3faa3c-7ac9-4082-aeb1-5fdc18b6ce07"
           },
           {
             "JSONConfiguration": "",
@@ -386,14 +426,14 @@
             "riskLevel": 0,
             "rulePrefills": [],
             "text": "Original values are kept (hospital internal sample identifier)",
-            "tmpUUID": "6451"
+            "tmpUUID": "c7e4500f-b3bf-4ff4-9ffa-9032a028bb5d"
           }
         ],
         "flag": "",
         "question": "Lab report identifier",
         "riskWeight": 2,
         "tab": "Data Risk - Structured Data",
-        "tmpUUID": "2083",
+        "tmpUUID": "72c95363-b35f-4706-af72-cb2c6869d409",
         "tooltip": ""
       },
       {
@@ -405,7 +445,7 @@
             "riskLevel": 3,
             "rulePrefills": [],
             "text": "Only the year and month of the original date of death are kept or the date is shifted by a random number of days between +/- 30 days",
-            "tmpUUID": "6452"
+            "tmpUUID": "e28645dc-760c-4b44-b723-cca8d63583ba"
           },
           {
             "JSONConfiguration": "",
@@ -413,7 +453,7 @@
             "riskLevel": 0,
             "rulePrefills": [],
             "text": "Date of death concept is suppressed or not used in the project",
-            "tmpUUID": "6453"
+            "tmpUUID": "d186cf1f-1093-4385-9f2d-801a7eb519b4"
           },
           {
             "JSONConfiguration": "",
@@ -421,7 +461,7 @@
             "riskLevel": 1,
             "rulePrefills": [],
             "text": "Only the year of the original date of death is kept or the date is shifted by a random number of days within +/- 365 days",
-            "tmpUUID": "6454"
+            "tmpUUID": "4a159921-0896-4b22-85d0-547e51079e36"
           },
           {
             "JSONConfiguration": "",
@@ -429,7 +469,7 @@
             "riskLevel": 2,
             "rulePrefills": [],
             "text": "Date of death is shifted by a random number of days within +/- 90 days (one quarter offset to preserve seasonality) (default)",
-            "tmpUUID": "6455"
+            "tmpUUID": "3528f46e-1aab-44fe-b834-2f4c82905b70"
           },
           {
             "JSONConfiguration": "",
@@ -437,14 +477,14 @@
             "riskLevel": 4,
             "rulePrefills": [],
             "text": "Full original date of death is kept (dd/mm/yyyy)",
-            "tmpUUID": "6456"
+            "tmpUUID": "64af3421-1ea2-460e-978a-e73a443d867b"
           }
         ],
         "flag": "",
         "question": "Date of death",
         "riskWeight": 6,
         "tab": "Data Risk - Structured Data",
-        "tmpUUID": "2084",
+        "tmpUUID": "0adc5b8c-78f9-4912-8e24-35699a6158fb",
         "tooltip": ""
       },
       {
@@ -456,7 +496,7 @@
             "riskLevel": 0,
             "rulePrefills": [],
             "text": "The age concept is not used in the project",
-            "tmpUUID": "6457"
+            "tmpUUID": "8d1f3341-d592-4194-bc1a-692194bb6280"
           },
           {
             "JSONConfiguration": "",
@@ -464,7 +504,7 @@
             "riskLevel": 1,
             "rulePrefills": [],
             "text": "Age in generalized in groups of 5 or more years",
-            "tmpUUID": "6458"
+            "tmpUUID": "1bd64ac7-b095-4206-a6ff-b551e4f56de9"
           },
           {
             "JSONConfiguration": "",
@@ -472,7 +512,7 @@
             "riskLevel": 2,
             "rulePrefills": [],
             "text": "Original age is kept except for people with more than 89y old who are put in the age class \"90y+\" (default)",
-            "tmpUUID": "6459"
+            "tmpUUID": "8993880c-c0e2-4179-8f9e-8c0358c098ed"
           },
           {
             "JSONConfiguration": "",
@@ -480,14 +520,14 @@
             "riskLevel": 3,
             "rulePrefills": [],
             "text": "Original age is kept",
-            "tmpUUID": "6460"
+            "tmpUUID": "017322ce-b0e0-4e93-8246-2a605246eab1"
           }
         ],
         "flag": "",
         "question": "Age",
         "riskWeight": 4,
         "tab": "Data Risk - Structured Data",
-        "tmpUUID": "2085",
+        "tmpUUID": "22c8fc02-aebf-456b-9340-467e2527a3d4",
         "tooltip": ""
       },
       {
@@ -499,7 +539,7 @@
             "riskLevel": 0,
             "rulePrefills": [],
             "text": "Dates are suppressed or replaced with a surrogate date or not used in the project",
-            "tmpUUID": "6461"
+            "tmpUUID": "2fc32d77-4055-48b4-9cf1-2dc5582f40ef"
           },
           {
             "JSONConfiguration": "",
@@ -507,7 +547,7 @@
             "riskLevel": 1,
             "rulePrefills": [],
             "text": "Dates are shifted by a random number of days within +/- 365 days",
-            "tmpUUID": "6462"
+            "tmpUUID": "4c1dc459-9417-4a68-80e7-52d88f783ef0"
           },
           {
             "JSONConfiguration": "",
@@ -515,7 +555,7 @@
             "riskLevel": 2,
             "rulePrefills": [],
             "text": "Dates are shifted by a random number of days within +/- 90 days (one quarter offset to preserve seasonality) (default)",
-            "tmpUUID": "6463"
+            "tmpUUID": "bbc30ccf-df2c-4ee7-a77c-208addb94e7c"
           },
           {
             "JSONConfiguration": "",
@@ -523,7 +563,7 @@
             "riskLevel": 3,
             "rulePrefills": [],
             "text": "Dates are shifted by a random number of days within +/- 30 days (one month offset to preserve seasonality) ",
-            "tmpUUID": "6464"
+            "tmpUUID": "7a4faa8b-fa4e-4edd-8831-0fd4c6b1e7af"
           },
           {
             "JSONConfiguration": "",
@@ -531,7 +571,7 @@
             "riskLevel": 4,
             "rulePrefills": [],
             "text": "Dates are shifted by a random number of days within +/- 7 days (one week offset) ",
-            "tmpUUID": "6465"
+            "tmpUUID": "fe4b4580-b309-4855-9859-fcb8bc9e3f1c"
           },
           {
             "JSONConfiguration": "",
@@ -539,14 +579,14 @@
             "riskLevel": 5,
             "rulePrefills": [],
             "text": "Original dates are kept",
-            "tmpUUID": "6466"
+            "tmpUUID": "06aaa294-e14b-44bf-8380-b16a1b8033c6"
           }
         ],
         "flag": "",
         "question": "Dates in the patient record (dates of birth and death excluded)",
         "riskWeight": 3,
         "tab": "Data Risk - Structured Data",
-        "tmpUUID": "2086",
+        "tmpUUID": "a7b10d28-d34d-4c0b-9478-d442993ce3e1",
         "tooltip": "\tAdditional information: If one of those dates is shifted, the date of birth and date of death should be shifted in the same way."
       },
       {
@@ -558,7 +598,7 @@
             "riskLevel": 0,
             "rulePrefills": [],
             "text": "Date of birth concept is suppressed or not used in the project ",
-            "tmpUUID": "6467"
+            "tmpUUID": "62c72715-4dbe-41f6-8658-d5df6e8cc883"
           },
           {
             "JSONConfiguration": "",
@@ -566,7 +606,7 @@
             "riskLevel": 1,
             "rulePrefills": [],
             "text": "Only the year of the original birth date is kept or the date is shifted by a random number of days within +/- 365 days",
-            "tmpUUID": "6468"
+            "tmpUUID": "ca28e1e7-a30e-435d-874b-b43ba9492954"
           },
           {
             "JSONConfiguration": "",
@@ -574,7 +614,7 @@
             "riskLevel": 2,
             "rulePrefills": [],
             "text": "Date of birth is shifted by a random number of days within +/- 90 days (one quarter offset to preserve seasonality) (default)",
-            "tmpUUID": "6469"
+            "tmpUUID": "ed14335d-6b77-41dd-8ad7-551b7d073e84"
           },
           {
             "JSONConfiguration": "",
@@ -582,7 +622,7 @@
             "riskLevel": 3,
             "rulePrefills": [],
             "text": "Only the year and month of the original birth date are kept or the date is shifted by a random number of days between +/- 30 days",
-            "tmpUUID": "6470"
+            "tmpUUID": "e3d9f5da-7a99-445d-b0a7-2b093ed5929b"
           },
           {
             "JSONConfiguration": "",
@@ -590,14 +630,14 @@
             "riskLevel": 4,
             "rulePrefills": [],
             "text": "Full original date of birth is kept (dd/mm/yyyy)",
-            "tmpUUID": "6471"
+            "tmpUUID": "8ef9fae1-a952-46e4-8c00-469ad9e1b643"
           }
         ],
         "flag": "",
         "question": "Date of birth",
         "riskWeight": 6,
         "tab": "Data Risk - Structured Data",
-        "tmpUUID": "2087",
+        "tmpUUID": "3d9058c0-8601-42fd-b0fb-205e567337d8",
         "tooltip": ""
       },
       {
@@ -609,7 +649,7 @@
             "riskLevel": 0,
             "rulePrefills": [],
             "text": "Identifiers are not used in the project (default)",
-            "tmpUUID": "6472"
+            "tmpUUID": "34db1285-cf39-4638-8922-9fa04e7cbcee"
           },
           {
             "JSONConfiguration": "",
@@ -617,7 +657,7 @@
             "riskLevel": 1,
             "rulePrefills": [],
             "text": "Identifiers are replaced by plausible surrogates (e.g., in text reports) ",
-            "tmpUUID": "6473"
+            "tmpUUID": "e2f17523-a5be-49e7-80e6-3514f7887215"
           },
           {
             "JSONConfiguration": "",
@@ -625,14 +665,14 @@
             "riskLevel": 0,
             "rulePrefills": [],
             "text": "Original values of one or more direct identifiers are kept (*if this rules is selected the data set is not considered de-identified)",
-            "tmpUUID": "6474"
+            "tmpUUID": "91ec79b3-2c03-4dfc-b21b-f27667e1c8cf"
           }
         ],
         "flag": "",
         "question": "Direct identifiers (e.g. name, phone number social security number, email address, medical record number, license number)",
         "riskWeight": 2,
         "tab": "Data Risk - Structured Data",
-        "tmpUUID": "2088",
+        "tmpUUID": "68fd24fb-9f00-46c4-a86f-b87be260b012",
         "tooltip": ""
       },
       {
@@ -644,7 +684,7 @@
             "riskLevel": 0,
             "rulePrefills": [],
             "text": "Identifiers are replaced by pseudonyms (project specific patient identifier) and no mapping table is kept",
-            "tmpUUID": "6475"
+            "tmpUUID": "0092558b-cf08-4602-a985-3450ee58639b"
           },
           {
             "JSONConfiguration": "",
@@ -652,7 +692,7 @@
             "riskLevel": 1,
             "rulePrefills": [],
             "text": "Identifiers are replaced by pseudonyms (project specific patient identifier) and the mapping table is securely stored by the data provider and not accessible by the research team (default) ",
-            "tmpUUID": "6476"
+            "tmpUUID": "2515a948-d107-49f7-bab3-2503106c617e"
           },
           {
             "JSONConfiguration": "",
@@ -660,14 +700,14 @@
             "riskLevel": 0,
             "rulePrefills": [],
             "text": "Original values are kept (hospital internal patient identifier) (*if this rules is selected the data set is not considered de-identified)",
-            "tmpUUID": "6477"
+            "tmpUUID": "41b84a54-673a-4f6e-b5c7-537e6efc02e2"
           }
         ],
         "flag": "",
         "question": "Patient identifier",
         "riskWeight": 1,
         "tab": "Data Risk - Structured Data",
-        "tmpUUID": "2089",
+        "tmpUUID": "d3530d37-9aca-42f0-9292-e0e547f3b1ae",
         "tooltip": "Mapping table available at the site"
       },
       {
@@ -679,7 +719,7 @@
             "riskLevel": 0,
             "rulePrefills": [],
             "text": "Sample identifiers are not use in the project",
-            "tmpUUID": "6478"
+            "tmpUUID": "89623ac5-76ef-403f-becd-38e71b227e63"
           },
           {
             "JSONConfiguration": "",
@@ -687,7 +727,7 @@
             "riskLevel": 1,
             "rulePrefills": [],
             "text": "Sample identifiers are replaced by pseudonyms (project specific sample identifier) and the mapping table is securely stored by the data provider and not accessible by the research team (default)  ",
-            "tmpUUID": "6479"
+            "tmpUUID": "d49e50ae-650b-4ceb-9001-55158f3a5d26"
           },
           {
             "JSONConfiguration": "",
@@ -695,14 +735,14 @@
             "riskLevel": 0,
             "rulePrefills": [],
             "text": "Original values are kept (hospital internal sample identifier)",
-            "tmpUUID": "6480"
+            "tmpUUID": "1f343023-cc07-47d7-bea7-707a4002b4c9"
           }
         ],
         "flag": "",
         "question": "Sample identifier",
         "riskWeight": 1,
         "tab": "Data Risk - Structured Data",
-        "tmpUUID": "2090",
+        "tmpUUID": "bcc2ffbc-69ae-475f-b6d7-f958720afd0a",
         "tooltip": ""
       },
       {
@@ -714,7 +754,7 @@
             "riskLevel": 0,
             "rulePrefills": [],
             "text": "Profession is not used in the project (default)",
-            "tmpUUID": "6481"
+            "tmpUUID": "9bcbf421-4328-4cec-8848-3ac14e87170a"
           },
           {
             "JSONConfiguration": "",
@@ -722,14 +762,14 @@
             "riskLevel": 1,
             "rulePrefills": [],
             "text": "Original profession is kept, but replaced by a random profession for identifying ones",
-            "tmpUUID": "6482"
+            "tmpUUID": "20887db9-cbfe-4ca0-9f08-5e3af0eb7c78"
           }
         ],
         "flag": "",
         "question": "Profession",
         "riskWeight": 2,
         "tab": "Data Risk - Structured Data",
-        "tmpUUID": "2091",
+        "tmpUUID": "9889a944-d785-4aaa-9445-9f19850ced1b",
         "tooltip": "Additional information: Replacing a profession by a random one should be made if the profession is by itself identifying the data subject (e.g., prime minister or similar positions)"
       },
       {
@@ -741,7 +781,7 @@
             "riskLevel": 0,
             "rulePrefills": [],
             "text": "Location is not used in the project (default)",
-            "tmpUUID": "6483"
+            "tmpUUID": "735da8cd-9488-4e78-8293-802d6743f856"
           },
           {
             "JSONConfiguration": "",
@@ -749,7 +789,7 @@
             "riskLevel": 1,
             "rulePrefills": [],
             "text": "Location is generalized to the country level",
-            "tmpUUID": "6484"
+            "tmpUUID": "12a0c1d5-81d5-47cb-9a19-f6163fd464e1"
           },
           {
             "JSONConfiguration": "",
@@ -757,7 +797,7 @@
             "riskLevel": 2,
             "rulePrefills": [],
             "text": "Location is generalized to the region level",
-            "tmpUUID": "6485"
+            "tmpUUID": "7fc395be-1101-457b-8c40-37c41e6891da"
           },
           {
             "JSONConfiguration": "",
@@ -765,7 +805,7 @@
             "riskLevel": 3,
             "rulePrefills": [],
             "text": "Location is generalized to the city level. If cities have less than 20.000 inhabitants, cities are replaced by the corresponding region",
-            "tmpUUID": "6486"
+            "tmpUUID": "6b9eb441-a83d-4a58-9839-36e71a554786"
           },
           {
             "JSONConfiguration": "",
@@ -773,7 +813,7 @@
             "riskLevel": 4,
             "rulePrefills": [],
             "text": "Location is generalized to the zip level. If zip codes refer to areas with less than 20.000 inhabitants, the last 2 numbers of the zip codes are suppressed",
-            "tmpUUID": "6487"
+            "tmpUUID": "3531d50f-63f9-462c-af08-2fba9dd36f25"
           },
           {
             "JSONConfiguration": "",
@@ -781,14 +821,14 @@
             "riskLevel": 0,
             "rulePrefills": [],
             "text": "The original locations are kept",
-            "tmpUUID": "6488"
+            "tmpUUID": "39e936f4-74a0-4fa2-be09-b753fa9a3dfc"
           }
         ],
         "flag": "",
         "question": "Location  (street, zip code, city, region, country)",
         "riskWeight": 3,
         "tab": "Data Risk - Structured Data",
-        "tmpUUID": "2092",
+        "tmpUUID": "4f5afff3-1552-4cbe-b164-2bf214101e19",
         "tooltip": ""
       },
       {
@@ -800,7 +840,7 @@
             "riskLevel": 0,
             "rulePrefills": [],
             "text": "Organization name is not used in the project (default)",
-            "tmpUUID": "6489"
+            "tmpUUID": "dc3edb2b-622c-4e16-a4a2-f7a9a7d228dd"
           },
           {
             "JSONConfiguration": "",
@@ -808,7 +848,7 @@
             "riskLevel": 1,
             "rulePrefills": [],
             "text": "Organization type is kept (e.g., hospital, clinic, etc.) ",
-            "tmpUUID": "6490"
+            "tmpUUID": "5ab60324-22a4-46a6-b660-a1328293e4a5"
           },
           {
             "JSONConfiguration": "",
@@ -816,14 +856,14 @@
             "riskLevel": 2,
             "rulePrefills": [],
             "text": "Organization name is kept (e.g., University Hospital Basel) ",
-            "tmpUUID": "6491"
+            "tmpUUID": "6682e281-dbc1-4f99-9c2f-db965733d219"
           }
         ],
         "flag": "",
         "question": "Organizations (data provider organization excluded)",
         "riskWeight": 2,
         "tab": "Data Risk - Structured Data",
-        "tmpUUID": "2093",
+        "tmpUUID": "e1897616-cabc-4ca7-9bc9-4cc0683d3aa8",
         "tooltip": ""
       },
       {
@@ -835,7 +875,7 @@
             "riskLevel": 0,
             "rulePrefills": [],
             "text": " No other quasi-identifiers used in the project ",
-            "tmpUUID": "6492"
+            "tmpUUID": "8cc88e9d-59e0-43b3-9b66-5b71d2ec7029"
           },
           {
             "JSONConfiguration": "",
@@ -843,7 +883,7 @@
             "riskLevel": 1,
             "rulePrefills": [],
             "text": "Additional quasi-identifiers exist and have been modified to reduce risks (e.g. generalization)",
-            "tmpUUID": "6493"
+            "tmpUUID": "519f897f-1a13-4d40-a488-2e9906d3350f"
           },
           {
             "JSONConfiguration": "",
@@ -851,14 +891,14 @@
             "riskLevel": 2,
             "rulePrefills": [],
             "text": "Additional quasi-identifiers exist and original values are kept",
-            "tmpUUID": "6494"
+            "tmpUUID": "09867776-d8a8-4fbc-b6a1-ffd16b8f617a"
           }
         ],
         "flag": "",
         "question": "Additional project specific quasi-identifiers that can be used for linkage by the data recipient (e.g., clinical variables) ",
         "riskWeight": 5,
         "tab": "Data Risk - Structured Data",
-        "tmpUUID": "2094",
+        "tmpUUID": "e814ae8e-6237-41c6-af26-4a96a0611048",
         "tooltip": "\tAdditional information: How to add additional quasi-identifier"
       },
       {
@@ -870,7 +910,7 @@
             "riskLevel": 0,
             "rulePrefills": [],
             "text": "Original value is suppressed",
-            "tmpUUID": "6495"
+            "tmpUUID": "219d6ba1-7790-45fa-958b-06e07c2f0e35"
           },
           {
             "JSONConfiguration": "",
@@ -878,7 +918,7 @@
             "riskLevel": 1,
             "rulePrefills": [],
             "text": "Original value is replaced by pseudonym (default)",
-            "tmpUUID": "6496"
+            "tmpUUID": "1972f820-c7e9-4f33-8218-578052208ca2"
           },
           {
             "JSONConfiguration": "",
@@ -886,7 +926,7 @@
             "riskLevel": 2,
             "rulePrefills": [],
             "text": "Original values are kept",
-            "tmpUUID": "6497"
+            "tmpUUID": "ffda7302-b3be-4a54-a99e-63b08e533173"
           },
           {
             "JSONConfiguration": "",
@@ -894,14 +934,14 @@
             "riskLevel": 0,
             "rulePrefills": [],
             "text": "No DICOM data is used in this project",
-            "tmpUUID": "6498"
+            "tmpUUID": "5069f1a6-6711-4a50-9d7d-e11adc5e49fd"
           }
         ],
         "flag": "",
         "question": "DICOM - Derivation Description",
         "riskWeight": 1,
         "tab": "Data Risk - Multimedia Data",
-        "tmpUUID": "2095",
+        "tmpUUID": "febf7c28-48c3-496f-876c-6816a45e7076",
         "tooltip": ""
       },
       {
@@ -913,7 +953,7 @@
             "riskLevel": 0,
             "rulePrefills": [],
             "text": "No audio data is used in the project",
-            "tmpUUID": "6499"
+            "tmpUUID": "904cac9f-933f-4a9b-adb9-65e336f33e1c"
           },
           {
             "JSONConfiguration": "",
@@ -921,7 +961,7 @@
             "riskLevel": 0,
             "rulePrefills": [],
             "text": "Patient voice is kept in audio files",
-            "tmpUUID": "6500"
+            "tmpUUID": "d6b451c9-d27b-4d3e-8a8c-30200d577e2e"
           },
           {
             "JSONConfiguration": "",
@@ -929,14 +969,14 @@
             "riskLevel": 1,
             "rulePrefills": [],
             "text": "Patient voice blurring/noise algorithm (default)",
-            "tmpUUID": "6501"
+            "tmpUUID": "4aa230ca-d847-457e-98e4-cd9462e2dd74"
           }
         ],
         "flag": "",
         "question": "Audio Data",
         "riskWeight": 5,
         "tab": "Data Risk - Multimedia Data",
-        "tmpUUID": "2096",
+        "tmpUUID": "a9b14ea8-18fa-44b8-af46-604233ea56e8",
         "tooltip": ""
       },
       {
@@ -948,7 +988,7 @@
             "riskLevel": 0,
             "rulePrefills": [],
             "text": "No images are used in the project",
-            "tmpUUID": "6502"
+            "tmpUUID": "ca70a9dc-31af-4027-9dc9-6e5710550cb5"
           },
           {
             "JSONConfiguration": "",
@@ -956,7 +996,7 @@
             "riskLevel": 0,
             "rulePrefills": [],
             "text": "Original image or video files are kept",
-            "tmpUUID": "6503"
+            "tmpUUID": "60843839-708d-43d6-af9b-4cea460f2c76"
           },
           {
             "JSONConfiguration": "",
@@ -964,7 +1004,7 @@
             "riskLevel": 2,
             "rulePrefills": [],
             "text": "Blurring of identifying parts ",
-            "tmpUUID": "6504"
+            "tmpUUID": "031a32b5-2d91-4c79-98ec-89ac96c88656"
           },
           {
             "JSONConfiguration": "",
@@ -972,14 +1012,14 @@
             "riskLevel": 1,
             "rulePrefills": [],
             "text": "Removing of identifying face or identifying patient body parts (e.g., by defacing algorithms) (default)",
-            "tmpUUID": "6505"
+            "tmpUUID": "831fc2f8-bbc1-46b4-933a-785aa8e235ec"
           }
         ],
         "flag": "",
         "question": "Images (including photos) & Videos with patient face or identifying body parts (e.g., tattoos, malformations)",
         "riskWeight": 5,
         "tab": "Data Risk - Multimedia Data",
-        "tmpUUID": "2097",
+        "tmpUUID": "b17cf5a4-73bd-47c8-b59c-61543d33ef0c",
         "tooltip": ""
       },
       {
@@ -991,7 +1031,7 @@
             "riskLevel": 0,
             "rulePrefills": [],
             "text": "Original value is suppressed",
-            "tmpUUID": "6506"
+            "tmpUUID": "c1229fb9-e45c-4f1a-aebd-df999e8361fa"
           },
           {
             "JSONConfiguration": "",
@@ -999,7 +1039,7 @@
             "riskLevel": 1,
             "rulePrefills": [],
             "text": "Original value is replaced by pseudonym (default)",
-            "tmpUUID": "6507"
+            "tmpUUID": "04f4f44e-02c0-44e4-8689-a4bea63b4775"
           },
           {
             "JSONConfiguration": "",
@@ -1007,7 +1047,7 @@
             "riskLevel": 2,
             "rulePrefills": [],
             "text": "Original values are kept",
-            "tmpUUID": "6508"
+            "tmpUUID": "949761e5-9889-4880-9b43-ddbf11f75efc"
           },
           {
             "JSONConfiguration": "",
@@ -1015,14 +1055,14 @@
             "riskLevel": 0,
             "rulePrefills": [],
             "text": "No DICOM data is used in this project",
-            "tmpUUID": "6509"
+            "tmpUUID": "eb001c37-6965-46ac-a36b-f42ed6e61efa"
           }
         ],
         "flag": "",
         "question": "DICOM - Hardware Identifying Attributes",
         "riskWeight": 1,
         "tab": "Data Risk - Multimedia Data",
-        "tmpUUID": "2098",
+        "tmpUUID": "aab29277-33ba-42a0-91e4-4973c8674ad1",
         "tooltip": ""
       },
       {
@@ -1034,7 +1074,7 @@
             "riskLevel": 0,
             "rulePrefills": [],
             "text": "Original value is suppressed",
-            "tmpUUID": "6510"
+            "tmpUUID": "6b9cec09-d7c6-4fc4-b1bc-977ef4afed13"
           },
           {
             "JSONConfiguration": "",
@@ -1042,7 +1082,7 @@
             "riskLevel": 1,
             "rulePrefills": [],
             "text": "Original value is replaced by pseudonym (default)",
-            "tmpUUID": "6511"
+            "tmpUUID": "54263da0-673a-408c-801d-c2fa899f5bdb"
           },
           {
             "JSONConfiguration": "",
@@ -1050,7 +1090,7 @@
             "riskLevel": 2,
             "rulePrefills": [],
             "text": "Original values are kept",
-            "tmpUUID": "6512"
+            "tmpUUID": "b2a315ea-11c0-4092-92c9-557ef4042ad2"
           },
           {
             "JSONConfiguration": "",
@@ -1058,14 +1098,14 @@
             "riskLevel": 0,
             "rulePrefills": [],
             "text": "No DICOM data is used in this project",
-            "tmpUUID": "6513"
+            "tmpUUID": "a317ba24-2ecb-419d-8a7b-df81b20b9949"
           }
         ],
         "flag": "",
         "question": "DICOM - Study Description",
         "riskWeight": 1,
         "tab": "Data Risk - Multimedia Data",
-        "tmpUUID": "2099",
+        "tmpUUID": "1c790f71-7553-4b17-809f-43839d027f23",
         "tooltip": ""
       },
       {
@@ -1077,7 +1117,7 @@
             "riskLevel": 0,
             "rulePrefills": [],
             "text": "Original value is suppressed",
-            "tmpUUID": "6514"
+            "tmpUUID": "b6e576f8-0746-455c-9189-d302fe3c2c15"
           },
           {
             "JSONConfiguration": "",
@@ -1085,7 +1125,7 @@
             "riskLevel": 1,
             "rulePrefills": [],
             "text": "Original value is replaced by pseudonym (default)",
-            "tmpUUID": "6515"
+            "tmpUUID": "ffbd4798-3d72-4db6-90d5-cc7f5f4415f4"
           },
           {
             "JSONConfiguration": "",
@@ -1093,7 +1133,7 @@
             "riskLevel": 2,
             "rulePrefills": [],
             "text": "Original values are kept",
-            "tmpUUID": "6516"
+            "tmpUUID": "a39fae13-cd76-4162-91bd-25e6611b6ff5"
           },
           {
             "JSONConfiguration": "",
@@ -1101,14 +1141,14 @@
             "riskLevel": 0,
             "rulePrefills": [],
             "text": "No DICOM data is used in this project",
-            "tmpUUID": "6517"
+            "tmpUUID": "2f62fde1-c8a3-453b-bbff-4405806d2219"
           }
         ],
         "flag": "",
         "question": "DICOM - Series Description",
         "riskWeight": 1,
         "tab": "Data Risk - Multimedia Data",
-        "tmpUUID": "2100",
+        "tmpUUID": "2abc1d05-2a83-4717-b8fd-198a8910b39e",
         "tooltip": ""
       },
       {
@@ -1120,7 +1160,7 @@
             "riskLevel": 0,
             "rulePrefills": [],
             "text": "Original value is suppressed",
-            "tmpUUID": "6518"
+            "tmpUUID": "4131b5aa-8b90-400f-984f-940546e09ae4"
           },
           {
             "JSONConfiguration": "",
@@ -1128,7 +1168,7 @@
             "riskLevel": 1,
             "rulePrefills": [],
             "text": "Original value is replaced by pseudonym (default)",
-            "tmpUUID": "6519"
+            "tmpUUID": "3e3ac0bf-09b6-45a3-a40b-b63b15510e8b"
           },
           {
             "JSONConfiguration": "",
@@ -1136,7 +1176,7 @@
             "riskLevel": 2,
             "rulePrefills": [],
             "text": "Original values are kept",
-            "tmpUUID": "6520"
+            "tmpUUID": "ae617f6b-c9ed-4b20-b064-4e0949aac128"
           },
           {
             "JSONConfiguration": "",
@@ -1144,14 +1184,14 @@
             "riskLevel": 0,
             "rulePrefills": [],
             "text": "No DICOM data is used in this project",
-            "tmpUUID": "6521"
+            "tmpUUID": "ccce9148-9bae-45ce-a35d-e108b6dc1ff2"
           }
         ],
         "flag": "",
         "question": "DICOM - Contrast Bolus Agent",
         "riskWeight": 1,
         "tab": "Data Risk - Multimedia Data",
-        "tmpUUID": "2101",
+        "tmpUUID": "d847255d-19aa-4c89-b66c-fad4efedc03f",
         "tooltip": ""
       },
       {
@@ -1163,7 +1203,7 @@
             "riskLevel": 0,
             "rulePrefills": [],
             "text": "Original value is suppressed",
-            "tmpUUID": "6522"
+            "tmpUUID": "741bd732-cdb2-495e-aa75-5410bdcf5fb4"
           },
           {
             "JSONConfiguration": "",
@@ -1171,7 +1211,7 @@
             "riskLevel": 1,
             "rulePrefills": [],
             "text": "Original value is replaced by pseudonym (default)",
-            "tmpUUID": "6523"
+            "tmpUUID": "7acada63-be0c-4473-9ec5-17984f397a1c"
           },
           {
             "JSONConfiguration": "",
@@ -1179,7 +1219,7 @@
             "riskLevel": 2,
             "rulePrefills": [],
             "text": "Original values are kept",
-            "tmpUUID": "6524"
+            "tmpUUID": "14fb9b05-5ef7-4b17-a2ed-070adfcb0d78"
           },
           {
             "JSONConfiguration": "",
@@ -1187,14 +1227,14 @@
             "riskLevel": 0,
             "rulePrefills": [],
             "text": "No DICOM data is used in this project",
-            "tmpUUID": "6525"
+            "tmpUUID": "00c306fe-27cc-4240-9360-b96251b38e2e"
           }
         ],
         "flag": "",
         "question": "DICOM - Retain original values of other DICOM attributes that would be removed by default according to the recommendations of nema.org",
         "riskWeight": 1,
         "tab": "Data Risk - Multimedia Data",
-        "tmpUUID": "2102",
+        "tmpUUID": "ab793dd0-fc66-465a-8fbf-7088f0dfbb89",
         "tooltip": "Additional information: DICOM attributes that are removed by default can be found on the confidentiality list provided by nema.org http://dicom.nema.org/medical/dicom/current/output/chtml/part15/chapter_E.html"
       },
       {
@@ -1206,7 +1246,7 @@
             "riskLevel": 0,
             "rulePrefills": [],
             "text": "No genomic sequences are used in the project ",
-            "tmpUUID": "6526"
+            "tmpUUID": "c05a8385-0ab3-4898-ba79-c3b11ce23c3c"
           },
           {
             "JSONConfiguration": "",
@@ -1214,7 +1254,7 @@
             "riskLevel": 1,
             "rulePrefills": [],
             "text": "Only blurred summary statistics (e.g., MAF, p-values, ORs) are released",
-            "tmpUUID": "6527"
+            "tmpUUID": "a199c137-c272-40f6-8dd7-b765140b402f"
           },
           {
             "JSONConfiguration": "",
@@ -1222,7 +1262,7 @@
             "riskLevel": 2,
             "rulePrefills": [],
             "text": "Only exact summary statistics (e.g., MAF, p-values, ORs) are released ",
-            "tmpUUID": "6528"
+            "tmpUUID": "52bd9583-a668-47c8-9f79-d8347f84dd23"
           },
           {
             "JSONConfiguration": "",
@@ -1230,14 +1270,14 @@
             "riskLevel": 0,
             "rulePrefills": [],
             "text": "Original individual-level values are released",
-            "tmpUUID": "6529"
+            "tmpUUID": "fb9e7a98-7d89-408a-a2fc-ed0fbaae2af0"
           }
         ],
         "flag": "",
         "question": "Genomic sequences",
         "riskWeight": 3,
         "tab": "Data Risk - Genomic Data",
-        "tmpUUID": "2103",
+        "tmpUUID": "a23c522b-5f01-43ad-8094-0694c33a9ffc",
         "tooltip": "Additional Information: Note that this answer contains all other options not having aggregated results"
       },
       {
@@ -1249,7 +1289,7 @@
             "riskLevel": 0,
             "rulePrefills": [],
             "text": "No health-related data on rare diseases are included",
-            "tmpUUID": "6530"
+            "tmpUUID": "8b1354f3-f719-45e7-8509-b8907afbf030"
           },
           {
             "JSONConfiguration": "",
@@ -1257,7 +1297,7 @@
             "riskLevel": 2,
             "rulePrefills": [],
             "text": "The disease occurs less than one in 80.000 (i.e., max. 100 cases in Switzerland)",
-            "tmpUUID": "6531"
+            "tmpUUID": "15416d7b-7229-48c8-9623-83a5e3ec3495"
           },
           {
             "JSONConfiguration": "",
@@ -1265,14 +1305,14 @@
             "riskLevel": 1,
             "rulePrefills": [],
             "text": "The disease occurs less than one in 2.000 (i.e., max. 4.000 cases in Switzerland)",
-            "tmpUUID": "6532"
+            "tmpUUID": "33a20e95-e319-4a6e-9c98-aa41a503f5a9"
           }
         ],
         "flag": "",
         "question": "Is the project collecting health-related data on rare disease patients?",
         "riskWeight": 5,
         "tab": "Basic Info",
-        "tmpUUID": "2104",
+        "tmpUUID": "7f8b7134-9554-4279-b85d-d3817191f960",
         "tooltip": ""
       },
       {
@@ -1284,7 +1324,7 @@
             "riskLevel": 1,
             "rulePrefills": [],
             "text": "< 100 patients",
-            "tmpUUID": "6533"
+            "tmpUUID": "a08d077c-ea8d-439a-958f-fcf36a4567c9"
           },
           {
             "JSONConfiguration": "",
@@ -1292,7 +1332,7 @@
             "riskLevel": 2,
             "rulePrefills": [],
             "text": "100 to 1.000 patients",
-            "tmpUUID": "6534"
+            "tmpUUID": "1b43b297-77c3-48e6-b078-cd9c7f3f903e"
           },
           {
             "JSONConfiguration": "",
@@ -1300,7 +1340,7 @@
             "riskLevel": 3,
             "rulePrefills": [],
             "text": "1.000 to 5.000 patients",
-            "tmpUUID": "6535"
+            "tmpUUID": "812360a5-d349-4581-a3fb-dbf4ebd7a2ce"
           },
           {
             "JSONConfiguration": "",
@@ -1308,14 +1348,14 @@
             "riskLevel": 4,
             "rulePrefills": [],
             "text": "> 5.000 patients",
-            "tmpUUID": "6536"
+            "tmpUUID": "923f4354-9a69-4ee4-8d50-657af02b59dd"
           }
         ],
         "flag": "",
         "question": "What is the number of patients planned to be included in the cohort?",
         "riskWeight": 2,
         "tab": "Basic Info",
-        "tmpUUID": "2105",
+        "tmpUUID": "8c8026ed-3fa2-4b4a-8a7d-5b9ce5b73e92",
         "tooltip": "Additional information: Note that this question is related to the impact of data leakage. With a larger dataset, the likelihood of identifying a patient increases compared to a smaller dataset containing only 500 patients."
       },
       {
@@ -1327,7 +1367,7 @@
             "riskLevel": 2,
             "rulePrefills": [],
             "text": "25 to 100 datapoints",
-            "tmpUUID": "6537"
+            "tmpUUID": "335f04c6-cf5c-4542-bd5d-fe26989a3aef"
           },
           {
             "JSONConfiguration": "",
@@ -1335,7 +1375,7 @@
             "riskLevel": 1,
             "rulePrefills": [],
             "text": "< 25 datapoints",
-            "tmpUUID": "6538"
+            "tmpUUID": "27545c3c-ea17-42b2-993f-3ba3ae1b07c9"
           },
           {
             "JSONConfiguration": "",
@@ -1343,7 +1383,7 @@
             "riskLevel": 3,
             "rulePrefills": [],
             "text": "100 to 1000 datapoints",
-            "tmpUUID": "6539"
+            "tmpUUID": "bf543010-c5b5-41cc-8045-3de63911d105"
           },
           {
             "JSONConfiguration": "",
@@ -1351,14 +1391,14 @@
             "riskLevel": 4,
             "rulePrefills": [],
             "text": "> 1000 datapoints",
-            "tmpUUID": "6540"
+            "tmpUUID": "d7cf2d23-e062-4464-97e9-9b0ef5ff1dff"
           }
         ],
         "flag": "",
         "question": "What is the number of the individual datapoints per patient included in the dataset?",
         "riskWeight": 2,
         "tab": "Basic Info",
-        "tmpUUID": "2106",
+        "tmpUUID": "f40d7d82-cbe9-46c9-bb8e-b204204e53dc",
         "tooltip": "Additional information: Note that datapoints mean each individual information and not variables only. For example: each lab measurement to be included in the dataset"
       },
       {
@@ -1370,7 +1410,7 @@
             "riskLevel": 0,
             "rulePrefills": [],
             "text": "No",
-            "tmpUUID": "6541"
+            "tmpUUID": "5c55338a-f19c-4610-8ad9-3df866f5a36b"
           },
           {
             "JSONConfiguration": "",
@@ -1378,14 +1418,14 @@
             "riskLevel": 1,
             "rulePrefills": [],
             "text": "Yes",
-            "tmpUUID": "6542"
+            "tmpUUID": "2a0c8e27-ffac-4590-bc1b-8523f9b7bd80"
           }
         ],
         "flag": "",
         "question": "Is one or more of the following stigmatizing information included in the dataset?\n\n- religious, ideological, political or trade union-related views or activities\n- disease associated with stigma (e.g. HIV status, psycological conditions), the intimate sphere or the racial origin\n- social security measures\n- administrative or criminal proceedings and sanctions",
         "riskWeight": 5,
         "tab": "Basic Info",
-        "tmpUUID": "2107",
+        "tmpUUID": "b7fd3f34-95c4-4ceb-a413-257b4e110a22",
         "tooltip": ""
       },
       {
@@ -1397,7 +1437,7 @@
             "riskLevel": 0,
             "rulePrefills": [],
             "text": "In Switzerland",
-            "tmpUUID": "6543"
+            "tmpUUID": "019e78b2-8cbd-42b0-b339-221351ca0ddb"
           },
           {
             "JSONConfiguration": "",
@@ -1405,7 +1445,7 @@
             "riskLevel": 1,
             "rulePrefills": [],
             "text": "In EU or another country providing an adequate level of protection, recognized as such by the Federal Council",
-            "tmpUUID": "6544"
+            "tmpUUID": "8f83a541-5de4-4657-9b66-74e25d369f97"
           },
           {
             "JSONConfiguration": "",
@@ -1413,7 +1453,7 @@
             "riskLevel": 2,
             "rulePrefills": [],
             "text": "In a country that does not provide an adequate level of protection, but with adequate safeguards according to Swiss law",
-            "tmpUUID": "6545"
+            "tmpUUID": "ab49d77d-76e0-484a-b797-19251e2e0f80"
           },
           {
             "JSONConfiguration": "",
@@ -1421,14 +1461,14 @@
             "riskLevel": 0,
             "rulePrefills": [],
             "text": "In a country that does not provide an adequate level of protection and without adequate safeguards according to Swiss law",
-            "tmpUUID": "6546"
+            "tmpUUID": "d6d98f85-b5df-47a0-98a3-aee1b1abce28"
           }
         ],
         "flag": "",
         "question": "In which jurisdiction the project data is planned to be stored and processed?\n",
         "riskWeight": 2,
         "tab": "Administrative",
-        "tmpUUID": "2108",
+        "tmpUUID": "2b8091c5-1a5c-4c16-b778-59036dbe390e",
         "tooltip": "Additional information: Please select multiple answers, if needed. For adequate safeguards please refer to the Federal Act on Data Protection (FADP) Art 16: https://www.fedlex.admin.ch/eli/cc/2022/491/en and to the Federal Data Protection and Information Commissioner (FDPIC):https://www.edoeb.admin.ch/edoeb/en/home/datenschutz/arbeit_wirtschaft/datenuebermittlung_ausland.html Please see list of countries with sufficient data protection: https://www.fedlex.admin.ch/eli/cc/2022/568/de#annex_1"
       },
       {
@@ -1440,7 +1480,7 @@
             "riskLevel": -1,
             "rulePrefills": [],
             "text": "Yes (default)",
-            "tmpUUID": "6547"
+            "tmpUUID": "9c6ca691-7b18-4e94-9323-771ff9b35703"
           },
           {
             "JSONConfiguration": "",
@@ -1448,14 +1488,14 @@
             "riskLevel": 0,
             "rulePrefills": [],
             "text": "No",
-            "tmpUUID": "6548"
+            "tmpUUID": "6044d4d6-f152-4456-ae35-d0707afa2943"
           }
         ],
         "flag": "",
         "question": "Is there a legal agreement between the data provider(s) and the data recipient(s) (e.g., a data transfer and use agreement) that regulates  the conditions under which data are disclosed to the data recipient(s)?",
         "riskWeight": 4,
         "tab": "Administrative",
-        "tmpUUID": "2109",
+        "tmpUUID": "8fef3ba1-17f6-4cac-9c79-470bbab6d6e7",
         "tooltip": "Please find the SPHN legal agreement templates for a data transfer and use agreement here: https://sphn.ch/services/dtua/"
       },
       {
@@ -1467,7 +1507,7 @@
             "riskLevel": -1,
             "rulePrefills": [],
             "text": "Yes (default)",
-            "tmpUUID": "6549"
+            "tmpUUID": "eaeeb493-1077-47a6-b9eb-b1c645cd1f4e"
           },
           {
             "JSONConfiguration": "",
@@ -1475,14 +1515,14 @@
             "riskLevel": 0,
             "rulePrefills": [],
             "text": "No",
-            "tmpUUID": "6550"
+            "tmpUUID": "088d30e6-ad83-493e-b95a-dfad951065dd"
           }
         ],
         "flag": "",
         "question": "Does the legal agreement between the data provider(s) and the data recipient(s) forbid the recipient(s) from disclosing the data to third parties or only with measures equivalent to those contractually agreed between the data provider and the data recipient?",
         "riskWeight": 4,
         "tab": "Administrative",
-        "tmpUUID": "2110",
+        "tmpUUID": "da2163b9-5111-44d3-a971-5164a37047a8",
         "tooltip": "If allowed, the data recipient may only share data with third parties under certain conditions, e.g a legal agreement between all parties and the third party. The new agreement with the third party needs to respect equivalent safeguards as imposed by the initial contract."
       },
       {
@@ -1494,7 +1534,7 @@
             "riskLevel": -1,
             "rulePrefills": [],
             "text": "Yes",
-            "tmpUUID": "6551"
+            "tmpUUID": "88bf2b37-d985-455c-a8b2-5cde78e0fbe7"
           },
           {
             "JSONConfiguration": "",
@@ -1502,14 +1542,14 @@
             "riskLevel": 0,
             "rulePrefills": [],
             "text": "No (default)",
-            "tmpUUID": "6552"
+            "tmpUUID": "9e63ee2e-c2eb-4fa2-832c-71d0f222309b"
           }
         ],
         "flag": "",
         "question": "Does the legal agreement between the data provider(s) and the data recipient(s) stipulate that external audits of the data management practices of the data recipient may be performed?",
         "riskWeight": 4,
         "tab": "Administrative",
-        "tmpUUID": "2111",
+        "tmpUUID": "64bce343-64bc-4d15-bd23-c55c7f536db2",
         "tooltip": "\tAn external audit is an audit carried out by an external company on behalf of a data provider."
       },
       {
@@ -1521,7 +1561,7 @@
             "riskLevel": -1,
             "rulePrefills": [],
             "text": "Yes",
-            "tmpUUID": "6553"
+            "tmpUUID": "9e104d76-4e2b-4a33-85da-d67d4dcba711"
           },
           {
             "JSONConfiguration": "",
@@ -1529,14 +1569,14 @@
             "riskLevel": 0,
             "rulePrefills": [],
             "text": "No (default)",
-            "tmpUUID": "6554"
+            "tmpUUID": "7a57eb60-08d3-428c-91bf-f0bdd33660b8"
           }
         ],
         "flag": "",
         "question": "Does the legal agreement between the data provider(s) and the data recipient(s) stipulate that regular external audits of privacy and security practices of the data recipient may be performed?",
         "riskWeight": 4,
         "tab": "Administrative",
-        "tmpUUID": "2112",
+        "tmpUUID": "dbfe9aba-4154-44ea-af0e-44ade38df448",
         "tooltip": "\tAn external audit is an audit carried out by an external company on behalf of a data provider."
       },
       {
@@ -1548,7 +1588,7 @@
             "riskLevel": -1,
             "rulePrefills": [],
             "text": "Yes",
-            "tmpUUID": "6555"
+            "tmpUUID": "8e9d485f-19b9-441c-aab7-f1d891143bf1"
           },
           {
             "JSONConfiguration": "",
@@ -1556,14 +1596,14 @@
             "riskLevel": 0,
             "rulePrefills": [],
             "text": "No (default)",
-            "tmpUUID": "6556"
+            "tmpUUID": "6faac6ff-24ab-40be-a0a7-fb3036045cfd"
           }
         ],
         "flag": "",
         "question": "Does the legal agreement between the data provider(s) and the data recipient(s) associate penalties in case of health-related data misuse by the recipient?",
         "riskWeight": 4,
         "tab": "Administrative",
-        "tmpUUID": "2113",
+        "tmpUUID": "82ba13f3-acfb-435f-a9b7-6b139509958b",
         "tooltip": "\tNote that the SPHN legal agreement template (link: https://sphn.ch/services/dtua/) do not foresee contractual penalties. "
       },
       {
@@ -1575,7 +1615,7 @@
             "riskLevel": -1,
             "rulePrefills": [],
             "text": "Yes ",
-            "tmpUUID": "6557"
+            "tmpUUID": "7251a40f-82da-4110-8eed-bec747c6feae"
           },
           {
             "JSONConfiguration": "",
@@ -1583,14 +1623,14 @@
             "riskLevel": 0,
             "rulePrefills": [],
             "text": "No (default)",
-            "tmpUUID": "6558"
+            "tmpUUID": "f1e23185-3738-471a-9523-a6639816d946"
           }
         ],
         "flag": "",
         "question": "Are the recipient's staff members personally bound by a duty of confidentiality (e.g. confidential agreement, access policy imposing a duty of confidentiality, personal legal obligation of confidentiality)? ",
         "riskWeight": 6,
         "tab": "Administrative",
-        "tmpUUID": "2114",
+        "tmpUUID": "21ab8e99-7066-4dc8-84ca-46b39cb8ef54",
         "tooltip": "Autor: This does not refer to the legal agreement between data provider(s) and data recipient(s)."
       },
       {
@@ -1602,7 +1642,7 @@
             "riskLevel": 0,
             "rulePrefills": [],
             "text": "On  computer(s) controlled by the hospital IT department of the data recipient",
-            "tmpUUID": "6559"
+            "tmpUUID": "a73076ae-3c66-4e75-909c-59c301ee6eb9"
           },
           {
             "JSONConfiguration": "",
@@ -1610,7 +1650,7 @@
             "riskLevel": -2,
             "rulePrefills": [],
             "text": "On the hospital IT infrastructure of the data recipient ",
-            "tmpUUID": "6560"
+            "tmpUUID": "6bf3bf8c-f3f9-4250-b363-b55f49440e33"
           },
           {
             "JSONConfiguration": "",
@@ -1618,7 +1658,7 @@
             "riskLevel": -1,
             "rulePrefills": [],
             "text": "On an external IT infrastructure that complies with BioMedIT Information Security Policy or similar policies (e.g., BioMedIT network) (default)",
-            "tmpUUID": "6561"
+            "tmpUUID": "8e1f1cef-5998-4b46-a893-1a33e64ce4b0"
           },
           {
             "JSONConfiguration": "",
@@ -1626,7 +1666,7 @@
             "riskLevel": 0,
             "rulePrefills": [],
             "text": "On an external IT infrastructure that DOES NOT comply with BioMedIT Information Security Policy or similar policies (e.g., public cloud)",
-            "tmpUUID": "6562"
+            "tmpUUID": "b4de53f7-d3c6-42ef-8af8-bf032063e3c8"
           },
           {
             "JSONConfiguration": "",
@@ -1634,14 +1674,14 @@
             "riskLevel": 0,
             "rulePrefills": [],
             "text": "On PRIVATE computer (e.g., desktop, laptop, etc.)",
-            "tmpUUID": "6563"
+            "tmpUUID": "caa7417b-b74a-4be2-8337-97f41b892ec0"
           }
         ],
         "flag": "",
         "question": "Where does the project data will be stored and processed (select the worst answer that applies)?",
         "riskWeight": 10,
         "tab": "IT",
-        "tmpUUID": "2115",
+        "tmpUUID": "fe0302ea-484c-46a6-9e0f-a29ee7fb5e9f",
         "tooltip": "\tIf the BioMedIT network is used, this answer needs to be selected. The risk is augmented in the following question if the conditions of the Information Security Policy of BioMedIT are not met. Please take also into account that cloud servers might be hosted abroad. See also Contextual risks. Note that servers of clouds might be hosted abroad without adequate security measures. Please consider also the question C-01 accordingly. "
       },
       {
@@ -1653,7 +1693,7 @@
             "riskLevel": 0,
             "rulePrefills": [],
             "text": "No (default)",
-            "tmpUUID": "6564"
+            "tmpUUID": "ae0f9c39-37a7-41d4-9b7c-c7a0411f20c8"
           },
           {
             "JSONConfiguration": "",
@@ -1661,14 +1701,14 @@
             "riskLevel": -1,
             "rulePrefills": [],
             "text": "Yes",
-            "tmpUUID": "6565"
+            "tmpUUID": "da220396-bb32-460c-b151-f1397d6adfd1"
           }
         ],
         "flag": "",
         "question": "If the project data is stored or processed on the IT infrastructure of an external provider, does the Management System of the provider's Information Security has been also audited and certified from an Information Security perspective (e.g., ISO 27001) and from a data protection perspective (Federal data Protection Act, General Data Protection Regulation of the European Union,...)",
         "riskWeight": 10,
         "tab": "IT",
-        "tmpUUID": "2116",
+        "tmpUUID": "7747db6a-54d0-409f-a57f-e7f998f49f03",
         "tooltip": "Note that the BioMedIT network is not certified. Choose the option \"No (default)\" also if this question is not applicable"
       },
       {
@@ -1680,7 +1720,7 @@
             "riskLevel": -1,
             "rulePrefills": [],
             "text": "Yes (default)",
-            "tmpUUID": "6566"
+            "tmpUUID": "a7d81cf2-323a-4ff3-a9a9-cfc3ba3ddf14"
           },
           {
             "JSONConfiguration": "",
@@ -1688,14 +1728,14 @@
             "riskLevel": 0,
             "rulePrefills": [],
             "text": "No",
-            "tmpUUID": "6567"
+            "tmpUUID": "716dcdfb-8132-482a-a78b-7d6f0bc34dab"
           }
         ],
         "flag": "",
         "question": "If the project data is stored or processed on the IT infrastructure of an external provider, is there a legal processing agreement with the external provider of the infrastructure such as the BioMedIT Network (e.g., data processor agreement)?",
         "riskWeight": 10,
         "tab": "IT",
-        "tmpUUID": "2117",
+        "tmpUUID": "230fd6f3-e3b2-4fee-85d0-63902a44f352",
         "tooltip": "In case the external processor and It infratsructure refers to the BioMedIT network, the legal agreement has to contain a Data Transfer and Processing agreement (DTPA) part. It regulates the data access rules and security requirements to ensure appropriate confidentiality, integrity, availability and resilience of the systems with regard to processing of the data. Choose the option \"No\" also if this question is not applicable"
       },
       {
@@ -1707,7 +1747,7 @@
             "riskLevel": 0,
             "rulePrefills": [],
             "text": "No",
-            "tmpUUID": "6568"
+            "tmpUUID": "1fd0eb3c-2d86-4d58-a222-24ddb02ce817"
           },
           {
             "JSONConfiguration": "",
@@ -1715,14 +1755,14 @@
             "riskLevel": 0,
             "rulePrefills": [],
             "text": "Yes",
-            "tmpUUID": "6569"
+            "tmpUUID": "aa9ac557-b666-45dd-8103-e0a3e2462dd4"
           }
         ],
         "flag": "",
         "question": "Does anyone in the data recipient's project team has access to mapping table for patient re-identification (i.e., data subjects)?",
         "riskWeight": 3,
         "tab": "Contextual",
-        "tmpUUID": "2118",
+        "tmpUUID": "8de7cb6f-3e85-4ab8-a36a-b529de96057d",
         "tooltip": "Additional information: This question concerns the effective access to the mapping table and not the storage of the mapping table (the \"key\") that allows re-identification of patients."
       },
       {
@@ -1734,7 +1774,7 @@
             "riskLevel": 2,
             "rulePrefills": [],
             "text": "Internal users of the hospital (i.e., the provider) from where the data is coming from, but who DO NOT HAVE access to the Electronic Health Records (EHR) of the hospital or other registries containing data from the same patients",
-            "tmpUUID": "6570"
+            "tmpUUID": "9135fff9-59f9-4c6a-bbf2-edec2ed41c9b"
           },
           {
             "JSONConfiguration": "",
@@ -1742,7 +1782,7 @@
             "riskLevel": 3,
             "rulePrefills": [],
             "text": "Internal users of the hospital (i.e., the provider) from where the data is coming from and who DO HAVE access to the Electronic Health Records (EHR) of the hospital or other registries containing data from the same patients (this excludes internal Clinical Data Warehouse (CDW) employees)",
-            "tmpUUID": "6571"
+            "tmpUUID": "f4cc26ba-e556-47bd-85bc-1395115fe12a"
           },
           {
             "JSONConfiguration": "",
@@ -1750,14 +1790,14 @@
             "riskLevel": 1,
             "rulePrefills": [],
             "text": "External users outside of the hospital",
-            "tmpUUID": "6572"
+            "tmpUUID": "8ad5d557-4b61-4c46-9afc-e147e5d770b0"
           }
         ],
         "flag": "",
         "question": "Who will have access to health-related data shared during the project?\nMultiple selections possible.",
         "riskWeight": 3,
         "tab": "Contextual",
-        "tmpUUID": "2119",
+        "tmpUUID": "347cb644-d272-4ae2-81eb-be3243887e52",
         "tooltip": "Additional information: \u201cIn this question, \u201caccess\u201d does not refer to data access for de-identification purposes (e.g. access by data engineers/clinical data warehouse)\u201d."
       }
     ]
