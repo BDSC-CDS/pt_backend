@@ -1,0 +1,110 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-{{ .Chart.Name }}-configmap
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "pt-backend.labels" . | nindent 4 }}
+data:
+  service_configuration.json: |
+    {
+      "database_schema": {
+        "url": "jdbc:postgresql://{{ .Values.datastore.host }}:{{ .Values.datastore.port }}/{{ .Values.datastore.database }}",
+        "username": "postgres",
+        "password": "{{ .Values.datastore.password }}"
+      },
+      "population_model_table": "MY_ARX_DEMOG_BIS",
+      "population_model_safe_harbor_table": "MY_ARX_DEMOG_SAFE_HARBOR_BIS",
+      "suppression_limit": 0.5,
+      "nb_solutions": 1,
+      "marketer_risk": 0.2,
+      "highest_prosecutor_risk": 0.5,
+      "average_prosecutor_risk": 0.2,
+      "is_used_population_model": false,
+      "privacy_models": [
+        {
+          "name": "k_anonymity",
+          "params": [
+            {
+              "name": "k",
+              "value": 2.0
+            }
+          ],
+          "involvedAttribute": null
+        }
+      ],
+      "ipp_name": "IPP_MASTER",
+      "numero_sejour_name": "NUMERO_SEJOUR",
+      "date_entree_sejour_name": "DATE_ENTREE_SEJOUR",
+      "null_value": "NULL",
+      "internal_chuv_risk": 0.5,
+      "multicentric_risk": 0.4,
+      "publication_risk": 0.2,
+      "sant_offsets": {
+        "0": 0,
+        "1": 31,
+        "2": 366,
+        "3": -1
+      },
+      "attributes": {
+        "IPP_MASTER": {
+          "type": "IDENTIFYING_ATTRIBUTE"
+        },
+        "DATE_NAISSANCE": {
+          "type": "QUASI_IDENTIFYING_ATTRIBUTE",
+          "weight": 0.5,
+          "hierarchy_table": "DATE_HIERARCHY"
+        },
+        "LIEU_NAISSANCE": {
+          "type": "QUASI_IDENTIFYING_ATTRIBUTE",
+          "weight": 0.5,
+          "hierarchy_table": "LIEU_NAISSANCE_HIERARCHY"
+        },
+        "SEXE": {
+          "type": "QUASI_IDENTIFYING_ATTRIBUTE",
+          "weight": 0.5,
+          "hierarchy_table": "SEXE_HIERARCHY"
+        },
+        "DATE_DECES_CHUV": {
+          "type": "QUASI_IDENTIFYING_ATTRIBUTE",
+          "weight": 0.5,
+          "hierarchy_table": "DATE_HIERARCHY"
+        },
+        "NATIONALITE": {
+          "type": "QUASI_IDENTIFYING_ATTRIBUTE",
+          "weight": 0.5,
+          "hierarchy_table": "NATIONALITE_HIERARCHY"
+        },
+        "CODE_POSTAL": {
+          "type": "QUASI_IDENTIFYING_ATTRIBUTE",
+          "weight": 0.5,
+          "hierarchy_table": "CODE_POSTAL_HIERARCHY"
+        },
+        "VILLE": {
+          "type": "QUASI_IDENTIFYING_ATTRIBUTE",
+          "weight": 0.5,
+          "hierarchy_table": "VILLE_HIERARCHY"
+        },
+        "CODE_CANTON": {
+          "type": "QUASI_IDENTIFYING_ATTRIBUTE",
+          "weight": 0.5,
+          "hierarchy_table": "CODE_CANTON_HIERARCHY"
+        },
+        "CODE_PAYS": {
+          "type": "QUASI_IDENTIFYING_ATTRIBUTE",
+          "weight": 0.5,
+          "hierarchy_table": "CODE_PAYS_HIERARCHY"
+        },
+        "CODE_LIB_LIEU_ORIGINE": {
+          "type": "QUASI_IDENTIFYING_ATTRIBUTE",
+          "weight": 0.5,
+          "hierarchy_table": "CODE_LIB_ORIGINE_HIERARCHY"
+        },
+        "NUMERO_SEJOUR": {
+          "type": "IDENTIFYING_ATTRIBUTE"
+        },
+        "DATE_ENTREE_SEJOUR": {
+          "type": "INSENSITIVE_ATTRIBUTE"
+        }
+      }
+    }
