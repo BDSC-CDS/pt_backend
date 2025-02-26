@@ -30,13 +30,6 @@ ingress:
   annotations: 
     kubernetes.io/tls-acme: "true"
     nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
-  
-# This defines the persistence options, allowing to mount a PVC.
-persistence:
-  enabled: true
-  size: 2Gi
-  accessMode: ReadWriteOnce
-  storageClass: microk8s-hostpath
 
 # Deployment specific options
 podAnnotations: {}
