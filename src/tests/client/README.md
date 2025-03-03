@@ -123,7 +123,8 @@ Class | Method | HTTP request | Description
 *QuestionnaireServiceApi* | [**questionnaire_service_create_questionnaire**](docs/QuestionnaireServiceApi.md#questionnaire_service_create_questionnaire) | **POST** /api/v1/questionnaire | Create a questionnaire
 *QuestionnaireServiceApi* | [**questionnaire_service_create_questionnaire_version**](docs/QuestionnaireServiceApi.md#questionnaire_service_create_questionnaire_version) | **POST** /api/v1/questionnaire/version | Create a questionnaire version
 *QuestionnaireServiceApi* | [**questionnaire_service_create_reply**](docs/QuestionnaireServiceApi.md#questionnaire_service_create_reply) | **POST** /api/v1/questionnaire/replies | Create questionnaires reply
-*QuestionnaireServiceApi* | [**questionnaire_service_delete_questionnaire**](docs/QuestionnaireServiceApi.md#questionnaire_service_delete_questionnaire) | **DELETE** /api/v1/questionnaire/{id} | Create a questionnaire
+*QuestionnaireServiceApi* | [**questionnaire_service_delete_questionnaire**](docs/QuestionnaireServiceApi.md#questionnaire_service_delete_questionnaire) | **DELETE** /api/v1/questionnaire/{id} | Delete a questionnaire
+*QuestionnaireServiceApi* | [**questionnaire_service_delete_reply**](docs/QuestionnaireServiceApi.md#questionnaire_service_delete_reply) | **DELETE** /api/v1/questionnaire/replies/{id} | Delete a questionnaires reply
 *QuestionnaireServiceApi* | [**questionnaire_service_get_questionnaire**](docs/QuestionnaireServiceApi.md#questionnaire_service_get_questionnaire) | **GET** /api/v1/questionnaire/{id} | Get questionnaires
 *QuestionnaireServiceApi* | [**questionnaire_service_get_reply**](docs/QuestionnaireServiceApi.md#questionnaire_service_get_reply) | **GET** /api/v1/questionnaire/replies/{id} | Get a questionnaires reply
 *QuestionnaireServiceApi* | [**questionnaire_service_list_questionnaire**](docs/QuestionnaireServiceApi.md#questionnaire_service_list_questionnaire) | **GET** /api/v1/questionnaire | List questionnaires
@@ -175,6 +176,8 @@ Class | Method | HTTP request | Description
  - [TemplatebackendDeleteDatasetResult](docs/TemplatebackendDeleteDatasetResult.md)
  - [TemplatebackendDeleteQuestionnaireReply](docs/TemplatebackendDeleteQuestionnaireReply.md)
  - [TemplatebackendDeleteQuestionnaireResult](docs/TemplatebackendDeleteQuestionnaireResult.md)
+ - [TemplatebackendDeleteReplyReply](docs/TemplatebackendDeleteReplyReply.md)
+ - [TemplatebackendDeleteReplyResult](docs/TemplatebackendDeleteReplyResult.md)
  - [TemplatebackendDeleteUserReply](docs/TemplatebackendDeleteUserReply.md)
  - [TemplatebackendExportConfigReply](docs/TemplatebackendExportConfigReply.md)
  - [TemplatebackendGetConfigsReply](docs/TemplatebackendGetConfigsReply.md)

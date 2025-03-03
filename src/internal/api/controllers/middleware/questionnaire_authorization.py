@@ -59,6 +59,12 @@ class QuestionnaireServiceControllerAuthentication():
         
         return self.next.questionnaire_service_list_questionnaire(user, offset, limit)
     
+    def questionnaire_service_delete_reply(self, user, id: int):
+        if not is_authenticated(user):
+            return None, 403
+        
+        return self.next.questionnaire_service_delete_reply(user, id)
+    
     def questionnaire_service_share_reply(self, user, id: int, body: QuestionnaireServiceShareReplyRequest):
         if not is_authenticated(user):
             return None, 403

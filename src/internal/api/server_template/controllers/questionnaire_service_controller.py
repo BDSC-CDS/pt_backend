@@ -16,6 +16,7 @@ from server_template.models.templatebackend_create_questionnaire_version_request
 from server_template.models.templatebackend_create_reply_reply import TemplatebackendCreateReplyReply
 from server_template.models.templatebackend_create_reply_request import TemplatebackendCreateReplyRequest
 from server_template.models.templatebackend_delete_questionnaire_reply import TemplatebackendDeleteQuestionnaireReply
+from server_template.models.templatebackend_delete_reply_reply import TemplatebackendDeleteReplyReply
 from server_template.models.templatebackend_get_questionnaire_reply import TemplatebackendGetQuestionnaireReply
 from server_template.models.templatebackend_get_reply_reply import TemplatebackendGetReplyReply
 from server_template.models.templatebackend_list_questionnaire_reply import TemplatebackendListQuestionnaireReply
@@ -26,7 +27,7 @@ from server_template import util
 
 #from src.internal.api.controllers import questionnaire_service_controller
 #controller_functions =  [func_tupple[0] for func_tupple in getmembers(questionnaire_service_controller, isfunction)]
-#needed_functions = ["questionnaire_service_create_questionnaire", "questionnaire_service_create_questionnaire_version", "questionnaire_service_create_reply", "questionnaire_service_delete_questionnaire", "questionnaire_service_get_questionnaire", "questionnaire_service_get_reply", "questionnaire_service_list_questionnaire", "questionnaire_service_list_replies", "questionnaire_service_share_reply"]
+#needed_functions = ["questionnaire_service_create_questionnaire", "questionnaire_service_create_questionnaire_version", "questionnaire_service_create_reply", "questionnaire_service_delete_questionnaire", "questionnaire_service_delete_reply", "questionnaire_service_get_questionnaire", "questionnaire_service_get_reply", "questionnaire_service_list_questionnaire", "questionnaire_service_list_replies", "questionnaire_service_share_reply"]
 #for op in needed_functions:
 #    if op not in controller_functions:
 #        raise NotImplementedError("operation " + op + " is not implemented by src.internal.api.controllers.questionnaire_service_controller")
@@ -34,7 +35,7 @@ from server_template import util
 class QuestionnaireServiceController:
     def __init__(self, controller):
         #controller_functions =  [func_tupple[0] for func_tupple in getmembers(controller, ismethod)]
-        #needed_functions = ["questionnaire_service_create_questionnaire", "questionnaire_service_create_questionnaire_version", "questionnaire_service_create_reply", "questionnaire_service_delete_questionnaire", "questionnaire_service_get_questionnaire", "questionnaire_service_get_reply", "questionnaire_service_list_questionnaire", "questionnaire_service_list_replies", "questionnaire_service_share_reply"]
+        #needed_functions = ["questionnaire_service_create_questionnaire", "questionnaire_service_create_questionnaire_version", "questionnaire_service_create_reply", "questionnaire_service_delete_questionnaire", "questionnaire_service_delete_reply", "questionnaire_service_get_questionnaire", "questionnaire_service_get_reply", "questionnaire_service_list_questionnaire", "questionnaire_service_list_replies", "questionnaire_service_share_reply"]
         #for op in needed_functions:
         #    if op not in controller_functions:
         #        raise NotImplementedError("operation " + op + " is not implemented by provided controller")
@@ -92,9 +93,9 @@ class QuestionnaireServiceController:
 
 
     def questionnaire_service_delete_questionnaire(self, user, id: str):
-        """Create a questionnaire
+        """Delete a questionnaire
 
-        This endpoint creates a questionnaire
+        This endpoint allows to delete a questionnaire
 
         :param id: 
         :type id: str
@@ -103,6 +104,20 @@ class QuestionnaireServiceController:
         """
 
         return self.controller.questionnaire_service_delete_questionnaire(user, id)
+
+
+    def questionnaire_service_delete_reply(self, user, id: int):
+        """Delete a questionnaires reply
+
+        This endpoint allows to delete a questionnaire reply
+
+        :param id: 
+        :type id: int
+
+        :rtype: Union[TemplatebackendDeleteReplyReply, Tuple[TemplatebackendDeleteReplyReply, int], Tuple[TemplatebackendDeleteReplyReply, int, Dict[str, str]]
+        """
+
+        return self.controller.questionnaire_service_delete_reply(user, id)
 
 
     def questionnaire_service_get_questionnaire(self, user, id: int):

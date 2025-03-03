@@ -21,6 +21,9 @@ class QuestionnaireService:
         #     f.write(str(version))
         return self.questionnaire_store.create_questionnaire_version(user.tenantid, user.id, questionnaire_id, version)
     
+    def delete_questionnaire(self, tenantid: int, userid: int, id: int) -> bool:
+        return self.questionnaire_store.delete_questionnaire(tenantid, userid, id)
+    
     def list_questionnaires(self, tenantid: int, userid: int, offset: int = 0, limit: int = None) -> Questionnaire:
         questionnaires = self.questionnaire_store.list_questionnaires(tenantid, userid, offset, limit)
         return questionnaires
@@ -31,6 +34,9 @@ class QuestionnaireService:
     
     def get_reply(self, user, reply_id: int) -> Reply:
         return self.questionnaire_store.get_reply(user.tenantid, user.id, reply_id)
+    
+    def delete_reply(self, user, reply_id: int) -> bool:
+        return self.questionnaire_store.delete_reply(user.tenantid, user.id, reply_id)
     
     def list_replies(self, user, offset: int=None, limit: int=None) -> list[Reply]:
         return self.questionnaire_store.list_replies(user.tenantid, user.id, offset, limit)

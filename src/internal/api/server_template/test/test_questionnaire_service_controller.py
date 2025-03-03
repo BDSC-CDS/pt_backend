@@ -13,6 +13,7 @@ from server_template.models.templatebackend_create_questionnaire_version_request
 from server_template.models.templatebackend_create_reply_reply import TemplatebackendCreateReplyReply
 from server_template.models.templatebackend_create_reply_request import TemplatebackendCreateReplyRequest
 from server_template.models.templatebackend_delete_questionnaire_reply import TemplatebackendDeleteQuestionnaireReply
+from server_template.models.templatebackend_delete_reply_reply import TemplatebackendDeleteReplyReply
 from server_template.models.templatebackend_get_questionnaire_reply import TemplatebackendGetQuestionnaireReply
 from server_template.models.templatebackend_get_reply_reply import TemplatebackendGetReplyReply
 from server_template.models.templatebackend_list_questionnaire_reply import TemplatebackendListQuestionnaireReply
@@ -87,7 +88,7 @@ class TestQuestionnaireServiceController(BaseTestCase):
     def test_questionnaire_service_delete_questionnaire(self):
         """Test case for questionnaire_service_delete_questionnaire
 
-        Create a questionnaire
+        Delete a questionnaire
         """
         headers = { 
             'Accept': 'application/json',
@@ -95,6 +96,22 @@ class TestQuestionnaireServiceController(BaseTestCase):
         }
         response = self.client.open(
             '/api/v1/questionnaire/{id}'.format(id='id_example'),
+            method='DELETE',
+            headers=headers)
+        self.assert200(response,
+                       'Response body is : ' + response.data.decode('utf-8'))
+
+    def test_questionnaire_service_delete_reply(self):
+        """Test case for questionnaire_service_delete_reply
+
+        Delete a questionnaires reply
+        """
+        headers = { 
+            'Accept': 'application/json',
+            'Bearer': 'special-key',
+        }
+        response = self.client.open(
+            '/api/v1/questionnaire/replies/{id}'.format(id=56),
             method='DELETE',
             headers=headers)
         self.assert200(response,
