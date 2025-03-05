@@ -4,7 +4,7 @@ from .questionnaire import (
     QuestionnaireQuestionAnswer,
 )
 
-questionnaire_v2 = QuestionnaireVersion(
+questionnaire_v2_0 = QuestionnaireVersion(
     version="2.0.0",
     questions=[
         QuestionnaireQuestion(

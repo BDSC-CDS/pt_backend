@@ -1,6 +1,7 @@
 from src.pkg.user.model.user import User
 from src.pkg.questionnaire.model.questionnaire import Questionnaire
-from src.pkg.questionnaire.model.questionnaire_v2 import questionnaire_v2
+from src.pkg.questionnaire.model.questionnaire_v2_0 import questionnaire_v2_0
+from src.pkg.questionnaire.model.questionnaire_v2_1 import questionnaire_v2_1
 
 class Steward:
     def __init__(self, steward_config, users_service, questionnaire_service):
@@ -66,7 +67,7 @@ class Steward:
                         userid=self.admin_user.id, 
                         tenantid=self.admin_user.tenantid, 
                         name=self.config.questionnaire.name, 
-                        versions=[questionnaire_v2],
+                        versions=[questionnaire_v2_1],
                     )
                 )
                 print("Initial questionnaire created.")
