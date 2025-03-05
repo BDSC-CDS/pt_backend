@@ -2,16 +2,16 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: {{ .Release.Name }}-{{ .Chart.Name }}-configmap
-  namespace: {{ .Release.Namespace }}
+  namespace: {{ .Release.Namespace }}{{- if .Values.namespace }}{ .Values.namespace }{{- end }}
   labels:
-    {{- include "pt-backend.labels" . | nindent 4 }}
+    {{- include "pt-arx-service-chart.labels" . | nindent 4 }}
 data:
   service_configuration.json: |
     {
       "database_schema": {
-        "url": "jdbc:postgresql://{{ .Values.datastore.host }}:{{ .Values.datastore.port }}/{{ .Values.datastore.database }}",
-        "username": "postgres",
-        "password": "{{ .Values.datastore.password }}"
+        "url": "jdbc:postgresql://{{ .Values.config.datastore.host }}:5432/{{ .Values.config.datastore.database }}",
+        "username": "{{ .Values.config.datastore.username }}",
+        "password": "{{ .Values.postgresql.secrets.postgresPassword }}"
       },
       "population_model_table": "MY_ARX_DEMOG_BIS",
       "population_model_safe_harbor_table": "MY_ARX_DEMOG_SAFE_HARBOR_BIS",

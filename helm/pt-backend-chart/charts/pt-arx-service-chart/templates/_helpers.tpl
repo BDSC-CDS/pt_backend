@@ -2,7 +2,8 @@
 Expand the name of the chart.
 */}}
 {{- define "pt-arx-service-chart.name" -}}
-{{- default .Chart.Name .Values.nameOverride | trunc 63 | trimSuffix "-" }}
+{{- $name := .Values.nameOverride | default .Chart.Name -}}
+{{- $name | trunc 63 | trimSuffix "-" -}}
 {{- end }}
 
 {{/*
@@ -34,29 +35,17 @@ Create chart name and version as used by the chart label.
 Common labels
 */}}
 {{- define "pt-arx-service-chart.labels" -}}
-helm.sh/chart: {{ include "pt-arx-service-chart.chart" . }}
+chart: {{ include "pt-arx-service-chart.chart" . }}
 {{ include "pt-arx-service-chart.selectorLabels" . }}
 {{- if .Chart.AppVersion }}
-app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
+appVersion: {{ .Chart.AppVersion | quote }}
 {{- end }}
-app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{- end }}
 
 {{/*
 Selector labels
 */}}
 {{- define "pt-arx-service-chart.selectorLabels" -}}
-app.kubernetes.io/name: {{ include "pt-arx-service-chart.name" . }}
-app.kubernetes.io/instance: {{ .Release.Name }}
-{{- end }}
-
-{{/*
-Create the name of the service account to use
-*/}}
-{{- define "pt-arx-service-chart.serviceAccountName" -}}
-{{- if .Values.serviceAccount.create }}
-{{- default (include "pt-arx-service-chart.fullname" .) .Values.serviceAccount.name }}
-{{- else }}
-{{- default "default" .Values.serviceAccount.name }}
-{{- end }}
+app: {{ include "pt-arx-service-chart.name" . }}
+release: {{ .Release.Name }}
 {{- end }}

@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ .Release.Name }}-{{ .Chart.Name }}-deployment
+  namespace: {{ .Release.Namespace }}{{- if .Values.namespace }}{ .Values.namespace }{{- end }}
   labels:
     {{- include "pt-arx-service-chart.labels" . | nindent 4 }}
 spec:
@@ -26,14 +27,20 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       containers:
-        - name: {{ .Chart.Name }}-deployment
-          {{- with .Values.securityContext }}
+        - name: {{ .Release.Name }}-{{ .Chart.Name }}-deployment
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - name: http
               containerPort: {{ .Values.service.port }}
               protocol: TCP
+          volumeMounts:
+            - name: {{ .Release.Name }}-{{ .Chart.Name }}-config-volume
+              mountPath: "/configuration/service_configuration.json"
+              subPath: "service_configuration.json"
+            - name: {{ .Release.Name }}-{{ .Chart.Name }}-localtime
+              mountPath: "/etc/localtime"
+              readOnly: true
           {{- with .Values.livenessProbe }}
           livenessProbe:
             {{- toYaml . | nindent 12 }}
@@ -46,17 +53,13 @@ spec:
           resources:
             {{- toYaml . | nindent 12 }}
           {{- end }}
-          {{- with .Values.volumeMounts }}
-          volumeMounts:
-            {{- toYaml . | nindent 12 }}
-          {{- end }}
-      {{- with .Values.volumes }}
       volumes:
         - name: {{ .Release.Name }}-{{ .Chart.Name }}-config-volume
           configMap:
             name: {{ .Release.Name }}-{{ .Chart.Name }}-configmap
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
+        - name: {{ .Release.Name }}-{{ .Chart.Name }}-localtime
+          hostPath:
+            path: "/etc/localtime"
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
