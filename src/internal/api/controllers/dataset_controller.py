@@ -91,6 +91,29 @@ class DatasetServiceController:
         dataset_content = dataset_converter.content_from_business(dataset_content)
         return TemplatebackendGetDatasetContentReply(TemplatebackendGetDatasetContentResult(columns=dataset_content, n_rows=n_rows))
     
+    def dataset_service_get_dataset_csv(self, user, id: int, offset: int=None, limit: int=None):
+        try:
+            df = self.dataset_service.get_dataset_as_dataframe(id,user.id,user.tenantid)
+        except Exception as e:
+            print("error", e)
+            traceback.print_exception(e)
+            return str(e), 500
+        
+        if df is None:
+            return None, 404
+        
+        buffer = io.BytesIO()
+        df.to_csv(buffer, index=False, lineterminator='\n')
+        bytes = buffer.getvalue()
+
+        headers = {
+            "Content-Type": "text/csv",
+        }
+
+        resp = flask.Response(bytes, headers=headers)
+
+        return resp, 200, headers
+
     def dataset_service_get_dataset_dataframe(self, user, id: int, offset: int=None, limit: int=None):
         try:
             df = self.dataset_service.get_dataset_as_dataframe(id,user.id,user.tenantid)

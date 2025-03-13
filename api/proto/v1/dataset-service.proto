@@ -252,6 +252,22 @@ service DatasetService {
             };
         };
     };
+
+    // Get a dataset CSV file
+    rpc GetDatasetCSV(GetDatasetContentRequest) returns (google.api.HttpBody) {
+        option (google.api.http) = {
+            get: "/api/v1/dataset/csv/{id}"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            summary: "Get Dataset CSVFile";
+            description: "This endpoint allow getting a specific user's Dataset file in CSV format.";
+            tags: "DatasetService";
+            extensions: {
+                key: "x-openapi-router-controller";
+                value: {string_value: "dataset_controller"};
+            };
+        };
+    };
     
     // Get a dataset's dataframe
     rpc GetDatasetDataframe(GetDatasetContentRequest) returns (google.api.HttpBody) {

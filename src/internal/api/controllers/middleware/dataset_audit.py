@@ -85,6 +85,17 @@ class DatasetServiceControllerAudit():
             self.auditLogService.log_event(AuditLog(service="dataset", userid=user.id,action="Error accessing content of dataset "+ str(id), response=e, error=True))
             raise e
         
+    def dataset_service_get_dataset_csv(self, user, id: int, offset: int=None, limit: int=None):
+        try:
+            response =  self.next.dataset_service_get_dataset_csv(user, id, offset, limit)
+
+            self.auditLogService.log_event(AuditLog(service="dataset", userid=user.id,action="downloaded csv of dataset "+ str(id), response=""))
+            return response
+        except  Exception as e:
+            self.auditLogService.log_event(AuditLog(service="dataset", userid=user.id,action="Error downloading content of dataset "+ str(id), response=e, error=True))
+            raise e
+
+
     def dataset_service_get_dataset_dataframe(self, user, id: int, offset: int=None, limit: int=None):
         try:
             response =  self.next.dataset_service_get_dataset_dataframe(user, id,offset,limit)

@@ -81,6 +81,25 @@ class TestDatasetServiceController(BaseTestCase):
         self.assert200(response,
                        'Response body is : ' + response.data.decode('utf-8'))
 
+    def test_dataset_service_get_dataset_csv(self):
+        """Test case for dataset_service_get_dataset_csv
+
+        Get Dataset CSVFile
+        """
+        query_string = [('offset', 56),
+                        ('limit', 56)]
+        headers = { 
+            'Accept': 'application/json',
+            'Bearer': 'special-key',
+        }
+        response = self.client.open(
+            '/api/v1/dataset/csv/{id}'.format(id=56),
+            method='GET',
+            headers=headers,
+            query_string=query_string)
+        self.assert200(response,
+                       'Response body is : ' + response.data.decode('utf-8'))
+
     def test_dataset_service_get_dataset_dataframe(self):
         """Test case for dataset_service_get_dataset_dataframe
 
