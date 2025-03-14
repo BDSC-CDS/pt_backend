@@ -109,6 +109,7 @@ Class | Method | HTTP request | Description
 *DatasetServiceApi* | [**dataset_service_change_types_dataset**](docs/DatasetServiceApi.md#dataset_service_change_types_dataset) | **POST** /api/v1/dataset/types | Change the types of a dataset
 *DatasetServiceApi* | [**dataset_service_delete_dataset**](docs/DatasetServiceApi.md#dataset_service_delete_dataset) | **DELETE** /api/v1/dataset/{id} | Deletes a dataset
 *DatasetServiceApi* | [**dataset_service_get_dataset_content**](docs/DatasetServiceApi.md#dataset_service_get_dataset_content) | **GET** /api/v1/dataset/content/{id} | Get Dataset Content
+*DatasetServiceApi* | [**dataset_service_get_dataset_csv**](docs/DatasetServiceApi.md#dataset_service_get_dataset_csv) | **GET** /api/v1/dataset/csv/{id} | Get Dataset CSVFile
 *DatasetServiceApi* | [**dataset_service_get_dataset_dataframe**](docs/DatasetServiceApi.md#dataset_service_get_dataset_dataframe) | **GET** /api/v1/dataset/dataframe/{id} | Get Dataset Dataframe
 *DatasetServiceApi* | [**dataset_service_get_dataset_identifier**](docs/DatasetServiceApi.md#dataset_service_get_dataset_identifier) | **GET** /api/v1/dataset/identifier/{id} | Get Dataset Content filtered by identifying and quasi identifying columns
 *DatasetServiceApi* | [**dataset_service_get_dataset_info**](docs/DatasetServiceApi.md#dataset_service_get_dataset_info) | **GET** /api/v1/dataset/info/{id} | Get Dataset Info

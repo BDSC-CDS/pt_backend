@@ -7,6 +7,7 @@ Method | HTTP request | Description
 [**dataset_service_change_types_dataset**](DatasetServiceApi.md#dataset_service_change_types_dataset) | **POST** /api/v1/dataset/types | Change the types of a dataset
 [**dataset_service_delete_dataset**](DatasetServiceApi.md#dataset_service_delete_dataset) | **DELETE** /api/v1/dataset/{id} | Deletes a dataset
 [**dataset_service_get_dataset_content**](DatasetServiceApi.md#dataset_service_get_dataset_content) | **GET** /api/v1/dataset/content/{id} | Get Dataset Content
+[**dataset_service_get_dataset_csv**](DatasetServiceApi.md#dataset_service_get_dataset_csv) | **GET** /api/v1/dataset/csv/{id} | Get Dataset CSVFile
 [**dataset_service_get_dataset_dataframe**](DatasetServiceApi.md#dataset_service_get_dataset_dataframe) | **GET** /api/v1/dataset/dataframe/{id} | Get Dataset Dataframe
 [**dataset_service_get_dataset_identifier**](DatasetServiceApi.md#dataset_service_get_dataset_identifier) | **GET** /api/v1/dataset/identifier/{id} | Get Dataset Content filtered by identifying and quasi identifying columns
 [**dataset_service_get_dataset_info**](DatasetServiceApi.md#dataset_service_get_dataset_info) | **GET** /api/v1/dataset/info/{id} | Get Dataset Info
@@ -250,6 +251,92 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**TemplatebackendGetDatasetContentReply**](TemplatebackendGetDatasetContentReply.md)
+
+### Authorization
+
+[Bearer](../README.md#Bearer)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | A successful response. |  -  |
+**0** | An unexpected error response. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **dataset_service_get_dataset_csv**
+> ApiHttpBody dataset_service_get_dataset_csv(id, offset=offset, limit=limit)
+
+Get Dataset CSVFile
+
+This endpoint allow getting a specific user's Dataset file in CSV format.
+
+### Example
+
+* Api Key Authentication (Bearer):
+
+```python
+import time
+import os
+import openapi_client
+from openapi_client.models.api_http_body import ApiHttpBody
+from openapi_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = openapi_client.Configuration(
+    host = "http://localhost"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: Bearer
+configuration.api_key['Bearer'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['Bearer'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with openapi_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = openapi_client.DatasetServiceApi(api_client)
+    id = 56 # int | 
+    offset = 56 # int |  (optional)
+    limit = 56 # int |  (optional)
+
+    try:
+        # Get Dataset CSVFile
+        api_response = api_instance.dataset_service_get_dataset_csv(id, offset=offset, limit=limit)
+        print("The response of DatasetServiceApi->dataset_service_get_dataset_csv:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling DatasetServiceApi->dataset_service_get_dataset_csv: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **int**|  | 
+ **offset** | **int**|  | [optional] 
+ **limit** | **int**|  | [optional] 
+
+### Return type
+
+[**ApiHttpBody**](ApiHttpBody.md)
 
 ### Authorization
 
