@@ -42,6 +42,7 @@ class TestTemplatebackendGetDatasetInfoReply(unittest.TestCase):
                     userid = 56, 
                     tenantid = 56, 
                     dataset_name = '', 
+                    original_filename = '', 
                     created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
                     deleted_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), )
             )

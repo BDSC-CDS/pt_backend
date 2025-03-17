@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **types** | **str** |  | [optional] 
 **identifiers** | **str** |  | [optional] 
 **is_id** | **str** |  | [optional] 
+**original_filename** | **str** |  | [optional] 
 
 ## Example
 

@@ -41,7 +41,8 @@ class TestTemplatebackendStoreDatasetRequest(unittest.TestCase):
                 dataset = '',
                 types = '',
                 identifiers = '',
-                is_id = ''
+                is_id = '',
+                original_filename = ''
             )
         else:
             return TemplatebackendStoreDatasetRequest(

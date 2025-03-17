@@ -35,9 +35,10 @@ class TemplatebackendDataset(BaseModel):
     userid: Optional[StrictInt] = None
     tenantid: Optional[StrictInt] = None
     dataset_name: Optional[StrictStr] = Field(default=None, alias="datasetName")
+    original_filename: Optional[StrictStr] = Field(default=None, alias="originalFilename")
     created_at: Optional[datetime] = Field(default=None, alias="createdAt")
     deleted_at: Optional[datetime] = Field(default=None, alias="deletedAt")
-    __properties: ClassVar[List[str]] = ["id", "userid", "tenantid", "datasetName", "createdAt", "deletedAt"]
+    __properties: ClassVar[List[str]] = ["id", "userid", "tenantid", "datasetName", "originalFilename", "createdAt", "deletedAt"]
 
     model_config = {
         "populate_by_name": True,
@@ -92,6 +93,7 @@ class TemplatebackendDataset(BaseModel):
             "userid": obj.get("userid"),
             "tenantid": obj.get("tenantid"),
             "datasetName": obj.get("datasetName"),
+            "originalFilename": obj.get("originalFilename"),
             "createdAt": obj.get("createdAt"),
             "deletedAt": obj.get("deletedAt")
         })

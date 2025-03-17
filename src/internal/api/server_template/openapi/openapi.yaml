@@ -1762,6 +1762,7 @@ components:
         datasetName: datasetName
         id: 0
         userid: 6
+        originalFilename: originalFilename
       properties:
         id:
           format: int64
@@ -1777,6 +1778,9 @@ components:
           type: integer
         datasetName:
           title: datasetName
+          type: string
+        originalFilename:
+          title: originalFilename
           type: string
         createdAt:
           format: date-time
@@ -2026,6 +2030,7 @@ components:
           datasetName: datasetName
           id: 0
           userid: 6
+          originalFilename: originalFilename
       properties:
         dataset:
           $ref: '#/components/schemas/templatebackendDataset'
@@ -2893,12 +2898,14 @@ components:
             datasetName: datasetName
             id: 0
             userid: 6
+            originalFilename: originalFilename
           - createdAt: 2000-01-23T04:56:07.000+00:00
             deletedAt: 2000-01-23T04:56:07.000+00:00
             tenantid: 1
             datasetName: datasetName
             id: 0
             userid: 6
+            originalFilename: originalFilename
       properties:
         result:
           $ref: '#/components/schemas/templatebackendListDatasetsResult'
@@ -2913,12 +2920,14 @@ components:
           datasetName: datasetName
           id: 0
           userid: 6
+          originalFilename: originalFilename
         - createdAt: 2000-01-23T04:56:07.000+00:00
           deletedAt: 2000-01-23T04:56:07.000+00:00
           tenantid: 1
           datasetName: datasetName
           id: 0
           userid: 6
+          originalFilename: originalFilename
       properties:
         Datasets:
           items:
@@ -4978,6 +4987,9 @@ components:
           type: string
         isId:
           title: isId
+          type: string
+        originalFilename:
+          title: originalFilename
           type: string
       title: Create a Dataset
       type: object

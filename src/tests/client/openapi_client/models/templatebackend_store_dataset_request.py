@@ -36,7 +36,8 @@ class TemplatebackendStoreDatasetRequest(BaseModel):
     types: Optional[StrictStr] = None
     identifiers: Optional[StrictStr] = None
     is_id: Optional[StrictStr] = Field(default=None, alias="isId")
-    __properties: ClassVar[List[str]] = ["datasetName", "dataset", "types", "identifiers", "isId"]
+    original_filename: Optional[StrictStr] = Field(default=None, alias="originalFilename")
+    __properties: ClassVar[List[str]] = ["datasetName", "dataset", "types", "identifiers", "isId", "originalFilename"]
 
     model_config = {
         "populate_by_name": True,
@@ -91,7 +92,8 @@ class TemplatebackendStoreDatasetRequest(BaseModel):
             "dataset": obj.get("dataset"),
             "types": obj.get("types"),
             "identifiers": obj.get("identifiers"),
-            "isId": obj.get("isId")
+            "isId": obj.get("isId"),
+            "originalFilename": obj.get("originalFilename")
         })
         return _obj
 
