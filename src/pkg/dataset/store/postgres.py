@@ -39,13 +39,13 @@ class DatasetStore:
         finally:
             session.close()
 
-    def store_dataset(self, userid:int,tenantid:int, dataset_name:str,dataset: str,types:str,identifiers:str, is_id:str) -> int:
+    def store_dataset(self, userid:int,tenantid:int, dataset_name:str,dataset: str,types:str,identifiers:str, is_id:str, original_filename: str) -> int:
         # Insert dataset entry and get the generated dataset_id
         dataset_query = """
             INSERT INTO datasets
-                (userid, tenantid, dataset_name,created_at)
+                (userid, tenantid, dataset_name, original_filename, created_at)
             VALUES
-                 (:userid, :tenantid, :dataset_name, NOW())
+                 (:userid, :tenantid, :dataset_name, :original_filename, NOW())
             RETURNING id;
         """
         dataset_id = 0
@@ -55,6 +55,7 @@ class DatasetStore:
                     'userid': userid,
                     'tenantid': tenantid,
                     'dataset_name':dataset_name,
+                    'original_filename': original_filename
                 }).fetchone()
                 dataset_id = result[0]
 
@@ -200,6 +201,7 @@ class DatasetStore:
                     tenantid=tenantid,
                     dataset_name=dataset.dataset_name,
                     id=dataset.id,
+                    original_filename=dataset.original_filename,
                     created_at=dataset.created_at,
                 )
 
