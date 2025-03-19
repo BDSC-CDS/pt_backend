@@ -547,7 +547,22 @@ class DatasetStore:
 
         return new_dataset_id
 
+    def update_dataset_name(self,userid:int, tenantid:int,id:int, new_name:str):
+        query = "UPDATE datasets SET dataset_name = :new_name WHERE id = :dataset_id AND userid = :userid AND tenantid = :tenantid;"
+        with self.session_scope() as session:
+            try:
+                session.execute(text(query), {
+                    'new_name': new_name,
+                    'dataset_id': id,
+                    'userid': userid,
+                    'tenantid': tenantid,
+                })
 
+            except Exception as e:
+                print(f"Error renaming dataset: {e}")
+                return False
+
+        return True
 # ---------------- utils -------------------------------------------- #
 
     # Function to shift a list of dates by n days

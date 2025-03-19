@@ -31,6 +31,12 @@ class DatasetService:
     def get_dataset_info(self,id:int, userid:int, tenantid:int):
         dataset = self.dataset_store.get_dataset_info(id=id,userid=userid,tenantid=tenantid)
         return dataset
+    
+    # update the name of a dataset
+    def update_dataset_name(self,id:int, userid:int, tenantid:int, name:str):
+        updated = self.dataset_store.update_dataset_name(id=id,userid=userid,tenantid=tenantid,new_name=name)
+        print("Updated", updated)
+        return updated
 
     # get metadata for a dataset (if not deleted)
     def get_dataset_metadata(self,id:int, userid:int, tenantid:int):
