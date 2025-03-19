@@ -119,7 +119,7 @@ Class | Method | HTTP request | Description
 *DatasetServiceApi* | [**dataset_service_revert_dataset**](docs/DatasetServiceApi.md#dataset_service_revert_dataset) | **POST** /api/v1/dataset/revert | Revert a dataset
 *DatasetServiceApi* | [**dataset_service_store_dataset**](docs/DatasetServiceApi.md#dataset_service_store_dataset) | **POST** /api/v1/dataset | Store a dataset
 *DatasetServiceApi* | [**dataset_service_transform_dataset**](docs/DatasetServiceApi.md#dataset_service_transform_dataset) | **POST** /api/v1/dataset/transform | Transform a dataset
-*DatasetServiceApi* | [**dataset_service_update_dataset_name**](docs/DatasetServiceApi.md#dataset_service_update_dataset_name) | **PATCH** /api/v1/dataset/{id} | Rename a dataset
+*DatasetServiceApi* | [**dataset_service_update_dataset_name**](docs/DatasetServiceApi.md#dataset_service_update_dataset_name) | **PUT** /api/v1/dataset/{id} | Rename a dataset
 *IndexServiceApi* | [**index_service_create_hello**](docs/IndexServiceApi.md#index_service_create_hello) | **POST** /api/v1/hello/{identifier} | Get a hello
 *IndexServiceApi* | [**index_service_get_hello**](docs/IndexServiceApi.md#index_service_get_hello) | **GET** /api/v1/hello | Get a hello
 *QuestionnaireServiceApi* | [**questionnaire_service_create_questionnaire**](docs/QuestionnaireServiceApi.md#questionnaire_service_create_questionnaire) | **POST** /api/v1/questionnaire | Create a questionnaire

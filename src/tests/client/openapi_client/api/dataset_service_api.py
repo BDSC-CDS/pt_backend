@@ -3894,7 +3894,7 @@ class DatasetServiceApi:
         ]
 
         return self.api_client.param_serialize(
-            method='PATCH',
+            method='PUT',
             resource_path='/api/v1/dataset/{id}',
             path_params=_path_params,
             query_params=_query_params,

@@ -845,7 +845,7 @@ paths:
       tags:
       - DatasetService
       x-openapi-router-controller: dataset_controller
-    patch:
+    put:
       description: This endpoint renames a dataset
       operationId: dataset_service_update_dataset_name
       parameters:

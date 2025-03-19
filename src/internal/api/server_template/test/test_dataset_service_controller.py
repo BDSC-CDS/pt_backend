@@ -280,7 +280,7 @@ class TestDatasetServiceController(BaseTestCase):
         }
         response = self.client.open(
             '/api/v1/dataset/{id}'.format(id=56),
-            method='PATCH',
+            method='PUT',
             headers=headers,
             data=json.dumps(body),
             content_type='application/json')

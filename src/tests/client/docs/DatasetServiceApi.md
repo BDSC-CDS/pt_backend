@@ -17,7 +17,7 @@ Method | HTTP request | Description
 [**dataset_service_revert_dataset**](DatasetServiceApi.md#dataset_service_revert_dataset) | **POST** /api/v1/dataset/revert | Revert a dataset
 [**dataset_service_store_dataset**](DatasetServiceApi.md#dataset_service_store_dataset) | **POST** /api/v1/dataset | Store a dataset
 [**dataset_service_transform_dataset**](DatasetServiceApi.md#dataset_service_transform_dataset) | **POST** /api/v1/dataset/transform | Transform a dataset
-[**dataset_service_update_dataset_name**](DatasetServiceApi.md#dataset_service_update_dataset_name) | **PATCH** /api/v1/dataset/{id} | Rename a dataset
+[**dataset_service_update_dataset_name**](DatasetServiceApi.md#dataset_service_update_dataset_name) | **PUT** /api/v1/dataset/{id} | Rename a dataset
 
 
 # **dataset_service_change_types_dataset**
