@@ -158,7 +158,6 @@ message TransformDatasetResult {
 message RevertDatasetRequest {
     uint32 id = 1;
 }
-
 message RevertDatasetReply {
     uint32 id = 1;
 }
@@ -167,9 +166,19 @@ message ChangeTypesDatasetRequest {
     uint32 dataset_id = 1;
     repeated Metadata metadata = 2;
 }
-
 message ChangeTypesDatasetReply {
     uint32 id = 1;
+}
+
+message UpdateDatasetNameRequest {
+    uint32 id = 1;
+    string name = 2;
+}
+message UpdateDatasetNameReply {
+    UpdateDatasetNameResult result = 1;
+}
+message UpdateDatasetNameResult {
+    bool success = 1;
 }
 
 service DatasetService {
@@ -221,6 +230,22 @@ service DatasetService {
         };
     };
 
+    // Rename a dataset
+    rpc UpdateDatasetName(UpdateDatasetNameRequest) returns (UpdateDatasetNameReply) {
+        option (google.api.http) = {
+            patch: "/api/v1/dataset/{id}";
+            body: "*";
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            summary: "Rename a dataset";
+            description: "This endpoint renames a dataset";
+            tags: "DatasetService";
+            extensions: {
+                key: "x-openapi-router-controller";
+                value: {string_value: "dataset_controller"};
+            };
+        };
+    };
 
     // Get a dataset's metadata
     rpc GetDatasetMetadata(GetDatasetMetadataRequest) returns (GetDatasetMetadataReply) {
@@ -350,7 +375,7 @@ service DatasetService {
         };
     };
 
-     // Revert a dataset to its state before transforming
+    // Revert a dataset to its state before transforming
     rpc RevertDataset(RevertDatasetRequest) returns (RevertDatasetReply) {
         option (google.api.http) = {
             post: "/api/v1/dataset/revert"

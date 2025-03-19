@@ -845,6 +845,40 @@ paths:
       tags:
       - DatasetService
       x-openapi-router-controller: dataset_controller
+    patch:
+      description: This endpoint renames a dataset
+      operationId: dataset_service_update_dataset_name
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DatasetService_UpdateDatasetName_request'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/templatebackendUpdateDatasetNameReply'
+          description: A successful response.
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+          description: An unexpected error response.
+      summary: Rename a dataset
+      tags:
+      - DatasetService
+      x-openapi-router-controller: dataset_controller
+      x-codegen-request-body-name: body
   /api/v1/hello:
     get:
       description: This endpoint returns a hello
@@ -5034,6 +5068,24 @@ components:
           type: integer
       title: templatebackendTransformDatasetResult
       type: object
+    templatebackendUpdateDatasetNameReply:
+      example:
+        result:
+          success: true
+      properties:
+        result:
+          $ref: '#/components/schemas/templatebackendUpdateDatasetNameResult'
+      title: templatebackendUpdateDatasetNameReply
+      type: object
+    templatebackendUpdateDatasetNameResult:
+      example:
+        success: true
+      properties:
+        success:
+          title: success
+          type: boolean
+      title: templatebackendUpdateDatasetNameResult
+      type: object
     templatebackendUpdatePasswordReply:
       example:
         result: "{}"
@@ -5134,6 +5186,13 @@ components:
           title: email
           type: string
       title: templatebackendUserEmail
+      type: object
+    DatasetService_UpdateDatasetName_request:
+      properties:
+        name:
+          title: name
+          type: string
+      title: DatasetService_UpdateDatasetName_request
       type: object
     IndexService_CreateHello_request:
       properties:
