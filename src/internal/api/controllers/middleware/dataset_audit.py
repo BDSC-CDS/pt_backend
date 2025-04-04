@@ -13,6 +13,8 @@ from server_template.models import TemplatebackendRevertDatasetRequest
 from server_template.models import TemplatebackendChangeTypesDatasetRequest
 from server_template.models import TemplatebackendChangeTypesDatasetReply
 from server_template.models import TemplatebackendGetDatasetInfoReply
+from server_template.models import DatasetServiceUpdateDatasetRequest
+from server_template.models import TemplatebackendUpdateDatasetReply
 from src.internal.api.controllers.dataset_controller import DatasetServiceController
 from src.internal.util.interface.implements import implements_interface
 from src.pkg.audit_log.model.audit_log import AuditLog
@@ -56,6 +58,16 @@ class DatasetServiceControllerAudit():
             return response
         except  Exception as e:
             self.auditLogService.log_event(AuditLog(service="dataset", userid=user.id,action="Error accessing info of dataset "+ str(id), response=e, error=True))
+            raise e
+        
+    def dataset_service_update_dataset(self, user, id: int, body:DatasetServiceUpdateDatasetRequest):
+        try:
+            response : TemplatebackendUpdateDatasetReply =  self.next.dataset_service_update_dataset(user, id, body)
+            response_serialized = response.result.success or ''
+            self.auditLogService.log_event(AuditLog(service="dataset", userid=user.id,action="updated name of dataset "+ str(id) + " to " + str(body.name), response=response_serialized))
+            return response
+        except  Exception as e:
+            self.auditLogService.log_event(AuditLog(service="dataset", userid=user.id,action="Error updating name of dataset "+ str(id) + " to " + str(body.name), response=e, error=True))
             raise e
 
     def dataset_service_get_dataset_metadata(self, user, id: int):

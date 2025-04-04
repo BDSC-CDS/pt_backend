@@ -14,7 +14,7 @@ class TemplatebackendDataset(Model):
     Do not edit the class manually.
     """
 
-    def __init__(self, id=None, userid=None, tenantid=None, dataset_name=None, created_at=None, deleted_at=None):
+    def __init__(self, id=None, userid=None, tenantid=None, dataset_name=None, original_filename=None, created_at=None, deleted_at=None):
         """TemplatebackendDataset - a model defined in OpenAPI
 
         :param id: The id of this TemplatebackendDataset.
@@ -25,6 +25,8 @@ class TemplatebackendDataset(Model):
         :type tenantid: int
         :param dataset_name: The dataset_name of this TemplatebackendDataset.
         :type dataset_name: str
+        :param original_filename: The original_filename of this TemplatebackendDataset.
+        :type original_filename: str
         :param created_at: The created_at of this TemplatebackendDataset.
         :type created_at: datetime
         :param deleted_at: The deleted_at of this TemplatebackendDataset.
@@ -35,6 +37,7 @@ class TemplatebackendDataset(Model):
             'userid': int,
             'tenantid': int,
             'dataset_name': str,
+            'original_filename': str,
             'created_at': datetime,
             'deleted_at': datetime
         }
@@ -44,6 +47,7 @@ class TemplatebackendDataset(Model):
             'userid': 'userid',
             'tenantid': 'tenantid',
             'dataset_name': 'datasetName',
+            'original_filename': 'originalFilename',
             'created_at': 'createdAt',
             'deleted_at': 'deletedAt'
         }
@@ -52,6 +56,7 @@ class TemplatebackendDataset(Model):
         self._userid = userid
         self._tenantid = tenantid
         self._dataset_name = dataset_name
+        self._original_filename = original_filename
         self._created_at = created_at
         self._deleted_at = deleted_at
 
@@ -149,6 +154,27 @@ class TemplatebackendDataset(Model):
         """
 
         self._dataset_name = dataset_name
+
+    @property
+    def original_filename(self) -> str:
+        """Gets the original_filename of this TemplatebackendDataset.
+
+
+        :return: The original_filename of this TemplatebackendDataset.
+        :rtype: str
+        """
+        return self._original_filename
+
+    @original_filename.setter
+    def original_filename(self, original_filename: str):
+        """Sets the original_filename of this TemplatebackendDataset.
+
+
+        :param original_filename: The original_filename of this TemplatebackendDataset.
+        :type original_filename: str
+        """
+
+        self._original_filename = original_filename
 
     @property
     def created_at(self) -> datetime:

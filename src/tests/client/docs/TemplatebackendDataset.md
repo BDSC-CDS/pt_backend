@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **userid** | **int** |  | [optional] 
 **tenantid** | **int** |  | [optional] 
 **dataset_name** | **str** |  | [optional] 
+**original_filename** | **str** |  | [optional] 
 **created_at** | **datetime** |  | [optional] 
 **deleted_at** | **datetime** |  | [optional] 
 

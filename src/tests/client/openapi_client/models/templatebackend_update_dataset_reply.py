@@ -18,27 +18,21 @@ import pprint
 import re  # noqa: F401
 import json
 
-from datetime import datetime
+
 from typing import Any, ClassVar, Dict, List, Optional
-from pydantic import BaseModel, StrictInt, StrictStr
-from pydantic import Field
+from pydantic import BaseModel
+from openapi_client.models.templatebackend_update_dataset_result import TemplatebackendUpdateDatasetResult
 try:
     from typing import Self
 except ImportError:
     from typing_extensions import Self
 
-class TemplatebackendDataset(BaseModel):
+class TemplatebackendUpdateDatasetReply(BaseModel):
     """
-    TemplatebackendDataset
+    TemplatebackendUpdateDatasetReply
     """ # noqa: E501
-    id: Optional[StrictInt] = None
-    userid: Optional[StrictInt] = None
-    tenantid: Optional[StrictInt] = None
-    dataset_name: Optional[StrictStr] = Field(default=None, alias="datasetName")
-    original_filename: Optional[StrictStr] = Field(default=None, alias="originalFilename")
-    created_at: Optional[datetime] = Field(default=None, alias="createdAt")
-    deleted_at: Optional[datetime] = Field(default=None, alias="deletedAt")
-    __properties: ClassVar[List[str]] = ["id", "userid", "tenantid", "datasetName", "originalFilename", "createdAt", "deletedAt"]
+    result: Optional[TemplatebackendUpdateDatasetResult] = None
+    __properties: ClassVar[List[str]] = ["result"]
 
     model_config = {
         "populate_by_name": True,
@@ -58,7 +52,7 @@ class TemplatebackendDataset(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Self:
-        """Create an instance of TemplatebackendDataset from a JSON string"""
+        """Create an instance of TemplatebackendUpdateDatasetReply from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -77,11 +71,14 @@ class TemplatebackendDataset(BaseModel):
             },
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of result
+        if self.result:
+            _dict['result'] = self.result.to_dict()
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Dict) -> Self:
-        """Create an instance of TemplatebackendDataset from a dict"""
+        """Create an instance of TemplatebackendUpdateDatasetReply from a dict"""
         if obj is None:
             return None
 
@@ -89,13 +86,7 @@ class TemplatebackendDataset(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "id": obj.get("id"),
-            "userid": obj.get("userid"),
-            "tenantid": obj.get("tenantid"),
-            "datasetName": obj.get("datasetName"),
-            "originalFilename": obj.get("originalFilename"),
-            "createdAt": obj.get("createdAt"),
-            "deletedAt": obj.get("deletedAt")
+            "result": TemplatebackendUpdateDatasetResult.from_dict(obj.get("result")) if obj.get("result") is not None else None
         })
         return _obj
 

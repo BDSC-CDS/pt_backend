@@ -8,6 +8,7 @@ from inspect import getmembers, isfunction, ismethod
 
 
 from server_template.models.api_http_body import ApiHttpBody
+from server_template.models.dataset_service_update_dataset_request import DatasetServiceUpdateDatasetRequest
 from server_template.models.rpc_status import RpcStatus
 from server_template.models.templatebackend_change_types_dataset_reply import TemplatebackendChangeTypesDatasetReply
 from server_template.models.templatebackend_change_types_dataset_request import TemplatebackendChangeTypesDatasetRequest
@@ -23,12 +24,13 @@ from server_template.models.templatebackend_store_dataset_reply import Templateb
 from server_template.models.templatebackend_store_dataset_request import TemplatebackendStoreDatasetRequest
 from server_template.models.templatebackend_transform_dataset_reply import TemplatebackendTransformDatasetReply
 from server_template.models.templatebackend_transform_dataset_request import TemplatebackendTransformDatasetRequest
+from server_template.models.templatebackend_update_dataset_reply import TemplatebackendUpdateDatasetReply
 from server_template import util
 
 
 #from src.internal.api.controllers import dataset_service_controller
 #controller_functions =  [func_tupple[0] for func_tupple in getmembers(dataset_service_controller, isfunction)]
-#needed_functions = ["dataset_service_change_types_dataset", "dataset_service_delete_dataset", "dataset_service_get_dataset_content", "dataset_service_get_dataset_csv", "dataset_service_get_dataset_dataframe", "dataset_service_get_dataset_identifier", "dataset_service_get_dataset_info", "dataset_service_get_dataset_jupyterhub", "dataset_service_get_dataset_metadata", "dataset_service_list_datasets", "dataset_service_revert_dataset", "dataset_service_store_dataset", "dataset_service_transform_dataset"]
+#needed_functions = ["dataset_service_change_types_dataset", "dataset_service_delete_dataset", "dataset_service_get_dataset_content", "dataset_service_get_dataset_csv", "dataset_service_get_dataset_dataframe", "dataset_service_get_dataset_identifier", "dataset_service_get_dataset_info", "dataset_service_get_dataset_jupyterhub", "dataset_service_get_dataset_metadata", "dataset_service_list_datasets", "dataset_service_revert_dataset", "dataset_service_store_dataset", "dataset_service_transform_dataset", "dataset_service_update_dataset"]
 #for op in needed_functions:
 #    if op not in controller_functions:
 #        raise NotImplementedError("operation " + op + " is not implemented by src.internal.api.controllers.dataset_service_controller")
@@ -36,7 +38,7 @@ from server_template import util
 class DatasetServiceController:
     def __init__(self, controller):
         #controller_functions =  [func_tupple[0] for func_tupple in getmembers(controller, ismethod)]
-        #needed_functions = ["dataset_service_change_types_dataset", "dataset_service_delete_dataset", "dataset_service_get_dataset_content", "dataset_service_get_dataset_csv", "dataset_service_get_dataset_dataframe", "dataset_service_get_dataset_identifier", "dataset_service_get_dataset_info", "dataset_service_get_dataset_jupyterhub", "dataset_service_get_dataset_metadata", "dataset_service_list_datasets", "dataset_service_revert_dataset", "dataset_service_store_dataset", "dataset_service_transform_dataset"]
+        #needed_functions = ["dataset_service_change_types_dataset", "dataset_service_delete_dataset", "dataset_service_get_dataset_content", "dataset_service_get_dataset_csv", "dataset_service_get_dataset_dataframe", "dataset_service_get_dataset_identifier", "dataset_service_get_dataset_info", "dataset_service_get_dataset_jupyterhub", "dataset_service_get_dataset_metadata", "dataset_service_list_datasets", "dataset_service_revert_dataset", "dataset_service_store_dataset", "dataset_service_transform_dataset", "dataset_service_update_dataset"]
         #for op in needed_functions:
         #    if op not in controller_functions:
         #        raise NotImplementedError("operation " + op + " is not implemented by provided controller")
@@ -251,3 +253,21 @@ class DatasetServiceController:
             body = TemplatebackendTransformDatasetRequest.from_dict(connexion.request.get_json())
 
         return self.controller.dataset_service_transform_dataset(user, body)
+
+
+    def dataset_service_update_dataset(self, user, id: int, body: DatasetServiceUpdateDatasetRequest):
+        """Update Dataset
+
+        This endpoint allows to update a dataset (accepts only the name field)
+
+        :param id: 
+        :type id: int
+        :param body: 
+        :type body: dict | bytes
+
+        :rtype: Union[TemplatebackendUpdateDatasetReply, Tuple[TemplatebackendUpdateDatasetReply, int], Tuple[TemplatebackendUpdateDatasetReply, int, Dict[str, str]]
+        """
+        if connexion.request.is_json:
+            body = DatasetServiceUpdateDatasetRequest.from_dict(connexion.request.get_json())
+
+        return self.controller.dataset_service_update_dataset(user, id, body)
