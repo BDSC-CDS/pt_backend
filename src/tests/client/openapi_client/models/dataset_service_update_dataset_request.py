@@ -20,19 +20,18 @@ import json
 
 
 from typing import Any, ClassVar, Dict, List, Optional
-from pydantic import BaseModel
-from openapi_client.models.templatebackend_update_dataset_name_result import TemplatebackendUpdateDatasetNameResult
+from pydantic import BaseModel, StrictStr
 try:
     from typing import Self
 except ImportError:
     from typing_extensions import Self
 
-class TemplatebackendUpdateDatasetNameReply(BaseModel):
+class DatasetServiceUpdateDatasetRequest(BaseModel):
     """
-    TemplatebackendUpdateDatasetNameReply
+    DatasetServiceUpdateDatasetRequest
     """ # noqa: E501
-    result: Optional[TemplatebackendUpdateDatasetNameResult] = None
-    __properties: ClassVar[List[str]] = ["result"]
+    name: Optional[StrictStr] = None
+    __properties: ClassVar[List[str]] = ["name"]
 
     model_config = {
         "populate_by_name": True,
@@ -52,7 +51,7 @@ class TemplatebackendUpdateDatasetNameReply(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Self:
-        """Create an instance of TemplatebackendUpdateDatasetNameReply from a JSON string"""
+        """Create an instance of DatasetServiceUpdateDatasetRequest from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -71,14 +70,11 @@ class TemplatebackendUpdateDatasetNameReply(BaseModel):
             },
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of result
-        if self.result:
-            _dict['result'] = self.result.to_dict()
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Dict) -> Self:
-        """Create an instance of TemplatebackendUpdateDatasetNameReply from a dict"""
+        """Create an instance of DatasetServiceUpdateDatasetRequest from a dict"""
         if obj is None:
             return None
 
@@ -86,7 +82,7 @@ class TemplatebackendUpdateDatasetNameReply(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "result": TemplatebackendUpdateDatasetNameResult.from_dict(obj.get("result")) if obj.get("result") is not None else None
+            "name": obj.get("name")
         })
         return _obj
 

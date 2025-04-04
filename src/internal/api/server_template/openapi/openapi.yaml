@@ -846,8 +846,9 @@ paths:
       - DatasetService
       x-openapi-router-controller: dataset_controller
     put:
-      description: This endpoint renames a dataset
-      operationId: dataset_service_update_dataset_name
+      description: This endpoint allows to update a dataset (accepts only the name
+        field)
+      operationId: dataset_service_update_dataset
       parameters:
       - in: path
         name: id
@@ -859,14 +860,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/DatasetService_UpdateDatasetName_request'
+              $ref: '#/components/schemas/DatasetService_UpdateDataset_request'
         required: true
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/templatebackendUpdateDatasetNameReply'
+                $ref: '#/components/schemas/templatebackendUpdateDatasetReply'
           description: A successful response.
         default:
           content:
@@ -874,7 +875,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/rpcStatus'
           description: An unexpected error response.
-      summary: Rename a dataset
+      summary: Update Dataset
       tags:
       - DatasetService
       x-openapi-router-controller: dataset_controller
@@ -5068,23 +5069,23 @@ components:
           type: integer
       title: templatebackendTransformDatasetResult
       type: object
-    templatebackendUpdateDatasetNameReply:
+    templatebackendUpdateDatasetReply:
       example:
         result:
           success: true
       properties:
         result:
-          $ref: '#/components/schemas/templatebackendUpdateDatasetNameResult'
-      title: templatebackendUpdateDatasetNameReply
+          $ref: '#/components/schemas/templatebackendUpdateDatasetResult'
+      title: templatebackendUpdateDatasetReply
       type: object
-    templatebackendUpdateDatasetNameResult:
+    templatebackendUpdateDatasetResult:
       example:
         success: true
       properties:
         success:
           title: success
           type: boolean
-      title: templatebackendUpdateDatasetNameResult
+      title: templatebackendUpdateDatasetResult
       type: object
     templatebackendUpdatePasswordReply:
       example:
@@ -5187,12 +5188,12 @@ components:
           type: string
       title: templatebackendUserEmail
       type: object
-    DatasetService_UpdateDatasetName_request:
+    DatasetService_UpdateDataset_request:
       properties:
         name:
           title: name
           type: string
-      title: DatasetService_UpdateDatasetName_request
+      title: DatasetService_UpdateDataset_request
       type: object
     IndexService_CreateHello_request:
       properties:

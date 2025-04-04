@@ -29,7 +29,7 @@ from pydantic import StrictInt
 from typing import Optional
 
 from openapi_client.models.api_http_body import ApiHttpBody
-from openapi_client.models.dataset_service_update_dataset_name_request import DatasetServiceUpdateDatasetNameRequest
+from openapi_client.models.dataset_service_update_dataset_request import DatasetServiceUpdateDatasetRequest
 from openapi_client.models.templatebackend_change_types_dataset_reply import TemplatebackendChangeTypesDatasetReply
 from openapi_client.models.templatebackend_change_types_dataset_request import TemplatebackendChangeTypesDatasetRequest
 from openapi_client.models.templatebackend_delete_dataset_reply import TemplatebackendDeleteDatasetReply
@@ -44,7 +44,7 @@ from openapi_client.models.templatebackend_store_dataset_reply import Templateba
 from openapi_client.models.templatebackend_store_dataset_request import TemplatebackendStoreDatasetRequest
 from openapi_client.models.templatebackend_transform_dataset_reply import TemplatebackendTransformDatasetReply
 from openapi_client.models.templatebackend_transform_dataset_request import TemplatebackendTransformDatasetRequest
-from openapi_client.models.templatebackend_update_dataset_name_reply import TemplatebackendUpdateDatasetNameReply
+from openapi_client.models.templatebackend_update_dataset_reply import TemplatebackendUpdateDatasetReply
 
 from openapi_client.api_client import ApiClient
 from openapi_client.api_response import ApiResponse
@@ -3626,10 +3626,10 @@ class DatasetServiceApi:
 
 
     @validate_call
-    def dataset_service_update_dataset_name(
+    def dataset_service_update_dataset(
         self,
         id: StrictInt,
-        body: DatasetServiceUpdateDatasetNameRequest,
+        body: DatasetServiceUpdateDatasetRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3642,15 +3642,15 @@ class DatasetServiceApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> TemplatebackendUpdateDatasetNameReply:
-        """Rename a dataset
+    ) -> TemplatebackendUpdateDatasetReply:
+        """Update Dataset
 
-        This endpoint renames a dataset
+        This endpoint allows to update a dataset (accepts only the name field)
 
         :param id: (required)
         :type id: int
         :param body: (required)
-        :type body: DatasetServiceUpdateDatasetNameRequest
+        :type body: DatasetServiceUpdateDatasetRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -3673,7 +3673,7 @@ class DatasetServiceApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._dataset_service_update_dataset_name_serialize(
+        _param = self._dataset_service_update_dataset_serialize(
             id=id,
             body=body,
             _request_auth=_request_auth,
@@ -3683,7 +3683,7 @@ class DatasetServiceApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "TemplatebackendUpdateDatasetNameReply",
+            '200': "TemplatebackendUpdateDatasetReply",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -3697,10 +3697,10 @@ class DatasetServiceApi:
 
 
     @validate_call
-    def dataset_service_update_dataset_name_with_http_info(
+    def dataset_service_update_dataset_with_http_info(
         self,
         id: StrictInt,
-        body: DatasetServiceUpdateDatasetNameRequest,
+        body: DatasetServiceUpdateDatasetRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3713,15 +3713,15 @@ class DatasetServiceApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[TemplatebackendUpdateDatasetNameReply]:
-        """Rename a dataset
+    ) -> ApiResponse[TemplatebackendUpdateDatasetReply]:
+        """Update Dataset
 
-        This endpoint renames a dataset
+        This endpoint allows to update a dataset (accepts only the name field)
 
         :param id: (required)
         :type id: int
         :param body: (required)
-        :type body: DatasetServiceUpdateDatasetNameRequest
+        :type body: DatasetServiceUpdateDatasetRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -3744,7 +3744,7 @@ class DatasetServiceApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._dataset_service_update_dataset_name_serialize(
+        _param = self._dataset_service_update_dataset_serialize(
             id=id,
             body=body,
             _request_auth=_request_auth,
@@ -3754,7 +3754,7 @@ class DatasetServiceApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "TemplatebackendUpdateDatasetNameReply",
+            '200': "TemplatebackendUpdateDatasetReply",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -3768,10 +3768,10 @@ class DatasetServiceApi:
 
 
     @validate_call
-    def dataset_service_update_dataset_name_without_preload_content(
+    def dataset_service_update_dataset_without_preload_content(
         self,
         id: StrictInt,
-        body: DatasetServiceUpdateDatasetNameRequest,
+        body: DatasetServiceUpdateDatasetRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3785,14 +3785,14 @@ class DatasetServiceApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Rename a dataset
+        """Update Dataset
 
-        This endpoint renames a dataset
+        This endpoint allows to update a dataset (accepts only the name field)
 
         :param id: (required)
         :type id: int
         :param body: (required)
-        :type body: DatasetServiceUpdateDatasetNameRequest
+        :type body: DatasetServiceUpdateDatasetRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -3815,7 +3815,7 @@ class DatasetServiceApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._dataset_service_update_dataset_name_serialize(
+        _param = self._dataset_service_update_dataset_serialize(
             id=id,
             body=body,
             _request_auth=_request_auth,
@@ -3825,7 +3825,7 @@ class DatasetServiceApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "TemplatebackendUpdateDatasetNameReply",
+            '200': "TemplatebackendUpdateDatasetReply",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -3834,7 +3834,7 @@ class DatasetServiceApi:
         return response_data.response
 
 
-    def _dataset_service_update_dataset_name_serialize(
+    def _dataset_service_update_dataset_serialize(
         self,
         id,
         body,

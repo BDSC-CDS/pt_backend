@@ -170,14 +170,14 @@ message ChangeTypesDatasetReply {
     uint32 id = 1;
 }
 
-message UpdateDatasetNameRequest {
+message UpdateDatasetRequest {
     uint32 id = 1;
     string name = 2;
 }
-message UpdateDatasetNameReply {
-    UpdateDatasetNameResult result = 1;
+message UpdateDatasetReply {
+    UpdateDatasetResult result = 1;
 }
-message UpdateDatasetNameResult {
+message UpdateDatasetResult {
     bool success = 1;
 }
 
@@ -231,14 +231,14 @@ service DatasetService {
     };
 
     // Rename a dataset
-    rpc UpdateDatasetName(UpdateDatasetNameRequest) returns (UpdateDatasetNameReply) {
+    rpc UpdateDataset(UpdateDatasetRequest) returns (UpdateDatasetReply) {
         option (google.api.http) = {
             put: "/api/v1/dataset/{id}";
             body: "*";
         };
         option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-            summary: "Rename a dataset";
-            description: "This endpoint renames a dataset";
+            summary: "Update Dataset";
+            description: "This endpoint allows to update a dataset (accepts only the name field)";
             tags: "DatasetService";
             extensions: {
                 key: "x-openapi-router-controller";

@@ -17,7 +17,7 @@ Method | HTTP request | Description
 [**dataset_service_revert_dataset**](DatasetServiceApi.md#dataset_service_revert_dataset) | **POST** /api/v1/dataset/revert | Revert a dataset
 [**dataset_service_store_dataset**](DatasetServiceApi.md#dataset_service_store_dataset) | **POST** /api/v1/dataset | Store a dataset
 [**dataset_service_transform_dataset**](DatasetServiceApi.md#dataset_service_transform_dataset) | **POST** /api/v1/dataset/transform | Transform a dataset
-[**dataset_service_update_dataset_name**](DatasetServiceApi.md#dataset_service_update_dataset_name) | **PUT** /api/v1/dataset/{id} | Rename a dataset
+[**dataset_service_update_dataset**](DatasetServiceApi.md#dataset_service_update_dataset) | **PUT** /api/v1/dataset/{id} | Update Dataset
 
 
 # **dataset_service_change_types_dataset**
@@ -1108,12 +1108,12 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **dataset_service_update_dataset_name**
-> TemplatebackendUpdateDatasetNameReply dataset_service_update_dataset_name(id, body)
+# **dataset_service_update_dataset**
+> TemplatebackendUpdateDatasetReply dataset_service_update_dataset(id, body)
 
-Rename a dataset
+Update Dataset
 
-This endpoint renames a dataset
+This endpoint allows to update a dataset (accepts only the name field)
 
 ### Example
 
@@ -1123,8 +1123,8 @@ This endpoint renames a dataset
 import time
 import os
 import openapi_client
-from openapi_client.models.dataset_service_update_dataset_name_request import DatasetServiceUpdateDatasetNameRequest
-from openapi_client.models.templatebackend_update_dataset_name_reply import TemplatebackendUpdateDatasetNameReply
+from openapi_client.models.dataset_service_update_dataset_request import DatasetServiceUpdateDatasetRequest
+from openapi_client.models.templatebackend_update_dataset_reply import TemplatebackendUpdateDatasetReply
 from openapi_client.rest import ApiException
 from pprint import pprint
 
@@ -1150,15 +1150,15 @@ with openapi_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = openapi_client.DatasetServiceApi(api_client)
     id = 56 # int | 
-    body = openapi_client.DatasetServiceUpdateDatasetNameRequest() # DatasetServiceUpdateDatasetNameRequest | 
+    body = openapi_client.DatasetServiceUpdateDatasetRequest() # DatasetServiceUpdateDatasetRequest | 
 
     try:
-        # Rename a dataset
-        api_response = api_instance.dataset_service_update_dataset_name(id, body)
-        print("The response of DatasetServiceApi->dataset_service_update_dataset_name:\n")
+        # Update Dataset
+        api_response = api_instance.dataset_service_update_dataset(id, body)
+        print("The response of DatasetServiceApi->dataset_service_update_dataset:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling DatasetServiceApi->dataset_service_update_dataset_name: %s\n" % e)
+        print("Exception when calling DatasetServiceApi->dataset_service_update_dataset: %s\n" % e)
 ```
 
 
@@ -1169,11 +1169,11 @@ with openapi_client.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id** | **int**|  | 
- **body** | [**DatasetServiceUpdateDatasetNameRequest**](DatasetServiceUpdateDatasetNameRequest.md)|  | 
+ **body** | [**DatasetServiceUpdateDatasetRequest**](DatasetServiceUpdateDatasetRequest.md)|  | 
 
 ### Return type
 
-[**TemplatebackendUpdateDatasetNameReply**](TemplatebackendUpdateDatasetNameReply.md)
+[**TemplatebackendUpdateDatasetReply**](TemplatebackendUpdateDatasetReply.md)
 
 ### Authorization
 

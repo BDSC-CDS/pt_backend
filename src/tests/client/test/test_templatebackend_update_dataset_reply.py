@@ -16,10 +16,10 @@
 import unittest
 import datetime
 
-from openapi_client.models.templatebackend_update_dataset_name_result import TemplatebackendUpdateDatasetNameResult
+from openapi_client.models.templatebackend_update_dataset_reply import TemplatebackendUpdateDatasetReply
 
-class TestTemplatebackendUpdateDatasetNameResult(unittest.TestCase):
-    """TemplatebackendUpdateDatasetNameResult unit test stubs"""
+class TestTemplatebackendUpdateDatasetReply(unittest.TestCase):
+    """TemplatebackendUpdateDatasetReply unit test stubs"""
 
     def setUp(self):
         pass
@@ -27,25 +27,26 @@ class TestTemplatebackendUpdateDatasetNameResult(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional) -> TemplatebackendUpdateDatasetNameResult:
-        """Test TemplatebackendUpdateDatasetNameResult
+    def make_instance(self, include_optional) -> TemplatebackendUpdateDatasetReply:
+        """Test TemplatebackendUpdateDatasetReply
             include_option is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
-        # uncomment below to create an instance of `TemplatebackendUpdateDatasetNameResult`
+        # uncomment below to create an instance of `TemplatebackendUpdateDatasetReply`
         """
-        model = TemplatebackendUpdateDatasetNameResult()
+        model = TemplatebackendUpdateDatasetReply()
         if include_optional:
-            return TemplatebackendUpdateDatasetNameResult(
-                success = True
+            return TemplatebackendUpdateDatasetReply(
+                result = openapi_client.models.templatebackend_update_dataset_result.templatebackendUpdateDatasetResult(
+                    success = True, )
             )
         else:
-            return TemplatebackendUpdateDatasetNameResult(
+            return TemplatebackendUpdateDatasetReply(
         )
         """
 
-    def testTemplatebackendUpdateDatasetNameResult(self):
-        """Test TemplatebackendUpdateDatasetNameResult"""
+    def testTemplatebackendUpdateDatasetReply(self):
+        """Test TemplatebackendUpdateDatasetReply"""
         # inst_req_only = self.make_instance(include_optional=False)
         # inst_req_and_optional = self.make_instance(include_optional=True)
 

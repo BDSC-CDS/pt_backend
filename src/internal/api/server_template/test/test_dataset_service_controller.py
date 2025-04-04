@@ -5,7 +5,7 @@ import unittest
 from flask import json
 
 from server_template.models.api_http_body import ApiHttpBody
-from server_template.models.dataset_service_update_dataset_name_request import DatasetServiceUpdateDatasetNameRequest
+from server_template.models.dataset_service_update_dataset_request import DatasetServiceUpdateDatasetRequest
 from server_template.models.rpc_status import RpcStatus
 from server_template.models.templatebackend_change_types_dataset_reply import TemplatebackendChangeTypesDatasetReply
 from server_template.models.templatebackend_change_types_dataset_request import TemplatebackendChangeTypesDatasetRequest
@@ -21,7 +21,7 @@ from server_template.models.templatebackend_store_dataset_reply import Templateb
 from server_template.models.templatebackend_store_dataset_request import TemplatebackendStoreDatasetRequest
 from server_template.models.templatebackend_transform_dataset_reply import TemplatebackendTransformDatasetReply
 from server_template.models.templatebackend_transform_dataset_request import TemplatebackendTransformDatasetRequest
-from server_template.models.templatebackend_update_dataset_name_reply import TemplatebackendUpdateDatasetNameReply
+from server_template.models.templatebackend_update_dataset_reply import TemplatebackendUpdateDatasetReply
 from server_template.test import BaseTestCase
 
 
@@ -267,12 +267,12 @@ class TestDatasetServiceController(BaseTestCase):
         self.assert200(response,
                        'Response body is : ' + response.data.decode('utf-8'))
 
-    def test_dataset_service_update_dataset_name(self):
-        """Test case for dataset_service_update_dataset_name
+    def test_dataset_service_update_dataset(self):
+        """Test case for dataset_service_update_dataset
 
-        Rename a dataset
+        Update Dataset
         """
-        body = server_template.DatasetServiceUpdateDatasetNameRequest()
+        body = server_template.DatasetServiceUpdateDatasetRequest()
         headers = { 
             'Accept': 'application/json',
             'Content-Type': 'application/json',

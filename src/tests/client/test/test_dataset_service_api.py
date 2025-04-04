@@ -118,10 +118,10 @@ class TestDatasetServiceApi(unittest.TestCase):
         """
         pass
 
-    def test_dataset_service_update_dataset_name(self) -> None:
-        """Test case for dataset_service_update_dataset_name
+    def test_dataset_service_update_dataset(self) -> None:
+        """Test case for dataset_service_update_dataset
 
-        Rename a dataset
+        Update Dataset
         """
         pass
 
