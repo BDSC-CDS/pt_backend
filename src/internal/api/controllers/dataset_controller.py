@@ -24,9 +24,9 @@ from server_template.models import TemplatebackendChangeTypesDatasetRequest
 from server_template.models import TemplatebackendChangeTypesDatasetReply
 from server_template.models import TemplatebackendGetDatasetJupyterhubReply
 from server_template.models import TemplatebackendGetDatasetJupyterhubResult
-from server_template.models import DatasetServiceUpdateDatasetNameRequest
-from server_template.models import TemplatebackendUpdateDatasetNameReply
-from server_template.models import TemplatebackendUpdateDatasetNameResult
+from server_template.models import DatasetServiceUpdateDatasetRequest
+from server_template.models import TemplatebackendUpdateDatasetReply
+from server_template.models import TemplatebackendUpdateDatasetResult
 from server_template.models import ApiHttpBody
 import src.internal.api.controllers.converter.dataset as dataset_converter
 
@@ -68,14 +68,14 @@ class DatasetServiceController:
         dataset = dataset_converter.dataset_from_business(dataset)
         return TemplatebackendGetDatasetInfoReply(dataset=dataset)
     
-    def dataset_service_update_dataset_name(self, user, id: int, body:DatasetServiceUpdateDatasetNameRequest):
+    def dataset_service_update_dataset(self, user, id: int, body:DatasetServiceUpdateDatasetRequest):
         try:
-            result = self.dataset_service.update_dataset_name(id, user.id, user.tenantid, body.name)
+            result = self.dataset_service.update_dataset(id, user.id, user.tenantid, body.name)
         except Exception as e:
             print("error", e)
             traceback.print_exception(e)
             return str(e), 500
-        return TemplatebackendUpdateDatasetNameReply(TemplatebackendUpdateDatasetNameResult(success=result))
+        return TemplatebackendUpdateDatasetReply(TemplatebackendUpdateDatasetResult(success=result))
 
     def dataset_service_get_dataset_metadata(self, user, id: int):
         try:

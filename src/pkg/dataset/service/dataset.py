@@ -33,8 +33,8 @@ class DatasetService:
         return dataset
     
     # update the name of a dataset
-    def update_dataset_name(self,id:int, userid:int, tenantid:int, name:str):
-        updated = self.dataset_store.update_dataset_name(id=id,userid=userid,tenantid=tenantid,new_name=name)
+    def update_dataset(self,id:int, userid:int, tenantid:int, name:str):
+        updated = self.dataset_store.update_dataset(id=id,userid=userid,tenantid=tenantid,new_name=name)
         print("Updated", updated)
         return updated
 

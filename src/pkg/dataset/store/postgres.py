@@ -547,7 +547,7 @@ class DatasetStore:
 
         return new_dataset_id
 
-    def update_dataset_name(self,userid:int, tenantid:int,id:int, new_name:str):
+    def update_dataset(self,userid:int, tenantid:int,id:int, new_name:str):
         query = "UPDATE datasets SET dataset_name = :new_name WHERE id = :dataset_id AND userid = :userid AND tenantid = :tenantid;"
         with self.session_scope() as session:
             try:
