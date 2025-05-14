@@ -53,6 +53,7 @@ message StoreDatasetRequest {
     string types = 3;
     string identifiers = 4;
     string is_id = 5;
+    string original_filename = 6;
 }
 
 message StoreDatasetReply {
@@ -157,7 +158,6 @@ message TransformDatasetResult {
 message RevertDatasetRequest {
     uint32 id = 1;
 }
-
 message RevertDatasetReply {
     uint32 id = 1;
 }
@@ -166,9 +166,19 @@ message ChangeTypesDatasetRequest {
     uint32 dataset_id = 1;
     repeated Metadata metadata = 2;
 }
-
 message ChangeTypesDatasetReply {
     uint32 id = 1;
+}
+
+message UpdateDatasetRequest {
+    uint32 id = 1;
+    string name = 2;
+}
+message UpdateDatasetReply {
+    UpdateDatasetResult result = 1;
+}
+message UpdateDatasetResult {
+    bool success = 1;
 }
 
 service DatasetService {
@@ -220,6 +230,22 @@ service DatasetService {
         };
     };
 
+    // Rename a dataset
+    rpc UpdateDataset(UpdateDatasetRequest) returns (UpdateDatasetReply) {
+        option (google.api.http) = {
+            put: "/api/v1/dataset/{id}";
+            body: "*";
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            summary: "Update Dataset";
+            description: "This endpoint allows to update a dataset (accepts only the name field)";
+            tags: "DatasetService";
+            extensions: {
+                key: "x-openapi-router-controller";
+                value: {string_value: "dataset_controller"};
+            };
+        };
+    };
 
     // Get a dataset's metadata
     rpc GetDatasetMetadata(GetDatasetMetadataRequest) returns (GetDatasetMetadataReply) {
@@ -245,6 +271,22 @@ service DatasetService {
         option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
             summary: "Get Dataset Content";
             description: "This endpoint allow getting a specific user's Dataset Content";
+            tags: "DatasetService";
+            extensions: {
+                key: "x-openapi-router-controller";
+                value: {string_value: "dataset_controller"};
+            };
+        };
+    };
+
+    // Get a dataset CSV file
+    rpc GetDatasetCSV(GetDatasetContentRequest) returns (google.api.HttpBody) {
+        option (google.api.http) = {
+            get: "/api/v1/dataset/csv/{id}"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            summary: "Get Dataset CSVFile";
+            description: "This endpoint allow getting a specific user's Dataset file in CSV format.";
             tags: "DatasetService";
             extensions: {
                 key: "x-openapi-router-controller";
@@ -333,7 +375,7 @@ service DatasetService {
         };
     };
 
-     // Revert a dataset to its state before transforming
+    // Revert a dataset to its state before transforming
     rpc RevertDataset(RevertDatasetRequest) returns (RevertDatasetReply) {
         option (google.api.http) = {
             post: "/api/v1/dataset/revert"

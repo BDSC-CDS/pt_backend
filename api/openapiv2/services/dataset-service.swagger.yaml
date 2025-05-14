@@ -98,6 +98,39 @@ paths:
       tags:
         - DatasetService
       x-openapi-router-controller: dataset_controller
+  /api/v1/dataset/csv/{id}:
+    get:
+      summary: Get Dataset CSVFile
+      description: This endpoint allow getting a specific user's Dataset file in CSV format.
+      operationId: DatasetService_GetDatasetCSV
+      responses:
+        "200":
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/apiHttpBody'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/rpcStatus'
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: integer
+          format: int64
+        - name: offset
+          in: query
+          required: false
+          type: integer
+          format: int32
+        - name: limit
+          in: query
+          required: false
+          type: integer
+          format: int32
+      tags:
+        - DatasetService
+      x-openapi-router-controller: dataset_controller
   /api/v1/dataset/dataframe/{id}:
     get:
       summary: Get Dataset Dataframe
@@ -325,6 +358,36 @@ paths:
       tags:
         - DatasetService
       x-openapi-router-controller: dataset_controller
+    put:
+      summary: Update Dataset
+      description: This endpoint allows to update a dataset (accepts only the name field)
+      operationId: DatasetService_UpdateDataset
+      responses:
+        "200":
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/templatebackendUpdateDatasetReply'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/rpcStatus'
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: integer
+          format: int64
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              name:
+                type: string
+      tags:
+        - DatasetService
+      x-openapi-router-controller: dataset_controller
 definitions:
   apiHttpBody:
     type: object
@@ -543,6 +606,8 @@ definitions:
         format: int64
       datasetName:
         type: string
+      originalFilename:
+        type: string
       createdAt:
         type: string
         format: date-time
@@ -669,6 +734,8 @@ definitions:
         type: string
       isId:
         type: string
+      originalFilename:
+        type: string
     title: Create a Dataset
   templatebackendStoreDatasetResult:
     type: object
@@ -696,6 +763,16 @@ definitions:
       id:
         type: integer
         format: int64
+  templatebackendUpdateDatasetReply:
+    type: object
+    properties:
+      result:
+        $ref: '#/definitions/templatebackendUpdateDatasetResult'
+  templatebackendUpdateDatasetResult:
+    type: object
+    properties:
+      success:
+        type: boolean
 securityDefinitions:
   Bearer:
     type: apiKey

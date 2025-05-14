@@ -531,6 +531,45 @@ paths:
       tags:
       - DatasetService
       x-openapi-router-controller: dataset_controller
+  /api/v1/dataset/csv/{id}:
+    get:
+      description: This endpoint allow getting a specific user's Dataset file in CSV
+        format.
+      operationId: dataset_service_get_dataset_csv
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      - in: query
+        name: offset
+        schema:
+          format: int32
+          type: integer
+      - in: query
+        name: limit
+        schema:
+          format: int32
+          type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/apiHttpBody'
+          description: A successful response.
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+          description: An unexpected error response.
+      summary: Get Dataset CSVFile
+      tags:
+      - DatasetService
+      x-openapi-router-controller: dataset_controller
   /api/v1/dataset/dataframe/{id}:
     get:
       description: This endpoint allow getting a specific user's Dataset as a Pandas
@@ -806,6 +845,41 @@ paths:
       tags:
       - DatasetService
       x-openapi-router-controller: dataset_controller
+    put:
+      description: This endpoint allows to update a dataset (accepts only the name
+        field)
+      operationId: dataset_service_update_dataset
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DatasetService_UpdateDataset_request'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/templatebackendUpdateDatasetReply'
+          description: A successful response.
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+          description: An unexpected error response.
+      summary: Update Dataset
+      tags:
+      - DatasetService
+      x-openapi-router-controller: dataset_controller
+      x-codegen-request-body-name: body
   /api/v1/hello:
     get:
       description: This endpoint returns a hello
@@ -1723,6 +1797,7 @@ components:
         datasetName: datasetName
         id: 0
         userid: 6
+        originalFilename: originalFilename
       properties:
         id:
           format: int64
@@ -1738,6 +1813,9 @@ components:
           type: integer
         datasetName:
           title: datasetName
+          type: string
+        originalFilename:
+          title: originalFilename
           type: string
         createdAt:
           format: date-time
@@ -1987,6 +2065,7 @@ components:
           datasetName: datasetName
           id: 0
           userid: 6
+          originalFilename: originalFilename
       properties:
         dataset:
           $ref: '#/components/schemas/templatebackendDataset'
@@ -2854,12 +2933,14 @@ components:
             datasetName: datasetName
             id: 0
             userid: 6
+            originalFilename: originalFilename
           - createdAt: 2000-01-23T04:56:07.000+00:00
             deletedAt: 2000-01-23T04:56:07.000+00:00
             tenantid: 1
             datasetName: datasetName
             id: 0
             userid: 6
+            originalFilename: originalFilename
       properties:
         result:
           $ref: '#/components/schemas/templatebackendListDatasetsResult'
@@ -2874,12 +2955,14 @@ components:
           datasetName: datasetName
           id: 0
           userid: 6
+          originalFilename: originalFilename
         - createdAt: 2000-01-23T04:56:07.000+00:00
           deletedAt: 2000-01-23T04:56:07.000+00:00
           tenantid: 1
           datasetName: datasetName
           id: 0
           userid: 6
+          originalFilename: originalFilename
       properties:
         Datasets:
           items:
@@ -4940,6 +5023,9 @@ components:
         isId:
           title: isId
           type: string
+        originalFilename:
+          title: originalFilename
+          type: string
       title: Create a Dataset
       type: object
     templatebackendStoreDatasetResult:
@@ -4982,6 +5068,24 @@ components:
           title: id
           type: integer
       title: templatebackendTransformDatasetResult
+      type: object
+    templatebackendUpdateDatasetReply:
+      example:
+        result:
+          success: true
+      properties:
+        result:
+          $ref: '#/components/schemas/templatebackendUpdateDatasetResult'
+      title: templatebackendUpdateDatasetReply
+      type: object
+    templatebackendUpdateDatasetResult:
+      example:
+        success: true
+      properties:
+        success:
+          title: success
+          type: boolean
+      title: templatebackendUpdateDatasetResult
       type: object
     templatebackendUpdatePasswordReply:
       example:
@@ -5083,6 +5187,13 @@ components:
           title: email
           type: string
       title: templatebackendUserEmail
+      type: object
+    DatasetService_UpdateDataset_request:
+      properties:
+        name:
+          title: name
+          type: string
+      title: DatasetService_UpdateDataset_request
       type: object
     IndexService_CreateHello_request:
       properties:

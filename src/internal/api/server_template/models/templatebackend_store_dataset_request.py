@@ -14,7 +14,7 @@ class TemplatebackendStoreDatasetRequest(Model):
     Do not edit the class manually.
     """
 
-    def __init__(self, dataset_name=None, dataset=None, types=None, identifiers=None, is_id=None):
+    def __init__(self, dataset_name=None, dataset=None, types=None, identifiers=None, is_id=None, original_filename=None):
         """TemplatebackendStoreDatasetRequest - a model defined in OpenAPI
 
         :param dataset_name: The dataset_name of this TemplatebackendStoreDatasetRequest.
@@ -27,13 +27,16 @@ class TemplatebackendStoreDatasetRequest(Model):
         :type identifiers: str
         :param is_id: The is_id of this TemplatebackendStoreDatasetRequest.
         :type is_id: str
+        :param original_filename: The original_filename of this TemplatebackendStoreDatasetRequest.
+        :type original_filename: str
         """
         self.openapi_types = {
             'dataset_name': str,
             'dataset': str,
             'types': str,
             'identifiers': str,
-            'is_id': str
+            'is_id': str,
+            'original_filename': str
         }
 
         self.attribute_map = {
@@ -41,7 +44,8 @@ class TemplatebackendStoreDatasetRequest(Model):
             'dataset': 'dataset',
             'types': 'types',
             'identifiers': 'identifiers',
-            'is_id': 'isId'
+            'is_id': 'isId',
+            'original_filename': 'originalFilename'
         }
 
         self._dataset_name = dataset_name
@@ -49,6 +53,7 @@ class TemplatebackendStoreDatasetRequest(Model):
         self._types = types
         self._identifiers = identifiers
         self._is_id = is_id
+        self._original_filename = original_filename
 
     @classmethod
     def from_dict(cls, dikt) -> 'TemplatebackendStoreDatasetRequest':
@@ -165,3 +170,24 @@ class TemplatebackendStoreDatasetRequest(Model):
         """
 
         self._is_id = is_id
+
+    @property
+    def original_filename(self) -> str:
+        """Gets the original_filename of this TemplatebackendStoreDatasetRequest.
+
+
+        :return: The original_filename of this TemplatebackendStoreDatasetRequest.
+        :rtype: str
+        """
+        return self._original_filename
+
+    @original_filename.setter
+    def original_filename(self, original_filename: str):
+        """Sets the original_filename of this TemplatebackendStoreDatasetRequest.
+
+
+        :param original_filename: The original_filename of this TemplatebackendStoreDatasetRequest.
+        :type original_filename: str
+        """
+
+        self._original_filename = original_filename

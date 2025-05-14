@@ -109,6 +109,7 @@ Class | Method | HTTP request | Description
 *DatasetServiceApi* | [**dataset_service_change_types_dataset**](docs/DatasetServiceApi.md#dataset_service_change_types_dataset) | **POST** /api/v1/dataset/types | Change the types of a dataset
 *DatasetServiceApi* | [**dataset_service_delete_dataset**](docs/DatasetServiceApi.md#dataset_service_delete_dataset) | **DELETE** /api/v1/dataset/{id} | Deletes a dataset
 *DatasetServiceApi* | [**dataset_service_get_dataset_content**](docs/DatasetServiceApi.md#dataset_service_get_dataset_content) | **GET** /api/v1/dataset/content/{id} | Get Dataset Content
+*DatasetServiceApi* | [**dataset_service_get_dataset_csv**](docs/DatasetServiceApi.md#dataset_service_get_dataset_csv) | **GET** /api/v1/dataset/csv/{id} | Get Dataset CSVFile
 *DatasetServiceApi* | [**dataset_service_get_dataset_dataframe**](docs/DatasetServiceApi.md#dataset_service_get_dataset_dataframe) | **GET** /api/v1/dataset/dataframe/{id} | Get Dataset Dataframe
 *DatasetServiceApi* | [**dataset_service_get_dataset_identifier**](docs/DatasetServiceApi.md#dataset_service_get_dataset_identifier) | **GET** /api/v1/dataset/identifier/{id} | Get Dataset Content filtered by identifying and quasi identifying columns
 *DatasetServiceApi* | [**dataset_service_get_dataset_info**](docs/DatasetServiceApi.md#dataset_service_get_dataset_info) | **GET** /api/v1/dataset/info/{id} | Get Dataset Info
@@ -118,6 +119,7 @@ Class | Method | HTTP request | Description
 *DatasetServiceApi* | [**dataset_service_revert_dataset**](docs/DatasetServiceApi.md#dataset_service_revert_dataset) | **POST** /api/v1/dataset/revert | Revert a dataset
 *DatasetServiceApi* | [**dataset_service_store_dataset**](docs/DatasetServiceApi.md#dataset_service_store_dataset) | **POST** /api/v1/dataset | Store a dataset
 *DatasetServiceApi* | [**dataset_service_transform_dataset**](docs/DatasetServiceApi.md#dataset_service_transform_dataset) | **POST** /api/v1/dataset/transform | Transform a dataset
+*DatasetServiceApi* | [**dataset_service_update_dataset**](docs/DatasetServiceApi.md#dataset_service_update_dataset) | **PUT** /api/v1/dataset/{id} | Update Dataset
 *IndexServiceApi* | [**index_service_create_hello**](docs/IndexServiceApi.md#index_service_create_hello) | **POST** /api/v1/hello/{identifier} | Get a hello
 *IndexServiceApi* | [**index_service_get_hello**](docs/IndexServiceApi.md#index_service_get_hello) | **GET** /api/v1/hello | Get a hello
 *QuestionnaireServiceApi* | [**questionnaire_service_create_questionnaire**](docs/QuestionnaireServiceApi.md#questionnaire_service_create_questionnaire) | **POST** /api/v1/questionnaire | Create a questionnaire
@@ -142,6 +144,7 @@ Class | Method | HTTP request | Description
 ## Documentation For Models
 
  - [ApiHttpBody](docs/ApiHttpBody.md)
+ - [DatasetServiceUpdateDatasetRequest](docs/DatasetServiceUpdateDatasetRequest.md)
  - [IndexServiceCreateHelloRequest](docs/IndexServiceCreateHelloRequest.md)
  - [ProtobufAny](docs/ProtobufAny.md)
  - [QuestionnaireServiceShareReplyRequest](docs/QuestionnaireServiceShareReplyRequest.md)
@@ -225,6 +228,8 @@ Class | Method | HTTP request | Description
  - [TemplatebackendTransformDatasetReply](docs/TemplatebackendTransformDatasetReply.md)
  - [TemplatebackendTransformDatasetRequest](docs/TemplatebackendTransformDatasetRequest.md)
  - [TemplatebackendTransformDatasetResult](docs/TemplatebackendTransformDatasetResult.md)
+ - [TemplatebackendUpdateDatasetReply](docs/TemplatebackendUpdateDatasetReply.md)
+ - [TemplatebackendUpdateDatasetResult](docs/TemplatebackendUpdateDatasetResult.md)
  - [TemplatebackendUpdatePasswordReply](docs/TemplatebackendUpdatePasswordReply.md)
  - [TemplatebackendUpdatePasswordRequest](docs/TemplatebackendUpdatePasswordRequest.md)
  - [TemplatebackendUser](docs/TemplatebackendUser.md)

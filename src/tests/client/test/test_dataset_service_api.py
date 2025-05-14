@@ -48,6 +48,13 @@ class TestDatasetServiceApi(unittest.TestCase):
         """
         pass
 
+    def test_dataset_service_get_dataset_csv(self) -> None:
+        """Test case for dataset_service_get_dataset_csv
+
+        Get Dataset CSVFile
+        """
+        pass
+
     def test_dataset_service_get_dataset_dataframe(self) -> None:
         """Test case for dataset_service_get_dataset_dataframe
 
@@ -108,6 +115,13 @@ class TestDatasetServiceApi(unittest.TestCase):
         """Test case for dataset_service_transform_dataset
 
         Transform a dataset
+        """
+        pass
+
+    def test_dataset_service_update_dataset(self) -> None:
+        """Test case for dataset_service_update_dataset
+
+        Update Dataset
         """
         pass
 

@@ -5,15 +5,14 @@ option go_package = ".;templatebackend";
 import "google/protobuf/timestamp.proto";
 
 message Dataset {
-
     uint32 id = 1;
     uint32 userid = 2;
     uint32 tenantid = 3;
     string dataset_name = 4;
+    string original_filename = 5;
 
-    google.protobuf.Timestamp createdAt = 5;
-    google.protobuf.Timestamp deletedAt = 6;
-
+    google.protobuf.Timestamp createdAt = 6;
+    google.protobuf.Timestamp deletedAt = 7;
 }
 
 message Metadata {

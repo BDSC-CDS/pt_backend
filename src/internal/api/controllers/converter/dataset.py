@@ -13,7 +13,10 @@ def dataset_from_business(dataset: Dataset) -> TemplatebackendDataset:
     print(dataset)
     d = TemplatebackendDataset(
         id=dataset.id,
+        userid=dataset.userid,
+        tenantid=dataset.tenantid,
         dataset_name = dataset.dataset_name,
+        original_filename=dataset.original_filename,
         created_at=dataset.created_at,
         deleted_at=dataset.deleted_at,
     )
@@ -61,6 +64,7 @@ def datasets_from_business(datasets: List[Dataset]) -> List[TemplatebackendDatas
             userid=data.userid,
             tenantid=data.tenantid,
             dataset_name=data.dataset_name,
+            original_filename=data.original_filename,
             created_at=data.created_at,
             deleted_at=data.deleted_at
         ) for data in datasets

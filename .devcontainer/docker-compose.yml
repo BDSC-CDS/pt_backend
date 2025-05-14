@@ -1,4 +1,5 @@
 version: '3'
+name: pt-backend-dev-container
 services:
   pt_backend:
     build:
