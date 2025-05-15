@@ -25,6 +25,5 @@ appVersion: "1.16.0"
 
 dependencies:
 - name: postgresql
-  alias: arx-postgresql
   version: "15.x.x"
   repository: "https://charts.bitnami.com/bitnami"

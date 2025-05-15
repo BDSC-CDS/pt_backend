@@ -61,7 +61,7 @@ resources: {}
 ####################################
 # PostgreSQL subchart configuration
 ####################################
-arx-postgresql:
+postgresql:
   nameOverride: arx-postgresql
   fullnameOverride: "arx-postgresql"
   secrets:
