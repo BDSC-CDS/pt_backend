@@ -10,15 +10,14 @@ fullnameOverride: ""
 replicaCount: 1
 
 # This sets the namespace used for the chart (will be prefixed with the main chart namespace).
-# namespace: "arx"
+# namespace: "pt-arx"
 
 # This sets the container image.
 image:
-  repository: registry.rdeid.unil.ch/service-arx
-  pullPolicy: IfNotPresent
+  repository: ghcr.io/bdsc-cds/pt-service-arx
+  pullPolicy: Always
   tag: "latest"
-  pullSecrets:
-    - name: registry-auth
+
 
 # This is for setting up a service.
 service:
