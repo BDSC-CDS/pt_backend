@@ -18,10 +18,10 @@ echo "Helm Lint:"
 helm lint ./pt-backend-chart
 echo
 
-echo "######################################"
-echo "Helm Template:"
-helm template ./pt-backend-chart
-echo
+# echo "######################################"
+# echo "Helm Template:"
+# helm template ./pt-backend-chart
+# echo
 
 echo "######################################"
 echo "Installing or upgrading chart..."
