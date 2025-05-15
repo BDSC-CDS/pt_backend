@@ -60,7 +60,7 @@ configOverride:
     public_url: "https://pt-backend-test.rdeid.unil.ch"
   clients:
     arx:
-      host: "http://arx-service.arx:8080/"
+      host: "http://pt-backend-test-arx-service.test:8080/" # The name of the service and the namespace.
     jupyterhub:
       host: "https://jupyterhub-test.rdeid.unil.ch/"
 
@@ -128,4 +128,4 @@ arx:
 
   postgresql:
     secrets:
-      postgresPassword: example-password # This value must be specified.
+      postgresPassword: example-password # This value must be specified during deployment.
