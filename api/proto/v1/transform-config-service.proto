@@ -1,0 +1,166 @@
+syntax = "proto3";
+package templatebackend;
+option go_package = ".;templatebackend";
+
+import "google/api/annotations.proto";
+import "google/api/httpbody.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
+
+import "transform-config.proto";
+
+option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
+    info: {
+        title: "pt backend";
+        version: "1.0";
+        contact: {
+            name: "pt backend transform configuration service";
+            url: "https://pt-backend.rdeid.unil.ch";
+            email: "development.bdsc@chuv.ch";
+        };
+    };
+
+    schemes: HTTP;
+    consumes: "application/json";
+    produces: "application/json";
+
+    security_definitions: {
+        security: {
+            key: "Bearer";
+            value: {
+                type: TYPE_API_KEY;
+                in: IN_HEADER;
+                name: "Authorization";
+            }
+        }
+    }
+
+    security: {
+        security_requirement: {
+            key: "Bearer";
+            value: {};
+        }
+    }
+    security: {}
+};
+
+
+// List all transform configs for a user
+message ListTransformConfigsRequest {
+    uint32 offset = 1;
+    uint32 limit = 2;
+}
+message ListTransformConfigsReply {
+    ListTransformConfigsResult result = 1;
+}
+message ListTransformConfigsResult {
+    repeated TransformConfig config = 1;
+}
+
+// Create a new transform config
+message CreateTransformConfigRequest {
+    TransformConfig config = 1;
+}
+message CreateTransformConfigReply {
+    CreateTransformConfigResult result = 1;
+}
+message CreateTransformConfigResult {
+    uint32 id = 1;
+}
+
+// Delete a transform config
+message DeleteTransformConfigRequest {
+    uint32 id = 1;
+}
+message DeleteTransformConfigReply {
+    DeleteTransformConfigResult result = 1;
+}
+message DeleteTransformConfigResult {
+    bool success = 1;
+}
+
+// Export a transform config in SPHN connector json format
+message ExportTransformConfigRequest {
+    uint32 id = 1;
+}
+message ExportTransformConfigReply {
+    string config = 1;
+}
+
+
+service TransformConfigService {
+    rpc CreateTransformConfig(CreateTransformConfigRequest) returns (CreateTransformConfigReply) {
+       option (google.api.http) = {
+            post: "/api/v1/transform-config"
+            body: "*"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            summary: "Create a transform configuration";
+            description: "This endpoint creates a dataset transform configuration";
+            tags: "TransformConfigService";
+            extensions: {
+                key: "x-openapi-router-controller";
+                value: {string_value: "transform_config_controller"};
+            };
+        };
+    };
+
+    rpc ListTransformConfigs(ListTransformConfigsRequest) returns (ListTransformConfigsReply) {
+        option (google.api.http) = {
+            get: "/api/v1/transform-config"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            summary: "List transform configurations";
+            description: "This endpoint allows listing a user's dataset transform configurations";
+            tags: "TransformConfigService";
+            extensions: {
+                key: "x-openapi-router-controller";
+                value {string_value: "transform_config_controller"};
+            };
+        };
+    };
+
+    rpc DeleteTransformConfig(DeleteTransformConfigRequest) returns (DeleteTransformConfigReply) {
+        option (google.api.http) = {
+            delete: "/api/v1/transform-config/{id}"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            summary: "Delete transform configuration";
+            description: "This endpoint deletes a dataset transform configuration";
+            tags: "TransformConfigService";
+            extensions: {
+                key: "x-openapi-router-controller";
+                value: {string_value: "transform_config_controller"};
+            };
+        };
+    };
+
+    rpc ExportTransformConfig(ExportTransformConfigRequest) returns (ExportTransformConfigReply) {
+        option (google.api.http) = {
+            get: "/api/v1/transform-config/export/{id}"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            summary: "Export transform configuration as a string";
+            description: "This endpoint returns a JSON string of a transform configuration (SPHN Connector format)";
+            tags: "TransformConfigService";
+            extensions: {
+                key: "x-openapi-router-controller";
+                value {string_value: "transform_config_controller"};
+            };
+        };
+    };
+
+    rpc ExportTransformConfigJSON(ExportTransformConfigRequest) returns (google.api.HttpBody) {
+        option (google.api.http) = {
+            get: "/api/v1/transform-config/export/json/{id}"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            summary: "Export transform configuration as a JSON file ";
+            description: "This endpoint returns a JSON file of a transform configuration (SPHN Connector format)";
+            tags: "TransformConfigService";
+            extensions: {
+                key: "x-openapi-router-controller";
+                value {string_value: "transform_config_controller"};
+            };
+        };
+    };
+}

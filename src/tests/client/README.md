@@ -102,10 +102,6 @@ Class | Method | HTTP request | Description
 *AuditLogServiceApi* | [**audit_log_service_get_logs**](docs/AuditLogServiceApi.md#audit_log_service_get_logs) | **GET** /api/v1/audit/logs | Get logs
 *AuditLogServiceApi* | [**audit_log_service_get_logs_for_user**](docs/AuditLogServiceApi.md#audit_log_service_get_logs_for_user) | **GET** /api/v1/audit/users/{userid}/logs | Get logs for a user
 *AuthenticationServiceApi* | [**authentication_service_authenticate**](docs/AuthenticationServiceApi.md#authentication_service_authenticate) | **POST** /api/rest/v1/authentication/login | Authenticate
-*ConfigurationServiceApi* | [**configuration_service_create_config**](docs/ConfigurationServiceApi.md#configuration_service_create_config) | **POST** /api/rest/v1/configs | Create a configuration
-*ConfigurationServiceApi* | [**configuration_service_delete_config**](docs/ConfigurationServiceApi.md#configuration_service_delete_config) | **DELETE** /api/v1/config/{id} | Deletes a config
-*ConfigurationServiceApi* | [**configuration_service_export_config**](docs/ConfigurationServiceApi.md#configuration_service_export_config) | **GET** /api/rest/v1/config/export/{id} | Export a configuration as json (SPHN Connector format)
-*ConfigurationServiceApi* | [**configuration_service_get_configs**](docs/ConfigurationServiceApi.md#configuration_service_get_configs) | **GET** /api/rest/v1/configs | Get configuration files
 *DatasetServiceApi* | [**dataset_service_change_types_dataset**](docs/DatasetServiceApi.md#dataset_service_change_types_dataset) | **POST** /api/v1/dataset/types | Change the types of a dataset
 *DatasetServiceApi* | [**dataset_service_delete_dataset**](docs/DatasetServiceApi.md#dataset_service_delete_dataset) | **DELETE** /api/v1/dataset/{id} | Deletes a dataset
 *DatasetServiceApi* | [**dataset_service_get_dataset_content**](docs/DatasetServiceApi.md#dataset_service_get_dataset_content) | **GET** /api/v1/dataset/content/{id} | Get Dataset Content
@@ -132,6 +128,11 @@ Class | Method | HTTP request | Description
 *QuestionnaireServiceApi* | [**questionnaire_service_list_replies**](docs/QuestionnaireServiceApi.md#questionnaire_service_list_replies) | **GET** /api/v1/questionnaire/replies | List questionnaires replies
 *QuestionnaireServiceApi* | [**questionnaire_service_share_reply**](docs/QuestionnaireServiceApi.md#questionnaire_service_share_reply) | **POST** /api/v1/questionnaire/replies/{id}/share | Share questionnaires reply
 *RiskAssessmentServiceApi* | [**risk_assessment_service_get_risk_assessment**](docs/RiskAssessmentServiceApi.md#risk_assessment_service_get_risk_assessment) | **GET** /api/v1/riskassessment/{datasetid} | Get risk assessment
+*TransformConfigServiceApi* | [**transform_config_service_create_transform_config**](docs/TransformConfigServiceApi.md#transform_config_service_create_transform_config) | **POST** /api/v1/transform-config | Create a transform configuration
+*TransformConfigServiceApi* | [**transform_config_service_delete_transform_config**](docs/TransformConfigServiceApi.md#transform_config_service_delete_transform_config) | **DELETE** /api/v1/transform-config/{id} | Delete transform configuration
+*TransformConfigServiceApi* | [**transform_config_service_export_transform_config**](docs/TransformConfigServiceApi.md#transform_config_service_export_transform_config) | **GET** /api/v1/transform-config/export/{id} | Export transform configuration as a string
+*TransformConfigServiceApi* | [**transform_config_service_export_transform_config_json**](docs/TransformConfigServiceApi.md#transform_config_service_export_transform_config_json) | **GET** /api/v1/transform-config/export/json/{id} | Export transform configuration as a JSON file 
+*TransformConfigServiceApi* | [**transform_config_service_list_transform_configs**](docs/TransformConfigServiceApi.md#transform_config_service_list_transform_configs) | **GET** /api/v1/transform-config | List transform configurations
 *UsersServiceApi* | [**users_service_create_user**](docs/UsersServiceApi.md#users_service_create_user) | **POST** /api/rest/v1/users | Create a user
 *UsersServiceApi* | [**users_service_delete_user**](docs/UsersServiceApi.md#users_service_delete_user) | **DELETE** /api/rest/v1/users/{id} | Delete a user
 *UsersServiceApi* | [**users_service_get_user**](docs/UsersServiceApi.md#users_service_get_user) | **GET** /api/rest/v1/users/{id} | Get a user
@@ -155,9 +156,6 @@ Class | Method | HTTP request | Description
  - [TemplatebackendChangeTypesDatasetReply](docs/TemplatebackendChangeTypesDatasetReply.md)
  - [TemplatebackendChangeTypesDatasetRequest](docs/TemplatebackendChangeTypesDatasetRequest.md)
  - [TemplatebackendColumn](docs/TemplatebackendColumn.md)
- - [TemplatebackendConfig](docs/TemplatebackendConfig.md)
- - [TemplatebackendCreateConfigReply](docs/TemplatebackendCreateConfigReply.md)
- - [TemplatebackendCreateConfigResult](docs/TemplatebackendCreateConfigResult.md)
  - [TemplatebackendCreateHelloReply](docs/TemplatebackendCreateHelloReply.md)
  - [TemplatebackendCreateQuestionnaireReply](docs/TemplatebackendCreateQuestionnaireReply.md)
  - [TemplatebackendCreateQuestionnaireRequest](docs/TemplatebackendCreateQuestionnaireRequest.md)
@@ -168,20 +166,22 @@ Class | Method | HTTP request | Description
  - [TemplatebackendCreateReplyReply](docs/TemplatebackendCreateReplyReply.md)
  - [TemplatebackendCreateReplyRequest](docs/TemplatebackendCreateReplyRequest.md)
  - [TemplatebackendCreateReplyResult](docs/TemplatebackendCreateReplyResult.md)
+ - [TemplatebackendCreateTransformConfigReply](docs/TemplatebackendCreateTransformConfigReply.md)
+ - [TemplatebackendCreateTransformConfigRequest](docs/TemplatebackendCreateTransformConfigRequest.md)
+ - [TemplatebackendCreateTransformConfigResult](docs/TemplatebackendCreateTransformConfigResult.md)
  - [TemplatebackendCreateUserReply](docs/TemplatebackendCreateUserReply.md)
  - [TemplatebackendCreateUserResult](docs/TemplatebackendCreateUserResult.md)
  - [TemplatebackendCredentials](docs/TemplatebackendCredentials.md)
  - [TemplatebackendDataset](docs/TemplatebackendDataset.md)
- - [TemplatebackendDeleteConfigReply](docs/TemplatebackendDeleteConfigReply.md)
- - [TemplatebackendDeleteConfigResult](docs/TemplatebackendDeleteConfigResult.md)
+ - [TemplatebackendDateShiftConfig](docs/TemplatebackendDateShiftConfig.md)
  - [TemplatebackendDeleteDatasetReply](docs/TemplatebackendDeleteDatasetReply.md)
  - [TemplatebackendDeleteDatasetResult](docs/TemplatebackendDeleteDatasetResult.md)
  - [TemplatebackendDeleteQuestionnaireReply](docs/TemplatebackendDeleteQuestionnaireReply.md)
  - [TemplatebackendDeleteQuestionnaireResult](docs/TemplatebackendDeleteQuestionnaireResult.md)
+ - [TemplatebackendDeleteTransformConfigReply](docs/TemplatebackendDeleteTransformConfigReply.md)
+ - [TemplatebackendDeleteTransformConfigResult](docs/TemplatebackendDeleteTransformConfigResult.md)
  - [TemplatebackendDeleteUserReply](docs/TemplatebackendDeleteUserReply.md)
- - [TemplatebackendExportConfigReply](docs/TemplatebackendExportConfigReply.md)
- - [TemplatebackendGetConfigsReply](docs/TemplatebackendGetConfigsReply.md)
- - [TemplatebackendGetConfigsResult](docs/TemplatebackendGetConfigsResult.md)
+ - [TemplatebackendExportTransformConfigReply](docs/TemplatebackendExportTransformConfigReply.md)
  - [TemplatebackendGetDatasetContentReply](docs/TemplatebackendGetDatasetContentReply.md)
  - [TemplatebackendGetDatasetContentResult](docs/TemplatebackendGetDatasetContentResult.md)
  - [TemplatebackendGetDatasetInfoReply](docs/TemplatebackendGetDatasetInfoReply.md)
@@ -207,6 +207,8 @@ Class | Method | HTTP request | Description
  - [TemplatebackendListQuestionnaireResult](docs/TemplatebackendListQuestionnaireResult.md)
  - [TemplatebackendListRepliesReply](docs/TemplatebackendListRepliesReply.md)
  - [TemplatebackendListRepliesResult](docs/TemplatebackendListRepliesResult.md)
+ - [TemplatebackendListTransformConfigsReply](docs/TemplatebackendListTransformConfigsReply.md)
+ - [TemplatebackendListTransformConfigsResult](docs/TemplatebackendListTransformConfigsResult.md)
  - [TemplatebackendMetadata](docs/TemplatebackendMetadata.md)
  - [TemplatebackendQuestionnaire](docs/TemplatebackendQuestionnaire.md)
  - [TemplatebackendQuestionnaireQuestion](docs/TemplatebackendQuestionnaireQuestion.md)
@@ -218,6 +220,7 @@ Class | Method | HTTP request | Description
  - [TemplatebackendResetPasswordReply](docs/TemplatebackendResetPasswordReply.md)
  - [TemplatebackendRevertDatasetReply](docs/TemplatebackendRevertDatasetReply.md)
  - [TemplatebackendRevertDatasetRequest](docs/TemplatebackendRevertDatasetRequest.md)
+ - [TemplatebackendScrambleFieldConfig](docs/TemplatebackendScrambleFieldConfig.md)
  - [TemplatebackendSearchUsersReply](docs/TemplatebackendSearchUsersReply.md)
  - [TemplatebackendSearchUsersRequest](docs/TemplatebackendSearchUsersRequest.md)
  - [TemplatebackendShareReplyReply](docs/TemplatebackendShareReplyReply.md)
@@ -225,6 +228,9 @@ Class | Method | HTTP request | Description
  - [TemplatebackendStoreDatasetReply](docs/TemplatebackendStoreDatasetReply.md)
  - [TemplatebackendStoreDatasetRequest](docs/TemplatebackendStoreDatasetRequest.md)
  - [TemplatebackendStoreDatasetResult](docs/TemplatebackendStoreDatasetResult.md)
+ - [TemplatebackendSubstituteFieldListConfig](docs/TemplatebackendSubstituteFieldListConfig.md)
+ - [TemplatebackendSubstituteFieldRegexConfig](docs/TemplatebackendSubstituteFieldRegexConfig.md)
+ - [TemplatebackendTransformConfig](docs/TemplatebackendTransformConfig.md)
  - [TemplatebackendTransformDatasetReply](docs/TemplatebackendTransformDatasetReply.md)
  - [TemplatebackendTransformDatasetRequest](docs/TemplatebackendTransformDatasetRequest.md)
  - [TemplatebackendTransformDatasetResult](docs/TemplatebackendTransformDatasetResult.md)

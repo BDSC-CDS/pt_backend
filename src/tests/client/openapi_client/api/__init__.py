@@ -3,10 +3,10 @@
 # import apis into api package
 from openapi_client.api.audit_log_service_api import AuditLogServiceApi
 from openapi_client.api.authentication_service_api import AuthenticationServiceApi
-from openapi_client.api.configuration_service_api import ConfigurationServiceApi
 from openapi_client.api.dataset_service_api import DatasetServiceApi
 from openapi_client.api.index_service_api import IndexServiceApi
 from openapi_client.api.questionnaire_service_api import QuestionnaireServiceApi
 from openapi_client.api.risk_assessment_service_api import RiskAssessmentServiceApi
+from openapi_client.api.transform_config_service_api import TransformConfigServiceApi
 from openapi_client.api.users_service_api import UsersServiceApi
 
