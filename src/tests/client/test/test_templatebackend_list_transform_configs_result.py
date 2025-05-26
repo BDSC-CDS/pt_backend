@@ -37,7 +37,7 @@ class TestTemplatebackendListTransformConfigsResult(unittest.TestCase):
         model = TemplatebackendListTransformConfigsResult()
         if include_optional:
             return TemplatebackendListTransformConfigsResult(
-                config = [
+                configs = [
                     openapi_client.models.templatebackend_transform_config.templatebackendTransformConfig(
                         id = 56, 
                         name = '', 

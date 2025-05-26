@@ -16,21 +16,21 @@ class TemplatebackendListTransformConfigsResult(Model):
     Do not edit the class manually.
     """
 
-    def __init__(self, config=None):
+    def __init__(self, configs=None):
         """TemplatebackendListTransformConfigsResult - a model defined in OpenAPI
 
-        :param config: The config of this TemplatebackendListTransformConfigsResult.
-        :type config: List[TemplatebackendTransformConfig]
+        :param configs: The configs of this TemplatebackendListTransformConfigsResult.
+        :type configs: List[TemplatebackendTransformConfig]
         """
         self.openapi_types = {
-            'config': List[TemplatebackendTransformConfig]
+            'configs': List[TemplatebackendTransformConfig]
         }
 
         self.attribute_map = {
-            'config': 'config'
+            'configs': 'configs'
         }
 
-        self._config = config
+        self._configs = configs
 
     @classmethod
     def from_dict(cls, dikt) -> 'TemplatebackendListTransformConfigsResult':
@@ -44,22 +44,22 @@ class TemplatebackendListTransformConfigsResult(Model):
         return util.deserialize_model(dikt, cls)
 
     @property
-    def config(self) -> List[TemplatebackendTransformConfig]:
-        """Gets the config of this TemplatebackendListTransformConfigsResult.
+    def configs(self) -> List[TemplatebackendTransformConfig]:
+        """Gets the configs of this TemplatebackendListTransformConfigsResult.
 
 
-        :return: The config of this TemplatebackendListTransformConfigsResult.
+        :return: The configs of this TemplatebackendListTransformConfigsResult.
         :rtype: List[TemplatebackendTransformConfig]
         """
-        return self._config
+        return self._configs
 
-    @config.setter
-    def config(self, config: List[TemplatebackendTransformConfig]):
-        """Sets the config of this TemplatebackendListTransformConfigsResult.
+    @configs.setter
+    def configs(self, configs: List[TemplatebackendTransformConfig]):
+        """Sets the configs of this TemplatebackendListTransformConfigsResult.
 
 
-        :param config: The config of this TemplatebackendListTransformConfigsResult.
-        :type config: List[TemplatebackendTransformConfig]
+        :param configs: The configs of this TemplatebackendListTransformConfigsResult.
+        :type configs: List[TemplatebackendTransformConfig]
         """
 
-        self._config = config
+        self._configs = configs

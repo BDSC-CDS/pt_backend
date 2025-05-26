@@ -363,7 +363,7 @@ definitions:
   templatebackendListTransformConfigsResult:
     type: object
     properties:
-      config:
+      configs:
         type: array
         items:
           type: object

@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**config** | [**List[TemplatebackendTransformConfig]**](TemplatebackendTransformConfig.md) |  | [optional] 
+**configs** | [**List[TemplatebackendTransformConfig]**](TemplatebackendTransformConfig.md) |  | [optional] 
 
 ## Example
 

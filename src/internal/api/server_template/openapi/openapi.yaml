@@ -3983,7 +3983,7 @@ components:
     templatebackendListTransformConfigsReply:
       example:
         result:
-          config:
+          configs:
           - createdAt: 2000-01-23T04:56:07.000+00:00
             subFieldRegexList:
             - regex: regex
@@ -4063,7 +4063,7 @@ components:
       type: object
     templatebackendListTransformConfigsResult:
       example:
-        config:
+        configs:
         - createdAt: 2000-01-23T04:56:07.000+00:00
           subFieldRegexList:
           - regex: regex
@@ -4137,10 +4137,10 @@ components:
             - fields
           userid: 6
       properties:
-        config:
+        configs:
           items:
             $ref: '#/components/schemas/templatebackendTransformConfig'
-          title: config
+          title: configs
           type: array
       title: templatebackendListTransformConfigsResult
       type: object

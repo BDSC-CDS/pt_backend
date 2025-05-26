@@ -31,8 +31,8 @@ class TemplatebackendListTransformConfigsResult(BaseModel):
     """
     TemplatebackendListTransformConfigsResult
     """ # noqa: E501
-    config: Optional[List[TemplatebackendTransformConfig]] = None
-    __properties: ClassVar[List[str]] = ["config"]
+    configs: Optional[List[TemplatebackendTransformConfig]] = None
+    __properties: ClassVar[List[str]] = ["configs"]
 
     model_config = {
         "populate_by_name": True,
@@ -71,13 +71,13 @@ class TemplatebackendListTransformConfigsResult(BaseModel):
             },
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of each item in config (list)
+        # override the default output from pydantic by calling `to_dict()` of each item in configs (list)
         _items = []
-        if self.config:
-            for _item in self.config:
+        if self.configs:
+            for _item in self.configs:
                 if _item:
                     _items.append(_item.to_dict())
-            _dict['config'] = _items
+            _dict['configs'] = _items
         return _dict
 
     @classmethod
@@ -90,7 +90,7 @@ class TemplatebackendListTransformConfigsResult(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "config": [TemplatebackendTransformConfig.from_dict(_item) for _item in obj.get("config")] if obj.get("config") is not None else None
+            "configs": [TemplatebackendTransformConfig.from_dict(_item) for _item in obj.get("configs")] if obj.get("configs") is not None else None
         })
         return _obj
 
