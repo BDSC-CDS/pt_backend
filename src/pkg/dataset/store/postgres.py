@@ -1,25 +1,21 @@
+from contextlib import contextmanager
+from collections import defaultdict
+from datetime import timedelta
 from io import StringIO
 from typing import List
+import csv
+import json
+import random
+import re
+import string
+
 from sqlalchemy.engine import Engine
 from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.sql import text
-from contextlib import contextmanager
-from src.pkg.config_generator.model.config_generator import ConfigGenerator
-from src.pkg.dataset.model.dataset import Dataset,Metadata,Dataset_content
-import csv
-from collections import defaultdict
-import json
-import random
-import string
-from datetime import datetime, timedelta
-from dateutil import parser
-from sqlalchemy import text, bindparam
-from sqlalchemy.dialects.postgresql import ARRAY
-from sqlalchemy.dialects.postgresql import VARCHAR, INTEGER
-from sqlalchemy.types import String
-from src.pkg.config_generator.store.postgres import ConfigGeneratorStore
-import re
+
+from src.pkg.dataset.model.dataset import Dataset, Metadata
+from src.pkg.transform_config.model.transform_config import TransformConfig
 
 class DatasetStore:
     def __init__(self, db: Engine):
@@ -388,8 +384,8 @@ class DatasetStore:
             dataset, n_rows =  self.get_dataset_content(dataset_id, userid, tenantid)
             dataset_info = self.get_dataset_info(dataset_id, userid, tenantid)
             # get the configuration
-            config_store = ConfigGeneratorStore(self.db)
-            config : ConfigGenerator = config_store.get_config(userid,tenantid,config_id)
+            config_store = TransformConfigStore(self.db)
+            config : TransformConfig = config_store.get_config(userid,tenantid,config_id)
 
             # check dataset
             if (not dataset ):
@@ -474,8 +470,8 @@ class DatasetStore:
                 if not transformation:
                     raise Exception("This dataset was not transformed.")
 
-                config_store = ConfigGeneratorStore(self.db)
-                config : ConfigGenerator = config_store.get_config(userid,tenantid,transformation.config_id)
+                config_store = TransformConfigStore(self.db)
+                config : TransformConfig = config_store.get_config(userid,tenantid,transformation.config_id)
                 dataset, n_rows =  self.get_dataset_content(dataset_id, userid, tenantid)
                 dataset_info = self.get_dataset_info(dataset_id, userid, tenantid)
 
