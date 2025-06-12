@@ -17,13 +17,12 @@ class TransformConfigServiceControllerAudit():
 
     def transform_config_service_create_transform_config(self, user, body: TemplatebackendCreateTransformConfigRequest):
         body_serialized = (
-            f"id: {body.config.id or ''}, "
-            f"questionnaire id: {body.config.questionnaireid or ''}, "
             f"config name: {body.config.name or ''}, "
-            f"date_shift: {body.config.date_shift.lowrange or ''}, {body.config.date_shift.highrange or ''}, "
-            f"scramble_field: {' '.join(body.config.scramble_field.fields)}, "
-            f"sub_field_list_name: {' '.join(subfield.name for subfield in body.config.sub_field_list_list)}, "
-            f"sub_field_regex_name: {' '.join(subfield.name for subfield in body.config.sub_field_regex_list)}, "
+            f"questionnaire id: {body.config.questionnaireid}, " if body.config.questionnaireid else ""
+            f"date_shift: {body.config.date_shift.lowrange}, {body.config.date_shift.highrange}, " if body.config.date_shift else ""
+            f"scramble_field: {' '.join(body.config.scramble_field.fields)}, " if body.config.scramble_field else ""
+            f"sub_field_list_name: {' '.join(subfield.name for subfield in body.config.sub_field_list_list)}, " if body.config.sub_field_list_list else ""
+            f"sub_field_regex_name: {' '.join(subfield.name for subfield in body.config.sub_field_regex_list)}, " if body.config.sub_field_regex_list else ""
         )
 
         try:

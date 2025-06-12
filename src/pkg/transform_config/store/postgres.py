@@ -83,7 +83,7 @@ class TransformConfigStore:
                     for subfield in transform_config.subFieldListList:
                         session.execute(text(subfieldlist_query), {
                             "config_id": config_id,
-                            "name": subfield.name,
+                            "name": subfield.name or "",
                             "field": subfield.field,
                             "substitute_list": ",".join(subfield.substituteList),
                             "replacement": subfield.replacement
@@ -94,7 +94,7 @@ class TransformConfigStore:
                     for subfield in transform_config.subFieldRegexList:
                         session.execute(text(subfieldregex_query), {
                             "config_id": config_id,
-                            "name": subfield.name,
+                            "name": subfield.name or "",
                             "field": subfield.field,
                             "regex": subfield.regex,
                             "replacement": subfield.replacement

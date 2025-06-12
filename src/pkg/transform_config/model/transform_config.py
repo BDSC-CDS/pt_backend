@@ -41,8 +41,9 @@ class TransformConfig:
     id: int = None
     userid:int = None
     tenantid:int = None
-    name:str = ""
     questionnaireid:int = None
+    name:str = ""
+    
     dateShift: DateShiftConfig = None
     scrambleField: ScrambleFieldConfig = None
     subFieldListList: List[SubFieldListConfig] = field_(default_factory=list)
