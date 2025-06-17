@@ -166,3 +166,5 @@ helm/pt-backend-chart/Chart.lock
 helm/pt-backend-chart/charts/*.tgz
 helm/pt-backend-chart/main.yaml
 helm/pt-backend-chart/values.yaml
+helm/pt-backend-chart/charts/pt-arx-service-chart/charts/postgresql-15.5.38.tgz
+helm/pt-backend-chart/charts/pt-arx-service-chart/Chart.lock

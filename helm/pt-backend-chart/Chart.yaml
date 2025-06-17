@@ -20,3 +20,10 @@ dependencies:
   tags:
     - jupyterhub
     - back-end
+- name: pt-arx-service-chart
+  alias: arx
+  version: "0.1.0"
+  condition: arx.enabled
+  tags:
+    - arx-service
+    - back-end

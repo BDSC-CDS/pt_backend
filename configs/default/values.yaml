@@ -59,6 +59,8 @@ configOverride:
   daemon:
     public_url: "https://pt-backend.rdeid.unil.ch"
   clients:
+    arx:
+      host: "http://pt-backend-arx-service.test:8080/" # The name of the service and the namespace.
     jupyterhub:
       host: "https://jupyterhub.rdeid.unil.ch/"
 
@@ -95,7 +97,7 @@ jupyterhub:
 
   ingress:
     enabled: true
-    host: jupyterhub-test.rdeid.unil.ch
+    host: jupyterhub.rdeid.unil.ch
     tls: true # Secret name should match: {{ .Chart.Name }}-tls
     annotations:
       nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
@@ -106,3 +108,24 @@ jupyterhub:
   env:
     # Allowed domains within jupyterhub iFrame
     allowedFrameDomains: "https://pt-frontend.rdeid.unil.ch" # Space separated list of domains
+
+####################################
+# arx-service subchart configuration
+####################################
+arx:
+  enabled: true
+
+  service:
+    enabled: true
+    type: ClusterIP
+    port: 8080
+
+  config:
+    datastore:
+      host: arx-postgresql
+      database: WRK_ARX
+      username: postgres
+
+  postgresql:
+    secrets:
+      postgresPassword: example-password # This value must be specified during deployment.
