@@ -24,8 +24,11 @@ message QuestionnaireReply {
 
     repeated QuestionnaireQuestionReply replies = 4;
 
-    google.protobuf.Timestamp createdAt = 5;
-    google.protobuf.Timestamp updatedAt = 6;
+    uint32 user_id = 5;
+    string user_name = 6;
+
+    google.protobuf.Timestamp createdAt = 7;
+    google.protobuf.Timestamp updatedAt = 8;
     // google.protobuf.Timestamp deletedAt = 11;
 }
 
@@ -36,9 +39,12 @@ message QuestionnaireQuestionAnswerRulePrefill {
     uint32 answer_id = 3;
     string answer_text = 4;
 
-    google.protobuf.Timestamp createdAt = 5;
-    google.protobuf.Timestamp updatedAt = 6;
-    // google.protobuf.Timestamp deletedAt = 7;
+    string tmpQuestionUUID = 5;
+    string tmpAnswerUUID = 6;
+
+    google.protobuf.Timestamp createdAt = 7;
+    google.protobuf.Timestamp updatedAt = 8;
+    // google.protobuf.Timestamp deletedAt = 9;
 }
 
 message QuestionnaireQuestionAnswer {
@@ -47,6 +53,14 @@ message QuestionnaireQuestionAnswer {
     string text = 2;
     uint32 risk_level = 3;
     bool high_risk = 4;
+
+    // to be used for rule prefills as the id of the answer
+    // is still unknown at the time of creation
+    // this will be used by the backend to compute the id but will not be
+    // stored in the database
+    string tmpUUID = 8;
+
+    string JSONConfiguration = 9;
 
     repeated QuestionnaireQuestionAnswerRulePrefill rule_prefills = 5;
 
@@ -65,11 +79,17 @@ message QuestionnaireQuestion {
     string flag = 6;
     string tooltip = 7;
 
-    repeated QuestionnaireQuestionAnswer answers = 8;
+    // to be used for rule prefills as the id of the question
+    // is still unknown at the time of creation
+    // this will be used by the backend to compute the id but will not be
+    // stored in the database
+    string tmpUUID = 8;
 
-    google.protobuf.Timestamp createdAt = 9;
-    google.protobuf.Timestamp updatedAt = 10;
-    // google.protobuf.Timestamp deletedAt = 11;
+    repeated QuestionnaireQuestionAnswer answers = 9;
+
+    google.protobuf.Timestamp createdAt = 10;
+    google.protobuf.Timestamp updatedAt = 11;
+    // google.protobuf.Timestamp deletedAt = 12;
 }
 
 message QuestionnaireVersion {

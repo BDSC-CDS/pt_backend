@@ -1,14 +1,15 @@
+from server_template.models import QuestionnaireServiceShareReplyRequest
 from server_template.models import TemplatebackendCreateReplyRequest
 from server_template.models import TemplatebackendCreateQuestionnaireRequest
 from server_template.models import TemplatebackendCreateQuestionnaireVersionRequest
-from src.internal.api.controllers.questionnaire_controller import QuestionnaireController
+from src.internal.api.controllers.questionnaire_controller import QuestionnaireServiceController
 from src.internal.util.interface.implements import implements_interface
 from .authorization import *
 
-class QuestionnaireControllerAuthentication():
-    def __init__(self, next: QuestionnaireController):
+class QuestionnaireServiceControllerAuthentication():
+    def __init__(self, next: QuestionnaireServiceController):
         self.next = next
-        implements_interface(QuestionnaireControllerAuthentication, QuestionnaireController)
+        implements_interface(QuestionnaireServiceControllerAuthentication, QuestionnaireServiceController)
 
     def questionnaire_service_create_reply(self, user, body: TemplatebackendCreateReplyRequest):
         if not is_authenticated(user):
@@ -57,3 +58,9 @@ class QuestionnaireControllerAuthentication():
             return None, 403
         
         return self.next.questionnaire_service_list_questionnaire(user, offset, limit)
+    
+    def questionnaire_service_share_reply(self, user, id: int, body: QuestionnaireServiceShareReplyRequest):
+        if not is_authenticated(user):
+            return None, 403
+        
+        return self.next.questionnaire_service_share_reply(user, id, body)

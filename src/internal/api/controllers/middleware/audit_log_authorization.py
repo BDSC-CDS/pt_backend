@@ -1,11 +1,11 @@
-from src.internal.api.controllers.audit_log_controller import AuditLogController
+from src.internal.api.controllers.audit_log_controller import AuditLogServiceController
 from src.internal.util.interface.implements import implements_interface
 from .authorization import *
 
-class AuditLogControllerAuthentication:
-    def __init__(self, next: AuditLogController):
+class AuditLogServiceControllerAuthentication:
+    def __init__(self, next: AuditLogServiceController):
         self.next = next
-        implements_interface(AuditLogController, AuditLogControllerAuthentication)
+        implements_interface(AuditLogServiceController, AuditLogServiceControllerAuthentication)
 
     def audit_log_service_get_logs(self, user, offset: int = None, limit: int = None, filters: str = None, sort_by: str = None):
         if not is_admin(user):

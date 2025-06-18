@@ -10,7 +10,7 @@ class TestAuthenticate(unittest.TestCase):
     def test_authenticate(self):
         with client() as api_client:
             # Create an instance of the API class
-            user_api = openapi_client.UsersApi(api_client)
+            user_api = openapi_client.UsersServiceApi(api_client)
             body = openapi_client.TemplatebackendUser(
                 password="hello1234", 
                 username="username2", 
@@ -18,11 +18,11 @@ class TestAuthenticate(unittest.TestCase):
                 firstName="Jean",
                 lastName="Marc"
             )
-            api_response = user_api.user_service_create_user(body)
+            api_response = user_api.users_service_create_user(body)
             self.assertIsNotNone(api_response)
             self.assertIsInstance(api_response.result.id, int)
             
-            auth_api = openapi_client.AuthenticationApi(api_client)
+            auth_api = openapi_client.AuthenticationServiceApi(api_client)
             body = openapi_client.TemplatebackendCredentials(username='username2', password="hello1234")
             r = auth_api.authentication_service_authenticate(body)
             self.assertIsNotNone(r)

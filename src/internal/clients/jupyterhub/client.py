@@ -15,20 +15,20 @@ class JupyterhubClient:
         }
 
     def create_user(self, username: str) -> requests.Response:
-        endpoint = f"{self.host}/hub/api/users/{username}"
+        endpoint = f"{self.host}/hub/api/users/user_{username}"
         response = requests.post(endpoint, headers=self.headers, json={})
         print("create_user", response.text)
         return response
 
     def launch_named_server(self, username: str, server_name: str) -> requests.Response:
-        endpoint = f"{self.host}/hub/api/users/{username}/servers/{server_name}"
+        endpoint = f"{self.host}/hub/api/users/user_{username}/servers/{server_name}"
         response = requests.post(endpoint, headers=self.headers, json={})
         print("launch_named_server", response.text)
         return response
 
     def get_authenticate_user_url(self, username: str, backend_jwt_token: str, notebook_bytes:bytes, namedserver_id: str) -> str:
         endpoint = f"{self.host}/hub/backendJWTlogin"
-        next_url = f"/user/{username}/{namedserver_id}/notebooks/notebook.ipynb"
+        next_url = f"/user/user_{username}/{namedserver_id}/notebooks/notebook.ipynb"
 
         notebook_bytes_b64_encoded_str = base64.b64encode(notebook_bytes).decode('utf-8')
                                                                     

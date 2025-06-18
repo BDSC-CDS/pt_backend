@@ -28,7 +28,7 @@ def implements_interface(A, B):
             a_param_type = a_type_hints.get(param_name)
             b_param_type = b_type_hints.get(param_name)
             if a_param_type is not None and a_param_type != b_param_type:
-                raise NotImplementedError(f"operation {op} parameter {param_name} does not have the correct type")
+                raise NotImplementedError(f"operation {op} parameter {param_name} does not have the correct type ({a_param_type} != {b_param_type})")
 
         # Check for extra parameters in B that are not in A
         for param_name in b_signature.parameters:

@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **answer_type** | **str** |  | [optional] 
 **flag** | **str** |  | [optional] 
 **tooltip** | **str** |  | [optional] 
+**tmp_uuid** | **str** |  | [optional] 
 **answers** | [**List[TemplatebackendQuestionnaireQuestionAnswer]**](TemplatebackendQuestionnaireQuestionAnswer.md) |  | [optional] 
 **created_at** | **datetime** |  | [optional] 
 **updated_at** | **datetime** |  | [optional] 

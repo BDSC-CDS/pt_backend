@@ -9,6 +9,8 @@ Name | Type | Description | Notes
 **questionnaire_version_id** | **int** |  | [optional] 
 **project_name** | **str** |  | [optional] 
 **replies** | [**List[TemplatebackendQuestionnaireQuestionReply]**](TemplatebackendQuestionnaireQuestionReply.md) |  | [optional] 
+**user_id** | **int** |  | [optional] 
+**user_name** | **str** |  | [optional] 
 **created_at** | **datetime** |  | [optional] 
 **updated_at** | **datetime** |  | [optional] 
 

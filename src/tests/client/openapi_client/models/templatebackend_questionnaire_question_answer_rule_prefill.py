@@ -35,9 +35,11 @@ class TemplatebackendQuestionnaireQuestionAnswerRulePrefill(BaseModel):
     question_id: Optional[StrictInt] = Field(default=None, alias="questionId")
     answer_id: Optional[StrictInt] = Field(default=None, alias="answerId")
     answer_text: Optional[StrictStr] = Field(default=None, alias="answerText")
+    tmp_question_uuid: Optional[StrictStr] = Field(default=None, alias="tmpQuestionUUID")
+    tmp_answer_uuid: Optional[StrictStr] = Field(default=None, alias="tmpAnswerUUID")
     created_at: Optional[datetime] = Field(default=None, alias="createdAt")
     updated_at: Optional[datetime] = Field(default=None, alias="updatedAt")
-    __properties: ClassVar[List[str]] = ["id", "questionId", "answerId", "answerText", "createdAt", "updatedAt"]
+    __properties: ClassVar[List[str]] = ["id", "questionId", "answerId", "answerText", "tmpQuestionUUID", "tmpAnswerUUID", "createdAt", "updatedAt"]
 
     model_config = {
         "populate_by_name": True,
@@ -92,6 +94,8 @@ class TemplatebackendQuestionnaireQuestionAnswerRulePrefill(BaseModel):
             "questionId": obj.get("questionId"),
             "answerId": obj.get("answerId"),
             "answerText": obj.get("answerText"),
+            "tmpQuestionUUID": obj.get("tmpQuestionUUID"),
+            "tmpAnswerUUID": obj.get("tmpAnswerUUID"),
             "createdAt": obj.get("createdAt"),
             "updatedAt": obj.get("updatedAt")
         })

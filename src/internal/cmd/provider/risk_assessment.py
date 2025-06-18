@@ -1,4 +1,4 @@
-import src.internal.api.server_template.controllers.risk_assessment_controller as connexion_risk_assessment_controller
+import src.internal.api.server_template.controllers.risk_assessment_service_controller as connexion_risk_assessment_controller
 import src.internal.api.controllers.risk_assessment_controller as internal_risk_assessment_controller
 import src.internal.api.controllers.middleware.risk_assessment_authorization as risk_assessment_controller_authorization
 from src.pkg.risk_assessment.service.risk_assessment import RiskAssessmentService
@@ -15,9 +15,9 @@ def provide_risk_assessment_controller():
     if risk_assessment_controller is not None:
         return risk_assessment_controller
 
-    controller = internal_risk_assessment_controller.RiskAssessmentController(provide_config(), provide_risk_assessment_service())
-    controller = risk_assessment_controller_authorization.RiskAssessmentControllerAuthentication(controller)
-    risk_assessment_controller = connexion_risk_assessment_controller.RiskAssessmentController(controller)
+    controller = internal_risk_assessment_controller.RiskAssessmentServiceController(provide_config(), provide_risk_assessment_service())
+    controller = risk_assessment_controller_authorization.RiskAssessmentServiceControllerAuthentication(controller)
+    risk_assessment_controller = connexion_risk_assessment_controller.RiskAssessmentServiceController(controller)
 
     return risk_assessment_controller
 

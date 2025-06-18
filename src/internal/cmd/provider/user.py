@@ -1,4 +1,4 @@
-import src.internal.api.server_template.controllers.users_controller as connexion_user_controller
+import src.internal.api.server_template.controllers.users_service_controller as connexion_user_controller
 import src.internal.api.controllers.user_controller as internal_user_controller
 import src.internal.api.controllers.middleware.user_authorization as user_controller_authorization
 import src.internal.api.controllers.middleware.user_audit as user_controller_audit
@@ -6,9 +6,10 @@ from src.internal.cmd.provider.audit_log import provide_audit_log_service
 from src.pkg.user.service.user import UserService
 from src.pkg.user.store.postgres import UserStore as PostgresUserStore
 from .db import provide_db_type, provide_db
+from .config import provide_config
 
 user_controller = None
-user_service = None
+users_service = None
 user_store = None
 
 def provide_user_controller():
@@ -17,22 +18,22 @@ def provide_user_controller():
     if user_controller is not None:
         return user_controller
 
-    controller = internal_user_controller.UsersController(provide_user_service())
-    controller = user_controller_audit.UsersControllerAudit(controller,provide_audit_log_service()) # TODO here ?
-    controller = user_controller_authorization.UsersControllerAuthentication(controller)
-    user_controller = connexion_user_controller.UsersController(controller)
+    controller = internal_user_controller.UsersServiceController(provide_config(), provide_users_service())
+    controller = user_controller_audit.UsersServiceControllerAudit(controller,provide_audit_log_service()) # TODO here ?
+    controller = user_controller_authorization.UsersServiceControllerAuthentication(controller)
+    user_controller = connexion_user_controller.UsersServiceController(controller)
 
     return user_controller
 
-def provide_user_service():
-    global user_service
+def provide_users_service():
+    global users_service
 
-    if user_service is not None:
-        return user_service
+    if users_service is not None:
+        return users_service
 
-    user_service = UserService(provide_user_store())
+    users_service = UserService(provide_user_store())
 
-    return user_service
+    return users_service
 
 def provide_user_store():
     global user_store

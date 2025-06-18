@@ -2,7 +2,7 @@ from server_template.models import IndexServiceCreateHelloRequest
 from server_template.models import TemplatebackendCreateHelloReply
 from server_template.models import TemplatebackendGetHelloReply
 
-class IndexController():
+class IndexServiceController():
     def index_service_create_hello(self, user, identifier: int, body: IndexServiceCreateHelloRequest):
         return TemplatebackendCreateHelloReply("hello"), 200
 

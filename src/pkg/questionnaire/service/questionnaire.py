@@ -16,8 +16,10 @@ class QuestionnaireService:
         return self.questionnaire_store.create_questionnaire(questionnaire)
     
     def create_questionnaire_version(self, user: User, questionnaire_id:int, version: QuestionnaireVersion) -> QuestionnaireVersion:
+        # Used for the Steward to convert JSON version to Python QuestionnaireVersion object
+        # with open("questionnaire_version.py", "w") as f:
+        #     f.write(str(version))
         return self.questionnaire_store.create_questionnaire_version(user.tenantid, user.id, questionnaire_id, version)
-        # return self.questionnaire_store.create_questionnaire(questionnaire_id, version)
     
     def list_questionnaires(self, tenantid: int, userid: int, offset: int = 0, limit: int = None) -> Questionnaire:
         questionnaires = self.questionnaire_store.list_questionnaires(tenantid, userid, offset, limit)
@@ -33,3 +35,9 @@ class QuestionnaireService:
     def list_replies(self, user, offset: int=None, limit: int=None) -> list[Reply]:
         return self.questionnaire_store.list_replies(user.tenantid, user.id, offset, limit)
     
+    def create_share(self, user, reply_id: int, sharedwith_userid: int):
+        questionnaire_reply = self.questionnaire_store.get_reply(user.tenantid, user.id, reply_id)
+        if questionnaire_reply is None or questionnaire_reply.userid != user.id:
+            return False
+        
+        return self.questionnaire_store.create_share(user.tenantid, user.id, reply_id, sharedwith_userid)

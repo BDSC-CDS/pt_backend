@@ -7,7 +7,7 @@ type: application
 version: 0.1.0
 
 # Application version
-appVersion: "v0.0.18"
+appVersion: "v0.1.1"
 
 dependencies:
 - name: postgresql
@@ -19,4 +19,11 @@ dependencies:
   condition: jupyterhub.enabled
   tags:
     - jupyterhub
+    - back-end
+- name: pt-arx-service-chart
+  alias: arx
+  version: "0.1.0"
+  condition: arx.enabled
+  tags:
+    - arx-service
     - back-end

@@ -108,6 +108,17 @@ message CreateReplyResult {
     uint32 id = 1;
 }
 
+message ShareReplyRequest {
+    uint32 id = 1;
+    uint32 sharedwith_userid = 2;
+}
+message ShareReplyReply {
+    ShareReplyResult result = 1;
+}
+message ShareReplyResult {
+    bool success = 1;
+}
+
 message ListRepliesRequest {
     // uint32 questionnaire_version_id = 1;
     uint32 offset = 2;
@@ -141,7 +152,7 @@ service QuestionnaireService {
         option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
             summary: "Create a questionnaire";
             description: "This endpoint creates a questionnaire";
-            tags: "Questionnaire";
+            tags: "QuestionnaireService";
             extensions: {
                 key: "x-openapi-router-controller";
                 value: {string_value: "questionnaire_controller"};
@@ -157,7 +168,7 @@ service QuestionnaireService {
         option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
             summary: "Create a questionnaire version";
             description: "This endpoint creates a questionnaire version";
-            tags: "Questionnaire";
+            tags: "QuestionnaireService";
             extensions: {
                 key: "x-openapi-router-controller";
                 value: {string_value: "questionnaire_controller"};
@@ -173,7 +184,7 @@ service QuestionnaireService {
         option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
             summary: "List questionnaires";
             description: "This endpoint allows listing a user's questionnaires";
-            tags: "Questionnaire";
+            tags: "QuestionnaireService";
             extensions: {
                 key: "x-openapi-router-controller";
                 value: {string_value: "questionnaire_controller"};
@@ -189,7 +200,7 @@ service QuestionnaireService {
         option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
             summary: "Get questionnaires";
             description: "This endpoint allow getting a single user's questionnaire";
-            tags: "Questionnaire";
+            tags: "QuestionnaireService";
             extensions: {
                 key: "x-openapi-router-controller";
                 value: {string_value: "questionnaire_controller"};
@@ -205,7 +216,7 @@ service QuestionnaireService {
         option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
             summary: "Create a questionnaire";
             description: "This endpoint creates a questionnaire";
-            tags: "Questionnaire";
+            tags: "QuestionnaireService";
             extensions: {
                 key: "x-openapi-router-controller";
                 value: {string_value: "questionnaire_controller"};
@@ -221,7 +232,7 @@ service QuestionnaireService {
         option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
             summary: "Create questionnaires reply";
             description: "This endpoint allows ceating a user's questionnaires reply";
-            tags: "Questionnaire";
+            tags: "QuestionnaireService";
             extensions: {
                 key: "x-openapi-router-controller";
                 value: {string_value: "questionnaire_controller"};
@@ -236,7 +247,7 @@ service QuestionnaireService {
         option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
             summary: "List questionnaires replies";
             description: "This endpoint allows listing a user's questionnaires replies";
-            tags: "Questionnaire";
+            tags: "QuestionnaireService";
             extensions: {
                 key: "x-openapi-router-controller";
                 value: {string_value: "questionnaire_controller"};
@@ -251,7 +262,23 @@ service QuestionnaireService {
         option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
             summary: "Get a questionnaires reply";
             description: "This endpoint allows getting a user's questionnaires reply";
-            tags: "Questionnaire";
+            tags: "QuestionnaireService";
+            extensions: {
+                key: "x-openapi-router-controller";
+                value: {string_value: "questionnaire_controller"};
+            };
+        };
+    };
+
+    rpc ShareReply(ShareReplyRequest) returns (ShareReplyReply) {
+        option (google.api.http) = {
+            post: "/api/v1/questionnaire/replies/{id}/share"
+            body: "*"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            summary: "Share questionnaires reply";
+            description: "This endpoint allows sharing a user's questionnaires reply";
+            tags: "QuestionnaireService";
             extensions: {
                 key: "x-openapi-router-controller";
                 value: {string_value: "questionnaire_controller"};

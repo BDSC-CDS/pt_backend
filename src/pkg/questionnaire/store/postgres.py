@@ -98,9 +98,9 @@ class QuestionnaireStore:
 
         questionnaire_answer_query = """
         INSERT INTO questionnaire_question_answers 
-            (userid, tenantid, questionnaire_questionid, text, risk_level, high_risk, createdat, updatedat) 
+            (userid, tenantid, questionnaire_questionid, text, risk_level, json_configuration, high_risk, createdat, updatedat) 
         VALUES 
-            (:userid, :tenantid, :questionnaire_questionid, :text, :risk_level, :high_risk, now(), now()) 
+            (:userid, :tenantid, :questionnaire_questionid, :text, :risk_level, :json_configuration, :high_risk, now(), now()) 
         RETURNING id;
         """
 
@@ -143,6 +143,7 @@ class QuestionnaireStore:
                 'tooltip': question.tooltip
             }).fetchone()
             question_id = result[0]
+            question.id = question_id
 
             for answer in question.answers:
                 # Insert questionnaire question answer
@@ -152,16 +153,32 @@ class QuestionnaireStore:
                     'questionnaire_questionid': question_id,
                     'text': answer.text,
                     'risk_level': answer.risk_level,
-                    'high_risk': answer.high_risk
+                    'high_risk': answer.high_risk,
+                    'json_configuration': answer.json_configuration,
                 }).fetchone()
                 answer_id = result[0]
+                answer.id = answer_id
 
+        # separate loop for rule prefills to find and map ids and uuids
+        for question in version.questions:
+            for answer in question.answers:
+                print("answer", answer, question.id)
                 for rule_prefill in answer.rule_prefills:
-                    # Insert questionnaire question answer rule prefill
+                    print("rule_prefill", rule_prefill)
+                    for question_ in version.questions:
+                        for answer_ in question_.answers:
+                            if rule_prefill.answer_uuid == answer_.tmp_uuid:
+                                rule_prefill.answerid = answer_.id
+                                rule_prefill.answer_text = answer_.text
+                                break
+                        if rule_prefill.question_uuid == question_.tmp_uuid:
+                            rule_prefill.questionid = question_.id
+                            break
+                    print("rule_prefill after", rule_prefill)
                     session.execute(text(questionnaire_rule_prefill_query), {
                         'userid': userid,
                         'tenantid': tenantid,
-                        'questionnaire_question_answerid': answer_id,
+                        'questionnaire_question_answerid': answer.id,
                         'questionid': rule_prefill.questionid,
                         'answerid': rule_prefill.answerid,
                         'answer_text': rule_prefill.answer_text
@@ -170,11 +187,32 @@ class QuestionnaireStore:
         return QuestionnaireVersion(id=version_id)
         
     def create_reply(self, tenantid: int, userid: int, reply: Reply) -> Reply:
+        questionnaire_reply_select_query = """
+        SELECT id
+        FROM questionnaire_replies
+        WHERE
+            project_name = :project_name and
+            userid = :userid and
+            tenantid = :tenantid and
+            questionnaire_versionid = :questionnaire_versionid and
+            deletedat is null
+        ORDER BY createdat DESC
+        LIMIT 1;
+        """
+
         questionnaire_reply_query = """
         INSERT INTO questionnaire_replies 
-            (project_name, userid, tenantid, questionnaire_versionid, questionnaireid, createdat, updatedat) 
-        VALUES 
+            (project_name, userid, tenantid, questionnaire_versionid, questionnaireid, createdat, updatedat)
+        VALUES
             (:project_name, :userid, :tenantid, :questionnaire_versionid, (select questionnaireid from questionnaire_versions where id = :questionnaire_versionid), now(), now()) 
+        RETURNING id;
+        """
+
+        questionnaire_reply_version_query = """
+        INSERT INTO questionnaire_reply_versions
+            (questionnairereplyid, userid, tenantid, createdat, updatedat)
+        VALUES
+            (:questionnairereplyid, :userid, :tenantid, now(), now())
         RETURNING id;
         """
 
@@ -188,17 +226,33 @@ class QuestionnaireStore:
 
         with self.session_scope() as session:
             try:
-                result = session.execute(text(questionnaire_reply_query), {
+                result_existing_project = session.execute(text(questionnaire_reply_select_query), {
                     'project_name': reply.project_name,
                     'userid': userid,
                     'tenantid': tenantid,
                     'questionnaire_versionid': reply.questionnaire_version_id
                 }).fetchone()
-                reply_id = result[0]
+                if result_existing_project:
+                    reply_id = result_existing_project[0]
+                else:
+                    result = session.execute(text(questionnaire_reply_query), {
+                        'project_name': reply.project_name,
+                        'userid': userid,
+                        'tenantid': tenantid,
+                        'questionnaire_versionid': reply.questionnaire_version_id
+                    }).fetchone()
+                    reply_id = result[0]
+
+                result_version = session.execute(text(questionnaire_reply_version_query), {
+                    'questionnairereplyid': reply_id,
+                    'userid': userid,
+                    'tenantid': tenantid
+                }).fetchone()
+                reply_version_id = result_version[0]
 
                 for question_reply in reply.replies:
                     session.execute(text(questionnaire_question_reply_query), {
-                        'replyid': reply_id,
+                        'replyid': reply_version_id,
                         'userid': userid,
                         'tenantid': tenantid,
                         'questionnaire_versionid': reply.questionnaire_version_id,
@@ -223,7 +277,14 @@ class QuestionnaireStore:
         question_reply_query = """
         SELECT id, userid, tenantid, questionnaire_questionid, answer, createdat, updatedat, deletedat
         FROM questionnaire_question_reply
-        WHERE replyid = :reply_id;
+        WHERE
+            replyid = (
+                SELECT id from questionnaire_reply_versions
+                WHERE questionnairereplyid = :reply_id
+                ORDER BY createdat DESC
+                LIMIT 1
+            ) and
+            deletedat is null;
         """
 
         with self.session_scope() as session:
@@ -263,11 +324,44 @@ class QuestionnaireStore:
 
             return reply
     
+    def create_share(self, tenantid: int, userid: int, reply_id: int, sharedwith_userid: int) -> bool:
+        share_query = """
+        INSERT INTO questionnaire_reply_share 
+            (questionnairereplyid, sharedwith_userid, share_type, userid, tenantid, createdat, updatedat) 
+        VALUES 
+            (:questionnairereplyid, :sharedwith_userid, 'read', :userid, :tenantid, now(), now());
+        """
+
+        with self.session_scope() as session:
+            try:
+                session.execute(text(share_query), {
+                    'questionnairereplyid': reply_id,
+                    'sharedwith_userid': sharedwith_userid,
+                    'userid': userid,
+                    'tenantid': tenantid
+                })
+
+            except SQLAlchemyError as e:
+                raise e
+
+            return True
+    
     def list_replies(self, tenantid: int, userid: int, offset: int, limit: int) -> list[Reply]:
         reply_query = """
-        SELECT id, userid, tenantid, project_name, questionnaire_versionid, createdat, updatedat, deletedat
-        FROM questionnaire_replies
-        WHERE userid = :userid and deletedat is null
+        SELECT r.id, r.userid, subq.username, r.tenantid, r.project_name, r.questionnaire_versionid, r.createdat, r.updatedat, r.deletedat
+        FROM questionnaire_replies r
+        LEFT JOIN (
+            SELECT id, username 
+            FROM users
+        ) subq ON r.userid = subq.id
+        WHERE (
+            r.userid = :userid OR
+            r.id IN (
+                SELECT questionnairereplyid FROM questionnaire_reply_share 
+                WHERE sharedwith_userid = :userid and tenantid = :tenantid and deletedat is null 
+            )
+        ) 
+        and r.tenantid = :tenantid and r.deletedat is null
         OFFSET :offset
         LIMIT :limit;
         """
@@ -276,6 +370,7 @@ class QuestionnaireStore:
             try:
                 results = session.execute(text(reply_query), {
                     'userid': userid,
+                    'tenantid': tenantid,
                     'offset': offset,
                     'limit': limit,
                 }).mappings().fetchall()
@@ -284,6 +379,7 @@ class QuestionnaireStore:
                     Reply(
                         id=result['id'],
                         userid=result['userid'],
+                        username=result['username'],
                         tenantid=result['tenantid'],
                         project_name=result['project_name'],
                         questionnaire_version_id=result['questionnaire_versionid'],
@@ -321,7 +417,7 @@ class QuestionnaireStore:
         """
 
         questionnaire_answer_query = """
-        SELECT id, text, risk_level, high_risk, createdat, updatedat, deletedat
+        SELECT id, text, risk_level, high_risk, json_configuration, createdat, updatedat, deletedat
         FROM questionnaire_question_answers
         WHERE questionnaire_questionid = :question_id;
         """
@@ -389,6 +485,7 @@ class QuestionnaireStore:
                                 text=answer_row['text'],
                                 risk_level=answer_row['risk_level'],
                                 high_risk=answer_row['high_risk'],
+                                json_configuration=answer_row['json_configuration'],
                                 createdat=answer_row['createdat'],
                                 updatedat=answer_row['updatedat'],
                                 deletedat=answer_row['deletedat'],
@@ -513,6 +610,7 @@ class QuestionnaireStore:
                 #                 id=answer_row['id'],
                 #                 text=answer_row['text'],
                 #                 risk_level=answer_row['risk_level'],
+                #                 json_configuration=answer_row['json_configuration'],
                 #                 createdat=answer_row['createdat'],
                 #                 updatedat=answer_row['updatedat'],
                 #                 deletedat=answer_row['deletedat'],

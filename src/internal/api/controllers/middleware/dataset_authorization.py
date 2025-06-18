@@ -3,14 +3,15 @@ from server_template.models import TemplatebackendStoreDatasetRequest
 from server_template.models import TemplatebackendTransformDatasetRequest
 from server_template.models import TemplatebackendRevertDatasetRequest
 from server_template.models import TemplatebackendChangeTypesDatasetRequest
-from src.internal.api.controllers.dataset_controller import DatasetController
+from server_template.models import DatasetServiceUpdateDatasetRequest
+from src.internal.api.controllers.dataset_controller import DatasetServiceController
 from src.internal.util.interface.implements import implements_interface
 from .authorization import *
 
-class DatasetControllerAuthentication():
-    def __init__(self, next: DatasetController):
+class DatasetServiceControllerAuthentication():
+    def __init__(self, next: DatasetServiceController):
         self.next = next
-        implements_interface(DatasetController, DatasetControllerAuthentication)
+        implements_interface(DatasetServiceController, DatasetServiceControllerAuthentication)
 
     def dataset_service_store_dataset(self, user, body: TemplatebackendStoreDatasetRequest):
         if not is_authenticated(user): # TODO is_self ? comment on vérifie que qu'il accède a son propre dataset ?
@@ -29,6 +30,12 @@ class DatasetControllerAuthentication():
         if not is_authenticated(user):
             return None, 403
         return self.next.dataset_service_get_dataset_info(user, id)
+    
+    def dataset_service_update_dataset(self, user, id: int, body:DatasetServiceUpdateDatasetRequest):
+        if not is_authenticated(user):
+            return None, 403
+        return self.next.dataset_service_update_dataset(user, id, body)
+    
 
     def dataset_service_get_dataset_metadata(self, user, id: int):
         if not is_authenticated(user):
@@ -39,6 +46,11 @@ class DatasetControllerAuthentication():
         if not is_authenticated(user):
             return None, 403
         return self.next.dataset_service_get_dataset_content(user, id, offset, limit)
+    
+    def dataset_service_get_dataset_csv(self, user, id: int, offset: int=None, limit: int=None):
+        if not is_authenticated(user):
+            return None, 403
+        return self.next.dataset_service_get_dataset_csv(user, id, offset, limit)
     
     def dataset_service_get_dataset_dataframe(self, user, id: int,offset: int=None, limit: int=None):
         if not is_authenticated(user):

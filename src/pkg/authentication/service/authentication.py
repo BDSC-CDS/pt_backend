@@ -25,12 +25,12 @@ def user_to_token(user: User, expiration_time: int, secret: str) -> str:
     return token
 
 class AuthenticationService:
-    def __init__(self, config, user_service):
+    def __init__(self, config, users_service):
         self.config = config
-        self.user_service = user_service
+        self.users_service = users_service
 
     def authenticate(self, username:str, password:str) -> str:
-        user = self.user_service.get_user(by="username", identifier=username, keep_sensitive_filelds=True)
+        user = self.users_service.get_user(by="username", identifier=username, keep_sensitive_filelds=True)
         if user is None:
             return ""
         
@@ -42,7 +42,7 @@ class AuthenticationService:
         return self.user_to_token(user)
     
     def userid_to_token(self, userid: int) -> str:
-        user = self.user_service.get_user(by="id", identifier=userid, keep_sensitive_filelds=True)
+        user = self.users_service.get_user(by="id", identifier=userid, keep_sensitive_filelds=True)
         if user is None:
             return ""
         
@@ -61,7 +61,7 @@ class AuthenticationService:
         user_id = token['sub']
         user = None
         if user_id is not None:
-            user = self.user_service.get_user(by='id', identifier=user_id)
+            user = self.users_service.get_user(by='id', identifier=user_id)
 
 
         if user is not None:

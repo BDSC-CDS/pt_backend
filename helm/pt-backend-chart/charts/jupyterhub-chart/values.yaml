@@ -11,11 +11,9 @@ replicaCount: 1
 
 # This sets the container image.
 image:
-  repository: registry.rdeid.unil.ch/jupyterhub
-  pullPolicy: IfNotPresent
+  repository: ghcr.io/bdsc-cds/pt-jupyterhub
+  pullPolicy: Always
   tag: "latest"
-  pullSecrets:
-    - name: registry-auth
 
 # This is for setting up a service.
 service:
@@ -26,17 +24,21 @@ service:
 # This block is for setting up the ingress.
 ingress:
   enabled: true
-  host: jupyterhub-test.rdeid.unil.ch
+  host: jupyterhub.rdeid.unil.ch
   tls: true # Secret name should match: {{ .Chart.Name }}-tls
   className: public
   annotations:
     cert-manager.io/cluster-issuer: "letsencrypt-prod"
     nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/configuration-snippet: |
+            more_clear_headers "Content-Security-Policy";
+            add_header content-security-policy "frame-ancestors 'self' https://pt-frontend.rdeid.unil.ch" always;
+            add_header Access-Control-Allow-Origin "https://pt-frontend.rdeid.unil.ch";
 
 # Specific env variable for the container.
 env:
   # Allowed domains within jupyterhub iFrame
-  allowedFrameDomains: "https://pt-frontend-test.rdeid.unil.ch" # Space separated list
+  allowedFrameDomains: "https://pt-frontend.rdeid.unil.ch" # Space separated list
   
 # Deployment specific options
 podAnnotations: {}

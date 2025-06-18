@@ -1,0 +1,92 @@
+####################################
+# pt-arx-sevice chart configuration
+####################################
+
+# This is to override the chart name.
+nameOverride: "pt-arx-service"
+fullnameOverride: ""
+
+# This will set the replicaset count.
+replicaCount: 1
+
+# This sets the namespace used for the chart (will be prefixed with the main chart namespace).
+# namespace: "pt-arx"
+
+# This sets the container image.
+image:
+  repository: ghcr.io/bdsc-cds/pt-service-arx
+  pullPolicy: Always
+  tag: "latest"
+
+
+# This is for setting up a service.
+service:
+  enabled: true
+  type: ClusterIP
+  port: 8080
+
+config:
+  datastore:
+    host: arx-postgresql
+    database: WRK_ARX
+    username: postgres
+
+# This is to setup the liveness and readiness probes.
+# livenessProbe:
+#   httpGet:
+#     path: /
+#     port: http
+# readinessProbe:
+#   httpGet:
+#     path: /
+#     port: http
+
+
+# Deployment specific options
+podAnnotations: {}
+podLabels: {}
+affinity: {}
+tolerations: []
+nodeSelector: {}
+resources: {}
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
+
+
+####################################
+# PostgreSQL subchart configuration
+####################################
+postgresql:
+  nameOverride: arx-postgresql
+  fullnameOverride: "arx-postgresql"
+  secrets:
+    postgresPassword: example-password # This value must be specified.
+  auth:
+    enablePostgresUser: true # Creates a user "postgres" with admin rights.
+    existingSecret: arx-psql-secret # Secret should contain the key postgres-password
+    database: WRK_ARX
+
+  primary:
+    persistence:
+      enabled: true
+      size: 2Gi
+    initdb:
+      scripts:
+        create_records_table.sql: |
+          --- Postgres
+          CREATE TABLE RECORDS (
+              "ID" INTEGER GENERATED ALWAYS as IDENTITY(START with 1 INCREMENT by 1),
+              JOB_DATE TIMESTAMP NOT NULL,
+              JOB_TYPE VARCHAR(50) NOT NULL,
+              NB_ROWS INTEGER NOT NULL,
+              NB_COLUMNS INTEGER NOT NULL,
+              RISKS VARCHAR(4000),
+              ATTRIBUTE_TYPES VARCHAR(4000),
+              STATISTICS VARCHAR(4000),
+              PRIMARY KEY ("ID")
+          );
+      

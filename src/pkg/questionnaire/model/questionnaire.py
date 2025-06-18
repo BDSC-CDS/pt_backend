@@ -10,6 +10,9 @@ class QuestionnaireQuestionAnswerRulePrefill:
     answerid: int = None
     answer_text: str = ""
 
+    question_uuid: str = ""
+    answer_uuid: str = ""
+
     createdat: datetime.datetime = None
     updatedat: datetime.datetime = None
     deletedat: datetime.datetime = None
@@ -22,10 +25,12 @@ class QuestionnaireQuestionAnswerRulePrefill:
 @dataclass
 class QuestionnaireQuestionAnswer:
     id: int = None
+    tmp_uuid: str = ""
 
     text: str = ""
     risk_level: int = 0
     high_risk: bool = False
+    json_configuration: str = ""
 
     rule_prefills: list[QuestionnaireQuestionAnswerRulePrefill] = None
 
@@ -41,6 +46,7 @@ class QuestionnaireQuestionAnswer:
 @dataclass
 class QuestionnaireQuestion:
     id: int = None
+    tmp_uuid: str = ""
 
     tab: str = ""
     question: str = ""
@@ -125,6 +131,7 @@ class Reply:
     id: int = None
 
     userid: int = 0
+    username: str = ""
     tenantid: int = 0
 
     project_name: str = ''

@@ -8,6 +8,7 @@ class Dataset:
     userid: int = None
     tenantid:int = None
     dataset_name: str = ""
+    original_filename: str = ""
     id: int = None
     created_at: str = ""
     deleted_at:str = ""

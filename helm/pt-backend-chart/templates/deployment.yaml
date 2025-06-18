@@ -37,10 +37,6 @@ spec:
           volumeMounts:
             - name: {{ .Release.Name }}-{{ .Chart.Name }}-config-volume
               mountPath: "/pt_backend/conf"
-            {{- if .Values.persistence.enabled }}
-            - name: {{ .Release.Name }}-{{ .Chart.Name }}-data
-              mountPath: "/data/pt_backend"
-            {{- end }}
           env:
             - name: JWT_SECRET
               valueFrom:
@@ -89,11 +85,6 @@ spec:
         - name: {{ .Release.Name }}-{{ .Chart.Name }}-config-volume
           configMap:
             name: {{ .Release.Name }}-{{ .Chart.Name }}-configmap
-        {{- if .Values.persistence.enabled }}
-        - name: {{ .Release.Name }}-{{ .Chart.Name }}-data
-          persistentVolumeClaim:
-            claimName: {{ .Release.Name }}-{{ .Chart.Name }}-pvc
-        {{- end }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}

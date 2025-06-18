@@ -30,7 +30,7 @@ paths:
           schema:
             $ref: '#/definitions/rpcStatus'
       tags:
-        - Index
+        - IndexService
       x-openapi-router-controller: index_controller
   /api/v1/hello/{identifier}:
     post:
@@ -63,7 +63,7 @@ paths:
               content:
                 type: string
       tags:
-        - Index
+        - IndexService
       x-openapi-router-controller: index_controller
 definitions:
   protobufAny:

@@ -39,13 +39,13 @@ class DatasetStore:
         finally:
             session.close()
 
-    def store_dataset(self, userid:int,tenantid:int, dataset_name:str,dataset: str,types:str,identifiers:str, is_id:str) -> int:
+    def store_dataset(self, userid:int,tenantid:int, dataset_name:str,dataset: str,types:str,identifiers:str, is_id:str, original_filename: str) -> int:
         # Insert dataset entry and get the generated dataset_id
         dataset_query = """
             INSERT INTO datasets
-                (userid, tenantid, dataset_name,created_at)
+                (userid, tenantid, dataset_name, original_filename, created_at)
             VALUES
-                 (:userid, :tenantid, :dataset_name, NOW())
+                 (:userid, :tenantid, :dataset_name, :original_filename, NOW())
             RETURNING id;
         """
         dataset_id = 0
@@ -55,6 +55,7 @@ class DatasetStore:
                     'userid': userid,
                     'tenantid': tenantid,
                     'dataset_name':dataset_name,
+                    'original_filename': original_filename
                 }).fetchone()
                 dataset_id = result[0]
 
@@ -200,6 +201,7 @@ class DatasetStore:
                     tenantid=tenantid,
                     dataset_name=dataset.dataset_name,
                     id=dataset.id,
+                    original_filename=dataset.original_filename,
                     created_at=dataset.created_at,
                 )
 
@@ -384,6 +386,7 @@ class DatasetStore:
     def transform_dataset(self,userid:int,tenantid:int,dataset_id:int,config_id:int) -> str:
         try:
             dataset, n_rows =  self.get_dataset_content(dataset_id, userid, tenantid)
+            dataset_info = self.get_dataset_info(dataset_id, userid, tenantid)
             # get the configuration
             config_store = ConfigGeneratorStore(self.db)
             config : ConfigGenerator = config_store.get_config(userid,tenantid,config_id)
@@ -433,7 +436,6 @@ class DatasetStore:
                     raise Exception("Missing parameters for the substitution.")
                 new_dataset, sub_regex_col = self.substitute_field_regex(new_dataset, metadata_list, config.subFieldRegex_field, config.subFieldRegex_regex, config.subFieldRegex_replacement)
 
-
             # store the new dataset
             # Generate headers from metadata
             headers = ','.join(f'"{m.column_name}"' for m in metadata_list)
@@ -446,7 +448,7 @@ class DatasetStore:
             identifiers = json.dumps(identifiers_dict)
             is_id = next((meta.column_name for meta in metadata_list if meta.is_id), None)
             print("IS ID TRANSFORM: ", is_id)
-            new_dataset_id = self.store_dataset(userid,tenantid,"dataset "+str(dataset_id)+ " transformed",csv_string,types,identifiers,is_id)
+            new_dataset_id = self.store_dataset(userid,tenantid,"dataset "+str(dataset_id)+ " transformed",csv_string,types,identifiers,is_id,dataset_info.original_filename)
 
             # Create transformation entry
             self.insert_transformation_entry(userid, tenantid, new_dataset_id, config_id, scramble_field_cols, date_shift, sub_list_col, sub_regex_col)
@@ -475,6 +477,7 @@ class DatasetStore:
                 config_store = ConfigGeneratorStore(self.db)
                 config : ConfigGenerator = config_store.get_config(userid,tenantid,transformation.config_id)
                 dataset, n_rows =  self.get_dataset_content(dataset_id, userid, tenantid)
+                dataset_info = self.get_dataset_info(dataset_id, userid, tenantid)
 
                 # check dataset
                 if (not dataset):
@@ -508,7 +511,7 @@ class DatasetStore:
                 identifiers = json.dumps(identifiers_dict)
                 is_id_dict = {meta.column_name: meta.is_id for meta in metadata_list}
                 is_id = json.dumps(is_id_dict)
-                new_dataset_id = self.store_dataset(userid,tenantid,"dataset "+str(dataset_id)+ " reverted",csv_string,types,identifiers,is_id)
+                new_dataset_id = self.store_dataset(userid,tenantid,"dataset "+str(dataset_id)+ " reverted",csv_string,types,identifiers,is_id,dataset_info.original_filename)
 
             except Exception as e:
                 print(f"Error reverting dataset: {e}")
@@ -519,6 +522,7 @@ class DatasetStore:
     def change_types_dataset(self,userid:int, tenantid:int,dataset_id:int,new_metadata: List[Metadata]):
         try:
             dataset, n_rows =  self.get_dataset_content(dataset_id, userid, tenantid)
+            dataset_info = self.get_dataset_info(dataset_id, userid, tenantid)
 
             # check dataset
             if (not dataset ):
@@ -535,7 +539,7 @@ class DatasetStore:
             identifiers_dict = {meta.column_name: meta.identifier for meta in new_metadata}
             identifiers = json.dumps(identifiers_dict)
             is_id = next((meta.column_name for meta in new_metadata if meta.is_id), None)
-            new_dataset_id = self.store_dataset(userid,tenantid,"dataset "+str(dataset_id)+ " with changed types",csv_string,types,identifiers,is_id)
+            new_dataset_id = self.store_dataset(userid,tenantid,"dataset "+str(dataset_id)+ " with changed types",csv_string,types,identifiers,is_id,dataset_info.original_filename)
 
         except Exception as e:
                 print(f"Error changing the types of the dataset: {e}")
@@ -543,7 +547,22 @@ class DatasetStore:
 
         return new_dataset_id
 
+    def update_dataset(self,userid:int, tenantid:int,id:int, new_name:str):
+        query = "UPDATE datasets SET dataset_name = :new_name WHERE id = :dataset_id AND userid = :userid AND tenantid = :tenantid;"
+        with self.session_scope() as session:
+            try:
+                session.execute(text(query), {
+                    'new_name': new_name,
+                    'dataset_id': id,
+                    'userid': userid,
+                    'tenantid': tenantid,
+                })
 
+            except Exception as e:
+                print(f"Error renaming dataset: {e}")
+                return False
+
+        return True
 # ---------------- utils -------------------------------------------- #
 
     # Function to shift a list of dates by n days

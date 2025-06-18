@@ -80,7 +80,7 @@ message ExportConfigReply {
     string config = 1;
 }
 
-service ConfigService {
+service ConfigurationService {
     rpc GetConfigs(google.protobuf.Empty) returns (GetConfigsReply) {
         option (google.api.http) = {
             get: "/api/rest/v1/configs"
@@ -88,7 +88,7 @@ service ConfigService {
         option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
             summary: "Get configuration files";
             description: "This endpoint returns the configuration files for a given user";
-            tags: "Configuration";
+            tags: "ConfigurationService";
             extensions: {
                 key: "x-openapi-router-controller";
                 value {string_value: "config_generator_controller"};
@@ -104,7 +104,7 @@ service ConfigService {
         option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
             summary: "Create a configuration";
             description: "This endpoint creates a usconfigurationer";
-            tags: "Configuration";
+            tags: "ConfigurationService";
             extensions: {
                 key: "x-openapi-router-controller";
                 value: {string_value: "config_generator_controller"};
@@ -119,7 +119,7 @@ service ConfigService {
         option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
             summary: "Deletes a config";
             description: "This endpoint deletes a config";
-            tags: "Configuration";
+            tags: "ConfigurationService";
             extensions: {
                 key: "x-openapi-router-controller";
                 value: {string_value: "config_generator_controller"};
@@ -134,7 +134,7 @@ service ConfigService {
         option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
             summary: "Export a configuration as json (SPHN Connector format)";
             description: "This endpoint returns the JSON of a configuration";
-            tags: "Configuration";
+            tags: "ConfigurationService";
             extensions: {
                 key: "x-openapi-router-controller";
                 value {string_value: "config_generator_controller"};

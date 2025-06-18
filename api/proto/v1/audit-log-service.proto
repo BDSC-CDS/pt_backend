@@ -77,7 +77,7 @@ service AuditLogService {
         option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
             summary: "Get logs";
             description: "Gets a list of logs.";
-            tags: "AuditLog";
+            tags: "AuditLogService";
             extensions: {
                 key: "x-openapi-router-controller";
                 value {string_value: "audit_log_controller"};
@@ -92,7 +92,7 @@ service AuditLogService {
         option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
             summary: "Get logs for a user";
             description: "Gets logs for a specific user.";
-            tags: "AuditLog";
+            tags: "AuditLogService";
             extensions: {
                 key: "x-openapi-router-controller";
                 value {string_value: "audit_log_controller"};

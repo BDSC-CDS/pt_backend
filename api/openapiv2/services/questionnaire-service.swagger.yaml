@@ -41,7 +41,7 @@ paths:
           type: integer
           format: int64
       tags:
-        - Questionnaire
+        - QuestionnaireService
       x-openapi-router-controller: questionnaire_controller
     post:
       summary: Create a questionnaire
@@ -63,7 +63,7 @@ paths:
           schema:
             $ref: '#/definitions/templatebackendCreateQuestionnaireRequest'
       tags:
-        - Questionnaire
+        - QuestionnaireService
       x-openapi-router-controller: questionnaire_controller
   /api/v1/questionnaire/replies:
     get:
@@ -92,7 +92,7 @@ paths:
           type: integer
           format: int64
       tags:
-        - Questionnaire
+        - QuestionnaireService
       x-openapi-router-controller: questionnaire_controller
     post:
       summary: Create questionnaires reply
@@ -114,7 +114,7 @@ paths:
           schema:
             $ref: '#/definitions/templatebackendCreateReplyRequest'
       tags:
-        - Questionnaire
+        - QuestionnaireService
       x-openapi-router-controller: questionnaire_controller
   /api/v1/questionnaire/replies/{id}:
     get:
@@ -138,7 +138,39 @@ paths:
           type: integer
           format: int64
       tags:
-        - Questionnaire
+        - QuestionnaireService
+      x-openapi-router-controller: questionnaire_controller
+  /api/v1/questionnaire/replies/{id}/share:
+    post:
+      summary: Share questionnaires reply
+      description: This endpoint allows sharing a user's questionnaires reply
+      operationId: QuestionnaireService_ShareReply
+      responses:
+        "200":
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/templatebackendShareReplyReply'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/rpcStatus'
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: integer
+          format: int64
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              sharedwithUserid:
+                type: integer
+                format: int64
+      tags:
+        - QuestionnaireService
       x-openapi-router-controller: questionnaire_controller
   /api/v1/questionnaire/version:
     post:
@@ -161,7 +193,7 @@ paths:
           schema:
             $ref: '#/definitions/templatebackendCreateQuestionnaireVersionRequest'
       tags:
-        - Questionnaire
+        - QuestionnaireService
       x-openapi-router-controller: questionnaire_controller
   /api/v1/questionnaire/{id}:
     get:
@@ -184,7 +216,7 @@ paths:
           type: integer
           format: int64
       tags:
-        - Questionnaire
+        - QuestionnaireService
       x-openapi-router-controller: questionnaire_controller
     delete:
       summary: Create a questionnaire
@@ -205,7 +237,7 @@ paths:
           required: true
           type: string
       tags:
-        - Questionnaire
+        - QuestionnaireService
       x-openapi-router-controller: questionnaire_controller
 definitions:
   protobufAny:
@@ -379,6 +411,13 @@ definitions:
         type: string
       tooltip:
         type: string
+      tmpUUID:
+        type: string
+        title: |-
+          to be used for rule prefills as the id of the question
+          is still unknown at the time of creation
+          this will be used by the backend to compute the id but will not be
+          stored in the database
       answers:
         type: array
         items:
@@ -390,7 +429,7 @@ definitions:
       updatedAt:
         type: string
         format: date-time
-        title: google.protobuf.Timestamp deletedAt = 11;
+        title: google.protobuf.Timestamp deletedAt = 12;
   templatebackendQuestionnaireQuestionAnswer:
     type: object
     properties:
@@ -404,6 +443,15 @@ definitions:
         format: int64
       highRisk:
         type: boolean
+      tmpUUID:
+        type: string
+        title: |-
+          to be used for rule prefills as the id of the answer
+          is still unknown at the time of creation
+          this will be used by the backend to compute the id but will not be
+          stored in the database
+      JSONConfiguration:
+        type: string
       rulePrefills:
         type: array
         items:
@@ -430,13 +478,17 @@ definitions:
         format: int64
       answerText:
         type: string
+      tmpQuestionUUID:
+        type: string
+      tmpAnswerUUID:
+        type: string
       createdAt:
         type: string
         format: date-time
       updatedAt:
         type: string
         format: date-time
-        title: google.protobuf.Timestamp deletedAt = 7;
+        title: google.protobuf.Timestamp deletedAt = 9;
   templatebackendQuestionnaireQuestionReply:
     type: object
     properties:
@@ -471,6 +523,11 @@ definitions:
         items:
           type: object
           $ref: '#/definitions/templatebackendQuestionnaireQuestionReply'
+      userId:
+        type: integer
+        format: int64
+      userName:
+        type: string
       createdAt:
         type: string
         format: date-time
@@ -500,6 +557,16 @@ definitions:
         type: string
         format: date-time
         title: google.protobuf.Timestamp deletedAt = 6;
+  templatebackendShareReplyReply:
+    type: object
+    properties:
+      result:
+        $ref: '#/definitions/templatebackendShareReplyResult'
+  templatebackendShareReplyResult:
+    type: object
+    properties:
+      success:
+        type: boolean
 securityDefinitions:
   Bearer:
     type: apiKey
