@@ -105,6 +105,54 @@ class TransformConfigStore:
                 raise e
 
             return config_id
+        
+    def get_transform_config_inner(self, session, config) -> TransformConfig:
+        """Helper function to fetch transform config details."""
+
+        dateshift_query = "SELECT lowrange, highrange FROM transform_config_date_shift WHERE config_id = :config_id;"
+        dateshift = session.execute(text(dateshift_query), {"config_id": config["id"]}).mappings().fetchone()
+
+        scramble_query = "SELECT field FROM transform_config_scramble_fields WHERE config_id = :config_id;"
+        scramble = session.execute(text(scramble_query), {"config_id": config["id"]}).mappings().fetchall()
+
+        subfieldlist_query = "SELECT name, field, substitute_list, replacement FROM transform_config_sub_field_list WHERE config_id = :config_id;"
+        subfieldlist = session.execute(text(subfieldlist_query), {"config_id": config["id"]}).mappings().fetchall()
+
+        subfieldregex_query = "SELECT name, field, regex, replacement FROM transform_config_sub_field_regex WHERE config_id = :config_id;"
+        subfieldregex = session.execute(text(subfieldregex_query), {"config_id": config["id"]}).mappings().fetchall()
+
+        return TransformConfig(
+            id=config["id"],
+            userid=config["userid"],
+            tenantid=config["tenantid"],
+            questionnaireid=config["questionnaireid"],
+            name=config["name"],
+            dateShift=DateShiftConfig(
+                lowrange=dateshift["lowrange"],
+                highrange=dateshift["highrange"]
+            ) if dateshift else None,
+            scrambleField=ScrambleFieldConfig(
+                fields=[field["field"] for field in scramble]
+            ) if scramble else None,
+            subFieldListList=[
+                SubFieldListConfig(
+                    name=subfield["name"],
+                    field=subfield["field"],
+                    substituteList=subfield["substitute_list"].split(",") if subfield["substitute_list"] else [],
+                    replacement=subfield["replacement"]
+                ) for subfield in subfieldlist
+            ] if subfieldlist else [],
+            subFieldRegexList=[
+                SubFieldRegexConfig(
+                    name=subfield["name"],
+                    field=subfield["field"],
+                    regex=subfield["regex"],
+                    replacement=subfield["replacement"]
+                ) for subfield in subfieldregex
+            ] if subfieldregex else [],
+            createdat=config["createdat"],
+            deletedat=config["deletedat"]
+        )
 
 
     def list_transform_configs(self, userid:int, tenantid:int, offset: int=0, limit: int=None) -> list[TransformConfig]:
@@ -124,54 +172,7 @@ class TransformConfigStore:
                 
                 result = []
                 for config in configs:
-                    # Fetch the dateShift config
-                    dateshift_query = "SELECT lowrange, highrange FROM transform_config_date_shift WHERE config_id = :config_id;"
-                    dateshift = session.execute(text(dateshift_query), {"config_id": config["id"]}).mappings().fetchone()
-                    
-                    # Fetch the scrambleField config
-                    scramble_query = "SELECT field FROM transform_config_scramble_fields WHERE config_id = :config_id;"
-                    scramble = session.execute(text(scramble_query), {"config_id": config["id"]}).mappings().fetchall()
-
-                    # Fetch the subFieldList config
-                    subfieldlist_query = "SELECT name, field, substitute_list, replacement FROM transform_config_sub_field_list WHERE config_id = :config_id;"
-                    subfieldlist = session.execute(text(subfieldlist_query), {"config_id": config["id"]}).mappings().fetchall()
-
-                    # Fetch the subFieldRegex config
-                    subfieldregex_query = "SELECT name, field, regex, replacement FROM transform_config_sub_field_regex WHERE config_id = :config_id;"
-                    subfieldregex = session.execute(text(subfieldregex_query), {"config_id": config["id"]}).mappings().fetchall()
-                    
-                    transform_config = TransformConfig(
-                        id=config["id"],
-                        userid=config["userid"],
-                        tenantid=config["tenantid"],
-                        questionnaireid=config["questionnaireid"],
-                        name=config["name"],
-                        dateShift=DateShiftConfig(
-                            lowrange=dateshift["lowrange"],
-                            highrange=dateshift["highrange"]
-                        ) if dateshift else None,
-                        scrambleField=ScrambleFieldConfig(
-                            fields=[field["field"] for field in scramble]
-                        ) if scramble else None,
-                        subFieldListList=[
-                            SubFieldListConfig(
-                                name=subfield["name"],
-                                field=subfield["field"],
-                                substituteList=subfield["substitute_list"].split(",") if subfield["substitute_list"] else [],
-                                replacement=subfield["replacement"]
-                            ) for subfield in subfieldlist
-                        ] if subfieldlist else [],
-                        subFieldRegexList=[
-                            SubFieldRegexConfig(
-                                name=subfield["name"],
-                                field=subfield["field"],
-                                regex=subfield["regex"],
-                                replacement=subfield["replacement"]
-                            ) for subfield in subfieldregex
-                        ] if subfieldregex else [],
-                        createdat=config["createdat"],
-                        deletedat=config["deletedat"]
-                    )
+                    transform_config = self.get_transform_config_inner(session, config)
                     result.append(transform_config)
 
                 return result
@@ -183,6 +184,7 @@ class TransformConfigStore:
 
     def get_transform_config(self, userid:int, tenantid:int, config_id:int) -> TransformConfig:
         config_query = "SELECT * FROM transform_config WHERE userid = :userid AND tenantid = :tenantid AND id = :id AND deletedat is NULL"
+        
         with self.session_scope() as session:
             try:
                 config = session.execute(text(config_query), {
@@ -194,58 +196,12 @@ class TransformConfigStore:
                 if not config:
                     return None
 
-                # Fetch the dateShift config
-                dateshift_query = "SELECT lowrange, highrange FROM transform_config_date_shift WHERE config_id = :config_id"
-                dateshift = session.execute(text(dateshift_query), {"config_id": config["id"]}).mappings().fetchone()
-                # Fetch the scrambleField config
-                scramble_query = "SELECT field FROM transform_config_scramble_fields WHERE config_id = :config_id"
-                scramble = session.execute(text(scramble_query), {"config_id": config["id"]}).mappings().fetchall()
-                # Fetch the subFieldList config
-                subfieldlist_query = "SELECT name, field, substitute_list, replacement FROM transform_config_sub_field_list WHERE config_id = :config_id"
-                subfieldlist = session.execute(text(subfieldlist_query), {"config_id": config["id"]}).mappings().fetchall()
-                # Fetch the subFieldRegex config
-                subfieldregex_query = "SELECT name, field, regex, replacement FROM transform_config_sub_field_regex WHERE config_id = :config_id"
-                subfieldregex = session.execute(text(subfieldregex_query), {"config_id": config["id"]}).mappings().fetchall()
-
-                result =TransformConfig(
-                    id=config["id"],
-                    userid=config["userid"],
-                    tenantid=config["tenantid"],
-                    questionnaireid=config["questionnaireid"],
-                    name=config["name"],
-                    dateShift=DateShiftConfig(
-                        lowrange=dateshift["lowrange"],
-                        highrange=dateshift["highrange"]
-                    ) if dateshift else None,
-                    scrambleField=ScrambleFieldConfig(
-                        fields=[field["field"] for field in scramble]
-                    ) if scramble else None,
-                    subFieldListList=[
-                        SubFieldListConfig(
-                            name=subfield["name"],
-                            field=subfield["field"],
-                            substituteList=subfield["substitute_list"].split(",") if subfield["substitute_list"] else [],
-                            replacement=subfield["replacement"]
-                        ) for subfield in subfieldlist
-                    ] if subfieldlist else [],
-                    subFieldRegexList=[
-                        SubFieldRegexConfig(
-                            name=subfield["name"],
-                            field=subfield["field"],
-                            regex=subfield["regex"],
-                            replacement=subfield["replacement"]
-                        ) for subfield in subfieldregex
-                    ] if subfieldregex else [],
-                    createdat=config["createdat"],
-                    deletedat=config["deletedat"]
-                )
-                        
+                result = self.get_transform_config_inner(session, config)
                 return result
             
             except SQLAlchemyError as e:
                 print(f"Error getting transform config: {e}")
                 raise e
-
 
     def delete_transform_config(self, userid: int, tenantid: int, config_id:int):
         config_query = """
