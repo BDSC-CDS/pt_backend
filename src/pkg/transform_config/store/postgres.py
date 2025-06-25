@@ -206,16 +206,20 @@ class TransformConfigStore:
     def delete_transform_config(self, userid: int, tenantid: int, config_id:int):
         config_query = """
         UPDATE transform_config SET deletedat = now()
-        WHERE id = :id AND userid = :userid AND tenantid = :tenantid
+        WHERE id = :id AND userid = :userid AND tenantid = :tenantid AND deletedat IS NULL
         """
         
         with self.session_scope() as session:
             try:
-                session.execute(text(config_query), {
+                result = session.execute(text(config_query), {
                     "id": config_id,
                     "userid": userid,
                     "tenantid": tenantid,
                 })
+
+                # Check if the config was found and deleted
+                if result.rowcount == 0:
+                    return False
 
                 # Delete associated dateShift config
                 dateshift_query = """
