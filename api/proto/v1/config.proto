@@ -1,0 +1,31 @@
+syntax = "proto3";
+package templatebackend;
+option go_package = ".;templatebackend";
+
+import "google/protobuf/timestamp.proto";
+
+message Config {
+    uint32 id = 1;
+    uint32 userid = 2;
+    uint32 tenantid = 3;
+    string config_name = 4;
+    uint32 questionnaireid = 5;
+
+    bool hasScrambleField = 6;
+    bool hasDateShift = 7;
+    bool hassubFieldList = 8;
+    bool hassubFieldRegex = 9;
+    repeated string scrambleField_fields = 10;
+    int32 dateShift_lowrange = 11;
+    int32 dateShift_highrange = 12;
+    string subFieldList_field = 13;
+    repeated string subFieldList_substitute = 14;
+    string subFieldList_replacement = 15;
+    string subFieldRegex_field = 16;
+    string subFieldRegex_regex = 17;
+    string subFieldRegex_replacement = 18;
+
+    google.protobuf.Timestamp createdAt = 19;
+    google.protobuf.Timestamp deletedAt = 20;
+
+}
