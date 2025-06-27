@@ -6,7 +6,7 @@ from .questionnaire import provide_questionnaire_controller
 from .risk_assessment import provide_risk_assessment_controller
 from .dataset import provide_dataset_controller
 from .audit_log import provide_audit_log_controller
-from .config_generator import provide_config_generator_controller
+from .transform_config import provide_transform_config_controller
 controllers = None
 
 def provide_controllers():
@@ -24,6 +24,6 @@ def provide_controllers():
     controllers['risk_assessment_controller'] = provide_risk_assessment_controller()
     controllers['dataset_controller'] = provide_dataset_controller()
     controllers['audit_log_controller'] = provide_audit_log_controller()
-    controllers['config_generator_controller'] = provide_config_generator_controller()
+    controllers['transform_config_controller'] = provide_transform_config_controller()
 
     return controllers

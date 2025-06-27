@@ -1,25 +1,23 @@
+from contextlib import contextmanager
+from collections import defaultdict
+from datetime import timedelta
 from io import StringIO
 from typing import List
+import csv
+import json
+import random
+import re
+import string
+from dateutil import parser
+
 from sqlalchemy.engine import Engine
 from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.sql import text
-from contextlib import contextmanager
-from src.pkg.config_generator.model.config_generator import ConfigGenerator
-from src.pkg.dataset.model.dataset import Dataset,Metadata,Dataset_content
-import csv
-from collections import defaultdict
-import json
-import random
-import string
-from datetime import datetime, timedelta
-from dateutil import parser
-from sqlalchemy import text, bindparam
-from sqlalchemy.dialects.postgresql import ARRAY
-from sqlalchemy.dialects.postgresql import VARCHAR, INTEGER
-from sqlalchemy.types import String
-from src.pkg.config_generator.store.postgres import ConfigGeneratorStore
-import re
+
+from src.pkg.dataset.model.dataset import Dataset, Metadata
+from src.pkg.transform_config.model.transform_config import TransformConfig
+from src.pkg.transform_config.store.postgres import TransformConfigStore
 
 class DatasetStore:
     def __init__(self, db: Engine):
@@ -63,93 +61,93 @@ class DatasetStore:
                 raise e
 
         try:
-                csv_data = dataset.replace("\\n", "\n")
-                csvfile = StringIO(csv_data)
+            csv_data = dataset.replace("\\n", "\n")
+            csvfile = StringIO(csv_data)
 
-                # Read the CSV file once to infer column type
-                csv_reader = csv.reader(csvfile)
-                headers = next(csv_reader)  # Read the header row
+            # Read the CSV file once to infer column type
+            csv_reader = csv.reader(csvfile)
+            headers = next(csv_reader)  # Read the header row
 
-                column_data = [[] for _ in headers]
-                for row in csv_reader:
-                    for col_index, value in enumerate(row):
-                        column_data[col_index].append(value)
+            column_data = [[] for _ in headers]
+            for row in csv_reader:
+                for col_index, value in enumerate(row):
+                    column_data[col_index].append(value)
 
-                column_types = json.loads(types)
-                column_identifiers = json.loads(identifiers)
+            column_types = json.loads(types)
+            column_identifiers = json.loads(identifiers)
 
-                metadata_to_insert = []
-                for column_id, header in enumerate(headers):
-                    column_type = column_types[header]
-                    column_identifier = column_identifiers[header]
-                    column_name = header
-                    is_id_bool = True if is_id == str(column_name) else False
-                    metadata_to_insert.append((int(userid), int(tenantid), int(dataset_id), int(column_id), str(column_name), str(column_type), str(column_identifier), is_id_bool))
+            metadata_to_insert = []
+            for column_id, header in enumerate(headers):
+                column_type = column_types[header]
+                column_identifier = column_identifiers[header]
+                column_name = header
+                is_id_bool = True if is_id == str(column_name) else False
+                metadata_to_insert.append((int(userid), int(tenantid), int(dataset_id), int(column_id), str(column_name), str(column_type), str(column_identifier), is_id_bool))
+            query = """
+                INSERT INTO metadata (userid, tenantid, dataset_id, column_id, column_name, type_, identifier, is_id)
+                VALUES (:userid, :tenantid, :dataset_id, :column_id, :column_name, :type_, :identifier, :is_id);
+            """
+            with self.session_scope() as session:
+                try:
+                    #session.execute(text(query),metadata_to_insert) # TODO verifier que ça fonctionne
+                    for record in metadata_to_insert:
+                        session.execute(text(query), {
+                            'userid': record[0],
+                            'tenantid': record[1],
+                            'dataset_id': record[2],
+                            'column_id': record[3],
+                            'column_name': record[4],
+                            'type_': record[5],
+                            'identifier':record[6],
+                            'is_id': record[7],
+                        })
+                except SQLAlchemyError as e:
+                    raise e
+
+            # # insert data content
+            csvfile.seek(0)
+            csv_reader = csv.reader(csvfile)
+            next(csv_reader)  # Skip the header row
+            
+            batch_size = 1000  # Define batch size
+            values_batch = []  # List to accumulate batch data
+
+            for line_number, row in enumerate(csv_reader):
+                for column_id, value in enumerate(row):
+                    # Append each row data to the batch list
+                    values_batch.append({
+                        'userid': userid,
+                        'tenantid': tenantid,
+                        'dataset_id': dataset_id,
+                        'column_id': column_id,
+                        'line_id': line_number,
+                        'val': value
+                    })
+                    
+                    # Perform batch insert when batch size is reached
+                    if len(values_batch) == batch_size:
+                        query = """
+                            INSERT INTO dataset_content (userid, tenantid, dataset_id, column_id, line_id, val)
+                            VALUES (:userid, :tenantid, :dataset_id, :column_id, :line_id, :val);
+                        """
+                        with self.session_scope() as session:
+                            try:
+                                session.execute(text(query), values_batch)
+                                values_batch = []  # Clear the batch after inserting
+                            except SQLAlchemyError as e:
+                                raise e
+
+            # Insert any remaining rows that are less than the batch size
+            if values_batch:
                 query = """
-                    INSERT INTO metadata (userid, tenantid, dataset_id, column_id, column_name, type_, identifier, is_id)
-                    VALUES (:userid, :tenantid, :dataset_id, :column_id, :column_name, :type_, :identifier, :is_id);
+                    INSERT INTO dataset_content (userid, tenantid, dataset_id, column_id, line_id, val)
+                    VALUES (:userid, :tenantid, :dataset_id, :column_id, :line_id, :val);
                 """
                 with self.session_scope() as session:
                     try:
-                        #session.execute(text(query),metadata_to_insert) # TODO verifier que ça fonctionne
-                        for record in metadata_to_insert:
-                            session.execute(text(query), {
-                                'userid': record[0],
-                                'tenantid': record[1],
-                                'dataset_id': record[2],
-                                'column_id': record[3],
-                                'column_name': record[4],
-                                'type_': record[5],
-                                'identifier':record[6],
-                                'is_id': record[7],
-                            })
+                        session.execute(text(query), values_batch)
                     except SQLAlchemyError as e:
                         raise e
-
-                # # insert data content
-                csvfile.seek(0)
-                csv_reader = csv.reader(csvfile)
-                next(csv_reader)  # Skip the header row
-                
-                batch_size = 1000  # Define batch size
-                values_batch = []  # List to accumulate batch data
-
-                for line_number, row in enumerate(csv_reader):
-                    for column_id, value in enumerate(row):
-                        # Append each row data to the batch list
-                        values_batch.append({
-                            'userid': userid,
-                            'tenantid': tenantid,
-                            'dataset_id': dataset_id,
-                            'column_id': column_id,
-                            'line_id': line_number,
-                            'val': value
-                        })
-                        
-                        # Perform batch insert when batch size is reached
-                        if len(values_batch) == batch_size:
-                            query = """
-                                INSERT INTO dataset_content (userid, tenantid, dataset_id, column_id, line_id, val)
-                                VALUES (:userid, :tenantid, :dataset_id, :column_id, :line_id, :val);
-                            """
-                            with self.session_scope() as session:
-                                try:
-                                    session.execute(text(query), values_batch)
-                                    values_batch = []  # Clear the batch after inserting
-                                except SQLAlchemyError as e:
-                                    raise e
-
-                # Insert any remaining rows that are less than the batch size
-                if values_batch:
-                    query = """
-                        INSERT INTO dataset_content (userid, tenantid, dataset_id, column_id, line_id, val)
-                        VALUES (:userid, :tenantid, :dataset_id, :column_id, :line_id, :val);
-                    """
-                    with self.session_scope() as session:
-                        try:
-                            session.execute(text(query), values_batch)
-                        except SQLAlchemyError as e:
-                            raise e
 
         except Exception as e:
                 print(f"Error storing dataset: {e}")
@@ -352,7 +350,6 @@ class DatasetStore:
                     'tenantid': tenantid,
                 }) # TODO mappings ? fetchall? qu'est ce que ça retourne?
 
-
             except Exception as e:
                 print(f"Error deleting dataset: {e}")
                 return False
@@ -385,80 +382,71 @@ class DatasetStore:
 
     def transform_dataset(self,userid:int,tenantid:int,dataset_id:int,config_id:int) -> str:
         try:
-            dataset, n_rows =  self.get_dataset_content(dataset_id, userid, tenantid)
+            # Get the dataset details and content
+            dataset_content, n_rows =  self.get_dataset_content(dataset_id, userid, tenantid)
             dataset_info = self.get_dataset_info(dataset_id, userid, tenantid)
-            # get the configuration
-            config_store = ConfigGeneratorStore(self.db)
-            config : ConfigGenerator = config_store.get_config(userid,tenantid,config_id)
+            dataset_metadata : List[Metadata] = self.get_dataset_metadata(dataset_id,userid,tenantid)
+            if (not dataset_content or not dataset_info or not dataset_metadata):
+                raise Exception("Error: unable to retrieve dataset details.")
 
-            # check dataset
-            if (not dataset ):
-                raise Exception("Error: Dataset not found.")
-            # check if config with this id exists
+            # Get the transform configuration
+            config_store = TransformConfigStore(self.db)
+            config : TransformConfig = config_store.get_transform_config(userid, tenantid, config_id)
             if (not config):
-                raise Exception("Error: Config not found.")
+                raise Exception("Error: unable to retrieve config.")
 
-            # if no transformation was selected
-            if (not config.hasScrambleField and not config.hasDateShift and
-                not config.hassubFieldList and not config.hassubFieldRegex):
-                raise Exception("No transformation was selected")
+            # Raise error if there is no transformation to perform
+            if (not config.dateShift and not config.scrambleField and not config.subFieldListList and not config.subFieldRegexList):
+                raise Exception("Error: no transformation to perform.")
 
-            # parse dataset depending on transformation
-            new_dataset = dataset
-            metadata_list : List[Metadata] = self.get_dataset_metadata(dataset_id,userid,tenantid)
-            if (not metadata_list):
-                raise Exception("No metadata found for this dataset")
+            # Parse dataset depending on transformation
+            new_dataset = dataset_content
+            date_shift, scramble_field_cols, sub_list_col, sub_regex_col = None, None, None, None
 
-            scramble_field_cols = None
-            date_shift = None
-            sub_list_col = None
-            sub_regex_col = None
-            print("what is going on")
-
-            if (config.hasDateShift):
-                print("DOING DATE SHIFT")
-                if not config.dateShift_lowrange or not config.dateShift_highrange:
+            if(config.dateShift):
+                if not config.dateShift.lowrange or not config.dateShift.highrange:
                     raise Exception("Please provide both ranges.")
-                new_dataset,date_shift = self.shift_dates(new_dataset, metadata_list,config.dateShift_lowrange, config.dateShift_highrange)
+                new_dataset, date_shift = self.shift_dates(new_dataset, dataset_metadata, config.dateShift.lowrange, config.dateShift.highrange)
 
-            if (config.hasScrambleField):
-                if not config.scrambleField_fields:
+            if (config.scrambleField):
+                if not config.scrambleField.fields:
                     raise Exception("No fields given to scramble.")
-                new_dataset, scramble_field_cols = self.scramble_fields(new_dataset, metadata_list, dataset_id, config.scrambleField_fields)
+                new_dataset, scramble_field_cols = self.scramble_fields(new_dataset, dataset_metadata, dataset_id, config.scrambleField.fields)
 
-            if (config.hassubFieldList):
-                if not config.subFieldList_field or not config.subFieldList_substitute or not config.subFieldList_replacement:
-                    raise Exception("Missing parameters for the substitution.")
-                new_dataset, sub_list_col = self.substitute_field(new_dataset, metadata_list, config.subFieldList_field, config.subFieldList_substitute, config.subFieldList_replacement)
+            if (config.subFieldListList):
+                for subfield in config.subFieldListList:
+                    if not subfield.field or not subfield.substituteList or not subfield.replacement:
+                        raise Exception("Missing parameters for the substitution.")
+                    new_dataset, sub_list_col = self.substitute_field(new_dataset, dataset_metadata, subfield.field, subfield.substituteList, subfield.replacement)
 
-            if (config.hassubFieldRegex):
-                if not config.subFieldRegex_field or not config.subFieldRegex_regex or not config.subFieldRegex_replacement:
-                    raise Exception("Missing parameters for the substitution.")
-                new_dataset, sub_regex_col = self.substitute_field_regex(new_dataset, metadata_list, config.subFieldRegex_field, config.subFieldRegex_regex, config.subFieldRegex_replacement)
+            if (config.subFieldRegexList):
+                for subfield in config.subFieldRegexList:
+                    if not subfield.field or not subfield.regex or not subfield.replacement:
+                        raise Exception("Missing parameters for the substitution.")
+                    new_dataset, sub_regex_col = self.substitute_field_regex(new_dataset, dataset_metadata, subfield.field, subfield.regex, subfield.replacement)
 
             # store the new dataset
             # Generate headers from metadata
-            headers = ','.join(f'"{m.column_name}"' for m in metadata_list)
+            headers = ','.join(f'"{m.column_name}"' for m in dataset_metadata)
             data_rows = list(zip(*new_dataset))
             csv_rows = [headers] + [','.join(f'"{item}"' for item in row) for row in data_rows]
             csv_string = '\n'.join(csv_rows)
-            types_dict = {meta.column_name: meta.type_ for meta in metadata_list}
+            types_dict = {meta.column_name: meta.type_ for meta in dataset_metadata}
             types = json.dumps(types_dict)
-            identifiers_dict = {meta.column_name: meta.identifier for meta in metadata_list}
+            identifiers_dict = {meta.column_name: meta.identifier for meta in dataset_metadata}
             identifiers = json.dumps(identifiers_dict)
-            is_id = next((meta.column_name for meta in metadata_list if meta.is_id), None)
+            is_id = next((meta.column_name for meta in dataset_metadata if meta.is_id), None)
             print("IS ID TRANSFORM: ", is_id)
             new_dataset_id = self.store_dataset(userid,tenantid,"dataset "+str(dataset_id)+ " transformed",csv_string,types,identifiers,is_id,dataset_info.original_filename)
 
             # Create transformation entry
             self.insert_transformation_entry(userid, tenantid, new_dataset_id, config_id, scramble_field_cols, date_shift, sub_list_col, sub_regex_col)
-
+            
+            return new_dataset_id
 
         except Exception as e:
-                print(f"Error transforming dataset: {e}")
-                return False
-        return new_dataset_id
-
+            print(f"Error transforming dataset: {e}")
+            return False
 
 
     def revert_dataset(self,userid:int,tenantid:int,dataset_id:int) -> str:
@@ -466,38 +454,40 @@ class DatasetStore:
         with self.session_scope() as session:
             try:
                 transformation = session.execute(text(query), {
-                                'dataset_id':dataset_id,
-                                'userid': userid,
-                                'tenantid': tenantid,
-                            }).mappings().fetchone()
+                    'dataset_id':dataset_id,
+                    'userid': userid,
+                    'tenantid': tenantid,
+                }).mappings().fetchone()
 
                 if not transformation:
-                    raise Exception("This dataset was not transformed.")
+                    raise Exception("Error: This dataset was not transformed.")
 
-                config_store = ConfigGeneratorStore(self.db)
-                config : ConfigGenerator = config_store.get_config(userid,tenantid,transformation.config_id)
-                dataset, n_rows =  self.get_dataset_content(dataset_id, userid, tenantid)
+                config_store = TransformConfigStore(self.db)
+                config : TransformConfig = config_store.get_transform_config(userid,tenantid,transformation.config_id)
+                dataset =  self.get_dataset_content(dataset_id, userid, tenantid)
                 dataset_info = self.get_dataset_info(dataset_id, userid, tenantid)
 
                 # check dataset
                 if (not dataset):
                     raise Exception("Error: Dataset not found.")
 
-                # if no transformation was selected
-                if (not config.hasScrambleField and not config.hasDateShift and
-                    not config.hassubFieldList and not config.hassubFieldRegex):
-                    raise Exception("This data was not transformed.")
+                # Raise error if there is no transformation to perform
+                if (not config.dateShift and not config.scrambleField and not config.subFieldListList and not config.subFieldRegexList):
+                    raise Exception("Error: This dataset was not transformed.")
 
                 new_dataset = dataset
                 metadata_list : List[Metadata] = self.get_dataset_metadata(dataset_id,userid,tenantid)
 
-                if config.hasScrambleField:
-                        new_dataset = self.revert_scramble_field(new_dataset, metadata_list, transformation.scramble_fields_cols, config.scrambleField_fields)
-                if config.hasDateShift:
+                if config.scrambleField:
+                    new_dataset = self.revert_scramble_field(new_dataset, metadata_list, transformation.scramble_fields_cols, config.scrambleField_fields)
+                if config.dateShift:
                     new_dataset = self.revert_date_shift(new_dataset, metadata_list, transformation.date_shift)
-                if config.hassubFieldList:
-                    new_dataset = self.revert_substitute(new_dataset, metadata_list, config.subFieldList_field, transformation.sub_list_col)
-                if config.hassubFieldRegex:
+                if config.subFieldListList:
+                    for subfield in config.subFieldListList:
+                        if not subfield.field or not subfield.substituteList or not subfield.replacement:
+                            raise Exception("Missing parameters for the substitution.")
+                        new_dataset = self.revert_substitute(new_dataset, metadata_list, subfield.field, transformation.sub_list_col)
+                if config.subFieldRegexList:
                     new_dataset = self.revert_substitute(new_dataset, metadata_list, config.subFieldRegex_field, transformation.sub_regex_col)
 
                 # store the new dataset
@@ -569,36 +559,36 @@ class DatasetStore:
     def shift_date_col(self,date_list: List[str], n: int) -> List[str]:
         shifted_dates = []
         for date_str in date_list:
+            if not date_str:
+                shifted_dates.append("")
+                continue
             date_obj = parser.parse(date_str)  # Automatically detect and parse the date string
             shifted_date_obj = date_obj + timedelta(days=n)  # Shift the date by n days
             shifted_date_str = shifted_date_obj.strftime("%Y-%m-%d")  # Convert back to string in desired format
             shifted_dates.append(shifted_date_str)
         return shifted_dates
 
-    def shift_dates(self, new_dataset: List[List[str]], metadata_list:List[Metadata],lowrange:int,highrange:int):
+    # Perform date shifting on the dataset
+    def shift_dates(self, new_dataset: List[List[str]], metadata_list:List[Metadata], lowrange:int, highrange:int):
         if lowrange == highrange == 0:
             raise ValueError("Both range limits are zero; a non-zero shift cannot be generated.")
 
         date_column_ids = [metadata.column_id for metadata in metadata_list if metadata.type_ == "date"]
-        print("shift date metadata: ",metadata_list)
         iden_col_id = next((metadata.column_id for metadata in metadata_list if metadata.is_id), None)
 
         if iden_col_id is None:
             raise ValueError("No ID column found in metadata.")
 
         id_col = new_dataset[iden_col_id]
-        print("ID COL: ", iden_col_id)
         unique_ids = set(id_col)
         id_to_shift = {}
 
-         # Generate a unique random shift for each unique ID
+        # Generate a unique random shift for each unique ID
         for unique_id in unique_ids:
             random_shift = random.randint(lowrange, highrange)
             while random_shift == 0:
                 random_shift = random.randint(lowrange, highrange)
             id_to_shift[unique_id] = random_shift
-
-        print("ID TO DATE SHIFT DICT: ", id_to_shift)
 
         # Apply the shifts to the date columns
         for col_id in date_column_ids:
@@ -612,6 +602,7 @@ class DatasetStore:
 
         return new_dataset, id_to_shift
 
+    # Update the metadata type for specific columns in a dataset
     def update_metadata_type(self,dataset_id:int, new_type:str, columns:List[str]):
         query = "UPDATE metadata SET type_ = :new_type WHERE dataset_id = :dataset_id AND column_name = ANY (:fields);"
 
@@ -628,16 +619,15 @@ class DatasetStore:
                 return False
         return True
 
-
+    # Generate a random identifier string
     def generate_random_identifier(self):
         characters = string.ascii_letters + string.digits + "!@#$%^&*()-_=+"
         length = 18
         random_string = ''.join(random.choice(characters) for _ in range(length))
         return random_string
 
-
-
-    def scramble_fields(self,new_dataset: List[List[str]], metadata_list:List[Metadata], dataset_id:int, scramble_fields : List[str]):
+    # Perform field scrambling on specified fields in the dataset
+    def scramble_fields(self, new_dataset: List[List[str]], metadata_list:List[Metadata], dataset_id:int, scramble_fields : List[str]):
         column_indices = {meta.column_name: meta.column_id for meta in metadata_list if meta.column_name in scramble_fields}
         # Replace each specified field's value with a unique identifier
         scramble_field_cols = {}
@@ -667,20 +657,21 @@ class DatasetStore:
 
         return new_dataset, scramble_field_cols
 
-
-    def substitute_field(self, new_dataset: List[List[str]], metadata_list:List[Metadata],  subFieldList_field: str, subFieldList_substitute: List[str], subFieldList_replacement:str):
+    # Perform field substitution based on a list of values
+    def substitute_field(self, new_dataset: List[List[str]], metadata_list:List[Metadata],  field: str, substitutionList: List[str], replacement:str):
         # get the corresponding column id
         for metadata in metadata_list:
-            if metadata.column_name == subFieldList_field:
-                    column_id = metadata.column_id
-                    break
+            if metadata.column_name == field:
+                column_id = metadata.column_id
+                break
         # replace the values in the goal column if they match the substitute values
         target_column = new_dataset[column_id]
         sub_field_col = target_column.copy()
-        target_column[:] = [subFieldList_replacement if value in subFieldList_substitute else value for value in target_column]
+        target_column = [replacement if value in substitutionList else value for value in target_column]
 
-        return new_dataset,sub_field_col
+        return new_dataset, sub_field_col
 
+    # Perform field substitution based on a regex pattern
     def substitute_field_regex(self, new_dataset: List[List[str]], metadata_list:List[Metadata], subFieldRegex_field : str, subFieldRegex_regex: str, subFieldRegex_replacement:str):
          # check validity of regex
         try:
@@ -691,8 +682,8 @@ class DatasetStore:
         # get the corresponding column id
         for metadata in metadata_list:
             if metadata.column_name == subFieldRegex_field:
-                    column_id = metadata.column_id
-                    break
+                column_id = metadata.column_id
+                break
 
         # replace the values in the goal column if they match the regex
         original_column = new_dataset[column_id].copy()
