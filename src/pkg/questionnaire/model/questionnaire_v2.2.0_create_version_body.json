@@ -1,0 +1,1902 @@
+{
+    "id": 1,
+    "name": "Use case assesment and risk evaluation",
+    "version": {
+        "version": "2.2.0",
+        "published": true,
+        "questions": [
+            {
+                "answerType": "",
+                "answers": [
+                    {
+                        "JSONConfiguration": "",
+                        "highRisk": false,
+                        "riskLevel": 0,
+                        "rulePrefills": [
+                            {
+                                "answerText": "In Switzerland",
+                                "tmpAnswerUUID": "66e38238-2dac-4cc5-97c6-8f26083f2ed5",
+                                "tmpQuestionUUID": "39592040-c066-4909-b0dc-3ae8f3075a1c"
+                            },
+                            {
+                                "answerText": "Yes",
+                                "tmpAnswerUUID": "1ac67f9f-42e6-42a9-90ab-74e71bd7f6af",
+                                "tmpQuestionUUID": "3958ec0d-43d1-45f2-8163-fbac2d7712b1"
+                            },
+                            {
+                                "answerText": "Yes",
+                                "tmpAnswerUUID": "1b65c6de-71f4-4ae6-be65-ab46677da804",
+                                "tmpQuestionUUID": "60d92bf6-924d-4e31-b5f6-b356541ea23c"
+                            },
+                            {
+                                "answerText": "Yes",
+                                "tmpAnswerUUID": "ebb19e6b-cd41-4562-b70e-584244264b8e",
+                                "tmpQuestionUUID": "65ea00ed-7713-42a3-8e7c-cfa5a8bf8460"
+                            },
+                            {
+                                "answerText": "Yes",
+                                "tmpAnswerUUID": "bed3dfad-def4-469e-82f3-d07569fdf23d",
+                                "tmpQuestionUUID": "eb7af9bc-840b-477c-b11d-5e2094d0a98b"
+                            },
+                            {
+                                "answerText": "Yes",
+                                "tmpAnswerUUID": "763d1ffb-880f-4e10-bd7d-10fa504b1e10",
+                                "tmpQuestionUUID": "6c2ff3c8-5488-4acc-aee8-eb5bb1e5d096"
+                            },
+                            {
+                                "answerText": "Yes ",
+                                "tmpAnswerUUID": "5da98278-e0a0-4ca1-9c6f-831b9e71a1e1",
+                                "tmpQuestionUUID": "d6f1a115-51a8-48ea-991a-33d9a87bc5c3"
+                            },
+                            {
+                                "answerText": "On the hospital IT infrastructure of the data recipient ",
+                                "tmpAnswerUUID": "b3f68a87-b0e1-4d92-9832-d2c8ab977a08",
+                                "tmpQuestionUUID": "44946a98-1cf4-401f-b434-e8d6314d167d"
+                            },
+                            {
+                                "answerText": "Yes",
+                                "tmpAnswerUUID": "f9992a55-436a-4197-8dd8-3d51c0611cb0",
+                                "tmpQuestionUUID": "af70345d-8ec2-452f-bbe0-7a5e4d814139"
+                            },
+                            {
+                                "answerText": "Yes",
+                                "tmpAnswerUUID": "653969f5-774f-4205-a5a1-dfd933e0caf5",
+                                "tmpQuestionUUID": "3a3cad49-ddcf-4cd0-a7db-a96b27891bb4"
+                            }
+                        ],
+                        "text": "CHUV internal project",
+                        "tmpUUID": "04fefdf4-1de7-4437-8c83-dbd7af2f66c0"
+                    },
+                    {
+                        "JSONConfiguration": "",
+                        "highRisk": false,
+                        "riskLevel": 0,
+                        "rulePrefills": [
+                            {
+                                "answerText": "In Switzerland",
+                                "tmpAnswerUUID": "66e38238-2dac-4cc5-97c6-8f26083f2ed5",
+                                "tmpQuestionUUID": "39592040-c066-4909-b0dc-3ae8f3075a1c"
+                            },
+                            {
+                                "answerText": "Yes",
+                                "tmpAnswerUUID": "1ac67f9f-42e6-42a9-90ab-74e71bd7f6af",
+                                "tmpQuestionUUID": "3958ec0d-43d1-45f2-8163-fbac2d7712b1"
+                            },
+                            {
+                                "answerText": "Yes",
+                                "tmpAnswerUUID": "1b65c6de-71f4-4ae6-be65-ab46677da804",
+                                "tmpQuestionUUID": "60d92bf6-924d-4e31-b5f6-b356541ea23c"
+                            },
+                            {
+                                "answerText": "Yes",
+                                "tmpAnswerUUID": "ebb19e6b-cd41-4562-b70e-584244264b8e",
+                                "tmpQuestionUUID": "65ea00ed-7713-42a3-8e7c-cfa5a8bf8460"
+                            },
+                            {
+                                "answerText": "Yes",
+                                "tmpAnswerUUID": "bed3dfad-def4-469e-82f3-d07569fdf23d",
+                                "tmpQuestionUUID": "eb7af9bc-840b-477c-b11d-5e2094d0a98b"
+                            },
+                            {
+                                "answerText": "Yes ",
+                                "tmpAnswerUUID": "5da98278-e0a0-4ca1-9c6f-831b9e71a1e1",
+                                "tmpQuestionUUID": "d6f1a115-51a8-48ea-991a-33d9a87bc5c3"
+                            },
+                            {
+                                "answerText": "On  computer(s) controlled by the hospital IT department of the data recipient",
+                                "tmpAnswerUUID": "e324e92d-1604-4729-8258-4fb1b0eeb101",
+                                "tmpQuestionUUID": "44946a98-1cf4-401f-b434-e8d6314d167d"
+                            },
+                            {
+                                "answerText": "Yes",
+                                "tmpAnswerUUID": "f9992a55-436a-4197-8dd8-3d51c0611cb0",
+                                "tmpQuestionUUID": "af70345d-8ec2-452f-bbe0-7a5e4d814139"
+                            },
+                            {
+                                "answerText": "Yes",
+                                "tmpAnswerUUID": "653969f5-774f-4205-a5a1-dfd933e0caf5",
+                                "tmpQuestionUUID": "3a3cad49-ddcf-4cd0-a7db-a96b27891bb4"
+                            },
+                            {
+                                "answerText": "Yes",
+                                "tmpAnswerUUID": "763d1ffb-880f-4e10-bd7d-10fa504b1e10",
+                                "tmpQuestionUUID": "6c2ff3c8-5488-4acc-aee8-eb5bb1e5d096"
+                            }
+                        ],
+                        "text": "USZ internal project",
+                        "tmpUUID": "32275958-eac2-45cc-88f4-424b168b9067"
+                    },
+                    {
+                        "JSONConfiguration": "",
+                        "highRisk": false,
+                        "riskLevel": 0,
+                        "rulePrefills": [
+                            {
+                                "answerText": "Yes",
+                                "tmpAnswerUUID": "d1da03fa-7c11-457c-aeec-d0ae9896e899",
+                                "tmpQuestionUUID": "9f073d71-b504-430d-b158-4b5ed7ac0b21"
+                            },
+                            {
+                                "answerText": "Yes",
+                                "tmpAnswerUUID": "d1da03fa-7c11-457c-aeec-d0ae9896e899",
+                                "tmpQuestionUUID": "9f073d71-b504-430d-b158-4b5ed7ac0b21"
+                            },
+                            {
+                                "answerText": "Yes",
+                                "tmpAnswerUUID": "d1da03fa-7c11-457c-aeec-d0ae9896e899",
+                                "tmpQuestionUUID": "9f073d71-b504-430d-b158-4b5ed7ac0b21"
+                            },
+                            {
+                                "answerText": "Yes",
+                                "tmpAnswerUUID": "d1da03fa-7c11-457c-aeec-d0ae9896e899",
+                                "tmpQuestionUUID": "9f073d71-b504-430d-b158-4b5ed7ac0b21"
+                            },
+                            {
+                                "answerText": "Yes",
+                                "tmpAnswerUUID": "d1da03fa-7c11-457c-aeec-d0ae9896e899",
+                                "tmpQuestionUUID": "9f073d71-b504-430d-b158-4b5ed7ac0b21"
+                            },
+                            {
+                                "answerText": "Yes",
+                                "tmpAnswerUUID": "d1da03fa-7c11-457c-aeec-d0ae9896e899",
+                                "tmpQuestionUUID": "9f073d71-b504-430d-b158-4b5ed7ac0b21"
+                            }
+                        ],
+                        "text": "Multicentric SPHN project",
+                        "tmpUUID": "4a5b4312-ac7d-4861-acc0-d4365555b695"
+                    },
+                    {
+                        "JSONConfiguration": "",
+                        "highRisk": false,
+                        "riskLevel": 0,
+                        "rulePrefills": [],
+                        "text": "None of the above",
+                        "tmpUUID": "8681a548-08c7-45e5-bcc9-5ed39e0aebdd"
+                    }
+                ],
+                "flag": "",
+                "question": "Please specify the type of your project",
+                "riskWeight": 0,
+                "tab": "Project Type",
+                "tmpUUID": "7d0809d6-4c25-4313-b98f-acf93439eb55",
+                "tooltip": "This assists in pre-filling certain responses based on your institution's guidelines."
+            },
+            {
+                "answerType": "",
+                "answers": [
+                    {
+                        "JSONConfiguration": "",
+                        "highRisk": false,
+                        "riskLevel": 0,
+                        "rulePrefills": [],
+                        "text": "Yes",
+                        "tmpUUID": "d1da03fa-7c11-457c-aeec-d0ae9896e899"
+                    },
+                    {
+                        "JSONConfiguration": "",
+                        "highRisk": false,
+                        "riskLevel": 0,
+                        "rulePrefills": [
+                            {
+                                "answerText": "No genomic sequences are used in the project ",
+                                "tmpAnswerUUID": "00b3178a-1009-4981-883a-eedbaebccb0f",
+                                "tmpQuestionUUID": "2c302e7a-23a8-4f23-a0ce-ce10d63ec8c0"
+                            }
+                        ],
+                        "text": "No",
+                        "tmpUUID": "9ab5574d-4639-4276-83e5-b52f270585be"
+                    }
+                ],
+                "flag": "",
+                "question": "Does your project contain omics data?",
+                "riskWeight": 0,
+                "tab": "Project Overview",
+                "tmpUUID": "9f073d71-b504-430d-b158-4b5ed7ac0b21",
+                "tooltip": ""
+            },
+            {
+                "answerType": "",
+                "answers": [
+                    {
+                        "JSONConfiguration": "",
+                        "highRisk": false,
+                        "riskLevel": 0,
+                        "rulePrefills": [],
+                        "text": "Yes",
+                        "tmpUUID": "d3aeb629-8a0d-4cd9-8548-4eaf2f444416"
+                    },
+                    {
+                        "JSONConfiguration": "",
+                        "highRisk": false,
+                        "riskLevel": 0,
+                        "rulePrefills": [
+                            {
+                                "answerText": "No audio data is used in the project",
+                                "tmpAnswerUUID": "f9c0f10e-9e77-4652-8def-9a49c43637dd",
+                                "tmpQuestionUUID": "c9809b1c-fbe9-405e-9bec-93b534cf9a6d"
+                            },
+                            {
+                                "answerText": "No images are used in the project",
+                                "tmpAnswerUUID": "985e9a08-bbc9-4325-8b7e-d986ef824efc",
+                                "tmpQuestionUUID": "63ba25c7-390f-4f14-aa3c-5bad1292fa92"
+                            },
+                            {
+                                "answerText": "No DICOM data is used in this project",
+                                "tmpAnswerUUID": "39a536bd-7193-4f92-b4e7-0b2634edf5fe",
+                                "tmpQuestionUUID": "1bef5179-158d-419d-a224-b357c4fc0074"
+                            },
+                            {
+                                "answerText": "No DICOM data is used in this project",
+                                "tmpAnswerUUID": "d8cf62cc-693f-4951-8b75-53cabccbf39b",
+                                "tmpQuestionUUID": "59a7f2e3-d446-4fb5-ac4c-dfd37e138a4f"
+                            },
+                            {
+                                "answerText": "No DICOM data is used in this project",
+                                "tmpAnswerUUID": "aaf348a9-9c9c-4350-9a0f-6f82dfd1ba1d",
+                                "tmpQuestionUUID": "6c2e1d34-b0f0-45ec-a628-647e47d08de8"
+                            },
+                            {
+                                "answerText": "No DICOM data is used in this project",
+                                "tmpAnswerUUID": "36f850d3-0c79-449a-90a1-24b265952e34",
+                                "tmpQuestionUUID": "ad77ca88-31af-4ca4-b08e-8e96a0e6c635"
+                            },
+                            {
+                                "answerText": "No DICOM data is used in this project",
+                                "tmpAnswerUUID": "32824746-f943-4432-afa0-20e8333736b4",
+                                "tmpQuestionUUID": "fe977f2b-36f3-402a-9fce-a479f9f04088"
+                            },
+                            {
+                                "answerText": "The project does not contain DICOM data",
+                                "tmpAnswerUUID": "c2fd93b2-ea43-456e-8bf0-5b7b99c00a54",
+                                "tmpQuestionUUID": "dd039e2c-f609-4e08-b4e5-c850aedbf5d3"
+                            }
+                        ],
+                        "text": "No",
+                        "tmpUUID": "c1dc2b5b-8620-4543-8503-16b2b241b250"
+                    }
+                ],
+                "flag": "",
+                "question": "Does your project contain multimedia data?",
+                "riskWeight": 0,
+                "tab": "Project Overview",
+                "tmpUUID": "1aec1b4e-ca95-4e88-b669-d6e2ccb3da43",
+                "tooltip": ""
+            },
+            {
+                "answerType": "",
+                "answers": [
+                    {
+                        "JSONConfiguration": "",
+                        "highRisk": false,
+                        "riskLevel": 0,
+                        "rulePrefills": [],
+                        "text": "Yes",
+                        "tmpUUID": "2761cc44-42fa-454c-8189-05b40ef6cebd"
+                    },
+                    {
+                        "JSONConfiguration": "",
+                        "highRisk": false,
+                        "riskLevel": 0,
+                        "rulePrefills": [],
+                        "text": "No",
+                        "tmpUUID": "d792daf7-2c27-4ff3-a5e9-07d64c349b71"
+                    }
+                ],
+                "flag": "",
+                "question": "Does your project contain demographic and administrative variables?",
+                "riskWeight": 0,
+                "tab": "Project Overview",
+                "tmpUUID": "82aee5d3-89f3-4aaa-bc98-da3f4de98322",
+                "tooltip": ""
+            },
+            {
+                "answerType": "",
+                "answers": [
+                    {
+                        "JSONConfiguration": "",
+                        "highRisk": false,
+                        "riskLevel": 0,
+                        "rulePrefills": [],
+                        "text": "Yes",
+                        "tmpUUID": "85fc8a06-03f0-47eb-a3e9-6e0244a715cc"
+                    },
+                    {
+                        "JSONConfiguration": "",
+                        "highRisk": false,
+                        "riskLevel": 0,
+                        "rulePrefills": [],
+                        "text": "No",
+                        "tmpUUID": "6662787e-32c9-44df-9fcf-77a72b8986b4"
+                    }
+                ],
+                "flag": "",
+                "question": "Does your project contain unstructured data/reports?",
+                "riskWeight": 0,
+                "tab": "Project Overview",
+                "tmpUUID": "890c1502-aea9-4544-9489-9c15a01c9185",
+                "tooltip": ""
+            },
+            {
+                "answerType": "",
+                "answers": [
+                    {
+                        "JSONConfiguration": "",
+                        "highRisk": false,
+                        "riskLevel": 0,
+                        "rulePrefills": [],
+                        "text": "Only once at the beginning of the project",
+                        "tmpUUID": "e20beabe-8d30-4805-8241-9c5bd49e7d63"
+                    },
+                    {
+                        "JSONConfiguration": "",
+                        "highRisk": false,
+                        "riskLevel": 0,
+                        "rulePrefills": [],
+                        "text": "Multiple times during the project",
+                        "tmpUUID": "66f24723-cdd4-46af-b7c8-de57bdfc5346"
+                    }
+                ],
+                "flag": "",
+                "question": "How often is transfer of health-related data scheduled?",
+                "riskWeight": 0,
+                "tab": "Project Overview",
+                "tmpUUID": "ec6bc6d6-30d7-4bb1-be13-c6953236f6ab",
+                "tooltip": ""
+            },
+            {
+                "answerType": "",
+                "answers": [
+                    {
+                        "JSONConfiguration": "",
+                        "highRisk": false,
+                        "riskLevel": 0,
+                        "rulePrefills": [],
+                        "text": "Yes",
+                        "tmpUUID": "fd5bc307-c859-41df-a1fb-2c5c449a1ccf"
+                    },
+                    {
+                        "JSONConfiguration": "",
+                        "highRisk": false,
+                        "riskLevel": 0,
+                        "rulePrefills": [],
+                        "text": "No",
+                        "tmpUUID": "cf351d8e-86f4-4487-b14e-0f0c0b22c679"
+                    }
+                ],
+                "flag": "",
+                "question": "Is there the need to acquire additional data from the same patient at the provider site (e.g., longitudinal study, additional data required by project, etc.)?",
+                "riskWeight": 0,
+                "tab": "Project Overview",
+                "tmpUUID": "f08ac966-d4a1-4b9d-a618-c914b66228fe",
+                "tooltip": ""
+            },
+            {
+                "answerType": "",
+                "answers": [
+                    {
+                        "JSONConfiguration": "",
+                        "highRisk": false,
+                        "riskLevel": 0,
+                        "rulePrefills": [],
+                        "text": "Yes",
+                        "tmpUUID": "3a160b22-e7c3-4365-bc6c-360d500f818b"
+                    },
+                    {
+                        "JSONConfiguration": "",
+                        "highRisk": false,
+                        "riskLevel": 0,
+                        "rulePrefills": [],
+                        "text": "No",
+                        "tmpUUID": "78f15e3d-03e5-4d35-9a4c-aa6532c941b3"
+                    }
+                ],
+                "flag": "",
+                "question": "Is it planned to release the dataset as anonymized open data set?",
+                "riskWeight": 0,
+                "tab": "Project Overview",
+                "tmpUUID": "cb2eb0d3-d359-47bb-90a7-70de32f92793",
+                "tooltip": "Additional information: If the answer is yes, additional measures than those specified in tab \"Contextual measures\" and \"Data\" are recommended to be taken. Releasing the data set as open data has to be explicitly mentioned in the study protocol submitted for ethics approval. Think about how the data data is anonymized, meta data and where you wish to deposit it."
+            },
+            {
+                "answerType": "",
+                "answers": [
+                    {
+                        "JSONConfiguration": "",
+                        "highRisk": false,
+                        "riskLevel": 0,
+                        "rulePrefills": [],
+                        "text": "Yes",
+                        "tmpUUID": "686f3990-d986-47bc-a0f6-b48636a7a9af"
+                    },
+                    {
+                        "JSONConfiguration": "",
+                        "highRisk": false,
+                        "riskLevel": 0,
+                        "rulePrefills": [],
+                        "text": "No",
+                        "tmpUUID": "5c25b4fa-263d-4cf7-8019-4151e5fc26fb"
+                    }
+                ],
+                "flag": "",
+                "question": "Is it planned to make the dataset (containing personal data) available for reuse by third parties?",
+                "riskWeight": 0,
+                "tab": "Project Overview",
+                "tmpUUID": "ca3fd3ec-fb48-41c1-82b9-9e7dee9adea9",
+                "tooltip": "Additional information: If the answer is yes, additional measures than those specified in tab \"Contextual measures\" and \"Data\" are recommended to be taken.  Making the dataset available for third parties containing personal data requires some further requirements being fullfilled, e.g. legal agreement with third parties. A proper secure location to store the dataset with personal data is obligatory."
+            },
+            {
+                "answerType": "multiple_choice",
+                "answers": [
+                    {
+                        "JSONConfiguration": "",
+                        "highRisk": false,
+                        "riskLevel": 1,
+                        "rulePrefills": [],
+                        "text": "< 100 patients",
+                        "tmpUUID": "7331c632-64e6-4415-a770-3c3efc037475"
+                    },
+                    {
+                        "JSONConfiguration": "",
+                        "highRisk": false,
+                        "riskLevel": 2,
+                        "rulePrefills": [],
+                        "text": "100 to 1.000 patients",
+                        "tmpUUID": "4c56f7d9-2814-4368-b7ac-7ba84dbe4883"
+                    },
+                    {
+                        "JSONConfiguration": "",
+                        "highRisk": false,
+                        "riskLevel": 3,
+                        "rulePrefills": [],
+                        "text": "1.000 to 5.000 patients",
+                        "tmpUUID": "03118741-be15-423b-8b69-e629286a96bc"
+                    },
+                    {
+                        "JSONConfiguration": "",
+                        "highRisk": false,
+                        "riskLevel": 4,
+                        "rulePrefills": [],
+                        "text": "> 5.000 patients",
+                        "tmpUUID": "13e020e4-f1c8-4fd8-b497-2b7063d41f82"
+                    }
+                ],
+                "flag": "",
+                "question": "What is the number of patients planned to be included in the cohort?",
+                "riskWeight": 2,
+                "tab": "Cohort Characteristics",
+                "tmpUUID": "8ae25dfc-9641-43dc-aaf1-d3e3a2f81ed5",
+                "tooltip": "Additional information: Note that this question is related to the impact of data leakage. With a larger dataset, the likelihood of identifying a patient increases compared to a smaller dataset containing only 500 patients."
+            },
+            {
+                "answerType": "multiple_choice",
+                "answers": [
+                    {
+                        "JSONConfiguration": "",
+                        "highRisk": false,
+                        "riskLevel": 2,
+                        "rulePrefills": [],
+                        "text": "25 to 100 datapoints",
+                        "tmpUUID": "769252dc-473a-440f-aba2-f8d65355ee5a"
+                    },
+                    {
+                        "JSONConfiguration": "",
+                        "highRisk": false,
+                        "riskLevel": 1,
+                        "rulePrefills": [],
+                        "text": "< 25 datapoints",
+                        "tmpUUID": "2d24d2c3-cdab-4462-a65b-84df99eb4c06"
+                    },
+                    {
+                        "JSONConfiguration": "",
+                        "highRisk": false,
+                        "riskLevel": 3,
+                        "rulePrefills": [],
+                        "text": "100 to 1000 datapoints",
+                        "tmpUUID": "ac7b27b6-a81f-4abe-be4e-02902f214ba7"
+                    },
+                    {
+                        "JSONConfiguration": "",
+                        "highRisk": false,
+                        "riskLevel": 4,
+                        "rulePrefills": [],
+                        "text": "> 1000 datapoints",
+                        "tmpUUID": "375e5c94-7813-4561-815f-b3d7889335fd"
+                    }
+                ],
+                "flag": "",
+                "question": "What is the number of the individual datapoints per patient included in the dataset?",
+                "riskWeight": 2,
+                "tab": "Cohort Characteristics",
+                "tmpUUID": "b51a3024-555d-4c7b-b933-d0d5cb449799",
+                "tooltip": "Additional information: Note that datapoints mean each individual information and not variables only. For example: each lab measurement to be included in the dataset"
+            },
+            {
+                "answerType": "multiple_choice",
+                "answers": [
+                    {
+                        "JSONConfiguration": "",
+                        "highRisk": false,
+                        "riskLevel": 0,
+                        "rulePrefills": [],
+                        "text": "No health-related data on rare diseases are included",
+                        "tmpUUID": "9d5b9994-b784-4132-8dc7-bdaa46c746bd"
+                    },
+                    {
+                        "JSONConfiguration": "",
+                        "highRisk": false,
+                        "riskLevel": 2,
+                        "rulePrefills": [],
+                        "text": "The disease occurs less than one in 80.000 (i.e., max. 100 cases in Switzerland)",
+                        "tmpUUID": "6c833423-c9cf-4a80-82b7-3863dfbe8f53"
+                    },
+                    {
+                        "JSONConfiguration": "",
+                        "highRisk": false,
+                        "riskLevel": 1,
+                        "rulePrefills": [],
+                        "text": "The disease occurs less than one in 2.000 (i.e., max. 4.000 cases in Switzerland)",
+                        "tmpUUID": "08e1fd68-26f0-4455-a624-eb70ec774394"
+                    }
+                ],
+                "flag": "",
+                "question": "Is the project collecting health-related data on rare disease patients?",
+                "riskWeight": 5,
+                "tab": "Cohort Characteristics",
+                "tmpUUID": "dfa7dd72-eb79-47f6-882c-3650054575e5",
+                "tooltip": ""
+            },
+            {
+                "answerType": "multiple_choice",
+                "answers": [
+                    {
+                        "JSONConfiguration": "",
+                        "highRisk": false,
+                        "riskLevel": 0,
+                        "rulePrefills": [],
+                        "text": "No",
+                        "tmpUUID": "d787447d-d7ef-4ef2-b70d-f583082aa3cb"
+                    },
+                    {
+                        "JSONConfiguration": "",
+                        "highRisk": false,
+                        "riskLevel": 1,
+                        "rulePrefills": [],
+                        "text": "Yes",
+                        "tmpUUID": "3636bdcf-9bdb-45ef-838e-fd9862c8f818"
+                    }
+                ],
+                "flag": "",
+                "question": "Is one or more of the following stigmatizing information included in the dataset?\n\n- religious, ideological, political or trade union-related views or activities\n- disease associated with stigma (e.g. HIV status, psycological conditions), the intimate sphere or the racial origin\n- social security measures\n- administrative or criminal proceedings and sanctions",
+                "riskWeight": 5,
+                "tab": "Cohort Characteristics",
+                "tmpUUID": "e67dd422-fe61-40f0-b9b5-4bf5100b8a32",
+                "tooltip": ""
+            },
+            {
+                "answerType": "multiple_choice",
+                "answers": [
+                    {
+                        "JSONConfiguration": "",
+                        "highRisk": false,
+                        "riskLevel": 0,
+                        "rulePrefills": [],
+                        "text": "In Switzerland",
+                        "tmpUUID": "66e38238-2dac-4cc5-97c6-8f26083f2ed5"
+                    },
+                    {
+                        "JSONConfiguration": "",
+                        "highRisk": false,
+                        "riskLevel": 1,
+                        "rulePrefills": [],
+                        "text": "In EU or another country providing an adequate level of protection, recognized as such by the Federal Council",
+                        "tmpUUID": "8964bd4f-f3a7-4506-a47c-75f641df7ad9"
+                    },
+                    {
+                        "JSONConfiguration": "",
+                        "highRisk": false,
+                        "riskLevel": 2,
+                        "rulePrefills": [],
+                        "text": "In a country that does not provide an adequate level of protection, but with adequate safeguards according to Swiss law",
+                        "tmpUUID": "6db01bcd-8018-4081-9920-0b7af410f463"
+                    },
+                    {
+                        "JSONConfiguration": "",
+                        "highRisk": true,
+                        "riskLevel": 0,
+                        "rulePrefills": [],
+                        "text": "In a country that does not provide an adequate level of protection and without adequate safeguards according to Swiss law",
+                        "tmpUUID": "4a93849f-0144-4bb6-89e1-e5e7f904362f"
+                    }
+                ],
+                "flag": "",
+                "question": "In which jurisdiction the project data is planned to be stored and processed?\n",
+                "riskWeight": 2,
+                "tab": "Administrative",
+                "tmpUUID": "39592040-c066-4909-b0dc-3ae8f3075a1c",
+                "tooltip": "Additional information: Please select multiple answers, if needed. For adequate safeguards please refer to the Federal Act on Data Protection (FADP) Art 16: https://www.fedlex.admin.ch/eli/cc/2022/491/en and to the Federal Data Protection and Information Commissioner (FDPIC):https://www.edoeb.admin.ch/edoeb/en/home/datenschutz/arbeit_wirtschaft/datenuebermittlung_ausland.html Please see list of countries with sufficient data protection: https://www.fedlex.admin.ch/eli/cc/2022/568/de#annex_1"
+            },
+            {
+                "answerType": "multiple_choice",
+                "answers": [
+                    {
+                        "JSONConfiguration": "",
+                        "highRisk": false,
+                        "riskLevel": -1,
+                        "rulePrefills": [],
+                        "text": "Yes",
+                        "tmpUUID": "1ac67f9f-42e6-42a9-90ab-74e71bd7f6af"
+                    },
+                    {
+                        "JSONConfiguration": "",
+                        "highRisk": false,
+                        "riskLevel": 0,
+                        "rulePrefills": [],
+                        "text": "No",
+                        "tmpUUID": "22270d01-d508-435a-b813-472744a832be"
+                    }
+                ],
+                "flag": "",
+                "question": "Is there a legal agreement between the data provider(s) and the data recipient(s) (e.g., a data transfer and use agreement) that regulates  the conditions under which data are disclosed to the data recipient(s)?",
+                "riskWeight": 4,
+                "tab": "Administrative",
+                "tmpUUID": "3958ec0d-43d1-45f2-8163-fbac2d7712b1",
+                "tooltip": "Please find the SPHN legal agreement templates for a data transfer and use agreement here: https://sphn.ch/services/dtua/"
+            },
+            {
+                "answerType": "multiple_choice",
+                "answers": [
+                    {
+                        "JSONConfiguration": "",
+                        "highRisk": false,
+                        "riskLevel": -1,
+                        "rulePrefills": [],
+                        "text": "Yes",
+                        "tmpUUID": "1b65c6de-71f4-4ae6-be65-ab46677da804"
+                    },
+                    {
+                        "JSONConfiguration": "",
+                        "highRisk": false,
+                        "riskLevel": 0,
+                        "rulePrefills": [],
+                        "text": "No",
+                        "tmpUUID": "5d9120bf-f4ef-4c76-9fe1-c5624ac9bcb9"
+                    }
+                ],
+                "flag": "",
+                "question": "Does the legal agreement between the data provider(s) and the data recipient(s) forbid the recipient(s) from disclosing the data to third parties or only with measures equivalent to those contractually agreed between the data provider and the data recipient?",
+                "riskWeight": 4,
+                "tab": "Administrative",
+                "tmpUUID": "60d92bf6-924d-4e31-b5f6-b356541ea23c",
+                "tooltip": "If allowed, the data recipient may only share data with third parties under certain conditions, e.g a legal agreement between all parties and the third party. The new agreement with the third party needs to respect equivalent safeguards as imposed by the initial contract."
+            },
+            {
+                "answerType": "multiple_choice",
+                "answers": [
+                    {
+                        "JSONConfiguration": "",
+                        "highRisk": false,
+                        "riskLevel": -1,
+                        "rulePrefills": [],
+                        "text": "Yes",
+                        "tmpUUID": "ebb19e6b-cd41-4562-b70e-584244264b8e"
+                    },
+                    {
+                        "JSONConfiguration": "",
+                        "highRisk": false,
+                        "riskLevel": 0,
+                        "rulePrefills": [],
+                        "text": "No",
+                        "tmpUUID": "de2cdd7c-2635-4ba4-b151-8196b1ed42e1"
+                    }
+                ],
+                "flag": "",
+                "question": "Does the legal agreement between the data provider(s) and the data recipient(s) stipulate that external audits of the data management practices of the data recipient may be performed?",
+                "riskWeight": 4,
+                "tab": "Administrative",
+                "tmpUUID": "65ea00ed-7713-42a3-8e7c-cfa5a8bf8460",
+                "tooltip": "\tAn external audit is an audit carried out by an external company on behalf of a data provider."
+            },
+            {
+                "answerType": "multiple_choice",
+                "answers": [
+                    {
+                        "JSONConfiguration": "",
+                        "highRisk": false,
+                        "riskLevel": -1,
+                        "rulePrefills": [],
+                        "text": "Yes",
+                        "tmpUUID": "bed3dfad-def4-469e-82f3-d07569fdf23d"
+                    },
+                    {
+                        "JSONConfiguration": "",
+                        "highRisk": false,
+                        "riskLevel": 0,
+                        "rulePrefills": [],
+                        "text": "No",
+                        "tmpUUID": "6e775a26-49af-4e1a-b849-af53c3c57d58"
+                    }
+                ],
+                "flag": "",
+                "question": "Does the legal agreement between the data provider(s) and the data recipient(s) stipulate that regular external audits of privacy and security practices of the data recipient may be performed?",
+                "riskWeight": 4,
+                "tab": "Administrative",
+                "tmpUUID": "eb7af9bc-840b-477c-b11d-5e2094d0a98b",
+                "tooltip": "\tAn external audit is an audit carried out by an external company on behalf of a data provider."
+            },
+            {
+                "answerType": "multiple_choice",
+                "answers": [
+                    {
+                        "JSONConfiguration": "",
+                        "highRisk": false,
+                        "riskLevel": -1,
+                        "rulePrefills": [],
+                        "text": "Yes",
+                        "tmpUUID": "763d1ffb-880f-4e10-bd7d-10fa504b1e10"
+                    },
+                    {
+                        "JSONConfiguration": "",
+                        "highRisk": false,
+                        "riskLevel": 0,
+                        "rulePrefills": [],
+                        "text": "No",
+                        "tmpUUID": "66099235-fbcb-4a36-98c5-4f7dc19557cf"
+                    }
+                ],
+                "flag": "",
+                "question": "Does the legal agreement between the data provider(s) and the data recipient(s) associate penalties in case of health-related data misuse by the recipient?",
+                "riskWeight": 4,
+                "tab": "Administrative",
+                "tmpUUID": "6c2ff3c8-5488-4acc-aee8-eb5bb1e5d096",
+                "tooltip": "\tNote that the SPHN legal agreement template (link: https://sphn.ch/services/dtua/) do not foresee contractual penalties. "
+            },
+            {
+                "answerType": "multiple_choice",
+                "answers": [
+                    {
+                        "JSONConfiguration": "",
+                        "highRisk": false,
+                        "riskLevel": -1,
+                        "rulePrefills": [],
+                        "text": "Yes ",
+                        "tmpUUID": "5da98278-e0a0-4ca1-9c6f-831b9e71a1e1"
+                    },
+                    {
+                        "JSONConfiguration": "",
+                        "highRisk": false,
+                        "riskLevel": 0,
+                        "rulePrefills": [],
+                        "text": "No",
+                        "tmpUUID": "81fa1e1b-9450-494a-a338-cfdc86177599"
+                    }
+                ],
+                "flag": "",
+                "question": "Are the recipient's staff members personally bound by a duty of confidentiality (e.g. confidential agreement, access policy imposing a duty of confidentiality, personal legal obligation of confidentiality)? ",
+                "riskWeight": 6,
+                "tab": "Administrative",
+                "tmpUUID": "d6f1a115-51a8-48ea-991a-33d9a87bc5c3",
+                "tooltip": "Autor: This does not refer to the legal agreement between data provider(s) and data recipient(s)."
+            },
+            {
+                "answerType": "multiple_choice",
+                "answers": [
+                    {
+                        "JSONConfiguration": "",
+                        "highRisk": false,
+                        "riskLevel": 2,
+                        "rulePrefills": [],
+                        "text": "Internal users of the hospital (i.e., the provider) from where the data is coming from, but who DO NOT HAVE access to the Electronic Health Records (EHR) of the hospital or other registries containing data from the same patients",
+                        "tmpUUID": "6d695df1-9963-407d-8a7a-5e944fe0e8d6"
+                    },
+                    {
+                        "JSONConfiguration": "",
+                        "highRisk": false,
+                        "riskLevel": 3,
+                        "rulePrefills": [],
+                        "text": "Internal users of the hospital (i.e., the provider) from where the data is coming from and who DO HAVE access to the Electronic Health Records (EHR) of the hospital or other registries containing data from the same patients (this excludes internal Clinical Data Warehouse (CDW) employees)",
+                        "tmpUUID": "f6077ba6-ac23-4185-9b82-4736c972f14a"
+                    },
+                    {
+                        "JSONConfiguration": "",
+                        "highRisk": false,
+                        "riskLevel": 1,
+                        "rulePrefills": [],
+                        "text": "External users outside of the hospital",
+                        "tmpUUID": "fe71a727-bb70-4ca5-af84-6963831c83a2"
+                    }
+                ],
+                "flag": "",
+                "question": "Who will have access to health-related data shared during the project?\nMultiple selections possible.",
+                "riskWeight": 3,
+                "tab": "Data Users",
+                "tmpUUID": "d00d5cac-d1fd-464d-b09e-b83ca0b077b8",
+                "tooltip": "Additional information: \u201cIn this question, \u201caccess\u201d does not refer to data access for de-identification purposes (e.g. access by data engineers/clinical data warehouse)\u201d."
+            },
+            {
+                "answerType": "multiple_choice",
+                "answers": [
+                    {
+                        "JSONConfiguration": "",
+                        "highRisk": false,
+                        "riskLevel": 0,
+                        "rulePrefills": [],
+                        "text": "No",
+                        "tmpUUID": "0d5feced-6ce8-4224-99d7-518d1daa4107"
+                    },
+                    {
+                        "JSONConfiguration": "",
+                        "highRisk": true,
+                        "riskLevel": 0,
+                        "rulePrefills": [],
+                        "text": "Yes",
+                        "tmpUUID": "088347ec-1aa8-4816-b000-a444765300df"
+                    }
+                ],
+                "flag": "",
+                "question": "Does anyone in the data recipient's project team has access to mapping table for patient re-identification (i.e., data subjects)?",
+                "riskWeight": 3,
+                "tab": "Data Users",
+                "tmpUUID": "9fc5a0ee-bc4e-464f-b62e-58573eb312d7",
+                "tooltip": "Additional information: This question concerns the effective access to the mapping table and not the storage of the mapping table (the \"key\") that allows re-identification of patients."
+            },
+            {
+                "answerType": "multiple_choice",
+                "answers": [
+                    {
+                        "JSONConfiguration": "",
+                        "highRisk": false,
+                        "riskLevel": 0,
+                        "rulePrefills": [],
+                        "text": "On  computer(s) controlled by the hospital IT department of the data recipient",
+                        "tmpUUID": "e324e92d-1604-4729-8258-4fb1b0eeb101"
+                    },
+                    {
+                        "JSONConfiguration": "",
+                        "highRisk": false,
+                        "riskLevel": -2,
+                        "rulePrefills": [],
+                        "text": "On the hospital IT infrastructure of the data recipient ",
+                        "tmpUUID": "b3f68a87-b0e1-4d92-9832-d2c8ab977a08"
+                    },
+                    {
+                        "JSONConfiguration": "",
+                        "highRisk": false,
+                        "riskLevel": -1,
+                        "rulePrefills": [],
+                        "text": "On an external IT infrastructure that complies with BioMedIT Information Security Policy or similar policies (e.g., BioMedIT network)",
+                        "tmpUUID": "5133b701-3019-4651-ac2c-4cf46bebb581"
+                    },
+                    {
+                        "JSONConfiguration": "",
+                        "highRisk": true,
+                        "riskLevel": 0,
+                        "rulePrefills": [],
+                        "text": "On an external IT infrastructure that DOES NOT comply with BioMedIT Information Security Policy or similar policies (e.g., public cloud)",
+                        "tmpUUID": "1d5c2fd1-558c-4354-b8e5-1c63fddf9aaf"
+                    },
+                    {
+                        "JSONConfiguration": "",
+                        "highRisk": true,
+                        "riskLevel": 0,
+                        "rulePrefills": [],
+                        "text": "On PRIVATE computer (e.g., desktop, laptop, etc.)",
+                        "tmpUUID": "646f9871-2a34-4e9a-a816-fd0fc3ce8772"
+                    }
+                ],
+                "flag": "",
+                "question": "Where does the project data will be stored and processed (select the worst answer that applies)?",
+                "riskWeight": 10,
+                "tab": "IT",
+                "tmpUUID": "44946a98-1cf4-401f-b434-e8d6314d167d",
+                "tooltip": "\tIf the BioMedIT network is used, this answer needs to be selected. The risk is augmented in the following question if the conditions of the Information Security Policy of BioMedIT are not met. Please take also into account that cloud servers might be hosted abroad. See also Contextual risks. Note that servers of clouds might be hosted abroad without adequate security measures. Please consider also the question C-01 accordingly. "
+            },
+            {
+                "answerType": "multiple_choice",
+                "answers": [
+                    {
+                        "JSONConfiguration": "",
+                        "highRisk": false,
+                        "riskLevel": 0,
+                        "rulePrefills": [],
+                        "text": "No",
+                        "tmpUUID": "99516f1b-ccf1-4d85-a77d-039111743187"
+                    },
+                    {
+                        "JSONConfiguration": "",
+                        "highRisk": false,
+                        "riskLevel": -1,
+                        "rulePrefills": [],
+                        "text": "Yes",
+                        "tmpUUID": "f9992a55-436a-4197-8dd8-3d51c0611cb0"
+                    }
+                ],
+                "flag": "",
+                "question": "If the project data is stored or processed on the IT infrastructure of an external provider, does the Management System of the provider's Information Security has been also audited and certified from an Information Security perspective (e.g., ISO 27001) and from a data protection perspective (Federal data Protection Act, General Data Protection Regulation of the European Union,...)",
+                "riskWeight": 10,
+                "tab": "IT",
+                "tmpUUID": "af70345d-8ec2-452f-bbe0-7a5e4d814139",
+                "tooltip": "Note that the BioMedIT network is not certified. Choose the option \"No\" also if this question is not applicable"
+            },
+            {
+                "answerType": "multiple_choice",
+                "answers": [
+                    {
+                        "JSONConfiguration": "",
+                        "highRisk": false,
+                        "riskLevel": -1,
+                        "rulePrefills": [],
+                        "text": "Yes",
+                        "tmpUUID": "653969f5-774f-4205-a5a1-dfd933e0caf5"
+                    },
+                    {
+                        "JSONConfiguration": "",
+                        "highRisk": false,
+                        "riskLevel": 0,
+                        "rulePrefills": [],
+                        "text": "No",
+                        "tmpUUID": "13e241b1-db36-4d9c-bc18-e98781334e4e"
+                    }
+                ],
+                "flag": "",
+                "question": "If the project data is stored or processed on the IT infrastructure of an external provider, is there a legal processing agreement with the external provider of the infrastructure such as the BioMedIT Network (e.g., data processor agreement)?",
+                "riskWeight": 10,
+                "tab": "IT",
+                "tmpUUID": "3a3cad49-ddcf-4cd0-a7db-a96b27891bb4",
+                "tooltip": "In case the external processor and It infratsructure refers to the BioMedIT network, the legal agreement has to contain a Data Transfer and Processing agreement (DTPA) part. It regulates the data access rules and security requirements to ensure appropriate confidentiality, integrity, availability and resilience of the systems with regard to processing of the data. Choose the option \"No\" also if this question is not applicable"
+            },
+            {
+                "answerType": "multiple_choice",
+                "answers": [
+                    {
+                        "JSONConfiguration": "",
+                        "highRisk": false,
+                        "riskLevel": 0,
+                        "rulePrefills": [],
+                        "text": "No audio data is used in the project",
+                        "tmpUUID": "f9c0f10e-9e77-4652-8def-9a49c43637dd"
+                    },
+                    {
+                        "JSONConfiguration": "",
+                        "highRisk": true,
+                        "riskLevel": 0,
+                        "rulePrefills": [],
+                        "text": "Patient voice is kept in audio files",
+                        "tmpUUID": "ab8aa94b-94b7-498a-ae6b-e96426b9e2f1"
+                    },
+                    {
+                        "JSONConfiguration": "",
+                        "highRisk": false,
+                        "riskLevel": 1,
+                        "rulePrefills": [],
+                        "text": "Patient voice blurring/noise algorithm",
+                        "tmpUUID": "e9395002-8daf-44a3-b373-12de797499c5"
+                    }
+                ],
+                "flag": "",
+                "question": "Audio Data",
+                "riskWeight": 5,
+                "tab": "Multimedia Data Risk",
+                "tmpUUID": "c9809b1c-fbe9-405e-9bec-93b534cf9a6d",
+                "tooltip": ""
+            },
+            {
+                "answerType": "multiple_choice",
+                "answers": [
+                    {
+                        "JSONConfiguration": "",
+                        "highRisk": false,
+                        "riskLevel": 0,
+                        "rulePrefills": [],
+                        "text": "No images are used in the project",
+                        "tmpUUID": "985e9a08-bbc9-4325-8b7e-d986ef824efc"
+                    },
+                    {
+                        "JSONConfiguration": "",
+                        "highRisk": true,
+                        "riskLevel": 0,
+                        "rulePrefills": [],
+                        "text": "Original image or video files are kept",
+                        "tmpUUID": "c48a49b6-0295-4f45-9205-d9f63eba3226"
+                    },
+                    {
+                        "JSONConfiguration": "",
+                        "highRisk": false,
+                        "riskLevel": 2,
+                        "rulePrefills": [],
+                        "text": "Blurring of identifying parts ",
+                        "tmpUUID": "72822b0d-3b96-47d9-953e-d47401b68632"
+                    },
+                    {
+                        "JSONConfiguration": "",
+                        "highRisk": false,
+                        "riskLevel": 1,
+                        "rulePrefills": [],
+                        "text": "Removing of identifying face or identifying patient body parts (e.g., by defacing algorithms)",
+                        "tmpUUID": "6d9a4311-5a0c-434c-b69c-d6db1999940a"
+                    }
+                ],
+                "flag": "",
+                "question": "Images (including photos) & Videos with patient face or identifying body parts (e.g., tattoos, malformations)",
+                "riskWeight": 5,
+                "tab": "Multimedia Data Risk",
+                "tmpUUID": "63ba25c7-390f-4f14-aa3c-5bad1292fa92",
+                "tooltip": ""
+            },
+            {
+                "answerType": "",
+                "answers": [
+                    {
+                        "JSONConfiguration": "",
+                        "highRisk": false,
+                        "riskLevel": 0,
+                        "rulePrefills": [],
+                        "text": "The project contains DICOM data",
+                        "tmpUUID": "874bc8e3-22d5-4664-8084-258ab7293bf3"
+                    },
+                    {
+                        "JSONConfiguration": "",
+                        "highRisk": false,
+                        "riskLevel": 0,
+                        "rulePrefills": [],
+                        "text": "The project does not contain DICOM data",
+                        "tmpUUID": "c2fd93b2-ea43-456e-8bf0-5b7b99c00a54"
+                    }
+                ],
+                "flag": "",
+                "question": "DICOM Data",
+                "riskWeight": 0,
+                "tab": "Multimedia Data Risk",
+                "tmpUUID": "dd039e2c-f609-4e08-b4e5-c850aedbf5d3",
+                "tooltip": ""
+            },
+            {
+                "answerType": "multiple_choice",
+                "answers": [
+                    {
+                        "JSONConfiguration": "",
+                        "highRisk": false,
+                        "riskLevel": 0,
+                        "rulePrefills": [],
+                        "text": "Original value is suppressed",
+                        "tmpUUID": "495d7ea6-9591-4d02-9794-f4e6ba7206d1"
+                    },
+                    {
+                        "JSONConfiguration": "",
+                        "highRisk": false,
+                        "riskLevel": 1,
+                        "rulePrefills": [],
+                        "text": "Original value is replaced by pseudonym",
+                        "tmpUUID": "51d77bf1-05fd-41a8-86b0-146cb26bd140"
+                    },
+                    {
+                        "JSONConfiguration": "",
+                        "highRisk": false,
+                        "riskLevel": 2,
+                        "rulePrefills": [],
+                        "text": "Original values are kept",
+                        "tmpUUID": "fa9b187a-e165-4b47-8983-60cb15c2d556"
+                    },
+                    {
+                        "JSONConfiguration": "",
+                        "highRisk": false,
+                        "riskLevel": 0,
+                        "rulePrefills": [],
+                        "text": "No DICOM data is used in this project",
+                        "tmpUUID": "39a536bd-7193-4f92-b4e7-0b2634edf5fe"
+                    }
+                ],
+                "flag": "",
+                "question": "DICOM - Hardware Identifying Attributes",
+                "riskWeight": 1,
+                "tab": "Multimedia Data Risk",
+                "tmpUUID": "1bef5179-158d-419d-a224-b357c4fc0074",
+                "tooltip": ""
+            },
+            {
+                "answerType": "multiple_choice",
+                "answers": [
+                    {
+                        "JSONConfiguration": "",
+                        "highRisk": false,
+                        "riskLevel": 0,
+                        "rulePrefills": [],
+                        "text": "Original value is suppressed",
+                        "tmpUUID": "4e2bedd9-8c4d-4048-aaad-ac86f0dabd86"
+                    },
+                    {
+                        "JSONConfiguration": "",
+                        "highRisk": false,
+                        "riskLevel": 1,
+                        "rulePrefills": [],
+                        "text": "Original value is replaced by pseudonym",
+                        "tmpUUID": "8cae0bef-4bdb-4675-a0c9-17909c8dda42"
+                    },
+                    {
+                        "JSONConfiguration": "",
+                        "highRisk": false,
+                        "riskLevel": 2,
+                        "rulePrefills": [],
+                        "text": "Original values are kept",
+                        "tmpUUID": "ca4da86b-2688-452d-867b-d3bf22237137"
+                    },
+                    {
+                        "JSONConfiguration": "",
+                        "highRisk": false,
+                        "riskLevel": 0,
+                        "rulePrefills": [],
+                        "text": "No DICOM data is used in this project",
+                        "tmpUUID": "d8cf62cc-693f-4951-8b75-53cabccbf39b"
+                    }
+                ],
+                "flag": "",
+                "question": "DICOM - Study Description",
+                "riskWeight": 1,
+                "tab": "Multimedia Data Risk",
+                "tmpUUID": "59a7f2e3-d446-4fb5-ac4c-dfd37e138a4f",
+                "tooltip": ""
+            },
+            {
+                "answerType": "multiple_choice",
+                "answers": [
+                    {
+                        "JSONConfiguration": "",
+                        "highRisk": false,
+                        "riskLevel": 0,
+                        "rulePrefills": [],
+                        "text": "Original value is suppressed",
+                        "tmpUUID": "ee38d498-4987-4455-a636-63c615731e07"
+                    },
+                    {
+                        "JSONConfiguration": "",
+                        "highRisk": false,
+                        "riskLevel": 1,
+                        "rulePrefills": [],
+                        "text": "Original value is replaced by pseudonym",
+                        "tmpUUID": "7416b349-1e90-43a2-bdfa-09f56d35761a"
+                    },
+                    {
+                        "JSONConfiguration": "",
+                        "highRisk": false,
+                        "riskLevel": 2,
+                        "rulePrefills": [],
+                        "text": "Original values are kept",
+                        "tmpUUID": "b273fb14-9526-4b36-ba1c-9db71c087c72"
+                    },
+                    {
+                        "JSONConfiguration": "",
+                        "highRisk": false,
+                        "riskLevel": 0,
+                        "rulePrefills": [],
+                        "text": "No DICOM data is used in this project",
+                        "tmpUUID": "aaf348a9-9c9c-4350-9a0f-6f82dfd1ba1d"
+                    }
+                ],
+                "flag": "",
+                "question": "DICOM - Series Description",
+                "riskWeight": 1,
+                "tab": "Multimedia Data Risk",
+                "tmpUUID": "6c2e1d34-b0f0-45ec-a628-647e47d08de8",
+                "tooltip": ""
+            },
+            {
+                "answerType": "multiple_choice",
+                "answers": [
+                    {
+                        "JSONConfiguration": "",
+                        "highRisk": false,
+                        "riskLevel": 0,
+                        "rulePrefills": [],
+                        "text": "Original value is suppressed",
+                        "tmpUUID": "0a858be5-8e6b-4972-b25f-f876d4619873"
+                    },
+                    {
+                        "JSONConfiguration": "",
+                        "highRisk": false,
+                        "riskLevel": 1,
+                        "rulePrefills": [],
+                        "text": "Original value is replaced by pseudonym",
+                        "tmpUUID": "0fafd237-c871-4899-b8f8-7459a708a338"
+                    },
+                    {
+                        "JSONConfiguration": "",
+                        "highRisk": false,
+                        "riskLevel": 2,
+                        "rulePrefills": [],
+                        "text": "Original values are kept",
+                        "tmpUUID": "3e974510-bb05-4e46-9b3c-8ce956ec1f0a"
+                    },
+                    {
+                        "JSONConfiguration": "",
+                        "highRisk": false,
+                        "riskLevel": 0,
+                        "rulePrefills": [],
+                        "text": "No DICOM data is used in this project",
+                        "tmpUUID": "36f850d3-0c79-449a-90a1-24b265952e34"
+                    }
+                ],
+                "flag": "",
+                "question": "DICOM - Contrast Bolus Agent",
+                "riskWeight": 1,
+                "tab": "Multimedia Data Risk",
+                "tmpUUID": "ad77ca88-31af-4ca4-b08e-8e96a0e6c635",
+                "tooltip": ""
+            },
+            {
+                "answerType": "multiple_choice",
+                "answers": [
+                    {
+                        "JSONConfiguration": "",
+                        "highRisk": false,
+                        "riskLevel": 0,
+                        "rulePrefills": [],
+                        "text": "Original value is suppressed",
+                        "tmpUUID": "f46cd645-8314-46bb-99cf-2d2020efadcf"
+                    },
+                    {
+                        "JSONConfiguration": "",
+                        "highRisk": false,
+                        "riskLevel": 1,
+                        "rulePrefills": [],
+                        "text": "Original value is replaced by pseudonym",
+                        "tmpUUID": "7b3e74ea-ad47-4c9b-ada7-386746afde48"
+                    },
+                    {
+                        "JSONConfiguration": "",
+                        "highRisk": false,
+                        "riskLevel": 2,
+                        "rulePrefills": [],
+                        "text": "Original values are kept",
+                        "tmpUUID": "78276087-8422-4733-875c-11b292dba31d"
+                    },
+                    {
+                        "JSONConfiguration": "",
+                        "highRisk": false,
+                        "riskLevel": 0,
+                        "rulePrefills": [],
+                        "text": "No DICOM data is used in this project",
+                        "tmpUUID": "32824746-f943-4432-afa0-20e8333736b4"
+                    }
+                ],
+                "flag": "",
+                "question": "DICOM - Retain original values of other DICOM attributes that would be removed by default according to the recommendations of nema.org",
+                "riskWeight": 1,
+                "tab": "Multimedia Data Risk",
+                "tmpUUID": "fe977f2b-36f3-402a-9fce-a479f9f04088",
+                "tooltip": "Additional information: DICOM attributes that are removed by default can be found on the confidentiality list provided by nema.org http://dicom.nema.org/medical/dicom/current/output/chtml/part15/chapter_E.html"
+            },
+            {
+                "answerType": "multiple_choice",
+                "answers": [
+                    {
+                        "JSONConfiguration": "",
+                        "highRisk": false,
+                        "riskLevel": 0,
+                        "rulePrefills": [],
+                        "text": "The age concept is not used in the project",
+                        "tmpUUID": "77279228-1e9c-4f71-9ee5-a7da4bf6b83a"
+                    },
+                    {
+                        "JSONConfiguration": "",
+                        "highRisk": false,
+                        "riskLevel": 1,
+                        "rulePrefills": [],
+                        "text": "Age in generalized in groups of 5 or more years",
+                        "tmpUUID": "d3bc3df0-88cf-466c-8688-e5bcc0a288c0"
+                    },
+                    {
+                        "JSONConfiguration": "",
+                        "highRisk": false,
+                        "riskLevel": 2,
+                        "rulePrefills": [],
+                        "text": "Original age is kept except for people with more than 89y old who are put in the age class \"90y+\" ",
+                        "tmpUUID": "4e9898cf-be04-41cd-b342-a5dec29709f7"
+                    },
+                    {
+                        "JSONConfiguration": "",
+                        "highRisk": false,
+                        "riskLevel": 3,
+                        "rulePrefills": [],
+                        "text": "Original age is kept",
+                        "tmpUUID": "7f78412e-bd17-4d78-9bc7-4b81539ec607"
+                    }
+                ],
+                "flag": "",
+                "question": "Age",
+                "riskWeight": 4,
+                "tab": "Structured Data Risk",
+                "tmpUUID": "40bc7db7-c347-4b03-b44f-0146aa37f8d9",
+                "tooltip": ""
+            },
+            {
+                "answerType": "multiple_choice",
+                "answers": [
+                    {
+                        "JSONConfiguration": "",
+                        "highRisk": false,
+                        "riskLevel": 0,
+                        "rulePrefills": [],
+                        "text": "Profession is not used in the project",
+                        "tmpUUID": "f8948a9f-8f5e-4746-b903-538950e35a6e"
+                    },
+                    {
+                        "JSONConfiguration": "",
+                        "highRisk": false,
+                        "riskLevel": 1,
+                        "rulePrefills": [],
+                        "text": "Original profession is kept, but replaced by a random profession for identifying ones",
+                        "tmpUUID": "6d217ed1-84c0-41c7-b2ee-46b699a627ff"
+                    }
+                ],
+                "flag": "",
+                "question": "Profession",
+                "riskWeight": 2,
+                "tab": "Structured Data Risk",
+                "tmpUUID": "2bfc677b-cb52-4c6e-990d-6f1213a4ac37",
+                "tooltip": "Additional information: Replacing a profession by a random one should be made if the profession is by itself identifying the data subject (e.g., prime minister or similar positions)"
+            },
+            {
+                "answerType": "multiple_choice",
+                "answers": [
+                    {
+                        "JSONConfiguration": "",
+                        "highRisk": false,
+                        "riskLevel": 0,
+                        "rulePrefills": [],
+                        "text": "Location is not used in the project",
+                        "tmpUUID": "3b298fab-7982-43b7-83d1-f47079998bef"
+                    },
+                    {
+                        "JSONConfiguration": "",
+                        "highRisk": false,
+                        "riskLevel": 1,
+                        "rulePrefills": [],
+                        "text": "Location is generalized to the country level",
+                        "tmpUUID": "c024f8de-9150-4cb0-abaf-d45a376dc0dd"
+                    },
+                    {
+                        "JSONConfiguration": "",
+                        "highRisk": false,
+                        "riskLevel": 2,
+                        "rulePrefills": [],
+                        "text": "Location is generalized to the region level",
+                        "tmpUUID": "c2d17556-4d14-4333-a32a-bdc0f5724024"
+                    },
+                    {
+                        "JSONConfiguration": "",
+                        "highRisk": false,
+                        "riskLevel": 3,
+                        "rulePrefills": [],
+                        "text": "Location is generalized to the city level. If cities have less than 20.000 inhabitants, cities are replaced by the corresponding region",
+                        "tmpUUID": "43ee5bba-d49b-49f7-8909-7f5182e4188b"
+                    },
+                    {
+                        "JSONConfiguration": "",
+                        "highRisk": false,
+                        "riskLevel": 4,
+                        "rulePrefills": [],
+                        "text": "Location is generalized to the zip level. If zip codes refer to areas with less than 20.000 inhabitants, the last 2 numbers of the zip codes are suppressed",
+                        "tmpUUID": "4b8c7871-9078-4a5b-ad56-d39b38e59aae"
+                    },
+                    {
+                        "JSONConfiguration": "",
+                        "highRisk": true,
+                        "riskLevel": 0,
+                        "rulePrefills": [],
+                        "text": "The original locations are kept",
+                        "tmpUUID": "8f5fcbc4-1d8f-49e0-acdd-b3bc2d51bf5b"
+                    }
+                ],
+                "flag": "",
+                "question": "Location  (street, zip code, city, region, country)",
+                "riskWeight": 3,
+                "tab": "Structured Data Risk",
+                "tmpUUID": "33d76019-d960-408f-9feb-3b9657316b20",
+                "tooltip": ""
+            },
+            {
+                "answerType": "multiple_choice",
+                "answers": [
+                    {
+                        "JSONConfiguration": "",
+                        "highRisk": false,
+                        "riskLevel": 0,
+                        "rulePrefills": [],
+                        "text": "Date of birth concept is suppressed or not used in the project ",
+                        "tmpUUID": "593346ff-0a47-484a-a4a1-99159b0050bb"
+                    },
+                    {
+                        "JSONConfiguration": "",
+                        "highRisk": false,
+                        "riskLevel": 1,
+                        "rulePrefills": [],
+                        "text": "Only the year of the original birth date is kept or the date is shifted by a random number of days within +/- 365 days",
+                        "tmpUUID": "ebd19ba7-f839-4f86-bef6-18a06ecafe72"
+                    },
+                    {
+                        "JSONConfiguration": "",
+                        "highRisk": false,
+                        "riskLevel": 2,
+                        "rulePrefills": [],
+                        "text": "Date of birth is shifted by a random number of days within +/- 90 days (one quarter offset to preserve seasonality)",
+                        "tmpUUID": "063624c6-b2f6-4695-9c1c-5aba9820ad87"
+                    },
+                    {
+                        "JSONConfiguration": "",
+                        "highRisk": false,
+                        "riskLevel": 3,
+                        "rulePrefills": [],
+                        "text": "Only the year and month of the original birth date are kept or the date is shifted by a random number of days between +/- 30 days",
+                        "tmpUUID": "2b2a1f9a-67e6-458b-bb71-b1a7ed5fdb47"
+                    },
+                    {
+                        "JSONConfiguration": "",
+                        "highRisk": false,
+                        "riskLevel": 4,
+                        "rulePrefills": [],
+                        "text": "Full original date of birth is kept (dd/mm/yyyy)",
+                        "tmpUUID": "64376470-d6d9-46e8-ad05-6205fd7c0222"
+                    }
+                ],
+                "flag": "",
+                "question": "Date of birth",
+                "riskWeight": 6,
+                "tab": "Structured Data Risk",
+                "tmpUUID": "85af3761-0e0e-440b-b1b5-47d135f7dc5d",
+                "tooltip": ""
+            },
+            {
+                "answerType": "multiple_choice",
+                "answers": [
+                    {
+                        "JSONConfiguration": "",
+                        "highRisk": false,
+                        "riskLevel": 3,
+                        "rulePrefills": [],
+                        "text": "Only the year and month of the original date of death are kept or the date is shifted by a random number of days between +/- 30 days",
+                        "tmpUUID": "25df5770-bb75-4742-8909-58a1e319a283"
+                    },
+                    {
+                        "JSONConfiguration": "",
+                        "highRisk": false,
+                        "riskLevel": 0,
+                        "rulePrefills": [],
+                        "text": "Date of death concept is suppressed or not used in the project",
+                        "tmpUUID": "02fe429a-9162-4c22-9e05-bbb76e5d127d"
+                    },
+                    {
+                        "JSONConfiguration": "",
+                        "highRisk": false,
+                        "riskLevel": 1,
+                        "rulePrefills": [],
+                        "text": "Only the year of the original date of death is kept or the date is shifted by a random number of days within +/- 365 days",
+                        "tmpUUID": "df28c567-392b-4739-a387-3b4d61f77b85"
+                    },
+                    {
+                        "JSONConfiguration": "",
+                        "highRisk": false,
+                        "riskLevel": 2,
+                        "rulePrefills": [],
+                        "text": "Date of death is shifted by a random number of days within +/- 90 days (one quarter offset to preserve seasonality)",
+                        "tmpUUID": "0a2e4c8a-70c3-44fb-9c93-e4641e144eb9"
+                    },
+                    {
+                        "JSONConfiguration": "",
+                        "highRisk": false,
+                        "riskLevel": 4,
+                        "rulePrefills": [],
+                        "text": "Full original date of death is kept (dd/mm/yyyy)",
+                        "tmpUUID": "e8e257c0-2e94-4158-8fa2-0633b9f26325"
+                    }
+                ],
+                "flag": "",
+                "question": "Date of death",
+                "riskWeight": 6,
+                "tab": "Structured Data Risk",
+                "tmpUUID": "29eacb76-9221-4078-8c50-e217d6f7cfc3",
+                "tooltip": ""
+            },
+            {
+                "answerType": "multiple_choice",
+                "answers": [
+                    {
+                        "JSONConfiguration": "",
+                        "highRisk": false,
+                        "riskLevel": 0,
+                        "rulePrefills": [],
+                        "text": "Identifiers are not used in the project",
+                        "tmpUUID": "9115d5dd-8723-4d2f-806b-03de23e995bf"
+                    },
+                    {
+                        "JSONConfiguration": "",
+                        "highRisk": false,
+                        "riskLevel": 1,
+                        "rulePrefills": [],
+                        "text": "Identifiers are replaced by plausible surrogates (e.g., in text reports) ",
+                        "tmpUUID": "9cc8ace8-79e2-4d87-b0f4-6af582c6288e"
+                    },
+                    {
+                        "JSONConfiguration": "",
+                        "highRisk": true,
+                        "riskLevel": 0,
+                        "rulePrefills": [],
+                        "text": "Original values of one or more direct identifiers are kept (*if this rules is selected the data set is not considered de-identified)",
+                        "tmpUUID": "2711aca9-a733-49a8-a375-4f0d617a21d8"
+                    }
+                ],
+                "flag": "",
+                "question": "Direct identifiers (e.g. name, phone number social security number, email address, medical record number, license number)",
+                "riskWeight": 2,
+                "tab": "Structured Data Risk",
+                "tmpUUID": "18b338b8-485b-4c06-99f9-daf3e745824e",
+                "tooltip": ""
+            },
+            {
+                "answerType": "multiple_choice",
+                "answers": [
+                    {
+                        "JSONConfiguration": "",
+                        "highRisk": false,
+                        "riskLevel": 0,
+                        "rulePrefills": [],
+                        "text": "Identifiers are replaced by pseudonyms (project specific patient identifier) and no mapping table is kept",
+                        "tmpUUID": "e9acbfe0-6023-4de1-b663-0c52d9c9edb2"
+                    },
+                    {
+                        "JSONConfiguration": "",
+                        "highRisk": false,
+                        "riskLevel": 1,
+                        "rulePrefills": [],
+                        "text": "Identifiers are replaced by pseudonyms (project specific patient identifier) and the mapping table is securely stored by the data provider and not accessible by the research team",
+                        "tmpUUID": "2d682cec-ef88-4fe2-affa-441768eb2a11"
+                    },
+                    {
+                        "JSONConfiguration": "",
+                        "highRisk": true,
+                        "riskLevel": 0,
+                        "rulePrefills": [],
+                        "text": "Original values are kept (hospital internal patient identifier) (*if this rules is selected the data set is not considered de-identified)",
+                        "tmpUUID": "c3a323df-3f13-4d86-bc19-263c0628bf5f"
+                    }
+                ],
+                "flag": "",
+                "question": "Patient identifier",
+                "riskWeight": 1,
+                "tab": "Structured Data Risk",
+                "tmpUUID": "d9b7c01c-24c0-4dd1-a89e-67b5fd7d372c",
+                "tooltip": "Mapping table available at the site"
+            },
+            {
+                "answerType": "multiple_choice",
+                "answers": [
+                    {
+                        "JSONConfiguration": "",
+                        "highRisk": false,
+                        "riskLevel": 0,
+                        "rulePrefills": [],
+                        "text": "Sample identifiers are not use in the project",
+                        "tmpUUID": "c63a6ce3-f4c0-4e6e-bae9-afd01dfc6cf4"
+                    },
+                    {
+                        "JSONConfiguration": "",
+                        "highRisk": false,
+                        "riskLevel": 1,
+                        "rulePrefills": [],
+                        "text": "Sample identifiers are replaced by pseudonyms (project specific sample identifier) and the mapping table is securely stored by the data provider and not accessible by the research team",
+                        "tmpUUID": "38b0213b-18a0-4b36-b838-70c703ee7e1a"
+                    },
+                    {
+                        "JSONConfiguration": "",
+                        "highRisk": true,
+                        "riskLevel": 0,
+                        "rulePrefills": [],
+                        "text": "Original values are kept (hospital internal sample identifier)",
+                        "tmpUUID": "0a2ab37e-ea56-457e-b99b-be568d6fa331"
+                    }
+                ],
+                "flag": "",
+                "question": "Sample identifier",
+                "riskWeight": 1,
+                "tab": "Structured Data Risk",
+                "tmpUUID": "e393f7ea-f436-40f9-86d0-74ff00b9a191",
+                "tooltip": ""
+            },
+            {
+                "answerType": "multiple_choice",
+                "answers": [
+                    {
+                        "JSONConfiguration": "",
+                        "highRisk": false,
+                        "riskLevel": 0,
+                        "rulePrefills": [],
+                        "text": "Administrative case identifier is not used in the project",
+                        "tmpUUID": "ec6f761f-56ad-450f-9752-ac50af8bdf0e"
+                    },
+                    {
+                        "JSONConfiguration": "",
+                        "highRisk": false,
+                        "riskLevel": 1,
+                        "rulePrefills": [],
+                        "text": "Identifiers are replaced by pseudonym (project specific identifier) and the mapping table is securely stored by the data provider and not accessible by the research team",
+                        "tmpUUID": "fc05bf45-fc45-45b4-bf58-17a79c798fda"
+                    },
+                    {
+                        "JSONConfiguration": "",
+                        "highRisk": true,
+                        "riskLevel": 0,
+                        "rulePrefills": [],
+                        "text": "Original values are kept (hospital internal case identifier)",
+                        "tmpUUID": "112c2377-b31a-4789-88a9-38e6c4273d62"
+                    }
+                ],
+                "flag": "",
+                "question": "Administrative case identifier",
+                "riskWeight": 1,
+                "tab": "Structured Data Risk",
+                "tmpUUID": "688f1d22-c728-4b84-842b-93255917944d",
+                "tooltip": ""
+            },
+            {
+                "answerType": "multiple_choice",
+                "answers": [
+                    {
+                        "JSONConfiguration": "",
+                        "highRisk": false,
+                        "riskLevel": 0,
+                        "rulePrefills": [],
+                        "text": "Organizational unit is not used in the project",
+                        "tmpUUID": "25cf076c-08b4-4fa3-8c08-66e3211aaecc"
+                    },
+                    {
+                        "JSONConfiguration": "",
+                        "highRisk": false,
+                        "riskLevel": 1,
+                        "rulePrefills": [],
+                        "text": "Organizational unit is generalized to the division level (e.g., Neurology, Radiology, Urology, etc.) ",
+                        "tmpUUID": "074eb87e-b6e2-48fe-a61b-28d603cf5b8e"
+                    },
+                    {
+                        "JSONConfiguration": "",
+                        "highRisk": false,
+                        "riskLevel": 2,
+                        "rulePrefills": [],
+                        "text": "Organizational unit is kept (e.g.,328 Kardiologie ME) ",
+                        "tmpUUID": "e59f8b97-2ae4-4bfb-b3d1-50f69112102b"
+                    }
+                ],
+                "flag": "",
+                "question": "Organizational Units (data provider organizational unit excluded)",
+                "riskWeight": 2,
+                "tab": "Structured Data Risk",
+                "tmpUUID": "b6e82d16-c166-4763-b4e7-bf6417d7f141",
+                "tooltip": ""
+            },
+            {
+                "answerType": "multiple_choice",
+                "answers": [
+                    {
+                        "JSONConfiguration": "",
+                        "highRisk": false,
+                        "riskLevel": 0,
+                        "rulePrefills": [],
+                        "text": "Lab report identifier and Lab order identifier is not used in the project",
+                        "tmpUUID": "d161fc4f-9aff-44f3-9e81-e8fca04f7fb8"
+                    },
+                    {
+                        "JSONConfiguration": "",
+                        "highRisk": false,
+                        "riskLevel": 1,
+                        "rulePrefills": [],
+                        "text": "Identifiers are replaced by pseudonym (project specific identifier) ",
+                        "tmpUUID": "b37ab628-52e7-439c-aa0f-72f159f771f3"
+                    },
+                    {
+                        "JSONConfiguration": "",
+                        "highRisk": true,
+                        "riskLevel": 0,
+                        "rulePrefills": [],
+                        "text": "Original values are kept (hospital internal sample identifier)",
+                        "tmpUUID": "fb894cfc-d529-432f-a668-86ae7ccfbf6f"
+                    }
+                ],
+                "flag": "",
+                "question": "Lab report identifier",
+                "riskWeight": 2,
+                "tab": "Structured Data Risk",
+                "tmpUUID": "090b02f0-4892-46ca-8022-c70202c5b925",
+                "tooltip": ""
+            },
+            {
+                "answerType": "multiple_choice",
+                "answers": [
+                    {
+                        "JSONConfiguration": "",
+                        "highRisk": false,
+                        "riskLevel": 0,
+                        "rulePrefills": [],
+                        "text": "Dates are suppressed or replaced with a surrogate date or not used in the project",
+                        "tmpUUID": "b3aeb460-8248-41ad-920e-d8d9888da2b1"
+                    },
+                    {
+                        "JSONConfiguration": "",
+                        "highRisk": false,
+                        "riskLevel": 1,
+                        "rulePrefills": [],
+                        "text": "Dates are shifted by a random number of days within +/- 365 days",
+                        "tmpUUID": "af14786d-929d-4e71-9c6d-0d61aacbab43"
+                    },
+                    {
+                        "JSONConfiguration": "",
+                        "highRisk": false,
+                        "riskLevel": 2,
+                        "rulePrefills": [],
+                        "text": "Dates are shifted by a random number of days within +/- 90 days (one quarter offset to preserve seasonality)",
+                        "tmpUUID": "b38b0c8d-0c16-4bad-a57d-ce78e01b29aa"
+                    },
+                    {
+                        "JSONConfiguration": "",
+                        "highRisk": false,
+                        "riskLevel": 3,
+                        "rulePrefills": [],
+                        "text": "Dates are shifted by a random number of days within +/- 30 days (one month offset to preserve seasonality) ",
+                        "tmpUUID": "ad04f382-5897-434c-930e-654d0a433b02"
+                    },
+                    {
+                        "JSONConfiguration": "",
+                        "highRisk": false,
+                        "riskLevel": 4,
+                        "rulePrefills": [],
+                        "text": "Dates are shifted by a random number of days within +/- 7 days (one week offset) ",
+                        "tmpUUID": "7a55252a-9b14-4528-8347-057abf12e4f0"
+                    },
+                    {
+                        "JSONConfiguration": "",
+                        "highRisk": false,
+                        "riskLevel": 5,
+                        "rulePrefills": [],
+                        "text": "Original dates are kept",
+                        "tmpUUID": "a841c658-7031-44ee-ae47-ea04e22f8026"
+                    }
+                ],
+                "flag": "",
+                "question": "Dates in the patient record (dates of birth and death excluded)",
+                "riskWeight": 3,
+                "tab": "Structured Data Risk",
+                "tmpUUID": "627336a0-fc4b-425c-aecf-d62b3f597131",
+                "tooltip": "\tAdditional information: If one of those dates is shifted, the date of birth and date of death should be shifted in the same way."
+            },
+            {
+                "answerType": "multiple_choice",
+                "answers": [
+                    {
+                        "JSONConfiguration": "",
+                        "highRisk": false,
+                        "riskLevel": 0,
+                        "rulePrefills": [],
+                        "text": "Organization name is not used in the project",
+                        "tmpUUID": "4b2d468c-7e5e-4b3c-8316-6c6b8ed931a2"
+                    },
+                    {
+                        "JSONConfiguration": "",
+                        "highRisk": false,
+                        "riskLevel": 1,
+                        "rulePrefills": [],
+                        "text": "Organization type is kept (e.g., hospital, clinic, etc.) ",
+                        "tmpUUID": "665f1019-e335-4485-ac4a-ee61fe1f850a"
+                    },
+                    {
+                        "JSONConfiguration": "",
+                        "highRisk": false,
+                        "riskLevel": 2,
+                        "rulePrefills": [],
+                        "text": "Organization name is kept (e.g., University Hospital Basel) ",
+                        "tmpUUID": "d4790875-79f7-4728-8368-d3189eefe3aa"
+                    }
+                ],
+                "flag": "",
+                "question": "Organizations (data provider organization excluded)",
+                "riskWeight": 2,
+                "tab": "Structured Data Risk",
+                "tmpUUID": "fc12e859-7725-45b7-8d37-7f98e4cd4226",
+                "tooltip": ""
+            },
+            {
+                "answerType": "multiple_choice",
+                "answers": [
+                    {
+                        "JSONConfiguration": "",
+                        "highRisk": false,
+                        "riskLevel": 0,
+                        "rulePrefills": [],
+                        "text": " No other quasi-identifiers used in the project ",
+                        "tmpUUID": "c31e1515-0b10-4e0e-b83c-03e28060ee5d"
+                    },
+                    {
+                        "JSONConfiguration": "",
+                        "highRisk": false,
+                        "riskLevel": 1,
+                        "rulePrefills": [],
+                        "text": "Additional quasi-identifiers exist and have been modified to reduce risks (e.g. generalization)",
+                        "tmpUUID": "6e692baf-588b-4a33-ac27-a50a8f20aef6"
+                    },
+                    {
+                        "JSONConfiguration": "",
+                        "highRisk": false,
+                        "riskLevel": 2,
+                        "rulePrefills": [],
+                        "text": "Additional quasi-identifiers exist and original values are kept",
+                        "tmpUUID": "4c404d6d-2a41-45fe-ba4d-201ed97c2ca0"
+                    }
+                ],
+                "flag": "",
+                "question": "Additional project specific quasi-identifiers that can be used for linkage by the data recipient (e.g., clinical variables) ",
+                "riskWeight": 5,
+                "tab": "Structured Data Risk",
+                "tmpUUID": "02c82f88-e20b-467c-a4e8-c6a8c6f7a11a",
+                "tooltip": "\tAdditional information: How to add additional quasi-identifier"
+            },
+            {
+                "answerType": "multiple_choice",
+                "answers": [
+                    {
+                        "JSONConfiguration": "",
+                        "highRisk": false,
+                        "riskLevel": 0,
+                        "rulePrefills": [],
+                        "text": "No genomic sequences are used in the project ",
+                        "tmpUUID": "00b3178a-1009-4981-883a-eedbaebccb0f"
+                    },
+                    {
+                        "JSONConfiguration": "",
+                        "highRisk": false,
+                        "riskLevel": 1,
+                        "rulePrefills": [],
+                        "text": "Only blurred summary statistics (e.g., MAF, p-values, ORs) are released",
+                        "tmpUUID": "7dd02867-5687-48d7-8308-6d55d3d79976"
+                    },
+                    {
+                        "JSONConfiguration": "",
+                        "highRisk": false,
+                        "riskLevel": 2,
+                        "rulePrefills": [],
+                        "text": "Only exact summary statistics (e.g., MAF, p-values, ORs) are released ",
+                        "tmpUUID": "d6f6c269-67ee-4507-85c3-dcc898e1705c"
+                    },
+                    {
+                        "JSONConfiguration": "",
+                        "highRisk": true,
+                        "riskLevel": 0,
+                        "rulePrefills": [],
+                        "text": "Original individual-level values are released",
+                        "tmpUUID": "29d7e694-3d5c-4534-9407-86d2467e4c80"
+                    }
+                ],
+                "flag": "",
+                "question": "Genomic sequences",
+                "riskWeight": 3,
+                "tab": "Genomic Data Risk",
+                "tmpUUID": "2c302e7a-23a8-4f23-a0ce-ce10d63ec8c0",
+                "tooltip": "Additional Information: Note that this answer contains all other options not having aggregated results"
+            }
+        ]
+    }
+}
