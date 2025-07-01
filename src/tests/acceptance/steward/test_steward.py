@@ -2,8 +2,7 @@ import unittest
 from unittest.mock import MagicMock
 from src.pkg.user.model.user import User
 from src.pkg.questionnaire.model.questionnaire import Questionnaire
-from src.pkg.questionnaire.model.questionnaire_v2_0 import questionnaire_v2_0
-from src.pkg.questionnaire.model.questionnaire_v2_1 import questionnaire_v2_1
+from src.pkg.questionnaire.model.questionnaire_v2_2 import questionnaire_v2_2
 from src.internal.steward.steward import Steward
 
 
@@ -30,8 +29,8 @@ class TestSteward(unittest.TestCase):
         self.mock_questionnaire = Questionnaire(
             userid=self.mock_admin_user.id,
             tenantid=self.mock_admin_user.tenantid,
-            name="Questionnaire V2.1",
-            versions=[questionnaire_v2_1],
+            name="Questionnaire V2.2",
+            versions=[questionnaire_v2_2],
         )
 
         # Initialize Steward with mocks
@@ -89,7 +88,7 @@ class TestSteward(unittest.TestCase):
                 userid=self.mock_admin_user.id,
                 tenantid=self.mock_admin_user.tenantid,
                 name="Questionnaire name",
-                versions=[questionnaire_v2_1],
+                versions=[questionnaire_v2_2],
             )
         )
 

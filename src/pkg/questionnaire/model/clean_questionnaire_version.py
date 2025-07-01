@@ -40,12 +40,12 @@ def read_json_from_file(filename: str):
         return obj
     
 def main():
-    obj = read_json_from_file("questionnaire_v2.1.0.json")
+    obj = read_json_from_file("questionnaire_v2.2.0.json")
     cleaned_obj = clean_questionnaire(obj)
     # Replace tmpUUID with id in cleaned object
     cleaned_obj.pop("tmpUUID", None)
     cleaned_obj["id"] = 1
-    write_json_to_file(cleaned_obj, "cleaned_questionnaire_v2.1.0.json")
+    write_json_to_file(cleaned_obj, "cleaned_questionnaire_v2.2.0.json")
 
 if __name__ == "__main__":
     main()
